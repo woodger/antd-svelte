@@ -51,7 +51,19 @@
   };
   const field = useFormField(() => controlRef);
   // FormItem владеет группой: отдельные Input не получают одинаковые id/name/required.
-  provideFormField(undefined);
+  // Ячейки наследуют visual status без id/name/ref и blur binding корневого OTP.
+  provideFormField({
+    get status() {
+      return resolvedStatus;
+    },
+    get invalid() {
+      return field?.invalid;
+    },
+    disabled: undefined,
+    required: false,
+    describedBy: undefined,
+    onBlur() {}
+  });
 
   const initialCells = untrack(() => {
     const initial = defaultValue || '';
@@ -174,7 +186,7 @@
   aria-label={attributes['aria-label'] ?? (attributes['aria-labelledby'] ? undefined : field?.label)}
   aria-labelledby={attributes['aria-labelledby']
     ?? (attributes['aria-label'] != null ? undefined : field?.labelledBy)}
-  data-ant-form-invalid={resolvedStatus === 'error'
+  data-ant-form-invalid={field?.invalid || resolvedStatus === 'error'
     || attributes['aria-invalid'] === true || attributes['aria-invalid'] === 'true' || undefined}
   aria-describedby={[attributes['aria-describedby'], field?.describedBy].filter(Boolean).join(' ') || undefined}
   onfocus={handleRootFocus}
@@ -198,7 +210,7 @@
       bind:inputElement={elements[index]}
       size={resolvedSize}
       disabled={blocked}
-      status={resolvedStatus}
+      {status}
       variant={appearance}
       {mask}
       {type}

@@ -736,7 +736,7 @@
             aria-label={attributes['aria-label']} aria-labelledby={attributes['aria-labelledby']}
             aria-describedby={[attributes['aria-describedby'], field?.describedBy].filter(Boolean).join(' ') || undefined}
             aria-required={attributes['aria-required'] ?? field?.required}
-            aria-invalid={resolvedStatus === 'error' || attributes['aria-invalid'] || undefined}
+            aria-invalid={field?.invalid || resolvedStatus === 'error' || attributes['aria-invalid'] || undefined}
             aria-busy={loading || undefined} autocomplete="off" disabled={blocked} readonly={!canSearch}
             {...{ autofocus: autoFocus || attributes.autofocus }}
             tabindex={tabIndex ?? attributes.tabindex} inputmode={attributes.inputmode} value={inputValue}

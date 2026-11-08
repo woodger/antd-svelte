@@ -185,7 +185,7 @@
         : field?.label)}
   aria-labelledby={attributes['aria-labelledby']
     ?? (attributes['aria-label'] != null ? undefined : field?.labelledBy)}
-  data-ant-form-invalid={field?.status === 'error'
+  data-ant-form-invalid={field?.invalid || field?.status === 'error'
       || ariaInvalid === true
       || ariaInvalid === 'true'
       || undefined}

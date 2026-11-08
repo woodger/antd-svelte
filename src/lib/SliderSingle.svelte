@@ -576,7 +576,7 @@
     aria-valuemax={options.max}
     aria-valuenow={resolvedValue}
     aria-orientation={orientation}
-    aria-invalid={field?.status === 'error' || attributes['aria-invalid'] || undefined}
+    aria-invalid={field?.invalid || field?.status === 'error' || attributes['aria-invalid'] || undefined}
     aria-describedby={[attributes['aria-describedby'], field?.describedBy].filter(
         Boolean
       )

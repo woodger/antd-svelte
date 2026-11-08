@@ -538,7 +538,7 @@
         aria-valuemin={minimum} aria-valuemax={maximum} aria-valuenow={point}
         aria-valuetext={indexed(props.ariaValueTextFormatterForHandle, index)?.(point) ?? props['aria-valuetext']}
         aria-orientation={orientation} aria-disabled={sliderHandleDisabled(disabled, index)}
-        aria-invalid={field?.status === 'error' || props['aria-invalid'] || undefined}
+        aria-invalid={field?.invalid || field?.status === 'error' || props['aria-invalid'] || undefined}
         aria-describedby={[props['aria-describedby'], field?.describedBy].filter(Boolean).join(' ') || undefined}
         onpointerdown={event => handleStart(event, index)}
         onpointerenter={event => handleEnter(event, index)}

@@ -745,6 +745,16 @@ export function createForm<Values extends FormValues>({
     get resetKey() {
       return resetKey;
     },
+    getFieldMeta(name) {
+      const field = findField(name);
+      if (!field) return;
+
+      return {
+        name: [...fieldPath(field)], touched: field.touched, validating: field.validating,
+        validated: field.validated, errors: [...(field.errors ?? [])],
+        warnings: [...(field.warnings ?? [])]
+      };
+    },
     initializeList,
     changeList(name, next) {
       updateValues(setFormValue(values, name, next) as Values);

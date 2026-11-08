@@ -327,7 +327,7 @@
       'aria-controls': `${controlId}-list`,
       'aria-activedescendant': visible && active >= 0 ? `${controlId}-option-${active}` : undefined,
       'aria-autocomplete': 'list',
-      'aria-invalid': resolvedStatus === 'error' || attributes['aria-invalid'] || undefined,
+      'aria-invalid': field?.invalid || resolvedStatus === 'error' || attributes['aria-invalid'] || undefined,
       'aria-describedby': [attributes['aria-describedby'], field?.describedBy].filter(Boolean).join(
         ' '
       )

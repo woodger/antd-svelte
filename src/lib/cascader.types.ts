@@ -1,6 +1,7 @@
 import type { Snippet } from 'svelte';
 import type { HTMLAttributes, HTMLInputAttributes } from 'svelte/elements';
 import type { ComponentSize } from './types';
+import type { FormValidateStatus } from './form-error-list.types';
 
 export type CascaderRawValue = string | number;
 export type CascaderPath = readonly CascaderRawValue[];
@@ -73,7 +74,8 @@ export interface CascaderSemantic {
     disabled: boolean;
     size: ComponentSize;
     variant: 'outlined' | 'borderless' | 'filled' | 'underlined';
-    status?: 'error' | 'warning';
+    /** Разрешённый Form status; локальный Cascader.status принимает error/warning. */
+    status?: FormValidateStatus;
     /** Остальные исходные props передаются как есть; перед использованием уточните их тип. */
     [property: string]: unknown;
   };

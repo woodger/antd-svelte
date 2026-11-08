@@ -190,10 +190,10 @@
   aria-labelledby={attributes['aria-labelledby']
     ?? (attributes['aria-label'] != null ? undefined : field?.labelledBy)}
   aria-required={resolvedRequired || undefined}
-  aria-invalid={field?.status === 'error' || ariaInvalid || undefined}
+  aria-invalid={field?.invalid || field?.status === 'error' || ariaInvalid || undefined}
   aria-orientation={resolvedOrientation}
   aria-describedby={describedBy}
-  data-ant-form-invalid={field?.status === 'error'
+  data-ant-form-invalid={field?.invalid || field?.status === 'error'
       || ariaInvalid === true
       || ariaInvalid === 'true'
       || undefined}

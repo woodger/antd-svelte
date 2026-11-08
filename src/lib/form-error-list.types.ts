@@ -1,5 +1,6 @@
 import type { RenderEmptyContent } from './types';
 
+/** Визуальный статус поля/help; '' отключает автоматический статус metadata FormItem. */
 export type FormValidateStatus = 'success' | 'warning' | 'error' | 'validating' | '';
 
 /** Сообщения FormList; строки/числа и Svelte snippets заменяют ReactNode. */

@@ -5062,7 +5062,18 @@
         "tests/browser/form-disabled-metrics.ts",
         "tests/browser/fixtures/FormDisabledFixtures.svelte",
         "tests/browser/fixtures/ant-design-form-disabled-reference.json",
-        "tests/package/form-disabled.ssr.test.ts"
+        "tests/package/form-disabled.ssr.test.ts",
+        "src/lib/form-status.engine.ts",
+        "src/lib/form-status.engine.test.ts",
+        "src/lib/form-status.test.ts",
+        "src/lib/cascader.types.ts",
+        "tests/browser/form-status.spec.ts",
+        "tests/browser/form-status-metrics.ts",
+        "tests/browser/fixtures/FormStatusFixtures.svelte",
+        "tests/browser/fixtures/FormStatusControls.svelte",
+        "tests/browser/fixtures/ant-design-form-status-reference.json",
+        "tests/package/form-status.ssr.test.ts",
+        "src/lib/Transfer.svelte"
       ],
       "features": [
         {
@@ -5131,7 +5142,7 @@
             "tests/browser/fixtures/ant-design-form-validation-concurrency-observation.json",
             "tests/package/form-validation-options.ssr.test.ts"
           ],
-          "note": "NamePath и FormList core перенесены: массивы, add/remove/move, stable keys, вложенный prefix, initialValue/reset и custom validators, warningOnly и FormErrorList с prefixCls списка, validateOnly/recursive/dirty. Полный API остаётся partial: Form semantic config, полный набор правил и field lifecycle, field adapters и остальные настройки Form ещё не перенесены."
+          "note": "NamePath и FormList core перенесены: массивы, add/remove/move, stable keys, вложенный prefix, initialValue/reset и custom validators, warningOnly и FormErrorList с prefixCls списка, validateOnly/recursive/dirty. Полный API остаётся partial: полный набор правил и field lifecycle, field adapters и остальные настройки Form ещё не перенесены."
         },
         {
           "id": "dayjs-values",
@@ -5755,7 +5766,7 @@
             "tests/browser/fixtures/ant-design-form-nameless-reference.json",
             "tests/package/form-nameless.ssr.test.ts"
           ],
-          "note": "FormItem.name стал optional; undefined/null runtime означают отсутствие binding, непустые/пустые допустимые NamePath по-прежнему считаются именованными. В nameless режиме layout/labels/columns/help/extra/theme и Form disabled/size/variant сохраняются, local rules игнорируются, errors/required/status/id/name/description/ref model-поля не передаются controls. Required управляет только mark; htmlFor и owner input id сохраняют явную label association. Вычисление и регистрация model name/prefix/rules выполняются только для hasName; NoFormItemBinding очищает контекст и сохраняет Form settings. Именованный layout получает прежний reactive FieldContext через приватный FormItemBinding, getters продолжают читать props/model. Смена hasName переключает render branch и пересоздаёт control, как source; name→name сохраняет прежний lifecycle. Reset модели не пересоздаёт unbound local draft и сохраняет focus/selection/DOM. Восемь UMD-состояний подтверждают отсутствие attributes/binding, ignored rules, визуальный required, manual htmlFor, disabled/small/filled, отдельный named reference; raw named id/name отличаются по согласованным native Svelte/FormData контрактам, они сохранены. Source reset и обе ownership transitions проверяются по node identity, value/store/bindings/ref. Публичные optional types и SSR не требуют DOM. NoStyle, dependencies, initialValue, feedback и остальные Field API остаются отдельными пробелами."
+          "note": "FormItem.name стал optional; undefined/null runtime означают отсутствие binding, непустые/пустые допустимые NamePath по-прежнему считаются именованными. В nameless режиме layout/labels/columns/help/extra/theme и Form disabled/size/variant сохраняются, local rules игнорируются, автоматические errors/required/status/id/name/description/ref model-поля не передаются controls. Required управляет только mark; htmlFor и owner input id сохраняют явную label association. Вычисление и регистрация model name/prefix/rules выполняются только для hasName; NoFormItemBinding очищает association и сохраняет Form settings; отдельный status context поддерживает ручной validateStatus без model binding. Именованный layout получает прежний reactive FieldContext через приватный FormItemBinding, getters продолжают читать props/model. Смена hasName переключает render branch и пересоздаёт control, как source; name→name сохраняет прежний lifecycle. Reset модели не пересоздаёт unbound local draft и сохраняет focus/selection/DOM. Восемь UMD-состояний подтверждают отсутствие attributes/binding, ignored rules, визуальный required, manual htmlFor, disabled/small/filled, отдельный named reference; raw named id/name отличаются по согласованным native Svelte/FormData контрактам, они сохранены. Source reset и обе ownership transitions проверяются по node identity, value/store/bindings/ref. Публичные optional types и SSR не требуют DOM. NoStyle, dependencies, initialValue, feedback и остальные Field API остаются отдельными пробелами."
         },
         {
           "id": "disabled-context",
@@ -5773,6 +5784,33 @@
             "tests/package/form-disabled.ssr.test.ts"
           ],
           "note": "Form передаёт disabled через reactive ConfigContext, включая controls без FormItem; undefined наследует ближайший Form/ConfigProvider, false разрешает controls поверх внешнего true. Вложенный ConfigProvider.componentDisabled переопределяет Form для своего поддерева, локальный prop control приоритетнее. Приватные useForm/useFormField читают disabled текущего ConfigContext вместо захваченного внешнего; отдельный submitting getter сохраняет прежнюю блокировку связанных controls и Form-aware widgets при async onFinish. Настройки соседей и остальные getters/регистрация/metadata не меняются. Двенадцать неизменённых UMD-состояний фиксируют defaults, global/Form true/false, nested Form, child ConfigProvider и local props для свободных/связанных Input, Select, Button и Tag. Динамическая смена сохраняет DOM/input selection/value и выбранную option; native submitting и explicit disabled=false проверяются отдельно. Публичный пакет рендерит disabled scope при SSR без DOM. Полный Form API и остальные Field возможности остаются отдельными пробелами."
+        },
+        {
+          "id": "validation-status",
+          "title": "FormItem.validateStatus и автоматические validating/success",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Form.svelte",
+            "src/lib/FormItem.svelte",
+            "src/lib/form-context.ts",
+            "src/lib/form-internal.ts",
+            "src/lib/form.model.svelte.ts",
+            "src/lib/form-status.engine.ts",
+            "src/lib/form-status.engine.test.ts",
+            "src/lib/form-status.test.ts",
+            "src/lib/form-error-list.types.ts",
+            "src/lib/InputOTP.svelte",
+            "src/lib/cascader.types.ts",
+            "tests/browser/form-status.spec.ts",
+            "tests/browser/form-status-metrics.ts",
+            "tests/browser/fixtures/FormStatusFixtures.svelte",
+            "tests/browser/fixtures/FormStatusControls.svelte",
+            "tests/browser/fixtures/ant-design-form-status-reference.json",
+            "tests/package/form-status.ssr.test.ts",
+            "src/lib/Transfer.svelte"
+          ],
+          "note": "Используется существующий публичный FormValidateStatus: success/warning/error/validating/пустая строка. Явный prop приоритетнее metadata, включая явный пустой статус; автоматический порядок — validating, errors, warnings, touched success, pristine без статуса. Приватный getFieldMeta читает точный binding, сохраняя публичную aggregate семантику isFieldTouched. Отсутствие meta не создаёт binding; правила/triggers/touched/reset модели не меняются. Двадцать девять неизменённых UMD-состояний фиксируют root/control classes, border colors и messages при metadata overrides, explicit empty, pending с прежней ошибкой, touched/validated, nameless, local control status и dark/compact/RTL. В nameless режиме передаётся только visual status: нет id/name/required/description/ref и model registration. Отдельный invalid в private context сохраняет доступность model errors при визуальном success/validating/empty и local status control; scoped child contexts передают этот флаг без association. InputOTP передаёт ячейкам visual status через private context, не расширяя публичный status Input/OTP; Cascader semantic props отражают разрешённые Form statuses. У Input/Select прежняя native политика aria-invalid для visual error без model errors сохранена: source не задаёт такой attribute, raw значения приложены. Реактивная смена сохраняет DOM/draft/focus/selection; pending validation, touched success и reset проверяются отдельно. Transfer root получает model aria-invalid/description независимо от visual status; пять отдельных UMD-состояний подтверждают connected description при default/success/warning/validating/empty. Package SSR выводит named/nameless/manual/automatic statuses и Transfer error association без DOM. HasFeedback/feedbackIcons, noStyle aggregation и остальной Field API остаются отдельными пробелами."
         }
       ]
     },
@@ -8256,7 +8294,12 @@
         "tests/package/transfer.ssr.test.ts",
         "tests/browser/transfer.spec.ts",
         "tests/browser/fixtures/TransferFixtures.svelte",
-        "readme.md"
+        "readme.md",
+        "src/lib/form-context.ts",
+        "tests/browser/form-status.spec.ts",
+        "tests/browser/fixtures/FormStatusControls.svelte",
+        "tests/browser/fixtures/ant-design-form-status-reference.json",
+        "tests/package/form-status.ssr.test.ts"
       ],
       "features": [
         {
@@ -8419,6 +8462,21 @@
             "readme.md"
           ],
           "note": "В UMD 6.6.8 изменение вложенного ConfigProvider.theme.inherit на false в записанной конфигурации заменяет input: старый узел disconnected, document.activeElement уже другой, текущая query Al превращается в пустую строку. Before/after identity/focus/value сохранены в inheritanceFocusObservation. Native не повторяет remount и сохраняет DOM/query/focus. Для точной CSS-сверки focusedInheritanceReset получен в неизменённом UMD после восстановления той же query Al и фокуса публичными действиями, с ожиданием фактического цвета рамки и завершения CSS-переходов. Наблюдение относится к этой конфигурации, а не утверждает remount для всех ConfigProvider updates."
+        },
+        {
+          "id": "form-error-accessibility",
+          "title": "FormItem errors: ARIA root независимо от visual status",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Transfer.svelte",
+            "src/lib/form-context.ts",
+            "tests/browser/form-status.spec.ts",
+            "tests/browser/fixtures/FormStatusControls.svelte",
+            "tests/browser/fixtures/ant-design-form-status-reference.json",
+            "tests/package/form-status.ssr.test.ts"
+          ],
+          "note": "Корень Transfer получает model aria-invalid и объединяет description владельца с FormItem description. Explicit FormItem success/warning/validating/empty не скрывают сохранённую ошибку от accessibility. Это не новый status prop Transfer: локальный status остаётся error/warning и сохраняет оформление; поле модели не регистрируется у служебных controls. Пять неизменённых UMD-состояний подтверждают root invalid и существующий error description при default/manual statuses. Общая Form matrix проверяет live updates/reset; package SSR проверяет association без DOM."
         }
       ]
     },

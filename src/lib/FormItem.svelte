@@ -15,6 +15,8 @@
   import type { ColProps } from './grid.types';
   import { resolveFormWrapperCol } from './form-columns.engine';
   import type { FormItemTooltip as FormItemTooltipContent } from './form.types';
+  import type { FormValidateStatus } from './form-error-list.types';
+  import { resolveFormStatus } from './form-status.engine';
   import { resolveFormTooltip } from './form-tooltip.engine';
   import FormItemTooltip from './FormItemTooltip.svelte';
   import NoFormItemBinding from './NoFormItemBinding.svelte';
@@ -56,6 +58,8 @@
     validateFirst?: boolean | 'parallel';
     /** Задержка автоматической validation в ms; validateFields/submit запускаются сразу. */
     validateDebounce?: number;
+    /** Визуальный статус поверх metadata; '' отключает автоматический, не очищая errors/ARIA. */
+    validateStatus?: FormValidateStatus;
     htmlFor?: string;
     /**
      * Native element, bind:this либо объект с focus/nativeElement пользовательского control.
@@ -86,6 +90,7 @@
     rules,
     validateFirst,
     validateDebounce,
+    validateStatus,
     htmlFor,
     controlRef,
     rootClassName,
@@ -119,6 +124,10 @@
   let optionalText = $derived(config.locale.Form?.optional || enUS.Form.optional);
   let errors = $derived(hasName ? form?.getFieldError(path) ?? [] : []);
   let warnings = $derived(hasName ? form?.getFieldWarning(path) ?? [] : []);
+  let meta = $derived(hasName ? form?.getFieldMeta(path) : undefined);
+  let status = $derived(resolveFormStatus({
+    validateStatus, errors, warnings, touched: meta?.touched, validating: meta?.validating
+  }));
   let isRequired = $derived(required
     ?? (hasName && (rules
       ? rules.some((rule) => rule.required && !rule.warningOnly) : form?.isFieldRequired(path)))
@@ -176,13 +185,14 @@
 
   const fieldContext: FormFieldContext = {
     get id() {
-      return id;
+      return hasName ? id : undefined;
     },
     get name() {
-      return path.map(String).join('_');
+      return hasName ? path.map(String).join('_') : undefined;
     },
     get label() {
-      return typeof label === 'string' || typeof label === 'number' ? String(label) : undefined;
+      return hasName && (typeof label === 'string' || typeof label === 'number')
+        ? String(label) : undefined;
     },
     get labelledBy() {
       return labelledBy;
@@ -191,10 +201,13 @@
       return form?.disabled;
     },
     get required() {
-      return isRequired;
+      return hasName && isRequired;
     },
     get status() {
-      return errors.length ? 'error' : warnings.length ? 'warning' : undefined;
+      return status;
+    },
+    get invalid() {
+      return errors.length > 0;
     },
     get describedBy() {
       return [descriptionId, extraId].filter(Boolean).join(' ') || undefined;
@@ -235,8 +248,10 @@
       componentTheme.className && `ant-form-css-var ${componentTheme.className}`,
       `ant-form-item-${resolvedLayout}`,
       hidden && 'ant-form-item-hidden',
-      errors.length && 'ant-form-item-has-error',
-      !errors.length && warnings.length && 'ant-form-item-has-warning',
+      status === 'error' && 'ant-form-item-has-error',
+      status === 'warning' && 'ant-form-item-has-warning',
+      status === 'success' && 'ant-form-item-has-success',
+      status === 'validating' && 'ant-form-item-is-validating',
       className,
       rootClassName
     ]} style={[componentTheme.style, style].filter(Boolean).join(';') || undefined}>
@@ -308,5 +323,7 @@
 {#if hasName}
   <FormItemBinding field={fieldContext}>{@render itemLayout()}</FormItemBinding>
 {:else}
-  <NoFormItemBinding>{@render itemLayout()}</NoFormItemBinding>
+  <NoFormItemBinding><FormItemBinding field={fieldContext}>
+    {@render itemLayout()}
+  </FormItemBinding></NoFormItemBinding>
 {/if}

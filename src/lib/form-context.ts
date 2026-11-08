@@ -1,6 +1,8 @@
 import { getContext, onDestroy, onMount, setContext } from 'svelte';
 import type { FormFieldRegistration } from './form-internal';
 import type { FormRequiredMark, FormSemanticSlots, FormTooltipProps } from './form.types';
+import type { FormValidateStatus } from './form-error-list.types';
+import type { FormFieldMeta } from './form.model.svelte';
 import type { ColProps } from './grid.types';
 import type { NamePath } from './form-store.engine';
 import type { Variant } from './types';
@@ -23,6 +25,7 @@ export interface FormContext {
   readonly resetKey?: object;
   getFieldError(name: NamePath): readonly string[];
   getFieldWarning(name: NamePath): readonly string[];
+  getFieldMeta(name: NamePath): Pick<FormFieldMeta, 'touched' | 'validating'> | undefined;
   isFieldRequired(name: NamePath): boolean;
   touchField(name: NamePath): void;
   registerField?(field: FormFieldRegistration): (() => void) | undefined;
@@ -39,7 +42,9 @@ export interface FormFieldContext {
   readonly labelledBy?: string;
   readonly disabled: boolean | undefined;
   readonly required: boolean;
-  readonly status: 'error' | 'warning' | undefined;
+  readonly status: FormValidateStatus | undefined;
+  // Ошибки остаются доступны и при визуальном success/validating либо явном пустом status.
+  readonly invalid?: boolean;
   readonly describedBy: string | undefined;
   registerControl?(getInstance: () => unknown): () => void;
   onBlur(): void;

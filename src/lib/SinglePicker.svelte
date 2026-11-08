@@ -724,6 +724,7 @@
       aria-expanded={visible}
       aria-controls={`ant-picker-${generatedId}`}
       aria-invalid={invalid
+        || field?.invalid
         || resolvedStatus === 'error'
         || attributes['aria-invalid']
         || undefined} aria-describedby={[attributes['aria-describedby'], field?.describedBy].filter(

@@ -34,6 +34,9 @@
     get status() {
       return field.status;
     },
+    get invalid() {
+      return field.invalid;
+    },
     required: false,
     describedBy: undefined,
     onBlur() {
@@ -231,6 +234,9 @@
 </script>
 
 <div {...attributes} bind:this={nativeElement}
+  aria-invalid={field?.invalid || attributes['aria-invalid'] || undefined}
+  aria-describedby={[attributes['aria-describedby'], field?.describedBy]
+    .filter(Boolean).join(' ') || undefined}
   class={[prefix, 'ant-transfer-css-var', componentTheme.className, disabled && `${prefix}-disabled`,
     config.direction === 'rtl' && `${prefix}-rtl`, props.children && `${prefix}-customize-list`,
     status && `${prefix}-status-${status}`, config.transfer?.class, props.class,

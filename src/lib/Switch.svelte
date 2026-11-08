@@ -188,7 +188,7 @@
         ? undefined
         : field?.label)}
   aria-required={attributes['aria-required'] ?? (field?.required || undefined)}
-  aria-invalid={field?.status === 'error' || attributes['aria-invalid'] || undefined}
+  aria-invalid={field?.invalid || field?.status === 'error' || attributes['aria-invalid'] || undefined}
   aria-describedby={[attributes['aria-describedby'], field
       ?.describedBy]
       .filter(Boolean)

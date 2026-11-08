@@ -434,7 +434,7 @@
     value={text} {readonly} disabled={blocked} required={attributes.required ?? field?.required} role="combobox" aria-expanded={visible}
     aria-autocomplete="list" aria-haspopup="listbox" aria-controls={visible ? `${controlId}-list` : undefined}
     aria-activedescendant={visible && active >= 0 ? `${controlId}-option-${active}` : undefined}
-    aria-label={attributes['aria-label'] ?? field?.label} aria-invalid={resolvedStatus === 'error'
+    aria-label={attributes['aria-label'] ?? field?.label} aria-invalid={field?.invalid || resolvedStatus === 'error'
         || attributes['aria-invalid']
         || undefined}
     aria-describedby={[attributes['aria-describedby'], field?.describedBy].filter(

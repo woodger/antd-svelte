@@ -232,7 +232,7 @@
       tabindex={props.tabIndex ?? props.tabindex}
       aria-checked={resolvedChecked}
       data-ant-form-invalid={!group
-          && (field?.status === 'error'
+          && (field?.invalid || field?.status === 'error'
             || props['aria-invalid'] === true
             || props['aria-invalid'] === 'true')
           || undefined}

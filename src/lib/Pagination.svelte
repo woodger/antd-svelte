@@ -72,6 +72,7 @@
   const field = useFormField();
   provideFormField(field ? {
     get status() { return field.status; },
+    get invalid() { return field.invalid; },
     get disabled() { return field.disabled; },
     required: false,
     describedBy: undefined,

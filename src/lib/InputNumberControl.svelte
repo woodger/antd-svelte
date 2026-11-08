@@ -492,7 +492,7 @@
     maxlength={props.maxLength ?? props.maxlength} step={options.step}
     required={props.required ?? field?.required} {disabled} {readonly}
     aria-label={props['aria-label'] ?? (props['aria-labelledby'] ? undefined : field?.label)}
-    aria-invalid={status === 'error' || props['aria-invalid'] || undefined}
+    aria-invalid={field?.invalid || status === 'error' || props['aria-invalid'] || undefined}
     aria-describedby={[props['aria-describedby'], field?.describedBy].filter(Boolean).join(' ') || undefined}
     oninput={handleInput} onkeydown={handleKeydown} onkeyup={handleKeyup}
     onfocus={handleFocus} onblur={handleBlur}

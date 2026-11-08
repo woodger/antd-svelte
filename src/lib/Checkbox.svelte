@@ -197,7 +197,7 @@
       disabled={resolvedDisabled} required={props.required ?? (inGroup ? false : field?.required)}
       autofocus={props.autoFocus ?? props.autofocus} tabindex={props.tabIndex ?? props.tabindex}
       aria-checked={indeterminate ? 'mixed' : resolvedChecked}
-      aria-invalid={field?.status === 'error' || props['aria-invalid'] || undefined}
+      aria-invalid={field?.invalid || field?.status === 'error' || props['aria-invalid'] || undefined}
       aria-describedby={[props['aria-describedby'], field?.describedBy].filter(Boolean).join(' ') || undefined}
       onchange={handleChange} onblur={handleBlur}
       onclick={event => {

@@ -1,5 +1,6 @@
 import type { NamePath } from './form-store.engine';
 import type { ValidationRule } from './validation.engine';
+import type { FormFieldMeta } from './form.model.svelte';
 
 export interface FormFieldRegistration {
   readonly name: NamePath;
@@ -17,6 +18,7 @@ export interface FormFieldRegistration {
 
 export interface FormHooks {
   readonly resetKey: object;
+  getFieldMeta(name: NamePath): FormFieldMeta | undefined;
   registerField(field: FormFieldRegistration): () => void;
   initializeList(name: NamePath, initialValue?: readonly unknown[]): void;
   changeList(name: NamePath, values: readonly unknown[]): void;

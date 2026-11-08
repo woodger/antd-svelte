@@ -9413,6 +9413,24 @@ controls поверх внешнего disabled=true. Вложенный ConfigP
 [браузер](./tests/browser/form-disabled.spec.ts),
 [публичный пакет и SSR](./tests/package/form-disabled.ssr.test.ts), `?fixture=form-disabled`.
 
+`FormItem.validateStatus` принимает success, warning, error, validating и ''.
+Явное значение меняет оформление поверх metadata; пустая строка отключает
+автоматический визуальный статус. Без prop приоритет такой: текущая validation,
+errors, warnings, затем success для touched-поля. Pristine-поле остаётся без статуса.
+Metadata берётся по точному имени, без touched потомков. Прежние triggers/touched
+модели сохранены. Настройка работает и у FormItem без name, без регистрации поля.
+
+Статус не запускает validation и не удаляет errors/warnings. Сохранённая ошибка
+остаётся доступной через aria-invalid и description даже при success/validating/'';
+локальный status control сохраняет приоритет оформления. Input/Select по-прежнему
+выставляют aria-invalid при visual error без ошибок модели; source его не задаёт.
+Transfer получает ошибку и доступное описание на корне, как официальный компонент.
+Обновления сохраняют DOM, draft, focus/selection; reset очищает автоматический статус.
+HasFeedback/feedbackIcons пока не перенесены.
+Сверка: [29 исходных состояний](./tests/browser/fixtures/ant-design-form-status-reference.json),
+[браузер и доступность controls](./tests/browser/form-status.spec.ts),
+[публичный пакет и SSR](./tests/package/form-status.ssr.test.ts), `?fixture=form-status`.
+
 `Form.colon`, `labelAlign` и `labelWrap` наследуют defaults из `ConfigProvider.form`.
 При отсутствии настройки colon включён, labelAlign равен right, labelWrap — false.
 Локальные FormItem.colon/labelAlign имеют приоритет над Form; true включает colon

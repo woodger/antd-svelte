@@ -43,6 +43,9 @@
     get status() {
       return field.status;
     },
+    get invalid() {
+      return field.invalid;
+    },
     required: false,
     describedBy: undefined,
     onBlur() {

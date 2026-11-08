@@ -1,0 +1,975 @@
+{
+  "reference": {
+    "version": "6.6.8",
+    "revision": "984592267de88fbf9cdaecc96a56629e721c709d",
+    "archiveSha256": "8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa",
+    "renderer": "unmodified official UMD with React 18.3.1",
+    "settled": "three animation frames after render"
+  },
+  "cases": [
+    {
+      "sample": {
+        "id": "default"
+      },
+      "metrics": {
+        "input": {
+          "root": [],
+          "control": [],
+          "ariaInvalid": null,
+          "color": "rgb(217, 217, 217)",
+          "messages": []
+        },
+        "select": {
+          "root": [],
+          "control": [],
+          "ariaInvalid": null,
+          "color": "rgb(217, 217, 217)",
+          "messages": []
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "explicit-empty",
+        "status": ""
+      },
+      "metrics": {
+        "input": {
+          "root": [],
+          "control": [],
+          "ariaInvalid": null,
+          "color": "rgb(217, 217, 217)",
+          "messages": []
+        },
+        "select": {
+          "root": [],
+          "control": [],
+          "ariaInvalid": null,
+          "color": "rgb(217, 217, 217)",
+          "messages": []
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "explicit-success",
+        "status": "success"
+      },
+      "metrics": {
+        "input": {
+          "root": [
+            "has-success"
+          ],
+          "control": [
+            "success"
+          ],
+          "ariaInvalid": null,
+          "color": "rgb(217, 217, 217)",
+          "messages": []
+        },
+        "select": {
+          "root": [
+            "has-success"
+          ],
+          "control": [
+            "success"
+          ],
+          "ariaInvalid": null,
+          "color": "rgb(217, 217, 217)",
+          "messages": []
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "explicit-error",
+        "status": "error"
+      },
+      "metrics": {
+        "input": {
+          "root": [
+            "has-error"
+          ],
+          "control": [
+            "error"
+          ],
+          "ariaInvalid": null,
+          "color": "rgb(255, 77, 79)",
+          "messages": []
+        },
+        "select": {
+          "root": [
+            "has-error"
+          ],
+          "control": [
+            "error"
+          ],
+          "ariaInvalid": null,
+          "color": "rgb(255, 77, 79)",
+          "messages": []
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "explicit-warning",
+        "status": "warning"
+      },
+      "metrics": {
+        "input": {
+          "root": [
+            "has-warning"
+          ],
+          "control": [
+            "warning"
+          ],
+          "ariaInvalid": null,
+          "color": "rgb(250, 173, 20)",
+          "messages": []
+        },
+        "select": {
+          "root": [
+            "has-warning"
+          ],
+          "control": [
+            "warning"
+          ],
+          "ariaInvalid": null,
+          "color": "rgb(250, 173, 20)",
+          "messages": []
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "explicit-validating",
+        "status": "validating"
+      },
+      "metrics": {
+        "input": {
+          "root": [
+            "is-validating"
+          ],
+          "control": [
+            "validating"
+          ],
+          "ariaInvalid": null,
+          "color": "rgb(217, 217, 217)",
+          "messages": []
+        },
+        "select": {
+          "root": [
+            "is-validating"
+          ],
+          "control": [
+            "validating"
+          ],
+          "ariaInvalid": null,
+          "color": "rgb(217, 217, 217)",
+          "messages": []
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "errors",
+        "errors": [
+          "Invalid"
+        ]
+      },
+      "metrics": {
+        "input": {
+          "root": [
+            "has-error"
+          ],
+          "control": [
+            "error"
+          ],
+          "ariaInvalid": "true",
+          "color": "rgb(255, 77, 79)",
+          "messages": [
+            "Invalid"
+          ]
+        },
+        "select": {
+          "root": [
+            "has-error"
+          ],
+          "control": [
+            "error"
+          ],
+          "ariaInvalid": "true",
+          "color": "rgb(255, 77, 79)",
+          "messages": [
+            "Invalid"
+          ]
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "warnings",
+        "warnings": [
+          "Check"
+        ]
+      },
+      "metrics": {
+        "input": {
+          "root": [
+            "has-warning"
+          ],
+          "control": [
+            "warning"
+          ],
+          "ariaInvalid": null,
+          "color": "rgb(250, 173, 20)",
+          "messages": [
+            "Check"
+          ]
+        },
+        "select": {
+          "root": [
+            "has-warning"
+          ],
+          "control": [
+            "warning"
+          ],
+          "ariaInvalid": null,
+          "color": "rgb(250, 173, 20)",
+          "messages": [
+            "Check"
+          ]
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "errors-warnings",
+        "errors": [
+          "Invalid"
+        ],
+        "warnings": [
+          "Check"
+        ]
+      },
+      "metrics": {
+        "input": {
+          "root": [
+            "has-error"
+          ],
+          "control": [
+            "error"
+          ],
+          "ariaInvalid": "true",
+          "color": "rgb(255, 77, 79)",
+          "messages": [
+            "Invalid",
+            "Check"
+          ]
+        },
+        "select": {
+          "root": [
+            "has-error"
+          ],
+          "control": [
+            "error"
+          ],
+          "ariaInvalid": "true",
+          "color": "rgb(255, 77, 79)",
+          "messages": [
+            "Invalid",
+            "Check"
+          ]
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "pending-error",
+        "validating": true,
+        "errors": [
+          "Invalid"
+        ]
+      },
+      "metrics": {
+        "input": {
+          "root": [
+            "is-validating"
+          ],
+          "control": [
+            "validating"
+          ],
+          "ariaInvalid": "true",
+          "color": "rgb(217, 217, 217)",
+          "messages": [
+            "Invalid"
+          ]
+        },
+        "select": {
+          "root": [
+            "is-validating"
+          ],
+          "control": [
+            "validating"
+          ],
+          "ariaInvalid": "true",
+          "color": "rgb(217, 217, 217)",
+          "messages": [
+            "Invalid"
+          ]
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "touched",
+        "touched": true
+      },
+      "metrics": {
+        "input": {
+          "root": [
+            "has-success"
+          ],
+          "control": [
+            "success"
+          ],
+          "ariaInvalid": null,
+          "color": "rgb(217, 217, 217)",
+          "messages": []
+        },
+        "select": {
+          "root": [
+            "has-success"
+          ],
+          "control": [
+            "success"
+          ],
+          "ariaInvalid": null,
+          "color": "rgb(217, 217, 217)",
+          "messages": []
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "validated",
+        "validating": false
+      },
+      "metrics": {
+        "input": {
+          "root": [],
+          "control": [],
+          "ariaInvalid": null,
+          "color": "rgb(217, 217, 217)",
+          "messages": []
+        },
+        "select": {
+          "root": [],
+          "control": [],
+          "ariaInvalid": null,
+          "color": "rgb(217, 217, 217)",
+          "messages": []
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "override-empty",
+        "status": "",
+        "errors": [
+          "Invalid"
+        ],
+        "warnings": [
+          "Check"
+        ]
+      },
+      "metrics": {
+        "input": {
+          "root": [],
+          "control": [],
+          "ariaInvalid": "true",
+          "color": "rgb(217, 217, 217)",
+          "messages": [
+            "Invalid",
+            "Check"
+          ]
+        },
+        "select": {
+          "root": [],
+          "control": [],
+          "ariaInvalid": "true",
+          "color": "rgb(217, 217, 217)",
+          "messages": [
+            "Invalid",
+            "Check"
+          ]
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "override-success",
+        "status": "success",
+        "errors": [
+          "Invalid"
+        ]
+      },
+      "metrics": {
+        "input": {
+          "root": [
+            "has-success"
+          ],
+          "control": [
+            "success"
+          ],
+          "ariaInvalid": "true",
+          "color": "rgb(217, 217, 217)",
+          "messages": [
+            "Invalid"
+          ]
+        },
+        "select": {
+          "root": [
+            "has-success"
+          ],
+          "control": [
+            "success"
+          ],
+          "ariaInvalid": "true",
+          "color": "rgb(217, 217, 217)",
+          "messages": [
+            "Invalid"
+          ]
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "override-warning",
+        "status": "warning",
+        "errors": [
+          "Invalid"
+        ]
+      },
+      "metrics": {
+        "input": {
+          "root": [
+            "has-warning"
+          ],
+          "control": [
+            "warning"
+          ],
+          "ariaInvalid": "true",
+          "color": "rgb(250, 173, 20)",
+          "messages": [
+            "Invalid"
+          ]
+        },
+        "select": {
+          "root": [
+            "has-warning"
+          ],
+          "control": [
+            "warning"
+          ],
+          "ariaInvalid": "true",
+          "color": "rgb(250, 173, 20)",
+          "messages": [
+            "Invalid"
+          ]
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "override-error",
+        "status": "error",
+        "warnings": [
+          "Check"
+        ]
+      },
+      "metrics": {
+        "input": {
+          "root": [
+            "has-error"
+          ],
+          "control": [
+            "error"
+          ],
+          "ariaInvalid": null,
+          "color": "rgb(255, 77, 79)",
+          "messages": [
+            "Check"
+          ]
+        },
+        "select": {
+          "root": [
+            "has-error"
+          ],
+          "control": [
+            "error"
+          ],
+          "ariaInvalid": null,
+          "color": "rgb(255, 77, 79)",
+          "messages": [
+            "Check"
+          ]
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "override-pending",
+        "status": "validating",
+        "errors": [
+          "Invalid"
+        ]
+      },
+      "metrics": {
+        "input": {
+          "root": [
+            "is-validating"
+          ],
+          "control": [
+            "validating"
+          ],
+          "ariaInvalid": "true",
+          "color": "rgb(217, 217, 217)",
+          "messages": [
+            "Invalid"
+          ]
+        },
+        "select": {
+          "root": [
+            "is-validating"
+          ],
+          "control": [
+            "validating"
+          ],
+          "ariaInvalid": "true",
+          "color": "rgb(217, 217, 217)",
+          "messages": [
+            "Invalid"
+          ]
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "control-warning",
+        "status": "error",
+        "local": "warning"
+      },
+      "metrics": {
+        "input": {
+          "root": [
+            "has-error"
+          ],
+          "control": [
+            "warning"
+          ],
+          "ariaInvalid": null,
+          "color": "rgb(250, 173, 20)",
+          "messages": []
+        },
+        "select": {
+          "root": [
+            "has-error"
+          ],
+          "control": [
+            "warning"
+          ],
+          "ariaInvalid": null,
+          "color": "rgb(250, 173, 20)",
+          "messages": []
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "control-warning-with-error",
+        "status": "success",
+        "local": "warning",
+        "errors": [
+          "Invalid"
+        ]
+      },
+      "metrics": {
+        "input": {
+          "root": [
+            "has-success"
+          ],
+          "control": [
+            "warning"
+          ],
+          "ariaInvalid": "true",
+          "color": "rgb(250, 173, 20)",
+          "messages": [
+            "Invalid"
+          ]
+        },
+        "select": {
+          "root": [
+            "has-success"
+          ],
+          "control": [
+            "warning"
+          ],
+          "ariaInvalid": "true",
+          "color": "rgb(250, 173, 20)",
+          "messages": [
+            "Invalid"
+          ]
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "nameless-warning",
+        "status": "warning",
+        "nameless": true
+      },
+      "metrics": {
+        "input": {
+          "root": [
+            "has-warning"
+          ],
+          "control": [
+            "warning"
+          ],
+          "ariaInvalid": null,
+          "color": "rgb(250, 173, 20)",
+          "messages": []
+        },
+        "select": {
+          "root": [
+            "has-warning"
+          ],
+          "control": [
+            "warning"
+          ],
+          "ariaInvalid": null,
+          "color": "rgb(250, 173, 20)",
+          "messages": []
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "dark-error",
+        "status": "error",
+        "mode": "dark",
+        "rtl": true
+      },
+      "metrics": {
+        "input": {
+          "root": [
+            "has-error"
+          ],
+          "control": [
+            "error"
+          ],
+          "ariaInvalid": null,
+          "color": "rgb(220, 68, 70)",
+          "messages": []
+        },
+        "select": {
+          "root": [
+            "has-error"
+          ],
+          "control": [
+            "error"
+          ],
+          "ariaInvalid": null,
+          "color": "rgb(220, 68, 70)",
+          "messages": []
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "dark-warning",
+        "status": "warning",
+        "mode": "dark",
+        "rtl": true
+      },
+      "metrics": {
+        "input": {
+          "root": [
+            "has-warning"
+          ],
+          "control": [
+            "warning"
+          ],
+          "ariaInvalid": null,
+          "color": "rgb(216, 150, 20)",
+          "messages": []
+        },
+        "select": {
+          "root": [
+            "has-warning"
+          ],
+          "control": [
+            "warning"
+          ],
+          "ariaInvalid": null,
+          "color": "rgb(216, 150, 20)",
+          "messages": []
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "compact-error",
+        "status": "error",
+        "mode": "compact",
+        "rtl": true
+      },
+      "metrics": {
+        "input": {
+          "root": [
+            "has-error"
+          ],
+          "control": [
+            "error"
+          ],
+          "ariaInvalid": null,
+          "color": "rgb(255, 77, 79)",
+          "messages": []
+        },
+        "select": {
+          "root": [
+            "has-error"
+          ],
+          "control": [
+            "error"
+          ],
+          "ariaInvalid": null,
+          "color": "rgb(255, 77, 79)",
+          "messages": []
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "compact-warning",
+        "status": "warning",
+        "mode": "compact",
+        "rtl": true
+      },
+      "metrics": {
+        "input": {
+          "root": [
+            "has-warning"
+          ],
+          "control": [
+            "warning"
+          ],
+          "ariaInvalid": null,
+          "color": "rgb(250, 173, 20)",
+          "messages": []
+        },
+        "select": {
+          "root": [
+            "has-warning"
+          ],
+          "control": [
+            "warning"
+          ],
+          "ariaInvalid": null,
+          "color": "rgb(250, 173, 20)",
+          "messages": []
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "dark-compact-error",
+        "status": "error",
+        "mode": "dark-compact",
+        "rtl": true
+      },
+      "metrics": {
+        "input": {
+          "root": [
+            "has-error"
+          ],
+          "control": [
+            "error"
+          ],
+          "ariaInvalid": null,
+          "color": "rgb(220, 68, 70)",
+          "messages": []
+        },
+        "select": {
+          "root": [
+            "has-error"
+          ],
+          "control": [
+            "error"
+          ],
+          "ariaInvalid": null,
+          "color": "rgb(220, 68, 70)",
+          "messages": []
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "dark-compact-warning",
+        "status": "warning",
+        "mode": "dark-compact",
+        "rtl": true
+      },
+      "metrics": {
+        "input": {
+          "root": [
+            "has-warning"
+          ],
+          "control": [
+            "warning"
+          ],
+          "ariaInvalid": null,
+          "color": "rgb(216, 150, 20)",
+          "messages": []
+        },
+        "select": {
+          "root": [
+            "has-warning"
+          ],
+          "control": [
+            "warning"
+          ],
+          "ariaInvalid": null,
+          "color": "rgb(216, 150, 20)",
+          "messages": []
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "nameless-error",
+        "status": "error",
+        "nameless": true
+      },
+      "metrics": {
+        "input": {
+          "root": [
+            "has-error"
+          ],
+          "control": [
+            "error"
+          ],
+          "ariaInvalid": null,
+          "color": "rgb(255, 77, 79)",
+          "messages": []
+        },
+        "select": {
+          "root": [
+            "has-error"
+          ],
+          "control": [
+            "error"
+          ],
+          "ariaInvalid": null,
+          "color": "rgb(255, 77, 79)",
+          "messages": []
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "nameless-success",
+        "status": "success",
+        "nameless": true
+      },
+      "metrics": {
+        "input": {
+          "root": [
+            "has-success"
+          ],
+          "control": [
+            "success"
+          ],
+          "ariaInvalid": null,
+          "color": "rgb(217, 217, 217)",
+          "messages": []
+        },
+        "select": {
+          "root": [
+            "has-success"
+          ],
+          "control": [
+            "success"
+          ],
+          "ariaInvalid": null,
+          "color": "rgb(217, 217, 217)",
+          "messages": []
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "nameless-pending",
+        "status": "validating",
+        "nameless": true
+      },
+      "metrics": {
+        "input": {
+          "root": [
+            "is-validating"
+          ],
+          "control": [
+            "validating"
+          ],
+          "ariaInvalid": null,
+          "color": "rgb(217, 217, 217)",
+          "messages": []
+        },
+        "select": {
+          "root": [
+            "is-validating"
+          ],
+          "control": [
+            "validating"
+          ],
+          "ariaInvalid": null,
+          "color": "rgb(217, 217, 217)",
+          "messages": []
+        }
+      }
+    }
+  ],
+  "transfer": [
+    {
+      "status": null,
+      "invalid": "true",
+      "descriptionConnected": true,
+      "description": "Stored error"
+    },
+    {
+      "status": "success",
+      "invalid": "true",
+      "descriptionConnected": true,
+      "description": "Stored error"
+    },
+    {
+      "status": "warning",
+      "invalid": "true",
+      "descriptionConnected": true,
+      "description": "Stored error"
+    },
+    {
+      "status": "validating",
+      "invalid": "true",
+      "descriptionConnected": true,
+      "description": "Stored error"
+    },
+    {
+      "status": "",
+      "invalid": "true",
+      "descriptionConnected": true,
+      "description": "Stored error"
+    }
+  ]
+}

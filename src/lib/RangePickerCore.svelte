@@ -1034,6 +1034,7 @@
         && 'ant-picker-input-placeholder'
     ]}>
     <input {...attributes} bind:this={startElement} id={typeof id === 'string' ? id : id?.start ?? field?.id} name={name ?? field?.name} placeholder={time ? timePlaceholder?.[0] : placeholder?.[0] ?? lang.rangePlaceholder[0]} type="text" role="combobox" aria-haspopup="dialog" aria-expanded={visible && active === 0} aria-controls={`ant-range-picker-${generatedId}`} aria-invalid={inputInvalid(0)
+        || field?.invalid
         || resolvedStatus === 'error'
         || attributes['aria-invalid']
         || undefined} aria-describedby={[attributes['aria-describedby'], field?.describedBy].filter(
@@ -1062,6 +1063,7 @@
         && 'ant-picker-input-placeholder'
     ]}>
     <input {...attributes} bind:this={endElement} id={typeof id === 'object' ? id.end : undefined} name={name ?? field?.name} placeholder={time ? timePlaceholder?.[1] : placeholder?.[1] ?? lang.rangePlaceholder[1]} type="text" role="combobox" aria-haspopup="dialog" aria-expanded={visible && active === 1} aria-controls={`ant-range-picker-${generatedId}`} aria-invalid={inputInvalid(1)
+        || field?.invalid
         || resolvedStatus === 'error'
         || attributes['aria-invalid']
         || undefined} aria-describedby={[attributes['aria-describedby'], field?.describedBy].filter(

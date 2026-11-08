@@ -569,7 +569,7 @@
             ? `${controlId}-option-${activeIndex}`
             : undefined}
         aria-autocomplete={canSearch ? 'list' : 'none'}
-        aria-invalid={resolvedStatus === 'error'
+        aria-invalid={field?.invalid || resolvedStatus === 'error'
             || attributes['aria-invalid']
             || undefined}
         aria-required={attributes.required || field?.required || undefined}

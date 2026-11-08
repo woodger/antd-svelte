@@ -550,7 +550,7 @@
         (blocked || item.disabled) && 'ant-select-selection-item-disabled'
       ]} title={text(item.label)}><span class="ant-select-selection-item-content">{@render labelNode(item)}</span>{#if !blocked&&!item.disabled}<button type="button" class="ant-select-selection-item-remove" aria-label={`${config.locale.removeText ?? 'Remove'} ${text(item.label)}`} onpointerdown={event => event.preventDefault()} onclick={() => choose(item.value, 'selection')}><Icon name="close" /></button>{/if}</span>{/each}
     {:else if (!visible || !canSearch) && (treeTitleRender || typeof display[0]?.label==='function') && display[0]}<span class="single-snippet">{@render labelNode(display[0])}</span>{/if}
-    <input {...attributes} bind:this={editor} id={controlId} class="ant-select-input" type="text" role="combobox" aria-haspopup="tree" aria-controls={`${controlId}-list`} aria-expanded={visible} aria-autocomplete={canSearch ? 'list' : 'none'} aria-activedescendant={visible ? activeDescendant : undefined} aria-invalid={resolvedStatus === 'error'
+    <input {...attributes} bind:this={editor} id={controlId} class="ant-select-input" type="text" role="combobox" aria-haspopup="tree" aria-controls={`${controlId}-list`} aria-expanded={visible} aria-autocomplete={canSearch ? 'list' : 'none'} aria-activedescendant={visible ? activeDescendant : undefined} aria-invalid={field?.invalid || resolvedStatus === 'error'
         || attributes['aria-invalid']
         || undefined} aria-describedby={[attributes['aria-describedby'], field?.describedBy].filter(
             Boolean

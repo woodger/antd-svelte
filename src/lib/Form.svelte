@@ -112,6 +112,13 @@
     },
     getFieldError: (name) => form.getFieldError(name),
     getFieldWarning: (name) => form.getFieldWarning(name),
+    getFieldMeta(name) {
+      const hooks = getFormHooks(form);
+
+      return hooks ? hooks.getFieldMeta(name) : {
+        touched: form.isFieldTouched(name), validating: form.isFieldValidating(name)
+      };
+    },
     isFieldRequired: (name) => form.isFieldRequired(name),
     touchField: (name) => form.touchField(name),
     registerField: (field) => getFormHooks(form)?.registerField(field),

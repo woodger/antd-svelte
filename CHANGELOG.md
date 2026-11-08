@@ -135,6 +135,10 @@
 
 ### Added
 
+- FormItem: validateStatus с явным пустым значением и автоматическими
+  validating/success. Статус работает без name; ошибки остаются доступны
+  при изменении оформления. Сверены source классы и цвета, темы и controls.
+
 - FormItem: name стал необязательным для layout-строк. Без него controls не получают
   binding/rules поля и сохраняют локальный state при reset модели; required-mark,
   явный htmlFor, оформление Form и lifecycle перехода к name соответствуют upstream.
@@ -1042,6 +1046,9 @@
   тип результата `createMessage` подготовлен к генерации деклараций.
 
 ### Fixed
+
+- Transfer: model errors передают aria-invalid и description на корень,
+  в том числе при ручном success/validating/пустом статусе FormItem.
 
 - Form: disabled распространяется на controls без FormItem; вложенный
   ConfigProvider и явный prop control сохраняют исходный приоритет.

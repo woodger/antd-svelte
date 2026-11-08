@@ -328,7 +328,7 @@
     {...(attributes.autofocus !== undefined || autoFocus !== undefined
         ? { autofocus: attributes.autofocus ?? autoFocus }
         : {})}
-    aria-invalid={resolvedStatus === 'error'
+    aria-invalid={field?.invalid || resolvedStatus === 'error'
         || attributes['aria-invalid']
         || undefined}
     aria-describedby={[attributes['aria-describedby'], field?.describedBy].filter(
