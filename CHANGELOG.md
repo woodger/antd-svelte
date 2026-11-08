@@ -9,6 +9,11 @@
 
 ### Added
 
+- Правила Form поддерживают вложенные fields и defaultField, readonly-массивы
+  дочерних правил и рекурсивные схемы. Сохранены корневые bindings, transform,
+  validator snapshot, validateFirst и async/reset guards. Исправлены source ошибки
+  вложенных warningOnly, sparse arrays, преобразованных массивов и inherited field names.
+
 - FormRule поддерживает фабрики `(form) => rule` в createForm и FormItem.
   Они получают текущую модель, вычисляют required/constraints перед проверкой
   и фиксируют настройки до debounce. Сохранены object rules и native validator API;

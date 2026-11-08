@@ -1,0 +1,771 @@
+{
+  "reference": {
+    "version": "6.6.8",
+    "revision": "984592267de88fbf9cdaecc96a56629e721c709d",
+    "archiveSha256": "8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa",
+    "renderer": "unmodified official UMD with React 18.3.1",
+    "settled": "three animation frames after validation; explicit Promise release for async order"
+  },
+  "cases": [
+    {
+      "sample": {
+        "id": "object-required-child",
+        "value": {
+          "name": ""
+        },
+        "rule": {
+          "type": "object",
+          "message": "Parent",
+          "fields": {
+            "name": {
+              "required": true,
+              "message": "Name"
+            }
+          }
+        }
+      },
+      "valid": false,
+      "errors": [
+        "Name"
+      ],
+      "warnings": [],
+      "validating": false
+    },
+    {
+      "sample": {
+        "id": "object-optional-missing",
+        "rule": {
+          "type": "object",
+          "message": "Parent",
+          "fields": {
+            "name": {
+              "required": true,
+              "message": "Name"
+            }
+          }
+        }
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": [],
+      "validating": false
+    },
+    {
+      "sample": {
+        "id": "object-required-missing",
+        "rule": {
+          "type": "object",
+          "message": "Parent",
+          "fields": {
+            "name": {
+              "required": true,
+              "message": "Name"
+            }
+          },
+          "required": true
+        }
+      },
+      "valid": false,
+      "errors": [
+        "Parent"
+      ],
+      "warnings": [],
+      "validating": false
+    },
+    {
+      "sample": {
+        "id": "object-child-present",
+        "value": {
+          "name": "abc"
+        },
+        "rule": {
+          "type": "object",
+          "message": "Parent",
+          "fields": {
+            "name": {
+              "required": true,
+              "message": "Name"
+            }
+          }
+        }
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": [],
+      "validating": false
+    },
+    {
+      "sample": {
+        "id": "object-child-rules",
+        "value": {
+          "name": "abc"
+        },
+        "rule": {
+          "type": "object",
+          "message": "Parent",
+          "fields": {
+            "name": [
+              {
+                "min": 4,
+                "message": "Short"
+              },
+              {
+                "pattern": "^z$",
+                "message": "Pattern"
+              }
+            ]
+          }
+        }
+      },
+      "valid": false,
+      "errors": [
+        "Short",
+        "Pattern"
+      ],
+      "warnings": [],
+      "validating": false
+    },
+    {
+      "sample": {
+        "id": "object-two-children",
+        "value": {
+          "a": "",
+          "b": ""
+        },
+        "rule": {
+          "type": "object",
+          "message": "Parent",
+          "fields": {
+            "a": {
+              "required": true,
+              "message": "A"
+            },
+            "b": {
+              "required": true,
+              "message": "B"
+            }
+          }
+        }
+      },
+      "valid": false,
+      "errors": [
+        "A",
+        "B"
+      ],
+      "warnings": [],
+      "validating": false
+    },
+    {
+      "sample": {
+        "id": "object-default",
+        "value": {
+          "a": "",
+          "b": "ok"
+        },
+        "rule": {
+          "type": "object",
+          "defaultField": {
+            "required": true,
+            "message": "Child"
+          },
+          "message": "Parent"
+        }
+      },
+      "valid": false,
+      "errors": [
+        "Child"
+      ],
+      "warnings": [],
+      "validating": false
+    },
+    {
+      "sample": {
+        "id": "object-default-override",
+        "value": {
+          "a": "xx",
+          "b": "x"
+        },
+        "rule": {
+          "type": "object",
+          "defaultField": {
+            "min": 3,
+            "message": "Default"
+          },
+          "fields": {
+            "a": {
+              "required": true,
+              "message": "Specific"
+            }
+          },
+          "message": "Parent"
+        }
+      },
+      "valid": false,
+      "errors": [
+        "Default"
+      ],
+      "warnings": [],
+      "validating": false
+    },
+    {
+      "sample": {
+        "id": "array-default-required",
+        "value": [
+          "",
+          "ok"
+        ],
+        "rule": {
+          "type": "array",
+          "message": "Parent",
+          "defaultField": {
+            "required": true,
+            "message": "Child"
+          }
+        }
+      },
+      "valid": false,
+      "errors": [
+        "Child"
+      ],
+      "warnings": [],
+      "validating": false
+    },
+    {
+      "sample": {
+        "id": "array-default-numeric",
+        "value": [
+          0,
+          false
+        ],
+        "rule": {
+          "type": "array",
+          "message": "Parent",
+          "defaultField": {
+            "required": true,
+            "message": "Child"
+          }
+        }
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": [],
+      "validating": false
+    },
+    {
+      "sample": {
+        "id": "array-default-object",
+        "value": [
+          {
+            "name": ""
+          },
+          {
+            "name": "ok"
+          }
+        ],
+        "rule": {
+          "type": "array",
+          "message": "Parent",
+          "defaultField": {
+            "type": "object",
+            "message": "Parent",
+            "fields": {
+              "name": {
+                "required": true,
+                "message": "Name"
+              }
+            }
+          }
+        }
+      },
+      "valid": false,
+      "errors": [
+        "Name"
+      ],
+      "warnings": [],
+      "validating": false
+    },
+    {
+      "sample": {
+        "id": "array-fields",
+        "value": [
+          "",
+          ""
+        ],
+        "rule": {
+          "type": "array",
+          "fields": {
+            "0": {
+              "required": true,
+              "message": "A"
+            },
+            "1": {
+              "required": true,
+              "message": "B"
+            }
+          },
+          "message": "Parent"
+        }
+      },
+      "valid": false,
+      "errors": [
+        "A",
+        "B"
+      ],
+      "warnings": [],
+      "validating": false
+    },
+    {
+      "sample": {
+        "id": "array-parent-range",
+        "value": [
+          ""
+        ],
+        "rule": {
+          "type": "array",
+          "message": "Parent",
+          "defaultField": {
+            "required": true,
+            "message": "Child"
+          },
+          "len": 2
+        }
+      },
+      "valid": false,
+      "errors": [
+        "Parent"
+      ],
+      "warnings": [],
+      "validating": false
+    },
+    {
+      "sample": {
+        "id": "object-parent-type",
+        "value": "abc",
+        "rule": {
+          "type": "object",
+          "message": "Parent",
+          "fields": {
+            "name": {
+              "required": true,
+              "message": "Name"
+            }
+          }
+        }
+      },
+      "valid": false,
+      "errors": [
+        "Parent",
+        "Name"
+      ],
+      "warnings": [],
+      "validating": false
+    },
+    {
+      "sample": {
+        "id": "object-parent-validator",
+        "value": {
+          "name": ""
+        },
+        "rule": {
+          "type": "object",
+          "message": "Parent",
+          "fields": {
+            "name": {
+              "required": true,
+              "message": "Name"
+            }
+          },
+          "validator": "fail"
+        }
+      },
+      "valid": false,
+      "errors": [
+        "Parent",
+        "Name"
+      ],
+      "warnings": [],
+      "validating": false
+    },
+    {
+      "sample": {
+        "id": "object-child-warning",
+        "value": {
+          "a": ""
+        },
+        "rule": {
+          "type": "object",
+          "message": "Parent",
+          "fields": {
+            "a": {
+              "required": true,
+              "message": "Warn",
+              "warningOnly": true
+            }
+          }
+        }
+      },
+      "valid": false,
+      "errors": [
+        "Warn"
+      ],
+      "warnings": [],
+      "validating": false
+    },
+    {
+      "sample": {
+        "id": "array-child-warning",
+        "value": [
+          ""
+        ],
+        "rule": {
+          "type": "array",
+          "message": "Parent",
+          "defaultField": {
+            "required": true,
+            "message": "Warn",
+            "warningOnly": true
+          }
+        }
+      },
+      "valid": false,
+      "errors": [
+        "Warn"
+      ],
+      "warnings": [],
+      "validating": false
+    },
+    {
+      "sample": {
+        "id": "parent-warning",
+        "value": {
+          "a": ""
+        },
+        "rule": {
+          "type": "object",
+          "message": "Parent",
+          "fields": {
+            "a": {
+              "required": true,
+              "message": "Child"
+            }
+          },
+          "warningOnly": true
+        }
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": [
+        "Child"
+      ],
+      "validating": false
+    },
+    {
+      "sample": {
+        "id": "nested-rows",
+        "value": {
+          "rows": [
+            {
+              "name": ""
+            }
+          ]
+        },
+        "rule": {
+          "type": "object",
+          "message": "Parent",
+          "fields": {
+            "rows": {
+              "type": "array",
+              "message": "Parent",
+              "defaultField": {
+                "type": "object",
+                "message": "Parent",
+                "fields": {
+                  "name": {
+                    "required": true,
+                    "message": "Name"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "valid": false,
+      "errors": [
+        "Name"
+      ],
+      "warnings": [],
+      "validating": false
+    },
+    {
+      "sample": {
+        "id": "object-transformed-default",
+        "value": {
+          "a": ""
+        },
+        "rule": {
+          "type": "object",
+          "transform": "object-filled",
+          "defaultField": {
+            "required": true,
+            "message": "Child"
+          }
+        }
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": [],
+      "validating": false
+    },
+    {
+      "sample": {
+        "id": "array-transformed-default",
+        "value": [
+          "",
+          "ok"
+        ],
+        "rule": {
+          "type": "array",
+          "message": "Parent",
+          "defaultField": {
+            "required": true,
+            "message": "Child"
+          },
+          "transform": "shrink"
+        }
+      },
+      "valid": false,
+      "errors": [
+        "Child"
+      ],
+      "warnings": [],
+      "validating": false
+    },
+    {
+      "sample": {
+        "id": "object-child-numeric-required",
+        "value": {
+          "n": 0
+        },
+        "rule": {
+          "type": "object",
+          "message": "Parent",
+          "fields": {
+            "n": {
+              "required": true,
+              "message": "Child"
+            }
+          }
+        }
+      },
+      "valid": false,
+      "errors": [
+        "Child"
+      ],
+      "warnings": [],
+      "validating": false
+    },
+    {
+      "sample": {
+        "id": "object-own-method",
+        "value": {},
+        "rule": {
+          "type": "object",
+          "message": "Parent",
+          "fields": {
+            "toString": {
+              "type": "method",
+              "required": true,
+              "message": "Method"
+            }
+          }
+        }
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": [],
+      "validating": false
+    },
+    {
+      "sample": {
+        "id": "object-literal-dot",
+        "value": {
+          "a.b": ""
+        },
+        "rule": {
+          "type": "object",
+          "message": "Parent",
+          "fields": {
+            "a.b": {
+              "required": true,
+              "message": "Dot"
+            }
+          }
+        }
+      },
+      "valid": false,
+      "errors": [
+        "Dot"
+      ],
+      "warnings": [],
+      "validating": false
+    },
+    {
+      "sample": {
+        "id": "array-explicit-error",
+        "value": [
+          ""
+        ],
+        "rule": {
+          "type": "array",
+          "message": "Parent",
+          "defaultField": {
+            "required": true,
+            "message": "Default"
+          },
+          "fields": {
+            "0": {
+              "required": true,
+              "message": "Specific"
+            }
+          }
+        }
+      },
+      "valid": false,
+      "errors": [
+        "Specific"
+      ],
+      "warnings": [],
+      "validating": false
+    },
+    {
+      "sample": {
+        "id": "array-explicit-valid",
+        "value": [
+          ""
+        ],
+        "rule": {
+          "type": "array",
+          "message": "Parent",
+          "defaultField": {
+            "required": true,
+            "message": "Default"
+          },
+          "fields": {
+            "0": {
+              "validator": "pass",
+              "message": "Specific"
+            }
+          }
+        }
+      },
+      "valid": false,
+      "errors": [
+        "Default"
+      ],
+      "warnings": [],
+      "validating": false
+    },
+    {
+      "sample": {
+        "id": "object-async-order",
+        "value": {
+          "a": "x",
+          "b": "x"
+        },
+        "rule": {
+          "type": "object",
+          "message": "Parent",
+          "fields": {
+            "a": {
+              "validator": "slow",
+              "message": "Slow"
+            },
+            "b": {
+              "validator": "fast",
+              "message": "Fast"
+            }
+          }
+        },
+        "pending": 1
+      },
+      "valid": false,
+      "errors": [
+        "Fast",
+        "Slow"
+      ],
+      "warnings": [],
+      "validating": false
+    },
+    {
+      "sample": {
+        "id": "array-async-order",
+        "value": [
+          "slow",
+          "fast"
+        ],
+        "rule": {
+          "type": "array",
+          "message": "Parent",
+          "defaultField": {
+            "validator": "by-value"
+          }
+        },
+        "pending": 1
+      },
+      "valid": false,
+      "errors": [
+        "Slow",
+        "Fast"
+      ],
+      "warnings": [],
+      "validating": false
+    },
+    {
+      "sample": {
+        "id": "array-child-transform",
+        "value": [
+          " x ",
+          "bad"
+        ],
+        "rule": {
+          "type": "array",
+          "message": "Parent",
+          "defaultField": {
+            "transform": "trim",
+            "pattern": "^x$",
+            "message": "Pattern"
+          }
+        }
+      },
+      "valid": false,
+      "errors": [
+        "Pattern"
+      ],
+      "warnings": [],
+      "validating": false
+    },
+    {
+      "sample": {
+        "id": "array-sparse",
+        "valueKind": "sparse",
+        "rule": {
+          "type": "array",
+          "message": "Parent",
+          "defaultField": {
+            "required": true,
+            "message": "Child"
+          }
+        }
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": [],
+      "validating": false
+    }
+  ],
+  "diagnostics": [
+    "TypeError: l[r].push is not a function\n    at <anonymous>:130:41225\n    at Array.forEach (<anonymous>)\n    at <anonymous>:130:40892\n    at Array.forEach (<anonymous>)\n    at Td.validate (<anonymous>:130:40847)\n    at t (<anonymous>:130:42217)\n    at Object.object [as validator] (<anonymous>:130:38882)\n    at <anonymous>:130:42502\n    at <anonymous>:130:32366\n    at Array.forEach (<anonymous>)",
+    "l[r].push is not a function"
+  ]
+}

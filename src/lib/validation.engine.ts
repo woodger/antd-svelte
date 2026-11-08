@@ -3,6 +3,10 @@ import {
 } from './validation-type.engine';
 import { matchesValidationPattern } from './validation-format.engine';
 import type { FormInstance } from './form.model.svelte';
+import {
+  collectValidationMessages, validateNestedRule,
+  type ValidationMessages, type ValidationAncestor
+} from './validation-nested.engine';
 export type { ValidationRuleType } from './validation-type.engine';
 
 /** Значение поля может быть скаляром, вложенным контейнером или экземпляром класса. */
@@ -25,6 +29,10 @@ export interface ValidationRule<Values extends FormValues = FormValues> {
   pattern?: RegExp | string;
   /** Строгое сравнение без coercion; используется при type='enum'. */
   enum?: readonly FormValue[];
+  /** Правила именованных дочерних значений при type='object' или 'array'. */
+  fields?: Readonly<Record<string, ValidationRule<Values> | readonly ValidationRule<Values>[]>>;
+  /** Правило элементов массива; для object применяется к ключам без собственного fields rule. */
+  defaultField?: ValidationRule<Values>;
   message?: string;
   /** Синхронно преобразует значение только для этого правила, не записывая результат в Form. */
   transform?: (value: FormValue) => FormValue;
@@ -78,23 +86,30 @@ export async function validateFieldValue<Values extends FormValues>(
   rules: readonly ValidationRule<Values>[],
   validateFirst: boolean | 'parallel' = false
 ): Promise<{ errors: string[]; warnings: string[] }> {
+  return validateRules(value, values, rules, validateFirst);
+}
+
+async function validateRules<Values extends FormValues>(
+  value: FormValue, values: Readonly<Values>, rules: readonly ValidationRule<Values>[],
+  validateFirst: boolean | 'parallel' = false, ancestor?: ValidationAncestor
+): Promise<ValidationMessages> {
   const ordered = [...rules].sort((first, second) =>
     Number(Boolean(first.warningOnly)) - Number(Boolean(second.warningOnly))
   );
 
   if (validateFirst === true) {
+    let warnings: string[] | undefined;
     for (const rule of ordered) {
-      const messages = await validateRuleValue(value, values, rule);
-      if (messages.length) {
-        return rule.warningOnly
-          ? { errors: [], warnings: messages } : { errors: messages, warnings: [] };
-      }
+      if (rule.warningOnly && warnings) return { errors: [], warnings };
+      const messages = await validateRuleValue(value, values, rule, ancestor);
+      if (messages.errors.length) return { errors: messages.errors, warnings: [] };
+      if (messages.warnings.length) warnings ??= messages.warnings;
     }
 
-    return { errors: [], warnings: [] };
+    return { errors: [], warnings: warnings ?? [] };
   }
 
-  const checks = ordered.map((rule) => validateRuleValue(value, values, rule));
+  const checks = ordered.map((rule) => validateRuleValue(value, values, rule, ancestor));
   if (validateFirst === 'parallel') {
     if (!checks.length) return { errors: [], warnings: [] };
 
@@ -108,13 +123,12 @@ export async function validateFieldValue<Values extends FormValues>(
           remaining--;
           if (!ordered[index].warningOnly) {
             blocking--;
-            if (messages.length) {
-              resolve({ errors: messages, warnings: [] });
+            if (messages.errors.length) {
+              resolve({ errors: messages.errors, warnings: [] });
               return;
             }
-          } else if (messages.length) {
-            warning ??= messages;
           }
+          if (messages.warnings.length) warning ??= messages.warnings;
 
           // Source выбирает и ранний warning, теряя позднюю ошибку; блокирующие правила ждём.
           if (!blocking && warning) resolve({ errors: [], warnings: warning });
@@ -127,8 +141,9 @@ export async function validateFieldValue<Values extends FormValues>(
   const results = await Promise.all(checks);
   const errors: string[] = [];
   const warnings: string[] = [];
-  results.forEach((messages, index) => {
-    (ordered[index].warningOnly ? warnings : errors).push(...messages);
+  results.forEach((messages) => {
+    errors.push(...messages.errors);
+    warnings.push(...messages.warnings);
   });
 
   return { errors, warnings };
@@ -137,18 +152,29 @@ export async function validateFieldValue<Values extends FormValues>(
 async function validateRuleValue<Values extends FormValues>(
   originalValue: FormValue,
   values: Readonly<Values>,
-  rule: ValidationRule<Values>
-): Promise<string[]> {
-  const messages: string[] = [];
+  configuration: ValidationRule<Values>, ancestor?: ValidationAncestor
+): Promise<ValidationMessages> {
+  const rule = ancestor || (configuration.type === 'object' || configuration.type === 'array')
+    && (configuration.fields || configuration.defaultField) ? { ...configuration } : configuration;
   let transformedValue = originalValue;
   if (rule.transform) {
     try {
       transformedValue = rule.transform(originalValue);
     } catch (error) {
       // Source теряет исключение transform и принимает значение; ошибка не должна давать success.
-      return [rule.message ?? (error instanceof Error ? error.message : 'Проверьте значение.')];
+      return collectValidationMessages(rule, [rule.message
+        ?? (error instanceof Error ? error.message : 'Проверьте значение.')], []);
     }
   }
+  const messages = await validatePrimitiveRule(transformedValue, values, rule);
+  return validateNestedRule(transformedValue, originalValue, rule, messages,
+    (child, rules, parent) => validateRules(child, values, rules, false, parent), ancestor, configuration);
+}
+
+async function validatePrimitiveRule<Values extends FormValues>(
+  transformedValue: FormValue, values: Readonly<Values>, rule: ValidationRule<Values>
+): Promise<string[]> {
+  const messages: string[] = [];
   const type = rule.type;
   if (type && rule.validator) return validateCustomRule(transformedValue, values, rule);
 

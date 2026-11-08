@@ -9894,6 +9894,43 @@ validator(value, values), setters/touched, reset и правила без фаб
 [браузер](./tests/browser/form-rule-factories.spec.ts),
 [публичные типы и SSR](./tests/package/form-rule-factories.ssr.test.ts), `?fixture=form-rule-factories`.
 
+`fields` задаёт правила дочерних значений при type='object' или 'array'. Каждый
+ключ — буквальное имя свойства, в том числе 'a.b'; значение — объект правила
+или readonly-массив объектов. DefaultField проверяет все существующие элементы
+массива после fields, если родитель и explicit fields не дали ошибок. Для object
+defaultField применяется к собственным ключам без переопределения в fields.
+Необязательное отсутствующее родительское значение пропускает вложенную схему.
+Ошибки и предупреждения записываются в родительское поле; отдельные bindings не создаются.
+
+```ts
+const form = createForm({
+  initialValues: { profile: { name: '' } },
+  rules: {
+    profile: [{ type: 'object', fields: {
+      name: { required: true, message: 'Введите имя.' }
+    } }]
+  }
+});
+```
+
+Вложенный validator сохраняет native `(value, values)` с общим snapshot формы.
+Parent transform применяется до дочерних правил и не заменяет store; схема
+фиксируется перед асинхронным parent validator. ValidateFirst управляет списком
+корневых правил, внутри одной схемы собираются все дочерние результаты. Вложенное
+предупреждение не скрывает ошибку последующего корневого правила.
+Fields сохраняет исходный порядок завершения child promises; defaultField массива —
+порядок индексов. Корневой warningOnly переводит все сообщения своей схемы в warnings.
+
+Исправлены подтверждённые ошибки source: вложенный warningOnly не блокирует submit,
+defaultField проверяет существующие sparse positions и преобразованный массив,
+required без type принимает числовой 0, поля читаются только из собственных данных.
+Повтор пары schema/value в текущей ветви завершается ошибкой цикла; одинаковый
+объект у независимых siblings допустим. Reset и устаревшие async results сохраняют
+прежние guards модели. Сверка: [30 raw-состояний и diagnostics](./tests/browser/fixtures/ant-design-form-nested-rules-reference.json),
+[правила и lifecycle](./src/lib/form-nested-rules.test.ts),
+[браузер](./tests/browser/form-nested-rules.spec.ts),
+[публичный пакет и SSR](./tests/package/form-nested-rules.ssr.test.ts), `?fixture=form-nested-rules`.
+
 `ValidationRule.transform(value)` синхронно преобразует вход только для своего
 правила, до required/min/max/pattern и validator. Другие правила получают исходное
 значение. Возвращённый результат не записывается в модель, native FormData, submit payload или
