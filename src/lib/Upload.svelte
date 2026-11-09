@@ -70,7 +70,8 @@
   let mergedProgress = $derived(config.upload?.progress || progress
     ? { ...config.upload?.progress, ...progress } : undefined);
   let componentPrefix = $derived(config.getPrefixCls('upload', customizePrefixCls));
-  let prefixCss = $derived(getUploadPrefixCss(componentPrefix));
+  let rootPrefix = $derived(config.getPrefixCls());
+  let prefixCss = $derived(getUploadPrefixCss(componentPrefix, rootPrefix));
   // В браузере сохраняются строковые attributes Source; SSR канонизирует boolean attribute.
   let directoryAttributes = $derived<Record<string, string>>(directory
     ? { directory: 'directory', webkitdirectory: 'webkitdirectory' } : {});

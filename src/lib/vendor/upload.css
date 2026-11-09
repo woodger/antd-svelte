@@ -1,5 +1,5 @@
 /* Ant Design 6.6.8 — MIT; vendor/LICENSE.ant-design.
- * Upload: text, picture, cards, drag и RTL; appear/leave строк и inline keyframes.
+ * Upload: text, picture, cards, drag и RTL; appear/leave строк, inline keyframes и fade progress.
  * SHA-256: 8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa
  */
 .ant-upload-wrapper:where(.ant-upload-css-var){font-family:var(--ant-font-family);font-size:var(--ant-font-size);box-sizing:border-box;}
@@ -85,7 +85,15 @@
 .ant-upload-wrapper:where(.ant-upload-css-var) .ant-upload-animate-inline-appear,.ant-upload-wrapper:where(.ant-upload-css-var) .ant-upload-animate-inline-enter,.ant-upload-wrapper:where(.ant-upload-css-var) .ant-upload-animate-inline-leave{animation-duration:var(--ant-motion-duration-slow);animation-timing-function:var(--ant-motion-ease-in-out-circ);animation-fill-mode:forwards;}
 .ant-upload-wrapper:where(.ant-upload-css-var) .ant-upload-animate-inline-appear,.ant-upload-wrapper:where(.ant-upload-css-var) .ant-upload-animate-inline-enter{animation-name:uploadAnimateInlineIn;}
 .ant-upload-wrapper:where(.ant-upload-css-var) .ant-upload-animate-inline-leave{animation-name:uploadAnimateInlineOut;}
+.ant-upload-wrapper:where(.ant-upload-css-var) .ant-fade-enter,.ant-upload-wrapper:where(.ant-upload-css-var) .ant-fade-appear{animation-duration:var(--ant-motion-duration-mid);animation-fill-mode:both;animation-play-state:paused;}
+.ant-upload-wrapper:where(.ant-upload-css-var) .ant-fade-leave{animation-duration:var(--ant-motion-duration-mid);animation-fill-mode:both;animation-play-state:paused;}
+.ant-upload-wrapper:where(.ant-upload-css-var) .ant-fade-enter.ant-fade-enter-active,.ant-upload-wrapper:where(.ant-upload-css-var) .ant-fade-appear.ant-fade-appear-active{animation-name:antFadeIn;animation-play-state:running;}
+.ant-upload-wrapper:where(.ant-upload-css-var) .ant-fade-leave.ant-fade-leave-active{animation-name:antFadeOut;animation-play-state:running;pointer-events:none;}
+.ant-upload-wrapper:where(.ant-upload-css-var) .ant-fade-enter,.ant-upload-wrapper:where(.ant-upload-css-var) .ant-fade-appear{opacity:0;animation-timing-function:linear;}
+.ant-upload-wrapper:where(.ant-upload-css-var) .ant-fade-leave{animation-timing-function:linear;}
 .ant-upload-rtl{direction:rtl;}
 @keyframes uploadAnimateInlineIn{from{width:0;height:0;padding:0;opacity:0;margin:calc(var(--ant-margin-xs) / -2);}}
 @keyframes uploadAnimateInlineOut{to{width:0;height:0;padding:0;opacity:0;margin:calc(var(--ant-margin-xs) / -2);}}
 .ant-upload-css-var{--ant-upload-actions-color:rgba(0,0,0,0.45);--ant-upload-picture-card-size:102px;}
+@keyframes antFadeIn{0%{opacity:0;}100%{opacity:1;}}
+@keyframes antFadeOut{0%{opacity:1;}100%{opacity:0;}}

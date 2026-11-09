@@ -11416,7 +11416,7 @@
             "tests/package/upload.ssr.test.ts",
             "tests/browser/upload.spec.ts"
           ],
-          "note": "Children snippet, hasControlInside, keyboard chooser, multiple drop/accept, ShowUploadList flags/extra, исходные icons и thumbnail canvas. RU/EN, RTL, темы и disabled из ConfigProvider/Form. 85 CSS-правил и два inline keyframes из закреплённого архива; fade progress и неиспользуемые collapse selectors пока исключены."
+          "note": "Children snippet, hasControlInside, keyboard chooser, multiple drop/accept, ShowUploadList flags/extra, исходные icons и thumbnail canvas. RU/EN, RTL, темы и disabled из ConfigProvider/Form. 91 CSS-правило и четыре keyframes из закреплённого архива; неиспользуемые collapse selectors исключены."
         },
         {
           "id": "component-theme",
@@ -11462,7 +11462,7 @@
         },
         {
           "id": "motion",
-          "title": "Полный motion Upload: trigger и fade progress",
+          "title": "Полный motion Upload",
           "state": "partial",
           "requiredForV1": false,
           "evidence": [
@@ -11485,7 +11485,7 @@
             "tests/package/upload-motion.ssr.test.ts",
             "readme.md"
           ],
-          "note": "Appear/enter/leave строк и collapse height для text/picture, inline keyframes card/circle перенесены отдельно. Motion появления/исчезновения trigger и fade lifecycle progress пока отсутствуют; прежняя задержка progress 300 ms и loading rotation сохранены."
+          "note": "Appear/enter/leave строк, collapse height text/picture, inline keyframes card/circle и fade progress перенесены отдельно. Motion появления/исчезновения trigger пока отсутствует; progress сохраняет задержку 300 ms, loading rotation и reduced motion."
         },
         {
           "id": "component-prefix",
@@ -11508,7 +11508,7 @@
             "tests/browser/upload-prefix.spec.ts",
             "tests/package/upload-prefix.ssr.test.ts"
           ],
-          "note": "22 raw UMD конфигурации в normal/nested/reset scopes: text/picture/card/circle/drag, statuses/error/progress, disabled/hidden controls/list, aliases/cssVar и style. Local nonempty prefix wins; empty/undefined наследуют ConfigProvider. 82 исходных CSS rules изолированы по wrapper/RTL markers, canonical component tokens и общий link reset сохранены; Button/Progress/Tooltip namespaces независимы. Consumer files-text/files-hint slot classes фиксированы явно в Dragger fixture и не переименовываются библиотекой. Три raw live transitions сохраняют wrapper/file input/filename link DOM и фокус. Native refs, controlled/default list, controller/transport и request lifecycle не меняются: отдельная проверка активного запроса защищает отсутствие restart/abort и однократные completion/remove callbacks. Progress metrics читают публичные v6 rail/track parts; delayed progress ожидается по DOM. Остальные config/semantic/render hooks и motion остаются отдельными gaps."
+          "note": "22 raw UMD конфигурации в normal/nested/reset scopes: text/picture/card/circle/drag, statuses/error/progress, disabled/hidden controls/list, aliases/cssVar и style. Local nonempty prefix wins; empty/undefined наследуют ConfigProvider. 82 исходных CSS rules изолированы по wrapper/RTL markers, canonical component tokens и общий link reset сохранены; Button/Progress/Tooltip namespaces независимы. Consumer files-text/files-hint slot classes фиксированы явно в Dragger fixture и не переименовываются библиотекой. Три raw live transitions сохраняют wrapper/file input/filename link DOM и фокус. Native refs, controlled/default list, controller/transport и request lifecycle не меняются: отдельная проверка активного запроса защищает отсутствие restart/abort и однократные completion/remove callbacks. Progress metrics читают публичные v6 rail/track parts; delayed progress ожидается по DOM. Остальные config/semantic/render hooks и motion остаются отдельными gaps. Fade progress использует shared root prefix независимо от local Upload prefix; CSS template получает оба namespace."
         },
         {
           "id": "pastable",
@@ -11659,7 +11659,7 @@
             "tests/package/upload-progress.ssr.test.ts",
             "readme.md"
           ],
-          "note": "UploadListProgressProps использует существующий Svelte line Progress без percent/type и deprecated line strokeWidth. Отсутствие progress задаёт size=[-1,2]/showInfo=false; явный объект заменяет defaults целиком. Size, colors/gradient, status/success, steps, format, semantic slots и ARIA передаются Progress; file aria-label/labelledby идут до progress props. Native fallback имени сохраняется при отсутствии явного имени. 16 raw UMD cases и шесть live transitions задают оформление и ARIA, во всех samples file label задан явно. Задержка 300 ms и cleanup на unmount сохранены; SSR не создаёт полосу/timers. Обновления сохраняют item/input/progress root, file percent и внешний draft/focus/selection. Исходный motion lifecycle остаётся отдельным gap."
+          "note": "UploadListProgressProps использует существующий Svelte line Progress без percent/type и deprecated line strokeWidth. Отсутствие progress задаёт size=[-1,2]/showInfo=false; явный объект заменяет defaults целиком. Size, colors/gradient, status/success, steps, format, semantic slots и ARIA передаются Progress; file aria-label/labelledby идут до progress props. Native fallback имени сохраняется при отсутствии явного имени. 16 raw UMD cases и шесть live transitions задают оформление и ARIA, во всех samples file label задан явно. Задержка 300 ms и cleanup на unmount сохранены; SSR не создаёт полосу/timers. Обновления сохраняют item/input/progress root, file percent и внешний draft/focus/selection. Fade lifecycle progress перенесён отдельно; motion trigger остаётся отдельным gap."
         },
         {
           "id": "semantic-slots",
@@ -11818,6 +11818,31 @@
             "readme.md"
           ],
           "note": "Unmodified package/es/util/diff.js из @rc-component/motion 1.3.3 при перестановке [a,__proto__] в [__proto__,a] возвращает add/keep/remove с дубликатом __proto__; аналогичен constructor. Plain object counter читает inherited значения и не удаляет duplicate remove entry. Оба raw результата сохранены без public подмены. Native использует Map и сохраняет одну keyed строку; этот дефект не перенесён. Наблюдение относится к алгоритму зависимости, не является замером всего UMD UI."
+        },
+        {
+          "id": "list-progress-motion",
+          "title": "Fade progress, percent-property semantics и shared namespace",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Upload.svelte",
+            "src/lib/UploadListItem.svelte",
+            "src/lib/UploadProgress.svelte",
+            "src/lib/upload-motion.dom.ts",
+            "src/lib/upload-prefix.engine.ts",
+            "src/lib/upload-prefix.engine.test.ts",
+            "src/lib/vendor/upload.css",
+            "src/lib/vendor/upload-prefix.css.js",
+            "tools/ant-design-css-recipes.json",
+            "tests/browser/upload-progress-motion.spec.ts",
+            "tests/browser/upload-progress-motion-metrics.ts",
+            "tests/browser/fixtures/UploadProgressMotionScope.svelte",
+            "tests/browser/fixtures/UploadProgressMotionFixtures.svelte",
+            "tests/browser/fixtures/ant-design-upload-progress-motion-reference.json",
+            "tests/package/upload-progress-motion.ssr.test.ts",
+            "readme.md"
+          ],
+          "note": "После прежних 300 ms wrapper/Progress проходят исходные appear/enter/leave fade; начальный скрытый CSSMotion даёт enter при последующем uploading. Проверка percent in file показывает нулевую полосу при явном undefined и пустой wrapper при отсутствии поля. CSS end events/2000ms deadline, возврат uploading, motion=false/reduced motion и unmount сохраняют cleanup. 12 raw UMD cases задают четыре list types, presence percent, local/shared namespace, global/component duration priority и initial done. Во всех samples явно задано file aria-label; прежний Native fallback сохраняется. Shared root fade prefix независим от local Upload prefix; CSS template получает оба namespace. Native sibling scopes с одинаковым local prefix получают свои fade classes/duration. Обновления сохраняют wrapper/bar/input DOM и внешний draft/focus/selection, включая прохождение старого deadline после возврата. SSR не создаёт полосу или browser resources."
         }
       ]
     },

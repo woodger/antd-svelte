@@ -1,8 +1,8 @@
 import template from './vendor/upload-prefix.css.js';
 
 /** Upload classes следуют владельцу; canonical tokens и общий link reset сохраняются. */
-export function getUploadPrefixCss(prefix: string) {
-  if (prefix === 'ant-upload') return undefined;
+export function getUploadPrefixCss(prefix: string, rootPrefix = 'ant') {
+  if (prefix === 'ant-upload' && rootPrefix === 'ant') return undefined;
 
   const scope = `:where([data-ant-upload-prefix=${JSON.stringify(prefix)}])`;
   const roots = new Set(['-wrapper', '-picture-card-wrapper', '-picture-circle-wrapper', '-rtl']);
@@ -15,5 +15,6 @@ export function getUploadPrefixCss(prefix: string) {
 
       return match === '"ant-upload"' ? `"${prefix}"` : `" ${prefix}"`;
     }
-  ).replace(/<\/style/gi, '<\\/style');
+  ).replace(/\.ant-fade\b/g, () => `.${rootPrefix}-fade`)
+    .replace(/<\/style/gi, '<\\/style');
 }

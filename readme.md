@@ -6582,8 +6582,8 @@ Upload переносит Ant Design 6.6.8 и AjaxUploader/request из @rc-comp
 1.1.1. UploadDragger соответствует Upload.Dragger; UPLOAD_LIST_IGNORE — отдельный
 экспорт аналога Upload.LIST_IGNORE. React и rc-upload runtime не устанавливаются.
 Лицензия rc-upload сохранена в vendor/LICENSE.rc-upload; CSS-рецепт извлекает
-85 правил и два inline keyframes из закреплённого antd.css; fade progress и
-неиспользуемые collapse selectors пока исключены.
+91 правило и четыре keyframes из закреплённого antd.css; неиспользуемые collapse
+selectors исключены.
 Отдельный рецепт `upload-link-reset` добавляет 14 исходных общих правил ссылок
 внутри Upload; цвета error rows сохраняют приоритет.
 Иконки взяты из закреплённого @ant-design/icons-svg 4.6.0 с существующей лицензией.
@@ -6591,7 +6591,7 @@ Upload переносит Ant Design 6.6.8 и AjaxUploader/request из @rc-comp
 `prefixCls` задаёт namespace Upload/Dragger, списка и всех состояний; пустая строка
 наследует ConfigProvider.prefixCls. Canonical variables и link reset сохранены,
 Button/Progress/Tooltip используют свои namespaces. CSS-рецепт upload-prefix
-воспроизводит те же 85 правил и keyframes в изолированном шаблоне.
+воспроизводит те же 91 правило и keyframes в изолированном шаблоне.
 [Сверка с официальным UMD](./tests/browser/fixtures/ant-design-upload-prefix-reference.json)
 покрывает все list types, drag, RTL, states и вложенные/reset scopes. Смена prefix
 сохраняет wrapper/input/filename DOM, refs, фокус и выполняющийся запрос; completion
@@ -6670,6 +6670,18 @@ fileList и отмена транспорта не задерживаются д
 [browser](tests/browser/upload-motion.spec.ts) и
 [SSR](tests/package/upload-motion.ssr.test.ts) охватывают четыре list types,
 prefixCls, RTL, duration tokens, возврат строки и cleanup.
+
+Progress появляется через 300 ms и сохраняет wrapper/полосу до конца исходного
+fade при завершении загрузки. Возврат в uploading отменяет уход без замены DOM;
+motion=false, reduced motion и unmount очищают переход и его deadline.
+Проверка `'percent' in file` повторяет upstream: явный `percent: undefined`
+показывает нулевую полосу, отсутствие поля оставляет только пустой fade wrapper.
+Fade использует общий `ConfigProvider.prefixCls`, независимо от локального
+Upload prefixCls; duration наследует глобальные и компонентные aliases.
+[Raw-замеры](tests/browser/fixtures/ant-design-upload-progress-motion-reference.json),
+[browser](tests/browser/upload-progress-motion.spec.ts) и
+[SSR](tests/package/upload-progress-motion.ssr.test.ts) защищают эти границы.
+Во всех raw samples имя полосы задано явно; прежний Native fallback имени сохранён.
 
 В `diffKeys` @rc-component/motion 1.3.3 перестановка `[a, __proto__]` в
 `[__proto__, a]` возвращает дубликаты ключа; то же происходит с `constructor`.
@@ -6874,7 +6886,7 @@ webkitdirectory как boolean attribute; в браузере сохраняют
 
 Locale/upload из ConfigProvider, собственный locale, RU/EN, RTL и theme variables
 поддержаны. Полный rc-upload ref/internal API, ReactElement clone/event forwarding,
-motion trigger и fade progress остаются отдельными пробелами реестра. Данный этап
+motion trigger остаётся отдельным пробелом реестра. Данный этап
 не заявляет полного покрытия React Upload.
 
 ## Input

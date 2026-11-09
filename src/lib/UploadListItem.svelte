@@ -1,6 +1,6 @@
 <script lang="ts" generics="T = unknown">
   import { onMount, untrack } from 'svelte';
-  import { createUploadItemMotion, type UploadItemMotionState } from './upload-motion.dom';
+  import { createUploadMotion, type UploadItemMotionState } from './upload-motion.dom';
   import { useToken } from './theme-context.svelte';
   import type {
     UploadFile,
@@ -13,7 +13,7 @@
   import { previewImage } from './upload-preview.dom';
   import Button from './Button.svelte';
   import UploadIcon from './UploadIcon.svelte';
-  import Progress from './Progress.svelte';
+  import UploadProgress from './UploadProgress.svelte';
   import Tooltip from './Tooltip.svelte';
   let {
     prefixCls,
@@ -62,7 +62,7 @@
   // Первые uid списка пропускают appear; новые экземпляры получают разрешение после mount списка.
   const appear = untrack(() => motionAppear);
   let root = $state<HTMLDivElement>();
-  let motion = $state<ReturnType<typeof createUploadItemMotion>>();
+  let motion = $state<ReturnType<typeof createUploadMotion>>();
   let motionState = $state<UploadItemMotionState>({});
   let status = $state(untrack(() => file.status));
   let thumbnail = $state('');
@@ -78,7 +78,7 @@
   });
   $effect(() => {
     if (!root) return;
-    const controller = createUploadItemMotion(root, next => { motionState = next; },
+    const controller = createUploadMotion(root, next => { motionState = next; },
       () => onMotionEnd?.());
     motion = controller;
     return () => {
@@ -92,7 +92,13 @@
     const prefix = prefixCls;
     const inline = card;
     const enabled = tokens.token.motion;
-    untrack(() => controller?.sync(next, prefix, inline, enabled, appear));
+    untrack(() => controller?.sync({
+      visible: next,
+      motionName: `${prefix}-animate${inline ? '-inline' : ''}`,
+      collapse: !inline,
+      enabled,
+      appear
+    }));
   });
   function show(
     flag: boolean | ((file: UploadFile<T>) => boolean) | undefined,
@@ -183,7 +189,8 @@
   {:else if onPreview}<button type="button" data-ant-upload-item-name class={`${prefixCls}-list-item-name`} title={file.name} onclick={() => onPreview?.(file)}>{file.name}{#if options.extra}<span class={`${prefixCls}-list-item-extra`}>{@render options.extra(file)}</span>{/if}</button>
   {:else}<span data-ant-upload-item-name class={`${prefixCls}-list-item-name`} title={file.name}>{file.name}{#if options.extra}<span class={`${prefixCls}-list-item-extra`}>{@render options.extra(file)}</span>{/if}</span>{/if}
   {#if !card || status !== 'uploading'}<span class={[`${prefixCls}-list-item-actions`, listType === 'picture' && 'picture']}>{@render actions()}</span>{/if}
-  {#if showProgress && status === 'uploading' && file.percent !== undefined}<div class={`${prefixCls}-list-item-progress`}><Progress type="line" percent={file.percent} aria-label={file['aria-label'] ?? (file['aria-labelledby'] ? undefined : `${locale.uploading} ${file.name}`)} aria-labelledby={file['aria-labelledby']} {...progress} /></div>{/if}
+  {#if showProgress}<UploadProgress {file} {prefixCls} visible={status === 'uploading'}
+    {progress} uploading={locale.uploading} />{/if}
 </div>
 {/snippet}
 {#snippet originNode()}{#if status === 'error'}<Tooltip title={message}>{@render item()}</Tooltip>{:else}{@render item()}{/if}{/snippet}<div data-ant-upload-item-container

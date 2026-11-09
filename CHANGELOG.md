@@ -9,6 +9,11 @@
 
 ### Added
 
+- Upload progress переносит исходный fade после задержки 300 ms, удерживает DOM
+  при завершении и отменяет уход при возврате в uploading. Перенесены отдельный
+  shared fade namespace, aliases duration и различие percent missing/undefined;
+  доступное имя, reduced motion, cleanup и соседние theme scopes сохранены.
+
 - Upload сохраняет строки до конца исходных appear/leave/collapse анимаций:
   text/picture используют высоту и opacity, card/circle — inline keyframes.
   Перенесены порядок удержания, возврат uid, deadline и motion token; начальные
