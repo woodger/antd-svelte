@@ -219,13 +219,10 @@
   }
 </script>
 
-{#if prefixCss}
-  <ThemeScopeStyle css={prefixCss} scope={`button-prefix:${prefixCls}:${rootPrefixCls}`} />
-{/if}
 {#snippet value(node: ButtonContent, spacing = false)}
   {#if typeof node === 'function'}{@render node()}{:else if node !== true && node !== false}{typeof node === 'string' ? buttonText(node, spacing) : node ?? ''}{/if}
 {/snippet}
-<svelte:element this={href !== undefined ? 'a' : 'button'} {...attributes} bind:this={nativeElement}
+{#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`button-prefix:${prefixCls}:${rootPrefixCls}`} />{/if}<svelte:element this={href !== undefined ? 'a' : 'button'} {...attributes} bind:this={nativeElement}
   data-ant-button-root
   data-ant-button-prefix={prefixCss ? prefixCls : undefined}
   data-ant-button-global={prefixCss ? rootPrefixCls : undefined}

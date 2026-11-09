@@ -1342,6 +1342,9 @@
 
 ### Fixed
 
+- Button не добавляет text nodes перед native button/anchor при default/local prefix.
+  Граница разметки сохраняет ширину inline actions и панелей Tour.
+
 - Подключение prefix CSS Input/TextArea больше не добавляет whitespace text nodes
   вокруг native control. Input внутри rich help снова имеет пустой textContent;
   SSR сохраняет тот же контракт для canonical и custom prefixes.

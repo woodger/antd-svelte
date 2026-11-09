@@ -90,7 +90,8 @@
         "tests/browser/fixtures/ant-design-button-prefix-reference.json",
         "tests/browser/button-prefix-metrics.ts",
         "tests/browser/button-prefix.spec.ts",
-        "tests/package/button-prefix.ssr.test.ts"
+        "tests/package/button-prefix.ssr.test.ts",
+        "tests/package/button-prefix-whitespace.ssr.test.ts"
       ],
       "features": [
         {
@@ -216,9 +217,10 @@
             "tests/browser/fixtures/ant-design-button-prefix-reference.json",
             "tests/browser/button-prefix-metrics.ts",
             "tests/browser/button-prefix.spec.ts",
-            "tests/package/button-prefix.ssr.test.ts"
+            "tests/package/button-prefix.ssr.test.ts",
+            "tests/package/button-prefix-whitespace.ssr.test.ts"
           ],
-          "note": "Local nonempty prefix wins; empty/undefined наследуют ConfigProvider. Root/icon/loading/shape/size/color/variant/Compact classes и 113 CSS rules подключены без deprecated ButtonGroup. Private variant/Compact variables используют global prefix без точек независимо от local class и cssVar namespace; canonical component tokens и legacy theme bridge сохраняют прежние приоритеты. Semantic callbacks получают raw prefix. UMD matrix сохраняет raw loading styles отдельно от существующего Native disabled-loading contract; остальные стили, hover/active, nested/sibling scopes и live DOM/ref/focus/selection/FormData сверяются с unmodified Source. SSR не создаёт browser resources."
+          "note": "Local nonempty prefix wins; empty/undefined наследуют ConfigProvider. Root/icon/loading/shape/size/color/variant/Compact classes и 113 CSS rules подключены без deprecated ButtonGroup. Private variant/Compact variables используют global prefix без точек независимо от local class и cssVar namespace; canonical component tokens и legacy theme bridge сохраняют прежние приоритеты. Semantic callbacks получают raw prefix. UMD matrix сохраняет raw loading styles отдельно от существующего Native disabled-loading contract; остальные стили, hover/active, nested/sibling scopes и live DOM/ref/focus/selection/FormData сверяются с unmodified Source. SSR не создаёт browser resources. CSS head block не добавляет text nodes вокруг native button/anchor; inline actions и Tour сохраняют исходную ширину."
         }
       ]
     },
