@@ -11353,7 +11353,13 @@
         "tests/browser/fixtures/ant-design-upload-prefix-reference.json",
         "tests/browser/upload-prefix-metrics.ts",
         "tests/browser/upload-prefix.spec.ts",
-        "tests/package/upload-prefix.ssr.test.ts"
+        "tests/package/upload-prefix.ssr.test.ts",
+        "tests/browser/upload-paste.spec.ts",
+        "tests/browser/fixtures/UploadPasteScope.svelte",
+        "tests/browser/fixtures/UploadPasteFixtures.svelte",
+        "tests/browser/fixtures/ant-design-upload-paste-reference.json",
+        "tests/package/upload-paste.ssr.test.ts",
+        "readme.md"
       ],
       "features": [
         {
@@ -11429,7 +11435,7 @@
         },
         {
           "id": "extended-api",
-          "title": "Directory/paste, render hooks, semantic slots и полный config API",
+          "title": "Directory, render hooks, semantic slots и полный config API",
           "state": "missing",
           "requiredForV1": false,
           "evidence": [],
@@ -11465,6 +11471,40 @@
             "tests/package/upload-prefix.ssr.test.ts"
           ],
           "note": "22 raw UMD конфигурации в normal/nested/reset scopes: text/picture/card/circle/drag, statuses/error/progress, disabled/hidden controls/list, aliases/cssVar и style. Local nonempty prefix wins; empty/undefined наследуют ConfigProvider. 82 исходных CSS rules изолированы по wrapper/RTL markers, canonical component tokens и общий link reset сохранены; Button/Progress/Tooltip namespaces независимы. Consumer files-text/files-hint slot classes фиксированы явно в Dragger fixture и не переименовываются библиотекой. Три raw live transitions сохраняют wrapper/file input/filename link DOM и фокус. Native refs, controlled/default list, controller/transport и request lifecycle не меняются: отдельная проверка активного запроса защищает отсутствие restart/abort и однократные completion/remove callbacks. Progress metrics читают публичные v6 rail/track parts; delayed progress ожидается по DOM. Остальные config/semantic/render hooks и motion остаются отдельными gaps."
+        },
+        {
+          "id": "pastable",
+          "title": "Вставка файлов через document paste",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Upload.svelte",
+            "src/lib/upload.types.ts",
+            "tests/browser/upload-paste.spec.ts",
+            "tests/browser/fixtures/UploadPasteScope.svelte",
+            "tests/browser/fixtures/UploadPasteFixtures.svelte",
+            "tests/browser/fixtures/ant-design-upload-paste-reference.json",
+            "tests/package/upload-paste.ssr.test.ts",
+            "readme.md"
+          ],
+          "note": "Pastable=false по умолчанию; UploadDragger наследует prop. При наличии файлов вызывается preventDefault, текст пропускается; callback/native accept filters и multiple повторяют AjaxUploader 1.1.1. Single берёт первый исходный файл до accept, как существующий drop. Вставка использует прежний controller, beforeUpload/onChange и customRequest, не пересоздаёт input/trigger refs, не меняет focus/selection внешнего editor. Dynamic flag/disabled и unmount очищают listener; SSR не обращается к document. 11 raw cases, три live transitions и afterUnmount pin сохраняют исходные callbacks без generated UID."
+        },
+        {
+          "id": "native-disabled-paste",
+          "title": "Disabled блокирует вставку вместо пропущенного Source guard",
+          "state": "partial",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Upload.svelte",
+            "src/lib/upload.types.ts",
+            "tests/browser/upload-paste.spec.ts",
+            "tests/browser/fixtures/UploadPasteScope.svelte",
+            "tests/browser/fixtures/UploadPasteFixtures.svelte",
+            "tests/browser/fixtures/ant-design-upload-paste-reference.json",
+            "tests/package/upload-paste.ssr.test.ts",
+            "readme.md"
+          ],
+          "note": "Rc-upload 1.1.1 AjaxUploader.onFilePaste не проверяет disabled, хотя render отключает click/drop controls. Raw UMD local/provider disabled cases по-прежнему вызывают beforeUpload/onChange и preventDefault. Native сохраняет существующую disabled boundary для всех каналов ввода: document listener снимается и handler дополнительно проверяет актуальные props. Исходное поведение записано для отдельного разбора и не перенесено."
         }
       ]
     },

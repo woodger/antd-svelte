@@ -6680,8 +6680,22 @@ Button, Progress и Tooltip получают свои component tokens. Style о
 сохранено в `zero-metrics.interactions` [эталона](./tests/browser/fixtures/ant-design-upload-theme-reference.json).
 Этот крайний случай требует отдельного решения.
 
+`pastable=true` включает paste файлов в документе, как AjaxUploader 1.1.1;
+по умолчанию false. UploadDragger наследует этот prop. Наличие файлов отменяет
+обычную вставку; текст без файлов не перехватывается. Multiple использует accept,
+а single paste/drop сохраняет исходный выбор первого файла до фильтрации.
+Файлы проходят обычные beforeUpload, fileList/onChange и customRequest.
+Смена pastable/disabled и unmount обновляют listener, сохраняя input/trigger refs.
+
+Локальный и наследуемый disabled блокируют paste. В исходной 6.6.8 document handler
+не имеет этого guard и всё равно вызывает beforeUpload/onChange; это поведение
+не перенесено. [Raw-замеры](tests/browser/fixtures/ant-design-upload-paste-reference.json)
+сохраняют disabled observation отдельно. [Browser](tests/browser/upload-paste.spec.ts)
+проверяет callbacks, документ, focus/selection внешнего editor, транспорт и cleanup;
+[SSR](tests/package/upload-paste.ssr.test.ts) не создаёт browser listeners.
+
 Locale/upload из ConfigProvider, собственный locale, RU/EN, RTL и theme variables
-поддержаны. Directory/pastable, itemRender/iconRender/custom action icons,
+поддержаны. Directory, itemRender/iconRender/custom action icons,
 progress customization, linkProps, полный ref/config/semantic API и исходные
 appear/exit/collapse анимации остаются отдельными пробелами реестра. Данный этап
 не заявляет полного покрытия React Upload.

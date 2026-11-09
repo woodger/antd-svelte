@@ -22,6 +22,7 @@
     withCredentials,
     accept = '',
     multiple = false,
+    pastable = false,
     capture,
     disabled,
     beforeUpload,
@@ -98,6 +99,13 @@
     uid: () => `rc-upload-${generatedId}-${++counter}`
   });
   onDestroy(controller.dispose);
+  $effect(() => {
+    if (!pastable || blocked || !nativeElement) return;
+
+    const owner = nativeElement.ownerDocument;
+    owner.addEventListener('paste', handlePaste);
+    return () => owner.removeEventListener('paste', handlePaste);
+  });
   export function abort(file?: UploadFile<T> | string) {
     controller.abort(file);
   }
@@ -116,18 +124,29 @@
     event.currentTarget.value = '';
     void controller.upload(selected);
   }
+  function transferFiles(transfer: DataTransfer | null) {
+    const all = [...transfer?.files ?? []];
+    // rc-upload single paste/drop берёт первый исходный файл до accept filtering.
+    return multiple ? all.filter(file => filterUploadFile(file, accept, true)) : all.slice(0, 1);
+  }
+  function handlePaste(event: ClipboardEvent) {
+    if (!pastable || blocked) return;
+
+    const transfer = event.clipboardData;
+    const hasFiles = Boolean(transfer?.files.length)
+      || [...transfer?.items ?? []].some(item => item.kind === 'file');
+    if (!hasFiles) return;
+
+    event.preventDefault();
+    void controller.upload(transferFiles(transfer));
+  }
   function drag(event: DragEvent) {
     event.preventDefault();
     dragState = !blocked && event.type === 'dragover';
     if (event.type !== 'drop') return;
     onDrop?.(event);
     if (blocked) return;
-    const all = [...event.dataTransfer?.files ?? []];
-    // rc-upload 1.1.1 в single drop берёт первый исходный файл до accept filtering.
-    const selected = multiple
-      ? all.filter(file => filterUploadFile(file, accept, true))
-      : all.slice(0, 1);
-    void controller.upload(selected);
+    void controller.upload(transferFiles(event.dataTransfer));
   }
 </script>
 <style>

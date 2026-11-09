@@ -9,6 +9,10 @@
 
 ### Added
 
+- Upload/UploadDragger поддерживают pastable: файлы из paste проходят существующие
+  accept/beforeUpload/controller/customRequest. Listener обновляется при смене props
+  и удаляется при unmount; disabled блокирует paste, пропущенный guard upstream записан raw.
+
 - Masonry columns/gutter и responsive Pagination учитывают глобальные theme.token.screen*.
   Queries обновляются без remount, сохраняя editors, focus/selection, Masonry ref
   и страницу Pagination. Raw stale observer Source отделён от public fresh mount.

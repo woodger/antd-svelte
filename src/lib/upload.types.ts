@@ -84,6 +84,12 @@ export interface UploadProps<T = unknown> extends Omit<
   accept?: string | { format?: string; filter?: 'native' | ((file: File) => boolean); };
   /** @defaultValue false */
   multiple?: boolean;
+  /**
+   * Вставка файлов из paste событий документа. Disabled блокирует вставку,
+   * в отличие от отсутствующего guard у rc-upload 1.1.1.
+   * @defaultValue false
+   */
+  pastable?: boolean;
   capture?: boolean | 'user' | 'environment';
   disabled?: boolean;
   /** false останавливает отправку, UPLOAD_LIST_IGNORE исключает файл из списка. */

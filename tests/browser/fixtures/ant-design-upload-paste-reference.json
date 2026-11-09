@@ -1,0 +1,435 @@
+{
+  "reference": {
+    "version": "6.6.8",
+    "revision": "984592267de88fbf9cdaecc96a56629e721c709d",
+    "archiveSha256": "8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa",
+    "renderer": "unmodified official UMD with React 18.3.1",
+    "source": "Upload and @rc-component/upload 1.1.1 AjaxUploader onFilePaste/onDataTransferFiles",
+    "observation": "Document paste scope; synchronous prevention only for file data, single drop/paste takes first original file before accept, multiple uses forced accept. beforeUpload=false avoids transport. Raw disabled/provider-disabled cases still call beforeUpload and onChange: missing disabled guard in Source document handler. Native preserves disabled blocking instead of copying this defect. Dynamic pastable and unmount recorded without Source patches/private APIs; generated UID excluded."
+  },
+  "cases": [
+    {
+      "sample": {
+        "id": "default",
+        "files": [
+          {
+            "name": "notes.txt",
+            "type": "text/plain"
+          }
+        ]
+      },
+      "result": {
+        "prevented": false,
+        "before": [],
+        "changes": []
+      }
+    },
+    {
+      "sample": {
+        "id": "enabled",
+        "pastable": true,
+        "files": [
+          {
+            "name": "notes.txt",
+            "type": "text/plain"
+          }
+        ]
+      },
+      "result": {
+        "prevented": true,
+        "before": [
+          {
+            "name": "notes.txt",
+            "batch": [
+              "notes.txt"
+            ]
+          }
+        ],
+        "changes": [
+          {
+            "name": "notes.txt",
+            "status": null,
+            "list": [
+              "notes.txt"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "sample": {
+        "id": "multiple",
+        "pastable": true,
+        "multiple": true,
+        "files": [
+          {
+            "name": "notes.txt",
+            "type": "text/plain"
+          },
+          {
+            "name": "image.png",
+            "type": "image/png"
+          }
+        ]
+      },
+      "result": {
+        "prevented": true,
+        "before": [
+          {
+            "name": "notes.txt",
+            "batch": [
+              "notes.txt",
+              "image.png"
+            ]
+          },
+          {
+            "name": "image.png",
+            "batch": [
+              "notes.txt",
+              "image.png"
+            ]
+          }
+        ],
+        "changes": [
+          {
+            "name": "notes.txt",
+            "status": null,
+            "list": [
+              "notes.txt",
+              "image.png"
+            ]
+          },
+          {
+            "name": "image.png",
+            "status": null,
+            "list": [
+              "notes.txt",
+              "image.png"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "sample": {
+        "id": "single-before-filter",
+        "pastable": true,
+        "accept": ".png",
+        "files": [
+          {
+            "name": "notes.txt",
+            "type": "text/plain"
+          },
+          {
+            "name": "image.png",
+            "type": "image/png"
+          }
+        ]
+      },
+      "result": {
+        "prevented": true,
+        "before": [
+          {
+            "name": "notes.txt",
+            "batch": [
+              "notes.txt"
+            ]
+          }
+        ],
+        "changes": [
+          {
+            "name": "notes.txt",
+            "status": null,
+            "list": [
+              "notes.txt"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "sample": {
+        "id": "multiple-filter",
+        "pastable": true,
+        "multiple": true,
+        "accept": ".png",
+        "files": [
+          {
+            "name": "notes.txt",
+            "type": "text/plain"
+          },
+          {
+            "name": "image.png",
+            "type": "image/png"
+          }
+        ]
+      },
+      "result": {
+        "prevented": true,
+        "before": [
+          {
+            "name": "image.png",
+            "batch": [
+              "image.png"
+            ]
+          }
+        ],
+        "changes": [
+          {
+            "name": "image.png",
+            "status": null,
+            "list": [
+              "image.png"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "sample": {
+        "id": "native-filter",
+        "pastable": true,
+        "multiple": true,
+        "accept": ".png",
+        "filter": "native",
+        "files": [
+          {
+            "name": "notes.txt",
+            "type": "text/plain"
+          },
+          {
+            "name": "image.png",
+            "type": "image/png"
+          }
+        ]
+      },
+      "result": {
+        "prevented": true,
+        "before": [
+          {
+            "name": "notes.txt",
+            "batch": [
+              "notes.txt",
+              "image.png"
+            ]
+          },
+          {
+            "name": "image.png",
+            "batch": [
+              "notes.txt",
+              "image.png"
+            ]
+          }
+        ],
+        "changes": [
+          {
+            "name": "notes.txt",
+            "status": null,
+            "list": [
+              "notes.txt",
+              "image.png"
+            ]
+          },
+          {
+            "name": "image.png",
+            "status": null,
+            "list": [
+              "notes.txt",
+              "image.png"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "sample": {
+        "id": "callback-filter",
+        "pastable": true,
+        "multiple": true,
+        "filter": "callback",
+        "files": [
+          {
+            "name": "notes.txt",
+            "type": "text/plain"
+          },
+          {
+            "name": "draft.keep",
+            "type": "text/plain"
+          }
+        ]
+      },
+      "result": {
+        "prevented": true,
+        "before": [
+          {
+            "name": "draft.keep",
+            "batch": [
+              "draft.keep"
+            ]
+          }
+        ],
+        "changes": [
+          {
+            "name": "draft.keep",
+            "status": null,
+            "list": [
+              "draft.keep"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "sample": {
+        "id": "text-only",
+        "pastable": true,
+        "text": "Plain text"
+      },
+      "result": {
+        "prevented": false,
+        "before": [],
+        "changes": []
+      }
+    },
+    {
+      "sample": {
+        "id": "file-item-without-file",
+        "pastable": true,
+        "emptyFileItem": true
+      },
+      "result": {
+        "prevented": true,
+        "before": [],
+        "changes": []
+      }
+    },
+    {
+      "sample": {
+        "id": "disabled",
+        "pastable": true,
+        "disabled": true,
+        "files": [
+          {
+            "name": "notes.txt",
+            "type": "text/plain"
+          }
+        ]
+      },
+      "result": {
+        "prevented": true,
+        "before": [
+          {
+            "name": "notes.txt",
+            "batch": [
+              "notes.txt"
+            ]
+          }
+        ],
+        "changes": [
+          {
+            "name": "notes.txt",
+            "status": null,
+            "list": [
+              "notes.txt"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "sample": {
+        "id": "provider-disabled",
+        "pastable": true,
+        "providerDisabled": true,
+        "files": [
+          {
+            "name": "notes.txt",
+            "type": "text/plain"
+          }
+        ]
+      },
+      "result": {
+        "prevented": true,
+        "before": [
+          {
+            "name": "notes.txt",
+            "batch": [
+              "notes.txt"
+            ]
+          }
+        ],
+        "changes": [
+          {
+            "name": "notes.txt",
+            "status": null,
+            "list": [
+              "notes.txt"
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "transitions": [
+    {
+      "pastable": true,
+      "prevented": true,
+      "before": [
+        {
+          "name": "notes.txt",
+          "batch": [
+            "notes.txt"
+          ]
+        }
+      ],
+      "changes": [
+        {
+          "name": "notes.txt",
+          "status": null,
+          "list": [
+            "notes.txt"
+          ]
+        }
+      ],
+      "sameInput": true,
+      "sameButton": true
+    },
+    {
+      "pastable": false,
+      "prevented": false,
+      "before": [],
+      "changes": [],
+      "sameInput": true,
+      "sameButton": true
+    },
+    {
+      "pastable": true,
+      "prevented": true,
+      "before": [
+        {
+          "name": "notes.txt",
+          "batch": [
+            "notes.txt"
+          ]
+        }
+      ],
+      "changes": [
+        {
+          "name": "notes.txt",
+          "status": null,
+          "list": [
+            "notes.txt",
+            "notes.txt"
+          ]
+        }
+      ],
+      "sameInput": true,
+      "sameButton": true
+    }
+  ],
+  "afterUnmount": {
+    "prevented": false,
+    "before": [],
+    "changes": []
+  }
+}
