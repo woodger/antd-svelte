@@ -5,6 +5,10 @@ import * as UI from 'antd-svelte';
 
 const content = createRawSnippet(() => ({ render: () => '<span>Content</span>' }));
 const cases: Record<string, (prefixCls?: string) => ReturnType<typeof render>> = {
+  Table: prefixCls => render(UI.Table<{ key: string }>, { props: {
+    prefixCls, dataSource: [{ key: 'one' }],
+    columns: [{ key: 'key', title: 'Key', dataIndex: 'key' }], pagination: false
+  } }),
   Calendar: prefixCls => render(UI.Calendar, { props: { prefixCls } }),
   DatePicker: prefixCls => render(UI.DatePicker, { props: { prefixCls } }),
   RangePicker: prefixCls => render(UI.RangePicker, { props: { prefixCls } }),

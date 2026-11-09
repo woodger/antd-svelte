@@ -10126,6 +10126,27 @@ footerColor, обе панели — padding/font текущего размер�
 Source comparison: [browser](tests/browser/table-panels.spec.ts),
 [SSR](tests/package/table-panels.ssr.test.ts), fixture `?fixture=table-panels`.
 
+### Префиксы Table
+
+`prefixCls` задаёт локальные классы Table; без непустого значения используется
+`ConfigProvider.prefixCls + '-table'`. Checkbox, Pagination, Button и shell фильтра
+разрешают общий prefix независимо от владельца таблицы. `dropdownPrefixCls`
+задаёт префикс списка фильтров (`-menu`), как в исходном FilterDropdown;
+он не меняет общий namespace shell и controls.
+
+В upstream собственный dropdownPrefixCls оставляет filter Menu без соответствующих
+CSS selectors; raw прозрачный фон сохранён отдельно от public inherited-prefix
+counterpart. Svelte сохраняет прежнее оформление списка; только menu background
+сравнивается с counterpart, остальные свойства — с raw Source.
+
+187 правил закреплённого CSS изолированы по паре owner/shared prefix.
+Публичные component tokens и marker `ant-table-css-var` сохраняют canonical имена,
+а private `nested-border-top` следует общему namespace. Source theme, оформление
+по умолчанию, fixed offsets/scroll и нативные controls сохраняются при обновлении
+префикса. Открытый фильтр сохраняет draft/focus/IDs; раскрытая строка — editor,
+выделение текста и FormData. Проверки: [browser](tests/browser/table-prefix.spec.ts)
+и [SSR](tests/package/table-prefix.ssr.test.ts).
+
 ### Компонентная тема Table
 
 `ConfigProvider.theme.components.Table` применяет исходные component tokens и

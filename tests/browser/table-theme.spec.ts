@@ -140,18 +140,18 @@ test('Table local variables retain priority after token updates', async ({ page 
   await expect(cell).toHaveCSS('font-size', '21px');
 });
 
-test('Table returns to legacy styling and reopens with the current theme after unmount',
+test('Table returns to default styling and reopens with the current theme after unmount',
   async ({ page }) => {
     await page.getByLabel('Table theme mode', { exact: true }).selectOption('stateful');
     const root = page.locator('#table-theme-control');
     const input = root.getByRole('textbox', { name: 'Table draft', exact: true });
-    await input.fill('Legacy draft');
+    await input.fill('Default draft');
     const original = await input.elementHandle();
 
     await page.getByLabel('Apply source Table theme', { exact: true }).dispatchEvent('click');
 
     await expect(root.locator('.ant-table')).toHaveCSS('font-size', '14px');
-    await expect(input).toHaveValue('Legacy draft');
+    await expect(input).toHaveValue('Default draft');
     await expect(input).toBeFocused();
     expect(await input.evaluate((node, old) => node === old, original)).toBe(true);
     await expect(root.locator('col.ant-table-selection-col')).toHaveCount(0);

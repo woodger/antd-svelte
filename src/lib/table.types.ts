@@ -75,6 +75,10 @@ export interface TableChange<Row extends object> {
 
 /** Типизированная таблица с columns, row identity, фильтрами, сортировкой и пагинацией. */
 export interface TableProps<Row extends object> {
+  /** Локальный Table owner перекрывает ConfigProvider.prefixCls. */
+  prefixCls?: string;
+  /** Локальный префикс списка фильтров; shell и controls наследуют общий prefix. */
+  dropdownPrefixCls?: string;
   /** @defaultValue 'client' */
   mode?: TableMode;
   total?: number;

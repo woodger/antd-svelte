@@ -3278,5 +3278,23 @@
     "keyframes": [],
     "header": "/* Ant Design 6.6.8 — MIT; vendor/LICENSE.ant-design.\n * Cascader: selector, columns, checkbox, panel и RTL; select base — vendor/antd.css.\n * SHA-256: 8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa\n */",
     "format": "module"
+  },
+  {
+    "id": "table-prefix",
+    "output": "src/lib/vendor/table-prefix.css.js",
+    "expectedRules": 187,
+    "include": [
+      "^(?:\\.css-var-_R_0_)?\\.ant-table(?![\\w])"
+    ],
+    "exclude": [],
+    "replacements": [
+      {
+        "pattern": "\\.css-var-_R_0_\\.ant-table(?:-css-var)?(?![-\\w])",
+        "replacement": ":where(.ant-table-css-var)"
+      }
+    ],
+    "keyframes": [],
+    "header": "/* Ant Design 6.6.8 — MIT; см. LICENSE.ant-design.\n * Table prefix template: panels, cells, selection, expansion, filters и sizes.\n * Canonical tokens/marker, private nested border и общие namespaces независимы.\n * Component defaults имеют нулевую specificity для сохранения Native theme bridge.\n * https://registry.npmjs.org/antd/-/antd-6.6.8.tgz\n * SHA-256: 8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa\n */",
+    "format": "module"
   }
 ]

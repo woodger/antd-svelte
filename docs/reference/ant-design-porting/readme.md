@@ -316,6 +316,18 @@ overrides и aliases сохраняют свой приоритет.
 Head stylesheet Date/TimePicker расположен непосредственно перед корнем после
 snippet declarations. Границы snippets и NoCompactStyle не добавляют внешние text nodes;
 SSR охватывает также defaultOpen, browser — смену общего prefix без потери соседнего текста.
+В upstream собственный dropdownPrefixCls оставляет filter Menu без соответствующих
+CSS selectors; raw прозрачный фон сохранён отдельно от public inherited-prefix
+counterpart. Svelte сохраняет прежнее оформление списка; только menu background
+сравнивается с counterpart, остальные свойства — с raw Source.
+Рецепт table-prefix извлекает 187 правил Table. Owner classes и общие Checkbox,
+Pagination/Descriptions namespaces разделены; private nested-border-top следует
+общему prefix, component tokens/marker canonical. Defaults имеют нулевую specificity.
+Raw UMD замеры покрывают 23 случая в normal/nested/reset scopes и три live prefix
+updates с сохранением editor/selection/focus/DOM. Текущий размер medium используется
+в обоих controls. dropdownPrefixCls относится к списку фильтров; shell и controls
+разрешают общий prefix независимо. Native popover/expanded viewport сохраняют свою
+прежнюю структуру; без source theme paint сравнивается с canonical ant отдельно.
 Рецепт input-number-features извлекает variants, spinner, prefix/suffix и addon;
 прежние outlined/compact файлы не перезаписываются.
 Рецепт switch побайтно воспроизводит прежние 47 правил, включая reduced motion;

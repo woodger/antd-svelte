@@ -1,6 +1,8 @@
 <script lang="ts" generics="Row extends object">
   import { untrack } from 'svelte';
   import { useConfig } from './config-context';
+  import { getTablePrefixCss } from './table-prefix.engine';
+  import ThemeScopeStyle from './ThemeScopeStyle.svelte';
   import { useComponentTheme } from './theme-component.svelte';
   import { useDesignTokenContext } from './theme-context.svelte';
   import { getPaginationState } from './pagination.engine';
@@ -61,6 +63,8 @@
     title,
     footer,
     caption,
+    prefixCls,
+    dropdownPrefixCls,
     empty,
     scroll,
     'aria-label': ariaLabel,
@@ -69,6 +73,10 @@
   }: TableProps<Row> = $props();
 
   const config = useConfig();
+  let prefix = $derived(config.getPrefixCls('table', prefixCls));
+  let rootPrefix = $derived(config.getPrefixCls());
+  let dropdownPrefix = $derived(config.getPrefixCls('dropdown', dropdownPrefixCls));
+  let prefixCss = $derived(getTablePrefixCss(prefix, rootPrefix));
   const componentTheme = useComponentTheme('Table');
   const designTheme = useDesignTokenContext();
   let rootStyle = $derived([componentTheme.style, style].filter(Boolean).join(';') || undefined);
@@ -337,29 +345,29 @@
 </script>
 
 <style>
-  .ant-table-wrapper { min-width: 0; max-width: 100%; }
-  .ant-table-content { max-width: 100%; overflow-x: auto; overscroll-behavior-x: contain; }
+  [data-ant-table-part="wrapper"] { min-width: 0; max-width: 100%; }
+  [data-ant-table-part="content"] { max-width: 100%; overflow-x: auto; overscroll-behavior-x: contain; }
   .table-sticky { isolation: isolate; scroll-padding-inline: var(--ant-table-fixed-start-width, 0px) var(--ant-table-fixed-end-width, 0px); }
   .table-scroll-y { overflow-y: auto; overscroll-behavior-y: contain; scroll-padding-top: var(--ant-table-header-height, 0px); }
-  .ant-table-wrapper .ant-table-cell.table-fixed-cell { position: var(--ant-table-fixed-position, relative); background: var(--ant-color-bg-container); }
-  .ant-table-wrapper .ant-table-tbody > tr > th.table-fixed-cell { background: linear-gradient(var(--ant-table-header-bg), var(--ant-table-header-bg)) var(--ant-color-bg-container); }
-  .ant-table-wrapper .table-scroll-y .ant-table-thead > tr > th { position: sticky; top: 0; z-index: 2; }
+  [data-ant-table-part="wrapper"] [data-ant-table-part="cell"].table-fixed-cell { position: var(--ant-table-fixed-position, relative); background: var(--ant-color-bg-container); }
+  [data-ant-table-part="wrapper"] [data-ant-table-part="body"] > tr > th.table-fixed-cell { background: linear-gradient(var(--ant-table-header-bg), var(--ant-table-header-bg)) var(--ant-color-bg-container); }
+  [data-ant-table-part="wrapper"] .table-scroll-y [data-ant-table-part="head"] > tr > th { position: sticky; top: 0; z-index: 2; }
   /* Непрозрачная подложка нужна и для токенов темы с alpha. */
-  .ant-table-wrapper .table-scroll-y .ant-table-thead > tr > th,
-  .ant-table-wrapper .ant-table-thead > tr > .table-fixed-cell { background: linear-gradient(var(--ant-table-header-bg), var(--ant-table-header-bg)) var(--ant-color-bg-container); }
-  .ant-table-wrapper .table-scroll-y .ant-table-thead > tr > th.ant-table-column-sort,
-  .ant-table-wrapper .ant-table-thead > tr > .table-fixed-cell.ant-table-column-sort { background: linear-gradient(var(--ant-table-header-sort-active-bg), var(--ant-table-header-sort-active-bg)) var(--ant-color-bg-container); }
-  .ant-table-wrapper .table-scroll-y .ant-table-thead > tr > th.ant-table-column-has-sorters:hover,
-  .ant-table-wrapper .ant-table-thead > tr > .table-fixed-cell.ant-table-column-has-sorters:hover { background: linear-gradient(var(--ant-table-header-sort-hover-bg), var(--ant-table-header-sort-hover-bg)) var(--ant-color-bg-container); }
-  .ant-table-wrapper .ant-table-tbody > tr > :where(td).table-fixed-cell.ant-table-column-sort { background: linear-gradient(var(--ant-table-body-sort-bg), var(--ant-table-body-sort-bg)) var(--ant-color-bg-container); }
-  .ant-table-wrapper .ant-table-tbody > tr.ant-table-row-selected > .table-fixed-cell { background: linear-gradient(var(--ant-table-row-selected-bg), var(--ant-table-row-selected-bg)) var(--ant-color-bg-container); }
-  .table-source-theme .ant-table-thead th.ant-table-column-has-sorters:hover .ant-table-column-sorter { color: var(--ant-table-header-icon-hover-color); }
-  .ant-table-wrapper.table-source-theme .ant-table-thead th.ant-table-column-has-sorters.table-fixed-cell:hover { background: linear-gradient(var(--ant-table-fixed-header-sort-active-bg), var(--ant-table-fixed-header-sort-active-bg)) var(--ant-color-bg-container); }
-  .table-source-theme:not(.table-hover-disabled) .ant-table-tbody > tr.ant-table-row:hover > td { background: var(--ant-table-row-hover-bg); }
-  .table-source-theme:not(.table-hover-disabled) .ant-table-tbody > tr.ant-table-row.ant-table-row-selected:hover > :is(th, td) { background: var(--ant-table-row-selected-hover-bg); }
-  .table-source-theme:not(.table-hover-disabled) .ant-table-tbody > tr.ant-table-row:hover > td.table-fixed-cell { background: linear-gradient(var(--ant-table-row-hover-bg), var(--ant-table-row-hover-bg)) var(--ant-color-bg-container); }
-  .table-source-theme:not(.table-hover-disabled) .ant-table-tbody > tr.ant-table-row.ant-table-row-selected:hover > :is(th, td).table-fixed-cell { background: linear-gradient(var(--ant-table-row-selected-hover-bg), var(--ant-table-row-selected-hover-bg)) var(--ant-color-bg-container); }
-  .ant-table-content:focus-visible, .sort-button:focus-visible { outline: var(--ant-line-width-focus) solid var(--ant-color-primary-border); outline-offset: 2px; }
+  [data-ant-table-part="wrapper"] .table-scroll-y [data-ant-table-part="head"] > tr > th,
+  [data-ant-table-part="wrapper"] [data-ant-table-part="head"] > tr > .table-fixed-cell { background: linear-gradient(var(--ant-table-header-bg), var(--ant-table-header-bg)) var(--ant-color-bg-container); }
+  [data-ant-table-part="wrapper"] .table-scroll-y [data-ant-table-part="head"] > tr > th[data-ant-table-sorted],
+  [data-ant-table-part="wrapper"] [data-ant-table-part="head"] > tr > .table-fixed-cell[data-ant-table-sorted] { background: linear-gradient(var(--ant-table-header-sort-active-bg), var(--ant-table-header-sort-active-bg)) var(--ant-color-bg-container); }
+  [data-ant-table-part="wrapper"] .table-scroll-y [data-ant-table-part="head"] > tr > th[data-ant-table-sortable]:hover,
+  [data-ant-table-part="wrapper"] [data-ant-table-part="head"] > tr > .table-fixed-cell[data-ant-table-sortable]:hover { background: linear-gradient(var(--ant-table-header-sort-hover-bg), var(--ant-table-header-sort-hover-bg)) var(--ant-color-bg-container); }
+  [data-ant-table-part="wrapper"] [data-ant-table-part="body"] > tr > :where(td).table-fixed-cell[data-ant-table-sorted] { background: linear-gradient(var(--ant-table-body-sort-bg), var(--ant-table-body-sort-bg)) var(--ant-color-bg-container); }
+  [data-ant-table-part="wrapper"] [data-ant-table-part="body"] > tr[data-ant-table-selected] > .table-fixed-cell { background: linear-gradient(var(--ant-table-row-selected-bg), var(--ant-table-row-selected-bg)) var(--ant-color-bg-container); }
+  .table-source-theme [data-ant-table-part="head"] th[data-ant-table-sortable]:hover [data-ant-table-part="sorter"] { color: var(--ant-table-header-icon-hover-color); }
+  [data-ant-table-part="wrapper"].table-source-theme [data-ant-table-part="head"] th[data-ant-table-sortable].table-fixed-cell:hover { background: linear-gradient(var(--ant-table-fixed-header-sort-active-bg), var(--ant-table-fixed-header-sort-active-bg)) var(--ant-color-bg-container); }
+  .table-source-theme:not(.table-hover-disabled) [data-ant-table-part="body"] > tr[data-ant-table-part="row"]:hover > td { background: var(--ant-table-row-hover-bg); }
+  .table-source-theme:not(.table-hover-disabled) [data-ant-table-part="body"] > tr[data-ant-table-part="row"][data-ant-table-selected]:hover > :is(th, td) { background: var(--ant-table-row-selected-hover-bg); }
+  .table-source-theme:not(.table-hover-disabled) [data-ant-table-part="body"] > tr[data-ant-table-part="row"]:hover > td.table-fixed-cell { background: linear-gradient(var(--ant-table-row-hover-bg), var(--ant-table-row-hover-bg)) var(--ant-color-bg-container); }
+  .table-source-theme:not(.table-hover-disabled) [data-ant-table-part="body"] > tr[data-ant-table-part="row"][data-ant-table-selected]:hover > :is(th, td).table-fixed-cell { background: linear-gradient(var(--ant-table-row-selected-hover-bg), var(--ant-table-row-selected-hover-bg)) var(--ant-color-bg-container); }
+  [data-ant-table-part="content"]:focus-visible, .sort-button:focus-visible { outline: var(--ant-line-width-focus) solid var(--ant-color-primary-border); outline-offset: 2px; }
   caption { padding: var(--ant-padding-sm); color: var(--ant-color-text-heading); text-align: start; font-weight: 600; }
   .sort-button { width: 100%; padding: 0; border: 0; background: transparent; color: inherit; font: inherit; text-align: inherit; cursor: pointer; }
   .sort-button:disabled { cursor: not-allowed; }
@@ -371,65 +379,65 @@
   .sort-up { margin-bottom: 2px; border-bottom: 5px solid currentColor; }
   .sort-down { border-top: 5px solid currentColor; }
   .loading-state { display: flex; align-items: center; gap: var(--ant-margin-xs); padding: var(--ant-padding-sm); color: var(--ant-color-primary); }
-  .ant-table-wrapper .ant-table-row-expand-icon:disabled { color: var(--ant-color-text-disabled); border-color: var(--ant-table-border-color); cursor: not-allowed; }
-  .ant-table-wrapper .ant-table .ant-table-tbody > tr.ant-table-expanded-row > td.ant-table-cell { padding: 0; }
+  [data-ant-table-part="wrapper"] [data-ant-table-part="expand-icon"]:disabled { color: var(--ant-color-text-disabled); border-color: var(--ant-table-border-color); cursor: not-allowed; }
+  [data-ant-table-part="wrapper"] [data-ant-table-part="table"] [data-ant-table-part="body"] > tr[data-ant-table-part="expanded-row"] > td[data-ant-table-part="cell"] { padding: 0; }
   .expanded-content { position: sticky; inset-inline-start: 0; box-sizing: border-box; width: var(--ant-table-viewport-width, 100%); max-width: 100%; padding: var(--ant-table-cell-padding-block) var(--ant-table-cell-padding-inline); overflow-wrap: anywhere; }
-  .ant-table-medium .expanded-content { padding: var(--ant-table-cell-padding-block-md) var(--ant-table-cell-padding-inline-md); }
-  .ant-table-small .expanded-content { padding: var(--ant-table-cell-padding-block-sm) var(--ant-table-cell-padding-inline-sm); }
+  [data-ant-table-size="medium"] .expanded-content { padding: var(--ant-table-cell-padding-block-md) var(--ant-table-cell-padding-inline-md); }
+  [data-ant-table-size="small"] .expanded-content { padding: var(--ant-table-cell-padding-block-sm) var(--ant-table-cell-padding-inline-sm); }
 </style>
 
-<div class={[
-    'ant-table-wrapper ant-table-css-var',
+{#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`table-prefix:${prefix}:${rootPrefix}`} />{/if}<div data-ant-table-part="wrapper" data-ant-table-prefix={prefix} data-ant-table-root-prefix={rootPrefix} class={[
+    `${prefix}-wrapper ant-table-css-var`,
     componentTheme.className,
     designTheme.enabled && 'table-source-theme',
     !rowHoverable && 'table-hover-disabled',
-    config.direction === 'rtl' && 'ant-table-wrapper-rtl',
+    config.direction === 'rtl' && `${prefix}-wrapper-rtl`,
     className
   ]} dir={config.direction} style={rootStyle}>
   {#if loading}<div class="loading-state" role="status"><Spin size="small" aria-hidden />{strings.loadingText}</div>{/if}
-  <div class={[
-      'ant-table',
-      `ant-table-${resolvedSize}`,
-      bordered && 'ant-table-bordered',
-      showHeader === false && !title && 'ant-table-no-header',
-      !visibleRows.length && 'ant-table-empty'
+  <div data-ant-table-part="table" data-ant-table-prefix={prefix} data-ant-table-root-prefix={rootPrefix} data-ant-table-size={resolvedSize} class={[
+      `${prefix}`,
+      `${prefix}-${resolvedSize}`,
+      bordered && `${prefix}-bordered`,
+      showHeader === false && !title && `${prefix}-no-header`,
+      !visibleRows.length && `${prefix}-empty`
     ]}>
-    {#if title}<div class="ant-table-title">{@render title(panelData)}</div>{/if}
-    <div class="ant-table-container">
+    {#if title}<div class={`${prefix}-title`}>{@render title(panelData)}</div>{/if}
+    <div class={`${prefix}-container`}>
       <!-- svelte-ignore a11y_no_noninteractive_tabindex (Фокус нужен для прокрутки таблицы с клавиатуры.) -->
-      <div bind:this={content} class={[
-          'ant-table-content',
+      <div bind:this={content} data-ant-table-part="content" class={[
+          `${prefix}-content`,
           (scroll?.y !== undefined || fixedColumns.some(Boolean)) && 'table-sticky',
           scroll?.y !== undefined && 'table-scroll-y'
         ]} style:max-height={typeof scroll?.y === 'number' ? `${scroll.y}px` : scroll?.y} role="region" aria-label={caption ?? ariaLabel ?? strings.label} tabindex="0">
         <table bind:this={table} aria-label={ariaLabel ?? (caption ? undefined : strings.label)} aria-busy={loading || undefined} style:min-width={typeof scroll?.x === 'number' ? `${scroll.x}px` : scroll?.x}>
           {#if caption}<caption>{caption}</caption>{/if}
           {#if visibleColumns.length || dataOffset}<colgroup>
-            {#if expandable}<col class={designTheme.enabled ? 'ant-table-expand-icon-col' : undefined}
+            {#if expandable}<col class={designTheme.enabled ? `${prefix}-expand-icon-col` : undefined}
               style:width={typeof expandable.columnWidth === 'number'
                 ? `${expandable.columnWidth}px`
                 : expandable.columnWidth ?? (designTheme.enabled ? undefined : '48px')} />{/if}
-            {#if rowSelection}<col class={designTheme.enabled ? 'ant-table-selection-col' : undefined}
+            {#if rowSelection}<col class={designTheme.enabled ? `${prefix}-selection-col` : undefined}
               style:width={typeof selectionWidth === 'number'
                 ? `${selectionWidth}px` : selectionWidth} />{/if}
             {#each visibleColumns as column (column.key)}<col style:width={typeof column.width === 'number'
                 ? `${column.width}px`
                 : column.width} />{/each}
           </colgroup>{/if}
-          {#if showHeader}<thead class="ant-table-thead">
+          {#if showHeader}<thead data-ant-table-part="head" class={`${prefix}-thead`}>
             <tr>
               {#if expandable}
-                <th scope="col" aria-label={expandable.columnTitle ?? strings.expandColumn} class={[
-                    'ant-table-cell ant-table-row-expand-icon-cell',
+                <th data-ant-table-part="cell" scope="col" aria-label={expandable.columnTitle ?? strings.expandColumn} class={[
+                    `${prefix}-cell ${prefix}-row-expand-icon-cell`,
                     expandable.fixed
-                    && 'table-fixed-cell ant-table-cell-fix ant-table-cell-fix-start'
+                    && `table-fixed-cell ${prefix}-cell-fix ${prefix}-cell-fix-start`
                   ]} style:inset-inline-start={expandable.fixed ? fixedCells[0].offset : undefined} style:z-index={expandable.fixed ? 3 : undefined}>{expandable.columnTitle ?? ''}</th>
               {/if}
               {#if rowSelection}
-                <th scope="col" class={[
-                    'ant-table-cell ant-table-selection-column',
+                <th data-ant-table-part="cell" scope="col" class={[
+                    `${prefix}-cell ${prefix}-selection-column`,
                     selectionOptions?.fixed
-                    && 'table-fixed-cell ant-table-cell-fix ant-table-cell-fix-start'
+                    && `table-fixed-cell ${prefix}-cell-fix ${prefix}-cell-fix-start`
                   ]} style:inset-inline-start={selectionOptions?.fixed
                       ? fixedCells[expansionOffset].offset
                       : undefined} style:z-index={selectionOptions?.fixed ? 3 : undefined}>
@@ -444,25 +452,25 @@
                 {@const sortable = typeof column.sorter === 'function' || (mode === 'server' && column.sorter === true)}
                 {@const order = tableData.sorter?.columnKey === column.key ? tableData.sorter.order : undefined}
                 {@const fixed = fixedCells[columnIndex + dataOffset]}
-                <th scope="col" class={[
-                    'ant-table-cell',
+                <th data-ant-table-part="cell" scope="col" class={[
+                    `${prefix}-cell`,
                     column.className,
                     fixed.side
-                    && `table-fixed-cell ant-table-cell-fix ant-table-cell-fix-${fixed.side}`,
-                    sortable && 'ant-table-column-has-sorters',
-                    order && 'ant-table-column-sort'
-                  ]} style:inset-inline-start={fixed.side === 'start' ? fixed.offset : undefined} style:inset-inline-end={fixed.side === 'end' ? fixed.offset : undefined} style:z-index={fixed.side ? 3 : undefined} style:text-align={column.align} aria-sort={order === 'ascend'
+                    && `table-fixed-cell ${prefix}-cell-fix ${prefix}-cell-fix-${fixed.side}`,
+                    sortable && `${prefix}-column-has-sorters`,
+                    order && `${prefix}-column-sort`
+                  ]} style:inset-inline-start={fixed.side === 'start' ? fixed.offset : undefined} style:inset-inline-end={fixed.side === 'end' ? fixed.offset : undefined} style:z-index={fixed.side ? 3 : undefined} style:text-align={column.align} data-ant-table-sortable={sortable || undefined} data-ant-table-sorted={order || undefined} aria-sort={order === 'ascend'
                       ? 'ascending'
                       : order === 'descend' ? 'descending' : undefined}>
                   <div class="column-heading">
                     {#if sortable}
-                      <button type="button" class="sort-button ant-table-column-sorters" disabled={resolvedDisabled} title={sortDescription(column.key, tableData.sorter)} onclick={() => changeSort(column.key)}>
-                        <span class="ant-table-column-title">{column.title}</span>
-                        <span class="ant-table-column-sorter" aria-hidden="true"><span class="ant-table-column-sorter-inner">{#if designTheme.enabled}<span class={[
-                            'anticon anticon-caret-up ant-table-column-sorter-up',
+                      <button type="button" class={`sort-button ${prefix}-column-sorters`} disabled={resolvedDisabled} title={sortDescription(column.key, tableData.sorter)} onclick={() => changeSort(column.key)}>
+                        <span class={`${prefix}-column-title`}>{column.title}</span>
+                        <span data-ant-table-part="sorter" class={`${prefix}-column-sorter`} aria-hidden="true"><span class={`${prefix}-column-sorter-inner`}>{#if designTheme.enabled}<span class={[
+                            `anticon anticon-caret-up ${prefix}-column-sorter-up`,
                             order === 'ascend' && 'active'
                           ]}><svg viewBox="0 0 1024 1024" width="1em" height="1em" fill="currentColor" focusable="false"><path d="M858.9 689L530.5 308.2c-9.4-10.9-27.5-10.9-37 0L165.1 689c-12.2 14.2-1.2 35 18.5 35h656.8c19.7 0 30.7-20.8 18.5-35z" /></svg></span><span class={[
-                              'anticon anticon-caret-down ant-table-column-sorter-down',
+                              `anticon anticon-caret-down ${prefix}-column-sorter-down`,
                               order === 'descend' && 'active'
                             ]}><svg viewBox="0 0 1024 1024" width="1em" height="1em" fill="currentColor" focusable="false"><path d="M840.4 300H183.6c-19.7 0-30.7 20.8-18.5 35l328.4 380.8c9.4 10.9 27.5 10.9 37 0L858.9 335c12.2-14.2 1.2-35-18.5-35z" /></svg></span>{:else}<span class={[
                             'sort-arrow sort-up',
@@ -474,38 +482,38 @@
                       </button>
                     {:else}<span>{column.title}</span>{/if}
                     {#if column.filters && (mode === 'server' || column.onFilter)}
-                      <TableFilter title={column.title} options={column.filters} value={Object.hasOwn(tableData.filters, column.key)
+                      <TableFilter prefixCls={prefix} {dropdownPrefix} title={column.title} options={column.filters} value={Object.hasOwn(tableData.filters, column.key)
                           ? tableData.filters[column.key]
                           : []} multiple={column.filterMultiple !== false} disabled={resolvedDisabled} onApply={(values) => changeFilter(column.key, values)} />
                     {/if}
                   </div>
                 </th>
               {:else}
-                {#if !dataOffset}<th class="ant-table-cell"></th>{/if}
+                {#if !dataOffset}<th data-ant-table-part="cell" class={`${prefix}-cell`}></th>{/if}
               {/each}
             </tr>
           </thead>{/if}
-          <tbody class="ant-table-tbody">
+          <tbody data-ant-table-part="body" class={`${prefix}-tbody`}>
             {#each visibleRows as row, index (row.key)}
               {@const expanded = row.canExpand && expandedKeys.has(row.key)}
-              <tr class={[
-                  'ant-table-row',
+              <tr data-ant-table-part="row" data-ant-table-selected={rowSelection && selectedKeys.has(row.key) || undefined} class={[
+                  `${prefix}-row`,
                   typeof rowClassName === 'function'
                     ? rowClassName(row.record, index, 0) : rowClassName,
-                  rowSelection && selectedKeys.has(row.key) && 'ant-table-row-selected'
+                  rowSelection && selectedKeys.has(row.key) && `${prefix}-row-selected`
                 ]}>
                 {#if expandable}
-                  <td class={[
-                      'ant-table-cell ant-table-row-expand-icon-cell',
+                  <td data-ant-table-part="cell" class={[
+                      `${prefix}-cell ${prefix}-row-expand-icon-cell`,
                       expandable.fixed
-                      && 'table-fixed-cell ant-table-cell-fix ant-table-cell-fix-start'
+                      && `table-fixed-cell ${prefix}-cell-fix ${prefix}-cell-fix-start`
                     ]} style:inset-inline-start={expandable.fixed ? fixedCells[0].offset : undefined} style:z-index={expandable.fixed ? 1 : undefined}>
                     {#if row.canExpand}
-                      <button type="button" class={[
-                          'ant-table-row-expand-icon',
+                      <button type="button" data-ant-table-part="expand-icon" class={[
+                          `${prefix}-row-expand-icon`,
                           expanded
-                            ? 'ant-table-row-expand-icon-expanded'
-                            : 'ant-table-row-expand-icon-collapsed'
+                            ? `${prefix}-row-expand-icon-expanded`
+                            : `${prefix}-row-expand-icon-collapsed`
                         ]} disabled={resolvedDisabled} aria-label={`${expanded
                             ? strings.collapseRow
                             : strings.expandRow} ${row.key}`} aria-expanded={expanded} aria-controls={expanded ? expansionId(row.key) : undefined} onclick={() => changeExpansion(row.record, row.key)}></button>
@@ -513,10 +521,10 @@
                   </td>
                 {/if}
                 {#if rowSelection}
-                  <td class={[
-                      'ant-table-cell ant-table-selection-column',
+                  <td data-ant-table-part="cell" class={[
+                      `${prefix}-cell ${prefix}-selection-column`,
                       selectionOptions?.fixed
-                      && 'table-fixed-cell ant-table-cell-fix ant-table-cell-fix-start'
+                      && `table-fixed-cell ${prefix}-cell-fix ${prefix}-cell-fix-start`
                     ]} style:inset-inline-start={selectionOptions?.fixed
                         ? fixedCells[expansionOffset].offset
                         : undefined} style:z-index={selectionOptions?.fixed ? 1 : undefined}>
@@ -530,24 +538,24 @@
                 {/if}
                 {#each visibleColumns as column, columnIndex (column.key)}
                   {@const fixed = fixedCells[columnIndex + dataOffset]}
-                  <svelte:element this={column.rowScope ? 'th' : 'td'} scope={column.rowScope} class={[
-                      'ant-table-cell',
+                  <svelte:element data-ant-table-part="cell" data-ant-table-sorted={tableData.sorter?.columnKey === column.key || undefined} this={column.rowScope ? 'th' : 'td'} scope={column.rowScope} class={[
+                      `${prefix}-cell`,
                       column.className,
                       fixed.side
-                      && `table-fixed-cell ant-table-cell-fix ant-table-cell-fix-${fixed.side}`,
-                      tableData.sorter?.columnKey === column.key && 'ant-table-column-sort'
+                      && `table-fixed-cell ${prefix}-cell-fix ${prefix}-cell-fix-${fixed.side}`,
+                      tableData.sorter?.columnKey === column.key && `${prefix}-column-sort`
                     ]} style:inset-inline-start={fixed.side === 'start' ? fixed.offset : undefined} style:inset-inline-end={fixed.side === 'end' ? fixed.offset : undefined} style:z-index={fixed.side ? 1 : undefined} style:text-align={column.align}>
                     {#if column.render}{@render column.render(row.record, index)}{:else}{cellValue(row.record, column.dataIndex)}{/if}
                   </svelte:element>
                 {:else}
-                  {#if !dataOffset}<td class="ant-table-cell"></td>{/if}
+                  {#if !dataOffset}<td data-ant-table-part="cell" class={`${prefix}-cell`}></td>{/if}
                 {/each}
               </tr>
               {#if expanded && expandable}
-                <tr class="ant-table-expanded-row"><td class="ant-table-cell" colspan={Math.max(visibleColumns.length + dataOffset, 1)}><div class="expanded-content" id={expansionId(row.key)}>{@render expandable.expandedRowRender(row.record, index)}</div></td></tr>
+                <tr data-ant-table-part="expanded-row" class={`${prefix}-expanded-row`}><td data-ant-table-part="cell" class={`${prefix}-cell`} colspan={Math.max(visibleColumns.length + dataOffset, 1)}><div class="expanded-content" id={expansionId(row.key)}>{@render expandable.expandedRowRender(row.record, index)}</div></td></tr>
               {/if}
             {:else}
-              <tr class="ant-table-placeholder"><td class="ant-table-cell" colspan={Math.max(visibleColumns.length + dataOffset, 1)}>{#if !loading}
+              <tr class={`${prefix}-placeholder`}><td data-ant-table-part="cell" class={`${prefix}-cell`} colspan={Math.max(visibleColumns.length + dataOffset, 1)}>{#if !loading}
                 {#snippet nativeEmpty()}<Empty image="simple" description={strings.emptyText} />{/snippet}
                 <RenderEmpty componentName="Table" local={empty} fallback={nativeEmpty} />
               {:else}&nbsp;{/if}</td></tr>
@@ -556,9 +564,9 @@
         </table>
       </div>
     </div>
-    {#if footer}<div class="ant-table-footer">{@render footer(panelData)}</div>{/if}
+    {#if footer}<div class={`${prefix}-footer`}>{@render footer(panelData)}</div>{/if}
   </div>
   {#if pagination !== false}
-    <Pagination {...pagination} total={paging.total} current={paging.current} pageSize={paging.pageSize} disabled={resolvedDisabled} size={resolvedSize} class="ant-table-pagination ant-table-pagination-end" onChange={changePage} />
+    <Pagination {...pagination} total={paging.total} current={paging.current} pageSize={paging.pageSize} disabled={resolvedDisabled} size={resolvedSize} class={`${prefix}-pagination ${prefix}-pagination-end`} onChange={changePage} />
   {/if}
 </div>

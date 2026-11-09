@@ -9,6 +9,10 @@
 
 ### Added
 
+- Table поддерживает local/shared prefixCls и независимый dropdownPrefixCls списка
+  фильтров. Смена префикса сохраняет controls, sort/selection, открытый фильтр,
+  draft/focus раскрытой строки и fixed scroll; component tokens остаются canonical.
+
 - DatePicker/RangePicker и TimePicker/TimeRangePicker поддерживают local/shared
   prefixCls для поля, date/time panels и popup; Button и private affix namespaces
   независимы. Черновики, caret/focus, refs/IDs и pending datetime сохраняются,
