@@ -90,7 +90,7 @@
               class={classNames.groupHeader} style={styles.groupHeader}
               attach={element => model.attach(element, row.taggedKey)} />
           {:else if row.type === 'item'}
-            <div class={[`${prefixCls}-item`, classNames.item]} style={styles.item}
+            <div data-ant-listy-item class={[`${prefixCls}-item`, classNames.item]} style={styles.item}
               {@attach element => model.attach(element, row.taggedKey)}>
               {@render itemRender(row.item, row.index)}
             </div>

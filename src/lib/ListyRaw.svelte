@@ -35,7 +35,7 @@
 </script>
 
 {#snippet renderItem(row: import('./listy.engine').ListyItem<T>)}
-  <div class={[`${prefixCls}-item`, classNames.item]} style={styles.item}
+  <div data-ant-listy-item class={[`${prefixCls}-item`, classNames.item]} style={styles.item}
     data-key={row.taggedKey}>{@render itemRender(row.item, row.index)}</div>
 {/snippet}
 

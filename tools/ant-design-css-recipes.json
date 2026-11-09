@@ -2779,5 +2779,27 @@
     "keyframes": [],
     "header": "/* Ant Design 6.6.8 — MIT; vendor/LICENSE.ant-design.\n * Rate prefix template: все правила; >div заменён на >button для нативных controls.\n * SHA-256: 8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa\n */",
     "format": "module"
+  },
+  {
+    "id": "listy-prefix",
+    "output": "src/lib/vendor/listy-prefix.css.js",
+    "expectedRules": 16,
+    "include": [
+      "\\.ant-listy(?![\\w])"
+    ],
+    "exclude": [],
+    "replacements": [
+      {
+        "pattern": "\\.css-var-_R_0_\\.ant-listy(?:-css-var)?(?![-\\w])",
+        "replacement": ".ant-listy-css-var"
+      },
+      {
+        "pattern": "\\.ant-listy(?![-\\w])",
+        "replacement": ".ant-listy:where(.ant-listy-css-var)"
+      }
+    ],
+    "keyframes": [],
+    "header": "/* Ant Design 6.6.8 — MIT; см. LICENSE.ant-design.\n * Listy prefix template: items, group headers, sticky и scrollbar.\n * Базовый корень ограничен :where(.ant-listy-css-var).\n * https://registry.npmjs.org/antd/-/antd-6.6.8.tgz\n * SHA-256: 8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa\n */",
+    "format": "module"
   }
 ]

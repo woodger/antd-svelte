@@ -79,7 +79,7 @@ export interface ListyProps<T = unknown, K extends ListyKey = ListyKey> {
   onscroll?: HTMLAttributes<HTMLDivElement>['onscroll'];
   classNames?: ListySemantic;
   styles?: ListySemantic;
-  /** Меняет классы; встроенный CSS рассчитан на ant-listy. */
+  /** Local CSS prefix; empty/undefined наследуют ConfigProvider. */
   prefixCls?: string;
   class?: string;
   rootClassName?: string;

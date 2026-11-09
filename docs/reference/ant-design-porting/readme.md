@@ -210,6 +210,9 @@ cache defects; store/validation/ref/focus и native ErrorList motion не мен
 Рецепт rate-prefix выводит те же 21 правило Rate с native >button adapter;
 runtime меняет root/state/part selectors и character prefix, сохраняя canonical
 token marker/variables. Tooltip использует самостоятельный общий namespace.
+Рецепт listy-prefix выводит 16 правил Listy для raw/virtual parts, grouped/sticky
+headers и scrollbar. Canonical component tokens и rc-virtual-list variable
+сохраняются; общий link reset продолжает работать через canonical root marker.
 Рецепт layout-prefix выводит 35 flat rules Layout/Sider; runtime выбирает свою
 группу, сохраняет Menu namespace и ограничивает defaults/state selectors корнем.
 Тот же template используется для Header/Content/Footer: выбираются selectors

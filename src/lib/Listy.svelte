@@ -5,6 +5,8 @@
   import { useComponentTheme } from './theme-component.svelte';
   import { captureListyFocus } from './listy.dom';
   import { listyItemHeight } from './listy.engine';
+  import { getListyPrefixCss } from './listy-prefix.engine';
+  import ThemeScopeStyle from './ThemeScopeStyle.svelte';
   import type { ListyKey, ListyProps, ListySemantic } from './listy.types';
   import ListyRaw from './ListyRaw.svelte';
   import ListyVirtual from './ListyVirtual.svelte';
@@ -26,7 +28,7 @@
     onscroll,
     classNames,
     styles,
-    prefixCls = 'ant-listy',
+    prefixCls: customizePrefixCls,
     class: className,
     rootClassName,
     style,
@@ -34,6 +36,8 @@
   } = $derived(rawProps);
 
   const config = useConfig();
+  let prefixCls = $derived(config.getPrefixCls('listy', customizePrefixCls));
+  let prefixCss = $derived(getListyPrefixCss(prefixCls));
   const tokens = useDesignTokenContext();
   const componentTheme = useComponentTheme('Listy');
   let contextClasses = $derived(resolve(config.listy?.classNames));
@@ -72,7 +76,7 @@
     classNames: mergedClasses,
     styles: mergedStyles,
     onScroll: onScroll ?? onscroll,
-    attributes: forwarded
+    attributes: { ...forwarded, 'data-ant-listy': '', 'data-ant-listy-prefix': prefixCls }
   });
 
   function join(values: (string | undefined)[], separator: string) {
@@ -99,11 +103,12 @@
 </script>
 
 <style>
-  :global(.ant-listy :focus-visible) { outline: var(--ant-line-width-focus) solid var(--ant-color-primary-border); outline-offset: 2px; }
-  @media (prefers-reduced-motion: reduce) { :global(.ant-listy .ant-listy-item) { transition: none; } }
+  :global([data-ant-listy] :focus-visible) { outline: var(--ant-line-width-focus) solid var(--ant-color-primary-border); outline-offset: 2px; }
+  /* Prefix stylesheet появляется в head позже bundle; native reduced motion остаётся приоритетным. */
+  @media (prefers-reduced-motion: reduce) { :global([data-ant-listy][data-ant-listy-prefix] [data-ant-listy-item]) { transition: none; } }
 </style>
 
-{#if virtual ?? config.virtual ?? false}
+{#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`listy-prefix:${prefixCls}`} />{/if}{#if virtual ?? config.virtual ?? false}
   <ListyVirtual {...shared} bind:ref bind:nativeElement />
 {:else}
   <ListyRaw {...shared} bind:ref bind:nativeElement />

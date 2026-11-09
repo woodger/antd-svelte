@@ -9,6 +9,10 @@
 
 ### Added
 
+- Listy поддерживает local/shared prefixCls в raw/virtual ветках, группах, sticky
+  headers и scrollbar. Canonical tokens/link reset, native focus/reduced motion,
+  refs, измерения строк и прокрутка сохраняются.
+
 - Rate поддерживает local/shared prefixCls для корня, состояний и слоёв звёзд,
   включая character context. Сохранены canonical tokens, Tooltip composition,
   native keyboard/buttons, value, DOM/ref и focus при смене prefix.

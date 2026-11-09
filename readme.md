@@ -6093,6 +6093,15 @@ styles.root. Callback получает сырые props до defaults/context; g
 в metadata имеют тип unknown. Virtual root принудительно сохраняет position:relative,
 а top закреплённого clone перекрывает пользовательский top.
 
+Непустой prefixCls задаёт локальные классы; empty/undefined наследуют
+ConfigProvider.prefixCls. Один prefix используется raw/virtual корнями, items,
+группами, sticky headers и scrollbar. Scoped CSS повторяет 16 source rules;
+canonical token marker/variables и rc-virtual-list scrollbar variable сохраняются.
+Смена prefix сохраняет DOM, refs, cache/scroll, редактор строки, draft/focus/selection.
+Сверка: [UMD](./tests/browser/fixtures/ant-design-listy-prefix-reference.json),
+[browser](./tests/browser/listy-prefix.spec.ts),
+[SSR](./tests/package/listy-prefix.ssr.test.ts), `?fixture=listy-prefix`.
+
 OnScroll (либо native onscroll) получает native UIEvent: currentTarget — raw root
 либо virtual holder. Bind:ref и bind:nativeElement появляются после mount и
 очищаются при unmount. SSR не создаёт timers/observers; sticky clone появляется
@@ -6119,8 +6128,7 @@ source fallback для оценки. LineHeight темы применяется 
 2835px сохранены в `staleEstimateObservation` эталона; это отличие оставлено
 для отдельного разбора.
 
-Генерация CSS для произвольного prefixCls и React development warnings остаются
-за пределами этого этапа. CSS рассчитан на ant-listy.
+React development warnings остаются за пределами переноса.
 Проверки: [engine](./src/lib/listy.engine.test.ts),
 [публичный пакет/SSR](./tests/package/listy.ssr.test.ts),
 [браузер](./tests/browser/listy.spec.ts), `?fixture=listy`.
@@ -10221,7 +10229,7 @@ Tooltip, Popover, Popconfirm, Slider, BorderBeam, Masonry, Splitter, Anchor и
 Space/SpaceCompact/SpaceAddon, Breadcrumb, Row/Col, Typography, Carousel, Descriptions, Tabs,
 Card с Grid/Meta, Button, FloatButton/Group/BackTop, Radio/RadioButton/RadioGroup,
 Checkbox/CheckboxGroup, Switch, Input, TextArea, InputPassword, InputSearch, InputOTP,
-InputNumber, Form/FormItem/FormList/FormErrorList и Rate.
+InputNumber, Form/FormItem/FormList/FormErrorList, Rate и Listy.
 Остальные семейства подключаются отдельно. Например,
 ConfigProvider prefixCls="suite" создаёт suite-app, suite-layout,
 suite-layout-sider и suite-layout-header без изменения имён Svelte-компонентов.
