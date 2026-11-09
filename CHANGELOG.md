@@ -9,6 +9,10 @@
 
 ### Added
 
+- Dropdown поддерживает local/shared prefixCls для trigger, popup, внутреннего
+  меню, стрелок и состояний. Button namespace и canonical tokens независимы;
+  открытый popup, команды, фокус, typeahead и native binding/callbacks сохраняются.
+
 - Image.previewPrefixCls задаёт независимый полный префикс viewer, включая пустой.
   CSS подключается для нового namespace; upstream omission записан raw/styled.
   Смена имени сохраняет открытый dialog, image/action DOM, масштаб и фокус.

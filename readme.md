@@ -3031,6 +3031,18 @@ aria-controls и aria-expanded, сохраняя исходные ARIA-атри�
 относятся к wrapper trigger. Disabled наследуется от Form/ConfigProvider;
 явное false переопределяет контекст. Нативный disabled trigger также не открывает меню.
 
+PrefixCls задаёт локальный CSS-префикс Dropdown; пустая строка наследует общий
+ConfigProvider.prefixCls. Trigger/popup/arrow и внутреннее меню получают классы
+этого namespace; меню добавляет суффикс -menu. Button в trigger сохраняет собственный
+общий prefix. Canonical theme variables и IDs/ARIA не переименовываются.
+Смена префикса сохраняет открытый popover, DOM команд, фокус и typeahead по label.
+77 исходных CSS-правил без motion и исходного title flex:auto изолированы по локальному и общему префиксам;
+native wrapper, ссылки, reduced motion и bind:open/callback contracts сохранены.
+Независимый menu.prefixCls входит в ещё не перенесённый полный Menu API.
+Прежние label flex/min-width и явный dir popup сохранены. [Raw эталоны и public
+counterparts через styles.itemContent/root.direction](./tests/browser/fixtures/ant-design-dropdown-prefix-reference.json)
+разделяют эти Native границы и исходное оформление Ant Design.
+
 Placement: top, topLeft, topRight, bottom, bottomLeft, bottomRight. По умолчанию
 bottomLeft, в RTL — bottomRight. AutoAdjustOverflow по умолчанию true:
 меню переворачивается и сдвигается в границах окна; false сохраняет запрошенное

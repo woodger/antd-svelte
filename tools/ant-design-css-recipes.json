@@ -2872,5 +2872,30 @@
     "keyframes": [],
     "header": "/* Ant Design 6.6.8 — MIT; vendor/LICENSE.ant-design.\n * Image/Preview prefix template: thumbnail/cover/viewer/actions; progress wrapper/rc-motion исключены.\n * SHA-256: 8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa\n */",
     "format": "module"
+  },
+  {
+    "id": "dropdown-prefix",
+    "output": "src/lib/vendor/dropdown-prefix.css.js",
+    "expectedRules": 77,
+    "include": [
+      "^(?:\\.css-var-_R_0_)?\\.ant-dropdown(?![\\w])"
+    ],
+    "exclude": [
+      "\\.ant-(?:slide|zoom|motion-collapse|fade)",
+      "\\.ant-dropdown-menu-title-content$"
+    ],
+    "replacements": [
+      {
+        "pattern": "\\.css-var-_R_0_\\.ant-dropdown-css-var",
+        "replacement": ".ant-dropdown-css-var"
+      },
+      {
+        "pattern": "\\.ant-dropdown(?![-\\w])",
+        "replacement": ".ant-dropdown:where(.ant-dropdown-css-var)"
+      }
+    ],
+    "keyframes": [],
+    "header": "/* Ant Design 6.6.8 — MIT; vendor/LICENSE.ant-design.\n * Dropdown prefix template: trigger/flat menu/arrow/states; rc-motion и исходный title flex:auto исключены; native label layout сохранён.\n * SHA-256: 8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa\n */",
+    "format": "module"
   }
 ]

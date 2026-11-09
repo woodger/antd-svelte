@@ -226,6 +226,10 @@ variables и native dialog/focus/movement selectors. PreviewGroup.previewPrefixC
 Независимый single Image.previewPrefixCls задаёт полный namespace, включая пустой;
 CSS изолирован по base/viewer pair. Отдельные public Source counterparts показывают
 нормальное оформление, raw measurements сохраняют upstream omission stylesheet.
+Рецепт dropdown-prefix выводит 77 правил trigger/menu/arrow/status без rc-motion
+и исходного title flex:auto: сохранены прежние Native label flex/min-width.
+Runtime разделяет owner Dropdown/menu namespace и общий Button prefix; canonical
+markers/variables, native popover/controller, ссылки и typeahead сохраняются.
 Рецепт layout-prefix выводит 35 flat rules Layout/Sider; runtime выбирает свою
 группу, сохраняет Menu namespace и ограничивает defaults/state selectors корнем.
 Тот же template используется для Header/Content/Footer: выбираются selectors

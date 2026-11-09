@@ -1,5 +1,7 @@
 <script lang="ts">
   import NoCompactStyle from './NoCompactStyle.svelte';
+  import ThemeScopeStyle from './ThemeScopeStyle.svelte';
+  import { getDropdownPrefixCss } from './dropdown-prefix.engine';
   import { onDestroy, untrack } from 'svelte';
   import { useConfig } from './config-context';
   import { useForm } from './form-context';
@@ -25,6 +27,7 @@
   } from './dropdown.types';
 
   let {
+    prefixCls: customizePrefixCls,
     children,
     menu,
     open = $bindable<boolean | undefined>(),
@@ -45,6 +48,9 @@
   }: DropdownProps = $props();
 
   const config = useConfig();
+  let componentPrefix = $derived(config.getPrefixCls('dropdown', customizePrefixCls));
+  let rootPrefix = $derived(config.getPrefixCls());
+  let prefixCss = $derived(getDropdownPrefixCss(componentPrefix, rootPrefix));
   const componentTheme = useComponentTheme('Dropdown');
   const menuTheme = useComponentTheme('Menu');
   const designTokens = useDesignTokenContext();
@@ -458,7 +464,7 @@
         text: item.textValue
           ?? (typeof item.label === 'string'
             ? item.label
-            : element?.querySelector('.ant-dropdown-menu-title-content')?.textContent ?? '')
+            : element?.querySelector('[data-ant-dropdown-title]')?.textContent ?? '')
       };
     });
     const key = getDropdownMatch(commands, resolvedKey, search.text);
@@ -485,31 +491,31 @@
 </script>
 
 <style>
-  .ant-dropdown-trigger { display: inline-block; max-width: 100%; vertical-align: middle; }
-  .ant-dropdown { position: fixed; inset: auto; margin: 0; padding: 0; border: 0; background: transparent; width: max-content; overflow: visible; }
-  .ant-dropdown[hidden], .ant-dropdown:not(:popover-open) { display: none; }
-  .ant-dropdown-menu { box-sizing: border-box; width: 100%; max-width: 100%; max-height: calc(100dvh - 16px); overflow: auto; overflow-wrap: anywhere; }
-  .ant-dropdown-source-theme .ant-dropdown-menu { box-sizing: content-box; width: auto; max-height: calc(100vh - var(--ant-control-height-lg) * 2.5); }
+  [data-ant-dropdown-trigger] { display: inline-block; max-width: 100%; vertical-align: middle; }
+  [data-ant-dropdown-popup] { position: fixed; inset: auto; margin: 0; padding: 0; border: 0; background: transparent; width: max-content; overflow: visible; }
+  [data-ant-dropdown-popup][hidden], [data-ant-dropdown-popup]:not(:popover-open) { display: none; }
+  [data-ant-dropdown-menu] { box-sizing: border-box; width: 100%; max-width: 100%; max-height: calc(100dvh - 16px); overflow: auto; overflow-wrap: anywhere; }
+  [data-ant-dropdown-source-theme] [data-ant-dropdown-menu] { box-sizing: content-box; width: auto; max-height: calc(100vh - var(--ant-control-height-lg) * 2.5); }
   /* Button заполняет строку как исходный li; content-box сохраняет размеры и padding upstream. */
-  .ant-dropdown-source-theme .ant-dropdown-menu-item { box-sizing: content-box; width: stretch; height: auto; }
+  [data-ant-dropdown-source-theme] [data-ant-dropdown-item] { box-sizing: content-box; width: stretch; height: auto; }
   :where(button, a) { appearance: none; width: 100%; margin: 0; border: 0; background: transparent; color: inherit; text-align: start; font: inherit; }
-  a.ant-dropdown-menu-item { box-sizing: border-box; text-decoration: none; }
-  .ant-dropdown-menu-title-content { min-width: 0; white-space: normal; }
-  .ant-dropdown-menu-empty { padding: 8px 12px; color: var(--ant-color-text-description); }
-  .ant-dropdown-placement-top:where(:not(.ant-dropdown-source-theme)) > .ant-dropdown-arrow, .ant-dropdown-placement-topLeft:where(:not(.ant-dropdown-source-theme)) > .ant-dropdown-arrow, .ant-dropdown-placement-topRight:where(:not(.ant-dropdown-source-theme)) > .ant-dropdown-arrow { left: var(--arrow-x, 50%); right: auto; transform: translateX(-50%) translateY(100%) rotate(180deg); }
-  .ant-dropdown-placement-bottom:where(:not(.ant-dropdown-source-theme)) > .ant-dropdown-arrow, .ant-dropdown-placement-bottomLeft:where(:not(.ant-dropdown-source-theme)) > .ant-dropdown-arrow, .ant-dropdown-placement-bottomRight:where(:not(.ant-dropdown-source-theme)) > .ant-dropdown-arrow { left: var(--arrow-x, 50%); right: auto; transform: translateX(-50%) translateY(-100%); }
-  @media (prefers-reduced-motion: reduce) { .ant-dropdown, .ant-dropdown .ant-dropdown-menu, .ant-dropdown .ant-dropdown-menu .ant-dropdown-menu-item { animation: none; transition: none; } }
+  a[data-ant-dropdown-item] { box-sizing: border-box; text-decoration: none; }
+  [data-ant-dropdown-title] { min-width: 0; white-space: normal; }
+  [data-ant-dropdown-empty] { padding: 8px 12px; color: var(--ant-color-text-description); }
+  [data-ant-dropdown-placement^="top"]:where(:not([data-ant-dropdown-source-theme])) > [data-ant-dropdown-arrow] { left: var(--arrow-x, 50%); right: auto; transform: translateX(-50%) translateY(100%) rotate(180deg); }
+  [data-ant-dropdown-placement^="bottom"]:where(:not([data-ant-dropdown-source-theme])) > [data-ant-dropdown-arrow] { left: var(--arrow-x, 50%); right: auto; transform: translateX(-50%) translateY(-100%); }
+  @media (prefers-reduced-motion: reduce) { [data-ant-dropdown-popup], [data-ant-dropdown-popup] [data-ant-dropdown-menu], [data-ant-dropdown-popup] [data-ant-dropdown-menu] [data-ant-dropdown-item] { animation: none; transition: none; } }
 </style>
 
-<span bind:this={host} id={triggerId} role="presentation" class={['ant-dropdown-trigger', className]} {style} onpointerenter={handleEnter} onpointerleave={handleLeave} onclick={handleClick} onkeydown={handleTriggerKeydown}>{@render children()}</span>
+{#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`dropdown-prefix:${componentPrefix}:${rootPrefix}`} />{/if}<span data-ant-dropdown-trigger data-ant-dropdown-prefix={componentPrefix} data-ant-dropdown-root-prefix={rootPrefix} bind:this={host} id={triggerId} role="presentation" class={[`${componentPrefix}-trigger`, className]} {style} onpointerenter={handleEnter} onpointerleave={handleLeave} onclick={handleClick} onkeydown={handleTriggerKeydown}>{@render children()}</span>
 <NoCompactStyle>
-<div bind:this={popup} id={`${menuId}-popup`} popover="manual" role="presentation" hidden dir={config.direction} class={[
-    'ant-dropdown',
+<div data-ant-dropdown-popup data-ant-dropdown-prefix={componentPrefix} data-ant-dropdown-root-prefix={rootPrefix} data-ant-dropdown-source-theme={componentTheme.className ? true : undefined} data-ant-dropdown-placement={shown ? actualPlacement : requestedPlacement} bind:this={popup} id={`${menuId}-popup`} popover="manual" role="presentation" hidden dir={config.direction} class={[
+    componentPrefix,
     'ant-dropdown-css-var',
     componentTheme.className,
     componentTheme.className && 'ant-dropdown-source-theme',
-    `ant-dropdown-placement-${shown ? actualPlacement : requestedPlacement}`,
-    config.direction === 'rtl' && 'ant-dropdown-rtl'
+    `${componentPrefix}-placement-${shown ? actualPlacement : requestedPlacement}`,
+    config.direction === 'rtl' && `${componentPrefix}-rtl`
   ]} style={untrack(() => componentTheme.style)}
   {@attach node => connectComponentTheme(node, componentTheme.style)} {@attach portal}
   onpointerenter={(event) => {
@@ -519,21 +525,21 @@
       menuFocused = true;
       cancelPending();
     }} onfocusout={handleFocusout}>
-  {#if arrow}<span class="ant-dropdown-arrow" aria-hidden="true"></span>{/if}
+  {#if arrow}<span data-ant-dropdown-arrow class={`${componentPrefix}-arrow`} aria-hidden="true"></span>{/if}
   <!-- Menu aliases дополняют Dropdown; общий provider reset не должен стирать Dropdown aliases. -->
-  <ul bind:this={list} id={menuId} role="menu" tabindex="-1" aria-label={ariaLabel} aria-labelledby={ariaLabel ? undefined : triggerId}
-    class={['ant-dropdown-menu ant-dropdown-menu-root ant-dropdown-menu-vertical',
+  <ul data-ant-dropdown-menu data-ant-dropdown-prefix={componentPrefix} data-ant-dropdown-root-prefix={rootPrefix} bind:this={list} id={menuId} role="menu" tabindex="-1" aria-label={ariaLabel} aria-labelledby={ariaLabel ? undefined : triggerId}
+    class={[`${componentPrefix}-menu ${componentPrefix}-menu-root ${componentPrefix}-menu-vertical`,
       componentTheme.className && 'ant-dropdown-menu-css-var']}
     style={menuTheme.style} onkeydown={handleMenuKeydown}>
     {#each items as item (item.key)}
-      {#if item.type === 'divider'}<li role="separator" class="ant-dropdown-menu-item-divider"></li>
+      {#if item.type === 'divider'}<li role="separator" class={`${componentPrefix}-menu-item-divider`}></li>
       {:else}
-        <li role="none"><svelte:element this={item.href === undefined ? 'button' : 'a'} type={item.href === undefined ? 'button' : undefined} href={item.disabled ? undefined : item.href} target={item.href === undefined ? undefined : item.target} rel={item.href === undefined ? undefined : item.rel} role="menuitem" data-dropdown-key={item.key} disabled={item.href === undefined ? item.disabled : undefined} aria-disabled={item.href !== undefined && item.disabled || undefined} tabindex={resolvedKey === item.key ? 0 : -1} aria-label={typeof item.label === 'function' ? item.textValue : undefined} class={[
-            'ant-dropdown-menu-item',
-            item.disabled && 'ant-dropdown-menu-item-disabled',
-            item.danger && 'ant-dropdown-menu-item-danger',
+        <li role="none"><svelte:element data-ant-dropdown-item this={item.href === undefined ? 'button' : 'a'} type={item.href === undefined ? 'button' : undefined} href={item.disabled ? undefined : item.href} target={item.href === undefined ? undefined : item.target} rel={item.href === undefined ? undefined : item.rel} role="menuitem" data-dropdown-key={item.key} disabled={item.href === undefined ? item.disabled : undefined} aria-disabled={item.href !== undefined && item.disabled || undefined} tabindex={resolvedKey === item.key ? 0 : -1} aria-label={typeof item.label === 'function' ? item.textValue : undefined} class={[
+            `${componentPrefix}-menu-item`,
+            item.disabled && `${componentPrefix}-menu-item-disabled`,
+            item.danger && `${componentPrefix}-menu-item-danger`,
             resolvedKey === item.key && (!componentTheme.className || menuFocused)
-              && 'ant-dropdown-menu-item-active'
+              && `${componentPrefix}-menu-item-active`
           ]} onfocus={() => {
               activeKey = item.key;
             }} onpointermove={(event: PointerEvent) => {
@@ -543,11 +549,11 @@
                   focusItem(item.key);
               }
             }} onclick={(event: MouseEvent) => activate(item.key, event)}>
-          {#if item.icon}<span class="ant-dropdown-menu-item-icon" aria-hidden="true">{@render item.icon()}</span>{/if}
-          <span class="ant-dropdown-menu-title-content">{#if typeof item.label === 'function'}{@render item.label()}{:else}{item.label}{/if}</span>
+          {#if item.icon}<span class={`${componentPrefix}-menu-item-icon`} aria-hidden="true">{@render item.icon()}</span>{/if}
+          <span data-ant-dropdown-title class={`${componentPrefix}-menu-title-content`}>{#if typeof item.label === 'function'}{@render item.label()}{:else}{item.label}{/if}</span>
         </svelte:element></li>
       {/if}
-    {:else}<li role="none" class="ant-dropdown-menu-empty">{config.locale.emptyText}</li>{/each}
+    {:else}<li data-ant-dropdown-empty role="none" class={`${componentPrefix}-menu-empty`}>{config.locale.emptyText}</li>{/each}
   </ul>
 </div>
 </NoCompactStyle>

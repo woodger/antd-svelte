@@ -43,6 +43,8 @@ export interface DropdownMenuProps {
 
 /** Меню команд у trigger snippet с клавиатурой, hover/click и возвратом фокуса. */
 export interface DropdownProps {
+  /** Непустой локальный префикс перекрывает ConfigProvider; внутреннее меню получает суффикс -menu. */
+  prefixCls?: string;
   children: Snippet;
   menu: DropdownMenuProps;
   /** Поддерживает bind:open. */
