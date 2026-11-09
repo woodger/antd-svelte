@@ -9,6 +9,10 @@
 
 ### Added
 
+- Rate поддерживает local/shared prefixCls для корня, состояний и слоёв звёзд,
+  включая character context. Сохранены canonical tokens, Tooltip composition,
+  native keyboard/buttons, value, DOM/ref и focus при смене prefix.
+
 - Form/FormItem/FormList поддерживают local/shared prefixCls; Form media CSS
   использует global screen*Max tokens с изоляцией scopes. Сохранены store,
   validation/reset/submit, field DOM/ref и focus/selection; ErrorList использует

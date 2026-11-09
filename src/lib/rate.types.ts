@@ -26,6 +26,8 @@ export interface RateProps extends Omit<
   HTMLAttributes<HTMLUListElement>,
   'children' | 'class' | 'style' | 'onchange'
 > {
+  /** Local CSS prefix; empty/undefined наследуют ConfigProvider. */
+  prefixCls?: string;
   /** Управляемое значение; владелец принимает новый выбор через onChange. */
   value?: number;
   /** Начальная локальная оценка при отсутствии value; по умолчанию 0. */

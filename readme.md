@@ -8329,6 +8329,16 @@ Ant wrapper, он заменяет автоматическую Tooltip composit
 строки или поддерживаемые локальные TooltipProps без children. Tooltip использует
 существующую обёртку с display:contents; отступы между stars сохранены.
 
+Непустой prefixCls задаёт локальные классы Rate; empty/undefined наследуют
+ConfigProvider.prefixCls. Состояния, слои звёзд и RateCharacterInfo.prefixCls
+используют разрешённый prefix. Tooltip сохраняет самостоятельный общий namespace;
+canonical component token marker/variables не переименовываются. Scoped CSS
+использует те же 21 правило с native button adapter. Смена local/shared prefix
+сохраняет оценку, DOM/ref, focus и соседний draft/selection/FormData.
+Сверка с неизменённым UMD: [reference](./tests/browser/fixtures/ant-design-rate-prefix-reference.json),
+[browser](./tests/browser/rate-prefix.spec.ts),
+[SSR](./tests/package/rate-prefix.ssr.test.ts), `?fixture=rate-prefix`.
+
 Size принимает small/medium/large, наследует componentSize.
 Disabled наследует общий disabled-контекст, включая Form; явный false имеет
 приоритет. ConfigProvider.rate принимает class/style, локальные class/rootClassName
@@ -8368,7 +8378,6 @@ StarFilled SVG взят из Ant Design Icons SVG 4.6.0 с существующ�
 Галерея — `/ant-design#rate`, fixture — `?fixture=rate`; unit/SSR и browser
 сценарии проверяют значения, callbacks, геометрию, контексты и cleanup.
 
-PrefixCls пока отсутствует; namespace ant-rate закреплён.
 Полный upstream Tooltip API ограничен текущим публичным
 Svelte Tooltip. Эти части не считаются покрытыми переносом Rate.
 
@@ -10212,7 +10221,7 @@ Tooltip, Popover, Popconfirm, Slider, BorderBeam, Masonry, Splitter, Anchor и
 Space/SpaceCompact/SpaceAddon, Breadcrumb, Row/Col, Typography, Carousel, Descriptions, Tabs,
 Card с Grid/Meta, Button, FloatButton/Group/BackTop, Radio/RadioButton/RadioGroup,
 Checkbox/CheckboxGroup, Switch, Input, TextArea, InputPassword, InputSearch, InputOTP,
-InputNumber и Form/FormItem/FormList/FormErrorList.
+InputNumber, Form/FormItem/FormList/FormErrorList и Rate.
 Остальные семейства подключаются отдельно. Например,
 ConfigProvider prefixCls="suite" создаёт suite-app, suite-layout,
 suite-layout-sider и suite-layout-header без изменения имён Svelte-компонентов.

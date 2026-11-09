@@ -5,10 +5,13 @@
   import { useDesignTokenContext } from './theme-context.svelte';
   import { useForm, useFormField } from './form-context';
   import { getRateKeyValue, getRatePointerValue, getRateStarClass } from './rate.engine';
+  import { getRatePrefixCss } from './rate-prefix.engine';
   import type { RateCharacterInfo, RateProps } from './rate.types';
+  import ThemeScopeStyle from './ThemeScopeStyle.svelte';
   import Tooltip from './Tooltip.svelte';
 
   let {
+    prefixCls: customizePrefixCls,
     value,
     defaultValue,
     count = 5,
@@ -35,6 +38,8 @@
     ...attributes
   }: RateProps = $props();
   const config = useConfig();
+  let componentPrefix = $derived(config.getPrefixCls('rate', customizePrefixCls));
+  let prefixCss = $derived(getRatePrefixCss(componentPrefix));
   const componentTheme = useComponentTheme('Rate');
   const tokens = useDesignTokenContext();
   let transformFallback = $derived.by(() => {
@@ -155,11 +160,11 @@
 </script>
 
 <style>
-  .ant-rate-star > button { display: block; margin: 0; padding: 0; border: 0; background: none; color: inherit; font: inherit; line-height: inherit; cursor: inherit; }
-  .ant-rate:focus-visible { outline: var(--ant-rate-line-width-focus) dashed var(--ant-rate-star-color); outline-offset: 2px; }
-  .ant-rate-star-first, .ant-rate-star-second { display: block; }
+  [data-ant-rate-star] > button { display: block; margin: 0; padding: 0; border: 0; background: none; color: inherit; font: inherit; line-height: inherit; cursor: inherit; }
+  [data-ant-rate]:focus-visible { outline: var(--ant-rate-line-width-focus) dashed var(--ant-rate-star-color); outline-offset: 2px; }
+  [data-ant-rate-first], [data-ant-rate-second] { display: block; }
   .anticon { display: inline-flex; align-items: center; color: inherit; line-height: 0; vertical-align: -0.125em; }
-  @media (prefers-reduced-motion: reduce) { .ant-rate-star > button, .ant-rate-star-first, .ant-rate-star-second { transition: none; } }
+  @media (prefers-reduced-motion: reduce) { [data-ant-rate-star] > button, [data-ant-rate-first], [data-ant-rate-second] { transition: none; } }
 </style>
 
 {#snippet symbol(info: RateCharacterInfo)}
@@ -168,14 +173,14 @@
   {:else}<span class="anticon anticon-star" aria-hidden="true"><svg viewBox="64 64 896 896" width="1em" height="1em" fill="currentColor" focusable="false"><path d="M908.1 353.1l-253.9-36.9L540.7 86.1c-3.1-6.3-8.2-11.4-14.5-14.5-15.8-7.8-35-1.3-42.9 14.5L369.8 316.2l-253.9 36.9c-7 1-13.4 4.3-18.3 9.3a32.05 32.05 0 00.6 45.3l183.7 179.1-43.4 252.9a31.95 31.95 0 0046.4 33.7L512 754l227.1 119.4c6.2 3.3 13.4 4.4 20.3 3.2 17.4-3 29.1-19.5 26.1-36.9l-43.4-252.9 183.7-179.1c5-4.9 8.3-11.3 9.3-18.3 2.7-17.5-9.5-33.7-27-36.3z" /></svg></span>{/if}
 {/snippet}
 
-<ul role="radiogroup" {...attributes} bind:this={nativeElement} tabindex={blocked ? -1 : tabIndex ?? attributes.tabindex ?? 0}
+{#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`rate-prefix:${componentPrefix}`} />{/if}<ul role="radiogroup" {...attributes} data-ant-rate data-ant-rate-prefix={componentPrefix} bind:this={nativeElement} tabindex={blocked ? -1 : tabIndex ?? attributes.tabindex ?? 0}
   class={[
-      'ant-rate ant-rate-css-var',
+      `${componentPrefix} ant-rate-css-var`,
       componentTheme.className,
-      blocked && 'ant-rate-disabled',
-      config.direction === 'rtl' && 'ant-rate-rtl',
-      resolvedSize === 'small' && 'ant-rate-small',
-      resolvedSize === 'large' && 'ant-rate-large',
+      blocked && `${componentPrefix}-disabled`,
+      config.direction === 'rtl' && `${componentPrefix}-rtl`,
+      resolvedSize === 'small' && `${componentPrefix}-small`,
+      resolvedSize === 'large' && `${componentPrefix}-large`,
       className,
       rootClassName,
       config.rate?.class
@@ -205,9 +210,9 @@
       attributes.onmouseleave?.(event);
     }}>
   {#each Array(count).fill(0) as _, index (index)}
-    {@const info: RateCharacterInfo = { index, count, value: shownValue, allowHalf, disabled: Boolean(blocked), focused, prefixCls: 'ant-rate-star', onHover: handleStarHover, onClick: handleStarClick }}
+    {@const info: RateCharacterInfo = { index, count, value: shownValue, allowHalf, disabled: Boolean(blocked), focused, prefixCls: `${componentPrefix}-star`, onHover: handleStarHover, onClick: handleStarClick }}
     {#snippet star()}
-      <li class={getRateStarClass(index, shownValue, allowHalf, focused)} style={tooltips && !characterRender && index < count - 1
+      <li data-ant-rate-star class={getRateStarClass(index, shownValue, allowHalf, focused, componentPrefix)} style={tooltips && !characterRender && index < count - 1
           ? 'margin-inline-end:var(--ant-margin-xs);'
           : undefined}>
         <button type="button" role="radio" aria-checked={shownValue !== undefined && shownValue > index} aria-posinset={index + 1} aria-setsize={count} aria-label={String(index + 1)} disabled={blocked} tabindex={blocked ? -1 : 0}
@@ -218,8 +223,8 @@
                 handleClick(index, event);
               }
             }}>
-          <span class="ant-rate-star-first" aria-hidden="true">{@render symbol(info)}</span>
-          <span class="ant-rate-star-second" aria-hidden="true">{@render symbol(info)}</span>
+          <span data-ant-rate-first class={`${componentPrefix}-star-first`} aria-hidden="true">{@render symbol(info)}</span>
+          <span data-ant-rate-second class={`${componentPrefix}-star-second`} aria-hidden="true">{@render symbol(info)}</span>
         </button>
       </li>
     {/snippet}

@@ -2753,5 +2753,31 @@
     ],
     "keyframes": [],
     "header": "/* Ant Design 6.6.8 — MIT; см. LICENSE.ant-design.\n * Form prefix/media template; motion остаётся native, Col metadata сохраняют specificity.\n * Canonical component tokens сохранены; private Form/Grid variables используют общий prefix.\n * SHA-256: 8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa\n */"
+  },
+  {
+    "id": "rate-prefix",
+    "output": "src/lib/vendor/rate-prefix.css.js",
+    "expectedRules": 21,
+    "include": [
+      "^(?:\\.css-var-_R_0_)?\\.ant-rate(?![\\w])"
+    ],
+    "exclude": [],
+    "replacements": [
+      {
+        "pattern": "\\.css-var-_R_0_\\.ant-rate(?![-\\w])",
+        "replacement": ".ant-rate-css-var"
+      },
+      {
+        "pattern": "\\.ant-rate(?![-\\w])",
+        "replacement": ".ant-rate:where(.ant-rate-css-var)"
+      },
+      {
+        "pattern": ">div",
+        "replacement": ">button"
+      }
+    ],
+    "keyframes": [],
+    "header": "/* Ant Design 6.6.8 — MIT; vendor/LICENSE.ant-design.\n * Rate prefix template: все правила; >div заменён на >button для нативных controls.\n * SHA-256: 8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa\n */",
+    "format": "module"
   }
 ]

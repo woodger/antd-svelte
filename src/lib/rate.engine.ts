@@ -34,23 +34,24 @@ export function getRateStarClass(
   index: number,
   value: number | undefined,
   allowHalf: boolean,
-  focused: boolean
+  focused: boolean,
+  prefix = 'ant-rate'
 ): string {
   const star = index + 1;
-  const classes = ['ant-rate-star'];
+  const classes = [`${prefix}-star`];
 
   if (value === 0 && index === 0 && focused)
-    classes.push('ant-rate-star-focused');
+    classes.push(`${prefix}-star-focused`);
   else if (allowHalf && value !== undefined && value + 0.5 >= star && value < star) {
-    classes.push('ant-rate-star-half', 'ant-rate-star-active');
+    classes.push(`${prefix}-star-half`, `${prefix}-star-active`);
     if (focused)
-      classes.push('ant-rate-star-focused');
+      classes.push(`${prefix}-star-focused`);
   } else {
     classes.push(value !== undefined && star <= value
-      ? 'ant-rate-star-full'
-      : 'ant-rate-star-zero');
+      ? `${prefix}-star-full`
+      : `${prefix}-star-zero`);
     if (star === value && focused)
-      classes.push('ant-rate-star-focused');
+      classes.push(`${prefix}-star-focused`);
   }
 
   return classes.join(' ');

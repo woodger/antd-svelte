@@ -207,6 +207,9 @@ CSS исключает parts с отдельным scope, сохраняя speci
 local Form/Item classes, global Col/private Form/Grid namespaces и global screen*Max.
 Col span/breakpoint metadata сохранены. Raw и fresh measurements отделяют Source
 cache defects; store/validation/ref/focus и native ErrorList motion не меняются.
+Рецепт rate-prefix выводит те же 21 правило Rate с native >button adapter;
+runtime меняет root/state/part selectors и character prefix, сохраняя canonical
+token marker/variables. Tooltip использует самостоятельный общий namespace.
 Рецепт layout-prefix выводит 35 flat rules Layout/Sider; runtime выбирает свою
 группу, сохраняет Menu namespace и ограничивает defaults/state selectors корнем.
 Тот же template используется для Header/Content/Footer: выбираются selectors
