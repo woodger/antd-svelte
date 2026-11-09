@@ -196,6 +196,12 @@ defaults ограничены marker, остальные namespace Button/Spin �
 prefix меняет Timeline selectors, namespace Steps и токенов сохраняются.
 Рецепт steps-prefix выводит 137 правил Steps, включая layouts и progress;
 runtime изолирует root states, сохраняет token namespace и deprecated exclusions.
+Col local/shared prefixes повторно используют 1027 rules grid-responsive без
+дополнительной копии stylesheet. Runtime меняет Col classes и общий namespace
+private Col/Grid variables; scope учитывает оба prefixes и media thresholds.
+Native Form selectors сохраняют specificity и поддерживают span/breakpoint
+attributes; FormItem display bridge сохраняет default layout. Source shared local
+class private-flex cache записан raw/fresh; Form prefix/media переносится отдельно.
 Рецепт layout-prefix выводит 35 flat rules Layout/Sider; runtime выбирает свою
 группу, сохраняет Menu namespace и ограничивает defaults/state selectors корнем.
 Тот же template используется для Header/Content/Footer: выбираются selectors

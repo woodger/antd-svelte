@@ -9,6 +9,11 @@
 
 ### Added
 
+- Col поддерживает local/shared prefixCls с полным responsive CSS и независимым
+  private namespace. FormItem сохраняет раскладку через span/breakpoint attributes
+  и display bridge. Source shared-class flex cache записан raw/fresh; DOM/ref,
+  draft/focus/selection и прежний default Form layout сохранены.
+
 - InputNumber поддерживает local/shared prefixCls со стилями обоих modes, вариантов,
   affixes, actions и Compact. Native geometry adapters, арифметика, draft/selection,
   refs, клавиатура и canonical FormData сохранены.

@@ -8,6 +8,20 @@ import {
 } from './grid.engine';
 
 describe('Grid layout rules', () => {
+  it('keeps Form span/breakpoint metadata independent of local classes and private variables', () => {
+    const result = gridColClasses({
+      span: 24, xs: { span: '12', offset: 0, flex: 2 }, md: { span: 24 }, lg: '12'
+    }, 'column', 'suite.custom');
+
+    expect(result.classes).toEqual([
+      'column-24', 'column-xs-12', 'column-xs-offset-0', 'column-xs-flex', 'column-md-24'
+    ]);
+    expect(result.variables).toBe('--suitecustom-col-xs-flex:2 2 auto');
+    expect(result.attributes).toEqual({
+      'data-ant-col-span': '24', 'data-ant-col-xs-span': '12', 'data-ant-col-xs': '',
+      'data-ant-col-md-span': '24', 'data-ant-col-md': ''
+    });
+  });
   it('uses the largest configured gutter for SSR but leaves responsive alignment unset', () => {
     expect(gridGutters({ xs: 8, md: 24, xxxl: 48 }, null)).toEqual([48, undefined]);
     expect(gridResponsiveValue({ xs: 'top', md: 'middle' }, null)).toBeUndefined();

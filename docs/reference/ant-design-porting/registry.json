@@ -1354,7 +1354,20 @@
         "tests/browser/grid-breakpoints.spec.ts",
         "tests/browser/grid-breakpoints-ssr.spec.ts",
         "tests/browser/fixtures/ant-design-grid-breakpoints-reference.json",
-        "tests/browser/fixtures/ant-design-grid-breakpoints-update-observation.json"
+        "tests/browser/fixtures/ant-design-grid-breakpoints-update-observation.json",
+        "src/lib/grid.engine.test.ts",
+        "src/lib/grid-col-prefix.engine.ts",
+        "src/lib/grid-col-prefix.engine.test.ts",
+        "src/lib/vendor/grid-responsive.css.js",
+        "src/lib/FormItem.svelte",
+        "src/lib/vendor/antd.css",
+        "tests/browser/fixtures/GridColPrefixScope.svelte",
+        "tests/browser/fixtures/GridColPrefixFixtures.svelte",
+        "tests/browser/fixtures/GridColPrefixSSRFixtures.svelte",
+        "tests/browser/fixtures/ant-design-grid-col-prefix-reference.json",
+        "tests/browser/grid-col-prefix-metrics.ts",
+        "tests/browser/grid-col-prefix.spec.ts",
+        "tests/package/grid-col-prefix.ssr.test.ts"
       ],
       "features": [
         {
@@ -1396,7 +1409,7 @@
         {
           "id": "global-config",
           "title": "Пользовательские breakpoint/theme tokens и prefixCls",
-          "state": "partial",
+          "state": "supported",
           "requiredForV1": false,
           "evidence": [
             "src/lib/Row.svelte",
@@ -1411,7 +1424,7 @@
             "tests/browser/fixtures/ant-design-grid-breakpoints-reference.json",
             "tests/browser/fixtures/ant-design-grid-breakpoints-update-observation.json"
           ],
-          "note": "Grid aliases/algorithms и global screen tokens подключены: Row observer по screen*, Col scoped CSS по screen*Min, SSR без JavaScript, updates и scope isolation. Row prefixCls подключён отдельной feature; Col prefixCls/private namespace и FormItem Grid CSS остаются в работе. Component screen*Min в Source CSS-variable режиме — только declarations."
+          "note": "Grid aliases/algorithms и global screen tokens подключены: Row observer по screen*, Col scoped CSS по screen*Min, SSR без JavaScript, updates и scope isolation. Row/Col local/shared prefixCls, Col private namespace и default FormItem Grid integration подключены отдельными features. Form prefix/media остаются отдельной границей. Component screen*Min в Source CSS-variable режиме — только declarations."
         },
         {
           "id": "component-theme",
@@ -1477,15 +1490,28 @@
         {
           "id": "col-prefix-cls",
           "title": "Col prefixCls, private Grid/Col namespace и FormItem integration",
-          "state": "missing",
+          "state": "supported",
           "requiredForV1": false,
           "evidence": [
             "src/lib/Col.svelte",
+            "src/lib/grid.types.ts",
             "src/lib/grid.engine.ts",
+            "src/lib/grid.engine.test.ts",
+            "src/lib/grid-col-prefix.engine.ts",
+            "src/lib/grid-col-prefix.engine.test.ts",
             "src/lib/grid-style.engine.ts",
-            "src/lib/FormItem.svelte"
+            "src/lib/vendor/grid-responsive.css.js",
+            "src/lib/FormItem.svelte",
+            "src/lib/vendor/antd.css",
+            "tests/browser/fixtures/GridColPrefixScope.svelte",
+            "tests/browser/fixtures/GridColPrefixFixtures.svelte",
+            "tests/browser/fixtures/GridColPrefixSSRFixtures.svelte",
+            "tests/browser/fixtures/ant-design-grid-col-prefix-reference.json",
+            "tests/browser/grid-col-prefix-metrics.ts",
+            "tests/browser/grid-col-prefix.spec.ts",
+            "tests/package/grid-col-prefix.ssr.test.ts"
           ],
-          "note": "Col пока использует canonical ant-col classes и --ant-col/--ant-grid private variables. Полный перенос должен охватить base/xs/responsive CSS, custom media scopes, independent local/global prefix namespaces и текущие FormItem selector/display contracts, включая --ant-grid-display:flex. Row prefix перенесён отдельно."
+          "note": "Local nonempty prefix wins; empty/undefined наследуют ConfigProvider. Повторно используются все 1027 Source rules grid-responsive: base/xs, span/order/offset/push/pull, flex/reset и custom media. Scope учитывает local/global prefixes и media; canonical Grid marker, alias tokens и style/gutter/flex priority сохранены. Col private flex и grid-display variables используют общий namespace независимо от local classes/cssVar.prefix. FormItem CSS сохраняет specificity и принимает span/breakpoint attributes; control display bridge сохраняет default layout и independent labelCol/wrapperCol prefixes. Form root prefix/media не включены. Raw Source shared-class private-flex cache и fresh Inner measurements раздельны. Cached media CSS также сохранён raw; freshMedia измерен с новым public local class и текущими thresholds. Live updates сохраняют Col/input/ref, draft/selection/focus; SSR не запускает observers/timers."
         }
       ]
     },
@@ -5907,7 +5933,22 @@
         "tests/browser/fixtures/FormValidateMessagesLifecycle.svelte",
         "tests/browser/fixtures/form-validate-messages-cases.ts",
         "tests/browser/fixtures/ant-design-form-validate-messages-reference.json",
-        "tests/package/form-validate-messages.ssr.test.ts"
+        "tests/package/form-validate-messages.ssr.test.ts",
+        "src/lib/grid.types.ts",
+        "src/lib/grid.engine.ts",
+        "src/lib/grid.engine.test.ts",
+        "src/lib/grid-col-prefix.engine.ts",
+        "src/lib/grid-col-prefix.engine.test.ts",
+        "src/lib/grid-style.engine.ts",
+        "src/lib/vendor/grid-responsive.css.js",
+        "src/lib/vendor/antd.css",
+        "tests/browser/fixtures/GridColPrefixScope.svelte",
+        "tests/browser/fixtures/GridColPrefixFixtures.svelte",
+        "tests/browser/fixtures/GridColPrefixSSRFixtures.svelte",
+        "tests/browser/fixtures/ant-design-grid-col-prefix-reference.json",
+        "tests/browser/grid-col-prefix-metrics.ts",
+        "tests/browser/grid-col-prefix.spec.ts",
+        "tests/package/grid-col-prefix.ssr.test.ts"
       ],
       "features": [
         {
@@ -6874,6 +6915,32 @@
             "tests/package/form-validate-messages.ssr.test.ts"
           ],
           "note": "ValidateMessages/ValidateMessage публично экспортированы; Form.validateMessages, ConfigProvider.form.validateMessages и locale.Form.defaultValidateMessages принимают partial string/function templates required/enum/whitespace/types/string/number/array/pattern и source date/default shape. Locale/config объединяют группы, local Form заменяет заданные top-level группы; ConfigProvider.form сохраняет whole-record replacement, {} не наследует родительские Form overrides. Rule.message выше общего template, native русские defaults и first-error/implicit rules сохранены; встроенные ruRU/enUS не меняют прежние сообщения. Function и printf %s/%d/%j/%% получают source field/constraint args, затем выполняется однократная ${variables}; explicit rule.message не применяет printf. Date validation использует types.date и number timestamp range, date.format/parse/invalid приняты в типах без выдуманных constraints. Default перекрывает native custom rejection fallback без Error.message, готовые validator strings/manual metadata приоритетны. Контекст фиксируется перед debounce, следующие проверки читают reactive props, старые ошибки сами не переписываются. Private scoped provider привязан к mounted Form, освобождается при unmount/model replacement; отдельные модели изолированы. Пятьдесят два unmodified UMD-сценария фиксируют constraints, enums, 14 type-message groups, printf/function args, scopes, locale/config/local priorities, nested object/array и warnings. Native default differences двух cases и исправленный child context записаны отдельно. Source undefined template и function exception дают console/page diagnostics; Native использует обычную ошибку constraint без false success, raw failures и четыре diagnostics сохранены. SSR не запускает validation, standalone model сохраняет прежние defaults. Новых dependencies, React runtime и script/config changes нет."
+        },
+        {
+          "id": "grid-prefix-integration",
+          "title": "Колонки FormItem при local/shared Grid prefixes",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Col.svelte",
+            "src/lib/grid.types.ts",
+            "src/lib/grid.engine.ts",
+            "src/lib/grid.engine.test.ts",
+            "src/lib/grid-col-prefix.engine.ts",
+            "src/lib/grid-col-prefix.engine.test.ts",
+            "src/lib/grid-style.engine.ts",
+            "src/lib/vendor/grid-responsive.css.js",
+            "src/lib/FormItem.svelte",
+            "src/lib/vendor/antd.css",
+            "tests/browser/fixtures/GridColPrefixScope.svelte",
+            "tests/browser/fixtures/GridColPrefixFixtures.svelte",
+            "tests/browser/fixtures/GridColPrefixSSRFixtures.svelte",
+            "tests/browser/fixtures/ant-design-grid-col-prefix-reference.json",
+            "tests/browser/grid-col-prefix-metrics.ts",
+            "tests/browser/grid-col-prefix.spec.ts",
+            "tests/package/grid-col-prefix.ssr.test.ts"
+          ],
+          "note": "Default Form layout сохраняется при общем Grid prefix и independent labelCol/wrapperCol.prefixCls. Stable span/breakpoint attributes дополняют canonical selectors с той же specificity; control связывает общий grid-display namespace с native --ant-grid-display. Source Form CSS raw/fresh measurements сравниваются на семи ширинах. Самостоятельный Form.prefixCls и token.screen* media CSS не включены; custom-media Col fixture изолирует форму со стандартными порогами. Native labels, styles, field refs/state и validation contracts сохраняются."
         }
       ]
     },

@@ -79,30 +79,42 @@ export function parseGridFlex(value: string | number): string {
   return String(value);
 }
 
-export function gridColClasses(props: ColProps): { classes: string[]; variables: string; } {
+export function gridColClasses(props: ColProps, prefix = 'ant-col', rootPrefix = 'ant'): {
+  classes: string[];
+  variables: string;
+  attributes: Record<string, string>;
+} {
   const classes: string[] = [];
   const variables: string[] = [];
-  if (props.span !== undefined)
-    classes.push(`ant-col-${props.span}`);
+  const attributes: Record<string, string> = {};
+  const namespace = rootPrefix.replace(/\./g, '');
+  if (props.span !== undefined) {
+    classes.push(`${prefix}-${props.span}`);
+    attributes['data-ant-col-span'] = String(props.span);
+  }
   for (const key of ['order', 'offset', 'push', 'pull'] as const)
     if (props[key])
-      classes.push(`ant-col-${key}-${props[key]}`);
+      classes.push(`${prefix}-${key}-${props[key]}`);
   for (const breakpoint of [...gridBreakpoints].reverse()) {
+    const previous = classes.length;
     const value = props[breakpoint];
     const options = typeof value === 'number' && !Number.isNaN(value)
       ? { span: value }
       : typeof value === 'object' && value !== null ? value : {};
-    if (options.span !== undefined && options.span !== null)
-      classes.push(`ant-col-${breakpoint}-${options.span}`);
+    if (options.span !== undefined && options.span !== null) {
+      classes.push(`${prefix}-${breakpoint}-${options.span}`);
+      attributes[`data-ant-col-${breakpoint}-span`] = String(options.span);
+    }
     for (const key of ['order', 'offset', 'push', 'pull'] as const)
       if (options[key] || options[key] === 0)
-        classes.push(`ant-col-${breakpoint}-${key}-${options[key]}`);
+        classes.push(`${prefix}-${breakpoint}-${key}-${options[key]}`);
     if (options.flex || options.flex === 0) {
-      classes.push(`ant-col-${breakpoint}-flex`);
-      variables.push(`--ant-col-${breakpoint}-flex:${parseGridFlex(options.flex)}`);
+      classes.push(`${prefix}-${breakpoint}-flex`);
+      variables.push(`--${namespace}-col-${breakpoint}-flex:${parseGridFlex(options.flex)}`);
     }
+    if (classes.length !== previous) attributes[`data-ant-col-${breakpoint}`] = '';
   }
-  return { classes, variables: variables.join(';') };
+  return { classes, variables: variables.join(';'), attributes };
 }
 
 export function gridHalfGutter(value: GridGap, negative = false): string | undefined {

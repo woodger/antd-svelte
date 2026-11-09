@@ -705,9 +705,29 @@ Row.prefixCls задаёт корень и состояния wrap/align/justify
 [browser](./tests/browser/grid-row-prefix.spec.ts),
 [SSR](./tests/package/grid-row-prefix.ssr.test.ts), `?fixture=grid-row-prefix`.
 Рецепт grid-row-prefix извлекает 16 Row rules без Col/media scopes.
-Col.prefixCls и его private variable namespace пока не перенесены; их перенос
-также затрагивает правила Grid в FormItem. В Row reference официальный Col
-получает публичный prefixCls=ant-col, чтобы сверять существующую раскладку колонок.
+Col.prefixCls подключает полный scoped template из 1027 rules: base/xs и все
+responsive states, resets и flex. Empty/undefined наследуют ConfigProvider;
+локальные классы независимы от общего namespace private Col/Grid variables.
+Canonical Grid token marker и gutter/flex/style priority сохраняются. Смена
+prefix сохраняет Col/ref, draft и selection/focus вложенного native input.
+Пользовательские media thresholds изолированы от canonical styles, включая
+local prefix=ant-col в другом общем namespace.
+
+FormItem сохраняет default layout при общем prefix и собственных prefixes
+labelCol/wrapperCol: CSS поддерживает стабильные span/breakpoint attributes с
+прежней specificity, а control связывает общий grid-display с native Form variable.
+Сами Form classes остаются canonical до отдельного переноса Form.prefixCls.
+Media tokens Form также остаются отдельной границей; в custom-media примерах Col
+форма получает независимые стандартные пороги. Source кэширует private flex
+первого global namespace при одинаковом local Col class; raw и fresh Inner
+measurements сохранены раздельно. В custom-media случаях Source сохраняет прежние
+пороги; freshMedia измерен с новым public local class. Native scope включает оба
+prefixes и media.
+Проверки: `?fixture=grid-col-prefix`,
+[UMD](./tests/browser/fixtures/ant-design-grid-col-prefix-reference.json),
+[browser](./tests/browser/grid-col-prefix.spec.ts),
+[SSR](./tests/package/grid-col-prefix.ssr.test.ts). Row reference по-прежнему
+использует официальный Col с public prefixCls=ant-col для своего сравнения.
 В CSS-variable режиме эталон записывает components.Grid.screen*Min в CSS variables,
 но Col media queries продолжают использовать глобальные thresholds. Это
 [наблюдение](tests/browser/fixtures/ant-design-grid-media-observation.json) сохранено;
@@ -10190,7 +10210,7 @@ LayoutHeader/Content/Footer, Statistic/Timer, QRCode, Timeline, Steps, Divider, 
 Segmented, Avatar/AvatarGroup, Badge/BadgeRibbon, Tag/CheckableTag/CheckableTagGroup,
 Empty, Skeleton с primitives, Spin, Progress, Result, Alert, Collapse, Affix,
 Tooltip, Popover, Popconfirm, Slider, BorderBeam, Masonry, Splitter, Anchor и
-Space/SpaceCompact/SpaceAddon, Breadcrumb, Row, Typography, Carousel, Descriptions, Tabs,
+Space/SpaceCompact/SpaceAddon, Breadcrumb, Row/Col, Typography, Carousel, Descriptions, Tabs,
 Card с Grid/Meta, Button, FloatButton/Group/BackTop, Radio/RadioButton/RadioGroup,
 Checkbox/CheckboxGroup, Switch, Input, TextArea, InputPassword, InputSearch, InputOTP и InputNumber.
 Остальные семейства подключаются отдельно. Например,

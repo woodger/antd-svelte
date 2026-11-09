@@ -47,6 +47,8 @@ export interface ColProps extends Omit<
   HTMLAttributes<HTMLDivElement>,
   'children' | 'class' | 'style'
 >, ColSize {
+  /** Локальный CSS prefix колонки; empty/undefined наследуют ConfigProvider. */
+  prefixCls?: string;
   children?: Snippet;
   xs?: number | string | ColSize;
   sm?: number | string | ColSize;

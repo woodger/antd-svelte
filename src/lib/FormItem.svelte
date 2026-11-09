@@ -116,6 +116,8 @@
 
   const form = useForm();
   const config = useConfig();
+  let gridDisplayStyle = $derived(config.getPrefixCls() === 'ant' ? undefined
+    : `--${config.getPrefixCls().replace(/\./g, '')}-grid-display:var(--ant-grid-display,flex)`);
   const list = useFormList();
   const parentStatus = useFormItemStatusContext();
   const parentMeta = useFormItemMeta();
@@ -416,6 +418,7 @@
       {/if}
       <NoFormItemColumns>
         <Col {...resolvedWrapperCol}
+          style={[gridDisplayStyle, resolvedWrapperCol?.style].filter(Boolean).join(';') || undefined}
           class={['ant-form-item-control', resolvedWrapperCol?.class].filter(Boolean).join(' ')}>
           <div class="ant-form-item-control-input">
             <div bind:this={content}
