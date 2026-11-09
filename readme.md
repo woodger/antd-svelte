@@ -6680,6 +6680,22 @@ Button, Progress и Tooltip получают свои component tokens. Style о
 сохранено в `zero-metrics.interactions` [эталона](./tests/browser/fixtures/ant-design-upload-theme-reference.json).
 Этот крайний случай требует отдельного решения.
 
+`showUploadList.previewIcon/downloadIcon/removeIcon` — snippets `(file)`
+для содержимого стандартных действий. Они не меняют show*Icon predicates,
+locale labels, status/disabled rules или onPreview/onDownload/onRemove.
+Отсутствующий snippet сохраняет исходный SVG; пустой оставляет содержимое пустым,
+числовой 0 отображается. Preview icon используется в card/circle, download —
+только для done; disabled remove остаётся заблокированным.
+
+Snippet соответствует React content/Fragment, а не возвращаемому falsy значению
+render function. ReactElement inspection/clone и перенос его onClick на кнопку
+не воспроизводятся: собственные handlers вложенного DOM имеют нативный порядок
+событий. Это та же opaque Snippet boundary, что у остальных render hooks.
+[21 исходный вариант, действия и transitions](tests/browser/fixtures/ant-design-upload-action-icons-reference.json),
+[browser](tests/browser/upload-action-icons.spec.ts) и
+[SSR](tests/package/upload-action-icons.ssr.test.ts) проверяют содержимое,
+сохранение controls/input DOM и клавиатурный запуск remove.
+
 `ConfigProvider.upload` задаёт общие class/style, classNames/styles, accept,
 customRequest и progress. Незаполненный record наследуется; вложенный upload={{}}
 заменяет его целиком. ClassNames накапливаются с локальными slots, CSS-слои идут
@@ -6818,8 +6834,8 @@ webkitdirectory как boolean attribute; в браузере сохраняют
 [SSR](tests/package/upload-paste.ssr.test.ts) не создаёт browser listeners.
 
 Locale/upload из ConfigProvider, собственный locale, RU/EN, RTL и theme variables
-поддержаны. Custom action icons,
-полный rc-upload ref/internal API и исходные
+поддержаны. Полный rc-upload ref/internal API, ReactElement clone/event forwarding
+и исходные
 appear/exit/collapse анимации остаются отдельными пробелами реестра. Данный этап
 не заявляет полного покрытия React Upload.
 

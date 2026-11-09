@@ -320,6 +320,13 @@ SSR охватывает также defaultOpen, browser — смену обще
 CSS selectors; raw прозрачный фон сохранён отдельно от public inherited-prefix
 counterpart. Svelte сохраняет прежнее оформление списка; только menu background
 сравнивается с counterpart, остальные свойства — с raw Source.
+Upload action icon snippets сверяются по 21 raw UMD case, двум action traces
+и пяти transitions. Empty/zero samples используют React Fragment, соответствующий
+opaque Snippet content; falsy render return fallback и ReactElement clone/onClick
+forwarding не подменяются результатами другого сценария и не заявлены как ported.
+Нативный DOM event order собственных snippet handlers сохраняется. Reader
+сравнивает control text без краевых пробелов; Source measurements при этом
+не меняются, а SVG paths и остальные поля сохраняются полностью.
 Upload semantic root/list/item/trigger сверяются по 16 raw UMD cases и пяти
 transitions: object/callback, resolved defaults, style priority, list types,
 drag/disabled/hidden/error и root/trigger variables. Callback получает исходные

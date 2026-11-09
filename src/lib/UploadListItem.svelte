@@ -126,10 +126,11 @@
   [data-ant-upload-item-name]:focus-visible { outline:2px solid var(--ant-color-primary); }
 </style>
 {#snippet fileIcon()}{#if iconRender}{@render iconRender(file, listType)}{:else}{#if file.status === 'uploading'}{#if card}{locale.uploading}{:else}<UploadIcon name="loading" />{/if}{:else}<UploadIcon name={picture ? image ? 'picture' : 'file' : 'paper-clip'} />{/if}{/if}{/snippet}
-{#snippet downloadIcon()}<UploadIcon name="download" />{/snippet}
-{#snippet removeIcon()}<UploadIcon name="delete" />{/snippet}
+{#snippet downloadIcon()}{#if options.downloadIcon}{@render options.downloadIcon(file)}{:else}<UploadIcon name="download" />{/if}{/snippet}
+{#snippet removeIcon()}{#if options.removeIcon}{@render options.removeIcon(file)}{:else}<UploadIcon name="delete" />{/if}{/snippet}
+{#snippet previewIcon()}{#if options.previewIcon}{@render options.previewIcon(file)}{:else}<UploadIcon name="eye" />{/if}{/snippet}
 {#snippet actions()}
-  {#if card && show(options.showPreviewIcon, true) && source}<a href={file.url || source} target="_blank" rel="noopener noreferrer" aria-label={locale.previewFile} title={locale.previewFile} onclick={preview}><UploadIcon name="eye" /></a>{/if}
+  {#if card && show(options.showPreviewIcon, true) && source}<a href={file.url || source} target="_blank" rel="noopener noreferrer" aria-label={locale.previewFile} title={locale.previewFile} onclick={preview}>{@render previewIcon()}</a>{/if}
   {#if show(options.showDownloadIcon, false) && file.status === 'done'}<Button type="text" size="small" class={`${prefixCls}-list-item-action`} disabled={false} aria-label={locale.downloadFile} title={locale.downloadFile} onclick={() => download(file)} icon={downloadIcon} />{/if}
   {#if show(options.showRemoveIcon, !disabled)}<Button type="text" size="small" class={`${prefixCls}-list-item-action`} {disabled} aria-label={locale.removeFile} title={locale.removeFile} onclick={() => onRemove(file)} icon={removeIcon} />{/if}
 {/snippet}

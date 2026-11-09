@@ -11449,11 +11449,11 @@
         },
         {
           "id": "extended-api",
-          "title": "Custom action icons и полный rc-upload ref/internal API",
+          "title": "Полный rc-upload ref/internal API и ReactElement event forwarding",
           "state": "missing",
           "requiredForV1": false,
           "evidence": [],
-          "note": "Custom action icons не перенесены. Directory/pastable, iconRender/itemRender, linkProps/progress и local semantic slots/ConfigProvider.upload вынесены в отдельные supported features. Ref даёт abort и nativeElement/inputElement; полный rc-upload ref/internal lifecycle API отсутствует."
+          "note": "ReactElement clone/onClick forwarding и falsy render-function return fallback не воспроизводятся opaque Snippet API. Directory/pastable, iconRender/itemRender, linkProps/progress и local semantic slots/ConfigProvider.upload и action icon snippets вынесены в отдельные supported features. Ref даёт abort и nativeElement/inputElement; полный rc-upload ref/internal lifecycle API отсутствует."
         },
         {
           "id": "motion",
@@ -11698,6 +11698,24 @@
             "src/lib/upload-controller.engine.test.ts"
           ],
           "note": "В rc-upload 1.1.1 AjaxUploader.post синхронный onSuccess удаляет request до присваивания возврата customRequest в reqs[uid]. При последующем unmount abort вызывается для завершённого request. Raw requests[1] и rawUnmountEvents сохраняют исходные abort; publicRequests с deferred completion измерены после raw cases/transitions/progress и используются только для отделения этой границы. Native сохраняет существующий completed guard: нет abort после завершения, pending transport отменяется при unmount. Поведение Source не перенесено и оставлено для отдельного разбора."
+        },
+        {
+          "id": "action-icon-snippets",
+          "title": "Preview/download/remove icon snippets с текущим файлом",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/UploadListItem.svelte",
+            "src/lib/upload.types.ts",
+            "tests/browser/upload-action-icons.spec.ts",
+            "tests/browser/upload-action-icons-metrics.ts",
+            "tests/browser/fixtures/UploadActionIconsScope.svelte",
+            "tests/browser/fixtures/UploadActionIconsFixtures.svelte",
+            "tests/browser/fixtures/ant-design-upload-action-icons-reference.json",
+            "tests/package/upload-action-icons.ssr.test.ts",
+            "readme.md"
+          ],
+          "note": "ShowUploadList previewIcon/downloadIcon/removeIcon — Snippet<[UploadFile<T>]> для содержимого стандартных controls. Undefined сохраняет исходный SVG; empty и zero соответствуют React Fragment, а не falsy render return. Видимость/predicates, status/disabled, locale labels и действия сохраняются. 21 raw UMD case, два action traces и пять transitions задают content/default vectors и доступность действий, включая per-file context. Updates сохраняют controls/input DOM и внешний draft/focus/selection; keyboard remove вызывает тот же callback. ReactElement inspection/clone/onClick forwarding не воспроизводятся opaque Snippet, его собственные DOM handlers имеют нативный порядок. SSR не создаёт timers."
         }
       ]
     },

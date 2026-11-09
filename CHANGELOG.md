@@ -9,6 +9,10 @@
 
 ### Added
 
+- Upload showUploadList принимает previewIcon/downloadIcon/removeIcon snippets
+  с текущим файлом. Сохранены visibility/status/disabled, locale labels, callbacks
+  и controls/input DOM; empty/zero snippets соответствуют React Fragment content.
+
 - ConfigProvider.upload задаёт общие class/style, semantic slots, accept,
   customRequest и progress. Перенесены record inheritance/reset и локальные
   приоритеты; обновления сохраняют DOM и активный транспорт. Source abort после

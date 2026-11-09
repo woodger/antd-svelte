@@ -68,6 +68,10 @@ export interface UploadListOptions<T = unknown> {
   showRemoveIcon?: boolean | ((file: UploadFile<T>) => boolean);
   showDownloadIcon?: boolean | ((file: UploadFile<T>) => boolean);
   showPreviewIcon?: boolean | ((file: UploadFile<T>) => boolean);
+  /** Snippet получает текущий файл; отсутствующий prop сохраняет исходную иконку. */
+  removeIcon?: Snippet<[UploadFile<T>]>;
+  downloadIcon?: Snippet<[UploadFile<T>]>;
+  previewIcon?: Snippet<[UploadFile<T>]>;
   extra?: Snippet<[UploadFile<T>]>;
 }
 /** Line Progress без percent/type и deprecated strokeWidth; percent принадлежит файлу. */
