@@ -292,10 +292,7 @@
   <TabsNav bar={props} context={navContext} />
 {/snippet}
 
-{#if prefixCss}
-  <ThemeScopeStyle css={prefixCss} scope={`tabs-prefix:${prefixCls}:${rootPrefixCls}`} />
-{/if}
-<div {...attributes} bind:this={nativeElement} id={rootId} dir={config.direction}
+{#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`tabs-prefix:${prefixCls}:${rootPrefixCls}`} />{/if}<div {...attributes} bind:this={nativeElement} id={rootId} dir={config.direction}
   data-ant-tabs-root
   data-ant-tabs-prefix={prefixCss ? prefixCls : undefined}
   data-ant-tabs-global={prefixCss ? rootPrefixCls : undefined} class={[

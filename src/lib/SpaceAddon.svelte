@@ -26,8 +26,7 @@
   let classes = $derived(compactClasses(componentPrefix, config.direction, compact));
 </script>
 
-{#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`space-addon-prefix:${componentPrefix}:${rootPrefix}`} />{/if}
-<div {...rest} bind:this={nativeElement} dir={config.direction}
+{#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`space-addon-prefix:${componentPrefix}:${rootPrefix}`} />{/if}<div {...rest} bind:this={nativeElement} dir={config.direction}
   data-ant-space-addon-prefix={prefixCss ? componentPrefix : undefined}
   data-ant-space-addon-vars={prefixCss ? rootPrefix.replace(/\./g, '') : undefined}
   class={[

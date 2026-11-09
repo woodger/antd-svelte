@@ -254,8 +254,7 @@
   [data-ant-collapse]:focus-visible { outline: var(--ant-line-width-focus) solid var(--ant-color-primary-border); outline-offset: -3px; }
 </style>
 
-{#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`collapse-prefix:${prefix}`} />{/if}
-<div {...attributes} bind:this={root} id={rootId} role="group" aria-label={ariaLabel}
+{#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`collapse-prefix:${prefix}`} />{/if}<div {...attributes} bind:this={root} id={rootId} role="group" aria-label={ariaLabel}
   aria-labelledby={ariaLabelledby} tabindex="-1" dir={config.direction} data-ant-collapse
   data-ant-collapse-prefix={prefixCss ? prefix : undefined} data-size={resolvedSize}
   data-placement={placement} class={[

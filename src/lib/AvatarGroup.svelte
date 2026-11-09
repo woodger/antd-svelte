@@ -55,9 +55,7 @@
   .ant-avatar-group-overflow { display: inline-flex; flex-shrink: 0; }
 </style>
 
-{#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`avatar-prefix:${prefix}`} />{/if}
-
-<div bind:this={nativeElement} data-ant-avatar-group="" {id} role="group" aria-label={ariaLabel ?? (ariaLabelledby ? undefined : strings.label)} aria-labelledby={ariaLabelledby} aria-describedby={ariaDescribedby} dir={config.direction} class={[
+{#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`avatar-prefix:${prefix}`} />{/if}<div bind:this={nativeElement} data-ant-avatar-group="" {id} role="group" aria-label={ariaLabel ?? (ariaLabelledby ? undefined : strings.label)} aria-labelledby={ariaLabelledby} aria-describedby={ariaDescribedby} dir={config.direction} class={[
     `${prefix}-group`,
     'ant-avatar-css-var',
     componentTheme.className,

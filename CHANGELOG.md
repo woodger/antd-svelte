@@ -1347,6 +1347,10 @@
 
 ### Fixed
 
+- Подключаемые prefix/theme стили больше не добавляют пробелы вокруг корней
+  компонентов и ConfigProvider. Inline-композиция сохраняет исходную ширину;
+  текст внутри controls, snippets и пользовательские пробелы не меняются.
+
 - Button не добавляет text nodes перед native button/anchor при default/local prefix.
   Граница разметки сохраняет ширину inline actions и панелей Tour.
 

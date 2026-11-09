@@ -55,10 +55,7 @@
   let hasFlex = $derived(Boolean(flex) || flex === 0);
 </script>
 
-{#if prefixCss}
-  <ThemeScopeStyle css={prefixCss} scope={`grid-col-prefix:${prefixScope}`} />
-{/if}
-<div {...rest} {...responsive.attributes} bind:this={nativeElement} dir={config.direction} class={[
+{#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`grid-col-prefix:${prefixScope}`} />{/if}<div {...rest} {...responsive.attributes} bind:this={nativeElement} dir={config.direction} class={[
     `${componentPrefix} ant-grid-css-var`,
     componentTheme.className,
     styleScope && ['ant-grid-custom-media', styleScope],

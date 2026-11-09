@@ -500,8 +500,7 @@
 <svelte:document onreset={handleReset} />
 <svelte:window onpointerup={handlePointerup} onpointercancel={handlePointercancel} />
 
-{#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`slider-prefix:${prefix}`} />{/if}
-<div bind:this={nativeElement} class={[
+{#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`slider-prefix:${prefix}`} />{/if}<div bind:this={nativeElement} class={[
     prefix,
     (componentTheme.className || hasDecorations || customPrefix) && 'ant-slider-css-var',
     componentTheme.className,

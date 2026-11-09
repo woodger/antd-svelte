@@ -51,8 +51,7 @@
   $effect(() => breakpoint.connect(window, mediaQueries));
 </script>
 
-{#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`grid-row-prefix:${componentPrefix}`} />{/if}
-<div {...rest} bind:this={nativeElement} dir={config.direction}
+{#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`grid-row-prefix:${componentPrefix}`} />{/if}<div {...rest} bind:this={nativeElement} dir={config.direction}
   data-ant-grid-row-prefix={prefixCss ? componentPrefix : undefined}
   class={[
       `${componentPrefix} ant-grid-css-var`,

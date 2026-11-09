@@ -198,7 +198,7 @@
 {#snippet defaultIcon()}<FloatButtonIcon name="file-text" />{/snippet}
 {#snippet defaultCloseIcon()}<FloatButtonIcon name="close" />{/snippet}
 {#snippet content()}{#if items}{#each items as item (item.key)}{@render item.children()}{/each}{:else}{@render children?.()}{/if}{/snippet}
-<div bind:this={nativeElement} role="group" dir={config.direction}
+{#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`float-button-prefix:${prefixCls}:${rootPrefixCls}`} />{/if}<div bind:this={nativeElement} role="group" dir={config.direction}
   data-ant-float-group
   data-ant-float-prefix={prefixCss ? prefixCls : undefined}
   data-ant-float-global={prefixCss ? rootPrefixCls : undefined}
@@ -267,6 +267,3 @@
     </FloatButtonSlot>
   {/if}
 </div>
-{#if prefixCss}
-  <ThemeScopeStyle css={prefixCss} scope={`float-button-prefix:${prefixCls}:${rootPrefixCls}`} />
-{/if}

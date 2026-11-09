@@ -84,9 +84,7 @@
   @media (prefers-reduced-motion: reduce) { .ant-tag-css-var { transition: none; } }
 </style>
 
-{#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`tag-prefix:${prefix}`} />{/if}
-
-<button
+{#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`tag-prefix:${prefix}`} />{/if}<button
   {...attributes}
   bind:this={nativeElement}
   {id}

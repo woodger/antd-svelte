@@ -566,12 +566,9 @@
 
 {#if designTokens.enabled && theme}
   <ThemeScopeStyle css={designTokens.state.scopeCSS} scope={designTokens.state.key} />
-{/if}
-{#if gridMediaCss && gridMediaScope}
+{/if}{#if gridMediaCss && gridMediaScope}
   <ThemeScopeStyle css={gridMediaCss} scope={gridMediaScope} />
-{/if}
-
-<div
+{/if}<div
   bind:this={element}
   class={[
     'ant-svelte-theme',

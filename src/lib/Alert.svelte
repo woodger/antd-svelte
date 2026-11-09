@@ -153,8 +153,7 @@
 </style>
 
 {#if phase !== 'closed'}
-  {#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`alert-prefix:${prefix}`} />{/if}
-  <div {...attributes} bind:this={root} {id} {role} data-ant-alert
+  {#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`alert-prefix:${prefix}`} />{/if}<div {...attributes} bind:this={root} {id} {role} data-ant-alert
     data-ant-alert-prefix={prefixCss ? prefix : undefined} dir={config.direction}
     aria-label={ariaLabel} aria-labelledby={ariaLabelledby} aria-describedby={ariaDescribedby}
     aria-live={ariaLive} aria-atomic={ariaAtomic}

@@ -122,10 +122,7 @@
 {#snippet value(node: CardContent | undefined)}
   {#if typeof node === 'function'}{@render node()}{:else if node !== true && node !== false}{node ?? ''}{/if}
 {/snippet}
-{#if prefixCss}
-  <ThemeScopeStyle css={prefixCss} scope={`card-prefix:${prefixCls}:${rootPrefixCls}`} />
-{/if}
-<div {...rest} bind:this={nativeElement} dir={config.direction}
+{#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`card-prefix:${prefixCls}:${rootPrefixCls}`} />{/if}<div {...rest} bind:this={nativeElement} dir={config.direction}
   data-ant-card-root data-ant-card-loading={loading || undefined}
   data-ant-card-prefix={prefixCss ? prefixCls : undefined}
   data-ant-card-global={prefixCss ? rootPrefixCls : undefined}

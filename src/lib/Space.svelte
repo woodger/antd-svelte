@@ -130,8 +130,7 @@
   {#if typeof node === 'function'}{@render node()}{:else if node !== true && node !== false}{node ?? ''}{/if}
 {/snippet}
 {#if entries.length}
-  {#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`space-prefix:${componentPrefix}:${rootPrefix}`} />{/if}
-  <div {...rest} bind:this={nativeElement} dir={config.direction} class={[
+  {#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`space-prefix:${componentPrefix}:${rootPrefix}`} />{/if}<div {...rest} bind:this={nativeElement} dir={config.direction} class={[
       `${componentPrefix} ant-space-css-var`,
       componentTheme.className,
       config.space?.class,

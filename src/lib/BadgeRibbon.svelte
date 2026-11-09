@@ -88,8 +88,7 @@
   .ant-ribbon-css-var::before, .ant-ribbon-css-var::after, .ant-ribbon-content-css-var::before, .ant-ribbon-content-css-var::after, .ant-ribbon-corner-css-var::before, .ant-ribbon-corner-css-var::after { box-sizing: border-box; }
 </style>
 
-{#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`ribbon-global-prefix:${config.getPrefixCls()}`} />{/if}
-<div bind:this={nativeElement} class={[
+{#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`ribbon-global-prefix:${config.getPrefixCls()}`} />{/if}<div bind:this={nativeElement} class={[
     `${prefix}-wrapper`,
     'ant-ribbon-wrapper-css-var',
     rootClassName,

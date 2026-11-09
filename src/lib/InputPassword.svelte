@@ -174,9 +174,6 @@
   svg { width: 1em; height: 1em; }
 </style>
 
-{#if prefixCss}
-  <ThemeScopeStyle css={prefixCss} scope={`input-password-prefix:${inputPrefix}:${componentPrefix}`} />
-{/if}
 {#snippet passwordSuffix()}
   {#if visibilityToggle}
     <!-- svelte-ignore a11y_mouse_events_have_key_events (Как в upstream, клавиатура переключает по Enter/Space, а не при фокусе.) -->
@@ -210,7 +207,7 @@
   {#if typeof suffix === 'function'}{@render suffix()}{:else if suffix !== true && suffix !== false}{suffix ?? ''}{/if}
 {/snippet}
 
-<Input
+{#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`input-password-prefix:${inputPrefix}:${componentPrefix}`} />{/if}<Input
   {...attributes}
   bind:value
   bind:inputElement

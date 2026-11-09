@@ -125,10 +125,7 @@
   @media (prefers-reduced-motion: reduce) { .ant-avatar-css-var, [data-ant-avatar-string] { animation: none; transition: none; } }
 </style>
 
-{#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`avatar-prefix:${prefix}`} />{/if}
-
-<!-- svelte-ignore a11y_click_events_have_key_events, a11y_no_static_element_interactions, a11y_no_noninteractive_element_interactions (Avatar.onClick сохраняет span; keyboard behavior принадлежит владельцу.) -->
-<span {...attributes} bind:this={nativeElement} {id} {title}
+{#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`avatar-prefix:${prefix}`} />{/if}<!-- svelte-ignore a11y_click_events_have_key_events, a11y_no_static_element_interactions, a11y_no_noninteractive_element_interactions (Avatar.onClick сохраняет span; keyboard behavior принадлежит владельцу.) --><span {...attributes} bind:this={nativeElement} {id} {title}
   role={role ?? (!hidden && named ? imageSnippet ? 'group' : 'img' : undefined)}
   aria-label={ariaLabel ?? (ariaLabelledby ? undefined : alt || undefined)}
   aria-labelledby={ariaLabelledby} aria-describedby={ariaDescribedby}

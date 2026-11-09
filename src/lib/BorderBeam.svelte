@@ -75,5 +75,4 @@
   });
 </script>
 
-{#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`border-beam-prefix:${prefix}`} />{/if}
-{#if typeof children === 'function'}{@render children()}{:else if typeof children !== 'boolean'}{children ?? ''}{/if}
+{#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`border-beam-prefix:${prefix}`} />{/if}{#if typeof children === 'function'}{@render children()}{:else if typeof children !== 'boolean'}{children ?? ''}{/if}

@@ -27,8 +27,7 @@
   onDestroy(() => model.destroy());
 </script>
 
-{#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`layout-prefix:${componentPrefix}`} />{/if}
-<div {...rest} bind:this={nativeElement} dir={config.direction} data-ant-layout-root=""
+{#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`layout-prefix:${componentPrefix}`} />{/if}<div {...rest} bind:this={nativeElement} dir={config.direction} data-ant-layout-root=""
   data-ant-layout-prefix={prefixCss ? 'layout' : undefined}
   data-ant-has-sider={hasSider === false ? 'false' : undefined}
   class={[

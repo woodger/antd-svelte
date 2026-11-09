@@ -300,10 +300,7 @@
   {/if}
 {/snippet}
 
-{#if prefixCss}
-  <ThemeScopeStyle css={prefixCss} scope={`input-search-prefix:${componentPrefix}:${rootPrefix}`} />
-{/if}
-<SpaceCompact
+{#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`input-search-prefix:${componentPrefix}:${rootPrefix}`} />{/if}<SpaceCompact
   {...rootData}
   data-ant-input-search-root
   data-ant-input-search-prefix={prefixCss ? componentPrefix : undefined}

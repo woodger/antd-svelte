@@ -75,9 +75,7 @@
   }
 </script>
 
-{#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`tag-prefix:${prefix}`} />{/if}
-
-<div
+{#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`tag-prefix:${prefix}`} />{/if}<div
   {...attributes}
   bind:this={nativeElement}
   id={props.id}

@@ -452,12 +452,8 @@
     onStep={() => changeStep(direction === 'up' ? 1 : -1, 'handler')} />
 {/snippet}
 
-{#if prefixCss}
-  <ThemeScopeStyle css={prefixCss} scope={`input-number-prefix:${prefixCls}`} />
-{/if}
 <svelte:document onreset={handleReset} />
-<!-- svelte-ignore a11y_no_static_element_interactions, a11y_click_events_have_key_events, a11y_mouse_events_have_key_events (Mouse callbacks принадлежат root; клавиатурой и фокусом управляет native input.) -->
-<div bind:this={nativeElement} class={[
+{#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`input-number-prefix:${prefixCls}`} />{/if}<!-- svelte-ignore a11y_no_static_element_interactions, a11y_click_events_have_key_events, a11y_mouse_events_have_key_events (Mouse callbacks принадлежат root; клавиатурой и фокусом управляет native input.) --><div bind:this={nativeElement} class={[
   prefixCls, 'ant-input-number-css-var', 'input-number-root', `${prefixCls}-${variant}`,
   `${prefixCls}-mode-${mode}`, disabled && `${prefixCls}-disabled`, readonly && `${prefixCls}-readonly`,
   focused && !disabled && `${prefixCls}-focused`, focused && `${prefixCls}-mode-${mode}-focused`,

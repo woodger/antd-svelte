@@ -140,8 +140,7 @@
   @media (prefers-reduced-motion: reduce) { [data-ant-layout-sider], button, button::after { transition: none; } }
 </style>
 
-{#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`layout-sider-prefix:${componentPrefix}`} />{/if}
-<aside {...rest} bind:this={nativeElement} dir={config.direction} data-ant-layout-sider=""
+{#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`layout-sider-prefix:${componentPrefix}`} />{/if}<aside {...rest} bind:this={nativeElement} dir={config.direction} data-ant-layout-sider=""
   data-ant-layout-prefix={prefixCss ? 'sider' : undefined}
   data-ant-layout-compact={config.theme.compact ? '' : undefined}
   class={[

@@ -27,10 +27,7 @@
   const componentTheme = useComponentTheme('Layout');
 </script>
 
-{#if prefixCss}
-  <ThemeScopeStyle css={prefixCss} scope={`layout-${part}-prefix:${componentPrefix}`} />
-{/if}
-<svelte:element this={tag} {...rest} bind:this={nativeElement} dir={config.direction}
+{#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`layout-${part}-prefix:${componentPrefix}`} />{/if}<svelte:element this={tag} {...rest} bind:this={nativeElement} dir={config.direction}
   data-ant-layout-part={part}
   data-ant-layout-prefix={prefixCss ? part : undefined}
   data-ant-layout-standalone={!layout ? '' : undefined}

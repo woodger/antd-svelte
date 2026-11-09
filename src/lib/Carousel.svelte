@@ -90,10 +90,7 @@
   }
 </style>
 
-{#if prefixCss}
-  <ThemeScopeStyle css={prefixCss} scope={`carousel-prefix:${prefixCls}:${rootPrefixCls}`} />
-{/if}
-<div bind:this={nativeElement} id={props.id}
+{#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`carousel-prefix:${prefixCls}:${rootPrefixCls}`} />{/if}<div bind:this={nativeElement} id={props.id}
   data-ant-carousel-prefix={prefixCss ? prefixCls : undefined}
   data-ant-carousel-global={prefixCss ? rootPrefixCls : undefined}
   class={[prefixCls, 'ant-carousel-css-var', componentTheme.className,

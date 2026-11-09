@@ -175,7 +175,6 @@
   [data-ant-anchor-root] :global([data-ant-anchor-link-title]:focus) { text-decoration:var(--ant-link-focus-decoration, none); }
 </style>
 
-{#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`anchor-prefix:${componentPrefix}`} />{/if}
 {#snippet content()}
   <div {...rest} bind:this={host} dir={config.direction}
     data-ant-anchor-root
@@ -210,4 +209,4 @@
     </div>
   </div>
 {/snippet}
-{#if affix}<Affix offsetTop={offsetTop} target={container} {...typeof affix === 'object' ? affix : {}}>{@render content()}</Affix>{:else}{@render content()}{/if}
+{#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`anchor-prefix:${componentPrefix}`} />{/if}{#if affix}<Affix offsetTop={offsetTop} target={container} {...typeof affix === 'object' ? affix : {}}>{@render content()}</Affix>{:else}{@render content()}{/if}

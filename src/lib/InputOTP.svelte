@@ -189,11 +189,7 @@
   }
 </script>
 
-{#if prefixCss}
-  <ThemeScopeStyle css={prefixCss} scope={`input-otp-prefix:${componentPrefix}`} />
-{/if}
-<!-- tabindex=-1 даёт FormItem возможность фокусировать группу; явный native tabindex сохраняется. -->
-<div
+{#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`input-otp-prefix:${componentPrefix}`} />{/if}<!-- tabindex=-1 даёт FormItem возможность фокусировать группу; явный native tabindex сохраняется. --><div
   {...(field ? { tabindex: -1 } : {})}
   {...attributes}
   bind:this={nativeElement}

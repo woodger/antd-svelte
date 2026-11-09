@@ -269,8 +269,7 @@
 
 <!-- Явные a/span не перемещают SSR-корень при hydration и сохраняют фокус. -->
 {#if !closed}
-  {#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`tag-prefix:${prefix}`} />{/if}
-  {#if href}
+  {#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`tag-prefix:${prefix}`} />{/if}{#if href}
     <a
       {...rootAttributes}
       bind:this={nativeElement}

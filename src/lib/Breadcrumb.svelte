@@ -64,8 +64,7 @@
 {#snippet value(node: BreadcrumbContent | undefined)}
   {#if typeof node === 'function'}{@render node()}{:else if node !== true && node !== false}{node ?? ''}{/if}
 {/snippet}
-{#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`breadcrumb-prefix:${componentPrefix}`} />{/if}
-<nav {...rest} bind:this={nativeElement} dir={config.direction} class={[
+{#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`breadcrumb-prefix:${componentPrefix}`} />{/if}<nav {...rest} bind:this={nativeElement} dir={config.direction} class={[
     `${componentPrefix} ant-breadcrumb-css-var`,
     componentTheme.className,
     componentTheme.className && 'ant-breadcrumb-source-theme',

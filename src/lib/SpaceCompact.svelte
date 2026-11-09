@@ -68,8 +68,7 @@
 </script>
 
 {#if entries.length}
-  {#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`space-compact-prefix:${componentPrefix}`} />{/if}
-  <div {...rest} bind:this={nativeElement} dir={config.direction} class={[
+  {#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`space-compact-prefix:${componentPrefix}`} />{/if}<div {...rest} bind:this={nativeElement} dir={config.direction} class={[
       `${componentPrefix} ant-space-compact-css-var`,
       actualOrientation === 'vertical' && `${componentPrefix}-vertical`,
       block && `${componentPrefix}-block`,

@@ -166,11 +166,7 @@
   }
 </script>
 
-{#if prefixCss}
-  <ThemeScopeStyle css={prefixCss} scope={`checkbox-prefix:${prefix}:${rootPrefix}`} />
-{/if}
-<!-- svelte-ignore a11y_click_events_have_key_events, a11y_no_noninteractive_element_interactions (Label блокирует повторный click; клавиатурой и фокусом управляет native input.) -->
-<label class={[
+{#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`checkbox-prefix:${prefix}:${rootPrefix}`} />{/if}<!-- svelte-ignore a11y_click_events_have_key_events, a11y_no_noninteractive_element_interactions (Label блокирует повторный click; клавиатурой и фокусом управляет native input.) --><label class={[
   `${prefix}-wrapper ant-checkbox-css-var`,
   componentTheme.className,
   resolvedChecked && `${prefix}-wrapper-checked`,

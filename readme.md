@@ -10243,6 +10243,12 @@ Space/SpaceCompact/SpaceAddon, Breadcrumb, Row/Col, Typography, Carousel, Descri
 Card с Grid/Meta, Button, FloatButton/Group/BackTop, Radio/RadioButton/RadioGroup,
 Checkbox/CheckboxGroup, Switch, Input, TextArea, InputPassword, InputSearch, InputOTP,
 InputNumber, Form/FormItem/FormList/FormErrorList, Rate, Listy и Tour.
+Подключаемые prefix/theme styles остаются в head и не добавляют текст вокруг
+корней компонентов, включая обычные и grid media styles ConfigProvider.
+Пользовательские пробелы и текст внутри controls/snippets сохраняются.
+Это защищают [SSR-проверки границ](./tests/package/prefix-text-boundaries.ssr.test.ts)
+и [браузерный сценарий](./tests/browser/prefix-text-boundaries.spec.ts),
+`?fixture=prefix-text-boundaries`.
 Остальные семейства подключаются отдельно. Например,
 ConfigProvider prefixCls="suite" создаёт suite-app, suite-layout,
 suite-layout-sider и suite-layout-header без изменения имён Svelte-компонентов.

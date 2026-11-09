@@ -90,8 +90,7 @@
   }
 </script>
 
-{#if prefixCss}<ThemeScopeStyle css={prefixCss} scope="form-error-list-prefix" />{/if}
-{#if rendered}
+{#if prefixCss}<ThemeScopeStyle css={prefixCss} scope="form-error-list-prefix" />{/if}{#if rendered}
   <div
     id={fieldId ? `${fieldId}_help` : undefined}
     class={[

@@ -169,8 +169,7 @@
 {/snippet}
 
 {#if value}
-  {#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`qrcode-prefix:${componentPrefix}`} />{/if}
-  <div
+  {#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`qrcode-prefix:${componentPrefix}`} />{/if}<div
     bind:this={nativeElement}
     {...splitAttributes.root}
     onclick={onclick ?? onClick}

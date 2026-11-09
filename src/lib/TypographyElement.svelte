@@ -41,8 +41,7 @@
 </script>
 
 {#snippet content()}{@render children?.()}{/snippet}
-{#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`typography-prefix:${prefixCls}`} />{/if}
-{#if controlClamp}
+{#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`typography-prefix:${prefixCls}`} />{/if}{#if controlClamp}
   <svelte:element this={component} {...attributes} bind:this={nativeElement}
     data-ant-typography-prefix={prefixCss ? prefixCls : undefined}
     class={[prefixCls, componentTheme.className,

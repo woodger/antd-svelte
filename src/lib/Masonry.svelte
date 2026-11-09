@@ -184,8 +184,7 @@
   });
 </script>
 
-{#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`masonry-prefix:${componentPrefix}`} />{/if}
-<div
+{#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`masonry-prefix:${componentPrefix}`} />{/if}<div
   bind:this={nativeElement}
   class={[
     componentPrefix,

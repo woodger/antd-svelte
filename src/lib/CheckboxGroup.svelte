@@ -168,11 +168,7 @@
 </style>
 
 <svelte:document onreset={handleReset} />
-{#if prefixCss}
-  <ThemeScopeStyle css={prefixCss} scope={`checkbox-prefix:${prefixCls}:${rootPrefix}`} />
-{/if}
-
-<fieldset
+{#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`checkbox-prefix:${prefixCls}:${rootPrefix}`} />{/if}<fieldset
   {...attributes}
   bind:this={nativeElement}
   id={controlId}

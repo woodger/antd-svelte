@@ -98,10 +98,7 @@
   </span>
 {/snippet}
 
-{#if prefixCss}
-  <ThemeScopeStyle css={prefixCss} scope={`statistic-prefix:${componentPrefix}`} />
-{/if}
-<div {...rest} bind:this={nativeElement} dir={config.direction}
+{#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`statistic-prefix:${componentPrefix}`} />{/if}<div {...rest} bind:this={nativeElement} dir={config.direction}
   data-ant-statistic-prefix={prefixCss ? componentPrefix : undefined}
   class={[
       componentPrefix, 'ant-statistic-css-var',

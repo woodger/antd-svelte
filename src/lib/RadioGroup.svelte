@@ -167,11 +167,7 @@
 </style>
 
 <svelte:document onreset={handleReset} />
-{#if prefixCss}
-  <ThemeScopeStyle css={prefixCss} scope={`radio-prefix:${prefixCls}:${rootPrefix}`} />
-{/if}
-
-<fieldset
+{#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`radio-prefix:${prefixCls}:${rootPrefix}`} />{/if}<fieldset
   {...attributes}
   bind:this={nativeElement}
   id={controlId}

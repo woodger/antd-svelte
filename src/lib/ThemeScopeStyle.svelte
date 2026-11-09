@@ -1,4 +1,5 @@
 <script lang="ts">
+  // Соседние if/markup boundaries вызывающей стороны не разделяют whitespace: head не создаёт DOM root.
   let { css, scope }: { css: string; scope: string; } = $props();
 </script>
 

@@ -101,8 +101,7 @@
   });
 </script>
 
-{#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`splitter-prefix:${componentPrefix}:${rootPrefix}`} />{/if}
-<div
+{#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`splitter-prefix:${componentPrefix}:${rootPrefix}`} />{/if}<div
   bind:this={nativeElement}
   data-ant-splitter-native={!componentTheme.className || undefined}
   data-ant-splitter-prefix={prefixCss ? componentPrefix : undefined}

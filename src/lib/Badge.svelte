@@ -197,9 +197,7 @@
   @media (prefers-reduced-motion: reduce) { .ant-badge-css-var [data-ant-badge-visual], .ant-badge-css-var [data-ant-badge-visual]::after { transition: none; animation: none; } }
 </style>
 
-{#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`badge-prefix:${prefix}`} />{/if}
-
-<span {...rest} data-ant-badge-native-status={prefix === 'ant-badge' && badgeState.statusStandalone ? '' : undefined} bind:this={nativeElement} id={rootId} role={role !== undefined ? role : ariaLabel || ariaLabelledby ? 'group' : undefined} aria-label={ariaLabel} aria-labelledby={ariaLabelledby} aria-describedby={ariaDescribedby} dir={elementDirection !== undefined ? elementDirection : config.direction} title={nativeTitle} onclick={onclick ?? onClick} class={[
+{#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`badge-prefix:${prefix}`} />{/if}<span {...rest} data-ant-badge-native-status={prefix === 'ant-badge' && badgeState.statusStandalone ? '' : undefined} bind:this={nativeElement} id={rootId} role={role !== undefined ? role : ariaLabel || ariaLabelledby ? 'group' : undefined} aria-label={ariaLabel} aria-labelledby={ariaLabelledby} aria-describedby={ariaDescribedby} dir={elementDirection !== undefined ? elementDirection : config.direction} title={nativeTitle} onclick={onclick ?? onClick} class={[
     prefix,
     'ant-badge-css-var',
     componentTheme.className,

@@ -152,8 +152,5 @@
       )}
     classNames={combinedClasses} styles={combinedStyles} {style} bind:nativeElement />
 {/snippet}
-{#if tooltipProps}<Tooltip {...tooltipProps} style={[group
+{#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`float-button-prefix:${prefixCls}:${rootPrefixCls}`} />{/if}{#if tooltipProps}<Tooltip {...tooltipProps} style={[group
     && 'display:contents', tooltipProps.style].filter(Boolean).join(';')}>{@render node()}</Tooltip>{:else}{@render node()}{/if}
-{#if prefixCss}
-  <ThemeScopeStyle css={prefixCss} scope={`float-button-prefix:${prefixCls}:${rootPrefixCls}`} />
-{/if}

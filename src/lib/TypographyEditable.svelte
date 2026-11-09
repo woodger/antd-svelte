@@ -139,8 +139,7 @@
   }
 </script>
 
-{#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`typography-prefix:${prefixCls}`} />{/if}
-<div data-ant-typography-prefix={prefixCss ? prefixCls : undefined}
+{#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`typography-prefix:${prefixCls}`} />{/if}<div data-ant-typography-prefix={prefixCss ? prefixCls : undefined}
   class={[prefixCls, componentTheme.className,
   `${prefixCls}-edit-content`, direction === 'rtl' && `${prefixCls}-rtl`,
   `${prefixCls}-${component}`, className, classNames.root, 'ant-typography-css-var',

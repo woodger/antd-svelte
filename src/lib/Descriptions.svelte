@@ -67,10 +67,7 @@
 {#snippet value(node: DescriptionsContent | undefined)}
   {#if typeof node === 'function'}{@render node()}{:else if node !== true && node !== false}{node ?? ''}{/if}
 {/snippet}
-{#if prefixCss}
-  <ThemeScopeStyle css={prefixCss} scope={`descriptions-prefix:${prefixCls}:${rootPrefixCls}`} />
-{/if}
-<div {...rest} bind:this={nativeElement} dir={config.direction}
+{#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`descriptions-prefix:${prefixCls}:${rootPrefixCls}`} />{/if}<div {...rest} bind:this={nativeElement} dir={config.direction}
   data-ant-descriptions-prefix={prefixCss ? prefixCls : undefined}
   data-ant-descriptions-global={prefixCss ? rootPrefixCls : undefined}
   class={[

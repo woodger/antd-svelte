@@ -172,12 +172,7 @@
 </style>
 
 <svelte:document onreset={handleReset} />
-{#if prefixCss}
-  <ThemeScopeStyle css={prefixCss} scope={`switch-prefix:${prefix}`} />
-{/if}
-
-<!-- svelte-ignore a11y_autofocus (Сохраняются публичный autoFocus и нативный autofocus.) -->
-<button
+{#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`switch-prefix:${prefix}`} />{/if}<!-- svelte-ignore a11y_autofocus (Сохраняются публичный autoFocus и нативный autofocus.) --><button
   {...attributes}
   bind:this={nativeElement}
   data-ant-switch-root

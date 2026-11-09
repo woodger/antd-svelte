@@ -219,8 +219,7 @@
   </label>
 {/snippet}
 
-{#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`segmented-prefix:${prefix}`} />{/if}
-<div {...rest} bind:this={nativeElement} data-ant-segmented
+{#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`segmented-prefix:${prefix}`} />{/if}<div {...rest} bind:this={nativeElement} data-ant-segmented
   data-ant-segmented-prefix={prefixCss ? prefix : undefined} role="radiogroup" aria-label={rest['aria-label']
     ?? (rest['aria-labelledby']
       ? undefined

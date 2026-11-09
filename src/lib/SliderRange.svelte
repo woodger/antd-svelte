@@ -479,9 +479,7 @@
 </style>
 
 <svelte:document onreset={handleReset} />
-{#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`slider-prefix:${prefixCls}`} />{/if}
-<!-- svelte-ignore a11y_no_static_element_interactions (Корень маршрутизирует исходный click/drag по дорожке.) -->
-<div bind:this={nativeElement} class={[prefixCls, 'ant-slider-css-var', componentTheme.className, 'range-root',
+{#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`slider-prefix:${prefixCls}`} />{/if}<!-- svelte-ignore a11y_no_static_element_interactions (Корень маршрутизирует исходный click/drag по дорожке.) --><div bind:this={nativeElement} class={[prefixCls, 'ant-slider-css-var', componentTheme.className, 'range-root',
   `${prefixCls}-${orientation}`, (internal?.direction ?? config.direction) === 'rtl' && `${prefixCls}-rtl`,
   disabledState[0] && `${prefixCls}-disabled`, marks.length && `${prefixCls}-with-marks`,
   locked && `${prefixCls}-lock`, props.class, config.slider?.class, props.rootClassName, classNames.root]}

@@ -164,8 +164,7 @@
   @media (prefers-reduced-motion: reduce) { [data-ant-steps-root] :global(*) { transition: none; animation: none; } }
 </style>
 
-{#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`steps-prefix:${componentPrefix}`} />{/if}
-<ol {...rest} bind:this={nativeElement} data-ant-steps-root=""
+{#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`steps-prefix:${componentPrefix}`} />{/if}<ol {...rest} bind:this={nativeElement} data-ant-steps-root=""
   data-ant-steps-prefix={prefixCss ? componentPrefix : undefined}
   data-ant-steps-orientation={layout.vertical ? 'vertical' : 'horizontal'}
   id={composition?.timeline ? id : rootId} role="list" aria-label={ariaLabel

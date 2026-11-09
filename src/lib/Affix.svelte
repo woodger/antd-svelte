@@ -55,8 +55,7 @@
   });
 </script>
 
-{#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`affix-prefix:${prefix}`} />{/if}
-<div {...rest} bind:this={nativeElement} class={[className, config.affix?.class]} style={wrapperStyle}>
+{#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`affix-prefix:${prefix}`} />{/if}<div {...rest} bind:this={nativeElement} class={[className, config.affix?.class]} style={wrapperStyle}>
   {#if position}<div aria-hidden="true" style={`width:${position.width}px;height:${position.height}px`}></div>{/if}
   <div bind:this={content} data-ant-affix-prefix={position && prefixCss ? prefix : undefined}
     class={position
