@@ -4096,6 +4096,15 @@ handle завершается true после анимации и фактиче
 чтобы не продолжать сценарий после удаления holder.
 
 Holder наследует тему, compact и направление ближайшего ConfigProvider.
+`MessageHolder.prefixCls` меняет namespace списка и всех сообщений; пустая строка
+наследует ConfigProvider.prefixCls. В App тот же параметр задаётся через message.
+Canonical tokens и native popover/viewport/motion не зависят от публичных классов;
+private Notification metrics используют общий namespace отдельно от local prefix.
+[Raw замеры](./tests/browser/fixtures/ant-design-message-prefix-reference.json)
+фиксируют исходную потерю status-классов у уже показанной иконки при смене prefix.
+Отдельный public same-key refresh counterpart возвращает цвет. Native обновляет
+классы без повторного открытия, сохраняя очередь, handles, deadlines и внешний фокус.
+
 `theme.components.Message` настраивает zIndexPopup, contentBg и contentPadding,
 aliases и component algorithms. Отступ по умолчанию вычисляется без округления.
 Style сообщения и Holder сохраняют приоритет; локальные component variables

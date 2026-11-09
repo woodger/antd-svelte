@@ -7,7 +7,9 @@
   import { animateMessageNotice } from './message.dom';
   import type { MessageInstance } from './message.types';
 
-  let { notice, message }: { notice: MessageNotice; message: MessageInstance; } = $props();
+  let { notice, message, prefixCls }: {
+    notice: MessageNotice; message: MessageInstance; prefixCls: string;
+  } = $props();
   const id = untrack(() => notice.id);
   const runtime = untrack(() => message[messageHolderKey]);
   const designTheme = useDesignTokenContext();
@@ -67,30 +69,30 @@
 </script>
 
 <style>
-  :global(.ant-message-top) > :global(.ant-message-list-content) > .ant-message-notice { position: relative; top: auto; left: auto; transform: none; max-width: 100%; transition: none; }
-  .ant-message-notice-title { min-width: 0; overflow-wrap: anywhere; }
-  .ant-message-notice-wrapper { min-width: 0; }
-  .ant-message-notice-icon { display: inline-flex; }
-  .message-source-theme .ant-message-notice-icon { display: block; }
-  @media (prefers-reduced-motion: reduce) { .ant-message-notice-icon :global(.loading) { animation: none; } }
+  :global([data-ant-message-top]) > :global([data-ant-message-content]) > [data-ant-message-notice] { position: relative; top: auto; left: auto; transform: none; max-width: 100%; transition: none; }
+  [data-ant-message-title] { min-width: 0; overflow-wrap: anywhere; }
+  [data-ant-message-wrapper] { min-width: 0; }
+  [data-ant-message-icon] { display: inline-flex; }
+  .message-source-theme [data-ant-message-icon] { display: block; }
+  @media (prefers-reduced-motion: reduce) { [data-ant-message-icon] :global(.loading) { animation: none; } }
 </style>
 
 {#if present}
-  <div bind:this={node} {@attach mounted} role={notice.role} aria-atomic="true" aria-hidden={notice.closing || undefined} inert={notice.closing} class={[
-      'ant-message-notice',
-      `ant-message-notice-${notice.type}`,
+  <div data-ant-message-notice bind:this={node} {@attach mounted} role={notice.role} aria-atomic="true" aria-hidden={notice.closing || undefined} inert={notice.closing} class={[
+      `${prefixCls}-notice`,
+      `${prefixCls}-notice-${notice.type}`,
       designTheme.enabled && 'message-source-theme',
       notice.class
     ]} style={rootStyle} onpointerenter={(event) => {
       if (event.pointerType !== 'touch')
         runtime.hover(id, true);
     }} onpointerleave={() => runtime.hover(id, false)}>
-    <div class={['ant-message-notice-wrapper', `ant-message-${notice.type}`]}>
-      <span class={[
-          'ant-message-notice-icon',
-          `ant-message-notice-icon-${notice.type}`
+    <div data-ant-message-wrapper class={[`${prefixCls}-notice-wrapper`, `${prefixCls}-${notice.type}`]}>
+      <span data-ant-message-icon class={[
+          `${prefixCls}-notice-icon`,
+          `${prefixCls}-notice-icon-${notice.type}`
         ]} aria-hidden="true">{#if notice.icon}{@render notice.icon()}{:else}<Icon name={icons[notice.type]} />{/if}</span>
-      <div class="ant-message-notice-title">{#if typeof notice.content === 'function'}{@render notice.content()}{:else}{notice.content}{/if}</div>
+      <div data-ant-message-title class={`${prefixCls}-notice-title`}>{#if typeof notice.content === 'function'}{@render notice.content()}{:else}{notice.content}{/if}</div>
     </div>
   </div>
 {/if}

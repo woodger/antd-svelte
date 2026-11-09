@@ -3025,5 +3025,29 @@
     ],
     "keyframes": [],
     "header": "/* Ant Design 6.6.8 — MIT; vendor/LICENSE.ant-design.\n * Modal/Confirm prefix template; zoom/fade, pure and skeleton исключены.\n * SHA-256: 8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa\n */"
+  },
+  {
+    "id": "message-prefix",
+    "output": "src/lib/vendor/message-prefix.css.js",
+    "format": "module",
+    "expectedRules": 21,
+    "include": [
+      "^(?:\\.css-var-_R_0_)?\\.ant-message(?![\\w])"
+    ],
+    "exclude": [
+      "ant-message-(?:topLeft|topRight|bottom|fade|stack|notice-pure|list-content-decrease|notice-actions)"
+    ],
+    "replacements": [
+      {
+        "pattern": "\\.css-var-_R_0_\\.ant-message-css-var",
+        "replacement": ".ant-message-css-var"
+      },
+      {
+        "pattern": "\\.ant-message(?![-\\w])",
+        "replacement": ".ant-message:where(.ant-message-css-var)"
+      }
+    ],
+    "keyframes": [],
+    "header": "/* Ant Design 6.6.8 — MIT; vendor/LICENSE.ant-design.\n * Message prefix template: top/list/notices, без motion/stack/pure/actions.\n * SHA-256: 8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa\n */"
   }
 ]

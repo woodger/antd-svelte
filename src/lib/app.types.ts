@@ -5,6 +5,8 @@ import type { NotificationInstance, NotificationOptions } from './notification.t
 import type { ModalInstance } from './modal-confirm.types';
 
 export interface AppMessageConfig extends MessageOptions {
+  /** Локальный prefix MessageHolder; иначе наследуется ConfigProvider. */
+  prefixCls?: string;
   /** Вертикальный отступ поверхности MessageHolder; по умолчанию 8. */
   top?: number | string;
 }

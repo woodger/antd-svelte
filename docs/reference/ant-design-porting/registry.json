@@ -17089,7 +17089,7 @@
         {
           "name": "@rc-component/notification",
           "range": "~2.1.1",
-          "referenceVersion": null
+          "referenceVersion": "2.1.1"
         }
       ],
       "priority": "unassigned",
@@ -17110,7 +17110,23 @@
         "tests/browser/message-theme-metrics.ts",
         "tests/browser/message-theme.spec.ts",
         "tests/package/message-theme.ssr.test.ts",
-        "docs/reference/theme-context.md"
+        "docs/reference/theme-context.md",
+        "src/lib/message.types.ts",
+        "src/lib/App.svelte",
+        "src/lib/app.types.ts",
+        "src/lib/message-prefix.engine.ts",
+        "src/lib/message-prefix.engine.test.ts",
+        "src/lib/vendor/message-prefix.css.js",
+        "tools/ant-design-css-recipes.json",
+        "tests/browser/fixtures/MessagePrefixControl.svelte",
+        "tests/browser/fixtures/MessagePrefixScope.svelte",
+        "tests/browser/fixtures/MessagePrefixApp.svelte",
+        "tests/browser/fixtures/MessagePrefixFixtures.svelte",
+        "tests/browser/fixtures/MessagePrefixSSRFixtures.svelte",
+        "tests/browser/fixtures/ant-design-message-prefix-reference.json",
+        "tests/browser/message-prefix-metrics.ts",
+        "tests/browser/message-prefix.spec.ts",
+        "tests/package/message-prefix.ssr.test.ts"
       ],
       "features": [
         {
@@ -17155,6 +17171,46 @@
             "readme.md"
           ],
           "note": "В закреплённом UMD 6.6.8 (984592267de88fbf9cdaecc96a56629e721c709d) message.useMessage с content=\"unbroken\"×60 при viewport 1400×1200 даёт карточку 1352px, title 3835px и scrollWidth карточки 3871px. Исходный title использует break-word без native min-width:0/anywhere. Прежнее Svelte-поведение переноса сохранено; source CSS не копируются ради повторения этого переполнения. Raw source замеры сохранены отдельно для разбора, browser-проверка защищает вместимость текста в карточку."
+        },
+        {
+          "id": "component-prefix",
+          "title": "Local/shared prefixCls MessageHolder и App.message",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/MessageHolder.svelte",
+            "src/lib/MessageNotice.svelte",
+            "src/lib/message.types.ts",
+            "src/lib/App.svelte",
+            "src/lib/app.types.ts",
+            "src/lib/message-prefix.engine.ts",
+            "src/lib/message-prefix.engine.test.ts",
+            "src/lib/vendor/message-prefix.css.js",
+            "tools/ant-design-css-recipes.json",
+            "tests/browser/fixtures/MessagePrefixControl.svelte",
+            "tests/browser/fixtures/MessagePrefixScope.svelte",
+            "tests/browser/fixtures/MessagePrefixApp.svelte",
+            "tests/browser/fixtures/MessagePrefixFixtures.svelte",
+            "tests/browser/fixtures/MessagePrefixSSRFixtures.svelte",
+            "tests/browser/fixtures/ant-design-message-prefix-reference.json",
+            "tests/browser/message-prefix-metrics.ts",
+            "tests/browser/message-prefix.spec.ts",
+            "tests/package/message-prefix.ssr.test.ts"
+          ],
+          "note": "23 raw UMD конфигурации в normal/nested/reset scopes, включая пять statuses, multiline/custom icon, top/styles, component aliases/cssVar и App.message.prefixCls. Local nonempty prefix wins; empty/undefined наследуют ConfigProvider. 21 CSS rule побайтно совпадает с прежним vendor body; canonical tokens сохранены, private Notification metrics используют отдельный общий namespace. Три raw live transitions сохраняют notice/list/editor DOM и показывают Source stale status classes; отдельные public same-key refresh counterparts возвращают цвет без изменения raw evidence. Native меняет все классы согласованно без reopening, сохраняет очередь, handles, deadlines, passive roles, popover/viewport/motion, focus/selection и callbacks. Полный semantic/config/static/stack/container API и общий аудит семейства остаются отдельно. Делегированная Notification/list логика изучена в @rc-component/notification 2.1.1, без установки зависимости."
+        },
+        {
+          "id": "source-stale-prefix-status",
+          "title": "Status classes уже показанного сообщения при смене prefix",
+          "state": "partial",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/MessageNotice.svelte",
+            "tests/browser/fixtures/ant-design-message-prefix-reference.json",
+            "tests/browser/message-prefix.spec.ts",
+            "tests/package/message-prefix.ssr.test.ts"
+          ],
+          "note": "Для отдельного разбора: official UMD 6.6.8 message.useMessage сохраняет старые status classNames/config.className на уже открытом key, хотя delegated Notification меняет base prefix. После suite→next/ant иконка info наследует colorText вместо colorInfo. Raw transitions отделены от refreshedTransitions через публичный same-key open при duration=0; это style counterpart, а не доказательство совпадения timers. Native сохраняет coherent status classes без обновления очереди и без переноса дедлайна."
         }
       ]
     },
@@ -19110,7 +19166,23 @@
         "tests/package/config-prefix.ssr.test.ts",
         "tests/package/prefix-text-boundaries.ssr.test.ts",
         "tests/browser/fixtures/PrefixTextBoundariesFixtures.svelte",
-        "tests/browser/prefix-text-boundaries.spec.ts"
+        "tests/browser/prefix-text-boundaries.spec.ts",
+        "src/lib/MessageHolder.svelte",
+        "src/lib/MessageNotice.svelte",
+        "src/lib/message.types.ts",
+        "src/lib/message-prefix.engine.ts",
+        "src/lib/message-prefix.engine.test.ts",
+        "src/lib/vendor/message-prefix.css.js",
+        "tools/ant-design-css-recipes.json",
+        "tests/browser/fixtures/MessagePrefixControl.svelte",
+        "tests/browser/fixtures/MessagePrefixScope.svelte",
+        "tests/browser/fixtures/MessagePrefixApp.svelte",
+        "tests/browser/fixtures/MessagePrefixFixtures.svelte",
+        "tests/browser/fixtures/MessagePrefixSSRFixtures.svelte",
+        "tests/browser/fixtures/ant-design-message-prefix-reference.json",
+        "tests/browser/message-prefix-metrics.ts",
+        "tests/browser/message-prefix.spec.ts",
+        "tests/package/message-prefix.ssr.test.ts"
       ],
       "features": [
         {
@@ -19207,6 +19279,33 @@
             "readme.md"
           ],
           "note": "Framework differences: raw UMD после изменения notification config пересоздаёт notification API object, сохраняя message/modal; Native сохраняет все три factory API в течение жизни App. Это наблюдение, а не объявленная ошибка upstream. Native useApp без App даёт явную ошибку вместо исходных пустых objects. При удалении/смене root pending Modal handles завершаются false; Source destroy/unmount pending результат описан в Modal observation. Native top-layer/centering, locale.okText/cancelText и ConfigProvider DOM boundary сохранены."
+        },
+        {
+          "id": "message-prefix",
+          "title": "App.message.prefixCls и ConfigProvider fallback",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/MessageHolder.svelte",
+            "src/lib/MessageNotice.svelte",
+            "src/lib/message.types.ts",
+            "src/lib/App.svelte",
+            "src/lib/app.types.ts",
+            "src/lib/message-prefix.engine.ts",
+            "src/lib/message-prefix.engine.test.ts",
+            "src/lib/vendor/message-prefix.css.js",
+            "tools/ant-design-css-recipes.json",
+            "tests/browser/fixtures/MessagePrefixControl.svelte",
+            "tests/browser/fixtures/MessagePrefixScope.svelte",
+            "tests/browser/fixtures/MessagePrefixApp.svelte",
+            "tests/browser/fixtures/MessagePrefixFixtures.svelte",
+            "tests/browser/fixtures/MessagePrefixSSRFixtures.svelte",
+            "tests/browser/fixtures/ant-design-message-prefix-reference.json",
+            "tests/browser/message-prefix-metrics.ts",
+            "tests/browser/message-prefix.spec.ts",
+            "tests/package/message-prefix.ssr.test.ts"
+          ],
+          "note": "Message config передаёт prefixCls своему holder; record inheritance и локальный приоритет сохранены. Raw official App/useApp cases входят в общую prefix matrix Message. Канонические Modal/Notification namespaces, queue API и native App context не меняются."
         }
       ]
     },
@@ -20931,7 +21030,7 @@
             "tests/browser/drawer-prefix.spec.ts",
             "tests/package/drawer-prefix.ssr.test.ts"
           ],
-          "note": "Общий source resolver: local nonempty prefix wins, undefined/empty provider prefix наследует parent, suffix сохраняет точную роль. App/Layout/Sider/Header/Content/Footer, Statistic/Timer, QRCode, Timeline, Steps, Divider, Flex, Segmented, Avatar/Group, Badge/Ribbon, Tag/CheckableTag/Group, Empty, Skeleton/primitives, Spin, Progress, Result, Alert, Collapse, Affix, Tooltip/Popover/Popconfirm, Slider, BorderBeam, Masonry, Splitter, Anchor, Space/Compact/Addon, Breadcrumb и Row подключены; последующие расширения описаны ниже, остальные families подключаются отдельно. Source theme namespace fallback следует class prefix, inherited/local cssVar.prefix приоритетнее; explicit undefined сбрасывает inherited namespace к текущему provider. Theme/color defaults без настройки prefix не меняются. 13 raw UMD cases и 3 transitions, включая nested/reset/sibling scopes, live prefix/value identity и SSR. Display components отдельно сверяются с девятью raw UMD cases и тремя transitions; ambient typography/direction совпадают с Native provider DOM, текущее время Timer исключено из metrics. Divider/Flex/Segmented сверяются ещё с девятью raw UMD cases и тремя transitions; текущий FormData Segmented сохраняет исходное on. Status/display группа сверяется по 17 вариантам в девяти raw UMD cases и трём transitions. Прежние Native group spacing, Tag default и CheckableTag RTL classes, Skeleton wrappers учитываются явно; Badge number и Ribbon CSS отдельно используют общий prefix. Alert/Collapse/активный Affix сверяются ещё с девятью raw UMD cases и тремя transitions; SSR Affix не закрепляется, prefix update сохраняет редактор внутри раскрытой панели. Popup/single/range группа сверяется с 45 raw UMD cases и 15 transitions; delegated Tooltip/Popover namespaces независимы от local owner prefix, открытые DOM surfaces сохраняются. BorderBeam подключает также private variable namespace и двухмерный CSS scope; исходный shared-class cache defect записан отдельно и не перенесён. Masonry подключён с local priority, root/item/motion classes и отдельным global namespace inline width; source RTL-alias observation сохранён отдельно. Splitter подключён для всех частей и отдельного global namespace lazy preview; обновления сохраняют активный drag и существующее поведение hidden panels. Source shared-class CSS cache observation записан отдельно. Anchor подключён с inherited item prefixes, explicit per-item override и независимым Affix prefix. Source omission local owner→items записан raw/matched observations; Native сохраняет coherent classes/spacing/ink. Space family подключена с независимыми local prefixes, global Badge selector и Addon private variable namespace. Source shared-class Badge cache observation записан отдельно; существующие Compact adapters сохранены. Breadcrumb подключён для root/items/links/overlay/separators; исходный local separator namespace omission записан raw/matched measurements. Unbound Dropdown state сохраняется при parent spread updates, с прежними Native bind/callback/default fallback contracts. Row подключён отдельно от Col с прежним gutter context и responsive observer; Col/private namespace/Form prefix/media CSS подключены отдельными features. Button подключён для root/parts/states/Compact с независимым global namespace служебных variant variables; legacy theme bridge и Native disabled loading сохранены. FloatButton family подключена с owner inheritance, независимым Button namespace, global progress/WAAPI variables и отдельно записанными Source owner/cache observations. Radio/RadioButton/RadioGroup подключены с generated-option prefixes, независимым Badge namespace и сохранением Native fieldset/input/form/reset contracts; Source defaultChecked/no-op selector observations записаны отдельно. Checkbox/CheckboxGroup подключены с generated-option prefixes, независимым Row namespace и сохранёнными native mixed/form/reset contracts; Source Row cache observation записан raw/fresh. Switch подключён для root/parts/states с canonical variables и сохранением Native form/binding/reset/callback/focus contracts. Rate подключён для root/state/star/layers и character context с canonical token marker и независимым Tooltip namespace; raw UMD и live transitions сохраняют Native value/DOM/ref/focus contracts. Listy подключён для raw/virtual корней и parts с canonical tokens, shared link reset и сохранением Native measurement/cache/scroll/ref/focus contracts. Tour подключён для panel/mask/placeholder/primary/placement/arrow classes с отдельными global Button selectors/private Tooltip variables. Shared-class Source cache с потерей Button margins записан raw/fresh; native portal/layout/zIndex/keyboard и открытый step/editor сохраняются. Подключение prefix/theme/grid-media CSS не создаёт whitespace text nodes вокруг native roots и ConfigProvider; внутреннее содержимое, пользовательские пробелы и focus/value/ref contracts сохранены. Общая SSR boundary matrix и live browser scenario защищают inline composition. Mentions подключён для editor/mirror/variants/status и popup/menu, с отдельным global private cmp-mentions namespace и сохранением Native triggers/value/query/IME/ref/focus/FormData и plain empty fallback. Image/ImagePreviewGroup подключены с независимыми thumbnail/group namespaces, canonical variables и сохранением Native dialog/transforms/current/ref/focus; independent single previewPrefixCls подключён отдельно с raw observation недостающего Source CSS и сохранением Native viewer styling. Dropdown подключён с owner menu namespace, независимым Button prefix и сохранёнными canonical tokens, Native label/direction/portal/binding/focus/typeahead contracts; raw/public counterpart measurements отделяют существующие structural boundaries. Menu подключён с рекурсивными owner classes, независимым Typography namespace, canonical variables/link reset и scoped themes; Source dashed Divider owner omission записан raw/matched, Native DOM/ref/IDs/open/selection/focus сохранены. Pagination подключён с local classes, отдельным global actual-metric namespace и canonical tokens; Native nav/buttons/active colors/wireframe/Select/bindings/draft/focus сохранены, raw/public itemRender font counterparts разделены. Drawer подключён для panel/mask/placements/content с независимым Button namespace и canonical tokens; native WAA/backdrop selectors используют атрибуты, открытый dialog/draft/focus/IDs/scroll сохраняются. Modal/Confirm подключены с local parts, независимым Button namespace и canonical variables; native dialog/centering/IDs/draft/focus сохраняются, Source лишний local Confirm header записан raw/matched."
+          "note": "Общий source resolver: local nonempty prefix wins, undefined/empty provider prefix наследует parent, suffix сохраняет точную роль. App/Layout/Sider/Header/Content/Footer, Statistic/Timer, QRCode, Timeline, Steps, Divider, Flex, Segmented, Avatar/Group, Badge/Ribbon, Tag/CheckableTag/Group, Empty, Skeleton/primitives, Spin, Progress, Result, Alert, Collapse, Affix, Tooltip/Popover/Popconfirm, Slider, BorderBeam, Masonry, Splitter, Anchor, Space/Compact/Addon, Breadcrumb и Row подключены; последующие расширения описаны ниже, остальные families подключаются отдельно. Source theme namespace fallback следует class prefix, inherited/local cssVar.prefix приоритетнее; explicit undefined сбрасывает inherited namespace к текущему provider. Theme/color defaults без настройки prefix не меняются. 13 raw UMD cases и 3 transitions, включая nested/reset/sibling scopes, live prefix/value identity и SSR. Display components отдельно сверяются с девятью raw UMD cases и тремя transitions; ambient typography/direction совпадают с Native provider DOM, текущее время Timer исключено из metrics. Divider/Flex/Segmented сверяются ещё с девятью raw UMD cases и тремя transitions; текущий FormData Segmented сохраняет исходное on. Status/display группа сверяется по 17 вариантам в девяти raw UMD cases и трём transitions. Прежние Native group spacing, Tag default и CheckableTag RTL classes, Skeleton wrappers учитываются явно; Badge number и Ribbon CSS отдельно используют общий prefix. Alert/Collapse/активный Affix сверяются ещё с девятью raw UMD cases и тремя transitions; SSR Affix не закрепляется, prefix update сохраняет редактор внутри раскрытой панели. Popup/single/range группа сверяется с 45 raw UMD cases и 15 transitions; delegated Tooltip/Popover namespaces независимы от local owner prefix, открытые DOM surfaces сохраняются. BorderBeam подключает также private variable namespace и двухмерный CSS scope; исходный shared-class cache defect записан отдельно и не перенесён. Masonry подключён с local priority, root/item/motion classes и отдельным global namespace inline width; source RTL-alias observation сохранён отдельно. Splitter подключён для всех частей и отдельного global namespace lazy preview; обновления сохраняют активный drag и существующее поведение hidden panels. Source shared-class CSS cache observation записан отдельно. Anchor подключён с inherited item prefixes, explicit per-item override и независимым Affix prefix. Source omission local owner→items записан raw/matched observations; Native сохраняет coherent classes/spacing/ink. Space family подключена с независимыми local prefixes, global Badge selector и Addon private variable namespace. Source shared-class Badge cache observation записан отдельно; существующие Compact adapters сохранены. Breadcrumb подключён для root/items/links/overlay/separators; исходный local separator namespace omission записан raw/matched measurements. Unbound Dropdown state сохраняется при parent spread updates, с прежними Native bind/callback/default fallback contracts. Row подключён отдельно от Col с прежним gutter context и responsive observer; Col/private namespace/Form prefix/media CSS подключены отдельными features. Button подключён для root/parts/states/Compact с независимым global namespace служебных variant variables; legacy theme bridge и Native disabled loading сохранены. FloatButton family подключена с owner inheritance, независимым Button namespace, global progress/WAAPI variables и отдельно записанными Source owner/cache observations. Radio/RadioButton/RadioGroup подключены с generated-option prefixes, независимым Badge namespace и сохранением Native fieldset/input/form/reset contracts; Source defaultChecked/no-op selector observations записаны отдельно. Checkbox/CheckboxGroup подключены с generated-option prefixes, независимым Row namespace и сохранёнными native mixed/form/reset contracts; Source Row cache observation записан raw/fresh. Switch подключён для root/parts/states с canonical variables и сохранением Native form/binding/reset/callback/focus contracts. Rate подключён для root/state/star/layers и character context с canonical token marker и независимым Tooltip namespace; raw UMD и live transitions сохраняют Native value/DOM/ref/focus contracts. Listy подключён для raw/virtual корней и parts с canonical tokens, shared link reset и сохранением Native measurement/cache/scroll/ref/focus contracts. Tour подключён для panel/mask/placeholder/primary/placement/arrow classes с отдельными global Button selectors/private Tooltip variables. Shared-class Source cache с потерей Button margins записан raw/fresh; native portal/layout/zIndex/keyboard и открытый step/editor сохраняются. Подключение prefix/theme/grid-media CSS не создаёт whitespace text nodes вокруг native roots и ConfigProvider; внутреннее содержимое, пользовательские пробелы и focus/value/ref contracts сохранены. Общая SSR boundary matrix и live browser scenario защищают inline composition. Mentions подключён для editor/mirror/variants/status и popup/menu, с отдельным global private cmp-mentions namespace и сохранением Native triggers/value/query/IME/ref/focus/FormData и plain empty fallback. Image/ImagePreviewGroup подключены с независимыми thumbnail/group namespaces, canonical variables и сохранением Native dialog/transforms/current/ref/focus; independent single previewPrefixCls подключён отдельно с raw observation недостающего Source CSS и сохранением Native viewer styling. Dropdown подключён с owner menu namespace, независимым Button prefix и сохранёнными canonical tokens, Native label/direction/portal/binding/focus/typeahead contracts; raw/public counterpart measurements отделяют существующие structural boundaries. Menu подключён с рекурсивными owner classes, независимым Typography namespace, canonical variables/link reset и scoped themes; Source dashed Divider owner omission записан raw/matched, Native DOM/ref/IDs/open/selection/focus сохранены. Pagination подключён с local classes, отдельным global actual-metric namespace и canonical tokens; Native nav/buttons/active colors/wireframe/Select/bindings/draft/focus сохранены, raw/public itemRender font counterparts разделены. Drawer подключён для panel/mask/placements/content с независимым Button namespace и canonical tokens; native WAA/backdrop selectors используют атрибуты, открытый dialog/draft/focus/IDs/scroll сохраняются. Modal/Confirm подключены с local parts, независимым Button namespace и canonical variables; native dialog/centering/IDs/draft/focus сохраняются, Source лишний local Confirm header записан raw/matched. MessageHolder/App.message подключены с local classes, независимыми global private Notification metrics и canonical tokens; очередь, native popover/viewport/motion/deadlines и внешний фокус сохраняются, Source stale status classes записаны raw/refreshed."
         },
         {
           "id": "native-legacy-prefix-namespace",

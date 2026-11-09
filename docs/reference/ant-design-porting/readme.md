@@ -249,6 +249,11 @@ Raw лишний Confirm header при local prefix отделён от public s
 counterpart; Native сохраняет один заголовок подтверждения.
 Source cache с потерей footer Button margin записан raw/fresh; прежний native
 disabled-loading сверяется с отдельными public button props и SVG counterpart.
+Рецепт message-prefix выводит 21 правило списка сверху и сообщений; тело CSS
+совпадает с прежним vendor-файлом, motion/stack/pure/actions исключены.
+Runtime разделяет local classes и global private Notification metrics; canonical
+tokens и native popover/viewport/timing сохраняются. Source stale status classes
+при live prefix отделены от public same-key refresh counterparts.
 Рецепт layout-prefix выводит 35 flat rules Layout/Sider; runtime выбирает свою
 группу, сохраняет Menu namespace и ограничивает defaults/state selectors корнем.
 Тот же template используется для Header/Content/Footer: выбираются selectors

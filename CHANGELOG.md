@@ -9,6 +9,10 @@
 
 ### Added
 
+- MessageHolder и App.message поддерживают local/shared prefixCls для списка,
+  сообщений и иконок. Native popover, очередь, handles, deadlines и внешний фокус
+  сохраняются. Source stale status classes записаны raw/refreshed.
+
 - Modal и контекстные подтверждения поддерживают local/shared prefixCls.
   Button namespace и canonical tokens независимы; открытый dialog, draft,
   selection/focus, IDs и callbacks сохраняются. Source лишний Confirm header

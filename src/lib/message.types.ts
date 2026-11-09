@@ -41,6 +41,8 @@ export type MessageInstance = ReturnType<typeof createMessage>;
 /** Единственная визуальная поверхность выбранного экземпляра createMessage. */
 export interface MessageHolderProps {
   message: MessageInstance;
+  /** Локальный namespace списка и сообщений; пустая строка наследует ConfigProvider. */
+  prefixCls?: string;
   /** @defaultValue 8 */
   top?: number | string;
   id?: string;
