@@ -1,0 +1,143 @@
+{
+  "reference": {
+    "version": "6.6.8",
+    "revision": "984592267de88fbf9cdaecc96a56629e721c709d",
+    "archiveSha256": "8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa",
+    "renderer": "unmodified official UMD with React 18.3.1",
+    "source": "UploadList/ListItem error Tooltip message resolution",
+    "observation": "10 raw cases and four live transitions measure nonempty string response, statusText, message, empty fallbacks, response object, Error and ProgressEvent. Error metadata values in these samples are strings. Tooltip title updates while open without replacing the row."
+  },
+  "cases": [
+    {
+      "sample": {
+        "id": "response",
+        "response": "Response error",
+        "error": {
+          "statusText": "Status text",
+          "message": "Error message"
+        }
+      },
+      "message": "Response error"
+    },
+    {
+      "sample": {
+        "id": "empty-response",
+        "response": "",
+        "error": {
+          "statusText": "Status text",
+          "message": "Error message"
+        }
+      },
+      "message": "Status text"
+    },
+    {
+      "sample": {
+        "id": "status-text",
+        "error": {
+          "statusText": "Status text",
+          "message": "Error message"
+        }
+      },
+      "message": "Status text"
+    },
+    {
+      "sample": {
+        "id": "empty-status",
+        "error": {
+          "statusText": "",
+          "message": "Error message"
+        }
+      },
+      "message": "Error message"
+    },
+    {
+      "sample": {
+        "id": "message",
+        "error": {
+          "message": "Error message"
+        }
+      },
+      "message": "Error message"
+    },
+    {
+      "sample": {
+        "id": "empty-message",
+        "error": {
+          "statusText": "",
+          "message": ""
+        }
+      },
+      "message": "Fallback upload error"
+    },
+    {
+      "sample": {
+        "id": "response-object",
+        "response": {
+          "message": "Ignored response"
+        },
+        "error": {
+          "statusText": "Status text"
+        }
+      },
+      "message": "Status text"
+    },
+    {
+      "sample": {
+        "id": "native-error",
+        "nativeError": true
+      },
+      "message": "Native error message"
+    },
+    {
+      "sample": {
+        "id": "progress-event",
+        "progressEvent": true
+      },
+      "message": "Fallback upload error"
+    },
+    {
+      "sample": {
+        "id": "fallback"
+      },
+      "message": "Fallback upload error"
+    }
+  ],
+  "transitions": [
+    {
+      "sample": {
+        "id": "status-text",
+        "error": {
+          "statusText": "Status text",
+          "message": "Error message"
+        }
+      },
+      "message": "Status text"
+    },
+    {
+      "sample": {
+        "id": "message",
+        "error": {
+          "message": "Error message"
+        }
+      },
+      "message": "Error message"
+    },
+    {
+      "sample": {
+        "id": "response",
+        "response": "Response error",
+        "error": {
+          "statusText": "Status text",
+          "message": "Error message"
+        }
+      },
+      "message": "Response error"
+    },
+    {
+      "sample": {
+        "id": "fallback"
+      },
+      "message": "Fallback upload error"
+    }
+  ]
+}

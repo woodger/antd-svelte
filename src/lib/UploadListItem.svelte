@@ -7,7 +7,7 @@
     UploadListOptions,
     UploadItemRenderActions
   } from './upload.types';
-  import { resolveUploadLinkProps, uploadIsImage } from './upload.engine';
+  import { getUploadErrorMessage, resolveUploadLinkProps, uploadIsImage } from './upload.engine';
   import { previewImage } from './upload-preview.dom';
   import Button from './Button.svelte';
   import UploadIcon from './UploadIcon.svelte';
@@ -57,14 +57,7 @@
   let source = $derived(file.thumbUrl ?? (thumbnail || file.url));
   let image = $derived(isImageUrl({ ...file, thumbUrl: file.thumbUrl ?? thumbnail }));
   let linkAttributes = $derived(resolveUploadLinkProps(file.linkProps));
-  let message = $derived(
-    typeof file.response === 'string'
-    && file.response
-    || (file.error && 'message' in file.error
-      ? file.error.message
-      : undefined)
-    || locale.uploadError
-  );
+  let message = $derived(getUploadErrorMessage(file.response, file.error, locale.uploadError));
   function show(
     flag: boolean | ((file: UploadFile<T>) => boolean) | undefined,
     fallback: boolean

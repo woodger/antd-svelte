@@ -1481,6 +1481,10 @@
 
 ### Fixed
 
+- Upload учитывает error.statusText перед error.message при выборе Tooltip,
+  как в Ant Design 6.6.8. Controlled string metadata принимается типами; пустые
+  поля и Error/ProgressEvent сохраняют прежний fallback и lifecycle.
+
 - Date/TimePicker не добавляют внешние пробелы между snippets, head stylesheet,
   корнем поля и скрытым popup; текст соседнего содержимого сохраняется.
 

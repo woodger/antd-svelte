@@ -320,6 +320,10 @@ SSR охватывает также defaultOpen, browser — смену обще
 CSS selectors; raw прозрачный фон сохранён отдельно от public inherited-prefix
 counterpart. Svelte сохраняет прежнее оформление списка; только menu background
 сравнивается с counterpart, остальные свойства — с raw Source.
+Upload error Tooltip сверяется по десяти raw UMD cases и четырём transitions:
+string response, error.statusText, error.message, пустые значения, response object,
+Error/ProgressEvent и locale fallback. Sample metadata содержит строки. Текст
+открытого Tooltip меняется без замены строки; SSR сохраняет прежний hidden popover.
 Upload action icon snippets сверяются по 21 raw UMD case, двум action traces
 и пяти transitions. Empty/zero samples используют React Fragment, соответствующий
 opaque Snippet content; falsy render return fallback и ReactElement clone/onClick

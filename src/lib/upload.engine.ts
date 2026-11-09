@@ -3,6 +3,17 @@ import type { UploadFile, UploadProps, UploadRcFile } from './upload.types';
 // Ant Design 6.6.8 / rc-upload 1.1.1; MIT, vendor/LICENSE.ant-design и LICENSE.rc-upload.
 export const UPLOAD_LIST_IGNORE = '__ANT_SVELTE_UPLOAD_LIST_IGNORE__';
 
+export function getUploadErrorMessage(response: unknown, error: unknown, fallback: string): string {
+  if (typeof response === 'string' && response) return response;
+  if (error === null || (typeof error !== 'object' && typeof error !== 'function')) return fallback;
+
+  const statusText: unknown = Reflect.get(error, 'statusText');
+  if (typeof statusText === 'string' && statusText) return statusText;
+  const message: unknown = Reflect.get(error, 'message');
+
+  return typeof message === 'string' && message ? message : fallback;
+}
+
 /** Невалидный JSON выбрасывает SyntaxError, как исходный filename renderer. */
 export function resolveUploadLinkProps(value: UploadFile['linkProps']): HTMLAnchorAttributes {
   const parsed: unknown = typeof value === 'string' ? JSON.parse(value) : value;

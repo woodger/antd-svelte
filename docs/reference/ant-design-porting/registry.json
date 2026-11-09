@@ -11716,6 +11716,25 @@
             "readme.md"
           ],
           "note": "ShowUploadList previewIcon/downloadIcon/removeIcon — Snippet<[UploadFile<T>]> для содержимого стандартных controls. Undefined сохраняет исходный SVG; empty и zero соответствуют React Fragment, а не falsy render return. Видимость/predicates, status/disabled, locale labels и действия сохраняются. 21 raw UMD case, два action traces и пять transitions задают content/default vectors и доступность действий, включая per-file context. Updates сохраняют controls/input DOM и внешний draft/focus/selection; keyboard remove вызывает тот же callback. ReactElement inspection/clone/onClick forwarding не воспроизводятся opaque Snippet, его собственные DOM handlers имеют нативный порядок. SSR не создаёт timers."
+        },
+        {
+          "id": "error-message-metadata",
+          "title": "Приоритет response/statusText/message и locale в error Tooltip",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/UploadListItem.svelte",
+            "src/lib/upload.types.ts",
+            "src/lib/upload.engine.ts",
+            "src/lib/upload.engine.test.ts",
+            "tests/browser/upload-error-message.spec.ts",
+            "tests/browser/fixtures/UploadErrorMessageScope.svelte",
+            "tests/browser/fixtures/UploadErrorMessageFixtures.svelte",
+            "tests/browser/fixtures/ant-design-upload-error-message-reference.json",
+            "tests/package/upload-error-message.ssr.test.ts",
+            "readme.md"
+          ],
+          "note": "Непустой string response идёт перед error.statusText, error.message и locale.uploadError, как ListItem 6.6.8. Error/ProgressEvent сохранены; controlled string metadata включены в тип UploadFile.error. Пустые значения и response object не подменяют fallback; primitive/unavailable metadata не вызывают in-operator TypeError. Десять raw UMD cases и четыре live transitions измеряют строковые metadata и Error/ProgressEvent. Обновление открытого Tooltip сохраняет row/input DOM. SSR сохраняет прежний hidden popover без browser resources; ReactNode-valued arbitrary error metadata не заявлены."
         }
       ]
     },

@@ -17,7 +17,8 @@ export interface UploadFile<T = unknown> {
   percent?: number;
   originFileObj?: UploadRcFile;
   response?: T;
-  error?: Error | ProgressEvent;
+  /** Контролируемые string metadata: statusText имеет приоритет над message. */
+  error?: Error | ProgressEvent | { statusText?: string; message?: string; };
   xhr?: XMLHttpRequest;
   url?: string;
   thumbUrl?: string;

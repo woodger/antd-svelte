@@ -6680,6 +6680,16 @@ Button, Progress и Tooltip получают свои component tokens. Style о
 сохранено в `zero-metrics.interactions` [эталона](./tests/browser/fixtures/ant-design-upload-theme-reference.json).
 Этот крайний случай требует отдельного решения.
 
+Текст Tooltip ошибки следует исходному порядку: непустой string response,
+затем error.statusText, error.message и locale.uploadError. Controlled error
+принимает строковые metadata наряду с Error/ProgressEvent; пустые поля пропускаются,
+response object не подменяет сообщение ошибки. Обновление metadata открытого
+Tooltip сохраняет строку и file input.
+[Десять исходных случаев и четыре transitions](tests/browser/fixtures/ant-design-upload-error-message-reference.json),
+[browser](tests/browser/upload-error-message.spec.ts) и
+[SSR](tests/package/upload-error-message.ssr.test.ts) проверяют этот порядок;
+[чистая логика](src/lib/upload.engine.test.ts) также защищает locale fallback.
+
 `showUploadList.previewIcon/downloadIcon/removeIcon` — snippets `(file)`
 для содержимого стандартных действий. Они не меняют show*Icon predicates,
 locale labels, status/disabled rules или onPreview/onDownload/onRemove.

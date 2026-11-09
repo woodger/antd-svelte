@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import {
   filterUploadFile,
+  getUploadErrorMessage,
   limitUploadList,
   resolveUploadLinkProps,
   uploadAccept,
@@ -8,6 +9,33 @@ import {
   updateUploadList
 } from './upload.engine';
 import type { UploadFile } from './upload.types';
+
+describe('getUploadErrorMessage', () => {
+  it('prefers a nonempty string response over error metadata', () => {
+    expect(getUploadErrorMessage('Response', { statusText: 'Status', message: 'Message' }, 'Fallback'))
+      .toBe('Response');
+  });
+
+  it('prefers statusText over message and skips empty response values', () => {
+    expect(getUploadErrorMessage('', { statusText: 'Status', message: 'Message' }, 'Fallback'))
+      .toBe('Status');
+    expect(getUploadErrorMessage({ message: 'Ignored' }, { statusText: 'Status' }, 'Fallback'))
+      .toBe('Status');
+  });
+
+  it('uses message after an empty statusText, including Error instances', () => {
+    expect(getUploadErrorMessage(undefined, { statusText: '', message: 'Message' }, 'Fallback'))
+      .toBe('Message');
+    expect(getUploadErrorMessage(undefined, new Error('Error message'), 'Fallback'))
+      .toBe('Error message');
+  });
+
+  it.each([undefined, null, '', false, 7, {}, { statusText: '', message: '' }])(
+    'uses the locale fallback for empty or unavailable metadata %j', error => {
+      expect(getUploadErrorMessage(undefined, error, 'Fallback')).toBe('Fallback');
+    }
+  );
+});
 
 describe('resolveUploadLinkProps', () => {
   it('preserves native attributes and callback references from object input', () => {
