@@ -9,6 +9,10 @@
 
 ### Added
 
+- Descriptions учитывает глобальные theme.token.screen* при responsive column/span,
+  заменяет media queries после смены токенов и очищает listeners при unmount.
+  Raw stale observer Source сохранён отдельно от public fresh-mount counterpart.
+
 - Table поддерживает local/shared prefixCls и независимый dropdownPrefixCls списка
   фильтров. Смена префикса сохраняет controls, sort/selection, открытый фильтр,
   draft/focus раскрытой строки и fixed scroll; component tokens остаются canonical.

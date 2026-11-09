@@ -13355,7 +13355,16 @@
         "tests/package/descriptions-config.ssr.test.ts",
         "tests/package/prefix-text-boundaries.ssr.test.ts",
         "tests/browser/fixtures/PrefixTextBoundariesFixtures.svelte",
-        "tests/browser/prefix-text-boundaries.spec.ts"
+        "tests/browser/prefix-text-boundaries.spec.ts",
+        "src/lib/grid.engine.ts",
+        "src/lib/grid-breakpoint.model.svelte.ts",
+        "tests/browser/descriptions-breakpoints.spec.ts",
+        "tests/browser/descriptions-breakpoints-metrics.ts",
+        "tests/browser/fixtures/DescriptionsBreakpointsScope.svelte",
+        "tests/browser/fixtures/DescriptionsBreakpointsCase.svelte",
+        "tests/browser/fixtures/DescriptionsBreakpointsFixtures.svelte",
+        "tests/browser/fixtures/ant-design-descriptions-breakpoints-reference.json",
+        "tests/package/descriptions-breakpoints.ssr.test.ts"
       ],
       "features": [
         {
@@ -13416,10 +13425,22 @@
         {
           "id": "global-configuration",
           "title": "Пользовательские breakpoints",
-          "state": "missing",
+          "state": "supported",
           "requiredForV1": false,
-          "evidence": [],
-          "note": "Остаётся в полном объёме миграции после основного семейства; v1-ready не означает полный API React."
+          "evidence": [
+            "src/lib/Descriptions.svelte",
+            "src/lib/grid.engine.ts",
+            "src/lib/grid-breakpoint.model.svelte.ts",
+            "tests/browser/descriptions-breakpoints.spec.ts",
+            "tests/browser/descriptions-breakpoints-metrics.ts",
+            "tests/browser/fixtures/DescriptionsBreakpointsScope.svelte",
+            "tests/browser/fixtures/DescriptionsBreakpointsCase.svelte",
+            "tests/browser/fixtures/DescriptionsBreakpointsFixtures.svelte",
+            "tests/browser/fixtures/ant-design-descriptions-breakpoints-reference.json",
+            "tests/package/descriptions-breakpoints.ssr.test.ts",
+            "readme.md"
+          ],
+          "note": "Global theme.token.screen* задаёт queries responsive column/span через общий validated Grid resolver; component aliases не заменяют global thresholds. 52 raw viewport frames: default/shifted, distinct min/current values, gaps, all seven screens, inherited/reset scopes, horizontal/vertical/bordered и filled/responsive span. SSR проверяет порядок порогов до browser mount и сохраняет screens={} fallback3. Updates заменяют queries, сохраняют editor/ref/focus/selection/FormData; unmount удаляет listeners. Raw stale Source observer и отдельный public fresh mount сохранены; эта native boundary описана отдельно."
         },
         {
           "id": "component-config",
@@ -13493,6 +13514,26 @@
             "readme.md"
           ],
           "note": "Source Table 6.6.8 style/expand ищет global antCls-descriptions-view, поэтому local Descriptions prefix оставляет display:block/flex:0 1 auto. Raw UMD result сохранён. expectedNative — явно производный expected snapshot: только view.display и table.flex заменены измерениями public Source global Table case; остальные поля совпадают с raw local case. Native сохраняет expanded-row оформление с local prefix и namespace isolation. Стенд загружает Source Table CSS через hidden public Table, использует public theme.useToken().hashId на native wrapper и одинаковые width/border-spacing. Полный Table prefix этим этапом не объявляется перенесённым."
+        },
+        {
+          "id": "native-responsive-token-updates",
+          "title": "Смена breakpoint queries вместо stale Source subscriptions",
+          "state": "partial",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Descriptions.svelte",
+            "src/lib/grid.engine.ts",
+            "src/lib/grid-breakpoint.model.svelte.ts",
+            "tests/browser/descriptions-breakpoints.spec.ts",
+            "tests/browser/descriptions-breakpoints-metrics.ts",
+            "tests/browser/fixtures/DescriptionsBreakpointsScope.svelte",
+            "tests/browser/fixtures/DescriptionsBreakpointsCase.svelte",
+            "tests/browser/fixtures/DescriptionsBreakpointsFixtures.svelte",
+            "tests/browser/fixtures/ant-design-descriptions-breakpoints-reference.json",
+            "tests/package/descriptions-breakpoints.ssr.test.ts",
+            "readme.md"
+          ],
+          "note": "Source grid/useBreakpoint.tsx layout effect зависит только от refreshOnChange; смена token object оставляет прежний observer. Raw Descriptions update и последующий resize сохраняют старые thresholds, хотя tokens уже другие. Native использует существующий реактивный createBreakpoint, заменяя подписки; только актуальная layout сверяется с отдельным public fresh Source mount, остальные raw measurements остаются неизменными. Это намеренно сохранённое корректное поведение, а не объявленная полная parity lifecycle."
         }
       ]
     },

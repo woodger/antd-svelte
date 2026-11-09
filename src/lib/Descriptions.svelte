@@ -2,6 +2,8 @@
   import { untrack } from 'svelte';
   import { useConfig } from './config-context';
   import { useComponentTheme } from './theme-component.svelte';
+  import { useDesignTokenContext } from './theme-context.svelte';
+  import { getGridMediaQueries } from './grid.engine';
   import { getDescriptionsPrefixCss } from './descriptions-prefix.engine';
   import ThemeScopeStyle from './ThemeScopeStyle.svelte';
   import { createBreakpoint } from './grid-breakpoint.model.svelte.js';
@@ -34,6 +36,11 @@
   let rootPrefixCls = $derived(config.getPrefixCls());
   let prefixCss = $derived(getDescriptionsPrefixCss(prefixCls, rootPrefixCls));
   const breakpoint = createBreakpoint();
+  const designTokens = useDesignTokenContext();
+  let mediaQueries = $derived(designTokens.enabled
+    ? getGridMediaQueries(designTokens.state.token) : undefined);
+  // Source проверяет порядок порогов и при SSR, до подключения matchMedia.
+  untrack(() => mediaQueries);
   let columns = $derived(descriptionsColumn(column, breakpoint.screens));
   let rows = $derived(descriptionsRows(items, columns, breakpoint.screens));
   let mergedSize = $derived(size ?? config.explicitComponentSize);
@@ -61,7 +68,7 @@
   let semantic = $derived(descriptionsSemantics(config.descriptions, info.props));
   let classes = $derived(semantic.classes);
   let slots = $derived(semantic.styles);
-  $effect(() => untrack(() => breakpoint.connect(window)));
+  $effect(() => breakpoint.connect(window, mediaQueries));
 </script>
 
 {#snippet value(node: DescriptionsContent | undefined)}

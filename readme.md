@@ -1146,8 +1146,17 @@ itemPaddingBottom/itemPaddingEnd собственными отступами.
 Галерея — `/ant-design#descriptions`, фикстура — `?fixture=descriptions`.
 Unit/SSR/Chromium проверяют раскладку, media, приоритет стилей и вложенность.
 Рецепт descriptions извлекает 40 правил без keyframes, включая две интеграции
-Table expanded-row. Произвольные breakpoints пока не поддержаны
-и остаются в полном объёме миграции.
+Table expanded-row. Responsive column/span используют глобальные
+`theme.token.screen*`, включая отдельные screenSMMin/screenSM и gaps между
+порогами. Вложенный provider наследует значения; inherit:false возвращает defaults.
+Порядок порогов проверяется и при SSR; в браузере смена токенов заменяет queries
+без remount. Существующее оформление без source theme сохраняет стандартные пороги.
+[Исходные замеры](tests/browser/fixtures/ant-design-descriptions-breakpoints-reference.json)
+содержат raw stale observer Source при смене токенов и отдельный public fresh mount:
+Native сохраняет реактивное поведение, проверенное по свежей исходной раскладке.
+[Browser](tests/browser/descriptions-breakpoints.spec.ts) проверяет column/span,
+editor/ref/focus/selection/FormData и cleanup подписок;
+[SSR](tests/package/descriptions-breakpoints.ssr.test.ts) — fallback и validation.
 
 ## Card
 

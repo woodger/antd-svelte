@@ -1,0 +1,5852 @@
+{
+  "reference": {
+    "version": "6.6.8",
+    "revision": "984592267de88fbf9cdaecc96a56629e721c709d",
+    "archiveSha256": "8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa",
+    "renderer": "unmodified official UMD with React 18.3.1",
+    "source": "Descriptions/hooks/useItems/useRow; grid/useBreakpoint; _util/responsiveObserver",
+    "observation": "Raw viewport threshold column/span packing, default columns, horizontal/vertical/bordered and nested/reset contexts. Current items API, no deprecated children. All static/raw live stages precede a public fresh remount counterpart. Source useBreakpoint subscribes only on refreshOnChange and retains old media queries after token update; Native will retain the working reactive observer and compare updated layout to fresh Source. Draft/focus and selection must remain unchanged."
+  },
+  "cases": [
+    {
+      "sample": {
+        "id": "default"
+      },
+      "scope": "normal",
+      "result": [
+        {
+          "width": 575,
+          "layout": [
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label A"
+                ],
+                "contents": [
+                  ""
+                ],
+                "input": true
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label B"
+                ],
+                "contents": [
+                  "Value B"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label C"
+                ],
+                "contents": [
+                  "Value C"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label D"
+                ],
+                "contents": [
+                  "Value D"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label E"
+                ],
+                "contents": [
+                  "Value E"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label F"
+                ],
+                "contents": [
+                  "Value F"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label G"
+                ],
+                "contents": [
+                  "Value G"
+                ],
+                "input": false
+              }
+            ]
+          ]
+        },
+        {
+          "width": 576,
+          "layout": [
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label A"
+                ],
+                "contents": [
+                  ""
+                ],
+                "input": true
+              },
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label B"
+                ],
+                "contents": [
+                  "Value B"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label C"
+                ],
+                "contents": [
+                  "Value C"
+                ],
+                "input": false
+              },
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label D"
+                ],
+                "contents": [
+                  "Value D"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label E"
+                ],
+                "contents": [
+                  "Value E"
+                ],
+                "input": false
+              },
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label F"
+                ],
+                "contents": [
+                  "Value F"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 2,
+                "labels": [
+                  "Label G"
+                ],
+                "contents": [
+                  "Value G"
+                ],
+                "input": false
+              }
+            ]
+          ]
+        },
+        {
+          "width": 767,
+          "layout": [
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label A"
+                ],
+                "contents": [
+                  ""
+                ],
+                "input": true
+              },
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label B"
+                ],
+                "contents": [
+                  "Value B"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label C"
+                ],
+                "contents": [
+                  "Value C"
+                ],
+                "input": false
+              },
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label D"
+                ],
+                "contents": [
+                  "Value D"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label E"
+                ],
+                "contents": [
+                  "Value E"
+                ],
+                "input": false
+              },
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label F"
+                ],
+                "contents": [
+                  "Value F"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 2,
+                "labels": [
+                  "Label G"
+                ],
+                "contents": [
+                  "Value G"
+                ],
+                "input": false
+              }
+            ]
+          ]
+        },
+        {
+          "width": 768,
+          "layout": [
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label A"
+                ],
+                "contents": [
+                  ""
+                ],
+                "input": true
+              },
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label B"
+                ],
+                "contents": [
+                  "Value B"
+                ],
+                "input": false
+              },
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label C"
+                ],
+                "contents": [
+                  "Value C"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label D"
+                ],
+                "contents": [
+                  "Value D"
+                ],
+                "input": false
+              },
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label E"
+                ],
+                "contents": [
+                  "Value E"
+                ],
+                "input": false
+              },
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label F"
+                ],
+                "contents": [
+                  "Value F"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 3,
+                "labels": [
+                  "Label G"
+                ],
+                "contents": [
+                  "Value G"
+                ],
+                "input": false
+              }
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "shifted",
+        "token": {
+          "screenXSMax": 639,
+          "screenSMMin": 640,
+          "screenSM": 640,
+          "screenSMMax": 899,
+          "screenMDMin": 900,
+          "screenMD": 900
+        }
+      },
+      "scope": "normal",
+      "result": [
+        {
+          "width": 639,
+          "layout": [
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label A"
+                ],
+                "contents": [
+                  ""
+                ],
+                "input": true
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label B"
+                ],
+                "contents": [
+                  "Value B"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label C"
+                ],
+                "contents": [
+                  "Value C"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label D"
+                ],
+                "contents": [
+                  "Value D"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label E"
+                ],
+                "contents": [
+                  "Value E"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label F"
+                ],
+                "contents": [
+                  "Value F"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label G"
+                ],
+                "contents": [
+                  "Value G"
+                ],
+                "input": false
+              }
+            ]
+          ]
+        },
+        {
+          "width": 640,
+          "layout": [
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label A"
+                ],
+                "contents": [
+                  ""
+                ],
+                "input": true
+              },
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label B"
+                ],
+                "contents": [
+                  "Value B"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label C"
+                ],
+                "contents": [
+                  "Value C"
+                ],
+                "input": false
+              },
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label D"
+                ],
+                "contents": [
+                  "Value D"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label E"
+                ],
+                "contents": [
+                  "Value E"
+                ],
+                "input": false
+              },
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label F"
+                ],
+                "contents": [
+                  "Value F"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 2,
+                "labels": [
+                  "Label G"
+                ],
+                "contents": [
+                  "Value G"
+                ],
+                "input": false
+              }
+            ]
+          ]
+        },
+        {
+          "width": 899,
+          "layout": [
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label A"
+                ],
+                "contents": [
+                  ""
+                ],
+                "input": true
+              },
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label B"
+                ],
+                "contents": [
+                  "Value B"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label C"
+                ],
+                "contents": [
+                  "Value C"
+                ],
+                "input": false
+              },
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label D"
+                ],
+                "contents": [
+                  "Value D"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label E"
+                ],
+                "contents": [
+                  "Value E"
+                ],
+                "input": false
+              },
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label F"
+                ],
+                "contents": [
+                  "Value F"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 2,
+                "labels": [
+                  "Label G"
+                ],
+                "contents": [
+                  "Value G"
+                ],
+                "input": false
+              }
+            ]
+          ]
+        },
+        {
+          "width": 900,
+          "layout": [
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label A"
+                ],
+                "contents": [
+                  ""
+                ],
+                "input": true
+              },
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label B"
+                ],
+                "contents": [
+                  "Value B"
+                ],
+                "input": false
+              },
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label C"
+                ],
+                "contents": [
+                  "Value C"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label D"
+                ],
+                "contents": [
+                  "Value D"
+                ],
+                "input": false
+              },
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label E"
+                ],
+                "contents": [
+                  "Value E"
+                ],
+                "input": false
+              },
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label F"
+                ],
+                "contents": [
+                  "Value F"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 3,
+                "labels": [
+                  "Label G"
+                ],
+                "contents": [
+                  "Value G"
+                ],
+                "input": false
+              }
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "shifted",
+        "token": {
+          "screenXSMax": 639,
+          "screenSMMin": 640,
+          "screenSM": 640,
+          "screenSMMax": 899,
+          "screenMDMin": 900,
+          "screenMD": 900
+        }
+      },
+      "scope": "nested",
+      "result": [
+        {
+          "width": 639,
+          "layout": [
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label A"
+                ],
+                "contents": [
+                  ""
+                ],
+                "input": true
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label B"
+                ],
+                "contents": [
+                  "Value B"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label C"
+                ],
+                "contents": [
+                  "Value C"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label D"
+                ],
+                "contents": [
+                  "Value D"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label E"
+                ],
+                "contents": [
+                  "Value E"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label F"
+                ],
+                "contents": [
+                  "Value F"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label G"
+                ],
+                "contents": [
+                  "Value G"
+                ],
+                "input": false
+              }
+            ]
+          ]
+        },
+        {
+          "width": 640,
+          "layout": [
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label A"
+                ],
+                "contents": [
+                  ""
+                ],
+                "input": true
+              },
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label B"
+                ],
+                "contents": [
+                  "Value B"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label C"
+                ],
+                "contents": [
+                  "Value C"
+                ],
+                "input": false
+              },
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label D"
+                ],
+                "contents": [
+                  "Value D"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label E"
+                ],
+                "contents": [
+                  "Value E"
+                ],
+                "input": false
+              },
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label F"
+                ],
+                "contents": [
+                  "Value F"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 2,
+                "labels": [
+                  "Label G"
+                ],
+                "contents": [
+                  "Value G"
+                ],
+                "input": false
+              }
+            ]
+          ]
+        },
+        {
+          "width": 899,
+          "layout": [
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label A"
+                ],
+                "contents": [
+                  ""
+                ],
+                "input": true
+              },
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label B"
+                ],
+                "contents": [
+                  "Value B"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label C"
+                ],
+                "contents": [
+                  "Value C"
+                ],
+                "input": false
+              },
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label D"
+                ],
+                "contents": [
+                  "Value D"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label E"
+                ],
+                "contents": [
+                  "Value E"
+                ],
+                "input": false
+              },
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label F"
+                ],
+                "contents": [
+                  "Value F"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 2,
+                "labels": [
+                  "Label G"
+                ],
+                "contents": [
+                  "Value G"
+                ],
+                "input": false
+              }
+            ]
+          ]
+        },
+        {
+          "width": 900,
+          "layout": [
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label A"
+                ],
+                "contents": [
+                  ""
+                ],
+                "input": true
+              },
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label B"
+                ],
+                "contents": [
+                  "Value B"
+                ],
+                "input": false
+              },
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label C"
+                ],
+                "contents": [
+                  "Value C"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label D"
+                ],
+                "contents": [
+                  "Value D"
+                ],
+                "input": false
+              },
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label E"
+                ],
+                "contents": [
+                  "Value E"
+                ],
+                "input": false
+              },
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label F"
+                ],
+                "contents": [
+                  "Value F"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 3,
+                "labels": [
+                  "Label G"
+                ],
+                "contents": [
+                  "Value G"
+                ],
+                "input": false
+              }
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "shifted",
+        "token": {
+          "screenXSMax": 639,
+          "screenSMMin": 640,
+          "screenSM": 640,
+          "screenSMMax": 899,
+          "screenMDMin": 900,
+          "screenMD": 900
+        }
+      },
+      "scope": "reset",
+      "result": [
+        {
+          "width": 639,
+          "layout": [
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label A"
+                ],
+                "contents": [
+                  ""
+                ],
+                "input": true
+              },
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label B"
+                ],
+                "contents": [
+                  "Value B"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label C"
+                ],
+                "contents": [
+                  "Value C"
+                ],
+                "input": false
+              },
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label D"
+                ],
+                "contents": [
+                  "Value D"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label E"
+                ],
+                "contents": [
+                  "Value E"
+                ],
+                "input": false
+              },
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label F"
+                ],
+                "contents": [
+                  "Value F"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 2,
+                "labels": [
+                  "Label G"
+                ],
+                "contents": [
+                  "Value G"
+                ],
+                "input": false
+              }
+            ]
+          ]
+        },
+        {
+          "width": 640,
+          "layout": [
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label A"
+                ],
+                "contents": [
+                  ""
+                ],
+                "input": true
+              },
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label B"
+                ],
+                "contents": [
+                  "Value B"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label C"
+                ],
+                "contents": [
+                  "Value C"
+                ],
+                "input": false
+              },
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label D"
+                ],
+                "contents": [
+                  "Value D"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label E"
+                ],
+                "contents": [
+                  "Value E"
+                ],
+                "input": false
+              },
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label F"
+                ],
+                "contents": [
+                  "Value F"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 2,
+                "labels": [
+                  "Label G"
+                ],
+                "contents": [
+                  "Value G"
+                ],
+                "input": false
+              }
+            ]
+          ]
+        },
+        {
+          "width": 899,
+          "layout": [
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label A"
+                ],
+                "contents": [
+                  ""
+                ],
+                "input": true
+              },
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label B"
+                ],
+                "contents": [
+                  "Value B"
+                ],
+                "input": false
+              },
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label C"
+                ],
+                "contents": [
+                  "Value C"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label D"
+                ],
+                "contents": [
+                  "Value D"
+                ],
+                "input": false
+              },
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label E"
+                ],
+                "contents": [
+                  "Value E"
+                ],
+                "input": false
+              },
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label F"
+                ],
+                "contents": [
+                  "Value F"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 3,
+                "labels": [
+                  "Label G"
+                ],
+                "contents": [
+                  "Value G"
+                ],
+                "input": false
+              }
+            ]
+          ]
+        },
+        {
+          "width": 900,
+          "layout": [
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label A"
+                ],
+                "contents": [
+                  ""
+                ],
+                "input": true
+              },
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label B"
+                ],
+                "contents": [
+                  "Value B"
+                ],
+                "input": false
+              },
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label C"
+                ],
+                "contents": [
+                  "Value C"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label D"
+                ],
+                "contents": [
+                  "Value D"
+                ],
+                "input": false
+              },
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label E"
+                ],
+                "contents": [
+                  "Value E"
+                ],
+                "input": false
+              },
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label F"
+                ],
+                "contents": [
+                  "Value F"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 3,
+                "labels": [
+                  "Label G"
+                ],
+                "contents": [
+                  "Value G"
+                ],
+                "input": false
+              }
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "spans",
+        "token": {
+          "screenXSMax": 639,
+          "screenSMMin": 640,
+          "screenSM": 640,
+          "screenSMMax": 899,
+          "screenMDMin": 900,
+          "screenMD": 900
+        },
+        "spans": true
+      },
+      "scope": "normal",
+      "result": [
+        {
+          "width": 639,
+          "layout": [
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label A"
+                ],
+                "contents": [
+                  ""
+                ],
+                "input": true
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label B"
+                ],
+                "contents": [
+                  "Value B"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label C"
+                ],
+                "contents": [
+                  "Value C"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label D"
+                ],
+                "contents": [
+                  "Value D"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label E"
+                ],
+                "contents": [
+                  "Value E"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label F"
+                ],
+                "contents": [
+                  "Value F"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label G"
+                ],
+                "contents": [
+                  "Value G"
+                ],
+                "input": false
+              }
+            ]
+          ]
+        },
+        {
+          "width": 640,
+          "layout": [
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label A"
+                ],
+                "contents": [
+                  ""
+                ],
+                "input": true
+              },
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label B"
+                ],
+                "contents": [
+                  "Value B"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label C"
+                ],
+                "contents": [
+                  "Value C"
+                ],
+                "input": false
+              },
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label D"
+                ],
+                "contents": [
+                  "Value D"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 2,
+                "labels": [
+                  "Label E"
+                ],
+                "contents": [
+                  "Value E"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label F"
+                ],
+                "contents": [
+                  "Value F"
+                ],
+                "input": false
+              },
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label G"
+                ],
+                "contents": [
+                  "Value G"
+                ],
+                "input": false
+              }
+            ]
+          ]
+        },
+        {
+          "width": 899,
+          "layout": [
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label A"
+                ],
+                "contents": [
+                  ""
+                ],
+                "input": true
+              },
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label B"
+                ],
+                "contents": [
+                  "Value B"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label C"
+                ],
+                "contents": [
+                  "Value C"
+                ],
+                "input": false
+              },
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label D"
+                ],
+                "contents": [
+                  "Value D"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 2,
+                "labels": [
+                  "Label E"
+                ],
+                "contents": [
+                  "Value E"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label F"
+                ],
+                "contents": [
+                  "Value F"
+                ],
+                "input": false
+              },
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label G"
+                ],
+                "contents": [
+                  "Value G"
+                ],
+                "input": false
+              }
+            ]
+          ]
+        },
+        {
+          "width": 900,
+          "layout": [
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label A"
+                ],
+                "contents": [
+                  ""
+                ],
+                "input": true
+              },
+              {
+                "tag": "td",
+                "span": 2,
+                "labels": [
+                  "Label B"
+                ],
+                "contents": [
+                  "Value B"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label C"
+                ],
+                "contents": [
+                  "Value C"
+                ],
+                "input": false
+              },
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label D"
+                ],
+                "contents": [
+                  "Value D"
+                ],
+                "input": false
+              },
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label E"
+                ],
+                "contents": [
+                  "Value E"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label F"
+                ],
+                "contents": [
+                  "Value F"
+                ],
+                "input": false
+              },
+              {
+                "tag": "td",
+                "span": 2,
+                "labels": [
+                  "Label G"
+                ],
+                "contents": [
+                  "Value G"
+                ],
+                "input": false
+              }
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "bordered",
+        "token": {
+          "screenXSMax": 639,
+          "screenSMMin": 640,
+          "screenSM": 640,
+          "screenSMMax": 899,
+          "screenMDMin": 900,
+          "screenMD": 900
+        },
+        "spans": true,
+        "bordered": true
+      },
+      "scope": "normal",
+      "result": [
+        {
+          "width": 639,
+          "layout": [
+            [
+              {
+                "tag": "th",
+                "span": 1,
+                "labels": [
+                  "Label A"
+                ],
+                "contents": [],
+                "input": false
+              },
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [],
+                "contents": [
+                  ""
+                ],
+                "input": true
+              }
+            ],
+            [
+              {
+                "tag": "th",
+                "span": 1,
+                "labels": [
+                  "Label B"
+                ],
+                "contents": [],
+                "input": false
+              },
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [],
+                "contents": [
+                  "Value B"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "th",
+                "span": 1,
+                "labels": [
+                  "Label C"
+                ],
+                "contents": [],
+                "input": false
+              },
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [],
+                "contents": [
+                  "Value C"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "th",
+                "span": 1,
+                "labels": [
+                  "Label D"
+                ],
+                "contents": [],
+                "input": false
+              },
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [],
+                "contents": [
+                  "Value D"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "th",
+                "span": 1,
+                "labels": [
+                  "Label E"
+                ],
+                "contents": [],
+                "input": false
+              },
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [],
+                "contents": [
+                  "Value E"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "th",
+                "span": 1,
+                "labels": [
+                  "Label F"
+                ],
+                "contents": [],
+                "input": false
+              },
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [],
+                "contents": [
+                  "Value F"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "th",
+                "span": 1,
+                "labels": [
+                  "Label G"
+                ],
+                "contents": [],
+                "input": false
+              },
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [],
+                "contents": [
+                  "Value G"
+                ],
+                "input": false
+              }
+            ]
+          ]
+        },
+        {
+          "width": 640,
+          "layout": [
+            [
+              {
+                "tag": "th",
+                "span": 1,
+                "labels": [
+                  "Label A"
+                ],
+                "contents": [],
+                "input": false
+              },
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [],
+                "contents": [
+                  ""
+                ],
+                "input": true
+              },
+              {
+                "tag": "th",
+                "span": 1,
+                "labels": [
+                  "Label B"
+                ],
+                "contents": [],
+                "input": false
+              },
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [],
+                "contents": [
+                  "Value B"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "th",
+                "span": 1,
+                "labels": [
+                  "Label C"
+                ],
+                "contents": [],
+                "input": false
+              },
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [],
+                "contents": [
+                  "Value C"
+                ],
+                "input": false
+              },
+              {
+                "tag": "th",
+                "span": 1,
+                "labels": [
+                  "Label D"
+                ],
+                "contents": [],
+                "input": false
+              },
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [],
+                "contents": [
+                  "Value D"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "th",
+                "span": 1,
+                "labels": [
+                  "Label E"
+                ],
+                "contents": [],
+                "input": false
+              },
+              {
+                "tag": "td",
+                "span": 3,
+                "labels": [],
+                "contents": [
+                  "Value E"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "th",
+                "span": 1,
+                "labels": [
+                  "Label F"
+                ],
+                "contents": [],
+                "input": false
+              },
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [],
+                "contents": [
+                  "Value F"
+                ],
+                "input": false
+              },
+              {
+                "tag": "th",
+                "span": 1,
+                "labels": [
+                  "Label G"
+                ],
+                "contents": [],
+                "input": false
+              },
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [],
+                "contents": [
+                  "Value G"
+                ],
+                "input": false
+              }
+            ]
+          ]
+        },
+        {
+          "width": 899,
+          "layout": [
+            [
+              {
+                "tag": "th",
+                "span": 1,
+                "labels": [
+                  "Label A"
+                ],
+                "contents": [],
+                "input": false
+              },
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [],
+                "contents": [
+                  ""
+                ],
+                "input": true
+              },
+              {
+                "tag": "th",
+                "span": 1,
+                "labels": [
+                  "Label B"
+                ],
+                "contents": [],
+                "input": false
+              },
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [],
+                "contents": [
+                  "Value B"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "th",
+                "span": 1,
+                "labels": [
+                  "Label C"
+                ],
+                "contents": [],
+                "input": false
+              },
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [],
+                "contents": [
+                  "Value C"
+                ],
+                "input": false
+              },
+              {
+                "tag": "th",
+                "span": 1,
+                "labels": [
+                  "Label D"
+                ],
+                "contents": [],
+                "input": false
+              },
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [],
+                "contents": [
+                  "Value D"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "th",
+                "span": 1,
+                "labels": [
+                  "Label E"
+                ],
+                "contents": [],
+                "input": false
+              },
+              {
+                "tag": "td",
+                "span": 3,
+                "labels": [],
+                "contents": [
+                  "Value E"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "th",
+                "span": 1,
+                "labels": [
+                  "Label F"
+                ],
+                "contents": [],
+                "input": false
+              },
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [],
+                "contents": [
+                  "Value F"
+                ],
+                "input": false
+              },
+              {
+                "tag": "th",
+                "span": 1,
+                "labels": [
+                  "Label G"
+                ],
+                "contents": [],
+                "input": false
+              },
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [],
+                "contents": [
+                  "Value G"
+                ],
+                "input": false
+              }
+            ]
+          ]
+        },
+        {
+          "width": 900,
+          "layout": [
+            [
+              {
+                "tag": "th",
+                "span": 1,
+                "labels": [
+                  "Label A"
+                ],
+                "contents": [],
+                "input": false
+              },
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [],
+                "contents": [
+                  ""
+                ],
+                "input": true
+              },
+              {
+                "tag": "th",
+                "span": 1,
+                "labels": [
+                  "Label B"
+                ],
+                "contents": [],
+                "input": false
+              },
+              {
+                "tag": "td",
+                "span": 3,
+                "labels": [],
+                "contents": [
+                  "Value B"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "th",
+                "span": 1,
+                "labels": [
+                  "Label C"
+                ],
+                "contents": [],
+                "input": false
+              },
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [],
+                "contents": [
+                  "Value C"
+                ],
+                "input": false
+              },
+              {
+                "tag": "th",
+                "span": 1,
+                "labels": [
+                  "Label D"
+                ],
+                "contents": [],
+                "input": false
+              },
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [],
+                "contents": [
+                  "Value D"
+                ],
+                "input": false
+              },
+              {
+                "tag": "th",
+                "span": 1,
+                "labels": [
+                  "Label E"
+                ],
+                "contents": [],
+                "input": false
+              },
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [],
+                "contents": [
+                  "Value E"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "th",
+                "span": 1,
+                "labels": [
+                  "Label F"
+                ],
+                "contents": [],
+                "input": false
+              },
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [],
+                "contents": [
+                  "Value F"
+                ],
+                "input": false
+              },
+              {
+                "tag": "th",
+                "span": 1,
+                "labels": [
+                  "Label G"
+                ],
+                "contents": [],
+                "input": false
+              },
+              {
+                "tag": "td",
+                "span": 3,
+                "labels": [],
+                "contents": [
+                  "Value G"
+                ],
+                "input": false
+              }
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "vertical",
+        "token": {
+          "screenXSMax": 639,
+          "screenSMMin": 640,
+          "screenSM": 640,
+          "screenSMMax": 899,
+          "screenMDMin": 900,
+          "screenMD": 900
+        },
+        "spans": true,
+        "vertical": true
+      },
+      "scope": "normal",
+      "result": [
+        {
+          "width": 639,
+          "layout": [
+            [
+              {
+                "tag": "th",
+                "span": 1,
+                "labels": [
+                  "Label A"
+                ],
+                "contents": [],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [],
+                "contents": [
+                  ""
+                ],
+                "input": true
+              }
+            ],
+            [
+              {
+                "tag": "th",
+                "span": 1,
+                "labels": [
+                  "Label B"
+                ],
+                "contents": [],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [],
+                "contents": [
+                  "Value B"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "th",
+                "span": 1,
+                "labels": [
+                  "Label C"
+                ],
+                "contents": [],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [],
+                "contents": [
+                  "Value C"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "th",
+                "span": 1,
+                "labels": [
+                  "Label D"
+                ],
+                "contents": [],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [],
+                "contents": [
+                  "Value D"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "th",
+                "span": 1,
+                "labels": [
+                  "Label E"
+                ],
+                "contents": [],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [],
+                "contents": [
+                  "Value E"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "th",
+                "span": 1,
+                "labels": [
+                  "Label F"
+                ],
+                "contents": [],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [],
+                "contents": [
+                  "Value F"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "th",
+                "span": 1,
+                "labels": [
+                  "Label G"
+                ],
+                "contents": [],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [],
+                "contents": [
+                  "Value G"
+                ],
+                "input": false
+              }
+            ]
+          ]
+        },
+        {
+          "width": 640,
+          "layout": [
+            [
+              {
+                "tag": "th",
+                "span": 1,
+                "labels": [
+                  "Label A"
+                ],
+                "contents": [],
+                "input": false
+              },
+              {
+                "tag": "th",
+                "span": 1,
+                "labels": [
+                  "Label B"
+                ],
+                "contents": [],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [],
+                "contents": [
+                  ""
+                ],
+                "input": true
+              },
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [],
+                "contents": [
+                  "Value B"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "th",
+                "span": 1,
+                "labels": [
+                  "Label C"
+                ],
+                "contents": [],
+                "input": false
+              },
+              {
+                "tag": "th",
+                "span": 1,
+                "labels": [
+                  "Label D"
+                ],
+                "contents": [],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [],
+                "contents": [
+                  "Value C"
+                ],
+                "input": false
+              },
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [],
+                "contents": [
+                  "Value D"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "th",
+                "span": 2,
+                "labels": [
+                  "Label E"
+                ],
+                "contents": [],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 2,
+                "labels": [],
+                "contents": [
+                  "Value E"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "th",
+                "span": 1,
+                "labels": [
+                  "Label F"
+                ],
+                "contents": [],
+                "input": false
+              },
+              {
+                "tag": "th",
+                "span": 1,
+                "labels": [
+                  "Label G"
+                ],
+                "contents": [],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [],
+                "contents": [
+                  "Value F"
+                ],
+                "input": false
+              },
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [],
+                "contents": [
+                  "Value G"
+                ],
+                "input": false
+              }
+            ]
+          ]
+        },
+        {
+          "width": 899,
+          "layout": [
+            [
+              {
+                "tag": "th",
+                "span": 1,
+                "labels": [
+                  "Label A"
+                ],
+                "contents": [],
+                "input": false
+              },
+              {
+                "tag": "th",
+                "span": 1,
+                "labels": [
+                  "Label B"
+                ],
+                "contents": [],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [],
+                "contents": [
+                  ""
+                ],
+                "input": true
+              },
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [],
+                "contents": [
+                  "Value B"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "th",
+                "span": 1,
+                "labels": [
+                  "Label C"
+                ],
+                "contents": [],
+                "input": false
+              },
+              {
+                "tag": "th",
+                "span": 1,
+                "labels": [
+                  "Label D"
+                ],
+                "contents": [],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [],
+                "contents": [
+                  "Value C"
+                ],
+                "input": false
+              },
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [],
+                "contents": [
+                  "Value D"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "th",
+                "span": 2,
+                "labels": [
+                  "Label E"
+                ],
+                "contents": [],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 2,
+                "labels": [],
+                "contents": [
+                  "Value E"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "th",
+                "span": 1,
+                "labels": [
+                  "Label F"
+                ],
+                "contents": [],
+                "input": false
+              },
+              {
+                "tag": "th",
+                "span": 1,
+                "labels": [
+                  "Label G"
+                ],
+                "contents": [],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [],
+                "contents": [
+                  "Value F"
+                ],
+                "input": false
+              },
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [],
+                "contents": [
+                  "Value G"
+                ],
+                "input": false
+              }
+            ]
+          ]
+        },
+        {
+          "width": 900,
+          "layout": [
+            [
+              {
+                "tag": "th",
+                "span": 1,
+                "labels": [
+                  "Label A"
+                ],
+                "contents": [],
+                "input": false
+              },
+              {
+                "tag": "th",
+                "span": 2,
+                "labels": [
+                  "Label B"
+                ],
+                "contents": [],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [],
+                "contents": [
+                  ""
+                ],
+                "input": true
+              },
+              {
+                "tag": "td",
+                "span": 2,
+                "labels": [],
+                "contents": [
+                  "Value B"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "th",
+                "span": 1,
+                "labels": [
+                  "Label C"
+                ],
+                "contents": [],
+                "input": false
+              },
+              {
+                "tag": "th",
+                "span": 1,
+                "labels": [
+                  "Label D"
+                ],
+                "contents": [],
+                "input": false
+              },
+              {
+                "tag": "th",
+                "span": 1,
+                "labels": [
+                  "Label E"
+                ],
+                "contents": [],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [],
+                "contents": [
+                  "Value C"
+                ],
+                "input": false
+              },
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [],
+                "contents": [
+                  "Value D"
+                ],
+                "input": false
+              },
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [],
+                "contents": [
+                  "Value E"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "th",
+                "span": 1,
+                "labels": [
+                  "Label F"
+                ],
+                "contents": [],
+                "input": false
+              },
+              {
+                "tag": "th",
+                "span": 2,
+                "labels": [
+                  "Label G"
+                ],
+                "contents": [],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [],
+                "contents": [
+                  "Value F"
+                ],
+                "input": false
+              },
+              {
+                "tag": "td",
+                "span": 2,
+                "labels": [],
+                "contents": [
+                  "Value G"
+                ],
+                "input": false
+              }
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "default-column",
+        "token": {
+          "screenXSMax": 639,
+          "screenSMMin": 640,
+          "screenSM": 640,
+          "screenSMMax": 899,
+          "screenMDMin": 900,
+          "screenMD": 900
+        },
+        "defaultColumn": true
+      },
+      "scope": "normal",
+      "result": [
+        {
+          "width": 639,
+          "layout": [
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label A"
+                ],
+                "contents": [
+                  ""
+                ],
+                "input": true
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label B"
+                ],
+                "contents": [
+                  "Value B"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label C"
+                ],
+                "contents": [
+                  "Value C"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label D"
+                ],
+                "contents": [
+                  "Value D"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label E"
+                ],
+                "contents": [
+                  "Value E"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label F"
+                ],
+                "contents": [
+                  "Value F"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label G"
+                ],
+                "contents": [
+                  "Value G"
+                ],
+                "input": false
+              }
+            ]
+          ]
+        },
+        {
+          "width": 640,
+          "layout": [
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label A"
+                ],
+                "contents": [
+                  ""
+                ],
+                "input": true
+              },
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label B"
+                ],
+                "contents": [
+                  "Value B"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label C"
+                ],
+                "contents": [
+                  "Value C"
+                ],
+                "input": false
+              },
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label D"
+                ],
+                "contents": [
+                  "Value D"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label E"
+                ],
+                "contents": [
+                  "Value E"
+                ],
+                "input": false
+              },
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label F"
+                ],
+                "contents": [
+                  "Value F"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 2,
+                "labels": [
+                  "Label G"
+                ],
+                "contents": [
+                  "Value G"
+                ],
+                "input": false
+              }
+            ]
+          ]
+        },
+        {
+          "width": 899,
+          "layout": [
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label A"
+                ],
+                "contents": [
+                  ""
+                ],
+                "input": true
+              },
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label B"
+                ],
+                "contents": [
+                  "Value B"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label C"
+                ],
+                "contents": [
+                  "Value C"
+                ],
+                "input": false
+              },
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label D"
+                ],
+                "contents": [
+                  "Value D"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label E"
+                ],
+                "contents": [
+                  "Value E"
+                ],
+                "input": false
+              },
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label F"
+                ],
+                "contents": [
+                  "Value F"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 2,
+                "labels": [
+                  "Label G"
+                ],
+                "contents": [
+                  "Value G"
+                ],
+                "input": false
+              }
+            ]
+          ]
+        },
+        {
+          "width": 900,
+          "layout": [
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label A"
+                ],
+                "contents": [
+                  ""
+                ],
+                "input": true
+              },
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label B"
+                ],
+                "contents": [
+                  "Value B"
+                ],
+                "input": false
+              },
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label C"
+                ],
+                "contents": [
+                  "Value C"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label D"
+                ],
+                "contents": [
+                  "Value D"
+                ],
+                "input": false
+              },
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label E"
+                ],
+                "contents": [
+                  "Value E"
+                ],
+                "input": false
+              },
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label F"
+                ],
+                "contents": [
+                  "Value F"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 3,
+                "labels": [
+                  "Label G"
+                ],
+                "contents": [
+                  "Value G"
+                ],
+                "input": false
+              }
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "separate-minimum",
+        "token": {
+          "screenXSMax": 639,
+          "screenSMMin": 640,
+          "screenSM": 680,
+          "screenSMMax": 899,
+          "screenMDMin": 900,
+          "screenMD": 920
+        }
+      },
+      "scope": "normal",
+      "result": [
+        {
+          "width": 639,
+          "layout": [
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label A"
+                ],
+                "contents": [
+                  ""
+                ],
+                "input": true
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label B"
+                ],
+                "contents": [
+                  "Value B"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label C"
+                ],
+                "contents": [
+                  "Value C"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label D"
+                ],
+                "contents": [
+                  "Value D"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label E"
+                ],
+                "contents": [
+                  "Value E"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label F"
+                ],
+                "contents": [
+                  "Value F"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label G"
+                ],
+                "contents": [
+                  "Value G"
+                ],
+                "input": false
+              }
+            ]
+          ]
+        },
+        {
+          "width": 640,
+          "layout": [
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label A"
+                ],
+                "contents": [
+                  ""
+                ],
+                "input": true
+              },
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label B"
+                ],
+                "contents": [
+                  "Value B"
+                ],
+                "input": false
+              },
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label C"
+                ],
+                "contents": [
+                  "Value C"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label D"
+                ],
+                "contents": [
+                  "Value D"
+                ],
+                "input": false
+              },
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label E"
+                ],
+                "contents": [
+                  "Value E"
+                ],
+                "input": false
+              },
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label F"
+                ],
+                "contents": [
+                  "Value F"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 3,
+                "labels": [
+                  "Label G"
+                ],
+                "contents": [
+                  "Value G"
+                ],
+                "input": false
+              }
+            ]
+          ]
+        },
+        {
+          "width": 679,
+          "layout": [
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label A"
+                ],
+                "contents": [
+                  ""
+                ],
+                "input": true
+              },
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label B"
+                ],
+                "contents": [
+                  "Value B"
+                ],
+                "input": false
+              },
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label C"
+                ],
+                "contents": [
+                  "Value C"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label D"
+                ],
+                "contents": [
+                  "Value D"
+                ],
+                "input": false
+              },
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label E"
+                ],
+                "contents": [
+                  "Value E"
+                ],
+                "input": false
+              },
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label F"
+                ],
+                "contents": [
+                  "Value F"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 3,
+                "labels": [
+                  "Label G"
+                ],
+                "contents": [
+                  "Value G"
+                ],
+                "input": false
+              }
+            ]
+          ]
+        },
+        {
+          "width": 680,
+          "layout": [
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label A"
+                ],
+                "contents": [
+                  ""
+                ],
+                "input": true
+              },
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label B"
+                ],
+                "contents": [
+                  "Value B"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label C"
+                ],
+                "contents": [
+                  "Value C"
+                ],
+                "input": false
+              },
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label D"
+                ],
+                "contents": [
+                  "Value D"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label E"
+                ],
+                "contents": [
+                  "Value E"
+                ],
+                "input": false
+              },
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label F"
+                ],
+                "contents": [
+                  "Value F"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 2,
+                "labels": [
+                  "Label G"
+                ],
+                "contents": [
+                  "Value G"
+                ],
+                "input": false
+              }
+            ]
+          ]
+        },
+        {
+          "width": 899,
+          "layout": [
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label A"
+                ],
+                "contents": [
+                  ""
+                ],
+                "input": true
+              },
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label B"
+                ],
+                "contents": [
+                  "Value B"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label C"
+                ],
+                "contents": [
+                  "Value C"
+                ],
+                "input": false
+              },
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label D"
+                ],
+                "contents": [
+                  "Value D"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label E"
+                ],
+                "contents": [
+                  "Value E"
+                ],
+                "input": false
+              },
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label F"
+                ],
+                "contents": [
+                  "Value F"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 2,
+                "labels": [
+                  "Label G"
+                ],
+                "contents": [
+                  "Value G"
+                ],
+                "input": false
+              }
+            ]
+          ]
+        },
+        {
+          "width": 900,
+          "layout": [
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label A"
+                ],
+                "contents": [
+                  ""
+                ],
+                "input": true
+              },
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label B"
+                ],
+                "contents": [
+                  "Value B"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label C"
+                ],
+                "contents": [
+                  "Value C"
+                ],
+                "input": false
+              },
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label D"
+                ],
+                "contents": [
+                  "Value D"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label E"
+                ],
+                "contents": [
+                  "Value E"
+                ],
+                "input": false
+              },
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label F"
+                ],
+                "contents": [
+                  "Value F"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 2,
+                "labels": [
+                  "Label G"
+                ],
+                "contents": [
+                  "Value G"
+                ],
+                "input": false
+              }
+            ]
+          ]
+        },
+        {
+          "width": 919,
+          "layout": [
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label A"
+                ],
+                "contents": [
+                  ""
+                ],
+                "input": true
+              },
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label B"
+                ],
+                "contents": [
+                  "Value B"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label C"
+                ],
+                "contents": [
+                  "Value C"
+                ],
+                "input": false
+              },
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label D"
+                ],
+                "contents": [
+                  "Value D"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label E"
+                ],
+                "contents": [
+                  "Value E"
+                ],
+                "input": false
+              },
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label F"
+                ],
+                "contents": [
+                  "Value F"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 2,
+                "labels": [
+                  "Label G"
+                ],
+                "contents": [
+                  "Value G"
+                ],
+                "input": false
+              }
+            ]
+          ]
+        },
+        {
+          "width": 920,
+          "layout": [
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label A"
+                ],
+                "contents": [
+                  ""
+                ],
+                "input": true
+              },
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label B"
+                ],
+                "contents": [
+                  "Value B"
+                ],
+                "input": false
+              },
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label C"
+                ],
+                "contents": [
+                  "Value C"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label D"
+                ],
+                "contents": [
+                  "Value D"
+                ],
+                "input": false
+              },
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label E"
+                ],
+                "contents": [
+                  "Value E"
+                ],
+                "input": false
+              },
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label F"
+                ],
+                "contents": [
+                  "Value F"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 3,
+                "labels": [
+                  "Label G"
+                ],
+                "contents": [
+                  "Value G"
+                ],
+                "input": false
+              }
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "all-screens",
+        "token": {
+          "screenXSMin": 0,
+          "screenXS": 0,
+          "screenXSMax": 399,
+          "screenSMMin": 400,
+          "screenSM": 400,
+          "screenSMMax": 599,
+          "screenMDMin": 600,
+          "screenMD": 600,
+          "screenMDMax": 799,
+          "screenLGMin": 800,
+          "screenLG": 800,
+          "screenLGMax": 999,
+          "screenXLMin": 1000,
+          "screenXL": 1000,
+          "screenXLMax": 1199,
+          "screenXXLMin": 1200,
+          "screenXXL": 1200,
+          "screenXXLMax": 1399,
+          "screenXXXLMin": 1400,
+          "screenXXXL": 1400
+        },
+        "spans": true
+      },
+      "scope": "normal",
+      "result": [
+        {
+          "width": 399,
+          "layout": [
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label A"
+                ],
+                "contents": [
+                  ""
+                ],
+                "input": true
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label B"
+                ],
+                "contents": [
+                  "Value B"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label C"
+                ],
+                "contents": [
+                  "Value C"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label D"
+                ],
+                "contents": [
+                  "Value D"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label E"
+                ],
+                "contents": [
+                  "Value E"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label F"
+                ],
+                "contents": [
+                  "Value F"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label G"
+                ],
+                "contents": [
+                  "Value G"
+                ],
+                "input": false
+              }
+            ]
+          ]
+        },
+        {
+          "width": 400,
+          "layout": [
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label A"
+                ],
+                "contents": [
+                  ""
+                ],
+                "input": true
+              },
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label B"
+                ],
+                "contents": [
+                  "Value B"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label C"
+                ],
+                "contents": [
+                  "Value C"
+                ],
+                "input": false
+              },
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label D"
+                ],
+                "contents": [
+                  "Value D"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 2,
+                "labels": [
+                  "Label E"
+                ],
+                "contents": [
+                  "Value E"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label F"
+                ],
+                "contents": [
+                  "Value F"
+                ],
+                "input": false
+              },
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label G"
+                ],
+                "contents": [
+                  "Value G"
+                ],
+                "input": false
+              }
+            ]
+          ]
+        },
+        {
+          "width": 599,
+          "layout": [
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label A"
+                ],
+                "contents": [
+                  ""
+                ],
+                "input": true
+              },
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label B"
+                ],
+                "contents": [
+                  "Value B"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label C"
+                ],
+                "contents": [
+                  "Value C"
+                ],
+                "input": false
+              },
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label D"
+                ],
+                "contents": [
+                  "Value D"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 2,
+                "labels": [
+                  "Label E"
+                ],
+                "contents": [
+                  "Value E"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label F"
+                ],
+                "contents": [
+                  "Value F"
+                ],
+                "input": false
+              },
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label G"
+                ],
+                "contents": [
+                  "Value G"
+                ],
+                "input": false
+              }
+            ]
+          ]
+        },
+        {
+          "width": 600,
+          "layout": [
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label A"
+                ],
+                "contents": [
+                  ""
+                ],
+                "input": true
+              },
+              {
+                "tag": "td",
+                "span": 2,
+                "labels": [
+                  "Label B"
+                ],
+                "contents": [
+                  "Value B"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label C"
+                ],
+                "contents": [
+                  "Value C"
+                ],
+                "input": false
+              },
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label D"
+                ],
+                "contents": [
+                  "Value D"
+                ],
+                "input": false
+              },
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label E"
+                ],
+                "contents": [
+                  "Value E"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label F"
+                ],
+                "contents": [
+                  "Value F"
+                ],
+                "input": false
+              },
+              {
+                "tag": "td",
+                "span": 2,
+                "labels": [
+                  "Label G"
+                ],
+                "contents": [
+                  "Value G"
+                ],
+                "input": false
+              }
+            ]
+          ]
+        },
+        {
+          "width": 799,
+          "layout": [
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label A"
+                ],
+                "contents": [
+                  ""
+                ],
+                "input": true
+              },
+              {
+                "tag": "td",
+                "span": 2,
+                "labels": [
+                  "Label B"
+                ],
+                "contents": [
+                  "Value B"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label C"
+                ],
+                "contents": [
+                  "Value C"
+                ],
+                "input": false
+              },
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label D"
+                ],
+                "contents": [
+                  "Value D"
+                ],
+                "input": false
+              },
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label E"
+                ],
+                "contents": [
+                  "Value E"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label F"
+                ],
+                "contents": [
+                  "Value F"
+                ],
+                "input": false
+              },
+              {
+                "tag": "td",
+                "span": 2,
+                "labels": [
+                  "Label G"
+                ],
+                "contents": [
+                  "Value G"
+                ],
+                "input": false
+              }
+            ]
+          ]
+        },
+        {
+          "width": 800,
+          "layout": [
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label A"
+                ],
+                "contents": [
+                  ""
+                ],
+                "input": true
+              },
+              {
+                "tag": "td",
+                "span": 2,
+                "labels": [
+                  "Label B"
+                ],
+                "contents": [
+                  "Value B"
+                ],
+                "input": false
+              },
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label C"
+                ],
+                "contents": [
+                  "Value C"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label D"
+                ],
+                "contents": [
+                  "Value D"
+                ],
+                "input": false
+              },
+              {
+                "tag": "td",
+                "span": 3,
+                "labels": [
+                  "Label E"
+                ],
+                "contents": [
+                  "Value E"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label F"
+                ],
+                "contents": [
+                  "Value F"
+                ],
+                "input": false
+              },
+              {
+                "tag": "td",
+                "span": 3,
+                "labels": [
+                  "Label G"
+                ],
+                "contents": [
+                  "Value G"
+                ],
+                "input": false
+              }
+            ]
+          ]
+        },
+        {
+          "width": 999,
+          "layout": [
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label A"
+                ],
+                "contents": [
+                  ""
+                ],
+                "input": true
+              },
+              {
+                "tag": "td",
+                "span": 2,
+                "labels": [
+                  "Label B"
+                ],
+                "contents": [
+                  "Value B"
+                ],
+                "input": false
+              },
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label C"
+                ],
+                "contents": [
+                  "Value C"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label D"
+                ],
+                "contents": [
+                  "Value D"
+                ],
+                "input": false
+              },
+              {
+                "tag": "td",
+                "span": 3,
+                "labels": [
+                  "Label E"
+                ],
+                "contents": [
+                  "Value E"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label F"
+                ],
+                "contents": [
+                  "Value F"
+                ],
+                "input": false
+              },
+              {
+                "tag": "td",
+                "span": 3,
+                "labels": [
+                  "Label G"
+                ],
+                "contents": [
+                  "Value G"
+                ],
+                "input": false
+              }
+            ]
+          ]
+        },
+        {
+          "width": 1000,
+          "layout": [
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label A"
+                ],
+                "contents": [
+                  ""
+                ],
+                "input": true
+              },
+              {
+                "tag": "td",
+                "span": 2,
+                "labels": [
+                  "Label B"
+                ],
+                "contents": [
+                  "Value B"
+                ],
+                "input": false
+              },
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label C"
+                ],
+                "contents": [
+                  "Value C"
+                ],
+                "input": false
+              },
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label D"
+                ],
+                "contents": [
+                  "Value D"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 5,
+                "labels": [
+                  "Label E"
+                ],
+                "contents": [
+                  "Value E"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label F"
+                ],
+                "contents": [
+                  "Value F"
+                ],
+                "input": false
+              },
+              {
+                "tag": "td",
+                "span": 4,
+                "labels": [
+                  "Label G"
+                ],
+                "contents": [
+                  "Value G"
+                ],
+                "input": false
+              }
+            ]
+          ]
+        },
+        {
+          "width": 1199,
+          "layout": [
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label A"
+                ],
+                "contents": [
+                  ""
+                ],
+                "input": true
+              },
+              {
+                "tag": "td",
+                "span": 2,
+                "labels": [
+                  "Label B"
+                ],
+                "contents": [
+                  "Value B"
+                ],
+                "input": false
+              },
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label C"
+                ],
+                "contents": [
+                  "Value C"
+                ],
+                "input": false
+              },
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label D"
+                ],
+                "contents": [
+                  "Value D"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 5,
+                "labels": [
+                  "Label E"
+                ],
+                "contents": [
+                  "Value E"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label F"
+                ],
+                "contents": [
+                  "Value F"
+                ],
+                "input": false
+              },
+              {
+                "tag": "td",
+                "span": 4,
+                "labels": [
+                  "Label G"
+                ],
+                "contents": [
+                  "Value G"
+                ],
+                "input": false
+              }
+            ]
+          ]
+        },
+        {
+          "width": 1200,
+          "layout": [
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label A"
+                ],
+                "contents": [
+                  ""
+                ],
+                "input": true
+              },
+              {
+                "tag": "td",
+                "span": 2,
+                "labels": [
+                  "Label B"
+                ],
+                "contents": [
+                  "Value B"
+                ],
+                "input": false
+              },
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label C"
+                ],
+                "contents": [
+                  "Value C"
+                ],
+                "input": false
+              },
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label D"
+                ],
+                "contents": [
+                  "Value D"
+                ],
+                "input": false
+              },
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label E"
+                ],
+                "contents": [
+                  "Value E"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label F"
+                ],
+                "contents": [
+                  "Value F"
+                ],
+                "input": false
+              },
+              {
+                "tag": "td",
+                "span": 5,
+                "labels": [
+                  "Label G"
+                ],
+                "contents": [
+                  "Value G"
+                ],
+                "input": false
+              }
+            ]
+          ]
+        },
+        {
+          "width": 1399,
+          "layout": [
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label A"
+                ],
+                "contents": [
+                  ""
+                ],
+                "input": true
+              },
+              {
+                "tag": "td",
+                "span": 2,
+                "labels": [
+                  "Label B"
+                ],
+                "contents": [
+                  "Value B"
+                ],
+                "input": false
+              },
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label C"
+                ],
+                "contents": [
+                  "Value C"
+                ],
+                "input": false
+              },
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label D"
+                ],
+                "contents": [
+                  "Value D"
+                ],
+                "input": false
+              },
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label E"
+                ],
+                "contents": [
+                  "Value E"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label F"
+                ],
+                "contents": [
+                  "Value F"
+                ],
+                "input": false
+              },
+              {
+                "tag": "td",
+                "span": 5,
+                "labels": [
+                  "Label G"
+                ],
+                "contents": [
+                  "Value G"
+                ],
+                "input": false
+              }
+            ]
+          ]
+        },
+        {
+          "width": 1400,
+          "layout": [
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label A"
+                ],
+                "contents": [
+                  ""
+                ],
+                "input": true
+              },
+              {
+                "tag": "td",
+                "span": 3,
+                "labels": [
+                  "Label B"
+                ],
+                "contents": [
+                  "Value B"
+                ],
+                "input": false
+              },
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label C"
+                ],
+                "contents": [
+                  "Value C"
+                ],
+                "input": false
+              },
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label D"
+                ],
+                "contents": [
+                  "Value D"
+                ],
+                "input": false
+              },
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label E"
+                ],
+                "contents": [
+                  "Value E"
+                ],
+                "input": false
+              }
+            ],
+            [
+              {
+                "tag": "td",
+                "span": 1,
+                "labels": [
+                  "Label F"
+                ],
+                "contents": [
+                  "Value F"
+                ],
+                "input": false
+              },
+              {
+                "tag": "td",
+                "span": 6,
+                "labels": [
+                  "Label G"
+                ],
+                "contents": [
+                  "Value G"
+                ],
+                "input": false
+              }
+            ]
+          ]
+        }
+      ]
+    }
+  ],
+  "live": {
+    "initial": [
+      [
+        {
+          "tag": "td",
+          "span": 1,
+          "labels": [
+            "Label A"
+          ],
+          "contents": [
+            ""
+          ],
+          "input": true
+        },
+        {
+          "tag": "td",
+          "span": 1,
+          "labels": [
+            "Label B"
+          ],
+          "contents": [
+            "Value B"
+          ],
+          "input": false
+        },
+        {
+          "tag": "td",
+          "span": 1,
+          "labels": [
+            "Label C"
+          ],
+          "contents": [
+            "Value C"
+          ],
+          "input": false
+        }
+      ],
+      [
+        {
+          "tag": "td",
+          "span": 1,
+          "labels": [
+            "Label D"
+          ],
+          "contents": [
+            "Value D"
+          ],
+          "input": false
+        },
+        {
+          "tag": "td",
+          "span": 1,
+          "labels": [
+            "Label E"
+          ],
+          "contents": [
+            "Value E"
+          ],
+          "input": false
+        },
+        {
+          "tag": "td",
+          "span": 1,
+          "labels": [
+            "Label F"
+          ],
+          "contents": [
+            "Value F"
+          ],
+          "input": false
+        }
+      ],
+      [
+        {
+          "tag": "td",
+          "span": 3,
+          "labels": [
+            "Label G"
+          ],
+          "contents": [
+            "Value G"
+          ],
+          "input": false
+        }
+      ]
+    ],
+    "updated": {
+      "layout": [
+        [
+          {
+            "tag": "td",
+            "span": 1,
+            "labels": [
+              "Label A"
+            ],
+            "contents": [
+              ""
+            ],
+            "input": true
+          },
+          {
+            "tag": "td",
+            "span": 1,
+            "labels": [
+              "Label B"
+            ],
+            "contents": [
+              "Value B"
+            ],
+            "input": false
+          },
+          {
+            "tag": "td",
+            "span": 1,
+            "labels": [
+              "Label C"
+            ],
+            "contents": [
+              "Value C"
+            ],
+            "input": false
+          }
+        ],
+        [
+          {
+            "tag": "td",
+            "span": 1,
+            "labels": [
+              "Label D"
+            ],
+            "contents": [
+              "Value D"
+            ],
+            "input": false
+          },
+          {
+            "tag": "td",
+            "span": 1,
+            "labels": [
+              "Label E"
+            ],
+            "contents": [
+              "Value E"
+            ],
+            "input": false
+          },
+          {
+            "tag": "td",
+            "span": 1,
+            "labels": [
+              "Label F"
+            ],
+            "contents": [
+              "Value F"
+            ],
+            "input": false
+          }
+        ],
+        [
+          {
+            "tag": "td",
+            "span": 3,
+            "labels": [
+              "Label G"
+            ],
+            "contents": [
+              "Value G"
+            ],
+            "input": false
+          }
+        ]
+      ],
+      "sameRoot": true,
+      "sameInput": true,
+      "value": "Retained draft",
+      "selection": [
+        1,
+        5,
+        "backward"
+      ]
+    },
+    "resized": [
+      [
+        {
+          "tag": "td",
+          "span": 1,
+          "labels": [
+            "Label A"
+          ],
+          "contents": [
+            ""
+          ],
+          "input": true
+        },
+        {
+          "tag": "td",
+          "span": 1,
+          "labels": [
+            "Label B"
+          ],
+          "contents": [
+            "Value B"
+          ],
+          "input": false
+        }
+      ],
+      [
+        {
+          "tag": "td",
+          "span": 1,
+          "labels": [
+            "Label C"
+          ],
+          "contents": [
+            "Value C"
+          ],
+          "input": false
+        },
+        {
+          "tag": "td",
+          "span": 1,
+          "labels": [
+            "Label D"
+          ],
+          "contents": [
+            "Value D"
+          ],
+          "input": false
+        }
+      ],
+      [
+        {
+          "tag": "td",
+          "span": 1,
+          "labels": [
+            "Label E"
+          ],
+          "contents": [
+            "Value E"
+          ],
+          "input": false
+        },
+        {
+          "tag": "td",
+          "span": 1,
+          "labels": [
+            "Label F"
+          ],
+          "contents": [
+            "Value F"
+          ],
+          "input": false
+        }
+      ],
+      [
+        {
+          "tag": "td",
+          "span": 2,
+          "labels": [
+            "Label G"
+          ],
+          "contents": [
+            "Value G"
+          ],
+          "input": false
+        }
+      ]
+    ],
+    "fresh": [
+      {
+        "width": 800,
+        "layout": [
+          [
+            {
+              "tag": "td",
+              "span": 1,
+              "labels": [
+                "Label A"
+              ],
+              "contents": [
+                ""
+              ],
+              "input": true
+            },
+            {
+              "tag": "td",
+              "span": 1,
+              "labels": [
+                "Label B"
+              ],
+              "contents": [
+                "Value B"
+              ],
+              "input": false
+            }
+          ],
+          [
+            {
+              "tag": "td",
+              "span": 1,
+              "labels": [
+                "Label C"
+              ],
+              "contents": [
+                "Value C"
+              ],
+              "input": false
+            },
+            {
+              "tag": "td",
+              "span": 1,
+              "labels": [
+                "Label D"
+              ],
+              "contents": [
+                "Value D"
+              ],
+              "input": false
+            }
+          ],
+          [
+            {
+              "tag": "td",
+              "span": 1,
+              "labels": [
+                "Label E"
+              ],
+              "contents": [
+                "Value E"
+              ],
+              "input": false
+            },
+            {
+              "tag": "td",
+              "span": 1,
+              "labels": [
+                "Label F"
+              ],
+              "contents": [
+                "Value F"
+              ],
+              "input": false
+            }
+          ],
+          [
+            {
+              "tag": "td",
+              "span": 2,
+              "labels": [
+                "Label G"
+              ],
+              "contents": [
+                "Value G"
+              ],
+              "input": false
+            }
+          ]
+        ]
+      },
+      {
+        "width": 639,
+        "layout": [
+          [
+            {
+              "tag": "td",
+              "span": 1,
+              "labels": [
+                "Label A"
+              ],
+              "contents": [
+                ""
+              ],
+              "input": true
+            }
+          ],
+          [
+            {
+              "tag": "td",
+              "span": 1,
+              "labels": [
+                "Label B"
+              ],
+              "contents": [
+                "Value B"
+              ],
+              "input": false
+            }
+          ],
+          [
+            {
+              "tag": "td",
+              "span": 1,
+              "labels": [
+                "Label C"
+              ],
+              "contents": [
+                "Value C"
+              ],
+              "input": false
+            }
+          ],
+          [
+            {
+              "tag": "td",
+              "span": 1,
+              "labels": [
+                "Label D"
+              ],
+              "contents": [
+                "Value D"
+              ],
+              "input": false
+            }
+          ],
+          [
+            {
+              "tag": "td",
+              "span": 1,
+              "labels": [
+                "Label E"
+              ],
+              "contents": [
+                "Value E"
+              ],
+              "input": false
+            }
+          ],
+          [
+            {
+              "tag": "td",
+              "span": 1,
+              "labels": [
+                "Label F"
+              ],
+              "contents": [
+                "Value F"
+              ],
+              "input": false
+            }
+          ],
+          [
+            {
+              "tag": "td",
+              "span": 1,
+              "labels": [
+                "Label G"
+              ],
+              "contents": [
+                "Value G"
+              ],
+              "input": false
+            }
+          ]
+        ]
+      },
+      {
+        "width": 900,
+        "layout": [
+          [
+            {
+              "tag": "td",
+              "span": 1,
+              "labels": [
+                "Label A"
+              ],
+              "contents": [
+                ""
+              ],
+              "input": true
+            },
+            {
+              "tag": "td",
+              "span": 1,
+              "labels": [
+                "Label B"
+              ],
+              "contents": [
+                "Value B"
+              ],
+              "input": false
+            },
+            {
+              "tag": "td",
+              "span": 1,
+              "labels": [
+                "Label C"
+              ],
+              "contents": [
+                "Value C"
+              ],
+              "input": false
+            }
+          ],
+          [
+            {
+              "tag": "td",
+              "span": 1,
+              "labels": [
+                "Label D"
+              ],
+              "contents": [
+                "Value D"
+              ],
+              "input": false
+            },
+            {
+              "tag": "td",
+              "span": 1,
+              "labels": [
+                "Label E"
+              ],
+              "contents": [
+                "Value E"
+              ],
+              "input": false
+            },
+            {
+              "tag": "td",
+              "span": 1,
+              "labels": [
+                "Label F"
+              ],
+              "contents": [
+                "Value F"
+              ],
+              "input": false
+            }
+          ],
+          [
+            {
+              "tag": "td",
+              "span": 3,
+              "labels": [
+                "Label G"
+              ],
+              "contents": [
+                "Value G"
+              ],
+              "input": false
+            }
+          ]
+        ]
+      }
+    ],
+    "token": {
+      "screenXSMax": 639,
+      "screenSMMin": 640,
+      "screenSM": 640,
+      "screenSMMax": 899,
+      "screenMDMin": 900,
+      "screenMD": 900
+    }
+  }
+}

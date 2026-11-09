@@ -320,6 +320,11 @@ SSR охватывает также defaultOpen, browser — смену обще
 CSS selectors; raw прозрачный фон сохранён отдельно от public inherited-prefix
 counterpart. Svelte сохраняет прежнее оформление списка; только menu background
 сравнивается с counterpart, остальные свойства — с raw Source.
+Descriptions responsive column/span используют тот же validated global breakpoint
+resolver, что Row. 52 raw viewport frames и отдельные live/fresh frames описывают
+пороговые значения, вложенные/reset scopes, default columns и packing spans.
+Source useBreakpoint сохраняет старые subscriptions при смене tokens; Native
+заменяет их, сохраняя editor/ref/focus/selection. SSR остаётся с screens={} и fallback3.
 Рецепт table-prefix извлекает 187 правил Table. Owner classes и общие Checkbox,
 Pagination/Descriptions namespaces разделены; private nested-border-top следует
 общему prefix, component tokens/marker canonical. Defaults имеют нулевую specificity.
