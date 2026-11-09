@@ -2828,6 +2828,18 @@ hover/focus/contextMenu и независимые action props доступны 
 (диапазон upstream ~1.5.0). React/rc-menu runtime не устанавливается;
 [MIT-лицензия rc-menu](./src/lib/vendor/LICENSE.rc-menu) сохранена в пакете.
 
+PrefixCls задаёт локальный namespace Menu, его пунктов, групп, Divider и подменю.
+Пустая строка наследует ConfigProvider.prefixCls. Popup и inline-списки сохраняют
+тот же префикс; Typography selectors используют независимый общий namespace.
+Canonical variables/link reset и @scope границы тем сохранены. Шаблоны содержат
+201 базовое и 77 scoped theme rules без motion и deprecated declarations.
+Смена префикса сохраняет root/item/title DOM, selection/open state, refs, IDs и фокус.
+
+У upstream dashed Divider пропускает локальный префикс владельца. [Raw измерения и
+public per-divider prefixCls counterparts](./tests/browser/fixtures/ant-design-menu-prefix-reference.json)
+сохранены отдельно; Svelte наследует согласованный prefix Menu и сохраняет dashed.
+Независимый per-divider prefixCls этим этапом не добавляется.
+
 ```svelte
 <script lang="ts">
   import { Menu, type MenuItemType } from 'antd-svelte';

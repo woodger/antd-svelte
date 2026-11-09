@@ -17,8 +17,11 @@
   import { useSider } from './layout-context';
   import { useComponentTheme } from './theme-component.svelte';
   import MenuList from './MenuList.svelte';
+  import ThemeScopeStyle from './ThemeScopeStyle.svelte';
+  import { getMenuPrefixCss } from './menu-prefix.engine';
 
   let {
+    prefixCls: customizePrefixCls,
     items = [],
     mode = 'vertical',
     theme = 'light',
@@ -49,6 +52,9 @@
   }: MenuProps = $props();
 
   const config = useConfig();
+  let componentPrefix = $derived(config.getPrefixCls('menu', customizePrefixCls));
+  let rootPrefix = $derived(config.getPrefixCls());
+  let prefixCss = $derived(getMenuPrefixCss(componentPrefix, rootPrefix));
   let popupContainer = $derived(Object.hasOwn(rest, 'getPopupContainer')
     ? rest.getPopupContainer : config.getPopupContainer);
   let attributes = $derived.by(() => {
@@ -255,6 +261,8 @@
   }
 
   provideMenu({
+    get prefixCls() { return componentPrefix; },
+    get rootPrefixCls() { return rootPrefix; },
     componentTheme,
     get mode() {
       return actualMode;
@@ -346,17 +354,17 @@
   }
 </script>
 
-<ul {...attributes} bind:this={rootElement} role="menu" tabindex={tabindex} data-menu-list="true" dir={config.direction}
+{#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`menu-prefix:${componentPrefix}:${rootPrefix}`} />{/if}<ul {...attributes} data-ant-menu-prefix={componentPrefix} data-ant-menu-root-prefix={rootPrefix} bind:this={rootElement} role="menu" tabindex={tabindex} data-menu-list="true" dir={config.direction}
   aria-disabled={disabled || undefined} aria-orientation={actualMode === 'horizontal' ? 'horizontal' : 'vertical'}
   style={[componentTheme.style, style].filter(Boolean).join(';') || undefined} class={[
-      'ant-menu ant-menu-css-var ant-menu-root',
+      `${componentPrefix} ant-menu-css-var ${componentPrefix}-root`,
       componentTheme.className,
       componentTheme.className && 'ant-menu-source-theme',
-      componentTheme.className && actualMode === 'horizontal' && 'ant-menu-overflow',
-      `ant-menu-${actualMode}`,
-      `ant-menu-${theme}`,
-      collapsed && 'ant-menu-inline-collapsed',
-      config.direction === 'rtl' && 'ant-menu-rtl',
+      componentTheme.className && actualMode === 'horizontal' && `${componentPrefix}-overflow`,
+      `${componentPrefix}-${actualMode}`,
+      `${componentPrefix}-${theme}`,
+      collapsed && `${componentPrefix}-inline-collapsed`,
+      config.direction === 'rtl' && `${componentPrefix}-rtl`,
       className,
       rootClassName
     ]}

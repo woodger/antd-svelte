@@ -43,7 +43,7 @@
     const name = side === 'left' ? `${rtl ? 'right' : 'left'}Top`
       : side === 'right' ? `${rtl ? 'left' : 'right'}Top` : `${side}Left`;
 
-    return `ant-menu-submenu-placement-${name}`;
+    return `${context.prefixCls}-submenu-placement-${name}`;
   });
   let mounted = $state(untrack(() => opened || context.forceRender));
   let popupMounted = $state(untrack(() => context.mode !== 'inline'
@@ -158,21 +158,21 @@
 </script>
 
 <style>
-  .ant-menu-submenu-title { display: block; width: 100%; padding-block: 0; border: 0; background: transparent; color: inherit; font: inherit; text-align: inherit; }
-  .ant-menu-submenu-title:focus-visible { outline: 2px solid var(--ant-color-primary); outline-offset: -2px; }
+  [data-ant-menu-submenu-title] { display: block; width: 100%; padding-block: 0; border: 0; background: transparent; color: inherit; font: inherit; text-align: inherit; }
+  [data-ant-menu-submenu-title]:focus-visible { outline: 2px solid var(--ant-color-primary); outline-offset: -2px; }
   .menu-popup { position: fixed; margin: 0; border: 0; overflow: visible; background: transparent; }
   /* Horizontal vendor display не должен раскрывать forceSubMenuRender popup. */
   .menu-popup[hidden] { display: none; }
   .menu-popup:global(.ant-menu-source-theme) { border-radius: var(--ant-border-radius-lg); }
 </style>
 
-<li role="none" class={[
-    'ant-menu-submenu',
-    `ant-menu-submenu-${context.mode}`,
-    opened && 'ant-menu-submenu-open',
-    selected && 'ant-menu-submenu-selected',
-    blocked && 'ant-menu-submenu-disabled',
-    active && 'ant-menu-submenu-active',
+<li data-ant-menu-prefix={context.prefixCls} data-ant-menu-root-prefix={context.rootPrefixCls} role="none" class={[
+    `${context.prefixCls}-submenu`,
+    `${context.prefixCls}-submenu-${context.mode}`,
+    opened && `${context.prefixCls}-submenu-open`,
+    selected && `${context.prefixCls}-submenu-selected`,
+    blocked && `${context.prefixCls}-submenu-disabled`,
+    active && `${context.prefixCls}-submenu-active`,
     item.class
   ]}
   style={item.style} onmouseenter={() => {
@@ -185,8 +185,8 @@
         context.activate(null);
       context.hover(entry, false);
     }}>
-  <button type="button" disabled={blocked} bind:this={title} use:register id={context.id(entry.key)} data-menu-id={context.id(entry.key)}
-    class="ant-menu-submenu-title" role="menuitem" tabindex={blocked ? undefined : -1} aria-disabled={blocked || undefined}
+  <button data-ant-menu-submenu-title type="button" disabled={blocked} bind:this={title} use:register id={context.id(entry.key)} data-menu-id={context.id(entry.key)}
+    class={`${context.prefixCls}-submenu-title`} role="menuitem" tabindex={blocked ? undefined : -1} aria-disabled={blocked || undefined}
     aria-haspopup="menu" aria-expanded={opened} aria-controls={`${context.id(entry.key)}-popup`}
     title={item.title
         ?? (context.collapsed && typeof item.label === 'string'
@@ -213,18 +213,18 @@
         if (!blocked)
           context.activate(entry.key);
       }}>
-    {#if item.icon}<span class="ant-menu-item-icon">{@render item.icon()}</span>{#if !context.componentTheme.className}{' '}{/if}{/if}{#if context.collapsed && !entry.parent && !item.icon && typeof item.label === 'string'}
-      <span class="ant-menu-inline-collapsed-noicon">{item.label.charAt(0)}</span>
-    {:else}<span class="ant-menu-title-content">{#if typeof item.label === 'function'}{@render item.label()}{:else}{item.label ?? ''}{/if}</span>{/if}
-    {#if context.mode !== 'horizontal' || entry.parent}<i class="ant-menu-submenu-arrow" aria-hidden="true"></i>{/if}
+    {#if item.icon}<span class={`${context.prefixCls}-item-icon`}>{@render item.icon()}</span>{#if !context.componentTheme.className}{' '}{/if}{/if}{#if context.collapsed && !entry.parent && !item.icon && typeof item.label === 'string'}
+      <span class={`${context.prefixCls}-inline-collapsed-noicon`}>{item.label.charAt(0)}</span>
+    {:else}<span class={`${context.prefixCls}-title-content`}>{#if typeof item.label === 'function'}{@render item.label()}{:else}{item.label ?? ''}{/if}</span>{/if}
+    {#if context.mode !== 'horizontal' || entry.parent}<i class={`${context.prefixCls}-submenu-arrow`} aria-hidden="true"></i>{/if}
   </button>
   {#if mounted}
     {#if context.mode === 'inline'}
-      <ul id={`${context.id(entry.key)}-popup`} role="menu" data-menu-list="true"
+      <ul data-ant-menu-prefix={context.prefixCls} data-ant-menu-root-prefix={context.rootPrefixCls} id={`${context.id(entry.key)}-popup`} role="menu" data-menu-list="true"
         class={[
-            'ant-menu ant-menu-css-var ant-menu-sub ant-menu-inline',
-            !opened && 'ant-menu-hidden',
-            context.direction === 'rtl' && 'ant-menu-rtl'
+            `${context.prefixCls} ant-menu-css-var ${context.prefixCls}-sub ${context.prefixCls}-inline`,
+            !opened && `${context.prefixCls}-hidden`,
+            context.direction === 'rtl' && `${context.prefixCls}-rtl`
           ]}
         style={nestedStyle}
         hidden={!opened}><MenuList entries={entry.children} {theme} /></ul>
@@ -232,15 +232,15 @@
   {/if}
   {#if popupMounted && (context.mode !== 'inline' || client && containerUsed)}
     {#key popupContainer}
-      <div bind:this={popup} role="presentation" popover="manual"
+      <div data-ant-menu-prefix={context.prefixCls} data-ant-menu-root-prefix={context.rootPrefixCls} bind:this={popup} role="presentation" popover="manual"
         hidden={context.mode === 'inline' || !opened || !shown}
         class={[
-            'menu-popup ant-menu ant-menu-css-var ant-menu-submenu ant-menu-submenu-popup',
+            `menu-popup ${context.prefixCls} ant-menu-css-var ${context.prefixCls}-submenu ${context.prefixCls}-submenu-popup`,
             context.componentTheme.className,
             context.componentTheme.className && 'ant-menu-source-theme',
             placementClass,
-            `ant-menu-${actualTheme}`,
-            context.direction === 'rtl' && 'ant-menu-rtl',
+            `${context.prefixCls}-${actualTheme}`,
+            context.direction === 'rtl' && `${context.prefixCls}-rtl`,
             item.popupClassName
           ]}
         style={untrack(() => context.componentTheme.style)}
@@ -248,11 +248,11 @@
         onmouseleave={() => context.hover(entry, false)}
         {@attach portal}
         {@attach node => connectComponentTheme(node, context.componentTheme.style)}>
-        <ul id={`${context.id(entry.key)}-popup`} role="menu" data-menu-list="true"
+        <ul data-ant-menu-prefix={context.prefixCls} data-ant-menu-root-prefix={context.rootPrefixCls} id={`${context.id(entry.key)}-popup`} role="menu" data-menu-list="true"
           class={[
-              'ant-menu ant-menu-css-var ant-menu-sub',
-              context.mode === 'inline' ? 'ant-menu-inline' : 'ant-menu-vertical',
-              context.direction === 'rtl' && 'ant-menu-rtl'
+              `${context.prefixCls} ant-menu-css-var ${context.prefixCls}-sub`,
+              context.mode === 'inline' ? `${context.prefixCls}-inline` : `${context.prefixCls}-vertical`,
+              context.direction === 'rtl' && `${context.prefixCls}-rtl`
             ]} style={nestedStyle} {@attach connectEvents}>
           <MenuPopupContent entries={entry.children} {theme}
             isInlineCopy={context.mode === 'inline'} />

@@ -9,6 +9,10 @@
 
 ### Added
 
+- Menu поддерживает local/shared prefixCls во всех режимах, пунктах и подменю.
+  Scoped темы, canonical tokens/link reset, DOM/refs, selection/open и фокус
+  сохраняются. Source dashed Divider owner omission записан raw/matched.
+
 - Dropdown поддерживает local/shared prefixCls для trigger, popup, внутреннего
   меню, стрелок и состояний. Button namespace и canonical tokens независимы;
   открытый popup, команды, фокус, typeahead и native binding/callbacks сохраняются.

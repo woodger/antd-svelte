@@ -230,6 +230,10 @@ CSS изолирован по base/viewer pair. Отдельные public Source
 и исходного title flex:auto: сохранены прежние Native label flex/min-width.
 Runtime разделяет owner Dropdown/menu namespace и общий Button prefix; canonical
 markers/variables, native popover/controller, ссылки и typeahead сохраняются.
+Рецепты menu-prefix/menu-theme-prefix выводят 201 base и 77 scoped theme rules с
+прежними deprecated exclusions. Runtime сохраняет canonical variables/link reset,
+изолирует Menu/popup namespaces и общий Typography prefix. Raw dashed Divider
+owner omission отделён от public per-divider prefixCls counterparts.
 Рецепт layout-prefix выводит 35 flat rules Layout/Sider; runtime выбирает свою
 группу, сохраняет Menu namespace и ограничивает defaults/state selectors корнем.
 Тот же template используется для Header/Content/Footer: выбираются selectors

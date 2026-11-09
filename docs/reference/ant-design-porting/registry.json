@@ -3171,7 +3171,22 @@
         "tests/browser/fixtures/ant-design-menu-link-decoration-reference.json",
         "tests/browser/fixtures/MenuLinkDecorationFixtures.svelte",
         "tests/browser/menu-link-decoration.spec.ts",
-        "readme.md"
+        "readme.md",
+        "src/lib/MenuList.svelte",
+        "src/lib/MenuSubMenu.svelte",
+        "src/lib/menu-context.ts",
+        "src/lib/menu.types.ts",
+        "src/lib/menu-prefix.engine.ts",
+        "src/lib/menu-prefix.engine.test.ts",
+        "src/lib/vendor/menu-prefix.css.js",
+        "src/lib/vendor/menu-theme-prefix.css.js",
+        "tests/browser/fixtures/MenuPrefixScope.svelte",
+        "tests/browser/fixtures/MenuPrefixFixtures.svelte",
+        "tests/browser/fixtures/MenuPrefixSSRFixtures.svelte",
+        "tests/browser/fixtures/ant-design-menu-prefix-reference.json",
+        "tests/browser/menu-prefix-metrics.ts",
+        "tests/browser/menu-prefix.spec.ts",
+        "tests/package/menu-prefix.ssr.test.ts"
       ],
       "features": [
         {
@@ -3273,6 +3288,32 @@
             "readme.md"
           ],
           "note": "14 общих link reset rules извлекаются из закреплённого npm CSS и ограничены потомками .ant-menu-css-var с исходной specificity ссылок/псевдоклассов. Normal/hover/active/focus используют исходные decoration tokens; inline style приоритетнее, Menu item colors и disabled rules сохраняют приоритет над общим reset. Правила действуют без source theme, в cssVar, horizontal/vertical/inline, группах и popup-подменю, включая body/ShadowRoot containers с подключёнными владельцем стилями. 39 UMD-сценариев закрепляют default/custom/inline, light/dark/compact/RTL; browser проверяет href, одиночные click/selection callbacks, клавиатуру, сохранение DOM/focus при смене токенов и темы и оформление внешних ссылок. Native DOM, popup lifecycle и прочий Menu API сохранены."
+        },
+        {
+          "id": "component-prefix",
+          "title": "Local/shared prefixCls, nested/popup namespaces и scoped темы",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Menu.svelte",
+            "src/lib/MenuList.svelte",
+            "src/lib/MenuSubMenu.svelte",
+            "src/lib/menu-context.ts",
+            "src/lib/menu.types.ts",
+            "src/lib/menu-prefix.engine.ts",
+            "src/lib/menu-prefix.engine.test.ts",
+            "src/lib/vendor/menu-prefix.css.js",
+            "src/lib/vendor/menu-theme-prefix.css.js",
+            "tools/ant-design-css-recipes.json",
+            "tests/browser/fixtures/MenuPrefixScope.svelte",
+            "tests/browser/fixtures/MenuPrefixFixtures.svelte",
+            "tests/browser/fixtures/MenuPrefixSSRFixtures.svelte",
+            "tests/browser/fixtures/ant-design-menu-prefix-reference.json",
+            "tests/browser/menu-prefix-metrics.ts",
+            "tests/browser/menu-prefix.spec.ts",
+            "tests/package/menu-prefix.ssr.test.ts"
+          ],
+          "note": "14 raw UMD конфигураций: четыре режима и normal/nested/reset scopes, light/dark/RTL, aliases/cssVar и HTMLElement portal. Owner prefixCls используется рекурсивно для items/groups/divider/submenus/placements; пустая строка наследует ConfigProvider. 201 base и 77 theme rules сохраняют canonical variables/link reset, CSS scope boundaries и deprecated exclusions; Typography namespace независим. Source MenuDivider dashed class пропускает local owner prefix: raw results отделены от public per-divider prefixCls counterparts. Native сохраняет coherent dashed classes. Девять live transitions сохраняют root/item/title DOM, refs/IDs, selection/open state, focus, native links и callbacks. Независимый per-divider prefixCls, полный semantic/config/tooltip и overflow/motion этим этапом не добавлены."
         }
       ]
     },
@@ -20713,9 +20754,25 @@
             "tests/browser/fixtures/ant-design-dropdown-prefix-reference.json",
             "tests/browser/dropdown-prefix-metrics.ts",
             "tests/browser/dropdown-prefix.spec.ts",
-            "tests/package/dropdown-prefix.ssr.test.ts"
+            "tests/package/dropdown-prefix.ssr.test.ts",
+            "src/lib/Menu.svelte",
+            "src/lib/MenuList.svelte",
+            "src/lib/MenuSubMenu.svelte",
+            "src/lib/menu-context.ts",
+            "src/lib/menu.types.ts",
+            "src/lib/menu-prefix.engine.ts",
+            "src/lib/menu-prefix.engine.test.ts",
+            "src/lib/vendor/menu-prefix.css.js",
+            "src/lib/vendor/menu-theme-prefix.css.js",
+            "tests/browser/fixtures/MenuPrefixScope.svelte",
+            "tests/browser/fixtures/MenuPrefixFixtures.svelte",
+            "tests/browser/fixtures/MenuPrefixSSRFixtures.svelte",
+            "tests/browser/fixtures/ant-design-menu-prefix-reference.json",
+            "tests/browser/menu-prefix-metrics.ts",
+            "tests/browser/menu-prefix.spec.ts",
+            "tests/package/menu-prefix.ssr.test.ts"
           ],
-          "note": "Общий source resolver: local nonempty prefix wins, undefined/empty provider prefix наследует parent, suffix сохраняет точную роль. App/Layout/Sider/Header/Content/Footer, Statistic/Timer, QRCode, Timeline, Steps, Divider, Flex, Segmented, Avatar/Group, Badge/Ribbon, Tag/CheckableTag/Group, Empty, Skeleton/primitives, Spin, Progress, Result, Alert, Collapse, Affix, Tooltip/Popover/Popconfirm, Slider, BorderBeam, Masonry, Splitter, Anchor, Space/Compact/Addon, Breadcrumb и Row подключены; последующие расширения описаны ниже, остальные families подключаются отдельно. Source theme namespace fallback следует class prefix, inherited/local cssVar.prefix приоритетнее; explicit undefined сбрасывает inherited namespace к текущему provider. Theme/color defaults без настройки prefix не меняются. 13 raw UMD cases и 3 transitions, включая nested/reset/sibling scopes, live prefix/value identity и SSR. Display components отдельно сверяются с девятью raw UMD cases и тремя transitions; ambient typography/direction совпадают с Native provider DOM, текущее время Timer исключено из metrics. Divider/Flex/Segmented сверяются ещё с девятью raw UMD cases и тремя transitions; текущий FormData Segmented сохраняет исходное on. Status/display группа сверяется по 17 вариантам в девяти raw UMD cases и трём transitions. Прежние Native group spacing, Tag default и CheckableTag RTL classes, Skeleton wrappers учитываются явно; Badge number и Ribbon CSS отдельно используют общий prefix. Alert/Collapse/активный Affix сверяются ещё с девятью raw UMD cases и тремя transitions; SSR Affix не закрепляется, prefix update сохраняет редактор внутри раскрытой панели. Popup/single/range группа сверяется с 45 raw UMD cases и 15 transitions; delegated Tooltip/Popover namespaces независимы от local owner prefix, открытые DOM surfaces сохраняются. BorderBeam подключает также private variable namespace и двухмерный CSS scope; исходный shared-class cache defect записан отдельно и не перенесён. Masonry подключён с local priority, root/item/motion classes и отдельным global namespace inline width; source RTL-alias observation сохранён отдельно. Splitter подключён для всех частей и отдельного global namespace lazy preview; обновления сохраняют активный drag и существующее поведение hidden panels. Source shared-class CSS cache observation записан отдельно. Anchor подключён с inherited item prefixes, explicit per-item override и независимым Affix prefix. Source omission local owner→items записан raw/matched observations; Native сохраняет coherent classes/spacing/ink. Space family подключена с независимыми local prefixes, global Badge selector и Addon private variable namespace. Source shared-class Badge cache observation записан отдельно; существующие Compact adapters сохранены. Breadcrumb подключён для root/items/links/overlay/separators; исходный local separator namespace omission записан raw/matched measurements. Unbound Dropdown state сохраняется при parent spread updates, с прежними Native bind/callback/default fallback contracts. Row подключён отдельно от Col с прежним gutter context и responsive observer; Col/private namespace/Form prefix/media CSS подключены отдельными features. Button подключён для root/parts/states/Compact с независимым global namespace служебных variant variables; legacy theme bridge и Native disabled loading сохранены. FloatButton family подключена с owner inheritance, независимым Button namespace, global progress/WAAPI variables и отдельно записанными Source owner/cache observations. Radio/RadioButton/RadioGroup подключены с generated-option prefixes, независимым Badge namespace и сохранением Native fieldset/input/form/reset contracts; Source defaultChecked/no-op selector observations записаны отдельно. Checkbox/CheckboxGroup подключены с generated-option prefixes, независимым Row namespace и сохранёнными native mixed/form/reset contracts; Source Row cache observation записан raw/fresh. Switch подключён для root/parts/states с canonical variables и сохранением Native form/binding/reset/callback/focus contracts. Rate подключён для root/state/star/layers и character context с canonical token marker и независимым Tooltip namespace; raw UMD и live transitions сохраняют Native value/DOM/ref/focus contracts. Listy подключён для raw/virtual корней и parts с canonical tokens, shared link reset и сохранением Native measurement/cache/scroll/ref/focus contracts. Tour подключён для panel/mask/placeholder/primary/placement/arrow classes с отдельными global Button selectors/private Tooltip variables. Shared-class Source cache с потерей Button margins записан raw/fresh; native portal/layout/zIndex/keyboard и открытый step/editor сохраняются. Подключение prefix/theme/grid-media CSS не создаёт whitespace text nodes вокруг native roots и ConfigProvider; внутреннее содержимое, пользовательские пробелы и focus/value/ref contracts сохранены. Общая SSR boundary matrix и live browser scenario защищают inline composition. Mentions подключён для editor/mirror/variants/status и popup/menu, с отдельным global private cmp-mentions namespace и сохранением Native triggers/value/query/IME/ref/focus/FormData и plain empty fallback. Image/ImagePreviewGroup подключены с независимыми thumbnail/group namespaces, canonical variables и сохранением Native dialog/transforms/current/ref/focus; independent single previewPrefixCls подключён отдельно с raw observation недостающего Source CSS и сохранением Native viewer styling. Dropdown подключён с owner menu namespace, независимым Button prefix и сохранёнными canonical tokens, Native label/direction/portal/binding/focus/typeahead contracts; raw/public counterpart measurements отделяют существующие structural boundaries."
+          "note": "Общий source resolver: local nonempty prefix wins, undefined/empty provider prefix наследует parent, suffix сохраняет точную роль. App/Layout/Sider/Header/Content/Footer, Statistic/Timer, QRCode, Timeline, Steps, Divider, Flex, Segmented, Avatar/Group, Badge/Ribbon, Tag/CheckableTag/Group, Empty, Skeleton/primitives, Spin, Progress, Result, Alert, Collapse, Affix, Tooltip/Popover/Popconfirm, Slider, BorderBeam, Masonry, Splitter, Anchor, Space/Compact/Addon, Breadcrumb и Row подключены; последующие расширения описаны ниже, остальные families подключаются отдельно. Source theme namespace fallback следует class prefix, inherited/local cssVar.prefix приоритетнее; explicit undefined сбрасывает inherited namespace к текущему provider. Theme/color defaults без настройки prefix не меняются. 13 raw UMD cases и 3 transitions, включая nested/reset/sibling scopes, live prefix/value identity и SSR. Display components отдельно сверяются с девятью raw UMD cases и тремя transitions; ambient typography/direction совпадают с Native provider DOM, текущее время Timer исключено из metrics. Divider/Flex/Segmented сверяются ещё с девятью raw UMD cases и тремя transitions; текущий FormData Segmented сохраняет исходное on. Status/display группа сверяется по 17 вариантам в девяти raw UMD cases и трём transitions. Прежние Native group spacing, Tag default и CheckableTag RTL classes, Skeleton wrappers учитываются явно; Badge number и Ribbon CSS отдельно используют общий prefix. Alert/Collapse/активный Affix сверяются ещё с девятью raw UMD cases и тремя transitions; SSR Affix не закрепляется, prefix update сохраняет редактор внутри раскрытой панели. Popup/single/range группа сверяется с 45 raw UMD cases и 15 transitions; delegated Tooltip/Popover namespaces независимы от local owner prefix, открытые DOM surfaces сохраняются. BorderBeam подключает также private variable namespace и двухмерный CSS scope; исходный shared-class cache defect записан отдельно и не перенесён. Masonry подключён с local priority, root/item/motion classes и отдельным global namespace inline width; source RTL-alias observation сохранён отдельно. Splitter подключён для всех частей и отдельного global namespace lazy preview; обновления сохраняют активный drag и существующее поведение hidden panels. Source shared-class CSS cache observation записан отдельно. Anchor подключён с inherited item prefixes, explicit per-item override и независимым Affix prefix. Source omission local owner→items записан raw/matched observations; Native сохраняет coherent classes/spacing/ink. Space family подключена с независимыми local prefixes, global Badge selector и Addon private variable namespace. Source shared-class Badge cache observation записан отдельно; существующие Compact adapters сохранены. Breadcrumb подключён для root/items/links/overlay/separators; исходный local separator namespace omission записан raw/matched measurements. Unbound Dropdown state сохраняется при parent spread updates, с прежними Native bind/callback/default fallback contracts. Row подключён отдельно от Col с прежним gutter context и responsive observer; Col/private namespace/Form prefix/media CSS подключены отдельными features. Button подключён для root/parts/states/Compact с независимым global namespace служебных variant variables; legacy theme bridge и Native disabled loading сохранены. FloatButton family подключена с owner inheritance, независимым Button namespace, global progress/WAAPI variables и отдельно записанными Source owner/cache observations. Radio/RadioButton/RadioGroup подключены с generated-option prefixes, независимым Badge namespace и сохранением Native fieldset/input/form/reset contracts; Source defaultChecked/no-op selector observations записаны отдельно. Checkbox/CheckboxGroup подключены с generated-option prefixes, независимым Row namespace и сохранёнными native mixed/form/reset contracts; Source Row cache observation записан raw/fresh. Switch подключён для root/parts/states с canonical variables и сохранением Native form/binding/reset/callback/focus contracts. Rate подключён для root/state/star/layers и character context с canonical token marker и независимым Tooltip namespace; raw UMD и live transitions сохраняют Native value/DOM/ref/focus contracts. Listy подключён для raw/virtual корней и parts с canonical tokens, shared link reset и сохранением Native measurement/cache/scroll/ref/focus contracts. Tour подключён для panel/mask/placeholder/primary/placement/arrow classes с отдельными global Button selectors/private Tooltip variables. Shared-class Source cache с потерей Button margins записан raw/fresh; native portal/layout/zIndex/keyboard и открытый step/editor сохраняются. Подключение prefix/theme/grid-media CSS не создаёт whitespace text nodes вокруг native roots и ConfigProvider; внутреннее содержимое, пользовательские пробелы и focus/value/ref contracts сохранены. Общая SSR boundary matrix и live browser scenario защищают inline composition. Mentions подключён для editor/mirror/variants/status и popup/menu, с отдельным global private cmp-mentions namespace и сохранением Native triggers/value/query/IME/ref/focus/FormData и plain empty fallback. Image/ImagePreviewGroup подключены с независимыми thumbnail/group namespaces, canonical variables и сохранением Native dialog/transforms/current/ref/focus; independent single previewPrefixCls подключён отдельно с raw observation недостающего Source CSS и сохранением Native viewer styling. Dropdown подключён с owner menu namespace, независимым Button prefix и сохранёнными canonical tokens, Native label/direction/portal/binding/focus/typeahead contracts; raw/public counterpart measurements отделяют существующие structural boundaries. Menu подключён с рекурсивными owner classes, независимым Typography namespace, canonical variables/link reset и scoped themes; Source dashed Divider owner omission записан raw/matched, Native DOM/ref/IDs/open/selection/focus сохранены."
         },
         {
           "id": "native-legacy-prefix-namespace",

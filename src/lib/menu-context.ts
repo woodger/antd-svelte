@@ -3,6 +3,8 @@ import type { MenuEntry } from './menu.engine';
 import type { MenuMode, MenuProps, MenuTheme } from './menu.types';
 
 export interface MenuContext {
+  readonly prefixCls: string;
+  readonly rootPrefixCls: string;
   readonly componentTheme: {
     readonly className: string | undefined;
     readonly style: string | undefined;

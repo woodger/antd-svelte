@@ -57,6 +57,8 @@ export interface MenuProps extends Omit<
   HTMLAttributes<HTMLUListElement>,
   'children' | 'onselect'
 > {
+  /** Локальный префикс всех частей Menu и popup; пустая строка наследует ConfigProvider. */
+  prefixCls?: string;
   items?: readonly MenuItemType[];
   /** @defaultValue 'vertical' */
   mode?: MenuMode;
