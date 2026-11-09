@@ -5111,6 +5111,22 @@ Datetime header показывает выбранное время в panel form
 не подсвечивает время запасной даты. Проверки и 15 UMD-тем —
 [picker-theme](./tests/browser/picker-theme.spec.ts), `?fixture=picker-theme`.
 
+Все четыре date/time single/range controls принимают `prefixCls`: локальный owner
+перекрывает ConfigProvider.prefixCls для поля, календаря, time columns и popup.
+Button подтверждения сохраняет общий namespace, private affix-color следует общему
+префиксу, component tokens и theme marker остаются canonical. Time cellRender
+получает разрешённый prefixCls; generated IDs сохраняют прежний Native формат.
+
+Смена префикса сохраняет открытый popup, DOM/refs/IDs, незавершённый ввод,
+caret/focus и pending datetime. DatePicker/RangePicker синхронизируют текст при новом
+value или его отображении; обновление контекста без этих изменений не сбрасывает
+draft. Реальное изменение format продолжает обновлять поле. UTC, точность,
+подтверждение границ, формы и порядок callbacks сохраняются.
+[Сверка с официальным UMD](./tests/browser/picker-prefix.spec.ts),
+`?fixture=picker-prefix`, включает 33 варианта в normal/nested/reset scopes
+и live draft transitions всех четырёх controls, а также оформление по умолчанию
+и custom container cleanup.
+
 Остальные picker/multiple modes, generatePicker factory, single presets,
 cellRender/panelRender, mask format, hover preview, полный semantic/component config
 и полный rc-trigger/motion API ещё не перенесены. Реестр перечисляет эти пробелы
@@ -5206,7 +5222,7 @@ showToday, прямые disabled units, addon/onSelect и второй аргу�
 [browser](./tests/browser/time-picker.spec.ts) и `?fixture=time-picker`.
 Общие component tokens настраиваются через `components.DatePicker`; подробности
 и правила обновления открытой панели описаны в разделе DatePicker.
-Multiple, mask format, generatePicker, произвольный prefix,
+Multiple, mask format, generatePicker,
 полный каталог locales, React diagnostics и полный rc-trigger/
 motion API пока не перенесены. Контейнеры popup описаны в разделе DatePicker.
 Диапазон экспортируется как TimeRangePicker.

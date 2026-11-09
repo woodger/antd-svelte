@@ -150,7 +150,7 @@ test('Picker inheritance reset preserves the focused input and its unfinished va
     await expect(page.getByLabel('Picker theme events nested', { exact: true })).toHaveText('[]');
   });
 
-test('Picker restores legacy tokens and removes its portal without changing sibling themes',
+test('Picker restores default styling and removes its portal without changing sibling themes',
   async ({ page }) => {
     await page.getByLabel('Picker theme popup', { exact: true }).selectOption('time');
     const control = page.locator('[data-picker-theme="normal"] [data-picker-input="time"]');

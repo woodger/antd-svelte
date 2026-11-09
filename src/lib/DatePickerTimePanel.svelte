@@ -3,7 +3,8 @@
   import { formatPicker, timeColumns } from './date-picker.engine';
   import { timeFormat } from './time-picker.engine';
   import type { DatePickerDisabledTime, DatePickerTimeConfig } from './date-picker.types';
-  let { value, selectedValue, config, format, locale, disabledTime, onSelect }: {
+  let { prefixCls, value, selectedValue, config, format, locale, disabledTime, onSelect }: {
+    prefixCls: string;
     value: Dayjs;
     selectedValue: Dayjs | null;
     config: DatePickerTimeConfig;
@@ -32,7 +33,7 @@
     const frame = view.requestAnimationFrame(() => {
       for (const column of host.querySelectorAll<HTMLUListElement>('ul')) {
         const selected = column.querySelector<HTMLLIElement>(
-          '.ant-picker-time-panel-cell-selected'
+          '[data-picker-time-cell-selected]'
         ) ?? column.querySelector<HTMLButtonElement>('button[tabindex="0"]')?.closest('li');
         const first = column.querySelector<HTMLLIElement>('li');
         if (!selected || !first)
@@ -108,21 +109,21 @@
   button { color:inherit;width:100%;border:0;background:transparent;font:inherit;text-align:inherit;padding:0;cursor:pointer; }
   button:focus-visible { outline:2px solid var(--ant-color-primary);outline-offset:-2px; }
 </style>
-<div bind:this={root} class="ant-picker-time-panel">
-  <div class="ant-picker-header"><div class="ant-picker-header-view">{selectedValue
+<div bind:this={root} class={`${prefixCls}-time-panel`}>
+  <div class={`${prefixCls}-header`}><div class={`${prefixCls}-header-view`}>{selectedValue
         ? formatPicker(selectedValue, locale, [headerFormat]) : '\u00a0'}</div></div>
-  <div class="ant-picker-content">
+  <div class={`${prefixCls}-content`}>
     {#each columns as column (column.unit)}
-      <ul class="ant-picker-time-panel-column" aria-label={column.unit}>
+      <ul class={`${prefixCls}-time-panel-column`} aria-label={column.unit}>
         {#each items(column) as item (item)}
           {@const unavailable = blocked(column.unit, item)}
           {#if !config.hideDisabledOptions || !unavailable}
-            <li class={[
-                'ant-picker-time-panel-cell',
-                selectedValue?.get(column.unit) === item && 'ant-picker-time-panel-cell-selected',
-                unavailable && 'ant-picker-time-panel-cell-disabled'
+            <li data-picker-time-cell-selected={selectedValue?.get(column.unit) === item || undefined} class={[
+                `${prefixCls}-time-panel-cell`,
+                selectedValue?.get(column.unit) === item && `${prefixCls}-time-panel-cell-selected`,
+                unavailable && `${prefixCls}-time-panel-cell-disabled`
               ]}>
-              <button type="button" class="ant-picker-time-panel-cell-inner" disabled={unavailable} tabindex={activeValue.get(column.unit) === item ? 0 : -1} onkeydown={keyboard} aria-label={`${column.unit} ${item}`} aria-pressed={selectedValue?.get(column.unit) === item} onclick={() => onSelect(value.set(column.unit, item))}>{String(
+              <button type="button" class={`${prefixCls}-time-panel-cell-inner`} disabled={unavailable} tabindex={activeValue.get(column.unit) === item ? 0 : -1} onkeydown={keyboard} aria-label={`${column.unit} ${item}`} aria-pressed={selectedValue?.get(column.unit) === item} onclick={() => onSelect(value.set(column.unit, item))}>{String(
                   config.use12Hours && column.unit === 'hour' ? item % 12 || 12 : item
                 ).padStart(
                   column.unit === 'millisecond' ? 3 : 2,
@@ -134,14 +135,14 @@
       </ul>
     {/each}
     {#if config.use12Hours}
-      <ul class="ant-picker-time-panel-column" aria-label="meridiem">
+      <ul class={`${prefixCls}-time-panel-column`} aria-label="meridiem">
         {#each [0, 12] as hour}
-          <li class={[
-              'ant-picker-time-panel-cell',
+          <li data-picker-time-cell-selected={!!selectedValue && (selectedValue.hour() < 12) === (hour === 0) || undefined} class={[
+              `${prefixCls}-time-panel-cell`,
               selectedValue && (selectedValue.hour() < 12) === (hour === 0)
-                && 'ant-picker-time-panel-cell-selected'
+                && `${prefixCls}-time-panel-cell-selected`
             ]}>
-            <button type="button" class="ant-picker-time-panel-cell-inner" tabindex={(activeValue.hour() < 12) === (hour === 0) ? 0 : -1} onkeydown={keyboard} aria-pressed={!!selectedValue && (selectedValue.hour() < 12) === (hour === 0)} onclick={() => onSelect(value.hour(value.hour() % 12 + hour))}>{hour ? 'PM' : 'AM'}</button>
+            <button type="button" class={`${prefixCls}-time-panel-cell-inner`} tabindex={(activeValue.hour() < 12) === (hour === 0) ? 0 : -1} onkeydown={keyboard} aria-pressed={!!selectedValue && (selectedValue.hour() < 12) === (hour === 0)} onclick={() => onSelect(value.hour(value.hour() % 12 + hour))}>{hour ? 'PM' : 'AM'}</button>
           </li>
         {/each}
       </ul>

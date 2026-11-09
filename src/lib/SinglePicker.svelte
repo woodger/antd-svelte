@@ -13,6 +13,8 @@
   } from './date-picker.engine';
   import { datePickerEnUS } from './date-picker.locale';
   import { useConfig } from './config-context';
+  import { getPickerPrefixCss } from './picker-prefix.engine';
+  import ThemeScopeStyle from './ThemeScopeStyle.svelte';
   import { useVariant } from './variant.svelte';
   import { useComponentTheme } from './theme-component.svelte';
   import { connectComponentTheme } from './theme-component.dom';
@@ -81,6 +83,7 @@
     onfocus,
     class: className = '',
     rootClassName = '',
+    prefixCls,
     classNames,
     getPopupContainer,
     style,
@@ -88,6 +91,9 @@
     ...attributes
   }: DatePickerProps & { time?: TimePickerProps; } = $props();
   const config = useConfig();
+  let prefix = $derived(config.getPrefixCls('picker', prefixCls));
+  let rootPrefix = $derived(config.getPrefixCls());
+  let prefixCss = $derived(getPickerPrefixCss(prefix, rootPrefix));
   const dateVariant = useVariant('datePicker', () => ({ variant }));
   const timeVariant = useVariant('timePicker', () => time ?? {});
   const componentTheme = useComponentTheme('DatePicker');
@@ -167,6 +173,9 @@
   let timeLocale = $derived(time ? timePickerLang(time, actualLocale) : undefined);
   let previousValue = untrack(() => value);
   let previousMergedValue = untrack(() => mergedValue);
+  let formattedDateValue = $derived(time ? undefined
+    : formatPicker(mergedValue, actualLocale.locale, formats));
+  let previousDateText = untrack(() => formattedDateValue);
   let wasVisible = untrack(() => visible);
   let panelWasOpen = false;
   let actualVariant = $derived(time ? timeVariant.variant : dateVariant.variant);
@@ -236,11 +245,15 @@
     previousValue = value;
   });
   $effect(() => {
-    if (time && mergedValue === previousMergedValue) return;
-    text = formatPicker(mergedValue, actualLocale.locale, formats);
+    const formatted = formattedDateValue;
+    // Context repaint не сбрасывает draft, пока value и его отображение прежние.
+    if (mergedValue === previousMergedValue && (time || formatted === previousDateText)) return;
+
+    text = formatted ?? formatPicker(mergedValue, actualLocale.locale, formats);
     draft = mergedValue;
     dirty = false;
     previousMergedValue = mergedValue;
+    previousDateText = formatted;
   });
   $effect(() => {
     if (formattedTimeDraft !== undefined) {
@@ -460,7 +473,7 @@
         requestOpen(true);
         await tick();
         (popup?.querySelector<HTMLButtonElement>(
-          '.ant-picker-time-panel-cell-selected button:not(:disabled)'
+          '[data-picker-time-cell-selected] button:not(:disabled)'
         ) ?? popup?.querySelector<HTMLButtonElement>(
           'button[data-picker-time-control]:not(:disabled)'
         ))
@@ -573,17 +586,17 @@
   }
 </script>
 <style>
-  .ant-picker-dropdown { position:fixed;margin:0;padding:0;border:0;background:transparent;overflow:visible; }
-  .ant-picker-clear { padding:0;border:0;background:transparent;cursor:pointer; }
-  .ant-picker-clear:focus-visible { opacity:1;outline:2px solid var(--ant-color-primary); }
-  .ant-picker-now-btn, .ant-picker-today-btn { padding:0;border:0;background:transparent;color:var(--ant-color-link);font:inherit;cursor:pointer; }
-  .ant-picker-now-btn:disabled, .ant-picker-today-btn:disabled { color:var(--ant-color-text-disabled);cursor:not-allowed; }
-  .ant-picker-presets button { width:100%;padding:0;border:0;background:transparent;color:inherit;font:inherit;text-align:inherit;cursor:pointer; }
-</style>
+  [data-picker-popup] { position:fixed;margin:0;padding:0;border:0;background:transparent;overflow:visible; }
+  [data-picker-clear] { padding:0;border:0;background:transparent;cursor:pointer; }
+  [data-picker-clear]:focus-visible { opacity:1;outline:2px solid var(--ant-color-primary); }
+  [data-picker-current] { padding:0;border:0;background:transparent;color:var(--ant-color-link);font:inherit;cursor:pointer; }
+  [data-picker-current]:disabled { color:var(--ant-color-text-disabled);cursor:not-allowed; }
+  [data-picker-presets] button { width:100%;padding:0;border:0;background:transparent;color:inherit;font:inherit;text-align:inherit;cursor:pointer; }
+</style>{#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`picker-prefix:${prefix}:${rootPrefix}`} />{/if}
 {#snippet timePanelLayout()}
-  <div class="ant-picker-panel-layout">
+  <div class={`${prefix}-panel-layout`}>
     {#if time?.presets?.length}
-      <div class="ant-picker-presets"><ul>
+      <div data-picker-presets class={`${prefix}-presets`}><ul>
         {#each time.presets as preset, index (index)}
           <li>
             <button
@@ -600,10 +613,10 @@
     {/if}
     <div>
       <div
-        class={['ant-picker-panel', config.direction === 'rtl' && 'ant-picker-panel-rtl']}
+        class={[`${prefix}-panel`, config.direction === 'rtl' && `${prefix}-panel-rtl`]}
         tabindex="-1"
       >
-        {#if timeLocale}<PickerTimePanel
+        {#if timeLocale}<PickerTimePanel prefixCls={prefix}
           value={draft || clock.defaultOpenValue || null}
           pickerValue={panel}
           config={clock}
@@ -622,16 +635,16 @@
       </div>
       {#if confirm || showNow || renderExtraFooter}
         <div
-          class={['ant-picker-footer', semantic?.classes.popup.footer]}
+          class={[`${prefix}-footer`, semantic?.classes.popup.footer]}
           style={semantic?.styles.popup.footer}
         >
           {#if renderExtraFooter}
-            <div class="ant-picker-footer-extra">{@render renderExtraFooter()}</div>
+            <div class={`${prefix}-footer-extra`}>{@render renderExtraFooter()}</div>
           {/if}
-          {#if confirm || showNow}<ul class="ant-picker-ranges">
-            {#if showNow}<li class="ant-picker-now"><button
+          {#if confirm || showNow}<ul class={`${prefix}-ranges`}>
+            {#if showNow}<li class={`${prefix}-now`}><button
               type="button"
-              class="ant-picker-now-btn"
+              data-picker-current class={`${prefix}-now-btn`}
               disabled={time && timePickerDateDisabled(now, time)}
               onclick={() => {
                 if (!time) return;
@@ -641,7 +654,7 @@
                 if (commit(next)) requestOpen(false);
               }}
             >{actualLocale.now}</button></li>{/if}
-            {#if confirm}<li class="ant-picker-ok"><Button
+            {#if confirm}<li class={`${prefix}-ok`}><Button
               type="primary"
               size="small"
               disabled={!valid(draft || clock.defaultOpenValue || null)}
@@ -660,7 +673,7 @@
       && (time ? hoverValue || draft : mergedValue) && !blocked}
     <button
       type="button"
-      class="ant-picker-clear"
+      data-picker-clear class={`${prefix}-clear`}
       aria-label={actualLocale.clear}
       onpointerdown={event => event.preventDefault()}
       onclick={event => {
@@ -676,29 +689,29 @@
       }}
     >{#if time && typeof clearContent === 'function'}{@render clearContent()}
     {:else if time && (clearContent === null
-        || typeof clearContent === 'boolean' || clearContent === '')}<span class="ant-picker-clear-btn"></span>
+        || typeof clearContent === 'boolean' || clearContent === '')}<span class={`${prefix}-clear-btn`}></span>
     {:else if time && clearContent !== undefined}{clearContent}
     {:else}<Icon name="close-circle-filled" />{/if}</button>
   {/if}
 {/snippet}
 
-<div bind:this={rootElement} role={time ? 'presentation' : 'group'} style={
+<div bind:this={rootElement} data-ant-picker-prefix={prefix} data-ant-picker-root-prefix={rootPrefix} role={time ? 'presentation' : 'group'} style={
     componentTheme.style || time
       ? [componentTheme.style, time && semantic?.styles.root, style].filter(Boolean).join(';')
       : style}
   dir={config.direction} onfocusout={blurWithin} onclick={time ? handleRootClick : undefined}
   class={[
-      'ant-picker ant-picker-css-var',
+      `${prefix} ant-picker-css-var`,
       componentTheme.className,
-      `ant-picker-${actualVariant}`,
-      blocked && 'ant-picker-disabled',
-      visible && 'ant-picker-open',
-      focused && 'ant-picker-focused',
-      resolvedSize === 'large' && 'ant-picker-large',
-      resolvedSize === 'small' && 'ant-picker-small',
-      resolvedStatus && `ant-picker-status-${resolvedStatus}`,
-      config.direction === 'rtl' && 'ant-picker-rtl',
-      compactClasses('ant-picker', config.direction, compact),
+      `${prefix}-${actualVariant}`,
+      blocked && `${prefix}-disabled`,
+      visible && `${prefix}-open`,
+      focused && `${prefix}-focused`,
+      resolvedSize === 'large' && `${prefix}-large`,
+      resolvedSize === 'small' && `${prefix}-small`,
+      resolvedStatus && `${prefix}-status-${resolvedStatus}`,
+      config.direction === 'rtl' && `${prefix}-rtl`,
+      compactClasses(prefix, config.direction, compact),
       time && config.timePicker?.class,
       semantic?.classes.root,
       className,
@@ -707,11 +720,11 @@
   {#if time && time.prefix !== undefined && time.prefix !== null
       && typeof time.prefix !== 'boolean' && time.prefix !== ''}
     <div
-      class={['ant-picker-prefix', semantic?.classes.prefix]}
+      class={[`${prefix}-prefix`, semantic?.classes.prefix]}
       style={semantic?.styles.prefix}
     >{#if typeof time.prefix === 'function'}{@render time.prefix()}{:else}{time.prefix}{/if}</div>
   {/if}
-  <div class={['ant-picker-input', time && hoverValue && 'ant-picker-input-placeholder']}>
+  <div class={[`${prefix}-input`, time && hoverValue && `${prefix}-input-placeholder`]}>
     <input
       {...attributes}
       bind:this={input}
@@ -766,7 +779,7 @@
           }} />
     {#if !time || suffixContent !== false && suffixContent !== null && suffixContent !== ''}
       <span
-        class={['ant-picker-suffix', semantic?.classes.suffix]}
+        class={[`${prefix}-suffix`, semantic?.classes.suffix]}
         style={semantic?.styles.suffix}
         aria-hidden="true"
       >
@@ -784,47 +797,47 @@
   {#key container.target}
   {#if visible}
     {@const initialPopupStyle = untrack(() => popupThemeStyle)}
-    <div bind:this={popup} id={`ant-picker-${generatedId}`} popover="manual" role="dialog" aria-label={attributes['aria-label'] ?? (time ? placeholderText || actualLocale.timeSelect : actualLocale.placeholder)} hidden={!shown} onfocusout={blurWithin} class={[
-        'ant-picker-dropdown ant-picker-css-var',
+    <div bind:this={popup} data-picker-popup data-ant-picker-prefix={prefix} data-ant-picker-root-prefix={rootPrefix} id={`ant-picker-${generatedId}`} popover="manual" role="dialog" aria-label={attributes['aria-label'] ?? (time ? placeholderText || actualLocale.timeSelect : actualLocale.placeholder)} hidden={!shown} onfocusout={blurWithin} class={[
+        `${prefix}-dropdown ant-picker-css-var`,
         componentTheme.className,
-        config.direction === 'rtl' && 'ant-picker-dropdown-rtl',
-        `ant-picker-dropdown-placement-${popupPlacement === 'top' ? 'top' : 'bottom'}${actualPlacement.endsWith('Right') ? 'Right' : 'Left'}`,
+        config.direction === 'rtl' && `${prefix}-dropdown-rtl`,
+        `${prefix}-dropdown-placement-${popupPlacement === 'top' ? 'top' : 'bottom'}${actualPlacement.endsWith('Right') ? 'Right' : 'Left'}`,
         time ? semantic?.classes.popup.root : classNames?.popup?.root,
         time && rootClassName
       ]} style={initialPopupStyle}
       {@attach node => connectComponentTheme(node, popupThemeStyle)} {@attach container.portal}>
       {#if time}
         <div
-          class={['ant-picker-panel-container', semantic?.classes.popup.container]}
+          class={[`${prefix}-panel-container`, semantic?.classes.popup.container]}
           style={semantic?.styles.popup.container}
         >
           {#if time.panelRender}{@render time.panelRender(timePanelLayout)}
           {:else}{@render timePanelLayout()}{/if}
         </div>
       {:else}
-      <div class="ant-picker-panel-container"><div class="ant-picker-panel-layout"><div><div class="ant-picker-panel" tabindex="-1">
+      <div class={`${prefix}-panel-container`}><div class={`${prefix}-panel-layout`}><div><div class={`${prefix}-panel`} tabindex="-1">
         <div class={showTime && mode === 'date'
-            ? 'ant-picker-datetime-panel'
+            ? `${prefix}-datetime-panel`
             : undefined}>
-          <DatePickerCalendar {panel} selected={draft} direction={config.direction} {mode} locale={actualLocale} {restrictions} {now} onSelect={selectDate} onNavigate={navigate} onModeChange={changeMode} />
-          {#if showTime && mode === 'date'}<DatePickerTimePanel value={draft ?? clock.defaultOpenValue ?? panel} selectedValue={draft} config={clock} format={timeFormat} locale={actualLocale.locale} {disabledTime} onSelect={selectTime} />{/if}
+          <DatePickerCalendar prefixCls={prefix} {panel} selected={draft} direction={config.direction} {mode} locale={actualLocale} {restrictions} {now} onSelect={selectDate} onNavigate={navigate} onModeChange={changeMode} />
+          {#if showTime && mode === 'date'}<DatePickerTimePanel prefixCls={prefix} value={draft ?? clock.defaultOpenValue ?? panel} selectedValue={draft} config={clock} format={timeFormat} locale={actualLocale.locale} {disabledTime} onSelect={selectTime} />{/if}
         </div>
-        {#if renderExtraFooter}<div class="ant-picker-footer-extra">{@render renderExtraFooter()}</div>{/if}
-        {#if mode === 'date' && (confirm || showNow)}<div class="ant-picker-footer">
-          {#if confirm || showTime}<ul class="ant-picker-ranges">
-            {#if showNow}<li class="ant-picker-now"><button type="button" class="ant-picker-now-btn" disabled={pickerDateDisabled(now, restrictions)} onclick={() => {
+        {#if renderExtraFooter}<div class={`${prefix}-footer-extra`}>{@render renderExtraFooter()}</div>{/if}
+        {#if mode === 'date' && (confirm || showNow)}<div class={`${prefix}-footer`}>
+          {#if confirm || showTime}<ul class={`${prefix}-ranges`}>
+            {#if showNow}<li class={`${prefix}-now`}><button type="button" data-picker-current class={`${prefix}-now-btn`} disabled={pickerDateDisabled(now, restrictions)} onclick={() => {
                 const next = validPickerTime(adapter.getNow(), clock, disabledTime);
                 if (commit(next)) {
                   requestOpen(false);
                   input?.focus();
                 }
               }}>{actualLocale.now}</button></li>{/if}
-            {#if confirm}<li class="ant-picker-ok"><Button type="primary" size="small"
+            {#if confirm}<li class={`${prefix}-ok`}><Button type="primary" size="small"
               disabled={!valid(draft)} onclick={() => {
                 finish(true);
                 input?.focus();
               }} children={actualLocale.ok} /></li>{/if}
-          </ul>{:else if showNow}<button type="button" class="ant-picker-today-btn" disabled={pickerDateDisabled(now, restrictions)} onclick={() => {
+          </ul>{:else if showNow}<button type="button" data-picker-current class={`${prefix}-today-btn`} disabled={pickerDateDisabled(now, restrictions)} onclick={() => {
               const next = validPickerTime(adapter.getNow());
               if (commit(next))
                 requestOpen(false);

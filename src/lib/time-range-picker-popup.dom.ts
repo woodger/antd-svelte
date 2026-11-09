@@ -19,7 +19,7 @@ export function connectTimeRangePopup(
       const inputRect = input.parentElement!.getBoundingClientRect();
       const bounds = wrapper.getBoundingClientRect();
       const panelWidth = container.getBoundingClientRect().width;
-      const arrowWidth = wrapper.querySelector<HTMLElement>('.ant-picker-range-arrow')!.offsetWidth;
+      const arrowWidth = wrapper.querySelector<HTMLElement>('[data-picker-range-arrow]')!.offsetWidth;
       const selectorWidth = root.getBoundingClientRect().width;
       const rightToLeft = rtl();
       const arrow = (rightToLeft ? inputRect.right - arrowWidth : inputRect.left) - bounds.left;

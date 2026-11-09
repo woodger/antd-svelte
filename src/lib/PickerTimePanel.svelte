@@ -11,6 +11,7 @@
   import type { PickerLocale } from './picker-locale.types';
 
   let {
+    prefixCls,
     value,
     pickerValue,
     config,
@@ -27,6 +28,7 @@
     itemClass,
     itemStyle
   }: {
+    prefixCls: string;
     value: Dayjs | null;
     pickerValue?: Dayjs | null;
     config: DatePickerTimeConfig & { changeOnScroll?: boolean; };
@@ -47,10 +49,10 @@
   let panel = $derived(timePickerPanel(value, pickerValue, config, disabledTime, locale, now));
 </script>
 
-<div class="ant-picker-time-panel">
-  <div class={['ant-picker-content', className]} {style}>
+<div class={`${prefixCls}-time-panel`}>
+  <div class={[`${prefixCls}-content`, className]} {style}>
     {#each panel.columns as column (column.type)}
-      <PickerTimeColumn
+      <PickerTimeColumn {prefixCls}
         type={column.type}
         options={column.options}
         value={timePickerColumnValue(value, column.type)}

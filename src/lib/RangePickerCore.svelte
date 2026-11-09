@@ -26,6 +26,8 @@
   import { dayjsGenerateConfig as adapter } from './date-picker-dayjs.engine';
   import { datePickerEnUS } from './date-picker.locale';
   import { useConfig } from './config-context';
+  import { getPickerPrefixCss } from './picker-prefix.engine';
+  import ThemeScopeStyle from './ThemeScopeStyle.svelte';
   import { useVariant } from './variant.svelte';
   import { useComponentTheme } from './theme-component.svelte';
   import { connectComponentTheme } from './theme-component.dom';
@@ -103,6 +105,7 @@
     locale,
     class: className = '',
     rootClassName = '',
+    prefixCls,
     classNames,
     getPopupContainer,
     style,
@@ -112,6 +115,9 @@
     ...attributes
   }: RangePickerProps & { time?: TimeRangePickerProps; } = $props();
   const config = useConfig();
+  let prefix = $derived(config.getPrefixCls('picker', prefixCls));
+  let rootPrefix = $derived(config.getPrefixCls());
+  let prefixCss = $derived(getPickerPrefixCss(prefix, rootPrefix));
   const variantContext = useVariant('rangePicker', () => ({
     variant
   }));
@@ -279,6 +285,12 @@
   let previousVisible = untrack(() => visible);
   let previousCommitted = untrack(() => committed);
   let previousValue = untrack(() => value);
+  let dateStartText = $derived(time ? undefined
+    : formatPicker(committed[0], lang.locale, formats));
+  let dateEndText = $derived(time ? undefined
+    : formatPicker(committed[1], lang.locale, formats));
+  let previousDateStartText = untrack(() => dateStartText);
+  let previousDateEndText = untrack(() => dateEndText);
   let timeStartText = $derived(time ? formatPicker(calendar[0], lang.locale, formats) : undefined);
   let timeEndText = $derived(time ? formatPicker(calendar[1], lang.locale, formats) : undefined);
   let timePanelWasOpen = false;
@@ -309,11 +321,18 @@
     previousValue = value;
   });
   $effect(() => {
-    if (time && committed === previousCommitted) return;
+    const start = dateStartText;
+    const end = dateEndText;
+    // Изменение prefix/theme без нового value/отображения сохраняет обе draft-границы.
+    if (committed === previousCommitted
+      && (time || start === previousDateStartText && end === previousDateEndText)) return;
+
     calendar = [...committed];
     submit = [...committed];
-    texts = dateTexts(committed);
+    texts = time ? dateTexts(committed) : [start ?? '', end ?? ''];
     previousCommitted = committed;
+    previousDateStartText = start;
+    previousDateEndText = end;
   });
   $effect(() => {
     if (timeStartText !== undefined) {
@@ -761,7 +780,7 @@
         requestOpen(true);
         await tick();
         (popup?.querySelector<HTMLButtonElement>(
-          '.ant-picker-time-panel-cell-selected button:not(:disabled)'
+          '[data-picker-time-cell-selected] button:not(:disabled)'
         ) ?? popup?.querySelector<HTMLButtonElement>(
           'button[data-picker-time-control]:not(:disabled)'
         ))?.focus();
@@ -912,17 +931,17 @@
 </script>
 
 <style>
-  .ant-picker-dropdown { position:fixed;margin:0;padding:0;border:0;background:transparent;overflow:visible; }
-  .ant-picker-clear { padding:0;border:0;background:transparent;cursor:pointer; }
-  .ant-picker-clear:focus-visible { opacity:1;outline:2px solid var(--ant-color-primary); }
-  .ant-picker-now-btn { padding:0;border:0;background:transparent;color:var(--ant-color-link);font:inherit;cursor:pointer; }
-  .ant-picker-now-btn:disabled { color:var(--ant-color-text-disabled);cursor:not-allowed; }
-  .ant-picker-presets button { border:0;padding:0;background:transparent;color:inherit;font:inherit;cursor:pointer; }
-</style>
+  [data-picker-popup] { position:fixed;margin:0;padding:0;border:0;background:transparent;overflow:visible; }
+  [data-picker-clear] { padding:0;border:0;background:transparent;cursor:pointer; }
+  [data-picker-clear]:focus-visible { opacity:1;outline:2px solid var(--ant-color-primary); }
+  [data-picker-current] { padding:0;border:0;background:transparent;color:var(--ant-color-link);font:inherit;cursor:pointer; }
+  [data-picker-current]:disabled { color:var(--ant-color-text-disabled);cursor:not-allowed; }
+  [data-picker-presets] button { border:0;padding:0;background:transparent;color:inherit;font:inherit;cursor:pointer; }
+</style>{#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`picker-prefix:${prefix}:${rootPrefix}`} />{/if}
 
 {#snippet timePanelLayout()}
-  <div class="ant-picker-panel-layout">
-    {#if presets?.length}<div class="ant-picker-presets"><ul>
+  <div class={`${prefix}-panel-layout`}>
+    {#if presets?.length}<div data-picker-presets class={`${prefix}-presets`}><ul>
       {#each presets as preset, index (index)}<li><button
         type="button"
         onmouseenter={() => {
@@ -939,10 +958,10 @@
     </ul></div>{/if}
     <div>
       <div
-        class={['ant-picker-panel', config.direction === 'rtl' && 'ant-picker-panel-rtl']}
+        class={[`${prefix}-panel`, config.direction === 'rtl' && `${prefix}-panel-rtl`]}
         tabindex="-1"
       >
-        {#if timeLocale}<PickerTimePanel
+        {#if timeLocale}<PickerTimePanel prefixCls={prefix}
           value={calendar[active] || clock.defaultOpenValue || null}
           pickerValue={view}
           config={clock}
@@ -962,22 +981,22 @@
       </div>
       {#if confirm || showCurrent || time?.renderExtraFooter}
         <div
-          class={['ant-picker-footer', semantic?.classes.popup.footer]}
+          class={[`${prefix}-footer`, semantic?.classes.popup.footer]}
           style={semantic?.styles.popup.footer}
         >
-          {#if time?.renderExtraFooter}<div class="ant-picker-footer-extra">
+          {#if time?.renderExtraFooter}<div class={`${prefix}-footer-extra`}>
             {@render time.renderExtraFooter('time')}
           </div>{/if}
-          {#if confirm || showCurrent}<ul class="ant-picker-ranges">
-            {#if showCurrent}<li class="ant-picker-now"><button
+          {#if confirm || showCurrent}<ul class={`${prefix}-ranges`}>
+            {#if showCurrent}<li class={`${prefix}-now`}><button
               type="button"
-              class="ant-picker-now-btn"
+              data-picker-current class={`${prefix}-now-btn`}
               disabled={timeNowDisabled(now)}
               onclick={() => send(active, 'confirm', validPickerTime(
                 adapter.getNow(), clock, timeRestriction
               ))}
             >{lang.now}</button></li>{/if}
-            {#if confirm}<li class="ant-picker-ok"><Button
+            {#if confirm}<li class={`${prefix}-ok`}><Button
               type="primary"
               size="small"
               disabled={!calendar[active] && !clock.defaultOpenValue
@@ -994,7 +1013,7 @@
 {/snippet}
 
 <div
-  bind:this={rootElement}
+  bind:this={rootElement} data-ant-picker-prefix={prefix} data-ant-picker-root-prefix={rootPrefix}
   role={time ? 'presentation' : 'group'}
   style={componentTheme.style || time || config.rangePicker?.style
     ? [componentTheme.style, time ? semantic?.styles.root : config.rangePicker?.style,
@@ -1003,18 +1022,18 @@
   onfocusout={blurWithin}
   onclick={time ? handleTimeRootClick : undefined}
   class={[
-      'ant-picker ant-picker-range ant-picker-css-var',
+      `${prefix} ${prefix}-range ant-picker-css-var`,
       componentTheme.className,
-      `ant-picker-${resolvedVariant}`,
-      blocked.every(Boolean) && 'ant-picker-disabled',
-      visible && 'ant-picker-open',
-      focused && 'ant-picker-focused',
-      texts.some((_, index) => inputInvalid(index)) && 'ant-picker-invalid',
-      resolvedSize === 'large' && 'ant-picker-large',
-      resolvedSize === 'small' && 'ant-picker-small',
-      resolvedStatus && `ant-picker-status-${resolvedStatus}`,
-      config.direction === 'rtl' && 'ant-picker-rtl',
-      compactClasses('ant-picker', config.direction, compact),
+      `${prefix}-${resolvedVariant}`,
+      blocked.every(Boolean) && `${prefix}-disabled`,
+      visible && `${prefix}-open`,
+      focused && `${prefix}-focused`,
+      texts.some((_, index) => inputInvalid(index)) && `${prefix}-invalid`,
+      resolvedSize === 'large' && `${prefix}-large`,
+      resolvedSize === 'small' && `${prefix}-small`,
+      resolvedStatus && `${prefix}-status-${resolvedStatus}`,
+      config.direction === 'rtl' && `${prefix}-rtl`,
+      compactClasses(prefix, config.direction, compact),
       semantic?.classes.root,
       className,
       config.rangePicker?.class,
@@ -1023,15 +1042,15 @@
   {#if time?.prefix !== undefined && time.prefix !== null
       && typeof time.prefix !== 'boolean' && time.prefix !== ''}
     <div
-      class={['ant-picker-prefix', semantic?.classes.prefix]}
+      class={[`${prefix}-prefix`, semantic?.classes.prefix]}
       style={semantic?.styles.prefix}
     >{#if typeof time.prefix === 'function'}{@render time.prefix()}{:else}{time.prefix}{/if}</div>
   {/if}
   <div class={[
-      'ant-picker-input ant-picker-input-start',
-      focused && active === 0 && 'ant-picker-input-active',
+      `${prefix}-input ${prefix}-input-start`,
+      focused && active === 0 && `${prefix}-input-active`,
       time && previewValue && (presetHover || hover && active === 0)
-        && 'ant-picker-input-placeholder'
+        && `${prefix}-input-placeholder`
     ]}>
     <input {...attributes} bind:this={startElement} id={typeof id === 'string' ? id : id?.start ?? field?.id} name={name ?? field?.name} placeholder={time ? timePlaceholder?.[0] : placeholder?.[0] ?? lang.rangePlaceholder[0]} type="text" role="combobox" aria-haspopup="dialog" aria-expanded={visible && active === 0} aria-controls={`ant-range-picker-${generatedId}`} aria-invalid={inputInvalid(0)
         || field?.invalid
@@ -1055,12 +1074,12 @@
             else onfocus?.(event);
           }} onblur={event => blurInput(0, event)} onkeydown={event => keyboard(event, 0)} />
   </div>
-  <div class="ant-picker-range-separator">{#if !time && typeof resolvedSeparator === 'function'}{@render resolvedSeparator()}{:else}<span class="ant-picker-separator" aria-hidden={time && resolvedSeparator !== undefined ? undefined : 'true'}>{#if typeof resolvedSeparator === 'function'}{@render resolvedSeparator()}{:else if resolvedSeparator !== undefined}{resolvedSeparator}{:else}<PickerRangeSeparator />{/if}</span>{/if}</div>
+  <div class={`${prefix}-range-separator`}>{#if !time && typeof resolvedSeparator === 'function'}{@render resolvedSeparator()}{:else}<span class={`${prefix}-separator`} aria-hidden={time && resolvedSeparator !== undefined ? undefined : 'true'}>{#if typeof resolvedSeparator === 'function'}{@render resolvedSeparator()}{:else if resolvedSeparator !== undefined}{resolvedSeparator}{:else}<PickerRangeSeparator />{/if}</span>{/if}</div>
   <div class={[
-      'ant-picker-input ant-picker-input-end',
-      focused && active === 1 && 'ant-picker-input-active',
+      `${prefix}-input ${prefix}-input-end`,
+      focused && active === 1 && `${prefix}-input-active`,
       time && previewValue && (presetHover || hover && active === 1)
-        && 'ant-picker-input-placeholder'
+        && `${prefix}-input-placeholder`
     ]}>
     <input {...attributes} bind:this={endElement} id={typeof id === 'object' ? id.end : undefined} name={name ?? field?.name} placeholder={time ? timePlaceholder?.[1] : placeholder?.[1] ?? lang.rangePlaceholder[1]} type="text" role="combobox" aria-haspopup="dialog" aria-expanded={visible && active === 1} aria-controls={`ant-range-picker-${generatedId}`} aria-invalid={inputInvalid(1)
         || field?.invalid
@@ -1084,10 +1103,10 @@
             else onfocus?.(event);
           }} onblur={event => blurInput(1, event)} onkeydown={event => keyboard(event, 1)} />
   </div>
-  <div class="ant-picker-active-bar" style={`position:absolute;left:${bar.left}px;width:${bar.width}px`}></div>
+  <div class={`${prefix}-active-bar`} style={`position:absolute;left:${bar.left}px;width:${bar.width}px`}></div>
   {#if !time || suffixContent !== false && suffixContent !== null && suffixContent !== ''}
     <span
-      class={['ant-picker-suffix', semantic?.classes.suffix]}
+      class={[`${prefix}-suffix`, semantic?.classes.suffix]}
       style={semantic?.styles.suffix}
       aria-hidden="true"
     >{#if !time}<PickerCalendarIcon />
@@ -1100,13 +1119,13 @@
         && (presetHover?.[index] || index === active && hover)) && !blocked[index])}
     <button
       type="button"
-      class="ant-picker-clear"
+      data-picker-clear class={`${prefix}-clear`}
       aria-label={lang.clear}
       onpointerdown={event => event.preventDefault()}
       onclick={clear}
     >{#if time && typeof clearContent === 'function'}{@render clearContent()}
     {:else if time && (clearContent === null
-        || typeof clearContent === 'boolean' || clearContent === '')}<span class="ant-picker-clear-btn"></span>
+        || typeof clearContent === 'boolean' || clearContent === '')}<span class={`${prefix}-clear-btn`}></span>
     {:else if time && clearContent !== undefined}{clearContent}
     {:else}<Icon name="close-circle-filled" />{/if}</button>
   {/if}
@@ -1115,13 +1134,13 @@
   {#key container.target}
   {#if visible}
     {@const initialPopupStyle = untrack(() => popupThemeStyle)}
-    <div bind:this={popup} id={`ant-range-picker-${generatedId}`} popover="manual" role="dialog" tabindex="-1" aria-label={attributes['aria-label'] ?? (time ? lang.timeSelect : lang.placeholder)} hidden={!shown} onfocusout={blurWithin}
+    <div bind:this={popup} data-picker-popup data-ant-picker-prefix={prefix} data-ant-picker-root-prefix={rootPrefix} id={`ant-range-picker-${generatedId}`} popover="manual" role="dialog" tabindex="-1" aria-label={attributes['aria-label'] ?? (time ? lang.timeSelect : lang.placeholder)} hidden={!shown} onfocusout={blurWithin}
       class={[
-          'ant-picker-dropdown ant-picker-css-var',
+          `${prefix}-dropdown ant-picker-css-var`,
           componentTheme.className,
-          time && 'ant-picker-dropdown-range',
-          config.direction === 'rtl' && 'ant-picker-dropdown-rtl',
-          `ant-picker-dropdown-placement-${verticalPlacement}${actualPlacement.endsWith('Right')
+          time && `${prefix}-dropdown-range`,
+          config.direction === 'rtl' && `${prefix}-dropdown-rtl`,
+          `${prefix}-dropdown-placement-${verticalPlacement}${actualPlacement.endsWith('Right')
             ? 'Right'
             : 'Left'}`,
           time ? semantic?.classes.popup.root : classNames?.popup?.root,
@@ -1142,13 +1161,13 @@
       {#if time}
         <div
           bind:this={timeWrapper}
-          class="ant-picker-range-wrapper ant-picker-time-range-wrapper"
+          class={`${prefix}-range-wrapper ${prefix}-time-range-wrapper`}
         >
-          <div class="ant-picker-range-arrow" style={`left:${timePosition.arrow}px`}></div>
+          <div data-picker-range-arrow class={`${prefix}-range-arrow`} style={`left:${timePosition.arrow}px`}></div>
           <div
             bind:this={timeContainer}
             class={[
-              'ant-picker-panel-container ant-picker-time-panel-container',
+              `${prefix}-panel-container ${prefix}-time-panel-container`,
               semantic?.classes.popup.container
             ]}
             style={[
@@ -1166,9 +1185,9 @@
           </div>
         </div>
       {:else}
-      <div class="ant-picker-range-arrow" style={`left:${bar.left + bar.width / 2}px`}></div>
-      <div class="ant-picker-panel-container"><div class="ant-picker-panel-layout">
-        {#if presets?.length}<div class="ant-picker-presets"><ul>{#each presets as preset, index (index)}<li><button type="button" onpointerenter={() => {
+      <div data-picker-range-arrow class={`${prefix}-range-arrow`} style={`left:${bar.left + bar.width / 2}px`}></div>
+      <div class={`${prefix}-panel-container`}><div class={`${prefix}-panel-layout`}>
+        {#if presets?.length}<div data-picker-presets class={`${prefix}-presets`}><ul>{#each presets as preset, index (index)}<li><button type="button" onpointerenter={() => {
             if (previewValue)
               presetHover = rangePair(
                 typeof preset.value === 'function' ? preset.value() : preset.value
@@ -1178,19 +1197,19 @@
             }} onclick={() => presetValue(
               rangePair(typeof preset.value === 'function' ? preset.value() : preset.value)
             )}>{#if typeof preset.label === 'function'}{@render preset.label()}{:else}{preset.label}{/if}</button></li>{/each}</ul></div>{/if}
-        <div><div class:ant-picker-panels={!showTime && mode === 'date'}>
-          <div class="ant-picker-panel" tabindex="-1"><div class={showTime && mode === 'date'
-              ? 'ant-picker-datetime-panel'
+        <div><div class={!showTime && mode === 'date' ? `${prefix}-panels` : undefined}>
+          <div class={`${prefix}-panel`} tabindex="-1"><div class={showTime && mode === 'date'
+              ? `${prefix}-datetime-panel`
               : undefined}>
-            <DatePickerCalendar panel={view} selected={calendar[active]} range={displayRange} onHover={date => {
+            <DatePickerCalendar prefixCls={prefix} panel={view} selected={calendar[active]} range={displayRange} onHover={date => {
                 hover = date;
               }} {mode} locale={lang} restrictions={{ minDate, maxDate, disabledDate: panelDisabled }} {now} direction={config.direction} showNext={Boolean(showTime) || mode !== 'date'} onSelect={selectDate} onNavigate={next => syncPanel(active, 'panel', false, next)} onModeChange={next => {
                   mode = next;
                   onPanelChange?.([...calendar], [next, next]);
                 }} />
-            {#if showTime && mode === 'date'}<DatePickerTimePanel value={calendar[active] ?? clock.defaultOpenValue ?? view} selectedValue={calendar[active]} config={clock} format={timeFormat} locale={lang.locale} disabledTime={timeRestriction} onSelect={selectTime} />{/if}
+            {#if showTime && mode === 'date'}<DatePickerTimePanel prefixCls={prefix} value={calendar[active] ?? clock.defaultOpenValue ?? view} selectedValue={calendar[active]} config={clock} format={timeFormat} locale={lang.locale} disabledTime={timeRestriction} onSelect={selectTime} />{/if}
           </div></div>
-          {#if !showTime && mode === 'date'}<div class="ant-picker-panel" tabindex="-1"><DatePickerCalendar panel={view.add(1, 'month')} selected={calendar[active]} range={displayRange} onHover={date => {
+          {#if !showTime && mode === 'date'}<div class={`${prefix}-panel`} tabindex="-1"><DatePickerCalendar prefixCls={prefix} panel={view.add(1, 'month')} selected={calendar[active]} range={displayRange} onHover={date => {
               hover = date;
             }} {mode} locale={lang} restrictions={{ minDate, maxDate, disabledDate: panelDisabled }} {now} direction={config.direction} showPrevious={false} onSelect={selectDate} onNavigate={next => syncPanel(
                 active,
@@ -1203,15 +1222,15 @@
                 onPanelChange?.([...calendar], [next, next]);
               }} /></div>{/if}
         </div>
-        {#if renderExtraFooter}<div class="ant-picker-footer-extra">{@render renderExtraFooter()}</div>{/if}
-        {#if (confirm || showCurrent) && mode === 'date'}<div class="ant-picker-footer"><ul class="ant-picker-ranges">{#if showCurrent}<li class="ant-picker-now"><button type="button" class="ant-picker-now-btn" disabled={pickerDateDisabled(
+        {#if renderExtraFooter}<div class={`${prefix}-footer-extra`}>{@render renderExtraFooter()}</div>{/if}
+        {#if (confirm || showCurrent) && mode === 'date'}<div class={`${prefix}-footer`}><ul class={`${prefix}-ranges`}>{#if showCurrent}<li class={`${prefix}-now`}><button type="button" data-picker-current class={`${prefix}-now-btn`} disabled={pickerDateDisabled(
             now,
             { minDate, maxDate, disabledDate: panelDisabled }
           )} onclick={() => send(
               active,
               'confirm',
               validPickerTime(adapter.getNow(), clock)
-            )}>{showTime ? lang.now : lang.today}</button></li>{/if}{#if confirm}<li class="ant-picker-ok"><Button
+            )}>{showTime ? lang.now : lang.today}</button></li>{/if}{#if confirm}<li class={`${prefix}-ok`}><Button
               type="primary" size="small" disabled={!calendar[active]
               && !empty[active]
               || Boolean(

@@ -9,6 +9,11 @@
 
 ### Added
 
+- DatePicker/RangePicker и TimePicker/TimeRangePicker поддерживают local/shared
+  prefixCls для поля, date/time panels и popup; Button и private affix namespaces
+  независимы. Черновики, caret/focus, refs/IDs и pending datetime сохраняются,
+  а изменение value/format продолжает синхронизировать поле.
+
 - Calendar поддерживает local/shared picker prefixCls для корня, ячеек и renderers
   с независимыми Select/Radio шапки. DOM/ref/IDs, выбор даты, точность timestamp,
   focus/selection и прежний запрет переноса кнопок режима сохранены.

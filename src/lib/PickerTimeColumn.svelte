@@ -11,6 +11,7 @@
   } from './time-picker.types';
 
   let {
+    prefixCls,
     type,
     options,
     value,
@@ -26,6 +27,7 @@
     class: className,
     style
   }: {
+    prefixCls: string;
     type: TimePickerColumnType;
     options: readonly TimePickerOption[];
     value: TimePickerOption['value'] | null;
@@ -103,7 +105,7 @@
 
   function renderInfo(originNode: Snippet): TimePickerCellRenderInfo {
     return {
-      prefixCls: 'ant-picker', originNode, today, type: 'time', subType: type, locale, range
+      prefixCls, originNode, today, type: 'time', subType: type, locale, range
     };
   }
 </script>
@@ -113,15 +115,16 @@
   button:focus-visible { outline: 2px solid var(--ant-color-primary); outline-offset: -2px; }
 </style>
 
-<ul class="ant-picker-time-panel-column" data-type={type} aria-label={type} bind:this={element}>
+<ul class={`${prefixCls}-time-panel-column`} data-type={type} aria-label={type} bind:this={element}>
   {#each options as option (option.value)}
     <li
       role="presentation"
       data-value={option.value}
+      data-picker-time-cell-selected={value === option.value || undefined}
       class={[
-        'ant-picker-time-panel-cell',
-        value === option.value && 'ant-picker-time-panel-cell-selected',
-        option.disabled && 'ant-picker-time-panel-cell-disabled',
+        `${prefixCls}-time-panel-cell`,
+        value === option.value && `${prefixCls}-time-panel-cell-selected`,
+        option.disabled && `${prefixCls}-time-panel-cell-disabled`,
         className
       ]}
       {style}
@@ -139,7 +142,7 @@
       {#snippet originNode()}
         <button
           type="button"
-          class="ant-picker-time-panel-cell-inner"
+          class={`${prefixCls}-time-panel-cell-inner`}
           data-picker-time-control
           disabled={option.disabled}
           tabindex={value === option.value

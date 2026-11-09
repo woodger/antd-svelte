@@ -45,6 +45,8 @@ export interface DatePickerProps extends Omit<
   value?: Dayjs | null;
   /** Начальная дата локального состояния при отсутствии value. */
   defaultValue?: Dayjs;
+  /** Локальный picker owner перекрывает ConfigProvider.prefixCls для поля и panel. */
+  prefixCls?: string;
   /** @defaultValue false */
   showTime?: boolean | DatePickerTimeConfig;
   /** Первый формат используется для вывода; дополнительные строки допускаются при разборе ввода. */

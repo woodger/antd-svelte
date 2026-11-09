@@ -5632,7 +5632,23 @@
         "tests/browser/fixtures/ConfigVariantsFixtures.svelte",
         "tests/browser/config-variants-metrics.ts",
         "tests/browser/config-variants.spec.ts",
-        "tests/package/config-variants.ssr.test.ts"
+        "tests/package/config-variants.ssr.test.ts",
+        "src/lib/picker-prefix.engine.ts",
+        "src/lib/picker-prefix.engine.test.ts",
+        "src/lib/vendor/date-picker-prefix.css.js",
+        "src/lib/DatePickerCalendar.svelte",
+        "src/lib/PickerTimePanel.svelte",
+        "src/lib/PickerTimeColumn.svelte",
+        "src/lib/time-range-picker-popup.dom.ts",
+        "src/lib/date-picker.types.ts",
+        "tests/browser/picker-prefix.spec.ts",
+        "tests/browser/picker-prefix-metrics.ts",
+        "tests/browser/fixtures/PickerPrefixFixtures.svelte",
+        "tests/browser/fixtures/PickerPrefixScope.svelte",
+        "tests/browser/fixtures/PickerPrefixSSRFixtures.svelte",
+        "tests/browser/fixtures/ant-design-picker-prefix-reference.json",
+        "tests/package/picker-prefix.ssr.test.ts",
+        "tools/ant-design-css-recipes.json"
       ],
       "features": [
         {
@@ -5694,11 +5710,11 @@
         },
         {
           "id": "global-parity",
-          "title": "Глобальный DatePicker component config, prefix и полный popup motion/lifecycle",
+          "title": "Глобальный DatePicker component config и полный popup motion/lifecycle",
           "state": "missing",
           "requiredForV1": false,
           "evidence": [],
-          "note": "262 CSS-правила; component tokens/aliases/algorithms перенесены отдельно. Полный пользовательский component config и произвольный prefix не перенесены. Native conditional panel удаляется при закрытии; исходные retained popup lifecycle, полный rc-trigger и motion остаются пробелами."
+          "note": "262 CSS-правила; component tokens/aliases/algorithms перенесены отдельно. Полный пользовательский component config не перенесён; local/shared prefix поддерживается отдельно. Native conditional panel удаляется при закрытии; исходные retained popup lifecycle, полный rc-trigger и motion остаются пробелами."
         },
         {
           "id": "confirmation-button",
@@ -5812,6 +5828,34 @@
             "tests/package/config-variants.ssr.test.ts"
           ],
           "note": "DatePicker и RangePicker читают свои datePicker/rangePicker config после local variant и Form, затем global. DatePicker config пока только variant; Dayjs values, draft/confirmation и FormData сохраняют существующие контракты."
+        },
+        {
+          "id": "local-shared-prefix",
+          "title": "Локальный picker owner, общий private affix namespace и независимый Button",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/picker-prefix.engine.ts",
+            "src/lib/picker-prefix.engine.test.ts",
+            "src/lib/vendor/date-picker-prefix.css.js",
+            "src/lib/SinglePicker.svelte",
+            "src/lib/RangePickerCore.svelte",
+            "src/lib/DatePickerCalendar.svelte",
+            "src/lib/DatePickerTimePanel.svelte",
+            "src/lib/PickerTimePanel.svelte",
+            "src/lib/PickerTimeColumn.svelte",
+            "src/lib/time-range-picker-popup.dom.ts",
+            "src/lib/date-picker.types.ts",
+            "tests/browser/picker-prefix.spec.ts",
+            "tests/browser/picker-prefix-metrics.ts",
+            "tests/browser/fixtures/PickerPrefixFixtures.svelte",
+            "tests/browser/fixtures/PickerPrefixScope.svelte",
+            "tests/browser/fixtures/PickerPrefixSSRFixtures.svelte",
+            "tests/browser/fixtures/ant-design-picker-prefix-reference.json",
+            "tests/package/picker-prefix.ssr.test.ts",
+            "tools/ant-design-css-recipes.json"
+          ],
+          "note": "Single/Range date/time используют getPrefixCls(picker, local) и отдельный scoped template из 262 правил. Private affix-color следует общему prefix; component tokens/marker canonical, Tag/Button namespaces независимы. Time cellRender.info.prefixCls и originNode получают фактический picker owner. 33 raw UMD cases x normal/nested/sibling и 12 live transitions покрывают date/datetime/time, range, RTL, sizes/variants/status/affix, aliases и cssVar prefix. DOM/ref/IDs, unfinished input/caret/focus, pending datetime и собственный portal сохраняются. DatePicker/RangePicker синхронизируют текст по value и его отображению, поэтому prefix-only context repaint не сбрасывает draft; реальные value/format updates продолжают синхронизацию. UTC/precision, default millisecondStep=100, последовательное подтверждение границ и callbacks не меняются. Прежнее оформление без source theme и cleanup проверены отдельно."
         }
       ]
     },
@@ -10360,7 +10404,20 @@
         "tests/browser/fixtures/ConfigVariantsFixtures.svelte",
         "tests/browser/config-variants-metrics.ts",
         "tests/browser/config-variants.spec.ts",
-        "tests/package/config-variants.ssr.test.ts"
+        "tests/package/config-variants.ssr.test.ts",
+        "src/lib/picker-prefix.engine.ts",
+        "src/lib/picker-prefix.engine.test.ts",
+        "src/lib/vendor/date-picker-prefix.css.js",
+        "src/lib/DatePickerCalendar.svelte",
+        "src/lib/date-picker.types.ts",
+        "tests/browser/picker-prefix.spec.ts",
+        "tests/browser/picker-prefix-metrics.ts",
+        "tests/browser/fixtures/PickerPrefixFixtures.svelte",
+        "tests/browser/fixtures/PickerPrefixScope.svelte",
+        "tests/browser/fixtures/PickerPrefixSSRFixtures.svelte",
+        "tests/browser/fixtures/ant-design-picker-prefix-reference.json",
+        "tests/package/picker-prefix.ssr.test.ts",
+        "tools/ant-design-css-recipes.json"
       ],
       "features": [
         {
@@ -10431,7 +10488,7 @@
           "evidence": [
             "readme.md"
           ],
-          "note": "На этом этапе только один Dayjs; multiple=true не заявлен в типах. Произвольный prefix, полный каталог locales, React diagnostics и полный rc-trigger/motion API и retained popup lifecycle остаются следующими этапами. Styles — CSS strings, nodes/renderers — Svelte snippets. Переполненный 32-bit step вызывает RangeError вместо бесконечного цикла upstream."
+          "note": "На этом этапе только один Dayjs; multiple=true не заявлен в типах. Полный каталог locales, React diagnostics и полный rc-trigger/motion API и retained popup lifecycle остаются следующими этапами. Styles — CSS strings, nodes/renderers — Svelte snippets. Переполненный 32-bit step вызывает RangeError вместо бесконечного цикла upstream."
         },
         {
           "id": "confirmation-button",
@@ -10526,6 +10583,34 @@
             "tests/package/config-variants.ssr.test.ts"
           ],
           "note": "Single TimePicker читает timePicker.variant, Range — rangePicker.variant; datePicker config не перекрывает outer single variant, timePicker.variant не применяется к range. Form/global priority общий, outer/inner semantic callbacks и raw range props сохраняются."
+        },
+        {
+          "id": "local-shared-prefix",
+          "title": "Локальный picker owner, общий private affix namespace и независимый Button",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/picker-prefix.engine.ts",
+            "src/lib/picker-prefix.engine.test.ts",
+            "src/lib/vendor/date-picker-prefix.css.js",
+            "src/lib/SinglePicker.svelte",
+            "src/lib/RangePickerCore.svelte",
+            "src/lib/DatePickerCalendar.svelte",
+            "src/lib/DatePickerTimePanel.svelte",
+            "src/lib/PickerTimePanel.svelte",
+            "src/lib/PickerTimeColumn.svelte",
+            "src/lib/time-range-picker-popup.dom.ts",
+            "src/lib/date-picker.types.ts",
+            "tests/browser/picker-prefix.spec.ts",
+            "tests/browser/picker-prefix-metrics.ts",
+            "tests/browser/fixtures/PickerPrefixFixtures.svelte",
+            "tests/browser/fixtures/PickerPrefixScope.svelte",
+            "tests/browser/fixtures/PickerPrefixSSRFixtures.svelte",
+            "tests/browser/fixtures/ant-design-picker-prefix-reference.json",
+            "tests/package/picker-prefix.ssr.test.ts",
+            "tools/ant-design-css-recipes.json"
+          ],
+          "note": "Single/Range date/time используют getPrefixCls(picker, local) и отдельный scoped template из 262 правил. Private affix-color следует общему prefix; component tokens/marker canonical, Tag/Button namespaces независимы. Time cellRender.info.prefixCls и originNode получают фактический picker owner. 33 raw UMD cases x normal/nested/sibling и 12 live transitions покрывают date/datetime/time, range, RTL, sizes/variants/status/affix, aliases и cssVar prefix. DOM/ref/IDs, unfinished input/caret/focus, pending datetime и собственный portal сохраняются. DatePicker/RangePicker синхронизируют текст по value и его отображению, поэтому prefix-only context repaint не сбрасывает draft; реальные value/format updates продолжают синхронизацию. UTC/precision, default millisecondStep=100, последовательное подтверждение границ и callbacks не меняются. Прежнее оформление без source theme и cleanup проверены отдельно."
         }
       ]
     },

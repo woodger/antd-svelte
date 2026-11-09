@@ -5,6 +5,7 @@
   import { calendarCells, pickerDateDisabled } from './date-picker.engine';
   import type { DatePickerMode, DatePickerProps } from './date-picker.types';
   let {
+    prefixCls,
     panel,
     selected,
     mode,
@@ -20,6 +21,7 @@
     onNavigate,
     onModeChange
   }: {
+    prefixCls: string;
     panel: Dayjs;
     selected: Dayjs | null;
     mode: DatePickerMode;
@@ -130,13 +132,13 @@
   .date-cell { color:inherit;border:0;background:transparent;padding:0;font:inherit;cursor:pointer; }
   .date-cell:focus-visible { outline:2px solid var(--ant-color-primary);outline-offset:-2px; }
 </style>
-<div bind:this={root} class={`ant-picker-${mode}-panel`}>
-  <div class="ant-picker-header">
-    <button type="button" tabindex="-1" class="ant-picker-header-super-prev-btn" style:visibility={showPrevious ? undefined : 'hidden'} aria-label={locale.previousYear} onclick={() => move(-1, true)}><span class="ant-picker-super-prev-icon"></span></button>
-    {#if mode === 'date'}<button type="button" tabindex="-1" class="ant-picker-header-prev-btn" style:visibility={showPrevious ? undefined : 'hidden'} aria-label={locale.previousMonth} onclick={() => move(-1)}><span class="ant-picker-prev-icon"></span></button>{/if}
-    <div class="ant-picker-header-view">
-      {#if mode === 'date'}<button type="button" tabindex="-1" class="ant-picker-month-btn" aria-label={locale.monthSelect} onclick={() => onModeChange('month')}>{months[panel.month()]}</button>{/if}
-      <button type="button" tabindex="-1" class="ant-picker-year-btn" aria-label={mode === 'year' || mode === 'decade'
+<div bind:this={root} class={`${prefixCls}-${mode}-panel`}>
+  <div class={`${prefixCls}-header`}>
+    <button type="button" tabindex="-1" class={`${prefixCls}-header-super-prev-btn`} style:visibility={showPrevious ? undefined : 'hidden'} aria-label={locale.previousYear} onclick={() => move(-1, true)}><span class={`${prefixCls}-super-prev-icon`}></span></button>
+    {#if mode === 'date'}<button type="button" tabindex="-1" class={`${prefixCls}-header-prev-btn`} style:visibility={showPrevious ? undefined : 'hidden'} aria-label={locale.previousMonth} onclick={() => move(-1)}><span class={`${prefixCls}-prev-icon`}></span></button>{/if}
+    <div class={`${prefixCls}-header-view`}>
+      {#if mode === 'date'}<button type="button" tabindex="-1" class={`${prefixCls}-month-btn`} aria-label={locale.monthSelect} onclick={() => onModeChange('month')}>{months[panel.month()]}</button>{/if}
+      <button type="button" tabindex="-1" class={`${prefixCls}-year-btn`} aria-label={mode === 'year' || mode === 'decade'
           ? locale.decadeSelect
           : locale.yearSelect} onclick={() => onModeChange(
               mode === 'date' || mode === 'month' ? 'year' : 'decade'
@@ -150,11 +152,11 @@
                       .year() / 100) * 100 + 99}`
               : adapter.locale.format(locale.locale, panel, locale.yearFormat ?? 'YYYY')}</button>
     </div>
-    {#if mode === 'date'}<button type="button" tabindex="-1" class="ant-picker-header-next-btn" style:visibility={showNext ? undefined : 'hidden'} aria-label={locale.nextMonth} onclick={() => move(1)}><span class="ant-picker-next-icon"></span></button>{/if}
-    <button type="button" tabindex="-1" class="ant-picker-header-super-next-btn" style:visibility={showNext ? undefined : 'hidden'} aria-label={locale.nextYear} onclick={() => move(1, true)}><span class="ant-picker-super-next-icon"></span></button>
+    {#if mode === 'date'}<button type="button" tabindex="-1" class={`${prefixCls}-header-next-btn`} style:visibility={showNext ? undefined : 'hidden'} aria-label={locale.nextMonth} onclick={() => move(1)}><span class={`${prefixCls}-next-icon`}></span></button>{/if}
+    <button type="button" tabindex="-1" class={`${prefixCls}-header-super-next-btn`} style:visibility={showNext ? undefined : 'hidden'} aria-label={locale.nextYear} onclick={() => move(1, true)}><span class={`${prefixCls}-super-next-icon`}></span></button>
   </div>
-  <div class="ant-picker-body">
-    <table class="ant-picker-content" role="grid" aria-label={panel.format('YYYY-MM')}>
+  <div class={`${prefixCls}-body`}>
+    <table class={`${prefixCls}-content`} role="grid" aria-label={panel.format('YYYY-MM')}>
       {#if mode === 'date'}<thead><tr>{#each weeks as _, n}<th scope="col">{weeks[(n + firstDay) % 7]}</th>{/each}</tr></thead>{/if}
       <tbody>
         {#each Array.from({ length: cells.length / width }, (_, n) => n) as row}
@@ -165,12 +167,12 @@
                 if (!unavailable && event.pointerType !== 'touch')
                   onHover?.(date);
               }} onpointerleave={() => onHover?.(null)} aria-selected={selectedCell(date)} aria-disabled={unavailable || undefined} title={label(date)} class={[
-                  'ant-picker-cell',
-                  inView && 'ant-picker-cell-in-view',
-                  unavailable && 'ant-picker-cell-disabled',
-                  !range && selectedCell(date) && 'ant-picker-cell-selected',
-                  range?.[0]?.isSame(date, unit) && 'ant-picker-cell-range-start',
-                  range?.[1]?.isSame(date, unit) && 'ant-picker-cell-range-end',
+                  `${prefixCls}-cell`,
+                  inView && `${prefixCls}-cell-in-view`,
+                  unavailable && `${prefixCls}-cell-disabled`,
+                  !range && selectedCell(date) && `${prefixCls}-cell-selected`,
+                  range?.[0]?.isSame(date, unit) && `${prefixCls}-cell-range-start`,
+                  range?.[1]?.isSame(date, unit) && `${prefixCls}-cell-range-end`,
                   range?.[0]
                   && range[1]
                   && date.isAfter(range[0], unit)
@@ -178,10 +180,10 @@
                     range[1],
                     unit
                   )
-                  && 'ant-picker-cell-in-range',
-                  mode === 'date' && now.isSame(date, 'day') && 'ant-picker-cell-today'
+                  && `${prefixCls}-cell-in-range`,
+                  mode === 'date' && now.isSame(date, 'day') && `${prefixCls}-cell-today`
                 ]}>
-              <button type="button" data-picker-date={label(date)} aria-label={label(date)} disabled={unavailable} tabindex={date.isSame(panel, unit) ? 0 : -1} class="ant-picker-cell-inner date-cell" onclick={() => onSelect(date)} onkeydown={event => key(event, date)}>{mode === 'date'
+              <button type="button" data-picker-date={label(date)} aria-label={label(date)} disabled={unavailable} tabindex={date.isSame(panel, unit) ? 0 : -1} class={`${prefixCls}-cell-inner date-cell`} onclick={() => onSelect(date)} onkeydown={event => key(event, date)}>{mode === 'date'
                   ? date.date()
                   : mode === 'month'
                     ? months[date.month()]
