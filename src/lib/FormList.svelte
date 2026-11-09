@@ -1,6 +1,8 @@
 <script lang="ts">
   import { untrack } from 'svelte';
   import { useForm } from './form-context';
+  import { useConfig } from './config-context';
+  import { provideFormPrefix } from './form-prefix-context';
   import { provideFormList, useFormList } from './form-list-context';
   import { changeFormList, syncFormListKeys } from './form-list.engine';
   import { formNamePath } from './form-store.engine';
@@ -8,6 +10,12 @@
 
   let { name, initialValue, rules, children, prefixCls }: FormListProps = $props();
   const form = useForm();
+  const config = useConfig();
+  provideFormPrefix({
+    get prefixCls() {
+      return config.getPrefixCls('form', prefixCls);
+    }
+  });
   const parent = useFormList();
   if (!form) throw new Error('FormList requires Form');
 
@@ -34,7 +42,7 @@
 
   provideFormList({
     get prefixCls() {
-      return prefixCls || 'ant-form';
+      return config.getPrefixCls('form', prefixCls);
     },
     get prefixName() {
       return prefixName;

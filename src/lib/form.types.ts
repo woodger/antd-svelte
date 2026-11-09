@@ -69,6 +69,8 @@ export interface FormProps<Values extends FormValues> extends Omit<
 > {
   /** Изолированная модель, созданная createForm. */
   form: FormInstance<Values>;
+  /** CSS prefix корня Form; empty/undefined наследуют ConfigProvider независимо от FormItem. */
+  prefixCls?: string;
   children: Snippet;
   /** @defaultValue 'vertical' */
   layout?: 'vertical' | 'horizontal' | 'inline';

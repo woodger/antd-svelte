@@ -2,6 +2,9 @@
   import { onDestroy, tick } from 'svelte';
   import { provideConfig, useConfig, type ConfigContext } from './config-context';
   import { useComponentTheme } from './theme-component.svelte';
+  import { useDesignTokenContext } from './theme-context.svelte';
+  import { getFormPrefixCss, getFormPrefixScope } from './form-prefix.engine';
+  import ThemeScopeStyle from './ThemeScopeStyle.svelte';
   import { provideForm } from './form-context';
   import { getFormHooks } from './form-internal';
   import { provideFormList } from './form-list-context';
@@ -14,6 +17,7 @@
   let props: FormProps<Values> = $props();
   let {
     form,
+    prefixCls: customizePrefixCls,
     children,
     layout = 'vertical',
     colon,
@@ -41,6 +45,14 @@
   } = $derived(props);
 
   const config = useConfig();
+  const designTokens = useDesignTokenContext();
+  let componentPrefix = $derived(config.getPrefixCls('form', customizePrefixCls));
+  let prefixScope = $derived(getFormPrefixScope(
+    componentPrefix, config.getPrefixCls(), designTokens.state.token
+  ));
+  let prefixCss = $derived(getFormPrefixCss(
+    componentPrefix, config.getPrefixCls(), designTokens.state.token
+  ));
   const componentTheme = useComponentTheme('Form');
   $effect(() => getFormHooks(form)?.registerValidateMessages(() => ({
     ...mergeValidationMessages(
@@ -205,16 +217,18 @@
   }
 </script>
 
-{#if component === false}
+{#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`form-prefix:${prefixScope}`} />{/if}{#if component === false}
   {@render children()}
 {:else}
 <form
   {...attributes}
   novalidate
-  class={[`ant-form ant-form-css-var ant-form-${layout}`,
-    resolvedRequiredMark === false && 'ant-form-hide-required-mark',
-    resolvedSize === 'small' && 'ant-form-small',
-    resolvedSize === 'large' && 'ant-form-large',
+  data-ant-form-prefix={prefixScope}
+  class={[`${componentPrefix} ant-form-css-var ${componentPrefix}-${layout}`,
+    resolvedRequiredMark === false && `${componentPrefix}-hide-required-mark`,
+    resolvedSize === 'small' && `${componentPrefix}-small`,
+    resolvedSize === 'large' && `${componentPrefix}-large`,
+    config.direction === 'rtl' && `${componentPrefix}-rtl`,
     componentTheme.className, config.form?.class, className, rootClassName,
     semantic.classes.root].filter(Boolean).join(' ')}
   style={componentTheme.style || semantic.styles.root
@@ -224,7 +238,8 @@
   onreset={handleReset}
 >
   {#if form.submissionError}
-    <p role="alert" class="ant-form-item-explain-error">{config.locale.submitErrorText}</p>
+    <p role="alert" data-ant-form-prefix={prefixScope}
+      class={`${componentPrefix}-item-explain-error`}>{config.locale.submitErrorText}</p>
   {/if}
   {@render children()}
 </form>

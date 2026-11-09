@@ -9,6 +9,11 @@
 
 ### Added
 
+- Form/FormItem/FormList поддерживают local/shared prefixCls; Form media CSS
+  использует global screen*Max tokens с изоляцией scopes. Сохранены store,
+  validation/reset/submit, field DOM/ref и focus/selection; ErrorList использует
+  native List priority и fallback styled Item/noStyle. Source cache defects записаны.
+
 - Col поддерживает local/shared prefixCls с полным responsive CSS и независимым
   private namespace. FormItem сохраняет раскладку через span/breakpoint attributes
   и display bridge. Source shared-class flex cache записан raw/fresh; DOM/ref,

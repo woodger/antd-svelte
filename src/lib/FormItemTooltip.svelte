@@ -5,7 +5,11 @@
   import type { FormTooltipProps } from './form.types';
   import type { TooltipTrigger } from './tooltip.types';
 
-  let { options }: { options: FormTooltipProps } = $props();
+  let { options, formPrefix, formScope }: {
+    options: FormTooltipProps;
+    formPrefix: string;
+    formScope?: string;
+  } = $props();
   const config = useConfig();
   let { icon, children, ...settings } = $derived(options);
   let trigger = $derived(settings.trigger ?? config.tooltip?.trigger ?? 'hover');
@@ -28,7 +32,7 @@
 
 <style>
   /* Native Tooltip shell не меняет flex/inline геометрию исходного label. */
-  :global(.ant-form-item .ant-tooltip-trigger:has(> .ant-form-item-tooltip)) { display: contents; }
+  :global([data-ant-form-item] .ant-tooltip-trigger:has(> [data-ant-form-tooltip])) { display: contents; }
   .anticon {
     display: inline-flex;
     align-items: center;
@@ -46,7 +50,8 @@
 <Tooltip {...settings} {trigger}
   showAction={settings.showAction ?? actions} hideAction={settings.hideAction ?? actions}
   getPopupContainer={popupContainer}>
-  <span class="ant-form-item-tooltip" tabindex="-1" use:preventLabelClick>
+  <span class={`${formPrefix}-item-tooltip`} data-ant-form-prefix={formScope}
+    data-ant-form-tooltip tabindex="-1" use:preventLabelClick>
     {#if icon}{@render icon()}
     {:else if children}<RenderContent value={children} />
     {:else}

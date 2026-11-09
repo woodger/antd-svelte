@@ -3,7 +3,10 @@
   import RenderContent from './RenderContent.svelte';
   import ThemeScopeStyle from './ThemeScopeStyle.svelte';
   import { useComponentTheme } from './theme-component.svelte';
+  import { useFormPrefix } from './form-prefix-context';
   import { useFormList } from './form-list-context';
+  import { getFormPrefixScope } from './form-prefix.engine';
+  import { useDesignTokenContext } from './theme-context.svelte';
   import {
     buildFormErrorList, reconcileFormErrorList, type FormErrorMotionEntity
   } from './form-error-list.engine';
@@ -12,6 +15,7 @@
   import type { FormErrorListProps } from './form-error-list.types';
   import type { RenderEmptyContent } from './types';
   import { useForm } from './form-context';
+  import { useConfig } from './config-context';
 
   let {
     fieldId,
@@ -22,11 +26,17 @@
     class: className,
     onVisibleChanged
   }: FormErrorListProps = $props();
+  const ownerPrefix = useFormPrefix();
   const list = useFormList();
   const form = useForm();
+  const config = useConfig();
+  const designTokens = useDesignTokenContext();
   const componentTheme = useComponentTheme('Form');
-  let prefix = $derived(list?.prefixCls ?? 'ant-form');
-  let prefixCss = $derived(getFormErrorListPrefixCss(prefix));
+  // Прежний native contract отдаёт List prefix приоритет над промежуточным FormItem.
+  let prefix = $derived(list?.prefixCls ?? ownerPrefix?.prefixCls ?? config.getPrefixCls('form'));
+  let prefixCss = $derived(getFormErrorListPrefixCss(prefix, Boolean(getFormPrefixScope(
+    prefix, config.getPrefixCls(), designTokens.state.token
+  ))));
   let delayedErrors = $state.raw<readonly RenderEmptyContent[]>(untrack(() => errors));
   let delayedWarnings = $state.raw<readonly RenderEmptyContent[]>(untrack(() => warnings));
   let messages = $derived(buildFormErrorList({

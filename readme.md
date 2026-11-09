@@ -716,9 +716,8 @@ local prefix=ant-col в другом общем namespace.
 FormItem сохраняет default layout при общем prefix и собственных prefixes
 labelCol/wrapperCol: CSS поддерживает стабильные span/breakpoint attributes с
 прежней specificity, а control связывает общий grid-display с native Form variable.
-Сами Form classes остаются canonical до отдельного переноса Form.prefixCls.
-Media tokens Form также остаются отдельной границей; в custom-media примерах Col
-форма получает независимые стандартные пороги. Source кэширует private flex
+Form prefix/media теперь подключены отдельно. В custom-media примерах Col
+форма по-прежнему получает независимые стандартные пороги для своей матрицы. Source кэширует private flex
 первого global namespace при одинаковом local Col class; raw и fresh Inner
 measurements сохранены раздельно. В custom-media случаях Source сохраняет прежние
 пороги; freshMedia измерен с новым public local class. Native scope включает оба
@@ -10212,7 +10211,8 @@ Empty, Skeleton с primitives, Spin, Progress, Result, Alert, Collapse, Affix,
 Tooltip, Popover, Popconfirm, Slider, BorderBeam, Masonry, Splitter, Anchor и
 Space/SpaceCompact/SpaceAddon, Breadcrumb, Row/Col, Typography, Carousel, Descriptions, Tabs,
 Card с Grid/Meta, Button, FloatButton/Group/BackTop, Radio/RadioButton/RadioGroup,
-Checkbox/CheckboxGroup, Switch, Input, TextArea, InputPassword, InputSearch, InputOTP и InputNumber.
+Checkbox/CheckboxGroup, Switch, Input, TextArea, InputPassword, InputSearch, InputOTP,
+InputNumber и Form/FormItem/FormList/FormErrorList.
 Остальные семейства подключаются отдельно. Например,
 ConfigProvider prefixCls="suite" создаёт suite-app, suite-layout,
 suite-layout-sider и suite-layout-header без изменения имён Svelte-компонентов.
@@ -10281,6 +10281,31 @@ Raw textContent сохранён; сравниваются непустые те
 Svelte slots. В SSR остаются прежние hidden shells, без открытия popup и DOM containers.
 
 ## Формы и валидация
+
+Form, FormItem и FormList независимо разрешают prefixCls: непустой local prefix
+имеет приоритет, empty/undefined наследуют ConfigProvider. Локальный prefix Form
+не назначается дочерним Item автоматически, как в Source; для общего локального
+namespace задайте оба Props. Input/Col/Row/Tooltip используют собственные общие
+namespaces. Canonical Form token marker/variables и приоритет semantic/user styles
+сохраняются. Store, callbacks, registration, default vertical layout, native refs,
+labels/ARIA, focus/selection, submit/reset и component=false сохраняют прежние контракты.
+
+Form CSS использует global screenXSMax/SMMax/MDMax/LGMax. Scoped template из 99
+Source rules изолирует custom media от canonical CSS, включая сужение порогов,
+и разделяет общий namespace private Form/Grid variables. Scope не зависит от
+cssVar.key/hashed. Motion остаётся native. Styled Item и noStyle передают prefix
+ErrorList; существующий List prefix имеет приоритет над промежуточным Item.
+Без списка/Item используется общий Form prefix. Canonical ErrorList сохраняет
+explain styles и в форме с отдельным media scope.
+
+Raw UMD states записаны до fresh counterparts. Shared local class в Inner provider
+и media CSS эталона сохраняют чужие/старые namespaces; fresh scopes измерены с новым
+public local class. Canonical sibling в Source также получает чужие media rules;
+Native sibling сравнивается с отдельно измеренным исходным default на той же ширине.
+Все исходные results/freshMedia сохранены без изменения. Проверки —
+`?fixture=form-prefix`, [browser](./tests/browser/form-prefix.spec.ts),
+[SSR](./tests/package/form-prefix.ssr.test.ts),
+[эталон UMD](./tests/browser/fixtures/ant-design-form-prefix-reference.json).
 
 Создавайте модель в scope компонента или presentation model, чтобы разные формы
 и SSR-запросы не разделяли состояние:
@@ -11269,7 +11294,8 @@ Move переносит строку и её key. Rules списка прини�
 с прежней Svelte-сигнатурой `(value, values)`. Ошибки приходят в meta.errors,
 предупреждения warningOnly — в meta.warnings;
 после remove/reset поздняя validation не возвращает ошибки удалённых controls.
-`prefixCls` списка задаёт префикс вложенного FormErrorList, по умолчанию ant-form.
+`prefixCls` списка задаёт префикс вложенного FormErrorList; empty/undefined
+наследуют ConfigProvider (по умолчанию ant-form).
 Он не меняет prefix соседних FormItem.
 WarningOnly сверено с официальным UMD: [браузерные проверки и raw reference](./tests/browser/form-warnings.spec.ts),
 [SSR](./tests/package/form-warnings.ssr.test.ts) и [модель](./src/lib/form-warnings.test.ts).
@@ -11313,7 +11339,9 @@ motion с токенами Form, CSS easing и deadline 500 ms; motion=false и 
 Темы, приоритет help, snippets, callbacks, отмена при unmount и изолированный
 prefix проверяются [в браузере](./tests/browser/form-error-list.spec.ts),
 рендер без таймеров — [через SSR](./tests/package/form-error-list.ssr.test.ts).
-Общие classNames/styles Form, включая help/helpItem, ещё не перенесены.
+Help/helpItem наследуют classNames/styles Form; local styles и native motion
+сохраняют прежние приоритеты. Prefix списка приоритетнее styled Item; без списка
+используется styled Item через noStyle, затем ConfigProvider.
 
 ## Клавиатура и фокус
 

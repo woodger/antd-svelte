@@ -5948,7 +5948,20 @@
         "tests/browser/fixtures/ant-design-grid-col-prefix-reference.json",
         "tests/browser/grid-col-prefix-metrics.ts",
         "tests/browser/grid-col-prefix.spec.ts",
-        "tests/package/grid-col-prefix.ssr.test.ts"
+        "tests/package/grid-col-prefix.ssr.test.ts",
+        "src/lib/form-prefix-context.ts",
+        "src/lib/form-prefix.engine.ts",
+        "src/lib/form-prefix.engine.test.ts",
+        "src/lib/vendor/form-prefix.css.js",
+        "tools/ant-design-css-recipes.json",
+        "tests/browser/fixtures/FormPrefixScope.svelte",
+        "tests/browser/fixtures/FormPrefixFixtures.svelte",
+        "tests/browser/fixtures/FormPrefixNativeOwners.svelte",
+        "tests/browser/fixtures/FormPrefixSSRFixtures.svelte",
+        "tests/browser/fixtures/ant-design-form-prefix-reference.json",
+        "tests/browser/form-prefix-metrics.ts",
+        "tests/browser/form-prefix.spec.ts",
+        "tests/package/form-prefix.ssr.test.ts"
       ],
       "features": [
         {
@@ -6161,7 +6174,7 @@
             "tests/browser/fixtures/ant-design-form-error-list-observation.json",
             "tests/package/form-error-list.ssr.test.ts"
           ],
-          "note": "Текущие errors/warnings, non-null help (включая false/0/пустую строку), helpStatus, fieldId и callback видимости; class заменяет React className, snippets заменяют ReactNode. Вложенный FormList задаёт prefixCls без изменения соседних FormItem. Темы Form, opacity/height motion, CSS easing, deadline 500 ms, debounce очистки 10 ms, disabled/reduced motion и cleanup перенесены. Порядок leaving rows сверён с неизменённым diffKeys @rc-component/motion 1.3.3; в поставке есть MIT-лицензия. Обычные сообщения сохраняют key при перестановке, дубликаты получают уникальные keys. Дефект неизменённого UMD 6.6.8 с текстом toString зафиксирован: после обновления остаются 7 DOM-сообщений вместо переданных 5; здесь лишние строки не сохраняются. Общие semantic classNames/styles Form (help/helpItem) остаются вне этого этапа."
+          "note": "Текущие errors/warnings, non-null help (включая false/0/пустую строку), helpStatus, fieldId и callback видимости; class заменяет React className, snippets заменяют ReactNode. Вложенный FormList задаёт prefixCls без изменения соседних FormItem. Темы Form, opacity/height motion, CSS easing, deadline 500 ms, debounce очистки 10 ms, disabled/reduced motion и cleanup перенесены. Порядок leaving rows сверён с неизменённым diffKeys @rc-component/motion 1.3.3; в поставке есть MIT-лицензия. Обычные сообщения сохраняют key при перестановке, дубликаты получают уникальные keys. Дефект неизменённого UMD 6.6.8 с текстом toString зафиксирован: после обновления остаются 7 DOM-сообщений вместо переданных 5; здесь лишние строки не сохраняются. Help/helpItem наследуют Form semantics. Native List prefix сохраняет приоритет; без списка используется ближайший styled Item через noStyle, затем ConfigProvider. Canonical media-scoped explain styles подключены."
         },
         {
           "id": "validation-options",
@@ -6940,7 +6953,39 @@
             "tests/browser/grid-col-prefix.spec.ts",
             "tests/package/grid-col-prefix.ssr.test.ts"
           ],
-          "note": "Default Form layout сохраняется при общем Grid prefix и independent labelCol/wrapperCol.prefixCls. Stable span/breakpoint attributes дополняют canonical selectors с той же specificity; control связывает общий grid-display namespace с native --ant-grid-display. Source Form CSS raw/fresh measurements сравниваются на семи ширинах. Самостоятельный Form.prefixCls и token.screen* media CSS не включены; custom-media Col fixture изолирует форму со стандартными порогами. Native labels, styles, field refs/state и validation contracts сохраняются."
+          "note": "Default Form layout сохраняется при общем Grid prefix и independent labelCol/wrapperCol.prefixCls. Stable span/breakpoint attributes дополняют canonical selectors с той же specificity; control связывает общий grid-display namespace с native --ant-grid-display. Source Form CSS raw/fresh measurements сравниваются на семи ширинах. Form prefixCls и global screen*Max media CSS подключены отдельной feature; custom-media Col fixture изолирует форму со стандартными порогами. Native labels, styles, field refs/state и validation contracts сохраняются."
+        },
+        {
+          "id": "prefix-media-scopes",
+          "title": "Local/shared Form/Item/List prefixes и global screen*Max CSS",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Form.svelte",
+            "src/lib/FormItem.svelte",
+            "src/lib/FormList.svelte",
+            "src/lib/FormErrorList.svelte",
+            "src/lib/FormItemTooltip.svelte",
+            "src/lib/form.types.ts",
+            "src/lib/form-list.types.ts",
+            "src/lib/form-prefix-context.ts",
+            "src/lib/form-prefix.engine.ts",
+            "src/lib/form-prefix.engine.test.ts",
+            "src/lib/form-error-list-prefix.engine.ts",
+            "src/lib/vendor/form-prefix.css.js",
+            "src/lib/vendor/antd.css",
+            "tools/ant-design-css-recipes.json",
+            "tests/browser/fixtures/FormPrefixScope.svelte",
+            "tests/browser/fixtures/FormPrefixFixtures.svelte",
+            "tests/browser/fixtures/FormPrefixNativeOwners.svelte",
+            "tests/browser/fixtures/FormPrefixSSRFixtures.svelte",
+            "tests/browser/fixtures/ant-design-form-prefix-reference.json",
+            "tests/browser/form-prefix-metrics.ts",
+            "tests/browser/form-prefix.spec.ts",
+            "tests/package/FormPrefixTransparentSSRFixture.svelte",
+            "tests/package/form-prefix.ssr.test.ts"
+          ],
+          "note": "Form/Item/List разрешают local prefix независимо: nonempty local wins, empty/undefined наследуют ConfigProvider. Input/Row/Col/Tooltip namespaces остаются самостоятельными. 99 Source CSS rules изолируют parts через scope с global namespace и screenXSMax/SMMax/MDMax/LGMax; canonical defaults, component tokens/semantic priority, Col metadata и native motion сохранены. Scoped canonical CSS не получает default media rules. Raw 26 configurations/5 widths записаны до fresh public local-class counterparts: Inner private/cache и media observations сохранены. Source sibling media pollution отделена сравнением с измеренным исходным default sibling. Native List prefix приоритетнее промежуточного Item; вне списка styled Item/noStyle fallback и общий prefix. Model/store/validation, register/ref, values/errors, native forms/labels, callbacks, selection/focus и submit/reset не меняются. React diagnostics/full renderer и прочие Field API остаются вне объёма."
         }
       ]
     },

@@ -31,7 +31,7 @@ export interface FormListRule {
 
 /** Управляет массивом в ближайшем Form; вложенный name считается от родительского FormList. */
 export interface FormListProps {
-  /** Префикс FormErrorList внутри списка; по умолчанию ant-form. */
+  /** Префикс FormErrorList внутри списка; empty/undefined наследуют ConfigProvider. */
   prefixCls?: string;
   name: NamePath;
   /** Form initialValues имеет приоритет; значение копируется и участвует в reset. */

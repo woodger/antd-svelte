@@ -201,7 +201,12 @@ Col local/shared prefixes повторно используют 1027 rules grid-
 private Col/Grid variables; scope учитывает оба prefixes и media thresholds.
 Native Form selectors сохраняют specificity и поддерживают span/breakpoint
 attributes; FormItem display bridge сохраняет default layout. Source shared local
-class private-flex cache записан raw/fresh; Form prefix/media переносится отдельно.
+class private-flex cache записан raw/fresh; Form prefix/media подключены отдельно.
+Рецепт form-prefix выводит 99 исходных rules без collapse motion. Canonical Form
+CSS исключает parts с отдельным scope, сохраняя specificity; runtime подключает
+local Form/Item classes, global Col/private Form/Grid namespaces и global screen*Max.
+Col span/breakpoint metadata сохранены. Raw и fresh measurements отделяют Source
+cache defects; store/validation/ref/focus и native ErrorList motion не меняются.
 Рецепт layout-prefix выводит 35 flat rules Layout/Sider; runtime выбирает свою
 группу, сохраняет Menu namespace и ограничивает defaults/state selectors корнем.
 Тот же template используется для Header/Content/Footer: выбираются selectors
