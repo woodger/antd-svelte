@@ -1,0 +1,116 @@
+{
+  "reference": {
+    "version": "6.6.8",
+    "revision": "984592267de88fbf9cdaecc96a56629e721c709d",
+    "archiveSha256": "8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa",
+    "files": [
+      "components/tree/Tree.tsx",
+      "components/tree/DirectoryTree.tsx"
+    ],
+    "delegate": "@rc-component/tree 1.4.0"
+  },
+  "cases": [
+    {
+      "sample": {
+        "id": "settled-double",
+        "expandAction": "click",
+        "action": "settledDoubleClick",
+        "interval": 100
+      },
+      "initial": {
+        "expanded": "false",
+        "visible": [
+          "Root",
+          "Leaf"
+        ],
+        "selected": [],
+        "events": []
+      },
+      "result": {
+        "expanded": "false",
+        "visible": [
+          "Root",
+          "Leaf"
+        ],
+        "selected": [],
+        "events": [
+          {
+            "kind": "expand",
+            "keys": [
+              "root"
+            ],
+            "expanded": true,
+            "node": {
+              "key": "root",
+              "expanded": false,
+              "selected": false
+            },
+            "event": "click"
+          },
+          {
+            "kind": "click",
+            "node": {
+              "key": "root",
+              "expanded": false,
+              "selected": false
+            },
+            "event": "click"
+          },
+          {
+            "kind": "select",
+            "keys": [
+              "root"
+            ],
+            "selected": true,
+            "node": {
+              "key": "root",
+              "expanded": false,
+              "selected": false
+            },
+            "event": "click"
+          },
+          {
+            "kind": "expand",
+            "keys": [],
+            "expanded": false,
+            "node": {
+              "key": "root",
+              "expanded": true,
+              "selected": true
+            },
+            "event": "click"
+          },
+          {
+            "kind": "click",
+            "node": {
+              "key": "root",
+              "expanded": true,
+              "selected": true
+            },
+            "event": "click"
+          },
+          {
+            "kind": "select",
+            "keys": [],
+            "selected": false,
+            "node": {
+              "key": "root",
+              "expanded": true,
+              "selected": true
+            },
+            "event": "click"
+          },
+          {
+            "kind": "doubleClick",
+            "node": {
+              "key": "root",
+              "expanded": false,
+              "selected": false
+            },
+            "event": "dblclick"
+          }
+        ]
+      }
+    }
+  ]
+}

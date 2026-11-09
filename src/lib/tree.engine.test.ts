@@ -91,6 +91,11 @@ describe('Tree engines', () => {
     expect(selectTreeKeys(['a'], 'b', true)).toEqual(['a', 'b']);
     expect(selectTreeKeys(['a'], 'a', false)).toEqual([]);
   });
+  it('preserves the pre-event selection target after earlier callbacks change keys', () => {
+    expect(selectTreeKeys(['a', 'b'], 'b', true, false)).toEqual(['a', 'b']);
+    expect(selectTreeKeys(['b'], 'a', true, true)).toEqual(['b']);
+    expect(selectTreeKeys(['b'], 'a', false, true)).toEqual([]);
+  });
   it('keeps explicit isLeaf false expandable and recognizes loaded empty branches', () => {
     expect(treeLeaf({ key: 'a' }, true, false)).toBe(false);
     expect(treeLeaf({ key: 'a' }, true, true)).toBe(true);

@@ -9,6 +9,9 @@
 
 ### Added
 
+- Tree поддерживает expandAction=false/'click'/'doubleClick', modifier guards и
+  раскрытие заголовком с исходным порядком callbacks и снимком node до действия.
+
 - UploadFile предоставляет необязательные fileName и preview из текущего upstream
   API; renderer сохраняет name и thumbUrl/url для отображения строки.
 

@@ -268,6 +268,13 @@ Native file input, refs/focus и выполняющиеся запросы не 
 collapse motion. Runtime изолирует local/global scopes, сохраняет canonical tokens
 и отдельный Row namespace. Native focus/IDs/state/load и CSS-адаптер TreeSelect
 сохранены; raw style/readonly-selection отделены от public counterparts.
+Tree expandAction сверяется по 22 raw UMD cases и отдельному counterpart с двумя
+кликами через 100 ms. Проверяются modifier guards, click/doubleClick, controlled
+hold/accept, checkbox, lazy title collapse и синхронное изменение selection в onClick.
+Snapshot node предшествует onExpand/onClick/onSelect/onCheck; предыдущий default
+без title expansion сохраняется. Raw rapid double click отдельно показывает Source
+state/callback inconsistency: setExpandedKeys выполняется перед guard listChanging.
+Native сообщает оба перехода; raw Source outcome не переписан под исправление.
 Рецепт transfer-prefix выводит те же 54 правила, что transfer, как CSS data module.
 Owner classes, включая box-sizing selectors, отделены от общих Button/Input/
 Pagination/Table namespaces; canonical tokens сохраняются. Private Checkbox и

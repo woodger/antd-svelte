@@ -17857,6 +17857,43 @@
             "tests/package/tree-prefix.ssr.test.ts"
           ],
           "note": "Для отдельного разбора: Native уже сохранял defaultSelectedKeys/selectedKeys и selected paint при selectable=false, блокируя выбор. Raw UMD 6.6.8 / rc-tree study 1.4.0 не инициализирует selectedKeys, если global selectable=false, и не рисует заданный Beta. Отдельный public global selectable=true/per-node selectable=false counterpart сохраняет selected paint без node selection. Это visual counterpart, не утверждение о полном совпадении selection semantics. Prefix этап не меняет прежнее Native состояние."
+        },
+        {
+          "id": "title-expand-action",
+          "title": "ExpandAction заголовка с modifier guards и snapshot callbacks",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Tree.svelte",
+            "src/lib/tree.types.ts",
+            "src/lib/tree.engine.ts",
+            "src/lib/tree.engine.test.ts",
+            "src/lib/index.ts",
+            "tests/browser/tree-expand-action.spec.ts",
+            "tests/browser/tree-expand-action-metrics.ts",
+            "tests/browser/fixtures/TreeExpandActionScope.svelte",
+            "tests/browser/fixtures/TreeExpandActionFixtures.svelte",
+            "tests/browser/fixtures/ant-design-tree-expand-action-reference.json",
+            "tests/browser/fixtures/ant-design-tree-expand-action-settled-reference.json",
+            "tests/package/tree-expand-action.ssr.test.ts",
+            "readme.md"
+          ],
+          "note": "Текущий TreeProps наследует expandAction из rc-tree1.4.0: false по умолчанию, click/doubleClick. Ctrl/Meta/Shift блокируют только title expansion. Snapshot node сохраняется до onExpand/onClick/onSelect/onCheck, включая synchronous controlled selection update в onClick; keys не дублируются. Заголовок может свернуть pending lazy ветку, прежний pointer switcher loading guard сохраняется. 22 raw UMD cases плюс settled-double counterpart задают события, keys, selected/expanded flags, disabled, leaf, zero key, RTL/prefix, controlled hold/accept, checkable и load order. Native сохраняет прежние native controls/ARIA и default без title expansion; disabled pointer probes воспроизводят физический клик через существующий ARIA disabled. Prop updates сохраняют nodes, selection и внешний draft/focus/selection. SSR не запускает load или browser resources. Полный list motion/virtual и DirectoryTree остаются отдельно."
+        },
+        {
+          "id": "native-rapid-expand-callbacks",
+          "title": "Каждый быстрый title-переход получает onExpand вместо пропущенного Source callback",
+          "state": "partial",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Tree.svelte",
+            "tests/browser/tree-expand-action.spec.ts",
+            "tests/browser/fixtures/ant-design-tree-expand-action-reference.json",
+            "tests/browser/fixtures/ant-design-tree-expand-action-settled-reference.json",
+            "tests/package/tree-expand-action.ssr.test.ts",
+            "readme.md"
+          ],
+          "note": "Raw click-double при expandAction=click в rc-tree1.4.0 заканчивается expanded=false, но содержит только первый onExpand(expanded=true). triggerExpandActionExpand предварительно меняет keys до onNodeExpand, который может выйти через listChanging guard. Native immediate expansion сообщает оба фактических перехода и сохраняет согласованность state/callback; эталоном этой пары служит unmodified public Source counterpart с двумя кликами через100ms и последующим dblclick. Исходное ошибочное наблюдение сохранено отдельно и не используется как desired outcome. Полный Native virtual/list motion пока отсутствует."
         }
       ]
     },

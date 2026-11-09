@@ -90,6 +90,7 @@ export type {
   TreeDataNode,
   TreeEventNode,
   TreeKey,
+  TreeExpandAction,
   TreeCheckedKeys,
   TreeCheckInfo
 } from './tree.types';

@@ -28,6 +28,7 @@
     defaultExpandAll = false,
     defaultExpandParent = true,
     autoExpandParent = false,
+    expandAction = false,
     selectedKeys,
     defaultSelectedKeys = [],
     selectable = true,
@@ -219,9 +220,15 @@
         );
     });
   }
-  function expand(entry: TreeEntity, event?: MouseEvent) {
-    if (leaf(entry) || event && loading.includes(entry.key)) return;
-    const node = eventNode(entry);
+  function expand(
+    entry: TreeEntity,
+    event?: MouseEvent,
+    snapshot?: TreeEventNode,
+    fromTitle = false
+  ) {
+    // Selector rc-tree допускает collapse pending-ветки; switcher по-прежнему ждёт загрузку.
+    if (leaf(entry) || event && !fromTitle && loading.includes(entry.key)) return;
+    const node = snapshot ?? eventNode(entry);
     const next = node.expanded
       ? expanded.filter(key => key !== entry.key)
       : [...expanded, entry.key];
@@ -231,10 +238,10 @@
     if (!node.expanded && loadData)
       void loader.load(node);
   }
-  function select(entry: TreeEntity, event?: MouseEvent) {
+  function select(entry: TreeEntity, event?: MouseEvent, snapshot?: TreeEventNode) {
     if (blocked || entry.node.disabled || !(entry.node.selectable ?? selectable)) return;
-    const node = eventNode(entry);
-    const next = selectTreeKeys(selected, entry.key, multiple);
+    const node = snapshot ?? eventNode(entry);
+    const next = selectTreeKeys(selected, entry.key, multiple, snapshot?.selected);
     if (selectedKeys === undefined)
       selected = next;
     onSelect?.(next, {
@@ -248,9 +255,14 @@
       nativeEvent: event
     });
   }
-  function check(entry: TreeEntity, event?: MouseEvent, force?: boolean) {
+  function check(
+    entry: TreeEntity,
+    event?: MouseEvent,
+    force?: boolean,
+    snapshot?: TreeEventNode
+  ) {
     if (!checkable || blocked || treeCheckDisabled(entry.node)) return;
-    const node = eventNode(entry);
+    const node = snapshot ?? eventNode(entry);
     const target = force ?? !node.checked;
     const next = checkStrictly
       ? {
@@ -287,9 +299,18 @@
     );
   }
   function click(entry: TreeEntity, event: MouseEvent) {
-    onClick?.(event, eventNode(entry));
+    const node = eventNode(entry);
+    if (expandAction === 'click' && !event.ctrlKey && !event.metaKey && !event.shiftKey)
+      expand(entry, event, node, true);
+    onClick?.(event, node);
+    const snapshot = expandAction ? node : undefined;
     if (entry.node.selectable ?? selectable)
-      select(entry, event); else check(entry, event);
+      select(entry, event, snapshot); else check(entry, event, undefined, snapshot);
+  }
+  function doubleClick(entry: TreeEntity, event: MouseEvent, node: TreeEventNode) {
+    if (expandAction === 'doubleClick' && !event.ctrlKey && !event.metaKey && !event.shiftKey)
+      expand(entry, event, node, true);
+    onDoubleClick?.(event, node);
   }
   function focusIn(event: FocusEvent & { currentTarget: EventTarget & HTMLDivElement; }) {
     focused = true;
@@ -450,7 +471,7 @@
                 ? 'normal'
                 : node.expanded ? 'open' : 'close'}`,
               !unavailable && node.selected && `${componentPrefix}-node-selected`
-            ]} onmousedown={mouseFocus} onclick={event => click(entry, event)} ondblclick={event => onDoubleClick?.(event, node)} oncontextmenu={event => {
+            ]} onmousedown={mouseFocus} onclick={event => click(entry, event)} ondblclick={event => doubleClick(entry, event, node)} oncontextmenu={event => {
                 if (onRightClick) {
                   event.preventDefault();
                   onRightClick({ event, node });

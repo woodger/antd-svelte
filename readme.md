@@ -6508,6 +6508,23 @@ expanded/selected/checked/halfChecked/loaded/loading/active. Mouse callback со
 не иметь nativeEvent. Дополнительно поддержаны onClick/onDoubleClick/onRightClick
 и onActiveChange. Состояние node в callback относится к узлу до действия.
 
+`expandAction` включает раскрытие заголовком: false по умолчанию, 'click' или
+'doubleClick'. Ctrl/Meta/Shift оставляют выбор без раскрытия. При click-expansion
+onExpand предшествует onClick и последующему onSelect/onCheck; флаги node остаются
+снимком до действия, даже если callback синхронно обновил controlled selection.
+Заголовок может свернуть pending-ветку; прежний pointer switcher ждёт загрузку.
+Смена expandAction сохраняет DOM, выбранные ключи и внешний draft/focus/selection.
+[22 исходных случая](tests/browser/fixtures/ant-design-tree-expand-action-reference.json),
+[counterpart с завершёнными переходами](tests/browser/fixtures/ant-design-tree-expand-action-settled-reference.json),
+[browser](tests/browser/tree-expand-action.spec.ts) и
+[SSR](tests/package/tree-expand-action.ssr.test.ts) проверяют эти границы.
+
+В rc-tree 1.4.0 быстрый двойной клик с expandAction='click' может свернуть узел,
+оставив только первый onExpand(expanded=true): предварительное обновление keys
+обходит guard listChanging. Raw observation сохранён в случае click-double.
+Native сообщает каждый фактический переход, как Source при двух завершённых
+кликах. Полный virtual/list motion остаётся отдельным неперенесённым объёмом.
+
 LoadData(node) возвращает PromiseLike. Дети добавляются потребителем в treeData;
 компонент их не выдумывает. Loading дедуплицируется по ключу; pointer switcher ждёт завершения загрузки,
 но клавиатура позволяет свернуть pending-ветку. OnLoad(keys,{event:'load',
@@ -6571,7 +6588,7 @@ DOM, фокуса, active descendant, отметок и pending load при об
 браузерные ресурсы. Декларации сверяются с официальным UMD отдельным
 [unit-набором](src/lib/theme-tree-tokens-reference.test.ts).
 
-DirectoryTree, drag/drop, virtual/scrollTo, expandAction, fieldNames, полный generic
+DirectoryTree, drag/drop, virtual/scrollTo, fieldNames, полный generic
 node API, TreeNode children API, per-node switcherIcon, showLeafIcon snippet,
 semantic/config API и collapse/appear анимации ещё не перенесены. Реестр
 отделяет этот объём от полного React API Tree.

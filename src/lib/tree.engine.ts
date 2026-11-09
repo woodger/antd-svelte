@@ -144,8 +144,15 @@ export function toggleTreeCheck(
 export function selectTreeKeys(
   keys: readonly TreeKey[],
   key: TreeKey,
-  multiple: boolean
+  multiple: boolean,
+  wasSelected?: boolean
 ): TreeKey[] {
+  // Selector использует snapshot узла до onExpand/onClick, даже если callbacks обновили keys.
+  if (wasSelected !== undefined) {
+    if (!multiple) return wasSelected ? [] : [key];
+    if (wasSelected) return keys.filter(item => item !== key);
+    return keys.includes(key) ? [...keys] : [...keys, key];
+  }
   return keys.includes(key) ? keys.filter(item => item !== key) : multiple ? [...keys, key] : [
     key
   ];

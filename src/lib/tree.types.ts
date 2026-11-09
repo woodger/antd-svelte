@@ -1,6 +1,7 @@
 import type { Snippet } from 'svelte';
 import type { HTMLAttributes } from 'svelte/elements';
 export type TreeKey = string | number | bigint;
+export type TreeExpandAction = false | 'click' | 'doubleClick';
 export interface TreeDataNode {
   key: TreeKey;
   title?: string | number | Snippet<[TreeDataNode]>;
@@ -59,6 +60,8 @@ export interface TreeProps extends Omit<HTMLAttributes<HTMLDivElement>, 'childre
   defaultExpandParent?: boolean;
   /** @defaultValue false */
   autoExpandParent?: boolean;
+  /** Раскрытие через заголовок; Ctrl/Meta/Shift сохраняют только действие выбора. @defaultValue false */
+  expandAction?: TreeExpandAction;
   /** Управляемые ключи выбора; стабильные keys обязательны. */
   selectedKeys?: readonly TreeKey[];
   /** Начальное локальное значение; последующие изменения prop не переинициализируют состояние. */

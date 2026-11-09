@@ -1,0 +1,1685 @@
+{
+  "reference": {
+    "version": "6.6.8",
+    "revision": "984592267de88fbf9cdaecc96a56629e721c709d",
+    "archiveSha256": "8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa",
+    "files": [
+      "components/tree/Tree.tsx",
+      "components/tree/DirectoryTree.tsx"
+    ],
+    "delegate": "@rc-component/tree 1.4.0"
+  },
+  "cases": [
+    {
+      "sample": {
+        "id": "default",
+        "action": "click"
+      },
+      "initial": {
+        "expanded": "false",
+        "visible": [
+          "Root",
+          "Leaf"
+        ],
+        "selected": [],
+        "events": []
+      },
+      "result": {
+        "expanded": "false",
+        "visible": [
+          "Root",
+          "Leaf"
+        ],
+        "selected": [
+          "Root"
+        ],
+        "events": [
+          {
+            "kind": "click",
+            "node": {
+              "key": "root",
+              "expanded": false,
+              "selected": false
+            },
+            "event": "click"
+          },
+          {
+            "kind": "select",
+            "keys": [
+              "root"
+            ],
+            "selected": true,
+            "node": {
+              "key": "root",
+              "expanded": false,
+              "selected": false
+            },
+            "event": "click"
+          }
+        ]
+      }
+    },
+    {
+      "sample": {
+        "id": "false",
+        "expandAction": false,
+        "action": "click"
+      },
+      "initial": {
+        "expanded": "false",
+        "visible": [
+          "Root",
+          "Leaf"
+        ],
+        "selected": [],
+        "events": []
+      },
+      "result": {
+        "expanded": "false",
+        "visible": [
+          "Root",
+          "Leaf"
+        ],
+        "selected": [
+          "Root"
+        ],
+        "events": [
+          {
+            "kind": "click",
+            "node": {
+              "key": "root",
+              "expanded": false,
+              "selected": false
+            },
+            "event": "click"
+          },
+          {
+            "kind": "select",
+            "keys": [
+              "root"
+            ],
+            "selected": true,
+            "node": {
+              "key": "root",
+              "expanded": false,
+              "selected": false
+            },
+            "event": "click"
+          }
+        ]
+      }
+    },
+    {
+      "sample": {
+        "id": "click",
+        "expandAction": "click",
+        "action": "click"
+      },
+      "initial": {
+        "expanded": "false",
+        "visible": [
+          "Root",
+          "Leaf"
+        ],
+        "selected": [],
+        "events": []
+      },
+      "result": {
+        "expanded": "true",
+        "visible": [
+          "Root",
+          "Child",
+          "Leaf"
+        ],
+        "selected": [
+          "Root"
+        ],
+        "events": [
+          {
+            "kind": "expand",
+            "keys": [
+              "root"
+            ],
+            "expanded": true,
+            "node": {
+              "key": "root",
+              "expanded": false,
+              "selected": false
+            },
+            "event": "click"
+          },
+          {
+            "kind": "click",
+            "node": {
+              "key": "root",
+              "expanded": false,
+              "selected": false
+            },
+            "event": "click"
+          },
+          {
+            "kind": "select",
+            "keys": [
+              "root"
+            ],
+            "selected": true,
+            "node": {
+              "key": "root",
+              "expanded": false,
+              "selected": false
+            },
+            "event": "click"
+          }
+        ]
+      }
+    },
+    {
+      "sample": {
+        "id": "double-single",
+        "expandAction": "doubleClick",
+        "action": "click"
+      },
+      "initial": {
+        "expanded": "false",
+        "visible": [
+          "Root",
+          "Leaf"
+        ],
+        "selected": [],
+        "events": []
+      },
+      "result": {
+        "expanded": "false",
+        "visible": [
+          "Root",
+          "Leaf"
+        ],
+        "selected": [
+          "Root"
+        ],
+        "events": [
+          {
+            "kind": "click",
+            "node": {
+              "key": "root",
+              "expanded": false,
+              "selected": false
+            },
+            "event": "click"
+          },
+          {
+            "kind": "select",
+            "keys": [
+              "root"
+            ],
+            "selected": true,
+            "node": {
+              "key": "root",
+              "expanded": false,
+              "selected": false
+            },
+            "event": "click"
+          }
+        ]
+      }
+    },
+    {
+      "sample": {
+        "id": "double",
+        "expandAction": "doubleClick",
+        "action": "doubleClick"
+      },
+      "initial": {
+        "expanded": "false",
+        "visible": [
+          "Root",
+          "Leaf"
+        ],
+        "selected": [],
+        "events": []
+      },
+      "result": {
+        "expanded": "true",
+        "visible": [
+          "Root",
+          "Child",
+          "Leaf"
+        ],
+        "selected": [],
+        "events": [
+          {
+            "kind": "click",
+            "node": {
+              "key": "root",
+              "expanded": false,
+              "selected": false
+            },
+            "event": "click"
+          },
+          {
+            "kind": "select",
+            "keys": [
+              "root"
+            ],
+            "selected": true,
+            "node": {
+              "key": "root",
+              "expanded": false,
+              "selected": false
+            },
+            "event": "click"
+          },
+          {
+            "kind": "click",
+            "node": {
+              "key": "root",
+              "expanded": false,
+              "selected": true
+            },
+            "event": "click"
+          },
+          {
+            "kind": "select",
+            "keys": [],
+            "selected": false,
+            "node": {
+              "key": "root",
+              "expanded": false,
+              "selected": true
+            },
+            "event": "click"
+          },
+          {
+            "kind": "expand",
+            "keys": [
+              "root"
+            ],
+            "expanded": true,
+            "node": {
+              "key": "root",
+              "expanded": false,
+              "selected": false
+            },
+            "event": "dblclick"
+          },
+          {
+            "kind": "doubleClick",
+            "node": {
+              "key": "root",
+              "expanded": false,
+              "selected": false
+            },
+            "event": "dblclick"
+          }
+        ]
+      }
+    },
+    {
+      "sample": {
+        "id": "click-double",
+        "expandAction": "click",
+        "action": "doubleClick"
+      },
+      "initial": {
+        "expanded": "false",
+        "visible": [
+          "Root",
+          "Leaf"
+        ],
+        "selected": [],
+        "events": []
+      },
+      "result": {
+        "expanded": "false",
+        "visible": [
+          "Root",
+          "Leaf"
+        ],
+        "selected": [],
+        "events": [
+          {
+            "kind": "expand",
+            "keys": [
+              "root"
+            ],
+            "expanded": true,
+            "node": {
+              "key": "root",
+              "expanded": false,
+              "selected": false
+            },
+            "event": "click"
+          },
+          {
+            "kind": "click",
+            "node": {
+              "key": "root",
+              "expanded": false,
+              "selected": false
+            },
+            "event": "click"
+          },
+          {
+            "kind": "select",
+            "keys": [
+              "root"
+            ],
+            "selected": true,
+            "node": {
+              "key": "root",
+              "expanded": false,
+              "selected": false
+            },
+            "event": "click"
+          },
+          {
+            "kind": "click",
+            "node": {
+              "key": "root",
+              "expanded": true,
+              "selected": true
+            },
+            "event": "click"
+          },
+          {
+            "kind": "select",
+            "keys": [],
+            "selected": false,
+            "node": {
+              "key": "root",
+              "expanded": true,
+              "selected": true
+            },
+            "event": "click"
+          },
+          {
+            "kind": "doubleClick",
+            "node": {
+              "key": "root",
+              "expanded": false,
+              "selected": false
+            },
+            "event": "dblclick"
+          }
+        ]
+      }
+    },
+    {
+      "sample": {
+        "id": "ctrl",
+        "expandAction": "click",
+        "action": "click",
+        "modifier": "Control"
+      },
+      "initial": {
+        "expanded": "false",
+        "visible": [
+          "Root",
+          "Leaf"
+        ],
+        "selected": [],
+        "events": []
+      },
+      "result": {
+        "expanded": "false",
+        "visible": [
+          "Root",
+          "Leaf"
+        ],
+        "selected": [
+          "Root"
+        ],
+        "events": [
+          {
+            "kind": "click",
+            "node": {
+              "key": "root",
+              "expanded": false,
+              "selected": false
+            },
+            "event": "click"
+          },
+          {
+            "kind": "select",
+            "keys": [
+              "root"
+            ],
+            "selected": true,
+            "node": {
+              "key": "root",
+              "expanded": false,
+              "selected": false
+            },
+            "event": "click"
+          }
+        ]
+      }
+    },
+    {
+      "sample": {
+        "id": "meta",
+        "expandAction": "click",
+        "action": "click",
+        "modifier": "Meta"
+      },
+      "initial": {
+        "expanded": "false",
+        "visible": [
+          "Root",
+          "Leaf"
+        ],
+        "selected": [],
+        "events": []
+      },
+      "result": {
+        "expanded": "false",
+        "visible": [
+          "Root",
+          "Leaf"
+        ],
+        "selected": [
+          "Root"
+        ],
+        "events": [
+          {
+            "kind": "click",
+            "node": {
+              "key": "root",
+              "expanded": false,
+              "selected": false
+            },
+            "event": "click"
+          },
+          {
+            "kind": "select",
+            "keys": [
+              "root"
+            ],
+            "selected": true,
+            "node": {
+              "key": "root",
+              "expanded": false,
+              "selected": false
+            },
+            "event": "click"
+          }
+        ]
+      }
+    },
+    {
+      "sample": {
+        "id": "shift",
+        "expandAction": "click",
+        "action": "click",
+        "modifier": "Shift"
+      },
+      "initial": {
+        "expanded": "false",
+        "visible": [
+          "Root",
+          "Leaf"
+        ],
+        "selected": [],
+        "events": []
+      },
+      "result": {
+        "expanded": "false",
+        "visible": [
+          "Root",
+          "Leaf"
+        ],
+        "selected": [
+          "Root"
+        ],
+        "events": [
+          {
+            "kind": "click",
+            "node": {
+              "key": "root",
+              "expanded": false,
+              "selected": false
+            },
+            "event": "click"
+          },
+          {
+            "kind": "select",
+            "keys": [
+              "root"
+            ],
+            "selected": true,
+            "node": {
+              "key": "root",
+              "expanded": false,
+              "selected": false
+            },
+            "event": "click"
+          }
+        ]
+      }
+    },
+    {
+      "sample": {
+        "id": "double-ctrl",
+        "expandAction": "doubleClick",
+        "action": "doubleClick",
+        "modifier": "Control"
+      },
+      "initial": {
+        "expanded": "false",
+        "visible": [
+          "Root",
+          "Leaf"
+        ],
+        "selected": [],
+        "events": []
+      },
+      "result": {
+        "expanded": "false",
+        "visible": [
+          "Root",
+          "Leaf"
+        ],
+        "selected": [],
+        "events": [
+          {
+            "kind": "click",
+            "node": {
+              "key": "root",
+              "expanded": false,
+              "selected": false
+            },
+            "event": "click"
+          },
+          {
+            "kind": "select",
+            "keys": [
+              "root"
+            ],
+            "selected": true,
+            "node": {
+              "key": "root",
+              "expanded": false,
+              "selected": false
+            },
+            "event": "click"
+          },
+          {
+            "kind": "click",
+            "node": {
+              "key": "root",
+              "expanded": false,
+              "selected": true
+            },
+            "event": "click"
+          },
+          {
+            "kind": "select",
+            "keys": [],
+            "selected": false,
+            "node": {
+              "key": "root",
+              "expanded": false,
+              "selected": true
+            },
+            "event": "click"
+          },
+          {
+            "kind": "doubleClick",
+            "node": {
+              "key": "root",
+              "expanded": false,
+              "selected": false
+            },
+            "event": "dblclick"
+          }
+        ]
+      }
+    },
+    {
+      "sample": {
+        "id": "rtl-prefix",
+        "expandAction": "click",
+        "action": "click",
+        "rtl": true,
+        "prefix": "tenant"
+      },
+      "initial": {
+        "expanded": "false",
+        "visible": [
+          "Root",
+          "Leaf"
+        ],
+        "selected": [],
+        "events": []
+      },
+      "result": {
+        "expanded": "true",
+        "visible": [
+          "Root",
+          "Child",
+          "Leaf"
+        ],
+        "selected": [
+          "Root"
+        ],
+        "events": [
+          {
+            "kind": "expand",
+            "keys": [
+              "root"
+            ],
+            "expanded": true,
+            "node": {
+              "key": "root",
+              "expanded": false,
+              "selected": false
+            },
+            "event": "click"
+          },
+          {
+            "kind": "click",
+            "node": {
+              "key": "root",
+              "expanded": false,
+              "selected": false
+            },
+            "event": "click"
+          },
+          {
+            "kind": "select",
+            "keys": [
+              "root"
+            ],
+            "selected": true,
+            "node": {
+              "key": "root",
+              "expanded": false,
+              "selected": false
+            },
+            "event": "click"
+          }
+        ]
+      }
+    },
+    {
+      "sample": {
+        "id": "disabled",
+        "expandAction": "click",
+        "action": "click",
+        "disabled": true
+      },
+      "initial": {
+        "expanded": "false",
+        "visible": [
+          "Root",
+          "Leaf"
+        ],
+        "selected": [],
+        "events": []
+      },
+      "result": {
+        "expanded": "true",
+        "visible": [
+          "Root",
+          "Child",
+          "Leaf"
+        ],
+        "selected": [],
+        "events": [
+          {
+            "kind": "expand",
+            "keys": [
+              "root"
+            ],
+            "expanded": true,
+            "node": {
+              "key": "root",
+              "expanded": false,
+              "selected": false
+            },
+            "event": "click"
+          },
+          {
+            "kind": "click",
+            "node": {
+              "key": "root",
+              "expanded": false,
+              "selected": false
+            },
+            "event": "click"
+          }
+        ]
+      }
+    },
+    {
+      "sample": {
+        "id": "node-disabled",
+        "expandAction": "click",
+        "action": "click",
+        "nodeDisabled": true
+      },
+      "initial": {
+        "expanded": "false",
+        "visible": [
+          "Root",
+          "Leaf"
+        ],
+        "selected": [],
+        "events": []
+      },
+      "result": {
+        "expanded": "true",
+        "visible": [
+          "Root",
+          "Child",
+          "Leaf"
+        ],
+        "selected": [],
+        "events": [
+          {
+            "kind": "expand",
+            "keys": [
+              "root"
+            ],
+            "expanded": true,
+            "node": {
+              "key": "root",
+              "expanded": false,
+              "selected": false
+            },
+            "event": "click"
+          },
+          {
+            "kind": "click",
+            "node": {
+              "key": "root",
+              "expanded": false,
+              "selected": false
+            },
+            "event": "click"
+          }
+        ]
+      }
+    },
+    {
+      "sample": {
+        "id": "leaf",
+        "expandAction": "click",
+        "action": "click",
+        "leaf": true
+      },
+      "initial": {
+        "expanded": null,
+        "visible": [
+          "Root",
+          "Leaf"
+        ],
+        "selected": [],
+        "events": []
+      },
+      "result": {
+        "expanded": null,
+        "visible": [
+          "Root",
+          "Leaf"
+        ],
+        "selected": [
+          "Root"
+        ],
+        "events": [
+          {
+            "kind": "click",
+            "node": {
+              "key": "root",
+              "expanded": false,
+              "selected": false
+            },
+            "event": "click"
+          },
+          {
+            "kind": "select",
+            "keys": [
+              "root"
+            ],
+            "selected": true,
+            "node": {
+              "key": "root",
+              "expanded": false,
+              "selected": false
+            },
+            "event": "click"
+          }
+        ]
+      }
+    },
+    {
+      "sample": {
+        "id": "hold",
+        "expandAction": "click",
+        "action": "click",
+        "controlled": "hold",
+        "repeat": true
+      },
+      "initial": {
+        "expanded": "false",
+        "visible": [
+          "Root",
+          "Leaf"
+        ],
+        "selected": [],
+        "events": []
+      },
+      "result": {
+        "expanded": "false",
+        "visible": [
+          "Root",
+          "Leaf"
+        ],
+        "selected": [
+          "Root"
+        ],
+        "events": [
+          {
+            "kind": "expand",
+            "keys": [
+              "root"
+            ],
+            "expanded": true,
+            "node": {
+              "key": "root",
+              "expanded": false,
+              "selected": false
+            },
+            "event": "click"
+          },
+          {
+            "kind": "click",
+            "node": {
+              "key": "root",
+              "expanded": false,
+              "selected": false
+            },
+            "event": "click"
+          },
+          {
+            "kind": "select",
+            "keys": [
+              "root"
+            ],
+            "selected": true,
+            "node": {
+              "key": "root",
+              "expanded": false,
+              "selected": false
+            },
+            "event": "click"
+          }
+        ]
+      },
+      "repeated": {
+        "expanded": "false",
+        "visible": [
+          "Root",
+          "Leaf"
+        ],
+        "selected": [],
+        "events": [
+          {
+            "kind": "expand",
+            "keys": [
+              "root"
+            ],
+            "expanded": true,
+            "node": {
+              "key": "root",
+              "expanded": false,
+              "selected": false
+            },
+            "event": "click"
+          },
+          {
+            "kind": "click",
+            "node": {
+              "key": "root",
+              "expanded": false,
+              "selected": false
+            },
+            "event": "click"
+          },
+          {
+            "kind": "select",
+            "keys": [
+              "root"
+            ],
+            "selected": true,
+            "node": {
+              "key": "root",
+              "expanded": false,
+              "selected": false
+            },
+            "event": "click"
+          },
+          {
+            "kind": "expand",
+            "keys": [
+              "root"
+            ],
+            "expanded": true,
+            "node": {
+              "key": "root",
+              "expanded": false,
+              "selected": true
+            },
+            "event": "click"
+          },
+          {
+            "kind": "click",
+            "node": {
+              "key": "root",
+              "expanded": false,
+              "selected": true
+            },
+            "event": "click"
+          },
+          {
+            "kind": "select",
+            "keys": [],
+            "selected": false,
+            "node": {
+              "key": "root",
+              "expanded": false,
+              "selected": true
+            },
+            "event": "click"
+          }
+        ]
+      }
+    },
+    {
+      "sample": {
+        "id": "accept",
+        "expandAction": "click",
+        "action": "click",
+        "controlled": "accept",
+        "repeat": true
+      },
+      "initial": {
+        "expanded": "false",
+        "visible": [
+          "Root",
+          "Leaf"
+        ],
+        "selected": [],
+        "events": []
+      },
+      "result": {
+        "expanded": "true",
+        "visible": [
+          "Root",
+          "Child",
+          "Leaf"
+        ],
+        "selected": [
+          "Root"
+        ],
+        "events": [
+          {
+            "kind": "expand",
+            "keys": [
+              "root"
+            ],
+            "expanded": true,
+            "node": {
+              "key": "root",
+              "expanded": false,
+              "selected": false
+            },
+            "event": "click"
+          },
+          {
+            "kind": "click",
+            "node": {
+              "key": "root",
+              "expanded": false,
+              "selected": false
+            },
+            "event": "click"
+          },
+          {
+            "kind": "select",
+            "keys": [
+              "root"
+            ],
+            "selected": true,
+            "node": {
+              "key": "root",
+              "expanded": false,
+              "selected": false
+            },
+            "event": "click"
+          }
+        ]
+      },
+      "repeated": {
+        "expanded": "false",
+        "visible": [
+          "Root",
+          "Leaf"
+        ],
+        "selected": [],
+        "events": [
+          {
+            "kind": "expand",
+            "keys": [
+              "root"
+            ],
+            "expanded": true,
+            "node": {
+              "key": "root",
+              "expanded": false,
+              "selected": false
+            },
+            "event": "click"
+          },
+          {
+            "kind": "click",
+            "node": {
+              "key": "root",
+              "expanded": false,
+              "selected": false
+            },
+            "event": "click"
+          },
+          {
+            "kind": "select",
+            "keys": [
+              "root"
+            ],
+            "selected": true,
+            "node": {
+              "key": "root",
+              "expanded": false,
+              "selected": false
+            },
+            "event": "click"
+          },
+          {
+            "kind": "expand",
+            "keys": [],
+            "expanded": false,
+            "node": {
+              "key": "root",
+              "expanded": true,
+              "selected": true
+            },
+            "event": "click"
+          },
+          {
+            "kind": "click",
+            "node": {
+              "key": "root",
+              "expanded": true,
+              "selected": true
+            },
+            "event": "click"
+          },
+          {
+            "kind": "select",
+            "keys": [],
+            "selected": false,
+            "node": {
+              "key": "root",
+              "expanded": true,
+              "selected": true
+            },
+            "event": "click"
+          }
+        ]
+      }
+    },
+    {
+      "sample": {
+        "id": "collapse-zero",
+        "expandAction": "click",
+        "action": "click",
+        "expanded": true,
+        "zero": true
+      },
+      "initial": {
+        "expanded": "true",
+        "visible": [
+          "Root",
+          "Child",
+          "Leaf"
+        ],
+        "selected": [],
+        "events": []
+      },
+      "result": {
+        "expanded": "false",
+        "visible": [
+          "Root",
+          "Leaf"
+        ],
+        "selected": [
+          "Root"
+        ],
+        "events": [
+          {
+            "kind": "expand",
+            "keys": [],
+            "expanded": false,
+            "node": {
+              "key": 0,
+              "expanded": true,
+              "selected": false
+            },
+            "event": "click"
+          },
+          {
+            "kind": "click",
+            "node": {
+              "key": 0,
+              "expanded": true,
+              "selected": false
+            },
+            "event": "click"
+          },
+          {
+            "kind": "select",
+            "keys": [
+              0
+            ],
+            "selected": true,
+            "node": {
+              "key": 0,
+              "expanded": true,
+              "selected": false
+            },
+            "event": "click"
+          }
+        ]
+      }
+    },
+    {
+      "sample": {
+        "id": "lazy-click",
+        "expandAction": "click",
+        "action": "click",
+        "lazy": true,
+        "repeat": true
+      },
+      "initial": {
+        "expanded": "false",
+        "visible": [
+          "Root",
+          "Leaf"
+        ],
+        "selected": [],
+        "events": []
+      },
+      "result": {
+        "expanded": "true",
+        "visible": [
+          "Root",
+          "Leaf"
+        ],
+        "selected": [
+          "Root"
+        ],
+        "events": [
+          {
+            "kind": "expand",
+            "keys": [
+              "root"
+            ],
+            "expanded": true,
+            "node": {
+              "key": "root",
+              "expanded": false,
+              "selected": false
+            },
+            "event": "click"
+          },
+          {
+            "kind": "click",
+            "node": {
+              "key": "root",
+              "expanded": false,
+              "selected": false
+            },
+            "event": "click"
+          },
+          {
+            "kind": "select",
+            "keys": [
+              "root"
+            ],
+            "selected": true,
+            "node": {
+              "key": "root",
+              "expanded": false,
+              "selected": false
+            },
+            "event": "click"
+          },
+          {
+            "kind": "load",
+            "node": {
+              "key": "root",
+              "expanded": false,
+              "selected": false
+            }
+          }
+        ]
+      },
+      "repeated": {
+        "expanded": "false",
+        "visible": [
+          "Root",
+          "Leaf"
+        ],
+        "selected": [],
+        "events": [
+          {
+            "kind": "expand",
+            "keys": [
+              "root"
+            ],
+            "expanded": true,
+            "node": {
+              "key": "root",
+              "expanded": false,
+              "selected": false
+            },
+            "event": "click"
+          },
+          {
+            "kind": "click",
+            "node": {
+              "key": "root",
+              "expanded": false,
+              "selected": false
+            },
+            "event": "click"
+          },
+          {
+            "kind": "select",
+            "keys": [
+              "root"
+            ],
+            "selected": true,
+            "node": {
+              "key": "root",
+              "expanded": false,
+              "selected": false
+            },
+            "event": "click"
+          },
+          {
+            "kind": "load",
+            "node": {
+              "key": "root",
+              "expanded": false,
+              "selected": false
+            }
+          },
+          {
+            "kind": "expand",
+            "keys": [],
+            "expanded": false,
+            "node": {
+              "key": "root",
+              "expanded": true,
+              "selected": true
+            },
+            "event": "click"
+          },
+          {
+            "kind": "click",
+            "node": {
+              "key": "root",
+              "expanded": true,
+              "selected": true
+            },
+            "event": "click"
+          },
+          {
+            "kind": "select",
+            "keys": [],
+            "selected": false,
+            "node": {
+              "key": "root",
+              "expanded": true,
+              "selected": true
+            },
+            "event": "click"
+          }
+        ]
+      }
+    },
+    {
+      "sample": {
+        "id": "lazy-double",
+        "expandAction": "doubleClick",
+        "action": "doubleClick",
+        "lazy": true
+      },
+      "initial": {
+        "expanded": "false",
+        "visible": [
+          "Root",
+          "Leaf"
+        ],
+        "selected": [],
+        "events": []
+      },
+      "result": {
+        "expanded": "true",
+        "visible": [
+          "Root",
+          "Leaf"
+        ],
+        "selected": [],
+        "events": [
+          {
+            "kind": "click",
+            "node": {
+              "key": "root",
+              "expanded": false,
+              "selected": false
+            },
+            "event": "click"
+          },
+          {
+            "kind": "select",
+            "keys": [
+              "root"
+            ],
+            "selected": true,
+            "node": {
+              "key": "root",
+              "expanded": false,
+              "selected": false
+            },
+            "event": "click"
+          },
+          {
+            "kind": "click",
+            "node": {
+              "key": "root",
+              "expanded": false,
+              "selected": true
+            },
+            "event": "click"
+          },
+          {
+            "kind": "select",
+            "keys": [],
+            "selected": false,
+            "node": {
+              "key": "root",
+              "expanded": false,
+              "selected": true
+            },
+            "event": "click"
+          },
+          {
+            "kind": "expand",
+            "keys": [
+              "root"
+            ],
+            "expanded": true,
+            "node": {
+              "key": "root",
+              "expanded": false,
+              "selected": false
+            },
+            "event": "dblclick"
+          },
+          {
+            "kind": "doubleClick",
+            "node": {
+              "key": "root",
+              "expanded": false,
+              "selected": false
+            },
+            "event": "dblclick"
+          },
+          {
+            "kind": "load",
+            "node": {
+              "key": "root",
+              "expanded": false,
+              "selected": false
+            }
+          }
+        ]
+      }
+    },
+    {
+      "sample": {
+        "id": "checkable-click",
+        "expandAction": "click",
+        "action": "click",
+        "checkable": true,
+        "selectable": false
+      },
+      "initial": {
+        "expanded": "false",
+        "visible": [
+          "Root",
+          "Leaf"
+        ],
+        "selected": [],
+        "events": []
+      },
+      "result": {
+        "expanded": "true",
+        "visible": [
+          "Root",
+          "Child",
+          "Leaf"
+        ],
+        "selected": [],
+        "events": [
+          {
+            "kind": "expand",
+            "keys": [
+              "root"
+            ],
+            "expanded": true,
+            "node": {
+              "key": "root",
+              "expanded": false,
+              "selected": false
+            },
+            "event": "click"
+          },
+          {
+            "kind": "click",
+            "node": {
+              "key": "root",
+              "expanded": false,
+              "selected": false
+            },
+            "event": "click"
+          },
+          {
+            "kind": "check",
+            "keys": [
+              "root",
+              "child"
+            ],
+            "checked": true,
+            "node": {
+              "key": "root",
+              "expanded": false,
+              "selected": false
+            },
+            "event": "click"
+          }
+        ]
+      }
+    },
+    {
+      "sample": {
+        "id": "checkable-double",
+        "expandAction": "doubleClick",
+        "action": "doubleClick",
+        "checkable": true,
+        "selectable": false
+      },
+      "initial": {
+        "expanded": "false",
+        "visible": [
+          "Root",
+          "Leaf"
+        ],
+        "selected": [],
+        "events": []
+      },
+      "result": {
+        "expanded": "true",
+        "visible": [
+          "Root",
+          "Child",
+          "Leaf"
+        ],
+        "selected": [],
+        "events": [
+          {
+            "kind": "click",
+            "node": {
+              "key": "root",
+              "expanded": false,
+              "selected": false
+            },
+            "event": "click"
+          },
+          {
+            "kind": "check",
+            "keys": [
+              "root",
+              "child"
+            ],
+            "checked": true,
+            "node": {
+              "key": "root",
+              "expanded": false,
+              "selected": false
+            },
+            "event": "click"
+          },
+          {
+            "kind": "click",
+            "node": {
+              "key": "root",
+              "expanded": false,
+              "selected": false
+            },
+            "event": "click"
+          },
+          {
+            "kind": "check",
+            "keys": [],
+            "checked": false,
+            "node": {
+              "key": "root",
+              "expanded": false,
+              "selected": false
+            },
+            "event": "click"
+          },
+          {
+            "kind": "expand",
+            "keys": [
+              "root"
+            ],
+            "expanded": true,
+            "node": {
+              "key": "root",
+              "expanded": false,
+              "selected": false
+            },
+            "event": "dblclick"
+          },
+          {
+            "kind": "doubleClick",
+            "node": {
+              "key": "root",
+              "expanded": false,
+              "selected": false
+            },
+            "event": "dblclick"
+          }
+        ]
+      }
+    },
+    {
+      "sample": {
+        "id": "selection-update-in-click",
+        "expandAction": "click",
+        "action": "click",
+        "selectOnClick": true
+      },
+      "initial": {
+        "expanded": "false",
+        "visible": [
+          "Root",
+          "Leaf"
+        ],
+        "selected": [],
+        "events": []
+      },
+      "result": {
+        "expanded": "true",
+        "visible": [
+          "Root",
+          "Child",
+          "Leaf"
+        ],
+        "selected": [
+          "Root"
+        ],
+        "events": [
+          {
+            "kind": "expand",
+            "keys": [
+              "root"
+            ],
+            "expanded": true,
+            "node": {
+              "key": "root",
+              "expanded": false,
+              "selected": false
+            },
+            "event": "click"
+          },
+          {
+            "kind": "click",
+            "node": {
+              "key": "root",
+              "expanded": false,
+              "selected": false
+            },
+            "event": "click"
+          },
+          {
+            "kind": "select",
+            "keys": [
+              "root"
+            ],
+            "selected": true,
+            "node": {
+              "key": "root",
+              "expanded": false,
+              "selected": false
+            },
+            "event": "click"
+          }
+        ]
+      }
+    }
+  ]
+}
