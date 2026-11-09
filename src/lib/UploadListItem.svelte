@@ -1,6 +1,12 @@
 <script lang="ts" generics="T = unknown">
   import { onMount } from 'svelte';
-  import type { UploadFile, UploadLocale, UploadProps, UploadListOptions } from './upload.types';
+  import type {
+    UploadFile,
+    UploadLocale,
+    UploadProps,
+    UploadListOptions,
+    UploadItemRenderActions
+  } from './upload.types';
   import { uploadIsImage } from './upload.engine';
   import { previewImage } from './upload-preview.dom';
   import Button from './Button.svelte';
@@ -19,7 +25,9 @@
     onDownload,
     previewFile = previewImage,
     isImageUrl = uploadIsImage,
-    iconRender
+    iconRender,
+    itemRender,
+    fileList
   }: {
     prefixCls: string;
     file: UploadFile<T>;
@@ -33,6 +41,8 @@
     previewFile?: UploadProps<T>['previewFile'];
     isImageUrl?: UploadProps<T>['isImageUrl'];
     iconRender?: UploadProps<T>['iconRender'];
+    itemRender?: UploadProps<T>['itemRender'];
+    fileList: readonly UploadFile<T>[];
   } = $props();
   let thumbnail = $state('');
   let showProgress = $state(false);
@@ -54,17 +64,28 @@
   ) {
     return typeof flag === 'function' ? flag(file) : flag ?? fallback;
   }
-  function preview(event: MouseEvent) {
+  function preview(event?: MouseEvent, currentFile = file) {
     if (onPreview) {
-      event.preventDefault();
-      onPreview(file);
+      event?.preventDefault();
+      onPreview(currentFile);
     }
   }
-  function download() {
-    if (onDownload)
-      onDownload(file); else if (file.url)
-      window.open(file.url, '_blank', 'noopener');
+  function download(currentFile: UploadFile<T>) {
+    if (onDownload) {
+      onDownload(currentFile);
+    } else if (currentFile.url) {
+      window.open(currentFile.url, '_blank', 'noopener');
+    }
   }
+  let renderActions = $derived.by<UploadItemRenderActions>(() => {
+    const currentFile = file;
+
+    return {
+      download: () => download(currentFile),
+      preview: event => preview(event, currentFile),
+      remove: () => onRemove(currentFile)
+    };
+  });
   onMount(() => {
     const timer = setTimeout(() => {
       showProgress = true;
@@ -97,7 +118,7 @@
 {#snippet removeIcon()}<UploadIcon name="delete" />{/snippet}
 {#snippet actions()}
   {#if card && show(options.showPreviewIcon, true) && source}<a href={file.url || source} target="_blank" rel="noopener noreferrer" aria-label={locale.previewFile} title={locale.previewFile} onclick={preview}><UploadIcon name="eye" /></a>{/if}
-  {#if show(options.showDownloadIcon, false) && file.status === 'done'}<Button type="text" size="small" class={`${prefixCls}-list-item-action`} disabled={false} aria-label={locale.downloadFile} title={locale.downloadFile} onclick={download} icon={downloadIcon} />{/if}
+  {#if show(options.showDownloadIcon, false) && file.status === 'done'}<Button type="text" size="small" class={`${prefixCls}-list-item-action`} disabled={false} aria-label={locale.downloadFile} title={locale.downloadFile} onclick={() => download(file)} icon={downloadIcon} />{/if}
   {#if show(options.showRemoveIcon, !disabled)}<Button type="text" size="small" class={`${prefixCls}-list-item-action`} {disabled} aria-label={locale.removeFile} title={locale.removeFile} onclick={() => onRemove(file)} icon={removeIcon} />{/if}
 {/snippet}
 {#snippet item()}
@@ -122,4 +143,4 @@
   {#if showProgress && file.status === 'uploading' && file.percent !== undefined}<div class={`${prefixCls}-list-item-progress`}><Progress percent={file.percent} size={[-1, 2]} showInfo={false} aria-label={`${locale.uploading} ${file.name}`} /></div>{/if}
 </div>
 {/snippet}
-<div data-ant-upload-item-container class={`${prefixCls}-list-item-container`}>{#if file.status === 'error'}<Tooltip title={message}>{@render item()}</Tooltip>{:else}{@render item()}{/if}</div>
+{#snippet originNode()}{#if file.status === 'error'}<Tooltip title={message}>{@render item()}</Tooltip>{:else}{@render item()}{/if}{/snippet}<div data-ant-upload-item-container class={`${prefixCls}-list-item-container`}>{#if itemRender}{@render itemRender(originNode, file, fileList, renderActions)}{:else}{@render originNode()}{/if}</div>

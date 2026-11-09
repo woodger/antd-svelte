@@ -9,6 +9,10 @@
 
 ### Added
 
+- Upload.itemRender получает originNode snippet, файл, текущий список и действия
+  preview/download/remove. Можно обернуть или заменить строку, включая пустой
+  результат; контейнеры, input и привязка действий к файлу сохраняются.
+
 - Upload.iconRender заменяет иконку файла через snippet с file/listType, сохраняя
   default icons, image thumbnail priority и пустое/нулевое содержимое renderer.
   Изменения renderer сохраняют item/filename/input DOM и внешний focus/selection.

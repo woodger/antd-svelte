@@ -1,0 +1,831 @@
+{
+  "reference": {
+    "version": "6.6.8",
+    "revision": "984592267de88fbf9cdaecc96a56629e721c709d",
+    "archiveSha256": "8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa",
+    "renderer": "unmodified official UMD with React 18.3.1",
+    "source": "UploadList/ListItem itemRender origin, file, items and bound actions",
+    "observation": "19 raw visible-content cases for list types/wrap/replace/empty/default, error origin, current fileList order and disabled. Bound preview/download/remove callbacks remain callable from custom controls even with disabled; onRemove=false avoids list mutation. Five renderer transitions. Source origin includes its existing error Tooltip. Svelte counterpart uses an opaque originNode snippet and existing Native controls."
+  },
+  "cases": [
+    {
+      "sample": {
+        "id": "text:wrap",
+        "listType": "text",
+        "mode": "wrap"
+      },
+      "result": [
+        {
+          "custom": {
+            "id": "one",
+            "name": "alpha.txt",
+            "list": "alpha.txt,beta.txt",
+            "status": "done"
+          },
+          "origins": 1,
+          "names": [
+            "alpha.txt"
+          ],
+          "buttons": [
+            "Custom preview one",
+            "Custom download one",
+            "Custom remove one"
+          ]
+        },
+        {
+          "custom": {
+            "id": "two",
+            "name": "beta.txt",
+            "list": "alpha.txt,beta.txt",
+            "status": "done"
+          },
+          "origins": 1,
+          "names": [
+            "beta.txt"
+          ],
+          "buttons": [
+            "Custom preview two",
+            "Custom download two",
+            "Custom remove two"
+          ]
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "text:replace",
+        "listType": "text",
+        "mode": "replace"
+      },
+      "result": [
+        {
+          "custom": {
+            "id": "one",
+            "name": "alpha.txt",
+            "list": "alpha.txt,beta.txt",
+            "status": "done"
+          },
+          "origins": 0,
+          "names": [],
+          "buttons": [
+            "Custom preview one",
+            "Custom download one",
+            "Custom remove one"
+          ]
+        },
+        {
+          "custom": {
+            "id": "two",
+            "name": "beta.txt",
+            "list": "alpha.txt,beta.txt",
+            "status": "done"
+          },
+          "origins": 0,
+          "names": [],
+          "buttons": [
+            "Custom preview two",
+            "Custom download two",
+            "Custom remove two"
+          ]
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "text:empty",
+        "listType": "text",
+        "mode": "empty"
+      },
+      "result": [
+        {
+          "custom": null,
+          "origins": 0,
+          "names": [],
+          "buttons": []
+        },
+        {
+          "custom": null,
+          "origins": 0,
+          "names": [],
+          "buttons": []
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "text:default",
+        "listType": "text",
+        "mode": "default"
+      },
+      "result": [
+        {
+          "custom": null,
+          "origins": 1,
+          "names": [
+            "alpha.txt"
+          ],
+          "buttons": []
+        },
+        {
+          "custom": null,
+          "origins": 1,
+          "names": [
+            "beta.txt"
+          ],
+          "buttons": []
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "picture:wrap",
+        "listType": "picture",
+        "mode": "wrap"
+      },
+      "result": [
+        {
+          "custom": {
+            "id": "one",
+            "name": "alpha.txt",
+            "list": "alpha.txt,beta.txt",
+            "status": "done"
+          },
+          "origins": 1,
+          "names": [
+            "alpha.txt"
+          ],
+          "buttons": [
+            "Custom preview one",
+            "Custom download one",
+            "Custom remove one"
+          ]
+        },
+        {
+          "custom": {
+            "id": "two",
+            "name": "beta.txt",
+            "list": "alpha.txt,beta.txt",
+            "status": "done"
+          },
+          "origins": 1,
+          "names": [
+            "beta.txt"
+          ],
+          "buttons": [
+            "Custom preview two",
+            "Custom download two",
+            "Custom remove two"
+          ]
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "picture:replace",
+        "listType": "picture",
+        "mode": "replace"
+      },
+      "result": [
+        {
+          "custom": {
+            "id": "one",
+            "name": "alpha.txt",
+            "list": "alpha.txt,beta.txt",
+            "status": "done"
+          },
+          "origins": 0,
+          "names": [],
+          "buttons": [
+            "Custom preview one",
+            "Custom download one",
+            "Custom remove one"
+          ]
+        },
+        {
+          "custom": {
+            "id": "two",
+            "name": "beta.txt",
+            "list": "alpha.txt,beta.txt",
+            "status": "done"
+          },
+          "origins": 0,
+          "names": [],
+          "buttons": [
+            "Custom preview two",
+            "Custom download two",
+            "Custom remove two"
+          ]
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "picture:empty",
+        "listType": "picture",
+        "mode": "empty"
+      },
+      "result": [
+        {
+          "custom": null,
+          "origins": 0,
+          "names": [],
+          "buttons": []
+        },
+        {
+          "custom": null,
+          "origins": 0,
+          "names": [],
+          "buttons": []
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "picture:default",
+        "listType": "picture",
+        "mode": "default"
+      },
+      "result": [
+        {
+          "custom": null,
+          "origins": 1,
+          "names": [
+            "alpha.txt"
+          ],
+          "buttons": []
+        },
+        {
+          "custom": null,
+          "origins": 1,
+          "names": [
+            "beta.txt"
+          ],
+          "buttons": []
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "picture-card:wrap",
+        "listType": "picture-card",
+        "mode": "wrap"
+      },
+      "result": [
+        {
+          "custom": {
+            "id": "one",
+            "name": "alpha.txt",
+            "list": "alpha.txt,beta.txt",
+            "status": "done"
+          },
+          "origins": 1,
+          "names": [
+            "alpha.txt"
+          ],
+          "buttons": [
+            "Custom preview one",
+            "Custom download one",
+            "Custom remove one"
+          ]
+        },
+        {
+          "custom": {
+            "id": "two",
+            "name": "beta.txt",
+            "list": "alpha.txt,beta.txt",
+            "status": "done"
+          },
+          "origins": 1,
+          "names": [
+            "beta.txt"
+          ],
+          "buttons": [
+            "Custom preview two",
+            "Custom download two",
+            "Custom remove two"
+          ]
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "picture-card:replace",
+        "listType": "picture-card",
+        "mode": "replace"
+      },
+      "result": [
+        {
+          "custom": {
+            "id": "one",
+            "name": "alpha.txt",
+            "list": "alpha.txt,beta.txt",
+            "status": "done"
+          },
+          "origins": 0,
+          "names": [],
+          "buttons": [
+            "Custom preview one",
+            "Custom download one",
+            "Custom remove one"
+          ]
+        },
+        {
+          "custom": {
+            "id": "two",
+            "name": "beta.txt",
+            "list": "alpha.txt,beta.txt",
+            "status": "done"
+          },
+          "origins": 0,
+          "names": [],
+          "buttons": [
+            "Custom preview two",
+            "Custom download two",
+            "Custom remove two"
+          ]
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "picture-card:empty",
+        "listType": "picture-card",
+        "mode": "empty"
+      },
+      "result": [
+        {
+          "custom": null,
+          "origins": 0,
+          "names": [],
+          "buttons": []
+        },
+        {
+          "custom": null,
+          "origins": 0,
+          "names": [],
+          "buttons": []
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "picture-card:default",
+        "listType": "picture-card",
+        "mode": "default"
+      },
+      "result": [
+        {
+          "custom": null,
+          "origins": 1,
+          "names": [
+            "alpha.txt"
+          ],
+          "buttons": []
+        },
+        {
+          "custom": null,
+          "origins": 1,
+          "names": [
+            "beta.txt"
+          ],
+          "buttons": []
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "picture-circle:wrap",
+        "listType": "picture-circle",
+        "mode": "wrap"
+      },
+      "result": [
+        {
+          "custom": {
+            "id": "one",
+            "name": "alpha.txt",
+            "list": "alpha.txt,beta.txt",
+            "status": "done"
+          },
+          "origins": 1,
+          "names": [
+            "alpha.txt"
+          ],
+          "buttons": [
+            "Custom preview one",
+            "Custom download one",
+            "Custom remove one"
+          ]
+        },
+        {
+          "custom": {
+            "id": "two",
+            "name": "beta.txt",
+            "list": "alpha.txt,beta.txt",
+            "status": "done"
+          },
+          "origins": 1,
+          "names": [
+            "beta.txt"
+          ],
+          "buttons": [
+            "Custom preview two",
+            "Custom download two",
+            "Custom remove two"
+          ]
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "picture-circle:replace",
+        "listType": "picture-circle",
+        "mode": "replace"
+      },
+      "result": [
+        {
+          "custom": {
+            "id": "one",
+            "name": "alpha.txt",
+            "list": "alpha.txt,beta.txt",
+            "status": "done"
+          },
+          "origins": 0,
+          "names": [],
+          "buttons": [
+            "Custom preview one",
+            "Custom download one",
+            "Custom remove one"
+          ]
+        },
+        {
+          "custom": {
+            "id": "two",
+            "name": "beta.txt",
+            "list": "alpha.txt,beta.txt",
+            "status": "done"
+          },
+          "origins": 0,
+          "names": [],
+          "buttons": [
+            "Custom preview two",
+            "Custom download two",
+            "Custom remove two"
+          ]
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "picture-circle:empty",
+        "listType": "picture-circle",
+        "mode": "empty"
+      },
+      "result": [
+        {
+          "custom": null,
+          "origins": 0,
+          "names": [],
+          "buttons": []
+        },
+        {
+          "custom": null,
+          "origins": 0,
+          "names": [],
+          "buttons": []
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "picture-circle:default",
+        "listType": "picture-circle",
+        "mode": "default"
+      },
+      "result": [
+        {
+          "custom": null,
+          "origins": 1,
+          "names": [
+            "alpha.txt"
+          ],
+          "buttons": []
+        },
+        {
+          "custom": null,
+          "origins": 1,
+          "names": [
+            "beta.txt"
+          ],
+          "buttons": []
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "error",
+        "error": true
+      },
+      "result": [
+        {
+          "custom": {
+            "id": "one",
+            "name": "alpha.txt",
+            "list": "alpha.txt,beta.txt",
+            "status": "error"
+          },
+          "origins": 1,
+          "names": [
+            "alpha.txt"
+          ],
+          "buttons": [
+            "Custom preview one",
+            "Custom download one",
+            "Custom remove one"
+          ]
+        },
+        {
+          "custom": {
+            "id": "two",
+            "name": "beta.txt",
+            "list": "alpha.txt,beta.txt",
+            "status": "done"
+          },
+          "origins": 1,
+          "names": [
+            "beta.txt"
+          ],
+          "buttons": [
+            "Custom preview two",
+            "Custom download two",
+            "Custom remove two"
+          ]
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "reversed",
+        "reversed": true
+      },
+      "result": [
+        {
+          "custom": {
+            "id": "two",
+            "name": "beta.txt",
+            "list": "beta.txt,alpha.txt",
+            "status": "done"
+          },
+          "origins": 1,
+          "names": [
+            "beta.txt"
+          ],
+          "buttons": [
+            "Custom preview two",
+            "Custom download two",
+            "Custom remove two"
+          ]
+        },
+        {
+          "custom": {
+            "id": "one",
+            "name": "alpha.txt",
+            "list": "beta.txt,alpha.txt",
+            "status": "done"
+          },
+          "origins": 1,
+          "names": [
+            "alpha.txt"
+          ],
+          "buttons": [
+            "Custom preview one",
+            "Custom download one",
+            "Custom remove one"
+          ]
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "disabled",
+        "disabled": true
+      },
+      "result": [
+        {
+          "custom": {
+            "id": "one",
+            "name": "alpha.txt",
+            "list": "alpha.txt,beta.txt",
+            "status": "done"
+          },
+          "origins": 1,
+          "names": [
+            "alpha.txt"
+          ],
+          "buttons": [
+            "Custom preview one",
+            "Custom download one",
+            "Custom remove one"
+          ]
+        },
+        {
+          "custom": {
+            "id": "two",
+            "name": "beta.txt",
+            "list": "alpha.txt,beta.txt",
+            "status": "done"
+          },
+          "origins": 1,
+          "names": [
+            "beta.txt"
+          ],
+          "buttons": [
+            "Custom preview two",
+            "Custom download two",
+            "Custom remove two"
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "disabled": false,
+      "events": [
+        "preview:one",
+        "download:one",
+        "remove:one"
+      ],
+      "prevented": [
+        true,
+        false,
+        false
+      ]
+    },
+    {
+      "disabled": true,
+      "events": [
+        "preview:one",
+        "download:one",
+        "remove:one"
+      ],
+      "prevented": [
+        true,
+        false,
+        false
+      ]
+    }
+  ],
+  "transitions": [
+    {
+      "mode": "wrap",
+      "result": [
+        {
+          "custom": {
+            "id": "one",
+            "name": "alpha.txt",
+            "list": "alpha.txt,beta.txt",
+            "status": "done"
+          },
+          "origins": 1,
+          "names": [
+            "alpha.txt"
+          ],
+          "buttons": [
+            "Custom preview one",
+            "Custom download one",
+            "Custom remove one"
+          ]
+        },
+        {
+          "custom": {
+            "id": "two",
+            "name": "beta.txt",
+            "list": "alpha.txt,beta.txt",
+            "status": "done"
+          },
+          "origins": 1,
+          "names": [
+            "beta.txt"
+          ],
+          "buttons": [
+            "Custom preview two",
+            "Custom download two",
+            "Custom remove two"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "replace",
+      "result": [
+        {
+          "custom": {
+            "id": "one",
+            "name": "alpha.txt",
+            "list": "alpha.txt,beta.txt",
+            "status": "done"
+          },
+          "origins": 0,
+          "names": [],
+          "buttons": [
+            "Custom preview one",
+            "Custom download one",
+            "Custom remove one"
+          ]
+        },
+        {
+          "custom": {
+            "id": "two",
+            "name": "beta.txt",
+            "list": "alpha.txt,beta.txt",
+            "status": "done"
+          },
+          "origins": 0,
+          "names": [],
+          "buttons": [
+            "Custom preview two",
+            "Custom download two",
+            "Custom remove two"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "empty",
+      "result": [
+        {
+          "custom": null,
+          "origins": 0,
+          "names": [],
+          "buttons": []
+        },
+        {
+          "custom": null,
+          "origins": 0,
+          "names": [],
+          "buttons": []
+        }
+      ]
+    },
+    {
+      "mode": "default",
+      "result": [
+        {
+          "custom": null,
+          "origins": 1,
+          "names": [
+            "alpha.txt"
+          ],
+          "buttons": []
+        },
+        {
+          "custom": null,
+          "origins": 1,
+          "names": [
+            "beta.txt"
+          ],
+          "buttons": []
+        }
+      ]
+    },
+    {
+      "mode": "wrap",
+      "result": [
+        {
+          "custom": {
+            "id": "one",
+            "name": "alpha.txt",
+            "list": "alpha.txt,beta.txt",
+            "status": "done"
+          },
+          "origins": 1,
+          "names": [
+            "alpha.txt"
+          ],
+          "buttons": [
+            "Custom preview one",
+            "Custom download one",
+            "Custom remove one"
+          ]
+        },
+        {
+          "custom": {
+            "id": "two",
+            "name": "beta.txt",
+            "list": "alpha.txt,beta.txt",
+            "status": "done"
+          },
+          "origins": 1,
+          "names": [
+            "beta.txt"
+          ],
+          "buttons": [
+            "Custom preview two",
+            "Custom download two",
+            "Custom remove two"
+          ]
+        }
+      ]
+    }
+  ]
+}

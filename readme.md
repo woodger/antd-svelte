@@ -6690,6 +6690,32 @@ Button, Progress и Tooltip получают свои component tokens. Style о
 [SSR](tests/package/upload-icon-render.ssr.test.ts) проверяют видимое содержимое;
 Snippet не воспроизводит side effects вызова React render function.
 
+`itemRender` — snippet `(originNode, file, fileList, actions)`. OriginNode содержит
+обычную строку и Tooltip ошибки; его можно обернуть, заменить или не отрисовать.
+Внешний list-item-container сохраняется. FileList — текущий readonly список
+в исходном порядке; actions.preview/download/remove привязаны к данному файлу.
+Preview принимает необязательный MouseEvent и отменяет его default action,
+если задан onPreview. Действия custom renderer остаются доступны при disabled,
+как в upstream; disabled стандартных controls задаётся отдельно.
+
+```svelte
+<Upload fileList={files} onPreview={file => console.log(file.name)}>
+  {#snippet itemRender(originNode, file, fileList, actions)}
+    <div data-file-count={fileList.length}>
+      {@render originNode()}
+      <button type="button" onclick={actions.preview}>Открыть {file.name}</button>
+    </div>
+  {/snippet}
+</Upload>
+```
+
+Snippet непрозрачен для потребителя: ReactElement introspection/clone не переносится.
+Смена renderer может заменить внутренний DOM по выбору renderer; контейнеры,
+file input, порядок файлов и внешний focus/selection сохраняются.
+[19 исходных вариантов и действия](tests/browser/fixtures/ant-design-upload-item-render-reference.json),
+[browser](tests/browser/upload-item-render.spec.ts) и
+[SSR](tests/package/upload-item-render.ssr.test.ts) защищают эту границу.
+
 `directory=true` разрешает выбор папки и обход вложенных файлов при drop/paste.
 Input получает directory/webkitdirectory; multiple сохраняет своё значение,
 потому что режим папки обрабатывает все принятые файлы и при multiple=false.
@@ -6724,7 +6750,7 @@ webkitdirectory как boolean attribute; в браузере сохраняют
 [SSR](tests/package/upload-paste.ssr.test.ts) не создаёт browser listeners.
 
 Locale/upload из ConfigProvider, собственный locale, RU/EN, RTL и theme variables
-поддержаны. ItemRender/custom action icons,
+поддержаны. Custom action icons,
 progress customization, linkProps, полный ref/config/semantic API и исходные
 appear/exit/collapse анимации остаются отдельными пробелами реестра. Данный этап
 не заявляет полного покрытия React Upload.

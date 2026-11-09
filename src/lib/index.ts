@@ -105,6 +105,7 @@ export type {
   UploadChangeParam,
   UploadLocale,
   UploadListOptions,
+  UploadItemRenderActions,
   UploadRequestOptions,
   UploadRequestHandler,
   UploadRequest

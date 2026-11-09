@@ -11453,7 +11453,7 @@
           "state": "missing",
           "requiredForV1": false,
           "evidence": [],
-          "note": "Directory traversal/pastable, itemRender/iconRender/custom action icons, progress customization, linkProps, ConfigProvider.upload и semantic classNames/styles не перенесены. Ref даёт abort и nativeElement/inputElement; полный rc-upload ref/internal lifecycle API отсутствует."
+          "note": "Custom action icons, progress customization, linkProps, ConfigProvider.upload и semantic classNames/styles не перенесены. Directory/pastable, iconRender и itemRender вынесены в отдельные supported features. Ref даёт abort и nativeElement/inputElement; полный rc-upload ref/internal lifecycle API отсутствует."
         },
         {
           "id": "motion",
@@ -11578,6 +11578,25 @@
             "readme.md"
           ],
           "note": "Snippet заменяет видимую иконку text/picture/card/circle во всех статусах; пустое содержимое не выбирает default, zero отображается, готовая thumbnail сохраняет image. Без prop действуют прежние icons/locale defaults. 25 raw UMD cases и четыре live transitions фиксируют видимое содержимое; React render invocation side effects не воспроизводятся Snippet. Updates сохраняют item/filename/file-input DOM, внешний draft/focus/selection; SSR не вызывает browser timers."
+        },
+        {
+          "id": "file-item-render",
+          "title": "ItemRender с origin snippet, текущим списком и file actions",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Upload.svelte",
+            "src/lib/UploadListItem.svelte",
+            "src/lib/upload.types.ts",
+            "tests/browser/upload-item-render.spec.ts",
+            "tests/browser/upload-item-render-metrics.ts",
+            "tests/browser/fixtures/UploadItemRenderScope.svelte",
+            "tests/browser/fixtures/UploadItemRenderFixtures.svelte",
+            "tests/browser/fixtures/ant-design-upload-item-render-reference.json",
+            "tests/package/upload-item-render.ssr.test.ts",
+            "readme.md"
+          ],
+          "note": "Snippet получает originNode, file, текущий readonly fileList и действия preview/download/remove, привязанные к файлу. Origin включает Tooltip ошибки; wrap/replace/empty/default сохраняют внешний container. Preview принимает optional MouseEvent и отменяет default при onPreview; custom actions остаются callable при disabled, как Source. 19 raw UMD cases, два набора actions и пять live transitions задают содержимое/контекст/cancellation; Native updates сохраняют container/input DOM, внешний draft/focus/selection и keyed порядок. ReactElement inspection/clone не воспроизводится opaque Snippet. SSR не создаёт browser timers."
         }
       ]
     },

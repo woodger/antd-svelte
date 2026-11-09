@@ -52,6 +52,12 @@ export interface UploadChangeParam<T = unknown> {
   fileList: UploadFile<T>[];
   event?: { percent: number; };
 }
+/** Действия строки Upload; preview принимает DOM event для обычного onclick. */
+export interface UploadItemRenderActions {
+  download: () => void;
+  preview: (event?: MouseEvent) => void;
+  remove: () => void;
+}
 export interface UploadListOptions<T = unknown> {
   showRemoveIcon?: boolean | ((file: UploadFile<T>) => boolean);
   showDownloadIcon?: boolean | ((file: UploadFile<T>) => boolean);
@@ -126,6 +132,13 @@ export interface UploadProps<T = unknown> extends Omit<
   isImageUrl?: (file: UploadFile<T>) => boolean;
   /** Иконка файла с контекстом file/listType; готовая thumbnail по-прежнему показывает изображение. */
   iconRender?: Snippet<[file: UploadFile<T>, listType: NonNullable<UploadProps<T>['listType']>]>;
+  /** Оригинальная строка — Snippet с Tooltip ошибки; fileList сохраняет текущий порядок. */
+  itemRender?: Snippet<[
+    originNode: Snippet,
+    file: UploadFile<T>,
+    fileList: readonly UploadFile<T>[],
+    actions: UploadItemRenderActions
+  ]>;
   locale?: UploadLocale;
   type?: 'select' | 'drag';
   children?: Snippet;

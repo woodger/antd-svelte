@@ -320,6 +320,11 @@ SSR охватывает также defaultOpen, browser — смену обще
 CSS selectors; raw прозрачный фон сохранён отдельно от public inherited-prefix
 counterpart. Svelte сохраняет прежнее оформление списка; только menu background
 сравнивается с counterpart, остальные свойства — с raw Source.
+Upload itemRender получает opaque originNode Snippet с Tooltip ошибки,
+file/current fileList и actions, привязанные к файлу. 19 raw UMD cases, два
+набора действий и пять transitions фиксируют wrap/replace/empty/default,
+порядок списка и preview event cancellation. Renderer меняет внутреннее
+содержимое; внешний container и file input сохраняются.
 Upload iconRender использует Svelte snippet с file/listType. 25 raw UMD cases
 покрывают статусы/list types, empty/zero/default и thumbnail priority, четыре
 transitions — смену renderer. Сравнение ограничено видимым содержимым: React
