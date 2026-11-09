@@ -2,9 +2,22 @@ import { render } from 'svelte/server';
 import { describe, expect, it, vi } from 'vitest';
 import { Upload } from 'antd-svelte';
 import { UploadDragger } from 'antd-svelte';
+import type { UploadFile } from 'antd-svelte';
 import UploadFixtures from '../browser/fixtures/UploadFixtures.svelte';
 
 describe('Upload SSR', () => {
+  it('accepts optional file metadata without replacing the filename or thumbnail', () => {
+    const file: UploadFile = {
+      uid: 'metadata', name: 'actual.txt', status: 'done',
+      fileName: 'metadata-name.txt', preview: 'data:image/png;base64,metadata-preview'
+    };
+
+    const body = render(Upload, { props: { defaultFileList: [file], listType: 'picture' } }).body;
+
+    expect(body).toContain('actual.txt');
+    expect(body).not.toContain('metadata-name.txt');
+    expect(body).not.toContain('metadata-preview');
+  });
   it('renders initial status and native file constraints without starting a request', () => {
     const request = vi.fn();
     const body = render(

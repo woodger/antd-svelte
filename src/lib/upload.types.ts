@@ -9,6 +9,8 @@ export type UploadFileStatus = 'error' | 'done' | 'uploading' | 'removed';
 export interface UploadFile<T = unknown> {
   uid: string;
   name: string;
+  /** Metadata upstream; подпись строки по-прежнему использует name. */
+  fileName?: string;
   size?: number;
   type?: string;
   lastModified?: number;
@@ -23,6 +25,8 @@ export interface UploadFile<T = unknown> {
   url?: string;
   /** Пустая строка сохраняет fallback на url и запрещает генерацию через previewFile. */
   thumbUrl?: string;
+  /** Пользовательский preview cache; изображение строки использует thumbUrl или url. */
+  preview?: string;
   crossOrigin?: 'anonymous' | 'use-credentials' | '';
   /** Атрибуты filename link или их JSON; class/onclick/style используют нативный Svelte API. */
   linkProps?: HTMLAnchorAttributes | string;

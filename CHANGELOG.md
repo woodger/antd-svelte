@@ -9,6 +9,9 @@
 
 ### Added
 
+- UploadFile предоставляет необязательные fileName и preview из текущего upstream
+  API; renderer сохраняет name и thumbUrl/url для отображения строки.
+
 - Upload/Dragger предоставляет UploadRef с batch/progress/success/error callbacks,
   актуальным fileList, native refs и upload.abort. Сохранён прямой abort;
   callbacks используют текущий controlled list и не публикуют изменения после unmount.

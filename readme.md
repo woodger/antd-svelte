@@ -6613,6 +6613,8 @@ FileList — controlled prop с onChange; defaultFileList задаёт внут�
 Элемент UploadFile имеет стабильный uid, name, optional status/percent/url/thumbUrl,
 originFileObj/response/error/xhr. Статусы — uploading/done/error/removed. API типов
 параметризован типом ответа: UploadProps<T>, UploadFile<T>, UploadRequestOptions<T>.
+Необязательные fileName и preview сохраняют metadata API upstream: подпись строки
+использует name, изображение — thumbUrl/url. Эти поля не меняют отображение сами по себе.
 
 `bind:this` предоставляет UploadRef<T>, одинаковый для Upload и Dragger:
 onBatchStart/onProgress/onSuccess/onError, актуальный fileList и upload.abort.
