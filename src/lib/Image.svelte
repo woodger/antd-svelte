@@ -2,12 +2,15 @@
   import { onDestroy, untrack } from 'svelte';
   import type { ImageProps, ImagePreviewConfig, ImageElementData } from './image.types';
   import { useConfig } from './config-context';
+  import { getImagePrefixCss } from './image-prefix.engine';
+  import ThemeScopeStyle from './ThemeScopeStyle.svelte';
   import { useComponentTheme } from './theme-component.svelte';
   import { useImageGroup } from './image-group-context';
   import { checkImageSource } from './image-status.dom';
   import ImagePreview from './ImagePreview.svelte';
 
   let {
+    prefixCls: customizePrefixCls,
     src,
     alt,
     width,
@@ -30,6 +33,8 @@
     ...attributes
   }: ImageProps = $props();
   const context = useConfig();
+  let componentPrefix = $derived(context.getPrefixCls('image', customizePrefixCls));
+  let prefixCss = $derived(getImagePrefixCss(componentPrefix));
   const componentTheme = useComponentTheme('Image');
   const group = useImageGroup();
   const id = $props.id();
@@ -119,12 +124,12 @@
   .image-trigger:focus-visible { outline: 2px solid var(--ant-color-primary); outline-offset: 2px; }
 </style>
 
-<svelte:element this={canPreview ? 'button' : 'div'} bind:this={nativeElement} type={canPreview ? 'button' : undefined} role={canPreview ? 'button' : undefined}
+{#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`image-prefix:${componentPrefix}`} />{/if}<svelte:element this={canPreview ? 'button' : 'div'} data-ant-image-prefix={componentPrefix} bind:this={nativeElement} type={canPreview ? 'button' : undefined} role={canPreview ? 'button' : undefined}
   class={[
-      'image-trigger ant-image ant-image-css-var',
+      `image-trigger ${componentPrefix} ant-image-css-var`,
       componentTheme.className,
       rootClassName,
-      status === 'error' && 'ant-image-error'
+      status === 'error' && `${componentPrefix}-error`
     ]}
   style={[
       componentTheme.style,
@@ -143,8 +148,8 @@
   {#if !(typeof placeholder === 'function' && !src)}
     {#key displayed}<img {...attributes} bind:this={imageElement} src={displayed || undefined} {alt} {width} {height}
       class={[
-          'ant-image-img',
-          placeholder === true && 'ant-image-img-placeholder',
+          `${componentPrefix}-img`,
+          placeholder === true && `${componentPrefix}-img-placeholder`,
           className
         ]} style={[height !== undefined
             && `height:${dimension(height)}`, style].filter(
@@ -164,11 +169,11 @@
           onError?.(event);
         }} />{/key}
   {/if}
-  {#if typeof placeholder === 'function' && (!src || status === 'loading')}<div class="ant-image-placeholder" aria-hidden="true">{@render placeholder()}</div>{/if}
+  {#if typeof placeholder === 'function' && (!src || status === 'loading')}<div class={`${componentPrefix}-placeholder`} aria-hidden="true">{@render placeholder()}</div>{/if}
   {#if canPreview && config.cover !== false}
     <div class={[
-        'ant-image-cover',
-        `ant-image-cover-${typeof config.cover === 'object'
+        `${componentPrefix}-cover`,
+        `${componentPrefix}-cover-${typeof config.cover === 'object'
           ? config.cover.placement ?? 'center'
           : 'center'}`
       ]} aria-hidden="true">
@@ -176,4 +181,4 @@
     </div>
   {/if}
 </svelte:element>
-{#if canPreview && !group}<ImagePreview open={actualOpen} image={{ url: previewSource, alt: alt ?? undefined, width, height }} config={config} className={classNames?.popup?.root} {fallback} imageAttributes={common} onClose={() => requestOpen(false)} />{/if}
+{#if canPreview && !group}<ImagePreview imagePrefix={componentPrefix} open={actualOpen} image={{ url: previewSource, alt: alt ?? undefined, width, height }} config={config} className={classNames?.popup?.root} {fallback} imageAttributes={common} onClose={() => requestOpen(false)} />{/if}

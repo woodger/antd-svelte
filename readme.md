@@ -7880,6 +7880,11 @@ Preview по умолчанию true; false оставляет пассивно�
 Enter/Space открывают preview, onKeyDown доступен; pointer opening вызывается до
 onClick, как upstream. Image не наследует Form/ConfigProvider control disabled.
 
+PrefixCls задаёт локальный базовый префикс Image; пустая строка наследует общий
+ConfigProvider.prefixCls. Классы миниатюры, placeholder/cover и preview используют
+этот префикс; viewer добавляет суффикс -preview. Смена префикса сохраняет DOM,
+refs, открытый viewer, масштаб и фокус. Canonical theme variables не переименовываются.
+
 Fallback подставляется при ошибке исходного src; root сохраняет ant-image-error,
 даже если fallback загрузился. Новый src сбрасывает ошибку. Source probe повторяет
 useStatus; результаты старого src и события отсоединённого img игнорируются.
@@ -7936,7 +7941,7 @@ ProgressAnimationDuration пока доступен только как CSS vari
 
 Из semantic API пока перенесены styles.root у Image и classNames.popup.root у
 Image/ImagePreviewGroup. Остальные slots, placeholder progress/render,
-ConfigProvider.image/prefixCls, getContainer, icons/React info.icons wrappers и
+ConfigProvider.image, независимый Image.previewPrefixCls, getContainer, icons/React info.icons wrappers и
 исходные fade/appear/leave/mousePosition motion пока отсутствуют. Deprecated aliases
 исключены из переноса. [Замер текущих полей оформления](./tools/fixtures/ant-design-image-current-styling-observation.json)
 подтверждает styles.root и classNames.popup.root в закреплённом UMD; вложенный
@@ -7957,6 +7962,11 @@ ImagePreviewGroup соответствует React Image.PreviewGroup, отде�
   <Image src="/second.jpg" alt="Второе изображение" width={160} />
 </ImagePreviewGroup>
 ```
+
+PreviewPrefixCls группы задаёт базовый Image prefix, как в Ant Design; к нему
+добавляется -preview. Пустая строка наследует ConfigProvider. Префиксы дочерних
+Image независимы от группы. Смена общего или локального префикса сохраняет viewer,
+выбранное изображение и transform.
 
 Без items список строится из зарегистрированных дочерних Image с preview=true.
 Порядок соответствует созданию/регистрации, сохраняется при keyed DOM reorder;

@@ -1,5 +1,8 @@
 <script lang="ts">
   import { untrack } from 'svelte';
+  import { useConfig } from './config-context';
+  import { getImagePrefixCss } from './image-prefix.engine';
+  import ThemeScopeStyle from './ThemeScopeStyle.svelte';
   import type {
     ImagePreviewGroupProps,
     ImagePreviewGroupConfig
@@ -9,7 +12,12 @@
   import { getImagePreviewItems, getImagePreviewIndex } from './image-preview-group.engine';
   import ImagePreview from './ImagePreview.svelte';
 
-  let { items, preview = true, fallback, children, classNames }: ImagePreviewGroupProps = $props();
+  let {
+    items, preview = true, fallback, children, classNames, previewPrefixCls
+  }: ImagePreviewGroupProps = $props();
+  const context = useConfig();
+  let componentPrefix = $derived(context.getPrefixCls('image', previewPrefixCls));
+  let prefixCss = $derived(getImagePrefixCss(componentPrefix));
   let config = $derived<ImagePreviewGroupConfig>(typeof preview === 'object' ? preview : {});
   let registered = $state.raw<ReadonlyMap<string, ImageGroupEntry>>(new Map());
   let entries = $derived(getImagePreviewItems(items, registered));
@@ -69,6 +77,5 @@
   provideImageGroup({ register, preview: fromImage });
 </script>
 
-{#if children}{@render children()}{/if}
-<ImagePreview open={opened} image={{ url: data.src ?? undefined, alt: data.alt ?? undefined }} config={viewerConfig} className={classNames?.popup?.root} {fallback}
+{#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`image-prefix:${componentPrefix}`} />{/if}{#if children}{@render children()}{/if}<ImagePreview imagePrefix={componentPrefix} open={opened} image={{ url: data.src ?? undefined, alt: data.alt ?? undefined }} config={viewerConfig} className={classNames?.popup?.root} {fallback}
   imageAttributes={data} onClose={() => requestOpen(false)} {current} count={entries.length} group onChange={change} countRender={config.countRender} />

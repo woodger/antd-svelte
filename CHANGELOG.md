@@ -9,6 +9,10 @@
 
 ### Added
 
+- Image поддерживает local/shared prefixCls для миниатюры и preview;
+  ImagePreviewGroup.previewPrefixCls задаёт независимый базовый prefix viewer.
+  Canonical tokens, DOM/refs, открытый viewer, масштаб, текущий кадр и фокус сохраняются.
+
 - Mentions поддерживает local/shared prefixCls для editor/mirror, variants/status
   и popup/menu. Private input variables используют общий namespace; trigger prefix,
   native value/IME, refs, query/popup, focus/selection и FormData сохраняются.

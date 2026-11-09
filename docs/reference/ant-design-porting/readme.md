@@ -219,6 +219,10 @@ namespace; canonical tokens и прежние portals/layout/zIndex contracts с
 Рецепт mentions-prefix выводит 102 правила editor/variants/dropdown без rc-motion.
 Runtime разделяет local classes и общий namespace cmp-mentions variables/Form
 feedback selector; native measurement, triggers, clear/ARIA и popup lifecycle сохранены.
+Рецепт image-prefix выводит 48 правил thumbnail/cover/viewer/actions без progress
+и rc-motion. Runtime меняет базовый Image namespace, сохраняя canonical token
+variables и native dialog/focus/movement selectors. PreviewGroup.previewPrefixCls
+задаёт базовый prefix viewer; дочерние Image сохраняют самостоятельные prefixes.
 Рецепт layout-prefix выводит 35 flat rules Layout/Sider; runtime выбирает свою
 группу, сохраняет Menu namespace и ограничивает defaults/state selectors корнем.
 Тот же template используется для Header/Content/Footer: выбираются selectors

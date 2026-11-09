@@ -22,6 +22,7 @@
 
   let {
     open,
+    imagePrefix = 'ant-image',
     image,
     config: preview = {},
     fallback,
@@ -35,6 +36,7 @@
     className
   }: {
     open: boolean;
+    imagePrefix?: string;
     image: ImageInfo;
     config?: ImagePreviewConfig;
     className?: string;
@@ -48,6 +50,7 @@
     countRender?: import('svelte').Snippet<[number, number]>;
   } = $props();
   const context = useConfig();
+  let previewPrefix = $derived(`${imagePrefix}-preview`);
   const componentTheme = useComponentTheme('Image');
   let dialog = $state<HTMLDialogElement>();
   let element = $state<HTMLImageElement>();
@@ -258,14 +261,14 @@
   .image-preview-dialog { position: fixed; inset: 0; width: 100%; height: 100%; max-width: none; max-height: none; margin: 0; padding: 0; border: 0; background: transparent; overflow: hidden; color: var(--ant-color-text-light-solid); }
   .image-preview-dialog:not([open]) { display: none; }
   .image-preview-dialog::backdrop { background: transparent; }
-  .ant-image-preview-img { touch-action: none; }
-  .ant-image-preview-img.moving { transition-duration: 0s; }
-  .ant-image-preview-actions-action:focus-visible { outline: 2px solid var(--ant-color-primary); outline-offset: 2px; }
-  @media (prefers-reduced-motion: reduce) { .image-preview-dialog .ant-image-preview-img { transition: none; } }
+  [data-ant-image-preview-img] { touch-action: none; }
+  [data-ant-image-preview-img].moving { transition-duration: 0s; }
+  [data-ant-image-preview-action]:focus-visible { outline: 2px solid var(--ant-color-primary); outline-offset: 2px; }
+  @media (prefers-reduced-motion: reduce) { .image-preview-dialog [data-ant-image-preview-img] { transition: none; } }
 </style>
 
 {#snippet defaultImage()}
-  {#key source}<img {...imageAttributes} bind:this={element} src={source || undefined} alt={image.alt} draggable="false" class={['ant-image-preview-img', moving && 'moving']}
+  {#key source}<img {...imageAttributes} data-ant-image-preview-img bind:this={element} src={source || undefined} alt={image.alt} draggable="false" class={[`${previewPrefix}-img`, moving && 'moving']}
     style={`transform:translate3d(${transform
         .x}px,${transform
           .y}px,0) scale3d(${transform
@@ -282,7 +285,7 @@
       }} />{/key}
 {/snippet}
 {#snippet defaultActions()}
-  <div class="ant-image-preview-actions">
+  <div class={`${previewPrefix}-actions`}>
     {#each [
         'flipY',
         'flipX',
@@ -291,14 +294,14 @@
         'zoomOut',
         'zoomIn'
       ] as action}
-      <button type="button" aria-label={action} class={[
-          'ant-image-preview-actions-action',
-          `ant-image-preview-actions-action-${action}`,
+      <button data-ant-image-preview-action type="button" aria-label={action} class={[
+          `${previewPrefix}-actions-action`,
+          `${previewPrefix}-actions-action-${action}`,
           (action === 'zoomOut'
             && transform.scale <= min
             || action === 'zoomIn'
             && transform.scale === max)
-          && 'ant-image-preview-actions-action-disabled'
+          && `${previewPrefix}-actions-action-disabled`
         ]}
         disabled={action === 'zoomOut'
             && transform.scale <= min
@@ -325,12 +328,12 @@
 {/snippet}
 {#if mounted}
   <NoCompactStyle>
-    <dialog bind:this={dialog} tabindex="-1" class={[
-        'image-preview-dialog ant-image-preview ant-image-css-var',
+    <dialog data-ant-image-prefix={imagePrefix} bind:this={dialog} tabindex="-1" class={[
+        `image-preview-dialog ${previewPrefix} ant-image-css-var`,
         componentTheme.className,
         className,
-        preview.movable !== false && 'ant-image-preview-movable',
-        moving && 'ant-image-preview-moving'
+        preview.movable !== false && `${previewPrefix}-movable`,
+        moving && `${previewPrefix}-moving`
       ]}
       dir={context.direction} aria-label={image.alt || context.locale.image?.preview || 'Image preview'} aria-modal={focusTrap ? 'true' : undefined}
       style={[
@@ -341,35 +344,35 @@
               onClose();
             }}>
       <div class={[
-          'ant-image-preview-mask',
-          !mask && 'ant-image-preview-mask-hidden',
-          typeof preview.mask === 'object' && preview.mask.blur && 'ant-image-preview-mask-blur'
+          `${previewPrefix}-mask`,
+          !mask && `${previewPrefix}-mask-hidden`,
+          typeof preview.mask === 'object' && preview.mask.blur && `${previewPrefix}-mask-blur`
         ]}
         role="presentation" onclick={() => {
             if (maskClosable)
               onClose();
           }}></div>
-      <div class="ant-image-preview-body">
+      <div class={`${previewPrefix}-body`}>
         {#if preview.imageRender}{@render preview.imageRender(
             defaultImage,
             { transform, image, ...(group ? { current } : {}) }
           )}{:else}{@render defaultImage()}{/if}
       </div>
-      {#if preview.closeIcon !== false && preview.closeIcon !== null}<button type="button" class="ant-image-preview-close" aria-label={context.locale.closeText} onclick={onClose}>
+      {#if preview.closeIcon !== false && preview.closeIcon !== null}<button type="button" class={`${previewPrefix}-close`} aria-label={context.locale.closeText} onclick={onClose}>
         {#if typeof preview.closeIcon === 'function'}{@render preview.closeIcon()}{:else}<ImagePreviewIcon name="close" />{/if}
       </button>{/if}
       {#if group && count > 1}
         <button type="button" class={[
-            'ant-image-preview-switch ant-image-preview-switch-prev',
-            current === 0 && 'ant-image-preview-switch-disabled'
+            `${previewPrefix}-switch ${previewPrefix}-switch-prev`,
+            current === 0 && `${previewPrefix}-switch-disabled`
           ]} aria-label="prev" disabled={current === 0} onclick={() => activate(-1)}><ImagePreviewIcon name={context.direction === 'rtl' ? 'next' : 'prev'} /></button>
         <button type="button" class={[
-            'ant-image-preview-switch ant-image-preview-switch-next',
-            current === count - 1 && 'ant-image-preview-switch-disabled'
+            `${previewPrefix}-switch ${previewPrefix}-switch-next`,
+            current === count - 1 && `${previewPrefix}-switch-disabled`
           ]} aria-label="next" disabled={current === count - 1} onclick={() => activate(1)}><ImagePreviewIcon name={context.direction === 'rtl' ? 'prev' : 'next'} /></button>
       {/if}
-      <div class="ant-image-preview-footer">
-        {#if group && count >= 1}<div class="ant-image-preview-progress">{#if countRender}{@render countRender(current + 1, count)}{:else}<bdi>{current + 1} / {count}</bdi>{/if}</div>{/if}
+      <div class={`${previewPrefix}-footer`}>
+        {#if group && count >= 1}<div class={`${previewPrefix}-progress`}>{#if countRender}{@render countRender(current + 1, count)}{:else}<bdi>{current + 1} / {count}</bdi>{/if}</div>{/if}
         {#if preview.actionsRender}{@render preview.actionsRender(defaultActions, info)}{:else}{@render defaultActions()}{/if}
       </div>
     </dialog>

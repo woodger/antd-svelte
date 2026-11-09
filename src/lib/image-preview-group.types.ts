@@ -15,6 +15,8 @@ export interface ImagePreviewGroupConfig extends Omit<
 }
 /** Общий preview для явных items либо зарегистрированных дочерних Image. */
 export interface ImagePreviewGroupProps {
+  /** Базовый Image prefix группы, как в Ant Design; viewer добавляет -preview, children независимы. */
+  previewPrefixCls?: string;
   /** Явный список, включая пустой, имеет приоритет над регистрацией дочерних Image. */
   items?: readonly ImagePreviewGroupItem[];
   /** @defaultValue true */
