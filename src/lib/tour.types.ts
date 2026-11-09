@@ -136,6 +136,7 @@ export interface TourProps {
   class?: string;
   rootClassName?: string;
   style?: string;
+  /** Local CSS prefix; empty/undefined наследуют ConfigProvider. */
   prefixCls?: string;
   /** Ant Design принудительно включает placeholder animation, как и в upstream. */
   animated?: boolean | { placeholder: boolean; };

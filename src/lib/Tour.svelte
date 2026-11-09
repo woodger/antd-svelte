@@ -2,6 +2,8 @@
   import { onDestroy, untrack } from 'svelte';
   import { useConfig } from './config-context';
   import { useComponentTheme } from './theme-component.svelte';
+  import { getTourPrefixCss } from './tour-prefix.engine';
+  import ThemeScopeStyle from './ThemeScopeStyle.svelte';
   import { getTourClosable, getTourSemantics, type TourHighlight } from './tour.engine';
   import { connectTourEscape } from './tour-portal.dom';
   import {
@@ -20,11 +22,17 @@
   let props: TourProps = $props();
   const config = useConfig();
   const componentTheme = useComponentTheme('Tour');
+  let prefixCls = $derived(config.getPrefixCls('tour', props.prefixCls));
+  let rootPrefix = $derived(config.getPrefixCls());
+  let prefixCss = $derived(getTourPrefixCss(prefixCls, rootPrefix));
+  let prefixAttributes = $derived({
+    'data-ant-tour-prefix': prefixCls, 'data-ant-tour-global': rootPrefix
+  });
   let steps = $derived((props.steps ?? []).map(step => ({
     ...step,
     class: [
       step.class,
-      (step.type ?? props.type) === 'primary' && `${props.prefixCls ?? 'ant-tour'}-primary`
+      (step.type ?? props.type) === 'primary' && `${prefixCls}-primary`
     ]
       .filter(Boolean).join(' ')
   })));
@@ -38,7 +46,6 @@
     ? false : innerOpen !== undefined && props.open === undefined ? innerOpen : props.open ?? true);
   let wasOpen = untrack(() => visible);
   let step = $derived<Partial<TourStepProps>>(steps[current] ?? {});
-  let prefixCls = $derived(props.prefixCls ?? 'ant-tour');
   let semantics = $derived(getTourSemantics(config.tour, { ...props, steps }));
   let rootClass = $derived([
     config.direction === 'rtl' && `${prefixCls}-rtl`,
@@ -244,10 +251,10 @@
     indicatorsRender={props.indicatorsRender} actionsRender={props.actionsRender} />
 {/snippet}
 
-{#if mounted && visible && target !== undefined}
+{#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`tour-prefix:${prefixCls}:${rootPrefix}`} />{/if}{#if mounted && visible && target !== undefined}
   <div bind:this={host} style="display:contents">
     <TourPortal getPopupContainer={props.getPopupContainer}>
-      <div class={[`${prefixCls}-mask`, ...rootClass, semantics.classes.mask]}
+      <div {...prefixAttributes} class={[`${prefixCls}-mask`, ...rootClass, semantics.classes.mask]}
         style={`${componentTheme.style ?? ''};position:${props.getPopupContainer === false ? 'absolute' : 'fixed'};left:0;right:0;top:0;bottom:0;z-index:${zIndex};pointer-events:${highlight && !props.disabledInteraction ? 'none' : 'auto'};${maskStyle ?? ''};${semantics.styles.mask ?? ''}`}>
         {#if mask}
           <svg style="width:100%;height:100%" aria-hidden="true">
@@ -275,10 +282,10 @@
       </div>
     </TourPortal>
     <TourPortal getPopupContainer={props.getPopupContainer} onReady={handlePlaceholderReady}>
-      <div bind:this={placeholder} class={[...rootClass, `${prefixCls}-target-placeholder`]}></div>
+      <div {...prefixAttributes} bind:this={placeholder} class={[...rootClass, `${prefixCls}-target-placeholder`]}></div>
     </TourPortal>
     <TourPortal getPopupContainer={props.getPopupContainer} reference={placeholder} popup onReady={handlePopupReady}>
-      <div bind:this={popup} class={[prefixCls, position?.placement && `${prefixCls}-placement-${position.placement}`,
+      <div {...prefixAttributes} bind:this={popup} class={[prefixCls, position?.placement && `${prefixCls}-placement-${position.placement}`,
         ...rootClass, step.class]}
         style={`${componentTheme.style ?? ''};${getTourOffsetStyle(position)};z-index:${zIndex};${step.style ?? ''}`}>
         {#if arrow && position?.align.points}

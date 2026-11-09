@@ -213,6 +213,9 @@ token marker/variables. Tooltip использует самостоятельн�
 Рецепт listy-prefix выводит 16 правил Listy для raw/virtual parts, grouped/sticky
 headers и scrollbar. Canonical component tokens и rc-virtual-list variable
 сохраняются; общий link reset продолжает работать через canonical root marker.
+Рецепт tour-prefix выводит 61 правило панелей, маски, primary state и стрелок.
+Runtime разделяет local Tour classes, global Button selectors и private Tooltip
+namespace; canonical tokens и прежние portals/layout/zIndex contracts сохранены.
 Рецепт layout-prefix выводит 35 flat rules Layout/Sider; runtime выбирает свою
 группу, сохраняет Menu namespace и ограничивает defaults/state selectors корнем.
 Тот же template используется для Header/Content/Footer: выбираются selectors

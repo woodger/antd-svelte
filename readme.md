@@ -5852,6 +5852,20 @@ slots. Локальные слои имеют приоритет. Locale.tour и
 текста наследуется от фактического контейнера: body остаётся LTR при RTL config,
 как в React-эталоне; класс ant-tour-rtl и контекст кнопок при этом сохраняются.
 
+Непустой prefixCls задаёт классы Tour; empty/undefined наследуют ConfigProvider.
+Панель, маска, placeholder, primary state, placements и стрелки используют один
+resolved prefix. Button namespace и private Tooltip variables следуют общему
+prefix отдельно от local Tour; canonical tokens/markers не переименовываются.
+Scoped template повторяет 61 source CSS rule. Смена prefix сохраняет текущий
+шаг, открытый popup, draft/focus/selection и порядок callbacks.
+
+При общем local class=guide вложенный Source provider с другим global prefix
+теряет margins кнопок из-за CSS-кэша первого namespace. Raw результаты сохранены;
+freshNested измерен с новым public local class. Svelte изолирует CSS по обоим
+prefixes. Сверка — [UMD](./tests/browser/fixtures/ant-design-tour-prefix-reference.json),
+[browser](./tests/browser/tour-prefix.spec.ts),
+[SSR](./tests/package/tour-prefix.ssr.test.ts), `?fixture=tour-prefix`.
+
 По умолчанию mask/placeholder/popup находятся в body. GetPopupContainer=false
 оставляет их inline без body lock; функция задаёт собственный контейнер. Как в
 rc-tour, mask/placeholder вызывают getter без аргумента, popup передаёт placeholder.
@@ -5878,8 +5892,7 @@ Runtime `zIndex` имеет приоритет над CSS token `zIndexPopup`: �
 подтверждённое [raw observation](./tests/browser/fixtures/ant-design-tour-z-index-observation.json).
 Для изменения фактического слоя используйте prop `zIndex`; его default сохранён.
 
-CSS для произвольного prefixCls и общий zIndex context всех
-popup families остаются вне этого этапа.
+Общий zIndex context всех popup families остаётся вне этого этапа.
 React private PurePanel и development diagnostics не экспортируются.
 
 Проверки: [engine](./src/lib/tour.engine.test.ts),
@@ -10229,7 +10242,7 @@ Tooltip, Popover, Popconfirm, Slider, BorderBeam, Masonry, Splitter, Anchor и
 Space/SpaceCompact/SpaceAddon, Breadcrumb, Row/Col, Typography, Carousel, Descriptions, Tabs,
 Card с Grid/Meta, Button, FloatButton/Group/BackTop, Radio/RadioButton/RadioGroup,
 Checkbox/CheckboxGroup, Switch, Input, TextArea, InputPassword, InputSearch, InputOTP,
-InputNumber, Form/FormItem/FormList/FormErrorList, Rate и Listy.
+InputNumber, Form/FormItem/FormList/FormErrorList, Rate, Listy и Tour.
 Остальные семейства подключаются отдельно. Например,
 ConfigProvider prefixCls="suite" создаёт suite-app, suite-layout,
 suite-layout-sider и suite-layout-header без изменения имён Svelte-компонентов.

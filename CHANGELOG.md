@@ -9,6 +9,11 @@
 
 ### Added
 
+- Tour поддерживает local/shared prefixCls для панелей, маски, placements и стрелок.
+  Button selectors/private Tooltip variables используют независимый общий prefix;
+  шаг, portal DOM, draft/focus/selection и callbacks сохраняются. Source shared-class
+  cache с пропущенными Button margins записан raw/fresh.
+
 - Listy поддерживает local/shared prefixCls в raw/virtual ветках, группах, sticky
   headers и scrollbar. Canonical tokens/link reset, native focus/reduced motion,
   refs, измерения строк и прокрутка сохраняются.
