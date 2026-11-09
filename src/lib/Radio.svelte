@@ -7,6 +7,8 @@
   import { useRadioGroup, useRadioOptionType } from './radio-context';
   import { connectRadio, syncRadioPeers } from './radio.dom';
   import { createCheckableClickLock } from './checkable.dom';
+  import { getRadioPrefixCss } from './radio-prefix.engine';
+  import ThemeScopeStyle from './ThemeScopeStyle.svelte';
   import type { RadioChangeEvent, RadioProps } from './radio.types';
 
   let {
@@ -31,7 +33,10 @@
   let control = $derived(inputElement);
   let value = $derived(props.value ?? 'on');
   let button = $derived((group?.optionType || optionType) === 'button');
-  let prefix = $derived(`${props.prefixCls ?? 'ant-radio'}${button ? '-button' : ''}`);
+  let radioPrefix = $derived(config.getPrefixCls('radio', props.prefixCls));
+  let rootPrefix = $derived(config.getPrefixCls());
+  let prefix = $derived(`${radioPrefix}${button ? '-button' : ''}`);
+  let prefixCss = $derived(getRadioPrefixCss(radioPrefix, rootPrefix));
   let resolvedChecked = $derived(group ? group.value === value : checked ?? initialDefault);
   let resolvedDefault = $derived(group ? group.defaultValue === value : initialDefault);
   let resolvedDisabled = $derived(
@@ -186,6 +191,9 @@
 </style>
 
 <svelte:document onreset={handleReset} />
+{#if prefixCss}
+  <ThemeScopeStyle css={prefixCss} scope={`radio-prefix:${radioPrefix}:${rootPrefix}`} />
+{/if}
 
 <!-- svelte-ignore a11y_click_events_have_key_events, a11y_no_noninteractive_element_interactions (Label блокирует повторный click; клавиатурой и фокусом управляет native input.) -->
 <label class={[
@@ -203,6 +211,10 @@
     contextClasses?.root,
     localClasses?.root
   ]} style={rootStyle} title={props.title} {@attach wave}
+  data-ant-radio-wrapper={!button || undefined}
+  data-ant-radio-button-wrapper={button || undefined}
+  data-ant-radio-prefix={prefixCss ? radioPrefix : undefined}
+  data-ant-radio-global={prefixCss ? rootPrefix : undefined}
   onclick={clickLock.label}
   onmouseenter={event => props.onMouseEnter?.(event)}
   onmouseleave={event => props.onMouseLeave?.(event)}>

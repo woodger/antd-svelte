@@ -149,6 +149,12 @@ Runtime разделяет local classes и общий namespace служебн�
 сохраняет component tokens, разделяет local classes и global Button/progress
 namespace; root selector сохраняет исходный приоритет FloatButton после Button
 при любом порядке head styles. Существующий scoped WAAPI fade остаётся в Native.
+Рецепт radio-prefix выводит 99 правил Radio/RadioButton/RadioGroup. Namespace
+component tokens сохранён, Badge selectors используют общий prefix. Неэффективный
+Source selector с button-wrapper исключён; defaultChecked wrapper observation
+хранится raw и с public checked=true counterpart. В radio-button восстановлены
+три пропущенных Group/Badge rules: vertical width/margin и z-index счётчика;
+normal radio.css сохраняется.
 Рецепт segmented-prefix выводит data module из 38 правил Segmented для локального
 prefixCls; runtime сохраняет CSS variables/marker и ограничивает defaults корнем.
 Рецепт flex-prefix выводит data module из 32 правил Flex без typography reset;

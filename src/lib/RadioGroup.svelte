@@ -7,6 +7,8 @@
   import { provideRadioGroup } from './radio-context';
   import { getRadioOptions } from './radio.engine';
   import { spaceOrientation } from './space.engine';
+  import { getRadioPrefixCss } from './radio-prefix.engine';
+  import ThemeScopeStyle from './ThemeScopeStyle.svelte';
   import type { RadioChangeEvent, RadioGroupProps, RadioValue } from './radio.types';
 
   let {
@@ -30,7 +32,7 @@
     onBlur,
     onMouseEnter,
     onMouseLeave,
-    prefixCls = 'ant-radio',
+    prefixCls: customizePrefixCls,
     role = 'radiogroup',
     nativeElement = $bindable(),
     onfocus,
@@ -45,6 +47,9 @@
   const componentTheme = useComponentTheme('Radio');
   const form = useForm();
   const field = useFormField(() => nativeElement);
+  let prefixCls = $derived(config.getPrefixCls('radio', customizePrefixCls));
+  let rootPrefix = $derived(config.getPrefixCls());
+  let prefixCss = $derived(getRadioPrefixCss(prefixCls, rootPrefix));
   const generatedId = $props.id();
   const initialDefault = untrack(() => defaultValue);
   const resets = new Set<ReturnType<typeof setTimeout>>();
@@ -153,15 +158,18 @@
 </script>
 
 <style>
-  .ant-radio-group { display: inline-flex; flex-wrap: wrap; min-width: 0; max-width: 100%; padding: 0; border: 0; row-gap: var(--ant-margin-xs); }
-  .ant-radio-group-vertical { display: flex; flex-direction: column; align-items: stretch; }
-  .ant-radio-group-vertical:has(> :global(.ant-radio-button-wrapper), > :global(.ant-badge) > :global(.ant-radio-button-wrapper)) { align-items: stretch; }
-  .ant-radio-group.ant-radio-group-block { display: flex; width: 100%; }
-  .ant-radio-group:focus-visible { outline: 2px solid var(--ant-color-primary); outline-offset: 2px; }
-  .ant-radio-group :global(.ant-radio-wrapper) { min-width: 0; max-width: 100%; }
+  [data-ant-radio-group] { display: inline-flex; flex-wrap: wrap; min-width: 0; max-width: 100%; padding: 0; border: 0; row-gap: var(--ant-margin-xs); }
+  [data-ant-radio-group][data-ant-radio-vertical] { display: flex; flex-direction: column; align-items: stretch; }
+  [data-ant-radio-vertical]:has(> :global([data-ant-radio-button-wrapper]), > :global(span) > :global([data-ant-radio-button-wrapper])) { align-items: stretch; }
+  [data-ant-radio-group][data-ant-radio-block] { display: flex; width: 100%; }
+  [data-ant-radio-group]:focus-visible { outline: 2px solid var(--ant-color-primary); outline-offset: 2px; }
+  [data-ant-radio-group] :global([data-ant-radio-wrapper]) { min-width: 0; max-width: 100%; }
 </style>
 
 <svelte:document onreset={handleReset} />
+{#if prefixCss}
+  <ThemeScopeStyle css={prefixCss} scope={`radio-prefix:${prefixCls}:${rootPrefix}`} />
+{/if}
 
 <fieldset
   {...attributes}
@@ -182,6 +190,11 @@
       className,
       rootClassName
     ]}
+  data-ant-radio-group
+  data-ant-radio-block={block || undefined}
+  data-ant-radio-vertical={resolvedOrientation === 'vertical' || undefined}
+  data-ant-radio-prefix={prefixCss ? prefixCls : undefined}
+  data-ant-radio-global={prefixCss ? rootPrefix : undefined}
   disabled={resolvedDisabled}
   aria-label={attributes['aria-label']
       ?? (attributes['aria-labelledby']

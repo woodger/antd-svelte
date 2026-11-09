@@ -9168,9 +9168,13 @@ AutoFocus переводит фокус на input при mount; lowercase autof
 [radio.types.ts](./src/lib/radio.types.ts). Изучены Radio/Group/RadioButton и
 @rc-component/checkbox 2.0.0; runtime React dependency не добавлена.
 
-Рецепт radio-button воспроизводит 67 правил эталона для кнопок, размеров,
+Рецепт radio-button воспроизводит 70 правил эталона для кнопок, размеров,
 vertical/block и Badge; прежний vendor/radio.css сохранён. Проверки —
 `?fixture=radio-button`, SSR/public package и browser, включая существующие Radio.
+Включены width:auto и отрицательный margin для Badge в vertical Group: обёртка
+и кнопка растягиваются по ширине группы, соседние границы перекрываются на 1px,
+в том числе со стандартным prefix.
+Счётчик Badge внутри Group получает исходный z-index:1.
 
 ClassNames/styles у Radio и RadioButton задают root/icon/label объектом или
 функцией от `{ props }`. Props содержат фактические checked, disabled, value и name;
@@ -9178,8 +9182,18 @@ checked учитывает локальное состояние Svelte. ConfigP
 class/style и semantic slots, в том числе для Radio из options и вложенного provider.
 Приоритет root style: config.styles.root, config.style, styles.root, style.
 Настройки применяются к каждому Radio, как в исходной реализации; Group сохраняет
-собственные class/style. PrefixCls меняет имена классов; CSS для нового префикса
-предоставляет потребитель. У Group он передаётся в options; children задают свой.
+собственные class/style. PrefixCls задаёт базовое имя Radio без -button; непустой
+локальный prefix имеет приоритет, empty/undefined наследуют ConfigProvider.
+Radio/RadioButton/RadioGroup подключают CSS для local/shared prefix, включая
+независимый общий Badge namespace. У Group prefix передаётся в options; children
+выбирают свой отдельно. Canonical token markers и native layout сохраняются.
+Смена prefix сохраняет input/group DOM, выбор, refs, focus, selection и FormData.
+
+В Source defaultChecked выбирает standalone input без wrapper-checked класса;
+у RadioButton выбранные цвета не применяются. Raw UMD замеры сохранены отдельно
+от matched public checked=true. Native отражает фактическое checked состояние,
+как прежде. Неэффективный Source Badge selector с button-wrapper исключён из
+нового CSS template; прежняя геометрия остаётся для отдельного разбора.
 
 OnChange получает `{ target, nativeEvent, stopPropagation, preventDefault }`;
 target.value сохраняет исходный тип. NativeEvent — DOM change, а не React MouseEvent.
@@ -9195,11 +9209,13 @@ onValueChange. Нативный onchange остаётся на input. Label/inpu
 уникальные имена, примитивные типы и удаление повторных options. Эти границы
 отличаются от React any-value/controlled-state и приоритета disabled дочернего Radio.
 Source Radio tokens и отдельные theme algorithms применяются к Radio, RadioButton
-и RadioGroup; native-only темы сохраняют прежнее оформление. Произвольный prefix CSS,
-Wave подключён; React diagnostics/statics и вложенные Form NamePath остаются неперенесёнными.
+и RadioGroup; native-only темы сохраняют прежнее оформление. Local/shared prefix CSS
+и Wave подключены; React diagnostics/statics и вложенные Form NamePath остаются неперенесёнными.
 Дополнительные сценарии — `?fixture=radio-features`,
 [browser](./tests/browser/radio-features.spec.ts) и
 [package SSR](./tests/package/radio-features.ssr.test.ts).
+Сверка prefix с официальным UMD — `?fixture=radio-prefix` и
+[browser](./tests/browser/radio-prefix.spec.ts).
 
 ## Switch
 

@@ -1582,12 +1582,15 @@
   {
     "id": "radio-button",
     "output": "src/lib/vendor/radio-button.css",
-    "expectedRules": 67,
+    "expectedRules": 70,
     "include": [
       "\\.ant-radio-button(?![\\w])",
       "\\.ant-radio-group-(?:large|small|solid|block)(?![\\w])",
       "\\.ant-radio-wrapper-block(?![\\w])",
-      "^\\.css-var-_R_0_\\.ant-radio-css-var$"
+      "^\\.css-var-_R_0_\\.ant-radio-css-var$",
+      "^\\.ant-radio-group-vertical\\s*>\\s*\\.ant-badge$",
+      "^\\.ant-radio-group-vertical\\s*>\\s*\\.ant-badge:not\\(:last-child\\)$",
+      "^\\.ant-radio-group\\s+\\.ant-badge\\s+\\.ant-badge-count$"
     ],
     "exclude": [],
     "replacements": [
@@ -1598,6 +1601,26 @@
     ],
     "keyframes": [],
     "header": "/* Ant Design 6.6.8 — MIT; см. LICENSE.ant-design.\n * Radio.Button: outline/solid, размеры, block, vertical, Badge и focus.\n * https://registry.npmjs.org/antd/-/antd-6.6.8.tgz\n * SHA-256: 8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa\n */"
+  },
+  {
+    "id": "radio-prefix",
+    "output": "src/lib/vendor/radio-prefix.css.js",
+    "expectedRules": 99,
+    "include": [
+      "\\.ant-radio(?![\\w])"
+    ],
+    "exclude": [
+      "\\.ant-button-wrapper(?![-\\w])"
+    ],
+    "replacements": [
+      {
+        "pattern": "\\.css-var-_R_0_\\.ant-radio-css-var",
+        "replacement": ":where(.ant-radio-css-var)"
+      }
+    ],
+    "keyframes": [],
+    "header": "/* Ant Design 6.6.8 — MIT; см. LICENSE.ant-design.\n * Radio/Group/Button prefix template: states, sizes, solid/outline, Badge и focus.\n * Неэффективный Source Badge/button-wrapper selector исключён.\n * https://registry.npmjs.org/antd/-/antd-6.6.8.tgz\n * SHA-256: 8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa\n */",
+    "format": "module"
   },
   {
     "id": "calendar",

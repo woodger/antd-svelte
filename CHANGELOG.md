@@ -9,6 +9,13 @@
 
 ### Added
 
+- Radio/RadioButton/RadioGroup поддерживают local/shared prefixCls и независимый
+  Badge namespace. Native fieldset/input, checked state, формы, refs и focus
+  сохранены; Source defaultChecked wrapper observation записан raw/matched.
+
+- В CSS RadioButton восстановлены исходные Group/Badge правила: ширина вертикальных
+  кнопок, стык соседних границ и слой счётчика теперь одинаковы при любом prefix.
+
 - FloatButton/Group/BackTop поддерживает local/shared prefixCls с наследованием
   от Group. Progress и анимация используют общий namespace; DOM/ref, открытое меню,
   scroll и focus сохранены. Source owner/cache observations записаны отдельно.

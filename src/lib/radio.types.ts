@@ -55,7 +55,7 @@ export interface RadioProps extends Omit<
   /** Один раз вызывает focus при mount; lowercase autofocus сохраняет HTML-поведение. */
   autoFocus?: boolean;
   tabIndex?: number;
-  /** Меняет классы; стили произвольного префикса предоставляет потребитель. */
+  /** Базовый prefix без -button; empty/undefined наследуют ConfigProvider. */
   prefixCls?: string;
   classNames?: RadioSemantic;
   styles?: RadioSemantic;
@@ -116,7 +116,7 @@ export interface RadioGroupProps<Value extends RadioValue = string> extends Omit
   onBlur?: HTMLFieldsetAttributes['onfocusout'];
   onMouseEnter?: HTMLFieldsetAttributes['onmouseenter'];
   onMouseLeave?: HTMLFieldsetAttributes['onmouseleave'];
-  /** Применяется к группе и Radio из options; children задают свой prefixCls. */
+  /** Базовый prefix группы и Radio из options; children выбирают свой prefix отдельно. */
   prefixCls?: string;
   /** Bindable fieldset; сохраняет нативные disabled, validation и form association. */
   nativeElement?: HTMLFieldSetElement;
