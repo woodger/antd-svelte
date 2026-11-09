@@ -162,6 +162,11 @@ shared local class; native input/form/fieldset contracts не меняются.
 Рецепт switch-prefix выводит 47 правил Switch в CSS module для local/shared
 prefix. Runtime меняет root/state/handle/caption classes, сохраняя component
 variables, внешний anticon namespace и прежний native max-width adapter.
+Рецепт input-prefix выводит 142 правила Input/TextArea, включая textarea selectors,
+resize/autoSize, affix, clear/count, variants/sizes и Compact. Deprecated Group и
+семейства InputNumber/Search/OTP исключены; runtime сохраняет canonical token
+variables/markers и ограничивает defaults владельцем. Password/Search/OTP имеют
+отдельные prefix API и подключаются следующим этапом.
 Рецепт segmented-prefix выводит data module из 38 правил Segmented для локального
 prefixCls; runtime сохраняет CSS variables/marker и ограничивает defaults корнем.
 Рецепт flex-prefix выводит data module из 32 правил Flex без typography reset;

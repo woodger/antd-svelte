@@ -6511,9 +6511,18 @@ Fixture `?fixture=input-features` дополняет прежний Input/Select
 Unit/SSR и browser проверяют count/IME, focus/Enter, clear/event order, refs,
 FormData/FormItem/Compact, variants/semantic styles, темы и RTL.
 
+Input и TextArea поддерживают общий базовый prefixCls: непустой local prefix имеет
+приоритет, empty/undefined наследуют ConfigProvider. Корень, affix, размеры,
+варианты, clear/count и Compact используют выбранный prefix; canonical token
+variables и markers сохраняются. Смена prefix не заменяет leaf/wrapper, сохраняет
+value, refs, selection/focus и FormData. Сверка с официальным UMD —
+`?fixture=input-prefix`, [browser](./tests/browser/input-prefix.spec.ts) и
+[SSR](./tests/package/input-prefix.ssr.test.ts). TextArea сохраняет vertical resize,
+autoSize и прежний приоритет semantic styles.
+
 Input.Password, Input.Search и Input.OTP доступны как
-InputPassword, InputSearch и InputOTP. Общие prefixCls,
-arbitrary token engine остаются отдельными пробелами. Deprecated internal
+InputPassword, InputSearch и InputOTP. Их самостоятельные prefixCls
+остаются отдельной задачей; компонентные tokens Input уже подключены. Deprecated internal
 classes/structures исключены из переноса. Согласованный string bind:value
 сохраняется вместо React controlled rejection/broad value types; native DOM events
 и именованные Svelte bindings заменяют SyntheticEvent/ref object. Общий аудит
@@ -6811,9 +6820,9 @@ Fixture `?fixture=textarea-features` дополняет `?fixture=textarea`. Uni
 проверяют count/clear/IME, размер и cleanup, native refs/events/Form, темы и RTL.
 
 Сохраняется согласованный строковый bind:value: он не заменяется React controlled
-rejection. React broad value types, исходный ref shape resizableTextArea, prefixCls,
-полный theme/token engine этим этапом
-не добавлены; refs представлены именованными Svelte bindings. Полный аудит всего
+rejection. React broad value types и исходный ref shape resizableTextArea
+не добавлены; refs представлены именованными Svelte bindings. Local/shared
+prefixCls и component token engine Input подключены, как у обычного Input. Полный аудит всего
 семейства Input, включая прочие subcomponents, остаётся незавершённым.
 
 ## FloatButton, FloatButtonGroup и FloatButtonBackTop
@@ -10115,7 +10124,7 @@ Empty, Skeleton с primitives, Spin, Progress, Result, Alert, Collapse, Affix,
 Tooltip, Popover, Popconfirm, Slider, BorderBeam, Masonry, Splitter, Anchor и
 Space/SpaceCompact/SpaceAddon, Breadcrumb, Row, Typography, Carousel, Descriptions, Tabs,
 Card с Grid/Meta, Button, FloatButton/Group/BackTop, Radio/RadioButton/RadioGroup,
-Checkbox/CheckboxGroup и Switch.
+Checkbox/CheckboxGroup, Switch, Input и TextArea.
 Остальные семейства подключаются отдельно. Например,
 ConfigProvider prefixCls="suite" создаёт suite-app, suite-layout,
 suite-layout-sider и suite-layout-header без изменения имён Svelte-компонентов.

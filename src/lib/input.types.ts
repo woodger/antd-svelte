@@ -64,6 +64,8 @@ export interface InputProps extends Omit<
   /** Приоритет: variant, Form, component config, global variant, outlined. */
   variant?: InputVariant;
   prefix?: InputContent;
+  /** Базовый CSS prefix; empty/undefined наследуют ConfigProvider.prefixCls. */
+  prefixCls?: string;
   suffix?: InputContent;
   /** false отключает очистку; иначе отсутствующие поля наследуются из ConfigProvider.input. */
   allowClear?: boolean | InputAllowClear;

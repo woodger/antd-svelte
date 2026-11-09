@@ -13,6 +13,8 @@
     textAreaResizeStyle
   } from './textarea.engine';
   import { createTextAreaMeasure, textAreaChangeEvent } from './textarea.dom';
+  import { getInputPrefixCss } from './input-prefix.engine';
+  import ThemeScopeStyle from './ThemeScopeStyle.svelte';
   import type { TextAreaProps } from './textarea.types';
   import Icon from './Icon.svelte';
 
@@ -59,12 +61,15 @@
     nativeElement = $bindable(),
     rootElement = $bindable(),
     rootClassName = '',
+    prefixCls: customizePrefixCls,
     class: className = '',
     ...attributes
   }: TextAreaProps = $props();
   const config = useConfig();
   const variantContext = useVariant('textArea', () => ({ variant }));
   const componentTheme = useComponentTheme('Input');
+  let componentPrefix = $derived(config.getPrefixCls('input', customizePrefixCls));
+  let prefixCss = $derived(getInputPrefixCss(componentPrefix));
   const compact = useCompact();
   const form = useForm();
   const controlRef = {
@@ -145,7 +150,8 @@
         nativeElement,
         rootElement,
         class: className,
-        rootClassName
+        rootClassName,
+        prefixCls: customizePrefixCls
       }
     }
   );
@@ -186,7 +192,7 @@
     )
   );
   let variantClasses = $derived(
-    [`ant-input-${appearance}`, resolvedStatus && `ant-input-status-${resolvedStatus}`]
+    [`${componentPrefix}-${appearance}`, resolvedStatus && `${componentPrefix}-status-${resolvedStatus}`]
   );
   let rootClasses = $derived(
     [
@@ -194,12 +200,12 @@
       componentTheme.className,
       className,
       rootClassName,
-      compactClasses('ant-input', config.direction, compact),
+      compactClasses(componentPrefix, config.direction, compact),
       config.textArea?.class,
       contextClasses?.root,
       localClasses?.root,
-      counter.exceeded && 'ant-input-out-of-range',
-      dirty && 'ant-input-textarea-affix-wrapper-resize-dirty'
+      counter.exceeded && `${componentPrefix}-out-of-range`,
+      dirty && `${componentPrefix}-textarea-affix-wrapper-resize-dirty`
     ]
   );
 
@@ -316,11 +322,16 @@
 </script>
 
 <style>
-  @media (prefers-reduced-motion: reduce) { textarea.ant-input, textarea.ant-input.ant-input-mouse-active, .ant-input-textarea-affix-wrapper { transition: none; } }
+  @media (prefers-reduced-motion: reduce) { textarea[data-ant-input-node], textarea[data-ant-input-node][data-ant-input-mouse-active], [data-ant-input-affix] { transition: none; } }
 </style>
 
+{#if prefixCss}
+  <ThemeScopeStyle css={prefixCss} scope={`input-prefix:${componentPrefix}`} />
+{/if}
 {#snippet control()}
   <textarea {...attributes} bind:this={nativeElement} id={id ?? field?.id} name={name ?? field?.name} value={text}
+    data-ant-input-node data-ant-input-prefix={prefixCss ? componentPrefix : undefined}
+    data-ant-input-mouse-active={mouseDown || undefined}
     required={attributes.required ?? field?.required} disabled={blocked} readonly={read} maxlength={maximum} hidden={wrapped ? undefined : hidden}
     autocomplete={attributes.autocomplete
         ?? autoComplete
@@ -367,11 +378,11 @@
         oncompositionend?.(event);
       }}
     style={leafStyle} class={[
-        'ant-input',
-        blocked && 'ant-input-disabled',
-        resolvedSize === 'large' && 'ant-input-lg',
-        resolvedSize === 'small' && 'ant-input-sm',
-        mouseDown && 'ant-input-mouse-active',
+        componentPrefix,
+        blocked && `${componentPrefix}-disabled`,
+        resolvedSize === 'large' && `${componentPrefix}-lg`,
+        resolvedSize === 'small' && `${componentPrefix}-sm`,
+        mouseDown && `${componentPrefix}-mouse-active`,
         contextClasses?.textarea,
         localClasses?.textarea,
         !wrapped && variantClasses,
@@ -380,20 +391,21 @@
 {/snippet}
 
 {#if wrapped}
-  <span bind:this={wrapper} {hidden} dir={config.direction} class={[
-      'ant-input-affix-wrapper ant-input-textarea-affix-wrapper',
+  <span bind:this={wrapper} {hidden} dir={config.direction}
+    data-ant-input-affix data-ant-input-prefix={prefixCss ? componentPrefix : undefined} class={[
+      `${componentPrefix}-affix-wrapper ${componentPrefix}-textarea-affix-wrapper`,
       rootClasses,
       variantClasses,
-      focused && 'ant-input-affix-wrapper-focused',
-      blocked && 'ant-input-disabled ant-input-affix-wrapper-disabled',
-      read && 'ant-input-affix-wrapper-readonly',
-      config.direction === 'rtl' && 'ant-input-affix-wrapper-rtl',
-      resolvedSize === 'large' && 'ant-input-affix-wrapper-lg',
-      resolvedSize === 'small' && 'ant-input-affix-wrapper-sm',
-      showCount && 'ant-input-show-count',
-      (showCount || count?.show) && 'ant-input-textarea-show-count',
-      clear && 'ant-input-textarea-allow-clear',
-      counter.show && clear && text && 'ant-input-affix-wrapper-input-with-clear-btn'
+      focused && `${componentPrefix}-affix-wrapper-focused`,
+      blocked && `${componentPrefix}-disabled ${componentPrefix}-affix-wrapper-disabled`,
+      read && `${componentPrefix}-affix-wrapper-readonly`,
+      config.direction === 'rtl' && `${componentPrefix}-affix-wrapper-rtl`,
+      resolvedSize === 'large' && `${componentPrefix}-affix-wrapper-lg`,
+      resolvedSize === 'small' && `${componentPrefix}-affix-wrapper-sm`,
+      showCount && `${componentPrefix}-show-count`,
+      (showCount || count?.show) && `${componentPrefix}-textarea-show-count`,
+      clear && `${componentPrefix}-textarea-allow-clear`,
+      counter.show && clear && text && `${componentPrefix}-affix-wrapper-input-with-clear-btn`
     ]}
     style={[
         rootStyle,
@@ -404,11 +416,11 @@
         ';'
       )} data-count={typeof counter.content === 'string' ? counter.content : undefined}>
     {@render control()}
-    <span class="ant-input-suffix">
+    <span class={`${componentPrefix}-suffix`}>
       {#if clear}<button type="button" aria-label={config.locale.clearText} class={[
-          'ant-input-clear-icon',
-          !canClear && 'ant-input-clear-icon-hidden',
-          counter.show && 'ant-input-clear-icon-has-suffix',
+          `${componentPrefix}-clear-icon`,
+          !canClear && `${componentPrefix}-clear-icon-hidden`,
+          counter.show && `${componentPrefix}-clear-icon-has-suffix`,
           contextClasses?.clear,
           localClasses?.clear
         ]} style={[contextStyles?.clear, localStyles?.clear].filter(Boolean).join(
@@ -417,7 +429,7 @@
         {#if typeof clear.clearIcon === 'function'}{@render clear.clearIcon()}{:else if clear.clearIcon === undefined}<Icon name="close-circle-filled" />{:else}{clear.clearIcon || '✖'}{/if}
       </button>{/if}
       {#if counter.show}<span class={[
-          'ant-input-data-count',
+          `${componentPrefix}-data-count`,
           contextClasses?.count,
           localClasses?.count
         ]} style={[contextStyles?.count, localStyles?.count].filter(Boolean).join(

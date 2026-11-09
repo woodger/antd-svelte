@@ -45,7 +45,7 @@ export interface InputSearchConfig {
  * Svelte-экспорт Input.Search с bind:value и событиями Input. Class/style/hidden и data-*
  * относятся к Compact root; inputElement/nativeElement и методы bind:this принадлежат Input.
  */
-export interface InputSearchProps extends Omit<InputProps, 'classNames' | 'styles'> {
+export interface InputSearchProps extends Omit<InputProps, 'classNames' | 'styles' | 'prefixCls'> {
   /**
    * false по умолчанию: обычная icon button; true — primary icon button;
    * scalar — текст primary button. Snippet заменяет кнопку целиком и получает контекст props.

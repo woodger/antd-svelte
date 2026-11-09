@@ -7003,7 +7003,20 @@
         "src/lib/FormItem.svelte",
         "src/lib/form-context.ts",
         "tests/browser/form-rich-labels.spec.ts",
-        "tests/browser/fixtures/FormRichLabelControls.svelte"
+        "tests/browser/fixtures/FormRichLabelControls.svelte",
+        "src/lib/input.types.ts",
+        "src/lib/textarea.types.ts",
+        "src/lib/input-prefix.engine.ts",
+        "src/lib/input-prefix.engine.test.ts",
+        "src/lib/vendor/input-prefix.css.js",
+        "tools/ant-design-css-recipes.json",
+        "tests/browser/fixtures/InputPrefixScope.svelte",
+        "tests/browser/fixtures/InputPrefixFixtures.svelte",
+        "tests/browser/fixtures/InputPrefixSSRFixtures.svelte",
+        "tests/browser/fixtures/ant-design-input-prefix-reference.json",
+        "tests/browser/input-prefix-metrics.ts",
+        "tests/browser/input-prefix.spec.ts",
+        "tests/package/input-prefix.ssr.test.ts"
       ],
       "features": [
         {
@@ -7152,7 +7165,7 @@
             "tests/browser/control-theme.spec.ts",
             "docs/reference/theme-context.md"
           ],
-          "note": "Компонентные tokens Input и composed Password/Search/OTP подключены к CSS. PrefixCls ещё не перенесён; deprecated internal hooks исключены из scope. Согласованные string bind:value, native refs/hidden и React dev diagnostics остаются прежними."
+          "note": "Компонентные tokens Input и composed Password/Search/OTP подключены к CSS. Local/shared prefixCls обычного Input подключён; самостоятельные prefix API Password/Search/OTP ещё в работе. Deprecated internal hooks исключены. Согласованные string bind:value, native refs/hidden и React dev diagnostics сохраняют прежнюю границу."
         },
         {
           "id": "textarea-remaining",
@@ -7170,7 +7183,7 @@
             "tests/browser/control-theme.spec.ts",
             "docs/reference/theme-context.md"
           ],
-          "note": "TextArea использует source Input token preparation и CSS variables, включая wrappers и native leaf. PrefixCls ещё не перенесён; string bind:value/native refs и React value conventions сохраняют прежнюю границу."
+          "note": "TextArea использует Source Input token preparation и CSS variables, включая wrappers и native leaf. Local/shared prefixCls подключён. String bind:value/native refs и React value conventions сохраняют прежнюю границу."
         },
         {
           "id": "control-theme-tokens",
@@ -7209,6 +7222,30 @@
             "tests/package/config-variants.ssr.test.ts"
           ],
           "note": "Общий source priority для Input/TextArea/Password/Search/OTP: local, Form, component, fallback Input у composed controls, global, outlined. Search input.variant fallback не задаёт variant кнопке; explicit outlined считается настройкой. Reactive scope сохраняет native values, DOM/focus/selection, FormData и callbacks; оставшиеся React value/ref/prefix API не включены."
+        },
+        {
+          "id": "input-textarea-prefix-cls",
+          "title": "Локальный и общий базовый prefixCls Input/TextArea",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Input.svelte",
+            "src/lib/TextArea.svelte",
+            "src/lib/input.types.ts",
+            "src/lib/textarea.types.ts",
+            "src/lib/input-prefix.engine.ts",
+            "src/lib/input-prefix.engine.test.ts",
+            "src/lib/vendor/input-prefix.css.js",
+            "tools/ant-design-css-recipes.json",
+            "tests/browser/fixtures/InputPrefixScope.svelte",
+            "tests/browser/fixtures/InputPrefixFixtures.svelte",
+            "tests/browser/fixtures/InputPrefixSSRFixtures.svelte",
+            "tests/browser/fixtures/ant-design-input-prefix-reference.json",
+            "tests/browser/input-prefix-metrics.ts",
+            "tests/browser/input-prefix.spec.ts",
+            "tests/package/input-prefix.ssr.test.ts"
+          ],
+          "note": "Nonempty local prefix wins; empty/undefined наследуют ConfigProvider. 142 Source CSS rules охватывают leaf/affix, clear/count, sizes/variants/RTL, Compact и textarea resize. Canonical variables/markers, semantic props и приоритет стилей сохранены. Official UMD matrix проверяет nested/sibling providers, custom cssVar prefix, component aliases и live changes. DOM/ref, value, selection/focus, FormData и callbacks не меняются. Native IME/reset/clear/resize/autoSize/measurement сохраняют существующие контракты; SSR не запускает browser resources. Самостоятельные prefix API Password/Search/OTP не включены."
         }
       ]
     },

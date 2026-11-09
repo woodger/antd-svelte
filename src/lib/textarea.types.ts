@@ -69,6 +69,8 @@ export interface TextAreaProps extends Omit<
   classNames?: TextAreaSemantic;
   styles?: TextAreaSemantic;
   rootClassName?: string;
+  /** Общий с Input базовый CSS prefix; empty/undefined наследуют ConfigProvider. */
+  prefixCls?: string;
   /** Вызывается перед onChange и native oninput при вводе или очистке. */
   onValueChange?: (value: string) => void;
   /** Стабильная копия target/currentTarget, nativeEvent содержит исходный DOM Event. */

@@ -12,6 +12,8 @@
   import { useForm, useFormField } from './form-context';
   import { inputCountInfo, inputExceedValue, resolveInputClear } from './input-count.engine';
   import { inputChangeEvent } from './input-event.dom';
+  import { getInputPrefixCss } from './input-prefix.engine';
+  import ThemeScopeStyle from './ThemeScopeStyle.svelte';
   import type { InputProps, InputContent } from './input.types';
   import Icon from './Icon.svelte';
 
@@ -60,6 +62,7 @@
     inputElement = $bindable(),
     nativeElement = $bindable(),
     rootClassName = '',
+    prefixCls: customizePrefixCls,
     class: className = '',
     ...attributes
   }: InputProps = $props();
@@ -67,6 +70,8 @@
   const config = useConfig();
   const variantContext = useVariant('input', () => ({ variant }));
   const componentTheme = useComponentTheme('Input');
+  let componentPrefix = $derived(config.getPrefixCls('input', customizePrefixCls));
+  let prefixCss = $derived(getInputPrefixCss(componentPrefix));
   const compact = useCompact();
   const form = useForm();
   const controlRef = {
@@ -145,7 +150,8 @@
       inputElement,
       nativeElement,
       class: className,
-      rootClassName
+      rootClassName,
+      prefixCls: customizePrefixCls
     }
   });
   let contextClasses = $derived(
@@ -168,19 +174,19 @@
     ].filter(Boolean).join(';')
   );
   let variantClasses = $derived([
-    `ant-input-${appearance}`,
-    resolvedStatus && `ant-input-status-${resolvedStatus}`
+    `${componentPrefix}-${appearance}`,
+    resolvedStatus && `${componentPrefix}-status-${resolvedStatus}`
   ]);
   let rootClasses = $derived([
     'ant-input-css-var',
     componentTheme.className,
     className,
     rootClassName,
-    compactClasses('ant-input', config.direction, compact),
+    compactClasses(componentPrefix, config.direction, compact),
     config.input?.class,
     contextClasses?.root,
     localClasses?.root,
-    counter.exceeded && 'ant-input-out-of-range'
+    counter.exceeded && `${componentPrefix}-out-of-range`
   ]);
 
   $effect(() => {
@@ -302,9 +308,12 @@
 </script>
 
 <style>
-  @media (prefers-reduced-motion: reduce) { input, .ant-input-affix-wrapper { transition: none; } }
+  @media (prefers-reduced-motion: reduce) { input, [data-ant-input-affix] { transition: none; } }
 </style>
 
+{#if prefixCss}
+  <ThemeScopeStyle css={prefixCss} scope={`input-prefix:${componentPrefix}`} />
+{/if}
 {#snippet content(node: InputContent | undefined)}
   {#if typeof node === 'function'}{@render node()}{:else if node !== true && node !== false}{node ?? ''}{/if}
 {/snippet}
@@ -312,6 +321,8 @@
   <input
     {...attributes}
     bind:this={inputElement}
+    data-ant-input-node
+    data-ant-input-prefix={prefixCss ? componentPrefix : undefined}
     id={id ?? field?.id}
     name={name ?? field?.name}
     {type}
@@ -384,11 +395,11 @@
         oncompositionend?.(event);
       }}
     class={[
-        'ant-input',
-        blocked && 'ant-input-disabled',
-        resolvedSize === 'small' && 'ant-input-sm',
-        resolvedSize === 'large' && 'ant-input-lg',
-        config.direction === 'rtl' && 'ant-input-rtl',
+        componentPrefix,
+        blocked && `${componentPrefix}-disabled`,
+        resolvedSize === 'small' && `${componentPrefix}-sm`,
+        resolvedSize === 'large' && `${componentPrefix}-lg`,
+        config.direction === 'rtl' && `${componentPrefix}-rtl`,
         contextClasses?.input,
         localClasses?.input,
         !wrapped && variantClasses,
@@ -405,28 +416,30 @@
   {#if wrapped}
     <span
       bind:this={affix}
+      data-ant-input-affix
+      data-ant-input-prefix={prefixCss ? componentPrefix : undefined}
       use:focusOnClick
       {hidden}
       class={[
-          'ant-input-affix-wrapper',
+          `${componentPrefix}-affix-wrapper`,
           variantClasses,
-          blocked && 'ant-input-disabled ant-input-affix-wrapper-disabled',
-          read && 'ant-input-affix-wrapper-readonly',
-          focused && 'ant-input-affix-wrapper-focused',
-          resolvedSize === 'small' && 'ant-input-affix-wrapper-sm',
-          resolvedSize === 'large' && 'ant-input-affix-wrapper-lg',
-          config.direction === 'rtl' && 'ant-input-affix-wrapper-rtl',
+          blocked && `${componentPrefix}-disabled ${componentPrefix}-affix-wrapper-disabled`,
+          read && `${componentPrefix}-affix-wrapper-readonly`,
+          focused && `${componentPrefix}-affix-wrapper-focused`,
+          resolvedSize === 'small' && `${componentPrefix}-affix-wrapper-sm`,
+          resolvedSize === 'large' && `${componentPrefix}-affix-wrapper-lg`,
+          config.direction === 'rtl' && `${componentPrefix}-affix-wrapper-rtl`,
           (suffix
             || counter.show)
           && clear
           && text
-          && 'ant-input-affix-wrapper-input-with-clear-btn',
+          && `${componentPrefix}-affix-wrapper-input-with-clear-btn`,
           rootClasses
         ]}
       style={rootStyle}>
       {#if prefix}<span
         class={[
-            'ant-input-prefix',
+            `${componentPrefix}-prefix`,
             contextClasses?.prefix,
             localClasses?.prefix
           ]}
@@ -438,7 +451,7 @@
       {#if suffix || counter.show || clear}
         <span
           class={[
-              'ant-input-suffix',
+              `${componentPrefix}-suffix`,
               contextClasses?.suffix,
               localClasses?.suffix
             ]}
@@ -453,9 +466,9 @@
             type="button"
             aria-label={config.locale.clearText}
             class={[
-                'ant-input-clear-icon',
-                !canClear && 'ant-input-clear-icon-hidden',
-                (suffix || counter.show) && 'ant-input-clear-icon-has-suffix',
+                `${componentPrefix}-clear-icon`,
+                !canClear && `${componentPrefix}-clear-icon-hidden`,
+                (suffix || counter.show) && `${componentPrefix}-clear-icon-has-suffix`,
                 contextClasses?.clear,
                 localClasses?.clear
               ]}
@@ -472,8 +485,8 @@
           </button>{/if}
           {#if counter.show}<span
             class={[
-                'ant-input-show-count-suffix',
-                suffix && 'ant-input-show-count-has-suffix',
+                `${componentPrefix}-show-count-suffix`,
+                suffix && `${componentPrefix}-show-count-has-suffix`,
                 contextClasses?.count,
                 localClasses?.count
               ]}

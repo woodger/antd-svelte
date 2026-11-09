@@ -35,7 +35,7 @@ export interface InputPasswordConfig {
  * Svelte-экспорт React Input.Password. Сохраняет string bind:value, события и refs Input;
  * type определяется видимостью. bind:this предоставляет методы фокуса и выделения Input.
  */
-export interface InputPasswordProps extends Omit<InputProps, 'classNames' | 'styles'> {
+export interface InputPasswordProps extends Omit<InputProps, 'classNames' | 'styles' | 'prefixCls'> {
   /** По умолчанию click; hover переключает на mouseover, без скрытия на mouseleave. */
   action?: 'click' | 'hover';
   /** По умолчанию true. false скрывает кнопку, сохраняя текущую видимость и suffix wrapper. */
