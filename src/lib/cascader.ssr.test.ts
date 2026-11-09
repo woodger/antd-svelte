@@ -79,7 +79,7 @@ describe('Cascader SSR', () => {
 
     expect(body).toContain('Custom root');
     expect(body).toContain('size-medium');
-    expect(body).toContain('color:red;color:green');
+    expect(body).toMatch(/style="[^"]*color:red;\s*color:green/);
     expect(body).toContain('padding:1px');
     expect(body).toContain('color:blue');
     expect(body).toContain('entry');

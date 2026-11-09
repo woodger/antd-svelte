@@ -5591,9 +5591,28 @@ Getter выполняется в браузере после первого от
 Standalone Panel использует нативные строки-кнопки и клавиатурный focus между
 ними. Это явная Svelte accessibility adaptation к исходной pointer-only Panel.
 SSR не обращается к DOM и не вызывает loadData; initially open popup отрисован
-hidden до mount. RenderEmpty, prefixCls, произвольные
-popup align/motion, React-specific components/refs/warnings и
+hidden до mount. Произвольные popup align/motion, React-specific components/refs/warnings и
 вывод типа value по произвольному generic ValueField остаются вне этого этапа.
+
+Непустой `prefixCls` задаёт локальный namespace Select control и Cascader
+columns/Panel; пустое значение наследует независимые общие prefixes. CSS сохраняет
+canonical tokens и передаёт resolved Cascader prefix в search render callback.
+Прежние input width, refs/IDs, selected paths, search/caret/focus, callbacks и
+клавиатура Panel сохраняются при смене префикса.
+[30 UMD-конфигураций](tests/browser/fixtures/ant-design-cascader-prefix-reference.json)
+в normal/nested/reset scopes сверяют single/multiple, Panel, поиск, empty/RTL,
+размеры, variants/status и aliases. Проверки:
+[browser](tests/browser/cascader-prefix.spec.ts),
+[SSR](tests/package/cascader-prefix.ssr.test.ts).
+
+В Ant Design 6.6.8 локальный prefix меняет Select popup class, а сброс Cascader
+padding продолжает искать общий Select class. В raw local случае остаётся 4px
+вместо 0px; Native сохраняет прежний padding:0. Отдельный public counterpart с
+`styles.popup.root.padding:0` сверяет popup и зависящую от padding ширину колонок;
+control остаётся raw. У Panel прежний Native root dir=rtl также сохранён: Source
+задаёт RTL колонкам, оставляя корень LTR. Raw root direction и отдельный public
+counterpart с обычной HTML-обёрткой `dir="rtl"` записаны раздельно. Сам Source Panel
+не передаёт dir на свой корень. Эти границы не означают одинаковый DOM.
 
 Проверки: [engine](./src/lib/cascader.engine.test.ts),
 [SSR](./src/lib/cascader.ssr.test.ts),

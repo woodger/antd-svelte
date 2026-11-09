@@ -140,6 +140,8 @@ export interface CascaderPanelProps<
   'children' | 'onchange' | 'onfocus' | 'onblur' | 'onkeydown' | 'onkeyup'
     | 'prefix' | 'placeholder'
 > {
+  /** Локальный namespace Select/Cascader; пустая строка наследует ConfigProvider. */
+  prefixCls?: string;
   options?: readonly OptionType[];
   /** Управляемые пути; undefined после controlled value освобождает локальное состояние. */
   value?: CascaderValue<Multiple>;

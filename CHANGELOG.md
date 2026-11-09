@@ -9,6 +9,10 @@
 
 ### Added
 
+- Cascader/CascaderPanel поддерживают local/shared prefixCls для поля, tags,
+  колонок/checkbox и popup. Canonical tokens, нативная ширина input и callbacks
+  сохранены; raw local popup padding upstream отделён от public counterpart.
+
 - TreeSelect поддерживает local/shared prefixCls для Select control/tags и popup,
   сохраняя общий Native Tree adapter, query/selection/focus, refs/IDs и форму.
   Несогласованность локальных tree classes/style hooks upstream записана отдельно.

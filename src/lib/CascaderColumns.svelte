@@ -12,6 +12,7 @@
   import Icon from './Icon.svelte';
 
   let {
+    prefixCls,
     columns,
     active,
     search,
@@ -40,6 +41,7 @@
     onKeyUp,
     onScroll
   }: {
+    prefixCls: string;
     columns: CascaderRow<OptionType>[][];
     active: CascaderPath;
     search: string;
@@ -104,12 +106,12 @@
 </script>
 
 <style>
-  .ant-cascader-menu { position: relative; }
+  [data-ant-cascader-menu] { position: relative; }
   .cascader-option { display:flex;align-items:center;width:100%;min-width:0;padding:0;border:0;background:transparent;color:inherit;font:inherit;line-height:inherit;text-align:start;cursor:inherit; }
   .cascader-option:focus-visible { outline:2px solid var(--ant-color-primary);outline-offset:2px; }
-  .ant-cascader-checkbox { flex:none; }
-  .cascader-option .ant-cascader-menu-item-content { padding:0;text-align:start; }
-  .ant-cascader-menu-item-expand-icon,.ant-cascader-menu-item-loading-icon { display:flex;flex:none; }
+  [data-ant-cascader-checkbox] { flex:none; }
+  .cascader-option [data-ant-cascader-content] { padding:0;text-align:start; }
+  [data-ant-cascader-expand-icon],[data-ant-cascader-loading-icon] { display:flex;flex:none; }
 </style>
 
 {#snippet content(value: CascaderContent | undefined)}
@@ -118,14 +120,14 @@
 {/snippet}
 {#snippet rowLabel(row: CascaderRow<OptionType>)}
   {#if search && searchRender}
-    {@render searchRender(search, row.options, 'ant-cascader', fields)}
+    {@render searchRender(search, row.options, prefixCls, fields)}
   {:else if search}
     {#each row.options as option, index}
       {#if index > 0}{' / '}{/if}
       {@const label = option[fields.label] as CascaderContent | undefined}
       {#if typeof label === 'string' || typeof label === 'number'}
         {#each cascaderHighlight(label, search) as part}
-          {#if part.match}<span class="ant-cascader-menu-item-keyword">{part.text}</span>
+          {#if part.match}<span class={`${prefixCls}-menu-item-keyword`}>{part.text}</span>
           {:else}{part.text}{/if}
         {/each}
       {:else}{@render content(label)}{/if}
@@ -133,10 +135,10 @@
   {:else}{@render content(row.option[fields.label] as CascaderContent | undefined)}{/if}
 {/snippet}
 
-<div bind:this={host} id={id} class={['ant-cascader-menus', !columns.length && 'ant-cascader-menu-empty']}>
+<div bind:this={host} id={id} class={[`${prefixCls}-menus`, !columns.length && `${prefixCls}-menu-empty`]}>
   {#each columns as rows, column}
     <ul role="menu" aria-label={label} tabindex={panel && column === 0 ? 0 : -1}
-      class={['ant-cascader-menu', classes.list]} style={styles.list}
+      data-ant-cascader-menu class={[`${prefixCls}-menu`, classes.list]} style={styles.list}
       onkeydown={onKeyDown} onkeyup={onKeyUp} onscroll={onScroll}>
       {#each rows as row (row.key)}
         {@const blocked = disabled || row.disabled}
@@ -148,11 +150,11 @@
           : typeof row.option[fields.label] === 'string' ? row.option[fields.label] as string
           : undefined}
         <li {...optionAttributes(row.option, 'data-')} role="presentation" class={[
-          'ant-cascader-menu-item',
-          !row.leaf && 'ant-cascader-menu-item-expand',
-          current && 'ant-cascader-menu-item-active',
-          blocked && 'ant-cascader-menu-item-disabled',
-          pending && 'ant-cascader-menu-item-loading',
+          `${prefixCls}-menu-item`,
+          !row.leaf && `${prefixCls}-menu-item-expand`,
+          current && `${prefixCls}-menu-item-active`,
+          blocked && `${prefixCls}-menu-item-disabled`,
+          pending && `${prefixCls}-menu-item-loading`,
           classes.listItem
         ]} style={styles.listItem}
           data-cascader-active={current} data-path-key={row.key}
@@ -172,20 +174,20 @@
             onclick={event => {
               if (blocked) return;
               const target = event.target;
-              const checkbox = target instanceof Element && target.closest('.ant-cascader-checkbox');
+              const checkbox = target instanceof Element && target.closest('[data-ant-cascader-checkbox]');
               if (!checkbox) onActivate(row, hover);
               if (!row.option.disableCheckbox && (checkbox || !multiple || row.leaf))
                 onSelect(row);
             }}>
             {#if multiple}
-              <span class={[
-                'ant-cascader-checkbox',
-                selected && 'ant-cascader-checkbox-checked',
-                indeterminate && 'ant-cascader-checkbox-indeterminate',
-                (blocked || row.option.disableCheckbox) && 'ant-cascader-checkbox-disabled'
-              ]} aria-hidden="true"><span class="ant-cascader-checkbox-inner"></span></span>
+              <span data-ant-cascader-checkbox class={[
+                `${prefixCls}-checkbox`,
+                selected && `${prefixCls}-checkbox-checked`,
+                indeterminate && `${prefixCls}-checkbox-indeterminate`,
+                (blocked || row.option.disableCheckbox) && `${prefixCls}-checkbox-disabled`
+              ]} aria-hidden="true"><span class={`${prefixCls}-checkbox-inner`}></span></span>
             {/if}
-            <span class="ant-cascader-menu-item-content">
+            <span data-ant-cascader-content class={`${prefixCls}-menu-item-content`}>
               {#snippet originNode()}{@render rowLabel(row)}{/snippet}
               {#if optionRender}
                 {@render optionRender(row.option, {
@@ -194,12 +196,12 @@
               {:else}{@render originNode()}{/if}
             </span>
             {#if pending && loadingIcon !== false}
-              <span class="ant-cascader-menu-item-loading-icon" aria-hidden="true">
+              <span data-ant-cascader-loading-icon class={`${prefixCls}-menu-item-loading-icon`} aria-hidden="true">
                 {#if loadingIcon == null}<Icon name="loading" />
                 {:else}{@render content(loadingIcon)}{/if}
               </span>
             {:else if !pending && !row.leaf && expandIcon !== false}
-              <span class="ant-cascader-menu-item-expand-icon" aria-hidden="true">
+              <span data-ant-cascader-expand-icon class={`${prefixCls}-menu-item-expand-icon`} aria-hidden="true">
                 {#if expandIcon == null}<Icon name={rtl ? 'left' : 'right'} />
                 {:else}{@render content(expandIcon)}{/if}
               </span>
@@ -210,10 +212,10 @@
     </ul>
   {:else}
     {#if panel}{@render empty()}
-    {:else}<ul role="menu" aria-label={label} class={['ant-cascader-menu', classes.list]}
+    {:else}<ul role="menu" aria-label={label} data-ant-cascader-menu class={[`${prefixCls}-menu`, classes.list]}
       style={styles.list} onscroll={onScroll}>
       <li role="presentation" class={[
-        'ant-cascader-menu-item ant-cascader-menu-item-disabled', classes.listItem
+        `${prefixCls}-menu-item ${prefixCls}-menu-item-disabled`, classes.listItem
       ]} style={styles.listItem} ondblclick={onClose}>
         <span role="menuitemcheckbox" aria-checked="false" aria-disabled="true">{@render empty()}</span>
       </li>

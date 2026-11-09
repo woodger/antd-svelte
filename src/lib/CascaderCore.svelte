@@ -32,6 +32,9 @@
   } from './cascader.engine';
   import { connectCascaderTags, connectCascaderWidth, measureCascaderInput } from './cascader.dom';
   import { useConfig } from './config-context';
+  import ThemeScopeStyle from './ThemeScopeStyle.svelte';
+  import { getSelectPrefixCss } from './select-prefix.engine';
+  import { getCascaderPrefixCss } from './cascader-prefix.engine';
   import { useVariant } from './variant.svelte';
   import { useForm, useFormField } from './form-context';
   import { useCompact } from './space-compact-context';
@@ -49,6 +52,7 @@
 
   let {
     panel = false,
+    prefixCls,
     semanticProps,
     options = [],
     value,
@@ -117,6 +121,12 @@
     semanticProps?: CascaderProps<OptionType, Multiple>;
   } = $props();
   const config = useConfig();
+  let selectPrefix = $derived(config.getPrefixCls('select', prefixCls));
+  let cascaderPrefix = $derived(config.getPrefixCls('cascader', prefixCls));
+  let rootPrefix = $derived(config.getPrefixCls());
+  let privateNamespace = $derived(rootPrefix.replaceAll('.', ''));
+  let selectPrefixCss = $derived(!panel && getSelectPrefixCss(selectPrefix, rootPrefix));
+  let cascaderPrefixCss = $derived(getCascaderPrefixCss(cascaderPrefix, selectPrefix, rootPrefix));
   const variantContext = useVariant('cascader', () => ({ variant }));
   const controlRef = {
     get nativeElement() {
@@ -504,48 +514,49 @@
 </script>
 
 <style>
-  .ant-cascader { display:inline-flex;align-items:center;position:relative;max-width:100%; }
-  .ant-cascader:focus-within { outline:2px solid var(--ant-color-primary);outline-offset:2px; }
-  .ant-cascader.ant-cascader-source-theme { align-items:flex-start;max-width:none; }
-  .ant-cascader.ant-cascader-source-theme:focus-within { outline:0;outline-offset:0; }
-  .ant-select-content { min-width:0;position:relative; }
-  .ant-select-single .ant-select-content { overflow:hidden;white-space:nowrap;min-height:1lh; }
-  .ant-select-single { min-height:var(--ant-select-height); }
-  .ant-select-single .selected-label { overflow:hidden;text-overflow:ellipsis; }
-  .ant-select-single .ant-select-input { position:absolute;inset:0;width:100%;height:100%; }
-  .ant-cascader .ant-select-input { min-width:0;padding:0;border:0;outline:0;background:transparent;color:var(--ant-select-color);font:inherit;line-height:inherit;cursor:inherit; }
-  .ant-cascader.ant-select-single.ant-select-open .ant-select-content-has-search-value > .overflow-item { opacity:1; }
-  .ant-select-input::placeholder { color:var(--ant-color-text-placeholder); }
-  .ant-select-multiple { height:auto;min-height:var(--ant-select-height); }
-  .ant-select-multiple .ant-select-content { gap:0; }
-  .ant-select-multiple .ant-select-input { position:relative;inset:auto;flex:0 1 auto;width:var(--select-input-width,4px);min-width:4px;max-width:100%;height:auto; }
-  .ant-cascader-source-theme.ant-select-multiple .ant-select-input { line-height:calc(var(--ant-select-internal_fixed_item_margin) * 2 + var(--ant-select-multi-item-height)); }
-  .ant-select-selection-item { flex:none;box-sizing:border-box;max-width:100%;min-width:0; }
-  .ant-cascader-source-theme .ant-select-selection-item { flex:1;max-width:none; }
+  [data-ant-path-choice-control] { display:inline-flex;align-items:center;position:relative;max-width:100%; }
+  [data-ant-path-choice-control]:focus-within { outline:2px solid var(--ant-color-primary);outline-offset:2px; }
+  [data-ant-path-choice-control][data-ant-path-choice-source-theme] { align-items:flex-start;max-width:none; }
+  [data-ant-path-choice-control][data-ant-path-choice-source-theme]:focus-within { outline:0;outline-offset:0; }
+  [data-ant-path-choice-content] { min-width:0;position:relative; }
+  [data-ant-path-choice-single] [data-ant-path-choice-content] { overflow:hidden;white-space:nowrap;min-height:1lh; }
+  [data-ant-path-choice-single] { min-height:var(--ant-native-path-choice-height); }
+  [data-ant-path-choice-single] .selected-label { overflow:hidden;text-overflow:ellipsis; }
+  [data-ant-path-choice-single] [data-ant-path-choice-input] { position:absolute;inset:0;width:100%;height:100%; }
+  [data-ant-path-choice-control] [data-ant-path-choice-input] { min-width:0;padding:0;border:0;outline:0;background:transparent;color:var(--ant-native-path-choice-color);font:inherit;line-height:inherit;cursor:inherit; }
+  [data-ant-path-choice-control][data-ant-path-choice-single][data-ant-path-choice-open] [data-ant-path-choice-content-has-search-value] > .overflow-item { opacity:1; }
+  [data-ant-path-choice-input]::placeholder { color:var(--ant-color-text-placeholder); }
+  [data-ant-path-choice-multiple] { height:auto;min-height:var(--ant-native-path-choice-height); }
+  [data-ant-path-choice-multiple] [data-ant-path-choice-content] { gap:0; }
+  /* Native width с px перекрывает unitless формулу Select и при поздней вставке prefix CSS. */
+  [data-ant-path-choice-control][data-ant-path-choice-multiple] [data-ant-path-choice-input] { position:relative;inset:auto;flex:0 1 auto;width:var(--select-input-width,4px);min-width:4px;max-width:100%;height:auto; }
+  [data-ant-path-choice-source-theme][data-ant-path-choice-multiple] [data-ant-path-choice-input] { line-height:calc(var(--ant-select-internal_fixed_item_margin) * 2 + var(--ant-native-path-choice-multi-item-height)); }
+  [data-ant-path-choice-selection-item] { flex:none;box-sizing:border-box;max-width:100%;min-width:0; }
+  [data-ant-path-choice-source-theme] [data-ant-path-choice-selection-item] { flex:1;max-width:none; }
   /* Обёртки сохраняют DOM при смене темы; source overflow измеряет каждый tag отдельно. */
   .overflow-item { display:contents; }
-  .ant-cascader-source-theme.ant-select-multiple .overflow-item { display:block; }
-  .ant-select-selection-item-remove,.clear { padding:0;border:0;background:transparent;cursor:pointer;flex:none; }
+  [data-ant-path-choice-source-theme][data-ant-path-choice-multiple] .overflow-item { display:block; }
+  [data-ant-path-choice-selection-item-remove],.clear { padding:0;border:0;background:transparent;cursor:pointer;flex:none; }
   .clear { margin-inline-end:4px;color:var(--ant-color-text-tertiary);display:flex; }
   .suffix { display:flex;flex:none;color:var(--ant-color-text-quaternary);pointer-events:none; }
-  .ant-cascader-source-theme .clear { margin-inline-end:0;display:inline-block;color:var(--ant-color-text-quaternary); }
-  .ant-cascader-source-theme .clear:hover { color:var(--ant-color-icon); }
-  .ant-cascader-source-theme:has(.clear):hover .suffix,.ant-cascader-source-theme:has(.clear:focus-visible) .suffix { opacity:0; }
+  [data-ant-path-choice-source-theme] .clear { margin-inline-end:0;display:inline-block;color:var(--ant-color-text-quaternary); }
+  [data-ant-path-choice-source-theme] .clear:hover { color:var(--ant-color-icon); }
+  [data-ant-path-choice-source-theme]:has(.clear):hover .suffix,[data-ant-path-choice-source-theme]:has(.clear:focus-visible) .suffix { opacity:0; }
   .prefix { display:flex;flex:none;margin-inline-end:var(--ant-padding-xs); }
-  .ant-select-selection-item-disabled { color:var(--ant-select-multiple-item-color-disabled); }
-  .ant-cascader-source-theme .ant-select-selection-item-disabled { color:inherit; }
-  .ant-select-selection-item-remove:focus-visible,.clear:focus-visible { outline:2px solid var(--ant-color-primary); }
+  [data-ant-path-choice-selection-item-disabled] { color:var(--ant-select-multiple-item-color-disabled); }
+  [data-ant-path-choice-source-theme] [data-ant-path-choice-selection-item-disabled] { color:inherit; }
+  [data-ant-path-choice-selection-item-remove]:focus-visible,.clear:focus-visible { outline:2px solid var(--ant-color-primary); }
   .clear:focus-visible { opacity:1; }
   .measure-tag { position:absolute;inset-block-start:0;inset-inline-start:0;visibility:hidden;pointer-events:none; }
   .placeholder { position:absolute;inset-inline-start:0;pointer-events:none;color:var(--ant-color-text-placeholder); }
   .popup { position:fixed;margin:0;border:0;overflow:auto; }
-  .ant-cascader-panel { color:var(--ant-color-text);background:var(--ant-color-bg-container); }
-  .ant-cascader-panel.ant-cascader-source-theme { color:inherit;background:transparent; }
+  [data-ant-path-choice-panel] { color:var(--ant-color-text);background:var(--ant-color-bg-container); }
+  [data-ant-path-choice-panel][data-ant-path-choice-source-theme] { color:inherit;background:transparent; }
   /* Upstream оставляет line box вокруг expand/loading icon, включая его высоту. */
-  .ant-cascader-source-theme :global(.ant-cascader-menu-item-expand-icon),.ant-cascader-source-theme :global(.ant-cascader-menu-item-loading-icon) { display:block; }
+  [data-ant-path-choice-source-theme] :global([data-ant-cascader-expand-icon]),[data-ant-path-choice-source-theme] :global([data-ant-cascader-loading-icon]) { display:block; }
   .custom-trigger { width:auto; }
   @media (hover:none) {
-    .ant-cascader-source-theme:has(.clear) .suffix { opacity:0; }
+    [data-ant-path-choice-source-theme]:has(.clear) .suffix { opacity:0; }
   }
 </style>
 
@@ -563,7 +574,7 @@
   <RenderEmpty componentName="Cascader" local={notFoundContent} fallback={nativeEmpty} />
 {/snippet}
 {#snippet menus()}
-  <CascaderColumns {columns} {active} {search} searchRender={searchConfig.render}
+  <CascaderColumns prefixCls={cascaderPrefix} {columns} {active} {search} searchRender={searchConfig.render}
     {fields} checked={checks.checked} half={checks.half} loading={loadingKeys}
     multiple={isMultiple} disabled={blocked} hover={expandTrigger === 'hover'} {rtl}
     expandIcon={expand} loadingIcon={loadingNode} {optionRender} id={listId}
@@ -576,36 +587,45 @@
     onKeyDown={handleKeyDown} onKeyUp={handleKeyUp} onScroll={onPopupScroll} />
 {/snippet}
 
-{#if panel}
-  <div {...attributes} bind:this={root} id={controlId} dir={resolvedDirection}
-    class={['ant-cascader-panel ant-cascader-css-var', !options.length && 'ant-cascader-panel-empty',
-      cascaderTheme.className, cascaderTheme.className && 'ant-cascader-source-theme',
+{#if selectPrefixCss}<ThemeScopeStyle css={selectPrefixCss} scope={`cascader-control-prefix:${selectPrefix}:${rootPrefix}`} />{/if}{#if cascaderPrefixCss}<ThemeScopeStyle css={cascaderPrefixCss} scope={`cascader-prefix:${cascaderPrefix}:${selectPrefix}:${rootPrefix}`} />{/if}{#if panel}
+  <div data-ant-cascader-prefix={cascaderPrefix} data-ant-cascader-select-prefix={selectPrefix} data-ant-cascader-root-prefix={rootPrefix} data-ant-path-choice-panel
+    data-ant-path-choice-source-theme={Boolean(cascaderTheme.className) || undefined} {...attributes} bind:this={root} id={controlId} dir={resolvedDirection}
+    class={[`${cascaderPrefix}-panel ant-cascader-css-var`, !options.length && `${cascaderPrefix}-panel-empty`,
+      cascaderTheme.className, cascaderTheme.className && `${cascaderPrefix}-source-theme`,
       className, rootClassName]}
     style={[componentStyle, style].filter(Boolean).join(';') || undefined}>
     {@render menus()}
   </div>
 {:else}
-  <div {...rootAttributes} bind:this={root} role="presentation" dir={resolvedDirection}
+  <div data-ant-cascader-prefix={cascaderPrefix} data-ant-cascader-select-prefix={selectPrefix} data-ant-cascader-root-prefix={rootPrefix} data-ant-select-prefix={selectPrefix} data-ant-select-root-prefix={rootPrefix} data-ant-path-choice-control
+    data-ant-path-choice-source-theme={Boolean(cascaderTheme.className) || undefined}
+    data-ant-path-choice-single={!children && !isMultiple || undefined}
+    data-ant-path-choice-multiple={!children && isMultiple || undefined}
+    data-ant-path-choice-open={!children && visible || undefined}
+    style:--ant-native-path-choice-height={`var(--${privateNamespace}-select-height)`}
+    style:--ant-native-path-choice-color={`var(--${privateNamespace}-select-color)`}
+    style:--ant-native-path-choice-multi-item-height={`var(--${privateNamespace}-select-multi-item-height)`}
+    {...rootAttributes} bind:this={root} role="presentation" dir={resolvedDirection}
     class={[
-      'ant-cascader ant-cascader-css-var',
+      `${cascaderPrefix} ant-cascader-css-var`,
       cascaderTheme.className,
-      cascaderTheme.className && 'ant-cascader-source-theme',
-      !children && 'ant-select ant-select-css-var',
-      !children && suffix !== null && suffix !== false && 'ant-select-show-arrow',
-      !children && canSearch && 'ant-select-show-search',
-      !children && hasClear && 'ant-select-allow-clear',
-      !children && loading && 'ant-select-loading',
+      cascaderTheme.className && `${cascaderPrefix}-source-theme`,
+      !children && `${selectPrefix} ant-select-css-var`,
+      !children && suffix !== null && suffix !== false && `${selectPrefix}-show-arrow`,
+      !children && canSearch && `${selectPrefix}-show-search`,
+      !children && hasClear && `${selectPrefix}-allow-clear`,
+      !children && loading && `${selectPrefix}-loading`,
       children && 'custom-trigger',
-      !children && `ant-select-${resolvedVariant}`,
-      !children && (isMultiple ? 'ant-select-multiple' : 'ant-select-single'),
-      !children && visible && 'ant-select-open',
-      !children && focused && 'ant-select-focused',
-      !children && blocked && 'ant-select-disabled',
-      !children && resolvedSize === 'small' && 'ant-select-sm',
-      !children && resolvedSize === 'large' && 'ant-select-lg',
-      !children && resolvedStatus && `ant-select-status-${resolvedStatus}`,
-      rtl && 'ant-select-rtl',
-      compactClasses('ant-select', resolvedDirection, compact),
+      !children && `${selectPrefix}-${resolvedVariant}`,
+      !children && (isMultiple ? `${selectPrefix}-multiple` : `${selectPrefix}-single`),
+      !children && visible && `${selectPrefix}-open`,
+      !children && focused && `${selectPrefix}-focused`,
+      !children && blocked && `${selectPrefix}-disabled`,
+      !children && resolvedSize === 'small' && `${selectPrefix}-sm`,
+      !children && resolvedSize === 'large' && `${selectPrefix}-lg`,
+      !children && resolvedStatus && `${selectPrefix}-status-${resolvedStatus}`,
+      rtl && `${selectPrefix}-rtl`,
+      compactClasses(selectPrefix, resolvedDirection, compact),
       context?.class, className, rootClassName, classes.root
     ]} style={[componentStyle, css.root, style].filter(Boolean).join(';')}
     onmousedown={event => {
@@ -637,20 +657,23 @@
         'aria-expanded': visible, 'aria-controls': listId
       })}
     {:else}
-      {#if prefix != null}<span class={['prefix ant-select-prefix', classes.prefix]}
+      {#if prefix != null}<span class={[`prefix ${selectPrefix}-prefix`, classes.prefix]}
         style={css.prefix}>{@render content(prefix)}</span>{/if}
-      <div bind:this={contentElement} class={[
-        'ant-select-content', display.length && 'ant-select-content-has-value',
-        search && 'ant-select-content-has-search-value', classes.content
+      <div bind:this={contentElement} data-ant-path-choice-content
+        data-ant-path-choice-content-has-search-value={Boolean(search) || undefined} class={[
+        `${selectPrefix}-content`, display.length && `${selectPrefix}-content-has-value`,
+        search && `${selectPrefix}-content-has-search-value`, classes.content
       ]} style={css.content}>
         {#if isMultiple}
           {#each display as item, index (item.key)}
             {@const hidden = index >= tagCount}
             {#snippet label()}{@render displayLabel(item, true)}{/snippet}
-            <div class={['overflow-item', cascaderTheme.className && 'ant-select-content-item']}>
-              <span data-cascader-tag class={[
-                'tag', !tagRender && 'ant-select-selection-item', hidden && 'measure-tag',
-                (blocked || item.disabled) && 'ant-select-selection-item-disabled', classes.item
+            <div class={['overflow-item', cascaderTheme.className && `${selectPrefix}-content-item`]}>
+              <span data-cascader-tag data-ant-path-choice-selection-item={!tagRender || undefined}
+                data-ant-path-choice-selection-item-disabled={blocked || item.disabled || undefined}
+                class={[
+                'tag', !tagRender && `${selectPrefix}-selection-item`, hidden && 'measure-tag',
+                (blocked || item.disabled) && `${selectPrefix}-selection-item-disabled`, classes.item
               ]} style={css.item} title={item.text} aria-hidden={hidden || undefined} inert={hidden}
                 role="presentation" onmousedown={event => {
                   if (!tagRender || blocked) return;
@@ -667,10 +690,11 @@
                     }
                   })}
                 {:else}
-                  <span class={['ant-select-selection-item-content', classes.itemContent]}
+                  <span class={[`${selectPrefix}-selection-item-content`, classes.itemContent]}
                     style={css.itemContent}>{@render label()}</span>
                   {#if !blocked && !item.disabled}
-                    <button type="button" class={['ant-select-selection-item-remove', classes.itemRemove]}
+                    <button type="button" data-ant-path-choice-selection-item-remove
+                      class={[`${selectPrefix}-selection-item-remove`, classes.itemRemove]}
                       style={css.itemRemove} tabindex="-1"
                       aria-label={`${config.locale.removeText ?? 'Remove'} ${item.text ?? item.key}`}
                       onmousedown={event => event.preventDefault()}
@@ -684,10 +708,11 @@
             </div>
           {/each}
           {#if display.length && (omitted.length || maxTagCount === 'responsive')}
-            <div class={['overflow-item', cascaderTheme.className && 'ant-select-content-item']}>
-              <span data-cascader-rest class={[
-                'ant-select-selection-overflow-item-rest',
-                !tagRender && 'ant-select-selection-item',
+            <div class={['overflow-item', cascaderTheme.className && `${selectPrefix}-content-item`]}>
+              <span data-cascader-rest data-ant-path-choice-selection-item={!tagRender || undefined}
+                class={[
+                `${selectPrefix}-selection-overflow-item-rest`,
+                !tagRender && `${selectPrefix}-selection-item`,
                 !omitted.length && 'measure-tag', classes.item
               ]} style={css.item} aria-hidden={!omitted.length || undefined} inert={!omitted.length}
                 role="presentation" onmousedown={event => {
@@ -710,7 +735,7 @@
                 {#if tagRender}
                   {@render tagRender({ label: restLabel, disabled: false, closable: false, isMaxTag: true })}
                 {:else}
-                  <span class={['ant-select-selection-item-content', classes.itemContent]}
+                  <span class={[`${selectPrefix}-selection-item-content`, classes.itemContent]}
                     style={css.itemContent}>{@render restLabel()}</span>
                 {/if}
               </span>
@@ -722,13 +747,13 @@
           </span>
         {/if}
         {#if !display.length && !search}
-          <span class={['placeholder ant-select-placeholder', classes.placeholder]}
+          <span class={[`placeholder ${selectPrefix}-placeholder`, classes.placeholder]}
             style={css.placeholder}>{@render content(placeholder)}</span>
         {/if}
         <div class={['overflow-item', cascaderTheme.className && isMultiple
-          && 'ant-select-content-item ant-select-content-item-suffix']}>
+          && `${selectPrefix}-content-item ${selectPrefix}-content-item-suffix`]}>
           <input bind:this={editor} id={controlId} type="text" role={attributes.role ?? 'combobox'}
-            class={['ant-select-input', classes.input]} style={css.input}
+            data-ant-path-choice-input class={[`${selectPrefix}-input`, classes.input]} style={css.input}
             aria-haspopup="menu" aria-controls={visible ? listId : undefined}
             aria-expanded={visible} aria-activedescendant={visible ? activeId : undefined}
             aria-autocomplete={canSearch ? 'list' : 'none'}
@@ -754,14 +779,14 @@
             }} />
         </div>
       </div>
-      {#if hasClear}<button type="button" class="clear ant-select-clear"
+      {#if hasClear}<button type="button" class={`clear ${selectPrefix}-clear`}
         aria-label={config.locale.clearText} onmousedown={event => event.preventDefault()}
         onclick={event => { event.stopPropagation(); clear(); }}>
         {#if clearIcon === undefined}<Icon name="close-circle-filled" />
         {:else}{@render content(clearIcon)}{/if}
       </button>{/if}
       {#if suffix !== null && suffix !== false}
-        <span class={['suffix ant-select-suffix', classes.suffix]} style={css.suffix} aria-hidden="true">
+        <span class={[`suffix ${selectPrefix}-suffix`, classes.suffix]} style={css.suffix} aria-hidden="true">
           {#if suffix !== undefined}{@render content(suffix)}
           {:else}<Icon name={loading ? 'loading' : visible && canSearch ? 'search' : 'down'} />{/if}
         </span>
@@ -771,12 +796,14 @@
   <NoCompactStyle>
     {#if mounted}
       <!-- SSR получает переменные сразу; attachment обновляет их, сохраняя left/top контроллера. -->
-      <div bind:this={popup} popover="manual" hidden={!visible || !shown}
+      <div data-ant-cascader-prefix={cascaderPrefix} data-ant-cascader-select-prefix={selectPrefix} data-ant-cascader-root-prefix={rootPrefix} data-ant-select-prefix={selectPrefix} data-ant-select-root-prefix={rootPrefix}
+        data-ant-path-choice-source-theme={Boolean(cascaderTheme.className) || undefined}
+        bind:this={popup} popover="manual" hidden={!visible || !shown}
         class={[
-          'popup ant-select-dropdown ant-select-css-var ant-cascader-dropdown ant-cascader-css-var',
+          `popup ${selectPrefix}-dropdown ant-select-css-var ${cascaderPrefix}-dropdown ant-cascader-css-var`,
           cascaderTheme.className,
-          cascaderTheme.className && 'ant-cascader-source-theme',
-          rtl && 'ant-cascader-dropdown-rtl',
+          cascaderTheme.className && `${cascaderPrefix}-source-theme`,
+          rtl && `${cascaderPrefix}-dropdown-rtl`,
           rootClassName, classes.popup.root
         ]} dir={resolvedDirection}
         style={[untrack(() => componentStyle), popupStyle].filter(Boolean).join(';')}
