@@ -6521,8 +6521,8 @@ value, refs, selection/focus и FormData. Сверка с официальным
 autoSize и прежний приоритет semantic styles.
 
 Input.Password, Input.Search и Input.OTP доступны как
-InputPassword, InputSearch и InputOTP. Самостоятельный prefixCls
-InputOTP остаётся отдельной задачей; компонентные tokens Input уже подключены. Deprecated internal
+InputPassword, InputSearch и InputOTP. Local/shared prefixCls и компонентные
+tokens подключены ко всем пяти экспортам. Deprecated internal
 classes/structures исключены из переноса. Согласованный string bind:value
 сохраняется вместо React controlled rejection/broad value types; native DOM events
 и именованные Svelte bindings заменяют SyntheticEvent/ref object. Общий аудит
@@ -6745,8 +6745,24 @@ Size группы наследуется из componentSize; Compact продо�
 Стили извлекаются рецептом otp в vendor/otp.css: 16 правил, без keyframes,
 с проверкой SHA-256 исходного npm-архива. Fixture `?fixture=input-otp`, engine,
 SSR и проверки публичного пакета покрывают эти сценарии. Общий аудит Input
-остаётся unreviewed; prefixCls, token engine и React dev
-diagnostics, включая предупреждение о длинной маске, пока не перенесены.
+остаётся unreviewed; React dev diagnostics, включая предупреждение о длинной
+маске, пока не перенесены. Input component tokens применяются к ячейкам и группе,
+включая gap и padding aliases; semantic styles и style сохраняют прежний приоритет.
+
+PrefixCls меняет группу, size/RTL states, input, wrappers, mask и separators.
+Непустой local prefix имеет приоритет; empty/undefined наследуют ConfigProvider.
+Вложенные Input используют общий input namespace независимо от локального OTP.
+Canonical token variables/markers сохраняются. Смена prefix не заменяет группу,
+ячейки и wrappers; code, callbacks, refs, focused index и selection сохраняются.
+
+В React 6.6.8 wrappers и mask ошибочно используют общий OTP prefix, игнорируя
+локальный. Native передаёт prefix владельца всему OTP. Raw UMD results и public
+counterpart с вложенным ConfigProvider, согласованным с локальным prefix, сохранены
+раздельно в [эталоне](./tests/browser/fixtures/ant-design-input-otp-prefix-reference.json).
+Native сохраняет независимый общий Input namespace. Проверки —
+`?fixture=input-otp-prefix`, [browser](./tests/browser/input-otp-prefix.spec.ts),
+[SSR](./tests/package/input-otp-prefix.ssr.test.ts); дополнительно сравниваются
+стандартный и общий prefix в светлой/тёмной и compact Native theme.
 
 ## TextArea (Input.TextArea)
 
@@ -10157,7 +10173,7 @@ Empty, Skeleton с primitives, Spin, Progress, Result, Alert, Collapse, Affix,
 Tooltip, Popover, Popconfirm, Slider, BorderBeam, Masonry, Splitter, Anchor и
 Space/SpaceCompact/SpaceAddon, Breadcrumb, Row, Typography, Carousel, Descriptions, Tabs,
 Card с Grid/Meta, Button, FloatButton/Group/BackTop, Radio/RadioButton/RadioGroup,
-Checkbox/CheckboxGroup, Switch, Input, TextArea, InputPassword и InputSearch.
+Checkbox/CheckboxGroup, Switch, Input, TextArea, InputPassword, InputSearch и InputOTP.
 Остальные семейства подключаются отдельно. Например,
 ConfigProvider prefixCls="suite" создаёт suite-app, suite-layout,
 suite-layout-sider и suite-layout-header без изменения имён Svelte-компонентов.

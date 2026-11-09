@@ -7036,7 +7036,18 @@
         "tests/browser/fixtures/ant-design-input-search-prefix-reference.json",
         "tests/browser/input-search-prefix-metrics.ts",
         "tests/browser/input-search-prefix.spec.ts",
-        "tests/package/input-search-prefix.ssr.test.ts"
+        "tests/package/input-search-prefix.ssr.test.ts",
+        "src/lib/InputOTPCell.svelte",
+        "src/lib/input-otp-prefix.engine.ts",
+        "src/lib/input-otp-prefix.engine.test.ts",
+        "src/lib/vendor/input-otp-prefix.css.js",
+        "tests/browser/fixtures/InputOTPPrefixScope.svelte",
+        "tests/browser/fixtures/InputOTPPrefixFixtures.svelte",
+        "tests/browser/fixtures/InputOTPPrefixSSRFixtures.svelte",
+        "tests/browser/fixtures/ant-design-input-otp-prefix-reference.json",
+        "tests/browser/input-otp-prefix-metrics.ts",
+        "tests/browser/input-otp-prefix.spec.ts",
+        "tests/package/input-otp-prefix.ssr.test.ts"
       ],
       "features": [
         {
@@ -7141,7 +7152,7 @@
             "tests/browser/form-rich-labels.spec.ts",
             "tests/browser/fixtures/FormRichLabelControls.svelte"
           ],
-          "note": "InputOTP сохраняет UTF-16 cells, sparse onInput перед onChange только полного изменившегося кода, formatter до ограничения length, paste/focus guard, arrows/backspace/undo, mask/type/autocomplete, semantic/otp config и Input fallback. Value синхронизируется при изменении prop после mount; локальный draft не отклоняется неизменённым prop, SSR использует defaultValue как upstream. Bind:value не добавлен; refs дают группу и focus/blur. FormItem association относится к группе, не к отдельным ячейкам; reset учитывает form.resetKey. PrefixCls, token engine и React dev diagnostics остаются за пределами этого объёма. Rich FormItem label передаёт доступное имя через стабильный aria-labelledby; caption updates, переход к строковой label и explicit ARIA priorities подтверждены Form rich-labels browser fixture. Прежние native roles/controls сохранены."
+          "note": "InputOTP сохраняет UTF-16 cells, sparse onInput перед onChange только полного изменившегося кода, formatter до ограничения length, paste/focus guard, arrows/backspace/undo, mask/type/autocomplete, semantic/otp config и Input fallback. Value синхронизируется при изменении prop после mount; локальный draft не отклоняется неизменённым prop, SSR использует defaultValue как upstream. Bind:value не добавлен; refs дают группу и focus/blur. FormItem association относится к группе, не к отдельным ячейкам; reset учитывает form.resetKey. Local/shared prefixCls и Input token engine подключены; React dev diagnostics остаются за пределами этого объёма. Rich FormItem label передаёт доступное имя через стабильный aria-labelledby; caption updates, переход к строковой label и explicit ARIA priorities подтверждены Form rich-labels browser fixture. Прежние native roles/controls сохранены."
         },
         {
           "id": "input-subcomponents",
@@ -7185,7 +7196,7 @@
             "tests/browser/control-theme.spec.ts",
             "docs/reference/theme-context.md"
           ],
-          "note": "Компонентные tokens Input и composed Password/Search/OTP подключены к CSS. Local/shared prefixCls обычного Input подключён; Password/Search имеют независимые prefixCls/inputPrefixCls; самостоятельный prefix API OTP ещё в работе. Deprecated internal hooks исключены. Согласованные string bind:value, native refs/hidden и React dev diagnostics сохраняют прежнюю границу."
+          "note": "Компонентные tokens Input и composed Password/Search/OTP подключены к CSS. Local/shared prefixCls обычного Input подключён; Password/Search имеют независимые prefixCls/inputPrefixCls; OTP поддерживает собственный local/shared prefix и общий Input namespace. Deprecated internal hooks исключены. Согласованные string bind:value, native refs/hidden и React dev diagnostics сохраняют прежнюю границу."
         },
         {
           "id": "textarea-remaining",
@@ -7310,6 +7321,29 @@
             "tests/package/input-search-prefix.ssr.test.ts"
           ],
           "note": "Local nonempty prefixCls задаёт Search/button classes, inputPrefixCls — вложенный Input; empty/undefined наследуют ConfigProvider. 16 CSS rules используют общий Button и private btn-height namespace независимо от local class/cssVar.prefix. Canonical variables/markers и semantic priority сохранены; Input component tokens применяются к Search root, включая small-button min-height. Source Compact fallback key remount записан raw; expectedNative измерен после public ref focus. Source enterButton=true empty content измерен raw и с public icon-only Button counterpart; Source stale Inner private variable записан raw/fresh. Native сохраняет прежние DOM/ref, focus/selection/value, IME/reset/поиск и disabled-loading Button contract."
+        },
+        {
+          "id": "input-otp-prefix-cls",
+          "title": "Локальный и общий OTP prefix с независимым Input namespace",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/InputOTP.svelte",
+            "src/lib/InputOTPCell.svelte",
+            "src/lib/input-otp.types.ts",
+            "src/lib/input-otp-prefix.engine.ts",
+            "src/lib/input-otp-prefix.engine.test.ts",
+            "src/lib/vendor/input-otp-prefix.css.js",
+            "tools/ant-design-css-recipes.json",
+            "tests/browser/fixtures/InputOTPPrefixScope.svelte",
+            "tests/browser/fixtures/InputOTPPrefixFixtures.svelte",
+            "tests/browser/fixtures/InputOTPPrefixSSRFixtures.svelte",
+            "tests/browser/fixtures/ant-design-input-otp-prefix-reference.json",
+            "tests/browser/input-otp-prefix-metrics.ts",
+            "tests/browser/input-otp-prefix.spec.ts",
+            "tests/package/input-otp-prefix.ssr.test.ts"
+          ],
+          "note": "Nonempty local prefix wins; empty/undefined наследуют ConfigProvider. Группа, size/RTL states, input/separator/wrappers/mask используют owner prefix; вложенные Input сохраняют общий namespace. 16 CSS rules сохраняют canonical token variables/markers. Input component tokens применяются к группе, semantic styles/style имеют прежний приоритет. Source wrappers/mask игнорируют local prefix: raw UMD measurements сохранены, expectedNative отдельно измерен с public inner ConfigProvider, согласованным с local OTP. Native не переносит этот дефект; values/UTF-16 distribution, keyboard, reset, refs, focus/selection и SSR defaults/cleanup сохраняются."
         }
       ]
     },

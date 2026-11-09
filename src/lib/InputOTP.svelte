@@ -10,6 +10,9 @@
   import { provideFormField, useForm, useFormField } from './form-context';
   import { provideFormItemStatus, useFormItemStatusContext } from './form-item-status';
   import { isOTPCompleteChange, patchOTPCells } from './input-otp.engine';
+  import { useComponentTheme } from './theme-component.svelte';
+  import { getInputOTPPrefixCss } from './input-otp-prefix.engine';
+  import ThemeScopeStyle from './ThemeScopeStyle.svelte';
   import type { InputOTPProps } from './input-otp.types';
 
   let {
@@ -33,6 +36,7 @@
     onBlur,
     onfocus,
     nativeElement = $bindable(),
+    prefixCls: customizePrefixCls,
     class: className = '',
     rootClassName = '',
     style,
@@ -42,6 +46,9 @@
   }: InputOTPProps = $props();
 
   const config = useConfig();
+  const componentTheme = useComponentTheme('Input');
+  let componentPrefix = $derived(config.getPrefixCls('otp', customizePrefixCls));
+  let prefixCss = $derived(getInputOTPPrefixCss(componentPrefix));
   const variantContext = useVariant('otp', () => ({ variant }), 'input');
   const form = useForm();
   const controlRef = {
@@ -106,6 +113,7 @@
       onBlur,
       onfocus,
       nativeElement,
+      prefixCls: customizePrefixCls,
       class: className,
       rootClassName,
       style,
@@ -123,7 +131,7 @@
   );
   let localStyles = $derived(typeof styles === 'function' ? styles(info) : styles);
   let rootStyle = $derived(
-    [contextStyles?.root, config.otp?.style, localStyles?.root, style]
+    [componentTheme.style, contextStyles?.root, config.otp?.style, localStyles?.root, style]
       .filter(Boolean).join(';')
   );
 
@@ -181,11 +189,15 @@
   }
 </script>
 
+{#if prefixCss}
+  <ThemeScopeStyle css={prefixCss} scope={`input-otp-prefix:${componentPrefix}`} />
+{/if}
 <!-- tabindex=-1 даёт FormItem возможность фокусировать группу; явный native tabindex сохраняется. -->
 <div
   {...(field ? { tabindex: -1 } : {})}
   {...attributes}
   bind:this={nativeElement}
+  data-ant-otp-prefix={prefixCss ? componentPrefix : undefined}
   id={attributes.id ?? field?.id}
   role="group"
   aria-label={attributes['aria-label'] ?? (attributes['aria-labelledby'] ? undefined : field?.label)}
@@ -198,10 +210,11 @@
   class={[
     className,
     rootClassName,
-    'ant-otp ant-otp-css-var',
-    resolvedSize === 'small' && 'ant-otp-sm',
-    resolvedSize === 'large' && 'ant-otp-lg',
-    config.direction === 'rtl' && 'ant-otp-rtl',
+    `${componentPrefix} ant-otp-css-var`,
+    componentTheme.className,
+    resolvedSize === 'small' && `${componentPrefix}-sm`,
+    resolvedSize === 'large' && `${componentPrefix}-lg`,
+    config.direction === 'rtl' && `${componentPrefix}-rtl`,
     config.otp?.class,
     contextClasses?.root,
     localClasses?.root
@@ -211,6 +224,7 @@
   {#each Array.from({ length }, (_, index) => index) as index (index)}
     <InputOTPCell
       {index}
+      otpPrefix={componentPrefix}
       value={cells[index] || ''}
       bind:inputElement={elements[index]}
       size={resolvedSize}
@@ -222,7 +236,7 @@
       {inputMode}
       {autoComplete}
       autoFocus={index === 0 && autoFocus}
-      class={['ant-otp-input', contextClasses?.input, localClasses?.input].filter(Boolean).join(' ')}
+      class={[`${componentPrefix}-input`, contextClasses?.input, localClasses?.input].filter(Boolean).join(' ')}
       style={[contextStyles?.input, localStyles?.input].filter(Boolean).join(';')}
       onCellInput={handleCellInput}
       onActiveChange={next => elements[next]?.focus()}
@@ -233,7 +247,7 @@
       {@const content = typeof separator === 'function' ? separator(index) : separator}
       {#if content !== null && content !== undefined && content !== false && content !== ''}
         <span
-          class={['ant-otp-separator', contextClasses?.separator, localClasses?.separator].filter(Boolean).join(' ')}
+          class={[`${componentPrefix}-separator`, contextClasses?.separator, localClasses?.separator].filter(Boolean).join(' ')}
           style={[contextStyles?.separator, localStyles?.separator].filter(Boolean).join(';')}
         >{#if typeof content === 'function'}{@render content(index)}{:else if content !== true}{content}{/if}</span>
       {/if}

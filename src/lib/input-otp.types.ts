@@ -28,6 +28,8 @@ export interface InputOTPConfig {
  * принимает любой текст. Native атрибуты относятся к div role=group, кроме явных input Props.
  */
 export interface InputOTPProps extends Omit<HTMLAttributes<HTMLDivElement>, 'children' | 'class'> {
+  /** CSS prefix группы, ячеек, маски и separator; empty/undefined наследуют ConfigProvider. */
+  prefixCls?: string;
   /** Число ячеек; по умолчанию 6. */
   length?: number;
   /**

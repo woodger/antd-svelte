@@ -9,6 +9,10 @@
 
 ### Added
 
+- InputOTP поддерживает local/shared prefixCls для группы, ячеек, separators и маски.
+  Source tokens применяются к группе; global Input namespace и прежние значения,
+  клавиатура, refs/focus сохранены. Source mask prefix defect записан raw/matched.
+
 - InputSearch поддерживает независимые Search/Input prefixes и общий Button/private
   namespace. Source tokens действуют на корень Search; DOM/ref, value, поиск,
   selection/focus сохраняются. Source Compact/cache observations записаны отдельно.

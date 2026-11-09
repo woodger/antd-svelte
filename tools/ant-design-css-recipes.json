@@ -2663,5 +2663,23 @@
       }
     ],
     "header": "/* Ant Design 6.6.8 — MIT; см. LICENSE.ant-design.\n * Search prefix template; Button и private variable namespace задаёт ConfigProvider.\n * Deprecated token declarations исключены; component defaults ограничены marker.\n * SHA-256: 8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa\n */"
+  },
+  {
+    "id": "input-otp-prefix",
+    "output": "src/lib/vendor/input-otp-prefix.css.js",
+    "expectedRules": 16,
+    "include": [
+      "\\.ant-otp(?![\\w])"
+    ],
+    "exclude": [],
+    "replacements": [
+      {
+        "pattern": "\\.css-var-_R_0_\\.ant-otp(?![-\\w])",
+        "replacement": ":where(.ant-otp-css-var)"
+      }
+    ],
+    "keyframes": [],
+    "header": "/* Ant Design 6.6.8 — MIT; см. LICENSE.ant-design.\n * Input.OTP prefix template: ячейки, маска, размеры, RTL и переменные компонента.\n * https://registry.npmjs.org/antd/-/antd-6.6.8.tgz\n * SHA-256: 8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa\n */",
+    "format": "module"
   }
 ]

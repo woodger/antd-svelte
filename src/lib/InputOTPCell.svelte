@@ -9,6 +9,7 @@
     'size' | 'variant' | 'disabled' | 'status' | 'autoFocus' | 'autoComplete' | 'class' | 'style'
   > {
     index: number;
+    otpPrefix: string;
     value: string;
     type?: InputOTPProps['type'];
     mask?: InputOTPProps['mask'];
@@ -22,6 +23,7 @@
 
   let {
     index,
+    otpPrefix,
     value,
     mask,
     type,
@@ -75,9 +77,9 @@
   }
 </script>
 
-<span class="ant-otp-input-wrapper" role="presentation">
+<span class={`${otpPrefix}-input-wrapper`} role="presentation">
   {#if mask && value !== ''}
-    <span class="ant-otp-mask-icon" aria-hidden="true">{typeof mask === 'string' ? mask : '•'}</span>
+    <span class={`${otpPrefix}-mask-icon`} aria-hidden="true">{typeof mask === 'string' ? mask : '•'}</span>
   {/if}
   <Input
     {...attributes}
@@ -87,7 +89,7 @@
     inputmode={inputMode}
     bind:value={text}
     bind:inputElement
-    class={[className, mask && 'ant-otp-mask-input'].filter(Boolean).join(' ')}
+    class={[className, mask && `${otpPrefix}-mask-input`].filter(Boolean).join(' ')}
     oninput={event => {
       text = onCellInput(index, event.currentTarget.value);
     }}
