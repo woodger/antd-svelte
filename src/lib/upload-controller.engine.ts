@@ -4,7 +4,8 @@ import type {
   UploadRcFile,
   UploadRequest,
   UploadRequestHandler,
-  UploadRequestOptions
+  UploadRequestOptions,
+  UploadRef
 } from './upload.types';
 import {
   UPLOAD_LIST_IGNORE,
@@ -42,6 +43,38 @@ export function createUploadController<T = unknown>(
     if (disposed || !options.files().some(item => item.uid === file.uid)) return;
     const item = { ...uploadFileObject<T>(file), ...patch };
     publish(item, updateUploadList(item, options.files()), event);
+  };
+  const onProgress: UploadRef<T>['onProgress'] = (event, file) => {
+    update(file, { status: 'uploading', percent: event.percent }, event);
+  };
+  const onSuccess: UploadRef<T>['onSuccess'] = (response, file, xhr) => {
+    let parsed: unknown = response;
+    try {
+      if (typeof response === 'string') parsed = JSON.parse(response);
+    } catch { /* upstream сохраняет не-JSON строку */ }
+    update(file, { status: 'done', percent: 100, response: parsed as T, xhr });
+  };
+  const onError: UploadRef<T>['onError'] = (error, response, file) => {
+    update(file, { status: 'error', error, response });
+  };
+  const onBatchStart: UploadRef<T>['onBatchStart'] = batch => {
+    if (disposed) return;
+    const accepted = batch.filter(item => !Reflect.get(item.file, UPLOAD_LIST_IGNORE));
+    let list = [...options.files()];
+    const items = accepted.map(item => uploadFileObject<T>(item.file));
+    for (const item of items) list = updateUploadList(item, list);
+    accepted.forEach((item, index) => {
+      if (item.parsedFile) {
+        items[index].status = 'uploading';
+        publish(items[index], list);
+      } else {
+        const clone = Object.assign(
+          new File([item.file], item.file.name, { type: item.file.type }),
+          { uid: item.file.uid }
+        );
+        publish(clone, list);
+      }
+    });
   };
   const abort = (file?: UploadFile<T> | string) => {
     const ids = file === undefined
@@ -86,23 +119,7 @@ export function createUploadController<T = unknown>(
     const ready = await Promise.all(batch.map(file => process(file, batch)));
     if (disposed) return;
     const accepted = ready.filter(item => !item.ignored);
-    let list = [...options.files()];
-    const items = accepted.map(item => uploadFileObject<T>(item.origin));
-    for (const item of items)
-      list = updateUploadList(item, list);
-    accepted.forEach((item, index) => {
-      if (item.parsed) {
-        items[index].status = 'uploading';
-        publish(items[index], list);
-      }
-      else {
-        const clone = Object.assign(
-          new File([item.origin], item.origin.name, { type: item.origin.type }),
-          { uid: item.origin.uid }
-        );
-        publish(clone, list);
-      }
-    });
+    onBatchStart(accepted.map(item => ({ file: item.origin, parsedFile: item.parsed })));
     for (const item of accepted) {
       if (!item.parsed || disposed)
         continue;
@@ -117,21 +134,16 @@ export function createUploadController<T = unknown>(
         method: props.method ?? 'post',
         headers: props.headers,
         withCredentials: props.withCredentials,
-        onProgress: event => update(file, { status: 'uploading', percent: event.percent }, event),
+        onProgress: event => onProgress(event, file),
         onSuccess: (response, xhr) => {
           completed = true;
           requests.delete(file.uid);
-          let parsed = response;
-          try {
-            if (typeof response === 'string')
-              parsed = JSON.parse(response);
-          } catch { /* upstream сохраняет не-JSON строку */ }
-          update(file, { status: 'done', percent: 100, response: parsed, xhr });
+          onSuccess(response, file, xhr);
         },
         onError: (error, response) => {
           completed = true;
           requests.delete(file.uid);
-          update(file, { status: 'error', error, response });
+          onError(error, response, file);
         }
       };
       const request = props.customRequest
@@ -157,6 +169,10 @@ export function createUploadController<T = unknown>(
     upload,
     remove,
     abort,
+    onBatchStart,
+    onProgress,
+    onSuccess,
+    onError,
     dispose: () => {
       disposed = true;
       abort();

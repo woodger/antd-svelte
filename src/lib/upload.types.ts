@@ -60,6 +60,35 @@ export interface UploadChangeParam<T = unknown> {
   fileList: UploadFile<T>[];
   event?: { percent: number; };
 }
+/** Результат подготовки batch; null сохраняет файл в списке без статуса uploading. */
+export interface UploadBatchFileInfo {
+  file: UploadRcFile;
+  parsedFile: File | Blob | string | null;
+}
+/** Ref вложенного загрузчика с отменой запроса. */
+export interface UploadUploaderRef<T = unknown> {
+  abort: (file?: UploadFile<T> | string) => void;
+}
+/** Imperative API Upload/Dragger через bind:this; список и DOM refs читаются из текущего состояния. */
+export interface UploadRef<T = unknown> {
+  /** Публикует подготовленный batch без beforeUpload и без запуска транспорта. */
+  onBatchStart: (batch: readonly UploadBatchFileInfo[]) => void;
+  /** Разбирает JSON-строку ответа; отсутствующий в текущем списке uid игнорируется. */
+  onSuccess: (response: T | string, file: UploadRcFile, xhr?: XMLHttpRequest) => void;
+  onProgress: (event: { percent: number; }, file: UploadRcFile) => void;
+  onError: (
+    error: NonNullable<UploadFile<T>['error']>,
+    response: T | undefined,
+    file: UploadRcFile
+  ) => void;
+  readonly fileList: readonly UploadFile<T>[];
+  /** Делегированный abort доступен после mount; сам по себе не удаляет строку. */
+  readonly upload: UploadUploaderRef<T> | null;
+  readonly nativeElement: HTMLSpanElement | undefined;
+  readonly inputElement: HTMLInputElement | undefined;
+  /** Сохраняет прежний прямой abort Svelte-компонента. */
+  abort: (file?: UploadFile<T> | string) => void;
+}
 /** Действия строки Upload; preview принимает DOM event для обычного onclick. */
 export interface UploadItemRenderActions {
   download: () => void;

@@ -11455,10 +11455,16 @@
         {
           "id": "extended-api",
           "title": "Полный rc-upload ref/internal API и ReactElement event forwarding",
-          "state": "missing",
+          "state": "partial",
           "requiredForV1": false,
-          "evidence": [],
-          "note": "ReactElement clone/onClick forwarding и falsy render-function return fallback не воспроизводятся opaque Snippet API. Directory/pastable, iconRender/itemRender, linkProps/progress и local semantic slots/ConfigProvider.upload и action icon snippets вынесены в отдельные supported features. Ref даёт abort и nativeElement/inputElement; полный rc-upload ref/internal lifecycle API отсутствует."
+          "evidence": [
+            "src/lib/Upload.svelte",
+            "src/lib/UploadDragger.svelte",
+            "src/lib/upload.types.ts",
+            "tests/browser/upload-ref.spec.ts",
+            "readme.md"
+          ],
+          "note": "ReactElement clone/onClick forwarding и falsy render-function return fallback не воспроизводятся opaque Snippet API. Directory/pastable, render hooks, linkProps/progress, semantic/config API и imperative lifecycle вынесены в отдельные supported features. Ref переносит onBatchStart/onProgress/onSuccess/onError, актуальный fileList, nativeElement/inputElement, upload.abort и прежний прямой abort. React.Component base methods, saveUploader и структура экземпляра React rc-upload не воспроизводятся Svelte renderer."
         },
         {
           "id": "motion",
@@ -11872,6 +11878,29 @@
             "readme.md"
           ],
           "note": "Select сохраняется при пустом children во всех list types; card/circle forceRender удерживает тот же root/input и native FileList. Dragger в card/circle не получает второй appendAction select, input или кнопку. 16 raw UMD cases задают структуру и id/hidden; шесть raw motion cases задают начальный skip appear, leave/enter, root/input identity, local/shared prefix и pointerEvents/display style priority. Motion pointer-events:none идёт до обычного style; скрытый/disabled input теряет id. Native onChange/chooser остаются единичными, внешний draft/focus/selection и cleanup после старого deadline/unmount сохраняются. SSR создаёт один input без motion resources. Полный rc-upload internal ref и React-specific renderer boundaries не входят в этот блок."
+        },
+        {
+          "id": "ref-lifecycle",
+          "title": "UploadRef: batch, callbacks, актуальный список и делегированный abort",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Upload.svelte",
+            "src/lib/UploadDragger.svelte",
+            "src/lib/upload-controller.engine.ts",
+            "src/lib/upload-controller.engine.test.ts",
+            "src/lib/upload.types.ts",
+            "src/lib/index.ts",
+            "tests/browser/upload-ref.spec.ts",
+            "tests/browser/upload-ref-metrics.ts",
+            "tests/browser/fixtures/UploadRefScope.svelte",
+            "tests/browser/fixtures/UploadRefFixtures.svelte",
+            "tests/browser/fixtures/ant-design-upload-ref-reference.json",
+            "tests/browser/fixtures/ant-design-upload-ref-transport-reference.json",
+            "tests/package/upload-ref.ssr.test.ts",
+            "readme.md"
+          ],
+          "note": "Активный UploadRef из Upload.tsx предоставляет onBatchStart/onProgress/onSuccess/onError, getter текущего fileList и upload.abort; Dragger передаёт те же методы. 18 raw UMD cases задают manual/mixed batch, LIST_IGNORE, maxCount, controlled hold/accept, membership guards, JSON/plain success, xhr и error. onBatchStart не запускает beforeUpload или транспорт. Два дополнительных raw UMD cases проверяют реальный customRequest, imperative completion, повторный abort и следующий progress. Прямые callbacks не закрывают transport request; imperative success сохраняет возможность abort. Прежний прямой abort и bindable nativeElement/inputElement сохранены, refs также доступны через bind:this. Native held ref после unmount не публикует callbacks и очищает DOM refs/делегированный upload; внешний draft/focus сохраняется. SSR не запускает callbacks или browser resources. React.Component/saveUploader renderer binding и opaque ReactElement rendering относятся к отдельной framework boundary."
         }
       ]
     },

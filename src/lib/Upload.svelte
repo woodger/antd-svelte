@@ -177,6 +177,13 @@
   export function abort(file?: UploadFile<T> | string) {
     controller.abort(file);
   }
+  export const onBatchStart = controller.onBatchStart;
+  export const onProgress = controller.onProgress;
+  export const onSuccess = controller.onSuccess;
+  export const onError = controller.onError;
+  const uploader = { abort };
+  let uploaderRef = $derived(nativeElement ? uploader : null);
+  export { files as fileList, uploaderRef as upload, nativeElement, inputElement };
   function openDialog(event: MouseEvent | KeyboardEvent) {
     if (blocked || !openFileDialogOnClick || !children || event.defaultPrevented) return;
     if (event instanceof KeyboardEvent) {

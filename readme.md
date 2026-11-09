@@ -6613,6 +6613,27 @@ FileList — controlled prop с onChange; defaultFileList задаёт внут�
 Элемент UploadFile имеет стабильный uid, name, optional status/percent/url/thumbUrl,
 originFileObj/response/error/xhr. Статусы — uploading/done/error/removed. API типов
 параметризован типом ответа: UploadProps<T>, UploadFile<T>, UploadRequestOptions<T>.
+
+`bind:this` предоставляет UploadRef<T>, одинаковый для Upload и Dragger:
+onBatchStart/onProgress/onSuccess/onError, актуальный fileList и upload.abort.
+`onBatchStart` принимает уже подготовленный batch, публикует onChange для каждого
+принятого файла и не запускает beforeUpload или транспорт. parsedFile=null
+сохраняет ручной файл без статуса uploading. Callback неизвестного или удалённого
+uid не меняет список; controlled fileList по-прежнему принимает владелец.
+`onSuccess` разбирает JSON-строку ответа, сохраняя обычный текст при ошибке разбора.
+Imperative callbacks меняют список независимо от завершения транспорта, поэтому
+после прямого onSuccess активный запрос по-прежнему можно отменить.
+
+Прямой abort и bind:nativeElement/bind:inputElement сохранены. Эти DOM refs также
+доступны через bind:this и очищаются при unmount; сохранённые callbacks после
+unmount не публикуют изменения. Вложенный upload предоставляет abort; базовые
+методы React.Component и saveUploader относятся к привязке React renderer.
+[18 raw случаев](tests/browser/fixtures/ant-design-upload-ref-reference.json),
+[два transport-сценария](tests/browser/fixtures/ant-design-upload-ref-transport-reference.json),
+[browser](tests/browser/upload-ref.spec.ts),
+[SSR](tests/package/upload-ref.ssr.test.ts) и
+[controller](src/lib/upload-controller.engine.test.ts) защищают lifecycle API.
+
 Передавайте uid для каждого элемента списка. Callback onChange({file,fileList,event?})
 предлагает полный новый список; владелец может отклонить изменение. Progress/success/error
 файла, уже исключённого владельцем из списка, не вызывают onChange.
@@ -6896,8 +6917,8 @@ webkitdirectory как boolean attribute; в браузере сохраняют
 [SSR](tests/package/upload-paste.ssr.test.ts) не создаёт browser listeners.
 
 Locale/upload из ConfigProvider, собственный locale, RU/EN, RTL и theme variables
-поддержаны. Полный rc-upload ref/internal API и ReactElement clone/event forwarding
-остаются отдельными пробелами реестра. Данный этап
+поддержаны. React.Component/ref renderer internals и ReactElement clone/event
+forwarding остаются отдельными границами реестра. Данный этап
 не заявляет полного покрытия React Upload.
 
 ## Input

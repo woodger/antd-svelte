@@ -1,0 +1,178 @@
+{
+  "reference": {
+    "version": "6.6.8",
+    "revision": "984592267de88fbf9cdaecc96a56629e721c709d",
+    "archiveSha256": "8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa",
+    "files": [
+      "components/upload/Upload.tsx",
+      "components/upload/Dragger.tsx"
+    ],
+    "delegate": "@rc-component/upload 1.1.1"
+  },
+  "cases": [
+    {
+      "sample": {
+        "id": "upload",
+        "drag": false
+      },
+      "initial": {
+        "changes": 1,
+        "requests": 1,
+        "prepared": 1,
+        "aborted": 0,
+        "list": [
+          {
+            "name": "pending.txt",
+            "status": "uploading",
+            "percent": 0,
+            "response": null
+          }
+        ]
+      },
+      "completed": {
+        "changes": 2,
+        "requests": 1,
+        "prepared": 1,
+        "aborted": 0,
+        "list": [
+          {
+            "name": "pending.txt",
+            "status": "done",
+            "percent": 100,
+            "response": {
+              "imperative": true
+            }
+          }
+        ]
+      },
+      "aborted": {
+        "changes": 2,
+        "requests": 1,
+        "prepared": 1,
+        "aborted": 1,
+        "list": [
+          {
+            "name": "pending.txt",
+            "status": "done",
+            "percent": 100,
+            "response": {
+              "imperative": true
+            }
+          }
+        ]
+      },
+      "repeated": {
+        "changes": 2,
+        "requests": 1,
+        "prepared": 1,
+        "aborted": 1,
+        "list": [
+          {
+            "name": "pending.txt",
+            "status": "done",
+            "percent": 100,
+            "response": {
+              "imperative": true
+            }
+          }
+        ]
+      },
+      "progressed": {
+        "changes": 3,
+        "requests": 1,
+        "prepared": 1,
+        "aborted": 1,
+        "list": [
+          {
+            "name": "pending.txt",
+            "status": "uploading",
+            "percent": 55,
+            "response": null
+          }
+        ]
+      }
+    },
+    {
+      "sample": {
+        "id": "dragger",
+        "drag": true
+      },
+      "initial": {
+        "changes": 1,
+        "requests": 1,
+        "prepared": 1,
+        "aborted": 0,
+        "list": [
+          {
+            "name": "pending.txt",
+            "status": "uploading",
+            "percent": 0,
+            "response": null
+          }
+        ]
+      },
+      "completed": {
+        "changes": 2,
+        "requests": 1,
+        "prepared": 1,
+        "aborted": 0,
+        "list": [
+          {
+            "name": "pending.txt",
+            "status": "done",
+            "percent": 100,
+            "response": {
+              "imperative": true
+            }
+          }
+        ]
+      },
+      "aborted": {
+        "changes": 2,
+        "requests": 1,
+        "prepared": 1,
+        "aborted": 1,
+        "list": [
+          {
+            "name": "pending.txt",
+            "status": "done",
+            "percent": 100,
+            "response": {
+              "imperative": true
+            }
+          }
+        ]
+      },
+      "repeated": {
+        "changes": 2,
+        "requests": 1,
+        "prepared": 1,
+        "aborted": 1,
+        "list": [
+          {
+            "name": "pending.txt",
+            "status": "done",
+            "percent": 100,
+            "response": {
+              "imperative": true
+            }
+          }
+        ]
+      },
+      "progressed": {
+        "changes": 3,
+        "requests": 1,
+        "prepared": 1,
+        "aborted": 1,
+        "list": [
+          {
+            "name": "pending.txt",
+            "status": "uploading",
+            "percent": 55,
+            "response": null
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -53,6 +53,110 @@ function setup(initial: UploadFile[] = [], overrides: UploadProps = {}) {
   };
 }
 const file = (name = 'a.txt') => new File(['content'], name, { type: 'text/plain' });
+describe('Upload imperative lifecycle', () => {
+  it('publishes a manual batch without preprocessing or transport', () => {
+    let prepared = 0;
+    const h = setup([], { beforeUpload: () => { prepared++; return true; } });
+    const raw = Object.assign(file(), { uid: 'manual' });
+
+    h.controller.onBatchStart([{ file: raw, parsedFile: null }]);
+
+    expect(prepared).toBe(0);
+    expect(h.requests).toEqual([]);
+    expect(h.files).toHaveLength(1);
+    expect(h.files[0]).toMatchObject({ uid: 'manual', name: 'a.txt', originFileObj: raw });
+    expect(h.files[0].status).toBeUndefined();
+    expect(h.events[0].file).toBeInstanceOf(File);
+    expect(h.events[0].file).not.toBe(raw);
+  });
+
+  it('filters the source ignore marker before publishing the complete batch', () => {
+    const h = setup();
+    const ignored = Object.assign(file('ignored.txt'), { uid: 'ignored' });
+    Object.defineProperty(ignored, UPLOAD_LIST_IGNORE, { value: true, configurable: true });
+    const accepted = Object.assign(file('accepted.txt'), { uid: 'accepted' });
+
+    h.controller.onBatchStart([
+      { file: ignored, parsedFile: ignored },
+      { file: accepted, parsedFile: accepted }
+    ]);
+
+    expect(h.files.map(item => item.name)).toEqual(['accepted.txt']);
+    expect(h.events).toHaveLength(1);
+    expect(h.events[0].fileList.map(item => item.name)).toEqual(['accepted.txt']);
+    expect(h.requests).toEqual([]);
+  });
+
+  it('replaces an existing uid while preserving the incoming original File', () => {
+    const h = setup([{ uid: 'same', name: 'previous.txt', url: '/previous.txt' }]);
+    const raw = Object.assign(file('replacement.txt'), { uid: 'same' });
+
+    h.controller.onBatchStart([{ file: raw, parsedFile: raw }]);
+
+    expect(h.files).toHaveLength(1);
+    expect(h.files[0]).toMatchObject({ name: 'replacement.txt', status: 'uploading' });
+    expect(h.files[0].originFileObj).toBe(raw);
+    expect(h.files[0].url).toBeUndefined();
+  });
+
+  it('publishes direct progress, parsed success, raw text and error with source resets', () => {
+    const h = setup();
+    const raw = Object.assign(file(), { uid: 'direct' });
+    const event = { percent: 37, loaded: 37, total: 100 };
+    h.controller.onBatchStart([{ file: raw, parsedFile: raw }]);
+
+    h.controller.onProgress(event, raw);
+
+    expect(h.files[0]).toMatchObject({ status: 'uploading', percent: 37 });
+    expect(h.events.at(-1)?.event).toBe(event);
+
+    h.controller.onSuccess('{"ok":true}', raw);
+
+    expect(h.files[0]).toMatchObject({ status: 'done', percent: 100, response: { ok: true } });
+
+    h.controller.onSuccess('plain text', raw);
+
+    expect(h.files[0].response).toBe('plain text');
+    const error = Error('Unavailable');
+
+    h.controller.onError(error, { reason: 'unavailable' }, raw);
+
+    expect(h.files[0]).toMatchObject({ status: 'error', percent: 0,
+      error, response: { reason: 'unavailable' } });
+  });
+
+  it('keeps transport abortable after a direct success callback', async () => {
+    const h = setup();
+    await h.controller.upload([file()]);
+    const raw = h.requests[0].file;
+
+    h.controller.onSuccess('{"imperative":true}', raw);
+    h.controller.abort(raw);
+    h.controller.abort(raw);
+
+    expect(h.files[0]).toMatchObject({ status: 'done', response: { imperative: true } });
+    expect(h.aborted).toBe(1);
+    expect(h.events).toHaveLength(2);
+  });
+
+  it('ignores callbacks for removed files and all held ref operations after disposal', async () => {
+    const h = setup();
+    const raw = Object.assign(file(), { uid: 'removed' });
+    h.controller.onBatchStart([{ file: raw, parsedFile: raw }]);
+    await h.controller.remove(h.files[0]);
+    const events = h.events.length;
+
+    h.controller.onProgress({ percent: 42 }, raw);
+    h.controller.onSuccess('{"late":true}', raw);
+    h.controller.onError(Error('late'), undefined, raw);
+    h.controller.dispose();
+    h.controller.onBatchStart([{ file: raw, parsedFile: raw }]);
+
+    expect(h.files).toEqual([]);
+    expect(h.events).toHaveLength(events);
+    expect(h.requests).toEqual([]);
+  });
+});
 describe('Upload lifecycle', () => {
   it(
     'starts a batch after all preprocessing and passes the same original batch to each hook',

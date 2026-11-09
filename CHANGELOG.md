@@ -9,6 +9,10 @@
 
 ### Added
 
+- Upload/Dragger предоставляет UploadRef с batch/progress/success/error callbacks,
+  актуальным fileList, native refs и upload.abort. Сохранён прямой abort;
+  callbacks используют текущий controlled list и не публикуют изменения после unmount.
+
 - Upload card/circle сохраняет trigger и native input при hide/return и повторяет
   исходные enter/leave keyframes с приоритетом пользовательских styles.
 

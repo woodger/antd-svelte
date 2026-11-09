@@ -345,8 +345,16 @@ id/hidden и четыре list types; шесть motion cases фиксируют
 leave/enter, identity input/root и style priority. Motion pointer-events:none идёт
 до обычного style; hidden class может быть перекрыт явным display.
 Native сохраняет выбранный FileList без change event через hide/return, внешний
-draft/focus/selection и cleanup после deadline/unmount. Source refs/internal APIs
-и React-specific render boundaries остаются отдельными ограничениями.
+draft/focus/selection и cleanup после deadline/unmount.
+UploadRef переносит onBatchStart/onProgress/onSuccess/onError, актуальный fileList,
+native refs и upload.abort; Dragger предоставляет тот же API. 18 raw UMD cases
+покрывают ручной/смешанный batch, LIST_IGNORE, maxCount, controlled hold/accept,
+membership guards, JSON/plain response, progress и error. Imperative completion
+не завершает transport request: его abort остаётся доступен. Два дополнительных
+raw cases проверяют реальный customRequest, повторный abort и следующий progress.
+Прямой abort и прежние bindable DOM refs сохранены; SSR не вызывает lifecycle callbacks.
+React.Component/saveUploader и React-specific render boundaries остаются
+отдельными ограничениями.
 Upload progress motion сверяется по 12 raw UMD cases: четыре list types,
 percent missing/undefined, motion=false, local/shared prefix, глобальная и
 компонентная duration, первый enter после done. Samples явно задают aria-label;
