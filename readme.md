@@ -3753,7 +3753,10 @@ ConfigProvider.getPopupContainer; Modal вызывает глобальный ge
 Getter вызывается только после browser mount, в том числе у закрытого Modal.
 Первый перенос готового контейнера сохраняет SSR DOM. Смена функции с тем же
 контейнером сохраняет содержимое, draft, выделение и фокус; смена самого
-контейнера пересоздаёт dialog и содержимое, как React portal. Отсутствующий
+контейнера пересоздаёт dialog и содержимое, как React portal. Перенос во время
+закрытия Drawer отменяет motion старой панели и её pending destruction;
+новый dialog остаётся закрытым до следующего открытия. Default/custom prefix
+не меняют этот lifecycle и не зацикливают перенос. Отсутствующий
 selector или пустой результат getter используют body. Для отключённого DOM-узла
 и DocumentFragment открытие ждёт вставки в document. Стили ShadowRoot подключает
 потребитель. Нативная модальность, fullscreen-размещение, inert, scroll lock и
@@ -3912,8 +3915,8 @@ footerPaddingInline, aliases и component algorithms. Пользовательс
 Button и Input внутри сохраняют собственные tokens. DraggerSize вычисляется
 как в upstream, но resize-handle пока не реализован.
 Обновление темы и inherit reset сохраняют модальность, DOM, draft, selection
-и focus, в том числе после переноса через getContainer. Legacy-темы сохраняют
-прежнее оформление. [Сверка с UMD и проверки](./docs/reference/theme-context.md#тема-drawer)
+и focus, в том числе после переноса через getContainer. Оформление по умолчанию
+сохраняется. [Сверка с UMD и проверки](./docs/reference/theme-context.md#тема-drawer)
 учитывают типографику внешнего ConfigProvider: в React она задана на статическом
 host через публичный theme.useToken(), в Svelte — на DOM-контейнере provider.
 

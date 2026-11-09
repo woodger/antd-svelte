@@ -320,6 +320,12 @@ SSR охватывает также defaultOpen, browser — смену обще
 CSS selectors; raw прозрачный фон сохранён отдельно от public inherited-prefix
 counterpart. Svelte сохраняет прежнее оформление списка; только menu background
 сравнивается с counterpart, остальные свойства — с raw Source.
+Modal/Drawer держат head-style condition вне keyed range переносимого dialog.
+Смешанный range с оставшимся в исходном parent comment anchor разрушал insertion
+anchor при смене target: новый dialog получал себя как theme origin, а observer
+циклически реагировал на собственные style writes. Existing container/motion
+contracts сохранены; regression охватывает default/custom shared prefix и
+перенос Drawer во время leave без ослабления timeout или console checks.
 Upload error Tooltip сверяется по десяти raw UMD cases и четырём transitions:
 string response, error.statusText, error.message, пустые значения, response object,
 Error/ProgressEvent и locale fallback. Sample metadata содержит строки. Текст

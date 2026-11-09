@@ -1481,6 +1481,10 @@
 
 ### Fixed
 
+- Modal/Drawer не зависают при смене getContainer, в том числе во время ухода
+  Drawer с destroyOnHidden. Head-style anchors остаются вне keyed dialog,
+  чтобы portal сохранял исходный parent и observer темы не наблюдал сам dialog.
+
 - Upload учитывает error.statusText перед error.message при выборе Tooltip,
   как в Ant Design 6.6.8. Controlled string metadata принимается типами; пустые
   поля и Error/ProgressEvent сохраняют прежний fallback и lifecycle.

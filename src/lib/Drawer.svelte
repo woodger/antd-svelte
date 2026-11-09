@@ -163,9 +163,9 @@
   @media (prefers-reduced-motion: reduce) { [data-ant-drawer-close] { transition: none; } }
 </style>
 
+<!-- Keyed range содержит только переносимый dialog; head-style anchors остаются снаружи. -->
 <NoCompactStyle>
-{#key container.key}
-{#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`drawer-prefix:${componentPrefix}`} />{/if}<dialog data-ant-drawer-prefix={componentPrefix} data-ant-drawer-placement={placement} bind:this={dialog} id={rootId} class={[
+{#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`drawer-prefix:${componentPrefix}`} />{/if}{#key container.key}<dialog data-ant-drawer-prefix={componentPrefix} data-ant-drawer-placement={placement} bind:this={dialog} id={rootId} class={[
     `${componentPrefix} ant-drawer-css-var ant-svelte-drawer`,
     componentTheme.className,
     designTheme.enabled && 'drawer-source-theme',

@@ -150,9 +150,9 @@
   {:else if typeof value !== 'boolean'}{value ?? ''}{/if}
 {/snippet}
 
+<!-- Keyed range содержит только переносимый dialog; head-style anchors остаются снаружи. -->
 <NoCompactStyle>
-{#key container.key}
-{#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`modal-prefix:${componentPrefix}:${rootPrefix}`} />{/if}<dialog
+{#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`modal-prefix:${componentPrefix}:${rootPrefix}`} />{/if}{#key container.key}<dialog
   data-ant-modal-prefix={componentPrefix} data-ant-modal-root-prefix={rootPrefix}
   bind:this={dialog}
   class={['ant-svelte-dialog ant-modal-css-var', componentTheme.className, className]}

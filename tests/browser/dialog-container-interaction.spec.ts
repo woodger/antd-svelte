@@ -163,26 +163,47 @@ for (const component of ['modal', 'drawer']) {
   }
 }
 
-test('changing a Drawer container during leave cancels the old motion and destruction state', async ({ page }) => {
-  await open(page, 'drawer-destroy');
-  await check(page, 'Animate container panel', true);
-  await frames(page);
-  await draft(page).fill('Leaving draft');
-  const previousRoot = await root(page).elementHandle();
+for (const customPrefix of [false, true]) {
+  test(`changing a Drawer container during leave cancels the old motion and destruction state prefix=${customPrefix}`, async ({ page }) => {
+    await check(page, 'Custom container prefix', customPrefix);
+    await open(page, 'drawer-destroy');
+    await check(page, 'Animate container panel', true);
+    await frames(page);
+    await draft(page).fill('Leaving draft');
+    const previousRoot = await root(page).elementHandle();
 
-  await page.getByRole('button', { name: 'Close container panel', exact: true })
-    .evaluate(node => (node as HTMLElement).click());
-  await expect(root(page)).toHaveJSProperty('open', true);
-  await check(page, 'Alternate panel container', true);
+    await page.getByRole('button', { name: 'Close container panel', exact: true })
+      .evaluate(node => (node as HTMLElement).click());
+    await expect(root(page)).toHaveJSProperty('open', true);
+    await check(page, 'Alternate panel container', true);
 
-  await expect(root(page)).toHaveJSProperty('open', false);
-  await expect(page.locator('[aria-label="Panel draft"]')).toHaveCount(0);
-  expect(await root(page).evaluate((node, old) => node === old, previousRoot)).toBe(false);
-  await opener(page).click();
-  await expect(draft(page)).toHaveValue('Seed');
-  await frames(page);
+    await expect(root(page)).toHaveJSProperty('open', false);
+    await expect(page.locator('[aria-label="Panel draft"]')).toHaveCount(0);
+    expect(await root(page).evaluate((node, old) => node === old, previousRoot)).toBe(false);
+    await opener(page).click();
+    await expect(draft(page)).toHaveValue('Seed');
+    await frames(page);
 
-  await expect(panel(page)).toBeVisible();
-  await expect(root(page)).toHaveCount(1);
-  await expect(page.getByLabel('Panel container closes', { exact: true })).toHaveText('0');
-});
+    await expect(panel(page)).toBeVisible();
+    await expect(root(page)).toHaveCount(1);
+    await expect(page.getByLabel('Panel container closes', { exact: true })).toHaveText('0');
+  });
+
+  test(`changing a Modal container recreates its contents and stays modal prefix=${customPrefix}`,
+    async ({ page }) => {
+      await check(page, 'Custom container prefix', customPrefix);
+      await open(page, 'modal-local');
+      await draft(page).fill('Previous draft');
+      const previousRoot = await root(page).elementHandle();
+
+      await check(page, 'Alternate panel container', true);
+
+      await expect(panel(page)).toBeVisible();
+      await expect(root(page)).toHaveJSProperty('open', true);
+      expect(await root(page).evaluate(node => node.matches(':modal'))).toBe(true);
+      expect(await root(page).evaluate((node, old) => node === old, previousRoot)).toBe(false);
+      await expect(draft(page)).toHaveValue('Seed');
+      await expect(page.locator('html')).toHaveCSS('overflow', 'hidden');
+      await expect(page.getByLabel('Panel container closes', { exact: true })).toHaveText('0');
+    });
+}

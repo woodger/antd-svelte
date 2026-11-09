@@ -18,6 +18,7 @@
     dark = false,
     nested = false,
     motion = false,
+    customPrefix = false,
     staging = 'none',
     onCall
   }: {
@@ -28,6 +29,7 @@
     dark?: boolean;
     nested?: boolean;
     motion?: boolean;
+    customPrefix?: boolean;
     staging?: 'none' | 'element' | 'fragment';
     onCall?: () => void;
   } = $props();
@@ -131,6 +133,7 @@
 }}>Disconnect staged panel</button>
 <div id="panel-host">
   <ConfigProvider {...parentOptions} direction={sample.rtl ? 'rtl' : undefined}
+    prefixCls={customPrefix ? 'suite' : undefined}
     style={`--panel-origin:${dark ? 'dark' : 'light'}`}
     theme={{ mode: dark ? 'dark' : 'light', token: { motion } }}>
     <ConfigProvider {...childOptions}>

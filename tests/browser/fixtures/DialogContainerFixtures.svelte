@@ -12,6 +12,7 @@
   let dark = $state(false);
   let nested = $state(false);
   let motion = $state(false);
+  let customPrefix = $state(false);
   let staging = $state<'none' | 'element' | 'fragment'>('none');
   let calls = $state(0);
 </script>
@@ -27,6 +28,7 @@
   <label><input type="checkbox" bind:checked={dark} /> Dark container panel</label>
   <label><input type="checkbox" bind:checked={nested} /> Nested panel controls</label>
   <label><input type="checkbox" bind:checked={motion} /> Animate container panel</label>
+  <label><input type="checkbox" bind:checked={customPrefix} /> Custom container prefix</label>
   <label>Panel staging <select aria-label="Panel staging" bind:value={staging}>
     <option value="none">None</option><option value="element">Detached element</option>
     <option value="fragment">DocumentFragment</option>
@@ -36,7 +38,7 @@
   <output aria-label="Panel owner calls">{calls}</output>
   {#if tree}
     {#key `${name}-${staging}`}
-      <DialogContainerCase {sample} {mounted} {revision} {alternate} {dark} {nested} {motion} {staging}
+      <DialogContainerCase {sample} {mounted} {revision} {alternate} {dark} {nested} {motion} {staging} {customPrefix}
         onCall={() => calls++} />
     {/key}
   {/if}
