@@ -9,6 +9,10 @@
 
 ### Added
 
+- InputSearch поддерживает независимые Search/Input prefixes и общий Button/private
+  namespace. Source tokens действуют на корень Search; DOM/ref, value, поиск,
+  selection/focus сохраняются. Source Compact/cache observations записаны отдельно.
+
 - InputPassword поддерживает независимые prefixCls/inputPrefixCls и общий prefix.
   Иконка сохраняет Source CSS при любом сочетании имён; исходный пропуск её стилей
   в React сохранён отдельными raw/matched замерами. Видимость, refs и focus прежние.

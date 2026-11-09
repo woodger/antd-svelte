@@ -7026,7 +7026,17 @@
         "tests/browser/fixtures/ant-design-input-password-prefix-reference.json",
         "tests/browser/input-password-prefix-metrics.ts",
         "tests/browser/input-password-prefix.spec.ts",
-        "tests/package/input-password-prefix.ssr.test.ts"
+        "tests/package/input-password-prefix.ssr.test.ts",
+        "src/lib/input-search-prefix.engine.ts",
+        "src/lib/input-search-prefix.engine.test.ts",
+        "src/lib/vendor/input-search-prefix.css.js",
+        "tests/browser/fixtures/InputSearchPrefixScope.svelte",
+        "tests/browser/fixtures/InputSearchPrefixFixtures.svelte",
+        "tests/browser/fixtures/InputSearchPrefixSSRFixtures.svelte",
+        "tests/browser/fixtures/ant-design-input-search-prefix-reference.json",
+        "tests/browser/input-search-prefix-metrics.ts",
+        "tests/browser/input-search-prefix.spec.ts",
+        "tests/package/input-search-prefix.ssr.test.ts"
       ],
       "features": [
         {
@@ -7175,7 +7185,7 @@
             "tests/browser/control-theme.spec.ts",
             "docs/reference/theme-context.md"
           ],
-          "note": "Компонентные tokens Input и composed Password/Search/OTP подключены к CSS. Local/shared prefixCls обычного Input подключён; Password имеет независимые prefixCls/inputPrefixCls; самостоятельные prefix API Search/OTP ещё в работе. Deprecated internal hooks исключены. Согласованные string bind:value, native refs/hidden и React dev diagnostics сохраняют прежнюю границу."
+          "note": "Компонентные tokens Input и composed Password/Search/OTP подключены к CSS. Local/shared prefixCls обычного Input подключён; Password/Search имеют независимые prefixCls/inputPrefixCls; самостоятельный prefix API OTP ещё в работе. Deprecated internal hooks исключены. Согласованные string bind:value, native refs/hidden и React dev diagnostics сохраняют прежнюю границу."
         },
         {
           "id": "textarea-remaining",
@@ -7278,6 +7288,28 @@
             "tests/package/input-password-prefix.ssr.test.ts"
           ],
           "note": "PrefixCls управляет Password/icon, inputPrefixCls — вложенным Input; nonempty local wins, empty/undefined наследуют ConfigProvider. Canonical variables/markers и приоритет semantic styles сохранены. Source ошибочно связывает icon selector с Input prefix: raw UMD results сохранены, expectedNative отдельно измерен с public paired prefixes. Четыре исходных CSS rules адресуют независимые namespaces без переноса этого дефекта. Live updates сохраняют DOM/ref, visibility, value, selection/focus, FormData и callbacks. Native toggle button, keyboard, password attribute timers и SSR cleanup contract не меняются."
+        },
+        {
+          "id": "input-search-prefix-cls",
+          "title": "Независимые Search/Input prefixes и общий Button/private namespace",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/InputSearch.svelte",
+            "src/lib/input-search.types.ts",
+            "src/lib/input-search-prefix.engine.ts",
+            "src/lib/input-search-prefix.engine.test.ts",
+            "src/lib/vendor/input-search-prefix.css.js",
+            "tools/ant-design-css-recipes.json",
+            "tests/browser/fixtures/InputSearchPrefixScope.svelte",
+            "tests/browser/fixtures/InputSearchPrefixFixtures.svelte",
+            "tests/browser/fixtures/InputSearchPrefixSSRFixtures.svelte",
+            "tests/browser/fixtures/ant-design-input-search-prefix-reference.json",
+            "tests/browser/input-search-prefix-metrics.ts",
+            "tests/browser/input-search-prefix.spec.ts",
+            "tests/package/input-search-prefix.ssr.test.ts"
+          ],
+          "note": "Local nonempty prefixCls задаёт Search/button classes, inputPrefixCls — вложенный Input; empty/undefined наследуют ConfigProvider. 16 CSS rules используют общий Button и private btn-height namespace независимо от local class/cssVar.prefix. Canonical variables/markers и semantic priority сохранены; Input component tokens применяются к Search root, включая small-button min-height. Source Compact fallback key remount записан raw; expectedNative измерен после public ref focus. Source enterButton=true empty content измерен raw и с public icon-only Button counterpart; Source stale Inner private variable записан raw/fresh. Native сохраняет прежние DOM/ref, focus/selection/value, IME/reset/поиск и disabled-loading Button contract."
         }
       ]
     },

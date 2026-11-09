@@ -10,6 +10,9 @@
   import { useVariant } from './variant.svelte';
   import { useCompact } from './space-compact-context';
   import { useForm, useFormField } from './form-context';
+  import { useComponentTheme } from './theme-component.svelte';
+  import { getInputSearchPrefixCss } from './input-search-prefix.engine';
+  import ThemeScopeStyle from './ThemeScopeStyle.svelte';
   import type { ButtonSlots } from './button.types';
   import type { InputChangeEvent, InputContent, InputSemanticSlots } from './input.types';
   import type { InputSearchProps, InputSearchButtonContext } from './input-search.types';
@@ -24,6 +27,8 @@
     disabled,
     size,
     variant,
+    prefixCls: customizePrefixCls,
+    inputPrefixCls: customizeInputPrefixCls,
     hidden,
     onSearch,
     onChange,
@@ -38,6 +43,11 @@
   }: InputSearchProps = $props();
 
   const config = useConfig();
+  const componentTheme = useComponentTheme('Input');
+  let componentPrefix = $derived(config.getPrefixCls('input-search', customizePrefixCls));
+  let inputPrefix = $derived(config.getPrefixCls('input', customizeInputPrefixCls));
+  let rootPrefix = $derived(config.getPrefixCls());
+  let prefixCss = $derived(getInputSearchPrefixCss(componentPrefix, rootPrefix));
   const buttonContextVariant = useVariant('inputSearch', () => ({ variant }));
   const inputContextVariant = useVariant('inputSearch', () => ({ variant }), 'input');
   const compact = useCompact();
@@ -75,6 +85,8 @@
       disabled,
       size,
       variant: buttonVariant,
+      prefixCls: customizePrefixCls,
+      inputPrefixCls: customizeInputPrefixCls,
       hidden,
       onSearch,
       onChange,
@@ -110,12 +122,12 @@
   let buttonClasses = $derived(mergeButtonSlots(contextClasses?.button, localClasses?.button, ' '));
   let buttonStyles = $derived(mergeButtonSlots(contextStyles?.button, localStyles?.button, ';'));
   let rootStyle = $derived(
-    [contextStyles?.root, config.inputSearch?.style, localStyles?.root, style]
+    [componentTheme.style, contextStyles?.root, config.inputSearch?.style, localStyles?.root, style]
       .filter(Boolean).join(';')
   );
   let buttonClass = $derived([
-    'ant-input-search-btn',
-    buttonVariant && `ant-input-search-btn-${buttonVariant}`
+    `${componentPrefix}-btn`,
+    buttonVariant && `${componentPrefix}-btn-${buttonVariant}`
   ].filter(Boolean).join(' '));
   let resolvedIcon = $derived(
     searchIcon !== undefined ? searchIcon : config.inputSearch?.searchIcon
@@ -246,6 +258,7 @@
     bind:nativeElement
     bind:this={input}
     type="search"
+    prefixCls={inputPrefix}
     size={resolvedSize}
     {disabled}
     variant={inputVariant}
@@ -287,14 +300,21 @@
   {/if}
 {/snippet}
 
+{#if prefixCss}
+  <ThemeScopeStyle css={prefixCss} scope={`input-search-prefix:${componentPrefix}:${rootPrefix}`} />
+{/if}
 <SpaceCompact
   {...rootData}
+  data-ant-input-search-root
+  data-ant-input-search-prefix={prefixCss ? componentPrefix : undefined}
+  data-ant-input-search-global={prefixCss ? rootPrefix : undefined}
   {hidden}
   class={[
-    'ant-input-search ant-input-search-css-var',
-    config.direction === 'rtl' && 'ant-input-search-rtl',
-    resolvedSize && `ant-input-search-${resolvedSize}`,
-    enterButton && 'ant-input-search-with-button',
+    `${componentPrefix} ant-input-search-css-var`,
+    componentTheme.className,
+    config.direction === 'rtl' && `${componentPrefix}-rtl`,
+    resolvedSize && `${componentPrefix}-${resolvedSize}`,
+    enterButton && `${componentPrefix}-with-button`,
     className,
     config.inputSearch?.class,
     contextClasses?.root,

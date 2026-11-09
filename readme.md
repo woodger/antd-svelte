@@ -6521,8 +6521,8 @@ value, refs, selection/focus и FormData. Сверка с официальным
 autoSize и прежний приоритет semantic styles.
 
 Input.Password, Input.Search и Input.OTP доступны как
-InputPassword, InputSearch и InputOTP. Самостоятельные prefixCls
-InputSearch/InputOTP остаются отдельной задачей; компонентные tokens Input уже подключены. Deprecated internal
+InputPassword, InputSearch и InputOTP. Самостоятельный prefixCls
+InputOTP остаётся отдельной задачей; компонентные tokens Input уже подключены. Deprecated internal
 classes/structures исключены из переноса. Согласованный string bind:value
 сохраняется вместо React controlled rejection/broad value types; native DOM events
 и именованные Svelte bindings заменяют SyntheticEvent/ref object. Общий аудит
@@ -6657,9 +6657,29 @@ InputElement/nativeElement и методы
 bind:this возвращают внутренний Input, не внешний Compact. String bind:value,
 defaultValue, FormItem, RTL, Compact, темы и SSR сохраняют контракты Input.
 Fixture `?fixture=input-search` проверяет поиск, IME, callbacks, пользовательские
-кнопки, semantic/config приоритеты и геометрию. Общие ограничения Input для
-prefixCls, token engine и React value/ref conventions сохраняются;
-аудит всего семейства остаётся unreviewed.
+кнопки, semantic/config приоритеты и геометрию. Component token engine и variant
+inheritance подключены; согласованные value/ref conventions сохраняются.
+Аудит всего семейства остаётся unreviewed.
+
+PrefixCls задаёт Search root/button classes, inputPrefixCls — независимый Input.
+Empty/undefined наследуют ConfigProvider; Button и служебная btn-height variable
+используют общий prefix независимо от local class и cssVar.prefix. Canonical token
+markers и variables сохраняются. Source component tokens применяются также к
+корню Search: small-button min-height учитывает inputFontSizeSM/paddingBlockSM.
+Semantic styles и style имеют прежний приоритет над вычисленной темой.
+
+Смена prefix сохраняет DOM/ref, value, selection/focus, FormData и поиск. React
+Compact пересоздаёт Input при смене общего prefix из-за ключа с prefix в имени;
+Native сохраняет прежний стабильный DOM. Raw переходы и измерения после public ref
+focus хранятся раздельно. Для enterButton=true Source создаёт пустое Button content
+и лишнюю ширину; Native сохраняет прежнюю icon-only кнопку. Public counterpart
+использует официальный Button без children. Source shared-class cache теряет
+вложенный private variable namespace; freshNested отдельно измерен со свежим
+локальным классом в Inner provider. Данные —
+[эталон UMD](./tests/browser/fixtures/ant-design-input-search-prefix-reference.json),
+проверки — `?fixture=input-search-prefix`,
+[browser](./tests/browser/input-search-prefix.spec.ts) и
+[SSR](./tests/package/input-search-prefix.ssr.test.ts).
 
 ## InputOTP (Input.OTP)
 
@@ -10137,7 +10157,7 @@ Empty, Skeleton с primitives, Spin, Progress, Result, Alert, Collapse, Affix,
 Tooltip, Popover, Popconfirm, Slider, BorderBeam, Masonry, Splitter, Anchor и
 Space/SpaceCompact/SpaceAddon, Breadcrumb, Row, Typography, Carousel, Descriptions, Tabs,
 Card с Grid/Meta, Button, FloatButton/Group/BackTop, Radio/RadioButton/RadioGroup,
-Checkbox/CheckboxGroup, Switch, Input, TextArea и InputPassword.
+Checkbox/CheckboxGroup, Switch, Input, TextArea, InputPassword и InputSearch.
 Остальные семейства подключаются отдельно. Например,
 ConfigProvider prefixCls="suite" создаёт suite-app, suite-layout,
 suite-layout-sider и suite-layout-header без изменения имён Svelte-компонентов.

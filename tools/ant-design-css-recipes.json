@@ -2635,5 +2635,33 @@
     "replacements": [],
     "keyframes": [],
     "header": "/* Ant Design 6.6.8 — MIT; см. LICENSE.ant-design.\n * Password icon CSS; runtime разделяет Password и Input namespaces.\n * SHA-256: 8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa\n */"
+  },
+  {
+    "id": "input-search-prefix",
+    "output": "src/lib/vendor/input-search-prefix.css.js",
+    "format": "module",
+    "expectedRules": 16,
+    "include": [
+      "^(?:\\.css-var-_R_0_)?\\.ant-input-search(?![\\w])"
+    ],
+    "exclude": [],
+    "replacements": [
+      {
+        "pattern": "\\.css-var-_R_0_\\.ant-input-search(?:-css-var)?(?![-\\w])",
+        "replacement": ":where(.ant-input-search-css-var)"
+      }
+    ],
+    "keyframes": [],
+    "declarationReplacements": [
+      {
+        "pattern": "(?:\\-\\-ant\\-menu\\-color\\-item\\-text\\-selected\\-horizontal|\\-\\-ant\\-menu\\-color\\-item\\-bg\\-selected\\-horizontal|\\-\\-ant\\-menu\\-color\\-item\\-text\\-hover\\-horizontal|\\-\\-ant\\-menu\\-color\\-danger\\-item\\-text\\-selected|\\-\\-ant\\-menu\\-color\\-danger\\-item\\-bg\\-selected|\\-\\-ant\\-menu\\-color\\-active\\-bar\\-border\\-size|\\-\\-ant\\-menu\\-color\\-danger\\-item\\-text\\-hover|\\-\\-ant\\-menu\\-color\\-danger\\-item\\-bg\\-active|\\-\\-ant\\-menu\\-color\\-item\\-text\\-disabled|\\-\\-ant\\-menu\\-color\\-item\\-text\\-selected|\\-\\-ant\\-button\\-content\\-line\\-height\\-lg|\\-\\-ant\\-button\\-content\\-line\\-height\\-sm|\\-\\-ant\\-menu\\-color\\-active\\-bar\\-height|\\-\\-ant\\-splitter\\-resize\\-spinner\\-size|\\-\\-ant\\-button\\-border\\-color\\-disabled|\\-\\-ant\\-menu\\-color\\-active\\-bar\\-width|\\-\\-ant\\-menu\\-color\\-danger\\-item\\-text|\\-\\-ant\\-menu\\-color\\-item\\-bg\\-selected|\\-\\-ant\\-steps\\-description\\-max\\-width|\\-\\-ant\\-skeleton\\-color\\-gradient\\-end|\\-\\-ant\\-menu\\-color\\-item\\-text\\-hover|\\-\\-ant\\-button\\-content\\-line\\-height|\\-\\-ant\\-carousel\\-dot\\-width\\-active|\\-\\-ant\\-menu\\-color\\-item\\-bg\\-active|\\-\\-ant\\-menu\\-radius\\-sub\\-menu\\-item|\\-\\-ant\\-button\\-group\\-border\\-color|\\-\\-ant\\-menu\\-color\\-item\\-bg\\-hover|\\-\\-ant\\-steps\\-title\\-line\\-height|\\-\\-ant\\-button\\-padding\\-block\\-lg|\\-\\-ant\\-button\\-padding\\-block\\-sm|\\-\\-ant\\-layout\\-color\\-bg\\-trigger|\\-\\-ant\\-menu\\-color\\-group\\-title|\\-\\-ant\\-menu\\-color\\-sub\\-item\\-bg|\\-\\-ant\\-layout\\-color\\-bg\\-header|\\-\\-ant\\-menu\\-color\\-item\\-text|\\-\\-ant\\-button\\-padding\\-block|\\-\\-ant\\-layout\\-color\\-bg\\-body|\\-\\-ant\\-control\\-tmp\\-outline|\\-\\-ant\\-menu\\-color\\-item\\-bg|\\-\\-ant\\-popover\\-min\\-width|\\-\\-ant\\-menu\\-radius\\-item|\\-\\-ant\\-skeleton\\-color|\\-\\-ant\\-popover\\-width|\\-\\-ant\\-pink):[^;{}]*(?:;|$)",
+        "replacement": ""
+      },
+      {
+        "pattern": "var\\(--ant-button-border-color-disabled\\)",
+        "replacement": "var(--ant-color-border-disabled,var(--ant-color-border))"
+      }
+    ],
+    "header": "/* Ant Design 6.6.8 — MIT; см. LICENSE.ant-design.\n * Search prefix template; Button и private variable namespace задаёт ConfigProvider.\n * Deprecated token declarations исключены; component defaults ограничены marker.\n * SHA-256: 8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa\n */"
   }
 ]
