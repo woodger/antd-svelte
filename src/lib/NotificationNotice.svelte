@@ -10,10 +10,12 @@
 
   let {
     notice,
-    notification
+    notification,
+    prefixCls
   }: {
     notice: NotificationNotice;
     notification: NotificationInstance;
+    prefixCls: string;
   } = $props();
   const id = untrack(() => notice.id);
   const runtime = untrack(() => notification[notificationHolderKey]);
@@ -118,37 +120,37 @@
 </script>
 
 <style>
-  :global(.ant-notification.ant-notification-list) > :global(.ant-notification-list-content) > .ant-notification-notice { position: relative; inset: auto; max-width: 100%; transform: none; transition: none; }
-  .ant-notification-notice-title, .ant-notification-notice-description { min-width: 0; overflow-wrap: anywhere; }
-  .ant-notification-notice-icon { display: inline-flex; }
+  :global([data-ant-notification-root][data-ant-notification-list]) > :global([data-ant-notification-content]) > [data-ant-notification-notice] { position: relative; inset: auto; max-width: 100%; transform: none; transition: none; }
+  [data-ant-notification-notice-title], [data-ant-notification-notice-description] { min-width: 0; overflow-wrap: anywhere; }
+  [data-ant-notification-notice-icon] { display: inline-flex; }
   /* Absolute notice в Source создаёт BFC; native relative notice сохраняет float через flow-root. */
   .notification-source-theme { display: flow-root; }
-  .notification-source-theme .ant-notification-notice-icon { display: block; }
-  .notification-source-theme .ant-notification-notice-actions { display: block; }
+  .notification-source-theme [data-ant-notification-notice-icon] { display: block; }
+  .notification-source-theme [data-ant-notification-notice-actions] { display: block; }
   /* Общий markup сохраняет controls при смене темы; grid повторяет прежний legacy layout. */
-  .ant-notification-notice:not(.notification-source-theme) { display: grid; grid-template-columns: minmax(0, 1fr); row-gap: var(--ant-margin-xs); }
-  .ant-notification-notice:not(.notification-source-theme).notification-with-icon { grid-template-columns: max-content minmax(0, 1fr); column-gap: var(--ant-margin-sm); }
-  .ant-notification-notice:not(.notification-source-theme) .ant-notification-notice-wrapper { display: contents; }
-  .ant-notification-notice:not(.notification-source-theme) :is(.ant-notification-notice-section, .ant-notification-notice-title, .ant-notification-notice-description) { grid-column: -2 / -1; grid-row: 1; }
-  .ant-notification-notice:not(.notification-source-theme) .ant-notification-notice-icon { grid-column: 1; grid-row: 1; align-self: start; }
-  .ant-notification-notice:not(.notification-source-theme):has(> .ant-notification-notice-actions) .ant-notification-notice-icon { grid-row: 1 / span 2; }
-  .ant-notification-notice:not(.notification-source-theme):not(.notification-with-text) { row-gap: 0; }
-  .ant-notification-notice:not(.notification-source-theme) > .ant-notification-notice-actions { grid-column: -2 / -1; grid-row: 2; float: none; }
-  .ant-notification-notice-close { min-width: 24px; min-height: 24px; padding: 0; cursor: pointer; }
-  .ant-notification-notice-close:disabled { cursor: default; }
-  .ant-notification-notice-actions { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: var(--ant-margin-xs); max-width: 100%; }
-  @media (prefers-reduced-motion: reduce) { .ant-notification-notice-close { transition: none; } }
+  [data-ant-notification-notice]:not(.notification-source-theme) { display: grid; grid-template-columns: minmax(0, 1fr); row-gap: var(--ant-margin-xs); }
+  [data-ant-notification-notice]:not(.notification-source-theme).notification-with-icon { grid-template-columns: max-content minmax(0, 1fr); column-gap: var(--ant-margin-sm); }
+  [data-ant-notification-notice]:not(.notification-source-theme) [data-ant-notification-notice-wrapper] { display: contents; }
+  [data-ant-notification-notice]:not(.notification-source-theme) :is([data-ant-notification-notice-section], [data-ant-notification-notice-title], [data-ant-notification-notice-description]) { grid-column: -2 / -1; grid-row: 1; }
+  [data-ant-notification-notice]:not(.notification-source-theme) [data-ant-notification-notice-icon] { grid-column: 1; grid-row: 1; align-self: start; }
+  [data-ant-notification-notice]:not(.notification-source-theme):has(> [data-ant-notification-notice-actions]) [data-ant-notification-notice-icon] { grid-row: 1 / span 2; }
+  [data-ant-notification-notice]:not(.notification-source-theme):not(.notification-with-text) { row-gap: 0; }
+  [data-ant-notification-notice]:not(.notification-source-theme) > [data-ant-notification-notice-actions] { grid-column: -2 / -1; grid-row: 2; float: none; }
+  [data-ant-notification-notice-close] { min-width: 24px; min-height: 24px; padding: 0; cursor: pointer; }
+  [data-ant-notification-notice-close]:disabled { cursor: default; }
+  [data-ant-notification-notice-actions] { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: var(--ant-margin-xs); max-width: 100%; }
+  @media (prefers-reduced-motion: reduce) { [data-ant-notification-notice-close] { transition: none; } }
 </style>
 
 {#snippet titleContent()}
-  <div class="ant-notification-notice-title" id={`${identity}-title`}>{#if typeof notice.title === 'function'}{@render notice.title()}{:else}{notice.title}{/if}</div>
+  <div data-ant-notification-notice-title class={`${prefixCls}-notice-title`} id={`${identity}-title`}>{#if typeof notice.title === 'function'}{@render notice.title()}{:else}{notice.title}{/if}</div>
 {/snippet}
 {#snippet descriptionContent()}
-  <div class="ant-notification-notice-description" id={`${identity}-description`}>{#if typeof notice.description === 'function'}{@render notice.description()}{:else}{notice.description}{/if}</div>
+  <div data-ant-notification-notice-description class={`${prefixCls}-notice-description`} id={`${identity}-description`}>{#if typeof notice.description === 'function'}{@render notice.description()}{:else}{notice.description}{/if}</div>
 {/snippet}
 {#snippet textContent()}
   {#if hasTitle && hasDescription}
-    <div class="ant-notification-notice-section">
+    <div data-ant-notification-notice-section class={`${prefixCls}-notice-section`}>
       {@render titleContent()}
       {@render descriptionContent()}
     </div>
@@ -157,35 +159,35 @@
 {/snippet}
 
 {#if present}
-  <div bind:this={node} {@attach mounted} role={notice.role} aria-atomic="true" aria-label={notice['aria-label']} aria-labelledby={notice['aria-labelledby']
+  <div data-ant-notification-notice bind:this={node} {@attach mounted} role={notice.role} aria-atomic="true" aria-label={notice['aria-label']} aria-labelledby={notice['aria-labelledby']
       ?? (notice['aria-label']
         ? undefined
         : hasTitle ? `${identity}-title` : undefined)} aria-describedby={notice['aria-describedby']
             ?? (hasDescription
               ? `${identity}-description`
               : undefined)} aria-hidden={notice.closing || undefined} inert={notice.closing} class={[
-            'ant-notification-notice',
+            `${prefixCls}-notice`,
             designTheme.enabled && 'notification-source-theme',
             (notice.icon || notice.type) && 'notification-with-icon',
             (hasTitle || hasDescription) && 'notification-with-text',
-            notice.type && `ant-notification-notice-${notice.type}`,
-            closable && 'ant-notification-notice-closable',
+            notice.type && `${prefixCls}-notice-${notice.type}`,
+            closable && `${prefixCls}-notice-closable`,
             notice.class
           ]} style={rootStyle} onpointerenter={(event) => {
         if (event.pointerType !== 'touch')
           runtime.hover(id, true);
       }} onpointerleave={() => runtime.hover(id, false)} onfocusin={() => runtime.focus(id, true)} onfocusout={handleFocusOut}>
     {#if notice.icon || notice.type}
-      <div class="ant-notification-notice-wrapper">
-        <span class={[
-          'ant-notification-notice-icon',
+      <div data-ant-notification-notice-wrapper class={`${prefixCls}-notice-wrapper`}>
+        <span data-ant-notification-notice-icon class={[
+          `${prefixCls}-notice-icon`,
           notice.type && (!designTheme.enabled || !notice.icon)
-            && `ant-notification-notice-icon-${notice.type}`
+            && `${prefixCls}-notice-icon-${notice.type}`
         ]} aria-hidden="true">{#if notice.icon}{@render notice.icon()}{:else if notice.type}<Icon name={icons[notice.type]} />{/if}</span>
         {@render textContent()}
       </div>
     {:else}{@render textContent()}{/if}
-    {#if notice.actions}<div class="ant-notification-notice-actions">{@render notice.actions()}</div>{/if}
-    {#if closable}<button type="button" class="ant-notification-notice-close" disabled={notice.closing || closeConfig?.disabled} aria-label={closeConfig?.['aria-label'] ?? config.locale.closeText} aria-labelledby={closeConfig?.['aria-labelledby']} aria-describedby={closeConfig?.['aria-describedby']} onclick={handleClose}><span aria-hidden="true">{#if typeof closeIcon === 'function'}{@render closeIcon()}{:else if typeof closeIcon === 'string'}{closeIcon}{:else}<Icon name="close" />{/if}</span></button>{/if}
+    {#if notice.actions}<div data-ant-notification-notice-actions class={`${prefixCls}-notice-actions`}>{@render notice.actions()}</div>{/if}
+    {#if closable}<button type="button" data-ant-notification-notice-close class={`${prefixCls}-notice-close`} disabled={notice.closing || closeConfig?.disabled} aria-label={closeConfig?.['aria-label'] ?? config.locale.closeText} aria-labelledby={closeConfig?.['aria-labelledby']} aria-describedby={closeConfig?.['aria-describedby']} onclick={handleClose}><span aria-hidden="true">{#if typeof closeIcon === 'function'}{@render closeIcon()}{:else if typeof closeIcon === 'string'}{closeIcon}{:else}<Icon name="close" />{/if}</span></button>{/if}
   </div>
 {/if}

@@ -4219,6 +4219,16 @@ Top/bottom у holder задают отступ в px, по умолчанию 24
 (по умолчанию 384px). Ширина ограничивается viewport, длинный текст переносится.
 Темы, compact и RTL наследуются от ConfigProvider. `theme.components.Notification`
 настраивает width, zIndexPopup, status backgrounds, aliases и component algorithms.
+`NotificationHolder.prefixCls` меняет namespace всех placement-списков и карточек;
+пустая строка наследует ConfigProvider.prefixCls. В App настройка передаётся через
+notification. Canonical component tokens и прежний status background bridge
+сохранены; private icon/title metrics используют независимый общий namespace.
+[Raw prefix-замеры](./tests/browser/fixtures/ant-design-notification-prefix-reference.json)
+отделены от public styles для native close target и wrapping guards. Потеря
+status-классов уже открытой карточки в React записана отдельно от public same-key
+refresh. Native обновляет классы без reopening, сохраняя DOM/ARIA IDs, draft,
+selection/focus, очередь, deadlines и callbacks, в том числе внутри App.
+
 ProgressBg подготавливается, но showProgress пока отсутствует. Локальные CSS variables
 другого prefix разрешаются на notice; пользовательские variables Holder имеют приоритет.
 Обновления сохраняют viewport styles, очередь, deadlines, actions DOM, draft/focus/selection.

@@ -9,6 +9,11 @@
 
 ### Added
 
+- NotificationHolder и App.notification поддерживают local/shared prefixCls
+  во всех placements и частях карточки. Canonical tokens/status backgrounds,
+  native viewport/motion, DOM/ARIA IDs, draft/focus/selection, очередь и deadlines
+  сохраняются. Source stale status classes записаны raw/refreshed.
+
 - MessageHolder и App.message поддерживают local/shared prefixCls для списка,
   сообщений и иконок. Native popover, очередь, handles, deadlines и внешний фокус
   сохраняются. Source stale status classes записаны raw/refreshed.

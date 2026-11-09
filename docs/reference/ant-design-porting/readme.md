@@ -254,6 +254,11 @@ disabled-loading сверяется с отдельными public button props 
 Runtime разделяет local classes и global private Notification metrics; canonical
 tokens и native popover/viewport/timing сохраняются. Source stale status classes
 при live prefix отделены от public same-key refresh counterparts.
+Рецепт notification-prefix выводит 45 правил всех шести placements и карточек;
+тело CSS совпадает с прежним vendor-файлом, motion/stack/progress/pure исключены.
+Runtime разделяет local classes и global private icon/title metrics; component
+tokens/status background bridge, native viewport/motion/focus/timing сохранены.
+Raw замеры отделены от public close/wrapping и same-key refresh counterparts.
 Рецепт layout-prefix выводит 35 flat rules Layout/Sider; runtime выбирает свою
 группу, сохраняет Menu namespace и ограничивает defaults/state selectors корнем.
 Тот же template используется для Header/Content/Footer: выбираются selectors

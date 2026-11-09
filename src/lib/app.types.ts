@@ -12,6 +12,8 @@ export interface AppMessageConfig extends MessageOptions {
 }
 
 export interface AppNotificationConfig extends NotificationOptions {
+  /** Локальный prefix NotificationHolder; иначе наследуется ConfigProvider. */
+  prefixCls?: string;
   top?: number;
   bottom?: number;
 }

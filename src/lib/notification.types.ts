@@ -60,6 +60,8 @@ export type NotificationInstance = ReturnType<typeof createNotification>;
 /** Единственная поверхность экземпляра createNotification для всех placements. */
 export interface NotificationHolderProps {
   notification: NotificationInstance;
+  /** Локальный namespace всех списков и уведомлений; пустая строка наследует ConfigProvider. */
+  prefixCls?: string;
   /** @defaultValue 24 */
   top?: number;
   /** @defaultValue 24 */

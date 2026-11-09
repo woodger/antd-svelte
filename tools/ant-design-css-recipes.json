@@ -3049,5 +3049,29 @@
     ],
     "keyframes": [],
     "header": "/* Ant Design 6.6.8 — MIT; vendor/LICENSE.ant-design.\n * Message prefix template: top/list/notices, без motion/stack/pure/actions.\n * SHA-256: 8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa\n */"
+  },
+  {
+    "id": "notification-prefix",
+    "output": "src/lib/vendor/notification-prefix.css.js",
+    "format": "module",
+    "expectedRules": 45,
+    "include": [
+      "^(?:\\.css-var-_R_0_)?\\.ant-notification(?![\\w])"
+    ],
+    "exclude": [
+      "ant-notification-(?:fade|stack|notice-pure|notice-progress|list-content-decrease)"
+    ],
+    "replacements": [
+      {
+        "pattern": "\\.css-var-_R_0_\\.ant-notification-css-var",
+        "replacement": ".ant-notification-css-var"
+      },
+      {
+        "pattern": "\\.ant-notification(?![-\\w])",
+        "replacement": ".ant-notification:where(.ant-notification-list)"
+      }
+    ],
+    "keyframes": [],
+    "header": "/* Ant Design 6.6.8 — MIT; vendor/LICENSE.ant-design.\n * Notification prefix template: six placements/list/notices, без motion/stack/progress/pure.\n * SHA-256: 8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa\n */"
   }
 ]
