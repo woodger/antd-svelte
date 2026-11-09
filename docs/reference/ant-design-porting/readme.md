@@ -259,7 +259,8 @@ tokens и native popover/viewport/timing сохраняются. Source stale st
 Runtime разделяет local classes и global private icon/title metrics; component
 tokens/status background bridge, native viewport/motion/focus/timing сохранены.
 Raw замеры отделены от public close/wrapping и same-key refresh counterparts.
-Рецепт upload-prefix выводит те же 82 правила, что upload, как CSS data module.
+Рецепт upload-prefix выводит те же 85 правил и два inline keyframes, что upload,
+как CSS data module. Fade progress и неиспользуемые collapse selectors исключены.
 Runtime изолирует wrapper/RTL scopes и меняет owner classes всех controls/list
 states; canonical tokens/link reset и Button/Progress/Tooltip namespaces сохранены.
 Native file input, refs/focus и выполняющиеся запросы не зависят от публичных классов.
@@ -330,6 +331,15 @@ Upload error Tooltip сверяется по десяти raw UMD cases и че�
 string response, error.statusText, error.message, пустые значения, response object,
 Error/ProgressEvent и locale fallback. Sample metadata содержит строки. Текст
 открытого Tooltip меняется без замены строки; SSR сохраняет прежний hidden popover.
+Upload list motion сверяется по 12 raw UMD cases: начальный список без motion,
+добавление/удаление text/picture/card/circle, motion=false, prefixCls, duration и RTL.
+Промежуточные computed размеры оставлены в raw как наблюдения времени; browser
+сравнивает классы, целевые inline styles, keyframes, duration и easing.
+CSS end event завершается только на собственном container; deadline 2000 ms,
+возврат uid, reduced motion и unmount сохраняют cleanup. Девять raw diffKeys cases
+задают порядок retention; ещё два raw observations показывают дубликаты inherited
+имён uid в @rc-component/motion 1.3.3. Native использует Map; этот дефект не перенесён.
+Motion trigger и fade progress остаются отдельно непокрытыми.
 Upload thumbnail fallback сверяется по 24 raw UMD cases и пяти transitions:
 picture/card/circle, absent/empty/present thumbUrl, URL priority, пустые источники
 и non-image файлы. Пустой thumbUrl сохраняет URL изображения/preview и запрещает

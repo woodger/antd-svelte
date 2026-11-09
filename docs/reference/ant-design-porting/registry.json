@@ -11315,6 +11315,11 @@
           "name": "@ant-design/icons",
           "range": "^6.3.4",
           "referenceVersion": "6.3.4"
+        },
+        {
+          "name": "@rc-component/motion",
+          "range": "^1.3.3",
+          "referenceVersion": "1.3.3"
         }
       ],
       "priority": "p1",
@@ -11411,7 +11416,7 @@
             "tests/package/upload.ssr.test.ts",
             "tests/browser/upload.spec.ts"
           ],
-          "note": "Children snippet, hasControlInside, keyboard chooser, multiple drop/accept, ShowUploadList flags/extra, исходные icons и thumbnail canvas. RU/EN, RTL, темы и disabled из ConfigProvider/Form. 82 CSS-правила из закреплённого архива; неиспользуемые React motion selectors исключены."
+          "note": "Children snippet, hasControlInside, keyboard chooser, multiple drop/accept, ShowUploadList flags/extra, исходные icons и thumbnail canvas. RU/EN, RTL, темы и disabled из ConfigProvider/Form. 85 CSS-правил и два inline keyframes из закреплённого архива; fade progress и неиспользуемые collapse selectors пока исключены."
         },
         {
           "id": "component-theme",
@@ -11457,11 +11462,30 @@
         },
         {
           "id": "motion",
-          "title": "Исходные анимации списка и collapse lifecycle",
-          "state": "missing",
+          "title": "Полный motion Upload: trigger и fade progress",
+          "state": "partial",
           "requiredForV1": false,
-          "evidence": [],
-          "note": "Удаление списка выполняется без CSSMotion exit/appear/collapse. Задержка progress 300 ms и вращение loading с reduced motion перенесены."
+          "evidence": [
+            "src/lib/Upload.svelte",
+            "src/lib/UploadList.svelte",
+            "src/lib/UploadListItem.svelte",
+            "src/lib/upload-motion.engine.ts",
+            "src/lib/upload-motion.engine.test.ts",
+            "src/lib/upload-motion.dom.ts",
+            "src/lib/vendor/upload.css",
+            "src/lib/vendor/upload-prefix.css.js",
+            "src/lib/vendor/LICENSE.rc-motion",
+            "tools/ant-design-css-recipes.json",
+            "tools/fixtures/ant-design-upload-motion-keys-reference.json",
+            "tests/browser/upload-motion.spec.ts",
+            "tests/browser/upload-motion-metrics.ts",
+            "tests/browser/fixtures/UploadMotionScope.svelte",
+            "tests/browser/fixtures/UploadMotionFixtures.svelte",
+            "tests/browser/fixtures/ant-design-upload-motion-reference.json",
+            "tests/package/upload-motion.ssr.test.ts",
+            "readme.md"
+          ],
+          "note": "Appear/enter/leave строк и collapse height для text/picture, inline keyframes card/circle перенесены отдельно. Motion появления/исчезновения trigger и fade lifecycle progress пока отсутствуют; прежняя задержка progress 300 ms и loading rotation сохранены."
         },
         {
           "id": "component-prefix",
@@ -11753,6 +11777,47 @@
             "readme.md"
           ],
           "note": "Непустой thumbUrl имеет приоритет над url; пустой thumbUrl сохраняет URL изображения и preview, но не вызывает previewFile при originFileObj. Генерация сохраняет guard thumbUrl===undefined. 24 raw UMD cases для picture/card/circle и пять transitions задают absent/empty/present thumbnail, URL priority, пустые источники и non-image файл. Updates сохраняют item/input DOM, thumbnail anchor до исчезновения источника и внешний draft/focus/selection. SSR использует URL без previewFile и browser resources."
+        },
+        {
+          "id": "list-item-motion",
+          "title": "Appear/leave/collapse строк и удержание ключей списка",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Upload.svelte",
+            "src/lib/UploadList.svelte",
+            "src/lib/UploadListItem.svelte",
+            "src/lib/upload-motion.engine.ts",
+            "src/lib/upload-motion.engine.test.ts",
+            "src/lib/upload-motion.dom.ts",
+            "src/lib/vendor/upload.css",
+            "src/lib/vendor/upload-prefix.css.js",
+            "src/lib/vendor/LICENSE.rc-motion",
+            "tools/ant-design-css-recipes.json",
+            "tools/fixtures/ant-design-upload-motion-keys-reference.json",
+            "tests/browser/upload-motion.spec.ts",
+            "tests/browser/upload-motion-metrics.ts",
+            "tests/browser/fixtures/UploadMotionScope.svelte",
+            "tests/browser/fixtures/UploadMotionFixtures.svelte",
+            "tests/browser/fixtures/ant-design-upload-motion-reference.json",
+            "tests/package/upload-motion.ssr.test.ts",
+            "readme.md"
+          ],
+          "note": "Первый список не анимируется; новые uid проходят appear, возвращённые во время leave — enter в прежнем DOM. Text/picture измеряют offsetHeight/scrollHeight и переходят по height/opacity, card/circle используют исходные inline keyframes. Два RAF, собственные end events, deadline 2000 ms и отмена stale callbacks; motion=false/reduced motion завершают переход. 12 raw UMD cases задают классы, целевые styles, keyframes, duration/easing, prefix и RTL; промежуточные computed размеры остаются raw timing observations. Retention повторяет девять обычных diffKeys cases. Контролируемый список, callbacks и abort не ждут окончания анимации. SSR не создаёт motion resources; Native сохраняет строки/input и внешний draft/focus/selection, очищает RAF/timers/listeners на unmount."
+        },
+        {
+          "id": "native-motion-key-names",
+          "title": "Наблюдение Source: дубликаты prototype-named uid в diffKeys",
+          "state": "partial",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/upload-motion.engine.ts",
+            "src/lib/upload-motion.engine.test.ts",
+            "tools/fixtures/ant-design-upload-motion-keys-reference.json",
+            "tests/browser/upload-motion.spec.ts",
+            "readme.md"
+          ],
+          "note": "Unmodified package/es/util/diff.js из @rc-component/motion 1.3.3 при перестановке [a,__proto__] в [__proto__,a] возвращает add/keep/remove с дубликатом __proto__; аналогичен constructor. Plain object counter читает inherited значения и не удаляет duplicate remove entry. Оба raw результата сохранены без public подмены. Native использует Map и сохраняет одну keyed строку; этот дефект не перенесён. Наблюдение относится к алгоритму зависимости, не является замером всего UMD UI."
         }
       ]
     },

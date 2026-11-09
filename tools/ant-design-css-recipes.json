@@ -1225,12 +1225,12 @@
   {
     "id": "upload",
     "output": "src/lib/vendor/upload.css",
-    "expectedRules": 82,
+    "expectedRules": 85,
     "include": [
       "^(?:\\.css-var-_R_0_)?\\.ant-upload(?![\\w])"
     ],
     "exclude": [
-      "\\.ant-upload-animate-inline-|\\.ant-fade-|\\.ant-motion-collapse"
+      "\\.ant-fade-|\\.ant-motion-collapse"
     ],
     "replacements": [
       {
@@ -1246,8 +1246,11 @@
         "replacement": ".ant-upload-wrapper:where(.ant-upload-css-var)"
       }
     ],
-    "keyframes": [],
-    "header": "/* Ant Design 6.6.8 — MIT; vendor/LICENSE.ant-design.\n * Upload: text, picture, cards, drag и RTL; motion lifecycle переносится отдельно.\n * SHA-256: 8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa\n */"
+    "keyframes": [
+      "uploadAnimateInlineIn",
+      "uploadAnimateInlineOut"
+    ],
+    "header": "/* Ant Design 6.6.8 — MIT; vendor/LICENSE.ant-design.\n * Upload: text, picture, cards, drag и RTL; appear/leave строк и inline keyframes.\n * SHA-256: 8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa\n */"
   },
   {
     "id": "tree",
@@ -3141,12 +3144,12 @@
   {
     "id": "upload-prefix",
     "output": "src/lib/vendor/upload-prefix.css.js",
-    "expectedRules": 82,
+    "expectedRules": 85,
     "include": [
       "^(?:\\.css-var-_R_0_)?\\.ant-upload(?![\\w])"
     ],
     "exclude": [
-      "\\.ant-upload-animate-inline-|\\.ant-fade-|\\.ant-motion-collapse"
+      "\\.ant-fade-|\\.ant-motion-collapse"
     ],
     "replacements": [
       {
@@ -3162,8 +3165,11 @@
         "replacement": ".ant-upload-wrapper:where(.ant-upload-css-var)"
       }
     ],
-    "keyframes": [],
-    "header": "/* Ant Design 6.6.8 — MIT; vendor/LICENSE.ant-design.\n * Upload: text, picture, cards, drag и RTL; motion lifecycle переносится отдельно.\n * SHA-256: 8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa\n */",
+    "keyframes": [
+      "uploadAnimateInlineIn",
+      "uploadAnimateInlineOut"
+    ],
+    "header": "/* Ant Design 6.6.8 — MIT; vendor/LICENSE.ant-design.\n * Upload: text, picture, cards, drag и RTL; appear/leave строк и inline keyframes.\n * SHA-256: 8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa\n */",
     "format": "module"
   },
   {

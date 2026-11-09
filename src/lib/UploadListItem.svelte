@@ -1,5 +1,7 @@
 <script lang="ts" generics="T = unknown">
-  import { onMount } from 'svelte';
+  import { onMount, untrack } from 'svelte';
+  import { createUploadItemMotion, type UploadItemMotionState } from './upload-motion.dom';
+  import { useToken } from './theme-context.svelte';
   import type {
     UploadFile,
     UploadLocale,
@@ -30,7 +32,10 @@
     progress = { size: [-1, 2], showInfo: false },
     itemClass,
     itemStyle,
-    fileList
+    fileList,
+    visible = true,
+    motionAppear = false,
+    onMotionEnd
   }: {
     prefixCls: string;
     file: UploadFile<T>;
@@ -49,7 +54,17 @@
     itemClass?: string;
     itemStyle?: string;
     fileList: readonly UploadFile<T>[];
+    visible?: boolean;
+    motionAppear?: boolean;
+    onMotionEnd?: () => void;
   } = $props();
+  const tokens = useToken();
+  // Первые uid списка пропускают appear; новые экземпляры получают разрешение после mount списка.
+  const appear = untrack(() => motionAppear);
+  let root = $state<HTMLDivElement>();
+  let motion = $state<ReturnType<typeof createUploadItemMotion>>();
+  let motionState = $state<UploadItemMotionState>({});
+  let status = $state(untrack(() => file.status));
   let thumbnail = $state('');
   let showProgress = $state(false);
   let picture = $derived(listType !== 'text');
@@ -58,6 +73,27 @@
   let image = $derived(isImageUrl({ ...file, thumbUrl: file.thumbUrl ?? thumbnail }));
   let linkAttributes = $derived(resolveUploadLinkProps(file.linkProps));
   let message = $derived(getUploadErrorMessage(file.response, file.error, locale.uploadError));
+  $effect.pre(() => {
+    if (file.status !== 'removed') status = file.status;
+  });
+  $effect(() => {
+    if (!root) return;
+    const controller = createUploadItemMotion(root, next => { motionState = next; },
+      () => onMotionEnd?.());
+    motion = controller;
+    return () => {
+      controller.destroy();
+      motion = undefined;
+    };
+  });
+  $effect.pre(() => {
+    const controller = motion;
+    const next = visible;
+    const prefix = prefixCls;
+    const inline = card;
+    const enabled = tokens.token.motion;
+    untrack(() => controller?.sync(next, prefix, inline, enabled, appear));
+  });
   function show(
     flag: boolean | ((file: UploadFile<T>) => boolean) | undefined,
     fallback: boolean
@@ -124,19 +160,19 @@
 {#snippet previewIcon()}{#if options.previewIcon}{@render options.previewIcon(file)}{:else}<UploadIcon name="eye" />{/if}{/snippet}
 {#snippet actions()}
   {#if card && show(options.showPreviewIcon, true) && source}<a href={file.url || source} target="_blank" rel="noopener noreferrer" aria-label={locale.previewFile} title={locale.previewFile} onclick={preview}>{@render previewIcon()}</a>{/if}
-  {#if show(options.showDownloadIcon, false) && file.status === 'done'}<Button type="text" size="small" class={`${prefixCls}-list-item-action`} disabled={false} aria-label={locale.downloadFile} title={locale.downloadFile} onclick={() => download(file)} icon={downloadIcon} />{/if}
+  {#if show(options.showDownloadIcon, false) && status === 'done'}<Button type="text" size="small" class={`${prefixCls}-list-item-action`} disabled={false} aria-label={locale.downloadFile} title={locale.downloadFile} onclick={() => download(file)} icon={downloadIcon} />{/if}
   {#if show(options.showRemoveIcon, !disabled)}<Button type="text" size="small" class={`${prefixCls}-list-item-action`} {disabled} aria-label={locale.removeFile} title={locale.removeFile} onclick={() => onRemove(file)} icon={removeIcon} />{/if}
 {/snippet}
 {#snippet item()}
 <div class={[
     `${prefixCls}-list-item`,
-    `${prefixCls}-list-item-${file.status ?? 'undefined'}`,
+    `${prefixCls}-list-item-${status ?? 'undefined'}`,
     itemClass
   ]} style={itemStyle}>
   {#if picture}
-    {#if file.status === 'uploading' || !source}<div class={[
+    {#if status === 'uploading' || !source}<div class={[
         `${prefixCls}-list-item-thumbnail`,
-        file.status !== 'uploading' && `${prefixCls}-list-item-file`
+        status !== 'uploading' && `${prefixCls}-list-item-file`
       ]}>{@render fileIcon()}</div>
     {:else}<a class={[
         `${prefixCls}-list-item-thumbnail`,
@@ -146,8 +182,10 @@
   {#if file.url}<a data-ant-upload-item-name class={`${prefixCls}-list-item-name`} title={file.name} target="_blank" rel="noopener noreferrer" {...linkAttributes} href={file.url} onclick={handleNameClick}>{file.name}{#if options.extra}<span class={`${prefixCls}-list-item-extra`}>{@render options.extra(file)}</span>{/if}</a>
   {:else if onPreview}<button type="button" data-ant-upload-item-name class={`${prefixCls}-list-item-name`} title={file.name} onclick={() => onPreview?.(file)}>{file.name}{#if options.extra}<span class={`${prefixCls}-list-item-extra`}>{@render options.extra(file)}</span>{/if}</button>
   {:else}<span data-ant-upload-item-name class={`${prefixCls}-list-item-name`} title={file.name}>{file.name}{#if options.extra}<span class={`${prefixCls}-list-item-extra`}>{@render options.extra(file)}</span>{/if}</span>{/if}
-  {#if !card || file.status !== 'uploading'}<span class={[`${prefixCls}-list-item-actions`, listType === 'picture' && 'picture']}>{@render actions()}</span>{/if}
-  {#if showProgress && file.status === 'uploading' && file.percent !== undefined}<div class={`${prefixCls}-list-item-progress`}><Progress type="line" percent={file.percent} aria-label={file['aria-label'] ?? (file['aria-labelledby'] ? undefined : `${locale.uploading} ${file.name}`)} aria-labelledby={file['aria-labelledby']} {...progress} /></div>{/if}
+  {#if !card || status !== 'uploading'}<span class={[`${prefixCls}-list-item-actions`, listType === 'picture' && 'picture']}>{@render actions()}</span>{/if}
+  {#if showProgress && status === 'uploading' && file.percent !== undefined}<div class={`${prefixCls}-list-item-progress`}><Progress type="line" percent={file.percent} aria-label={file['aria-label'] ?? (file['aria-labelledby'] ? undefined : `${locale.uploading} ${file.name}`)} aria-labelledby={file['aria-labelledby']} {...progress} /></div>{/if}
 </div>
 {/snippet}
-{#snippet originNode()}{#if file.status === 'error'}<Tooltip title={message}>{@render item()}</Tooltip>{:else}{@render item()}{/if}{/snippet}<div data-ant-upload-item-container class={`${prefixCls}-list-item-container`}>{#if itemRender}{@render itemRender(originNode, file, fileList, renderActions)}{:else}{@render originNode()}{/if}</div>
+{#snippet originNode()}{#if status === 'error'}<Tooltip title={message}>{@render item()}</Tooltip>{:else}{@render item()}{/if}{/snippet}<div data-ant-upload-item-container
+  bind:this={root} class={[`${prefixCls}-list-item-container`, motionState.className]}
+  style={motionState.style}>{#if itemRender}{@render itemRender(originNode, file, fileList, renderActions)}{:else}{@render originNode()}{/if}</div>

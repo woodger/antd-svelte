@@ -9,6 +9,12 @@
 
 ### Added
 
+- Upload сохраняет строки до конца исходных appear/leave/collapse анимаций:
+  text/picture используют высоту и opacity, card/circle — inline keyframes.
+  Перенесены порядок удержания, возврат uid, deadline и motion token; начальные
+  строки не анимируются, reduced motion и cleanup сохранены. Ошибка diffKeys
+  для prototype-named uid записана отдельно и не перенесена.
+
 - Upload showUploadList принимает previewIcon/downloadIcon/removeIcon snippets
   с текущим файлом. Сохранены visibility/status/disabled, locale labels, callbacks
   и controls/input DOM; empty/zero snippets соответствуют React Fragment content.

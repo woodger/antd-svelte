@@ -6582,7 +6582,8 @@ Upload переносит Ant Design 6.6.8 и AjaxUploader/request из @rc-comp
 1.1.1. UploadDragger соответствует Upload.Dragger; UPLOAD_LIST_IGNORE — отдельный
 экспорт аналога Upload.LIST_IGNORE. React и rc-upload runtime не устанавливаются.
 Лицензия rc-upload сохранена в vendor/LICENSE.rc-upload; CSS-рецепт извлекает
-82 правила из закреплённого antd.css, исключая неиспользуемые motion selectors.
+85 правил и два inline keyframes из закреплённого antd.css; fade progress и
+неиспользуемые collapse selectors пока исключены.
 Отдельный рецепт `upload-link-reset` добавляет 14 исходных общих правил ссылок
 внутри Upload; цвета error rows сохраняют приоритет.
 Иконки взяты из закреплённого @ant-design/icons-svg 4.6.0 с существующей лицензией.
@@ -6590,7 +6591,7 @@ Upload переносит Ant Design 6.6.8 и AjaxUploader/request из @rc-comp
 `prefixCls` задаёт namespace Upload/Dragger, списка и всех состояний; пустая строка
 наследует ConfigProvider.prefixCls. Canonical variables и link reset сохранены,
 Button/Progress/Tooltip используют свои namespaces. CSS-рецепт upload-prefix
-воспроизводит те же 82 правила в изолированном шаблоне.
+воспроизводит те же 85 правил и keyframes в изолированном шаблоне.
 [Сверка с официальным UMD](./tests/browser/fixtures/ant-design-upload-prefix-reference.json)
 покрывает все list types, drag, RTL, states и вложенные/reset scopes. Смена prefix
 сохраняет wrapper/input/filename DOM, refs, фокус и выполняющийся запрос; completion
@@ -6658,6 +6659,23 @@ previewFile/isImageUrl настраивают thumbnail. По умолчанию
 [browser](tests/browser/upload-thumbnail-fallback.spec.ts) и
 [SSR](tests/package/upload-thumbnail-fallback.ssr.test.ts) проверяют picture/card/circle,
 пустые URL, не-изображения и обновления без потери строки, input и внешнего фокуса.
+
+Начальный список появляется без анимации. Новые строки text/picture раскрываются
+по высоте и opacity; card/circle используют исходные keyframes размера, margin
+и opacity. При удалении строка сохраняется до собственного CSS end event или
+deadline 2000 ms; возврат того же uid отменяет уход и сохраняет DOM. Callbacks,
+fileList и отмена транспорта не задерживаются до конца оформления.
+`theme.token.motion=false` и reduced motion завершают переход сразу.
+[Raw-замеры](tests/browser/fixtures/ant-design-upload-motion-reference.json),
+[browser](tests/browser/upload-motion.spec.ts) и
+[SSR](tests/package/upload-motion.ssr.test.ts) охватывают четыре list types,
+prefixCls, RTL, duration tokens, возврат строки и cleanup.
+
+В `diffKeys` @rc-component/motion 1.3.3 перестановка `[a, __proto__]` в
+`[__proto__, a]` возвращает дубликаты ключа; то же происходит с `constructor`.
+[Исходные результаты](tools/fixtures/ant-design-upload-motion-keys-reference.json)
+сохранены без исправлений. Svelte использует `Map` и сохраняет одну строку на uid.
+Лицензия зависимости уже включена в [vendor/LICENSE.rc-motion](src/lib/vendor/LICENSE.rc-motion).
 
 UploadDragger принимает height и по умолчанию hasControlInside=false: его trigger
 имеет role=button и открывает chooser клавиатурой. Обычный Upload по умолчанию
@@ -6855,9 +6873,8 @@ webkitdirectory как boolean attribute; в браузере сохраняют
 [SSR](tests/package/upload-paste.ssr.test.ts) не создаёт browser listeners.
 
 Locale/upload из ConfigProvider, собственный locale, RU/EN, RTL и theme variables
-поддержаны. Полный rc-upload ref/internal API, ReactElement clone/event forwarding
-и исходные
-appear/exit/collapse анимации остаются отдельными пробелами реестра. Данный этап
+поддержаны. Полный rc-upload ref/internal API, ReactElement clone/event forwarding,
+motion trigger и fade progress остаются отдельными пробелами реестра. Данный этап
 не заявляет полного покрытия React Upload.
 
 ## Input

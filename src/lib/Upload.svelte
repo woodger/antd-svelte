@@ -11,7 +11,7 @@
   import { useConfig } from './config-context';
   import { useComponentTheme } from './theme-component.svelte';
   import { useForm } from './form-context';
-  import UploadListItem from './UploadListItem.svelte';
+  import UploadList from './UploadList.svelte';
   let {
     nativeElement = $bindable(),
     inputElement = $bindable(),
@@ -245,12 +245,16 @@
   </span>
 {/snippet}
 {#snippet list()}
-  {#if showUploadList}<div data-ant-upload-list data-ant-upload-list-type={listType} class={[`${componentPrefix}-list ${componentPrefix}-list-${listType}`, sharedClasses.list, semanticClasses.list]} style={[sharedStyles.list, semanticStyles.list].filter(Boolean).join(';') || undefined}>
-    {#each files as file (file.uid)}<UploadListItem prefixCls={componentPrefix} {file} {listType} options={listOptions} fileList={files} locale={strings} disabled={blocked} onRemove={file => {
+  {#if showUploadList}<UploadList prefixCls={componentPrefix} {files} {listType}
+    options={listOptions} locale={strings} disabled={blocked} onRemove={file => {
         void controller.remove(file);
-      }} {onPreview} {onDownload} {previewFile} {isImageUrl} {iconRender} {itemRender} progress={mergedProgress} itemClass={[sharedClasses.item, semanticClasses.item].filter(Boolean).join(' ') || undefined} itemStyle={[sharedStyles.item, semanticStyles.item].filter(Boolean).join(';') || undefined} />{/each}
-    {#if card && children}{@render selectTrigger()}{/if}
-  </div>{/if}
+      }} {onPreview} {onDownload} {previewFile} {isImageUrl} {iconRender} {itemRender}
+    progress={mergedProgress}
+    class={[sharedClasses.list, semanticClasses.list].filter(Boolean).join(' ') || undefined}
+    style={[sharedStyles.list, semanticStyles.list].filter(Boolean).join(';') || undefined}
+    itemClass={[sharedClasses.item, semanticClasses.item].filter(Boolean).join(' ') || undefined}
+    itemStyle={[sharedStyles.item, semanticStyles.item].filter(Boolean).join(';') || undefined}
+    appendAction={card && children ? selectTrigger : undefined} />{/if}
 {/snippet}
 {#snippet selectTrigger()}
   <div data-ant-upload-control class={[

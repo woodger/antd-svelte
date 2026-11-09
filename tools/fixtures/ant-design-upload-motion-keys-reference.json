@@ -1,0 +1,302 @@
+{
+  "reference": {
+    "package": "@rc-component/motion",
+    "version": "1.3.3",
+    "upstream": "Ant Design 6.6.8 (984592267de88fbf9cdaecc96a56629e721c709d)",
+    "source": "Unmodified package/es/util/diff.js from cached npm archive",
+    "observation": "Reordering [a, __proto__] to [__proto__, a] (also constructor) retains duplicate keys because the plain-object counter reads inherited values. Raw results are unchanged; Native uses Map and keeps one row."
+  },
+  "cases": [
+    {
+      "sample": {
+        "id": "initial",
+        "before": [],
+        "after": [
+          "a",
+          "b"
+        ]
+      },
+      "result": [
+        {
+          "key": "a",
+          "status": "add"
+        },
+        {
+          "key": "b",
+          "status": "add"
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "append",
+        "before": [
+          "a",
+          "b"
+        ],
+        "after": [
+          "a",
+          "b",
+          "c"
+        ]
+      },
+      "result": [
+        {
+          "key": "a",
+          "status": "keep"
+        },
+        {
+          "key": "b",
+          "status": "keep"
+        },
+        {
+          "key": "c",
+          "status": "add"
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "prepend",
+        "before": [
+          "a",
+          "b"
+        ],
+        "after": [
+          "c",
+          "a",
+          "b"
+        ]
+      },
+      "result": [
+        {
+          "key": "c",
+          "status": "add"
+        },
+        {
+          "key": "a",
+          "status": "keep"
+        },
+        {
+          "key": "b",
+          "status": "keep"
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "remove-first",
+        "before": [
+          "a",
+          "b",
+          "c"
+        ],
+        "after": [
+          "b",
+          "c"
+        ]
+      },
+      "result": [
+        {
+          "key": "a",
+          "status": "remove"
+        },
+        {
+          "key": "b",
+          "status": "keep"
+        },
+        {
+          "key": "c",
+          "status": "keep"
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "remove-middle",
+        "before": [
+          "a",
+          "b",
+          "c"
+        ],
+        "after": [
+          "a",
+          "c"
+        ]
+      },
+      "result": [
+        {
+          "key": "a",
+          "status": "keep"
+        },
+        {
+          "key": "b",
+          "status": "remove"
+        },
+        {
+          "key": "c",
+          "status": "keep"
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "replace",
+        "before": [
+          "a",
+          "b"
+        ],
+        "after": [
+          "c",
+          "d"
+        ]
+      },
+      "result": [
+        {
+          "key": "a",
+          "status": "remove"
+        },
+        {
+          "key": "b",
+          "status": "remove"
+        },
+        {
+          "key": "c",
+          "status": "add"
+        },
+        {
+          "key": "d",
+          "status": "add"
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "reorder",
+        "before": [
+          "a",
+          "b",
+          "c"
+        ],
+        "after": [
+          "c",
+          "a",
+          "b"
+        ]
+      },
+      "result": [
+        {
+          "key": "c",
+          "status": "keep"
+        },
+        {
+          "key": "a",
+          "status": "keep"
+        },
+        {
+          "key": "b",
+          "status": "keep"
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "swap",
+        "before": [
+          "a",
+          "b"
+        ],
+        "after": [
+          "b",
+          "a"
+        ]
+      },
+      "result": [
+        {
+          "key": "b",
+          "status": "keep"
+        },
+        {
+          "key": "a",
+          "status": "keep"
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "clear",
+        "before": [
+          "a",
+          "b"
+        ],
+        "after": []
+      },
+      "result": [
+        {
+          "key": "a",
+          "status": "remove"
+        },
+        {
+          "key": "b",
+          "status": "remove"
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "prototype-key-reorder",
+        "before": [
+          "a",
+          "__proto__"
+        ],
+        "after": [
+          "__proto__",
+          "a"
+        ],
+        "observation": true
+      },
+      "result": [
+        {
+          "key": "__proto__",
+          "status": "add"
+        },
+        {
+          "key": "a",
+          "status": "keep"
+        },
+        {
+          "key": "__proto__",
+          "status": "remove"
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "constructor-key-reorder",
+        "before": [
+          "a",
+          "constructor"
+        ],
+        "after": [
+          "constructor",
+          "a"
+        ],
+        "observation": true
+      },
+      "result": [
+        {
+          "key": "constructor",
+          "status": "add"
+        },
+        {
+          "key": "a",
+          "status": "keep"
+        },
+        {
+          "key": "constructor",
+          "status": "remove"
+        }
+      ]
+    }
+  ]
+}
