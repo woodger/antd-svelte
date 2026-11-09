@@ -3148,5 +3148,25 @@
     "keyframes": [],
     "header": "/* Ant Design 6.6.8 — MIT; см. LICENSE.ant-design.\n * Transfer: списки, поиск, actions, custom lists, pagination, status и RTL.\n * Корни ограничены :where(.ant-transfer-css-var); keyframes и at-rules отсутствуют.\n * https://registry.npmjs.org/antd/-/antd-6.6.8.tgz\n * SHA-256: 8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa\n */",
     "format": "module"
+  },
+  {
+    "id": "select-prefix",
+    "output": "src/lib/vendor/select-prefix.css.js",
+    "expectedRules": 158,
+    "include": [
+      "^(?:\\.css-var-[^\\s.]+)?\\.ant-select(?![\\w])"
+    ],
+    "exclude": [
+      "ant-slide-up"
+    ],
+    "replacements": [
+      {
+        "pattern": "\\.css-var-_R_0_\\.ant-select-css-var",
+        "replacement": ".ant-select-css-var"
+      }
+    ],
+    "keyframes": [],
+    "header": "/* Ant Design 6.6.8 — MIT; см. LICENSE.ant-design.\n * Select prefix template: single/multiple/tags, variants, options и compact.\n * Owner selectors и private variable namespace независимы от canonical tokens.\n * Motion selectors исключены; hover:none at-rule сохраняется.\n * https://registry.npmjs.org/antd/-/antd-6.6.8.tgz\n * SHA-256: 8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa\n */",
+    "format": "module"
   }
 ]

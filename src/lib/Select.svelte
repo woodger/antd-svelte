@@ -1,6 +1,8 @@
 <script lang="ts" generics="Value extends string | number = string, Mode extends 'multiple' | 'tags' | undefined = undefined">
   import { onMount, tick, untrack, type Snippet } from 'svelte';
   import { useConfig } from './config-context';
+  import ThemeScopeStyle from './ThemeScopeStyle.svelte';
+  import { getSelectPrefixCss } from './select-prefix.engine';
   import { useVariant } from './variant.svelte';
   import RenderEmpty from './RenderEmpty.svelte';
   import { useComponentTheme } from './theme-component.svelte';
@@ -38,6 +40,7 @@
 
   let {
     _autoWidth = false,
+    prefixCls,
     options = [],
     optionRender,
     mode,
@@ -81,6 +84,10 @@
   }: SelectProps<Value, Mode> = $props();
 
   const config = useConfig();
+  let prefix = $derived(config.getPrefixCls('select', prefixCls));
+  let rootPrefix = $derived(config.getPrefixCls());
+  let privateNamespace = $derived(rootPrefix.replaceAll('.', ''));
+  let prefixCss = $derived(getSelectPrefixCss(prefix, rootPrefix));
   const variantContext = useVariant('select', () => ({ variant }));
   const componentTheme = useComponentTheme('Select');
   const compact = useCompact();
@@ -244,7 +251,7 @@
   let resolvedDisabled = $derived(disabled ?? field?.disabled ?? config.componentDisabled);
   let resolvedStatus = $derived(status ?? field?.status);
   let resolvedSize = $derived(size ?? compact?.size ?? config.componentSize);
-  let compactItemClasses = $derived(compactClasses('ant-select', config.direction, compact));
+  let compactItemClasses = $derived(compactClasses(prefix, config.direction, compact));
   // Число 0 остаётся содержимым; null/empty string скрывают пустой список.
   let hiddenEmpty = $derived(filtered.length === 0
     && (notFoundContent === null || notFoundContent === false || notFoundContent === ''));
@@ -720,11 +727,11 @@
 
 <style>
   .container { position: relative; min-width: 0; width: 100%; }
-  .ant-select { display: flex; align-items: center; width: 100%; }
-  .ant-select:focus-within { outline: 2px solid var(--ant-color-primary); outline-offset: 2px; }
-  .ant-select.ant-select-source-theme { align-items: flex-start; }
-  .ant-select.ant-select-source-theme:focus-within { outline: 0; outline-offset: 0; }
-  .ant-select.ant-select-single .ant-select-input, .ant-select.ant-select-multiple .ant-select-input {
+  [data-ant-select-control] { display: flex; align-items: center; width: 100%; }
+  [data-ant-select-control]:focus-within { outline: 2px solid var(--ant-color-primary); outline-offset: 2px; }
+  [data-ant-select-control][data-ant-select-source-theme] { align-items: flex-start; }
+  [data-ant-select-control][data-ant-select-source-theme]:focus-within { outline: 0; outline-offset: 0; }
+  [data-ant-select-control][data-ant-select-single] [data-ant-select-input], [data-ant-select-control][data-ant-select-multiple] [data-ant-select-input] {
     position: relative;
     inset: auto;
     width: 100%;
@@ -738,90 +745,99 @@
     line-height: inherit;
     cursor: inherit;
   }
-  .ant-select-input::placeholder { color: var(--ant-color-text-placeholder); }
+  [data-ant-select-input]::placeholder { color: var(--ant-color-text-placeholder); }
   .intrinsic-width { width: auto; }
-  .intrinsic-width .ant-select-content { position: relative; }
-  .intrinsic-width .ant-select.ant-select-single .ant-select-input { position: absolute; inset: 0; }
+  .intrinsic-width [data-ant-select-content] { position: relative; }
+  .intrinsic-width [data-ant-select-control][data-ant-select-single] [data-ant-select-input] { position: absolute; inset: 0; }
   .intrinsic-label { visibility: hidden; white-space: pre; }
   .suffix { display: flex; flex: none; color: var(--ant-color-text-quaternary); pointer-events: none; }
   .clear { display: flex; padding: 0; margin-inline-end: 4px; border: 0; background: none; color: var(--ant-color-text-tertiary); cursor: pointer; }
   .clear:focus-visible { outline: 2px solid var(--ant-color-primary); outline-offset: 2px; }
-  .popup.ant-select-dropdown { top: calc(100% + 4px); inset-inline: 0; max-height: 256px; overflow-y: auto; }
+  .popup[data-ant-select-dropdown] { top: calc(100% + 4px); inset-inline: 0; max-height: 256px; overflow-y: auto; }
   /* Исходный virtual-list размещает options в flex column без сжатия строк. */
-  .popup.ant-select-source-popup { display: flex; flex-direction: column; }
-  .popup.ant-select-dropdown[popover] { position: fixed; inset: auto; margin: 0; }
-  .popup.ant-select-dropdown[hidden] { display: none; }
-  .ant-select-source-popup > .ant-select-item { flex: none; }
-  .ant-select-source-theme .clear { display: inline-block; margin-inline-end: 0; color: var(--ant-color-text-quaternary); }
-  .ant-select-source-theme .clear:hover { color: var(--ant-color-icon); }
-  .ant-select-source-theme .clear:focus-visible { opacity: 1; }
-  .ant-select-source-theme:has(.clear):hover .suffix, .ant-select-source-theme:has(.clear:focus-visible) .suffix { opacity: 0; }
-  .ant-select-item { width: 100%; border: 0; background: none; font-family: inherit; text-align: start; }
-  .ant-select.ant-select-multiple { height: auto; min-height: var(--ant-select-height); }
-  .ant-select.ant-select-multiple .ant-select-content { gap: 0; }
-  .ant-select.ant-select-multiple .ant-select-input { flex: 1 1 60px; width: 60px; min-width: 40px; max-width: 100%; }
-  .ant-select.ant-select-responsive-tags .ant-select-input { flex: none; width: 4px; min-width: 4px; }
+  .popup[data-ant-select-source-popup] { display: flex; flex-direction: column; }
+  .popup[data-ant-select-dropdown][popover] { position: fixed; inset: auto; margin: 0; }
+  .popup[data-ant-select-dropdown][hidden] { display: none; }
+  [data-ant-select-source-popup] > [data-ant-select-item] { flex: none; }
+  [data-ant-select-source-theme] .clear { display: inline-block; margin-inline-end: 0; color: var(--ant-color-text-quaternary); }
+  [data-ant-select-source-theme] .clear:hover { color: var(--ant-color-icon); }
+  [data-ant-select-source-theme] .clear:focus-visible { opacity: 1; }
+  [data-ant-select-source-theme]:has(.clear):hover .suffix, [data-ant-select-source-theme]:has(.clear:focus-visible) .suffix { opacity: 0; }
+  [data-ant-select-item] { width: 100%; border: 0; background: none; font-family: inherit; text-align: start; }
+  [data-ant-select-control][data-ant-select-multiple] { height: auto; min-height: var(--ant-native-select-height); }
+  [data-ant-select-control][data-ant-select-multiple] [data-ant-select-content] { gap: 0; }
+  [data-ant-select-control][data-ant-select-multiple] [data-ant-select-input] { flex: 1 1 60px; width: 60px; min-width: 40px; max-width: 100%; }
+  [data-ant-select-control][data-ant-select-responsive-tags] [data-ant-select-input] { flex: none; width: 4px; min-width: 4px; }
   .measure-tag { position: absolute; inset-block-start: 0; inset-inline-start: 0; visibility: hidden; pointer-events: none; }
   .custom-tag { display: inline-flex; flex: none; min-width: 0; max-width: 100%; }
-  .ant-select.ant-select-source-theme.ant-select-multiple .ant-select-input { line-height: calc(var(--ant-select-internal_fixed_item_margin) * 2 + var(--ant-select-multi-item-height)); }
-  .ant-select.ant-select-multiple .ant-select-selection-item { flex: none; box-sizing: border-box; max-width: calc(100% - var(--ant-select-internal_fixed_item_margin) * 2); min-width: 0; }
-  .ant-select-selection-item-remove { flex: none; padding: 0; border: 0; background: transparent; }
-  .ant-select-selection-item-remove:focus-visible { outline: 2px solid var(--ant-color-primary); outline-offset: 1px; }
-  .ant-select-selection-item-disabled { color: var(--ant-select-multiple-item-color-disabled); }
-  .ant-select-source-theme .ant-select-selection-item-disabled { color: inherit; }
-  .container.ant-select-compact-item > .ant-select { border-radius: inherit; }
+  [data-ant-select-control][data-ant-select-source-theme][data-ant-select-multiple] [data-ant-select-input] { line-height: calc(var(--ant-select-internal_fixed_item_margin) * 2 + var(--ant-native-select-multi-item-height)); }
+  [data-ant-select-control][data-ant-select-multiple] [data-ant-select-selection-item] { flex: none; box-sizing: border-box; max-width: calc(100% - var(--ant-select-internal_fixed_item_margin) * 2); min-width: 0; }
+  [data-ant-select-selection-item-remove] { flex: none; padding: 0; border: 0; background: transparent; }
+  [data-ant-select-selection-item-remove]:focus-visible { outline: 2px solid var(--ant-color-primary); outline-offset: 1px; }
+  [data-ant-select-selection-item-disabled] { color: var(--ant-select-multiple-item-color-disabled); }
+  [data-ant-select-source-theme] [data-ant-select-selection-item-disabled] { color: inherit; }
+  .container[data-ant-select-compact-item] > [data-ant-select-control] { border-radius: inherit; }
   @media (hover: none) {
-    .ant-select-source-theme:has(.clear) .suffix { opacity: 0; }
+    [data-ant-select-source-theme]:has(.clear) .suffix { opacity: 0; }
   }
 </style>
 
 <svelte:document onpointerdown={handleOutside} onreset={handleReset} />
 
-<div class={[
+{#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`select-prefix:${prefix}:${rootPrefix}`} />{/if}<div data-ant-select-prefix={prefix} data-ant-select-root-prefix={rootPrefix}
+  data-ant-select-compact-item={Boolean(compact) || undefined} class={[
     'container ant-select-css-var',
     intrinsicWidth && 'intrinsic-width',
     componentTheme.className,
     compactItemClasses,
-    compact && resolvedSize === 'large' && 'ant-select-lg',
-    compact && resolvedSize === 'small' && 'ant-select-sm',
-    compact && expanded && 'ant-select-focused',
-    compact && resolvedDisabled && 'ant-select-disabled',
+    compact && resolvedSize === 'large' && `${prefix}-lg`,
+    compact && resolvedSize === 'small' && `${prefix}-sm`,
+    compact && expanded && `${prefix}-focused`,
+    compact && resolvedDisabled && `${prefix}-disabled`,
     className
   ]} bind:this={container} style={[componentTheme.style, style].filter(Boolean).join(';') || undefined}>
   <div
     bind:this={reference}
+    data-ant-select-control data-ant-select-prefix={prefix} data-ant-select-root-prefix={rootPrefix}
+    data-ant-select-source-theme={Boolean(componentTheme.className) || undefined}
+    data-ant-select-single={!multiple || undefined} data-ant-select-multiple={multiple || undefined}
+    data-ant-select-responsive-tags={responsiveTags || undefined}
+    style:--ant-native-select-height={`var(--${privateNamespace}-select-height)`}
+    style:--ant-native-select-multi-item-height={`var(--${privateNamespace}-select-multi-item-height)`}
     role="presentation"
     onpointerdown={handlePointerDown}
     class={[
-        'ant-select ant-select-css-var',
-        `ant-select-${appearance}`,
-        'ant-select-show-arrow',
-        componentTheme.className && 'ant-select-source-theme',
-        componentTheme.className && canSearch && 'ant-select-show-search',
-        componentTheme.className && allowClear && 'ant-select-allow-clear',
-        componentTheme.className && config.direction === 'rtl' && 'ant-select-rtl',
-        loading && 'ant-select-loading',
-        multiple ? 'ant-select-multiple' : 'ant-select-single',
-        responsiveTags && 'ant-select-responsive-tags',
-        expanded && 'ant-select-open',
-        (expanded || componentTheme.className && focused) && 'ant-select-focused',
-        resolvedDisabled && 'ant-select-disabled',
-        resolvedSize === 'large' && 'ant-select-lg',
-        resolvedSize === 'small' && 'ant-select-sm',
-        resolvedStatus && `ant-select-status-${resolvedStatus}`
+        `${prefix} ant-select-css-var`,
+        `${prefix}-${appearance}`,
+        `${prefix}-show-arrow`,
+        componentTheme.className && `${prefix}-source-theme`,
+        componentTheme.className && canSearch && `${prefix}-show-search`,
+        componentTheme.className && allowClear && `${prefix}-allow-clear`,
+        componentTheme.className && config.direction === 'rtl' && `${prefix}-rtl`,
+        loading && `${prefix}-loading`,
+        multiple ? `${prefix}-multiple` : `${prefix}-single`,
+        responsiveTags && `${prefix}-responsive-tags`,
+        expanded && `${prefix}-open`,
+        (expanded || componentTheme.className && focused) && `${prefix}-focused`,
+        resolvedDisabled && `${prefix}-disabled`,
+        resolvedSize === 'large' && `${prefix}-lg`,
+        resolvedSize === 'small' && `${prefix}-sm`,
+        resolvedStatus && `${prefix}-status-${resolvedStatus}`
       ]}
     style={componentTheme.style}
   >
-    <div class="ant-select-content" bind:this={contentElement}>
+    <div data-ant-select-content class={`${prefix}-content`} bind:this={contentElement}>
       {#if intrinsicWidth}<span class="intrinsic-label" aria-hidden="true">{selected?.label ?? placeholder ?? ''}</span>{/if}
       {#if multiple}
         {#each renderedTags as tag, index (tag.value)}
           {@const hidden = responsiveTags && !visibleTagKeys.has(tag.value)}
           {#snippet tagLabel()}{getSelectTagText(tag.label, maxTagTextLength)}{/snippet}
-          <span class={[
-              renderTag ? 'custom-tag' : 'ant-select-selection-item',
+          <span data-ant-select-selection-item={!renderTag || undefined}
+            data-ant-select-selection-item-disabled={!renderTag && (resolvedDisabled || tag.disabled) || undefined}
+            class={[
+              renderTag ? 'custom-tag' : `${prefix}-selection-item`,
               hidden && 'measure-tag',
-              !renderTag && (resolvedDisabled || tag.disabled) && 'ant-select-selection-item-disabled'
+              !renderTag && (resolvedDisabled || tag.disabled) && `${prefix}-selection-item-disabled`
             ]} title={renderTag ? undefined : tag.label} data-select-tag={responsiveTags || undefined}
             data-select-custom-tag={renderTag ? '' : undefined}
             role="presentation" onmousedown={renderTag ? handleCustomTagMouseDown : undefined}
@@ -837,8 +853,8 @@
                 }
               })}
             {:else}
-              <span class="ant-select-selection-item-content">{@render tagLabel()}</span>
-              {#if !resolvedDisabled && !tag.disabled}<button type="button" class="ant-select-selection-item-remove" aria-label={`${config.locale.removeText
+              <span class={`${prefix}-selection-item-content`}>{@render tagLabel()}</span>
+              {#if !resolvedDisabled && !tag.disabled}<button type="button" data-ant-select-selection-item-remove class={`${prefix}-selection-item-remove`} aria-label={`${config.locale.removeText
                 ?? ruRU.removeText} ${tag.label}`} onpointerdown={(event) => event.preventDefault()} onclick={() => remove(tag.value)}><Icon name="close" /></button>{/if}
             {/if}
           </span>
@@ -849,8 +865,9 @@
             {:else if tagPlaceholder == null}+ {tagOverflow.omitted.length} ...
             {:else if typeof tagPlaceholder !== 'boolean'}{tagPlaceholder}{/if}
           {/snippet}
-          <span class={['ant-select-selection-overflow-item-rest',
-              renderTag ? 'custom-tag' : 'ant-select-selection-item',
+          <span data-ant-select-selection-item={!renderTag || undefined}
+            class={[`${prefix}-selection-overflow-item-rest`,
+              renderTag ? 'custom-tag' : `${prefix}-selection-item`,
               !tagOverflow.omitted.length && 'measure-tag']}
             title={renderTag ? undefined : tagPlaceholderTitle}
             data-select-rest={responsiveTags || undefined}
@@ -859,7 +876,7 @@
             aria-hidden={!tagOverflow.omitted.length || undefined} inert={!tagOverflow.omitted.length}>
             {#if renderTag}{@render renderTag({
               label: restLabel, isMaxTag: true, disabled: false, closable: false
-            })}{:else}<span class="ant-select-selection-item-content">{@render restLabel()}</span>{/if}
+            })}{:else}<span class={`${prefix}-selection-item-content`}>{@render restLabel()}</span>{/if}
           </span>
         {/if}
       {/if}
@@ -867,7 +884,7 @@
         {...attributes}
         bind:this={control}
         id={controlId}
-        class="ant-select-input"
+        data-ant-select-input class={`${prefix}-input`}
         type="text"
         role="combobox"
         aria-expanded={expanded}
@@ -913,9 +930,9 @@
       />
     </div>
     {#if allowClear && (multiple ? selectedValues.length || tagMode && search : selected) && !resolvedDisabled}
-      <button type="button" class={['clear', componentTheme.className && 'ant-select-clear']} aria-label={config.locale.clearText} onpointerdown={(event) => event.preventDefault()} onclick={() => choose(undefined)}><Icon name="close" /></button>
+      <button type="button" class={['clear', componentTheme.className && `${prefix}-clear`]} aria-label={config.locale.clearText} onpointerdown={(event) => event.preventDefault()} onclick={() => choose(undefined)}><Icon name="close" /></button>
     {/if}
-    <span class={['suffix', componentTheme.className && 'ant-select-suffix']}><Icon name={loading ? 'loading' : 'down'} /></span>
+    <span class={['suffix', componentTheme.className && `${prefix}-suffix`]}><Icon name={loading ? 'loading' : 'down'} /></span>
   </div>
   {#if name ?? field?.name}
     {#if multiple}
@@ -930,12 +947,14 @@
   {#if expanded}
     <div
       bind:this={list}
+      data-ant-select-dropdown data-ant-select-prefix={prefix} data-ant-select-root-prefix={rootPrefix}
+      data-ant-select-source-popup={Boolean(componentTheme.className) && filtered.length > 0 || undefined}
       popover={popupContainerGetter ? 'manual' : undefined}
       hidden={Boolean(popupContainerGetter) && !shown}
       dir={config.direction}
-      class={['popup ant-select-dropdown', componentTheme.className && 'ant-select-css-var',
-        componentTheme.className && filtered.length > 0 && 'ant-select-source-popup',
-        componentTheme.className && config.direction === 'rtl' && 'ant-select-dropdown-rtl',
+      class={[`popup ${prefix}-dropdown`, componentTheme.className && 'ant-select-css-var',
+        componentTheme.className && filtered.length > 0 && `${prefix}-source-popup`,
+        componentTheme.className && config.direction === 'rtl' && `${prefix}-dropdown-rtl`,
         componentTheme.className]}
       {@attach node => connectComponentTheme(node, componentTheme.style)}
       {@attach portal}
@@ -952,6 +971,7 @@
       {#each filtered as option, index (option.value)}
         <button
           type="button"
+          data-ant-select-item
           role="option"
           tabindex="-1"
           id={`${controlId}-option-${index}`}
@@ -961,13 +981,13 @@
           aria-disabled={option.disabled || undefined}
           disabled={option.disabled}
           class={[
-              'ant-select-item ant-select-item-option',
+              `${prefix}-item ${prefix}-item-option`,
               (multiple
                 ? selectedKeys.has(option.value)
                 : option.value === selectedValue)
-              && 'ant-select-item-option-selected',
-              index === activeIndex && 'ant-select-item-option-active',
-              option.disabled && 'ant-select-item-option-disabled'
+              && `${prefix}-item-option-selected`,
+              index === activeIndex && `${prefix}-item-option-active`,
+              option.disabled && `${prefix}-item-option-disabled`
             ]}
           onpointerdown={(event) => event.preventDefault()}
           onpointermove={() => {
@@ -976,11 +996,11 @@
             }}
           onclick={() => choose(option)}
         >
-          <span class="ant-select-item-option-content">{#if renderOption}{@render renderOption(getRenderOption(index), { index })}{:else}{option.label}{/if}</span>
-          {#if multiple ? selectedKeys.has(option.value) : option.value === selectedValue}<span class="ant-select-item-option-state"><Icon name="check" /></span>{/if}
+          <span class={`${prefix}-item-option-content`}>{#if renderOption}{@render renderOption(getRenderOption(index), { index })}{:else}{option.label}{/if}</span>
+          {#if multiple ? selectedKeys.has(option.value) : option.value === selectedValue}<span class={`${prefix}-item-option-state`}><Icon name="check" /></span>{/if}
         </button>
       {:else}
-        <div class="ant-select-item-empty">{#snippet nativeEmpty()}{loading
+        <div class={`${prefix}-item-empty`}>{#snippet nativeEmpty()}{loading
               ? (config.locale.spin ?? ruRU.spin!).loadingText
               : config.locale.emptyText}{/snippet}<RenderEmpty componentName="Select"
               local={notFoundContent} fallback={nativeEmpty} /></div>

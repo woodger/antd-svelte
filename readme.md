@@ -8745,6 +8745,18 @@ styles сверены с официальным UMD 6.6.8 в
 Общие [ConfigProvider.variant/Form.variant и Select config](./docs/reference/control-variants.md)
 применяются после локальных props.
 
+Непустой `prefixCls` задаёт локальные классы control, tags и popup; пустой или
+undefined наследует `ConfigProvider.prefixCls`. CSS scope разделяет owner prefix
+и общий namespace служебных переменных, сохраняя canonical theme variables.
+Нынешние native wrapper, option buttons, FormData/reset и generated IDs сохранены.
+Смена префикса сохраняет открытый список, query, text selection, focus и keyed options;
+это действует также с локальным popup container и responsive tags.
+[26 UMD-конфигураций](tests/browser/fixtures/ant-design-select-prefix-reference.json)
+в обычной, вложенной и reset областях сверяют single/multiple/tags, размеры,
+варианты, status, aliases и открытые options. Дополнительный native compact bridge
+сохраняет геометрию внешнего container. Проверки:
+[browser](tests/browser/select-prefix.spec.ts), [SSR](tests/package/select-prefix.ssr.test.ts).
+
 ```svelte
 <script lang="ts">
   import { Select } from 'antd-svelte';

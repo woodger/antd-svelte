@@ -9,6 +9,10 @@
 
 ### Added
 
+- Select поддерживает local/shared prefixCls для control/tags/popup и независимый
+  namespace служебных CSS variables. Сохранены native forms/reset, compact geometry,
+  поиск, text selection, focus и открытый popup, включая внешний container.
+
 - Transfer поддерживает local/shared prefixCls с независимыми namespaces внутренних
   Checkbox/Input/Button/Pagination. Canonical tokens и прежние semantic priorities,
   query/selection/focus, refs, перенос и draft пагинации сохранены.

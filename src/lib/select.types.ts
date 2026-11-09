@@ -77,6 +77,8 @@ export interface SelectProps<
   HTMLInputAttributes,
   'value' | 'size' | 'class' | 'onchange' | 'oninput' | 'type' | 'children'
 > {
+  /** Локальный namespace Select; пустая строка наследует ConfigProvider. */
+  prefixCls?: string;
   /** @internal Intrinsic ширина readonly single для составного владельца, без смены public default. */
   _autoWidth?: boolean;
   /** Пустой список по умолчанию; tags может создавать значения без options. */
