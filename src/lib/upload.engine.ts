@@ -1,6 +1,17 @@
+import type { HTMLAnchorAttributes } from 'svelte/elements';
 import type { UploadFile, UploadProps, UploadRcFile } from './upload.types';
 // Ant Design 6.6.8 / rc-upload 1.1.1; MIT, vendor/LICENSE.ant-design и LICENSE.rc-upload.
 export const UPLOAD_LIST_IGNORE = '__ANT_SVELTE_UPLOAD_LIST_IGNORE__';
+
+/** Невалидный JSON выбрасывает SyntaxError, как исходный filename renderer. */
+export function resolveUploadLinkProps(value: UploadFile['linkProps']): HTMLAnchorAttributes {
+  const parsed: unknown = typeof value === 'string' ? JSON.parse(value) : value;
+
+  return parsed !== null && typeof parsed === 'object' && !Array.isArray(parsed)
+    ? parsed as HTMLAnchorAttributes
+    : {};
+}
+
 export function uploadFileObject<T = unknown>(file: UploadRcFile): UploadFile<T> {
   return {
     ...file,

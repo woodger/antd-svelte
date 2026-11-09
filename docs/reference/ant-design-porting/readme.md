@@ -320,6 +320,11 @@ SSR охватывает также defaultOpen, browser — смену обще
 CSS selectors; raw прозрачный фон сохранён отдельно от public inherited-prefix
 counterpart. Svelte сохраняет прежнее оформление списка; только menu background
 сравнивается с counterpart, остальные свойства — с raw Source.
+UploadFile.linkProps сверяется по 19 raw UMD cases и пяти transitions:
+object/JSON attributes, file URL priority, class replacement, click callback
+ordering/cancellation и отсутствие props у thumbnail/preview action. Svelte
+использует native class/onclick/style string; reader игнорирует только
+сгенерированные Svelte scope classes. Raw Source результаты не изменены.
 Upload itemRender получает opaque originNode Snippet с Tooltip ошибки,
 file/current fileList и actions, привязанные к файлу. 19 raw UMD cases, два
 набора действий и пять transitions фиксируют wrap/replace/empty/default,

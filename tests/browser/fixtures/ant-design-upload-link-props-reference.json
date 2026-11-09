@@ -1,0 +1,682 @@
+{
+  "reference": {
+    "version": "6.6.8",
+    "revision": "984592267de88fbf9cdaecc96a56629e721c709d",
+    "archiveSha256": "8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa",
+    "renderer": "unmodified official UMD with React 18.3.1",
+    "source": "UploadFile.linkProps and UploadList/ListItem filename anchor",
+    "observation": "19 raw cases cover defaults, object/JSON attributes and styles across all list types, class replacement, filenames without URL, and click ordering/cancellation. File URL wins over linkProps.href. Only filename anchor receives linkProps; thumbnail/preview action retain their defaults. Five live transitions retain the filename anchor. Svelte maps className/onClick/style object to native class/onclick/style string."
+  },
+  "cases": [
+    {
+      "sample": {
+        "id": "text:default",
+        "listType": "text",
+        "mode": "default"
+      },
+      "result": {
+        "name": {
+          "tag": "A",
+          "text": "alpha.txt",
+          "class": "ant-upload-list-item-name",
+          "title": "alpha.txt",
+          "href": "#original-file",
+          "target": "_blank",
+          "rel": "noopener noreferrer",
+          "download": null,
+          "ariaLabel": null,
+          "data": null,
+          "color": null
+        },
+        "thumbnail": null,
+        "previewAction": null
+      },
+      "click": {
+        "prevented": true,
+        "events": [
+          "preview:one"
+        ]
+      }
+    },
+    {
+      "sample": {
+        "id": "text:attributes",
+        "listType": "text",
+        "mode": "attributes"
+      },
+      "result": {
+        "name": {
+          "tag": "A",
+          "text": "alpha.txt",
+          "class": "ant-upload-list-item-name",
+          "title": "Custom title",
+          "href": "#original-file",
+          "target": "_self",
+          "rel": "author",
+          "download": "report.txt",
+          "ariaLabel": "Open report",
+          "data": "attributes",
+          "color": "rgb(127, 20, 50)"
+        },
+        "thumbnail": null,
+        "previewAction": null
+      },
+      "click": {
+        "prevented": true,
+        "events": [
+          "preview:one"
+        ]
+      }
+    },
+    {
+      "sample": {
+        "id": "text:json",
+        "listType": "text",
+        "mode": "json"
+      },
+      "result": {
+        "name": {
+          "tag": "A",
+          "text": "alpha.txt",
+          "class": "ant-upload-list-item-name",
+          "title": "Custom title",
+          "href": "#original-file",
+          "target": "_self",
+          "rel": "author",
+          "download": "report.txt",
+          "ariaLabel": "Open report",
+          "data": "attributes",
+          "color": "rgb(127, 20, 50)"
+        },
+        "thumbnail": null,
+        "previewAction": null
+      },
+      "click": {
+        "prevented": true,
+        "events": [
+          "preview:one"
+        ]
+      }
+    },
+    {
+      "sample": {
+        "id": "picture:default",
+        "listType": "picture",
+        "mode": "default"
+      },
+      "result": {
+        "name": {
+          "tag": "A",
+          "text": "alpha.txt",
+          "class": "ant-upload-list-item-name",
+          "title": "alpha.txt",
+          "href": "#original-file",
+          "target": "_blank",
+          "rel": "noopener noreferrer",
+          "download": null,
+          "ariaLabel": null,
+          "data": null,
+          "color": null
+        },
+        "thumbnail": null,
+        "previewAction": null
+      },
+      "click": {
+        "prevented": true,
+        "events": [
+          "preview:one"
+        ]
+      }
+    },
+    {
+      "sample": {
+        "id": "picture:attributes",
+        "listType": "picture",
+        "mode": "attributes"
+      },
+      "result": {
+        "name": {
+          "tag": "A",
+          "text": "alpha.txt",
+          "class": "ant-upload-list-item-name",
+          "title": "Custom title",
+          "href": "#original-file",
+          "target": "_self",
+          "rel": "author",
+          "download": "report.txt",
+          "ariaLabel": "Open report",
+          "data": "attributes",
+          "color": "rgb(127, 20, 50)"
+        },
+        "thumbnail": null,
+        "previewAction": null
+      },
+      "click": {
+        "prevented": true,
+        "events": [
+          "preview:one"
+        ]
+      }
+    },
+    {
+      "sample": {
+        "id": "picture:json",
+        "listType": "picture",
+        "mode": "json"
+      },
+      "result": {
+        "name": {
+          "tag": "A",
+          "text": "alpha.txt",
+          "class": "ant-upload-list-item-name",
+          "title": "Custom title",
+          "href": "#original-file",
+          "target": "_self",
+          "rel": "author",
+          "download": "report.txt",
+          "ariaLabel": "Open report",
+          "data": "attributes",
+          "color": "rgb(127, 20, 50)"
+        },
+        "thumbnail": null,
+        "previewAction": null
+      },
+      "click": {
+        "prevented": true,
+        "events": [
+          "preview:one"
+        ]
+      }
+    },
+    {
+      "sample": {
+        "id": "picture-card:default",
+        "listType": "picture-card",
+        "mode": "default"
+      },
+      "result": {
+        "name": {
+          "tag": "A",
+          "text": "alpha.txt",
+          "class": "ant-upload-list-item-name",
+          "title": "alpha.txt",
+          "href": "#original-file",
+          "target": "_blank",
+          "rel": "noopener noreferrer",
+          "download": null,
+          "ariaLabel": null,
+          "data": null,
+          "color": null
+        },
+        "thumbnail": null,
+        "previewAction": null
+      },
+      "click": {
+        "prevented": true,
+        "events": [
+          "preview:one"
+        ]
+      }
+    },
+    {
+      "sample": {
+        "id": "picture-card:attributes",
+        "listType": "picture-card",
+        "mode": "attributes"
+      },
+      "result": {
+        "name": {
+          "tag": "A",
+          "text": "alpha.txt",
+          "class": "ant-upload-list-item-name",
+          "title": "Custom title",
+          "href": "#original-file",
+          "target": "_self",
+          "rel": "author",
+          "download": "report.txt",
+          "ariaLabel": "Open report",
+          "data": "attributes",
+          "color": "rgb(127, 20, 50)"
+        },
+        "thumbnail": null,
+        "previewAction": null
+      },
+      "click": {
+        "prevented": true,
+        "events": [
+          "preview:one"
+        ]
+      }
+    },
+    {
+      "sample": {
+        "id": "picture-card:json",
+        "listType": "picture-card",
+        "mode": "json"
+      },
+      "result": {
+        "name": {
+          "tag": "A",
+          "text": "alpha.txt",
+          "class": "ant-upload-list-item-name",
+          "title": "Custom title",
+          "href": "#original-file",
+          "target": "_self",
+          "rel": "author",
+          "download": "report.txt",
+          "ariaLabel": "Open report",
+          "data": "attributes",
+          "color": "rgb(127, 20, 50)"
+        },
+        "thumbnail": null,
+        "previewAction": null
+      },
+      "click": {
+        "prevented": true,
+        "events": [
+          "preview:one"
+        ]
+      }
+    },
+    {
+      "sample": {
+        "id": "picture-circle:default",
+        "listType": "picture-circle",
+        "mode": "default"
+      },
+      "result": {
+        "name": {
+          "tag": "A",
+          "text": "alpha.txt",
+          "class": "ant-upload-list-item-name",
+          "title": "alpha.txt",
+          "href": "#original-file",
+          "target": "_blank",
+          "rel": "noopener noreferrer",
+          "download": null,
+          "ariaLabel": null,
+          "data": null,
+          "color": null
+        },
+        "thumbnail": null,
+        "previewAction": null
+      },
+      "click": {
+        "prevented": true,
+        "events": [
+          "preview:one"
+        ]
+      }
+    },
+    {
+      "sample": {
+        "id": "picture-circle:attributes",
+        "listType": "picture-circle",
+        "mode": "attributes"
+      },
+      "result": {
+        "name": {
+          "tag": "A",
+          "text": "alpha.txt",
+          "class": "ant-upload-list-item-name",
+          "title": "Custom title",
+          "href": "#original-file",
+          "target": "_self",
+          "rel": "author",
+          "download": "report.txt",
+          "ariaLabel": "Open report",
+          "data": "attributes",
+          "color": "rgb(127, 20, 50)"
+        },
+        "thumbnail": null,
+        "previewAction": null
+      },
+      "click": {
+        "prevented": true,
+        "events": [
+          "preview:one"
+        ]
+      }
+    },
+    {
+      "sample": {
+        "id": "picture-circle:json",
+        "listType": "picture-circle",
+        "mode": "json"
+      },
+      "result": {
+        "name": {
+          "tag": "A",
+          "text": "alpha.txt",
+          "class": "ant-upload-list-item-name",
+          "title": "Custom title",
+          "href": "#original-file",
+          "target": "_self",
+          "rel": "author",
+          "download": "report.txt",
+          "ariaLabel": "Open report",
+          "data": "attributes",
+          "color": "rgb(127, 20, 50)"
+        },
+        "thumbnail": null,
+        "previewAction": null
+      },
+      "click": {
+        "prevented": true,
+        "events": [
+          "preview:one"
+        ]
+      }
+    },
+    {
+      "sample": {
+        "id": "class",
+        "mode": "class"
+      },
+      "result": {
+        "name": {
+          "tag": "A",
+          "text": "alpha.txt",
+          "class": "custom-file-name",
+          "title": "",
+          "href": "#original-file",
+          "target": "",
+          "rel": "",
+          "download": null,
+          "ariaLabel": null,
+          "data": "class",
+          "color": null
+        },
+        "thumbnail": null,
+        "previewAction": null
+      },
+      "click": {
+        "prevented": true,
+        "events": [
+          "preview:one"
+        ]
+      }
+    },
+    {
+      "sample": {
+        "id": "no-url",
+        "mode": "attributes",
+        "noUrl": true,
+        "noPreview": true
+      },
+      "result": {
+        "name": {
+          "tag": "SPAN",
+          "text": "alpha.txt",
+          "class": "ant-upload-list-item-name",
+          "title": "alpha.txt",
+          "href": null,
+          "target": null,
+          "rel": null,
+          "download": null,
+          "ariaLabel": null,
+          "data": null,
+          "color": null
+        },
+        "thumbnail": null,
+        "previewAction": null
+      },
+      "click": {
+        "prevented": false,
+        "events": []
+      }
+    },
+    {
+      "sample": {
+        "id": "thumb-only",
+        "mode": "attributes",
+        "listType": "picture-card",
+        "noUrl": true,
+        "thumbnail": true,
+        "noPreview": true
+      },
+      "result": {
+        "name": {
+          "tag": "SPAN",
+          "text": "alpha.txt",
+          "class": "ant-upload-list-item-name",
+          "title": "alpha.txt",
+          "href": null,
+          "target": null,
+          "rel": null,
+          "download": null,
+          "ariaLabel": null,
+          "data": null,
+          "color": null
+        },
+        "thumbnail": null,
+        "previewAction": null
+      },
+      "click": {
+        "prevented": false,
+        "events": []
+      }
+    },
+    {
+      "sample": {
+        "id": "click-allow",
+        "mode": "click-allow"
+      },
+      "result": {
+        "name": {
+          "tag": "A",
+          "text": "alpha.txt",
+          "class": "ant-upload-list-item-name",
+          "title": "alpha.txt",
+          "href": "#original-file",
+          "target": "_blank",
+          "rel": "noopener noreferrer",
+          "download": null,
+          "ariaLabel": null,
+          "data": null,
+          "color": null
+        },
+        "thumbnail": null,
+        "previewAction": null
+      },
+      "click": {
+        "prevented": true,
+        "events": [
+          "link:false",
+          "preview:one"
+        ]
+      }
+    },
+    {
+      "sample": {
+        "id": "click-prevent",
+        "mode": "click-prevent"
+      },
+      "result": {
+        "name": {
+          "tag": "A",
+          "text": "alpha.txt",
+          "class": "ant-upload-list-item-name",
+          "title": "alpha.txt",
+          "href": "#original-file",
+          "target": "_blank",
+          "rel": "noopener noreferrer",
+          "download": null,
+          "ariaLabel": null,
+          "data": null,
+          "color": null
+        },
+        "thumbnail": null,
+        "previewAction": null
+      },
+      "click": {
+        "prevented": true,
+        "events": [
+          "link:false"
+        ]
+      }
+    },
+    {
+      "sample": {
+        "id": "click-stop",
+        "mode": "click-stop"
+      },
+      "result": {
+        "name": {
+          "tag": "A",
+          "text": "alpha.txt",
+          "class": "ant-upload-list-item-name",
+          "title": "alpha.txt",
+          "href": "#original-file",
+          "target": "_blank",
+          "rel": "noopener noreferrer",
+          "download": null,
+          "ariaLabel": null,
+          "data": null,
+          "color": null
+        },
+        "thumbnail": null,
+        "previewAction": null
+      },
+      "click": {
+        "prevented": true,
+        "events": [
+          "link:false",
+          "preview:one"
+        ]
+      }
+    },
+    {
+      "sample": {
+        "id": "click-without-preview",
+        "mode": "click-prevent",
+        "noPreview": true
+      },
+      "result": {
+        "name": {
+          "tag": "A",
+          "text": "alpha.txt",
+          "class": "ant-upload-list-item-name",
+          "title": "alpha.txt",
+          "href": "#original-file",
+          "target": "_blank",
+          "rel": "noopener noreferrer",
+          "download": null,
+          "ariaLabel": null,
+          "data": null,
+          "color": null
+        },
+        "thumbnail": null,
+        "previewAction": null
+      },
+      "click": {
+        "prevented": true,
+        "events": [
+          "link:false"
+        ]
+      }
+    }
+  ],
+  "transitions": [
+    {
+      "mode": "default",
+      "result": {
+        "name": {
+          "tag": "A",
+          "text": "alpha.txt",
+          "class": "ant-upload-list-item-name",
+          "title": "alpha.txt",
+          "href": "#original-file",
+          "target": "_blank",
+          "rel": "noopener noreferrer",
+          "download": null,
+          "ariaLabel": null,
+          "data": null,
+          "color": null
+        },
+        "thumbnail": null,
+        "previewAction": null
+      }
+    },
+    {
+      "mode": "attributes",
+      "result": {
+        "name": {
+          "tag": "A",
+          "text": "alpha.txt",
+          "class": "ant-upload-list-item-name",
+          "title": "Custom title",
+          "href": "#original-file",
+          "target": "_self",
+          "rel": "author",
+          "download": "report.txt",
+          "ariaLabel": "Open report",
+          "data": "attributes",
+          "color": "rgb(127, 20, 50)"
+        },
+        "thumbnail": null,
+        "previewAction": null
+      }
+    },
+    {
+      "mode": "json",
+      "result": {
+        "name": {
+          "tag": "A",
+          "text": "alpha.txt",
+          "class": "ant-upload-list-item-name",
+          "title": "Custom title",
+          "href": "#original-file",
+          "target": "_self",
+          "rel": "author",
+          "download": "report.txt",
+          "ariaLabel": "Open report",
+          "data": "attributes",
+          "color": "rgb(127, 20, 50)"
+        },
+        "thumbnail": null,
+        "previewAction": null
+      }
+    },
+    {
+      "mode": "class",
+      "result": {
+        "name": {
+          "tag": "A",
+          "text": "alpha.txt",
+          "class": "custom-file-name",
+          "title": "",
+          "href": "#original-file",
+          "target": "",
+          "rel": "",
+          "download": null,
+          "ariaLabel": null,
+          "data": "class",
+          "color": null
+        },
+        "thumbnail": null,
+        "previewAction": null
+      }
+    },
+    {
+      "mode": "default",
+      "result": {
+        "name": {
+          "tag": "A",
+          "text": "alpha.txt",
+          "class": "ant-upload-list-item-name",
+          "title": "alpha.txt",
+          "href": "#original-file",
+          "target": "_blank",
+          "rel": "noopener noreferrer",
+          "download": null,
+          "ariaLabel": null,
+          "data": null,
+          "color": null
+        },
+        "thumbnail": null,
+        "previewAction": null
+      }
+    }
+  ]
+}

@@ -1,5 +1,5 @@
 import type { Snippet } from 'svelte';
-import type { HTMLAttributes } from 'svelte/elements';
+import type { HTMLAnchorAttributes, HTMLAttributes } from 'svelte/elements';
 export interface UploadRcFile extends File {
   uid: string;
   lastModifiedDate?: Date;
@@ -21,6 +21,8 @@ export interface UploadFile<T = unknown> {
   url?: string;
   thumbUrl?: string;
   crossOrigin?: 'anonymous' | 'use-credentials' | '';
+  /** Атрибуты filename link или их JSON; class/onclick/style используют нативный Svelte API. */
+  linkProps?: HTMLAnchorAttributes | string;
 }
 export interface UploadLocale {
   uploading?: string;

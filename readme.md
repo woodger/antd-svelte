@@ -6680,6 +6680,20 @@ Button, Progress и Tooltip получают свои component tokens. Style о
 сохранено в `zero-metrics.interactions` [эталона](./tests/browser/fixtures/ant-design-upload-theme-reference.json).
 Этот крайний случай требует отдельного решения.
 
+`UploadFile.linkProps` задаёт атрибуты ссылки имени файла: объект либо JSON
+с теми же нативными Svelte keys (`class`, `onclick`, строковый `style`).
+По умолчанию target="_blank", rel="noopener noreferrer", title=file.name;
+linkProps может их перекрыть. Href всегда берётся из file.url. Атрибуты не
+передаются thumbnail, preview action или имени без url.
+
+Обработчик linkProps.onclick вызывается перед onPreview. Если он вызвал
+preventDefault(), preview не запускается; return false и stopPropagation()
+сами по себе preview не отменяют. Невалидный JSON выбрасывает SyntaxError,
+как исходный renderer. Обновления атрибутов сохраняют ссылку и input DOM.
+[19 исходных случаев и пять transitions](tests/browser/fixtures/ant-design-upload-link-props-reference.json),
+[browser](tests/browser/upload-link-props.spec.ts) и
+[SSR](tests/package/upload-link-props.ssr.test.ts) сверяют эту границу.
+
 `iconRender` — snippet `(file, listType)`, заменяющий видимую иконку файла
 во всех list types и статусах. Пустой snippet сохраняет пустое содержимое;
 числовой 0 отображается. Готовая image thumbnail сохраняет приоритет над иконкой.
@@ -6751,7 +6765,7 @@ webkitdirectory как boolean attribute; в браузере сохраняют
 
 Locale/upload из ConfigProvider, собственный locale, RU/EN, RTL и theme variables
 поддержаны. Custom action icons,
-progress customization, linkProps, полный ref/config/semantic API и исходные
+progress customization, полный ref/config/semantic API и исходные
 appear/exit/collapse анимации остаются отдельными пробелами реестра. Данный этап
 не заявляет полного покрытия React Upload.
 

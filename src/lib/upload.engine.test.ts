@@ -2,11 +2,35 @@ import { describe, expect, it } from 'vitest';
 import {
   filterUploadFile,
   limitUploadList,
+  resolveUploadLinkProps,
   uploadAccept,
   uploadIsImage,
   updateUploadList
 } from './upload.engine';
 import type { UploadFile } from './upload.types';
+
+describe('resolveUploadLinkProps', () => {
+  it('preserves native attributes and callback references from object input', () => {
+    const attributes = { target: '_self', onclick: () => {} };
+
+    expect(resolveUploadLinkProps(attributes)).toBe(attributes);
+  });
+
+  it('parses JSON attributes without changing empty values or native style strings', () => {
+    const attributes = { target: '', title: '', download: 'report.txt', style: 'color:red' };
+
+    expect(resolveUploadLinkProps(JSON.stringify(attributes))).toEqual(attributes);
+  });
+
+  it('uses empty attributes when the optional input is absent or JSON is null', () => {
+    expect(resolveUploadLinkProps(undefined)).toEqual({});
+    expect(resolveUploadLinkProps('null')).toEqual({});
+  });
+
+  it('rejects invalid JSON instead of silently losing consumer attributes', () => {
+    expect(() => resolveUploadLinkProps('{broken')).toThrow(SyntaxError);
+  });
+});
 
 describe('Upload source list and accept semantics', () => {
   it('replaces matching uids without deduplicating names and preserves order', () => {

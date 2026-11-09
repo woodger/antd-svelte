@@ -7,7 +7,7 @@
     UploadListOptions,
     UploadItemRenderActions
   } from './upload.types';
-  import { uploadIsImage } from './upload.engine';
+  import { resolveUploadLinkProps, uploadIsImage } from './upload.engine';
   import { previewImage } from './upload-preview.dom';
   import Button from './Button.svelte';
   import UploadIcon from './UploadIcon.svelte';
@@ -50,6 +50,7 @@
   let card = $derived(listType === 'picture-card' || listType === 'picture-circle');
   let source = $derived(file.thumbUrl ?? (thumbnail || file.url));
   let image = $derived(isImageUrl({ ...file, thumbUrl: file.thumbUrl ?? thumbnail }));
+  let linkAttributes = $derived(resolveUploadLinkProps(file.linkProps));
   let message = $derived(
     typeof file.response === 'string'
     && file.response
@@ -76,6 +77,11 @@
     } else if (currentFile.url) {
       window.open(currentFile.url, '_blank', 'noopener');
     }
+  }
+  function handleNameClick(event: MouseEvent & { currentTarget: EventTarget & HTMLAnchorElement; }) {
+    linkAttributes.onclick?.(event);
+
+    if (!event.defaultPrevented) preview(event);
   }
   let renderActions = $derived.by<UploadItemRenderActions>(() => {
     const currentFile = file;
@@ -136,7 +142,7 @@
         !image && `${prefixCls}-list-item-file`
       ]} href={file.url || source} target="_blank" rel="noopener noreferrer" onclick={preview}>{#if image}<img class={`${prefixCls}-list-item-image`} src={source} alt={file.name} crossorigin={file.crossOrigin} />{:else}{@render fileIcon()}{/if}</a>{/if}
   {:else}<div class={`${prefixCls}-icon`}>{@render fileIcon()}</div>{/if}
-  {#if file.url}<a data-ant-upload-item-name class={`${prefixCls}-list-item-name`} title={file.name} href={file.url} target="_blank" rel="noopener noreferrer" onclick={preview}>{file.name}{#if options.extra}<span class={`${prefixCls}-list-item-extra`}>{@render options.extra(file)}</span>{/if}</a>
+  {#if file.url}<a data-ant-upload-item-name class={`${prefixCls}-list-item-name`} title={file.name} target="_blank" rel="noopener noreferrer" {...linkAttributes} href={file.url} onclick={handleNameClick}>{file.name}{#if options.extra}<span class={`${prefixCls}-list-item-extra`}>{@render options.extra(file)}</span>{/if}</a>
   {:else if onPreview}<button type="button" data-ant-upload-item-name class={`${prefixCls}-list-item-name`} title={file.name} onclick={() => onPreview?.(file)}>{file.name}{#if options.extra}<span class={`${prefixCls}-list-item-extra`}>{@render options.extra(file)}</span>{/if}</button>
   {:else}<span data-ant-upload-item-name class={`${prefixCls}-list-item-name`} title={file.name}>{file.name}{#if options.extra}<span class={`${prefixCls}-list-item-extra`}>{@render options.extra(file)}</span>{/if}</span>{/if}
   {#if !card || file.status !== 'uploading'}<span class={[`${prefixCls}-list-item-actions`, listType === 'picture' && 'picture']}>{@render actions()}</span>{/if}

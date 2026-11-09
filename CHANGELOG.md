@@ -9,6 +9,10 @@
 
 ### Added
 
+- UploadFile.linkProps задаёт атрибуты filename link через объект или JSON.
+  URL файла сохраняет приоритет; onclick может отменить preview, а обновление
+  props сохраняет ссылку и file input.
+
 - Upload.itemRender получает originNode snippet, файл, текущий список и действия
   preview/download/remove. Можно обернуть или заменить строку, включая пустой
   результат; контейнеры, input и привязка действий к файлу сохраняются.

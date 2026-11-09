@@ -11453,7 +11453,7 @@
           "state": "missing",
           "requiredForV1": false,
           "evidence": [],
-          "note": "Custom action icons, progress customization, linkProps, ConfigProvider.upload и semantic classNames/styles не перенесены. Directory/pastable, iconRender и itemRender вынесены в отдельные supported features. Ref даёт abort и nativeElement/inputElement; полный rc-upload ref/internal lifecycle API отсутствует."
+          "note": "Custom action icons, progress customization, ConfigProvider.upload и semantic classNames/styles не перенесены. Directory/pastable, iconRender/itemRender и linkProps вынесены в отдельные supported features. Ref даёт abort и nativeElement/inputElement; полный rc-upload ref/internal lifecycle API отсутствует."
         },
         {
           "id": "motion",
@@ -11597,6 +11597,26 @@
             "readme.md"
           ],
           "note": "Snippet получает originNode, file, текущий readonly fileList и действия preview/download/remove, привязанные к файлу. Origin включает Tooltip ошибки; wrap/replace/empty/default сохраняют внешний container. Preview принимает optional MouseEvent и отменяет default при onPreview; custom actions остаются callable при disabled, как Source. 19 raw UMD cases, два набора actions и пять live transitions задают содержимое/контекст/cancellation; Native updates сохраняют container/input DOM, внешний draft/focus/selection и keyed порядок. ReactElement inspection/clone не воспроизводится opaque Snippet. SSR не создаёт browser timers."
+        },
+        {
+          "id": "file-link-props",
+          "title": "Атрибуты filename link, JSON и отмена preview",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/UploadListItem.svelte",
+            "src/lib/upload.types.ts",
+            "src/lib/upload.engine.ts",
+            "src/lib/upload.engine.test.ts",
+            "tests/browser/upload-link-props.spec.ts",
+            "tests/browser/upload-link-props-metrics.ts",
+            "tests/browser/fixtures/UploadLinkPropsScope.svelte",
+            "tests/browser/fixtures/UploadLinkPropsFixtures.svelte",
+            "tests/browser/fixtures/ant-design-upload-link-props-reference.json",
+            "tests/package/upload-link-props.ssr.test.ts",
+            "readme.md"
+          ],
+          "note": "LinkProps принимает native HTMLAnchorAttributes или JSON с class/onclick/style string. Defaults target/rel/title перекрываются; file.url и внутренний click handler сохраняют приоритет. Consumer onclick вызывается до preview, preventDefault останавливает preview; return false/stopPropagation не отменяют его. Thumbnail/preview action и filename без url не получают props. 19 raw UMD cases и пять live transitions задают атрибуты и callbacks; generated Svelte scope classes исключены reader без изменения Source данных. Updates сохраняют filename/item/input DOM и внешний draft/focus/selection. Невалидный JSON выбрасывает SyntaxError, как исходный renderer."
         }
       ]
     },
