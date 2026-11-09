@@ -8,6 +8,8 @@ export type ModalConfirmAction = (close: () => void) => unknown;
 
 /** Контекстное подтверждение createModal, отображаемое единственным ModalHolder. */
 export interface ModalConfirmConfig {
+  /** Локальный namespace подтверждения; пустая строка наследует ConfigProvider держателя. */
+  prefixCls?: string;
   title?: ModalContent;
   content?: ModalContent;
   icon?: Snippet | null | false;

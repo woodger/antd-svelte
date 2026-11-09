@@ -9,6 +9,11 @@
 
 ### Added
 
+- Modal и контекстные подтверждения поддерживают local/shared prefixCls.
+  Button namespace и canonical tokens независимы; открытый dialog, draft,
+  selection/focus, IDs и callbacks сохраняются. Source лишний Confirm header
+  при local prefix записан raw/matched; Native сохраняет один заголовок.
+
 - Drawer поддерживает local/shared prefixCls для panel/mask/placements и частей
   содержимого. Native dialog/motion/backdrop, draft/focus/selection, IDs и scroll
   сохраняются; Button namespace и canonical tokens независимы.

@@ -3681,6 +3681,18 @@ aria-labelledby имеет приоритет, затем непустой aria-
 Закрытие по фону настраивается через mask={{ closable: false }}; по умолчанию
 разрешено. Прежний maskClosable удалён. Остальные настройки mask пока не перенесены.
 
+`prefixCls` меняет namespace Modal и его частей; пустая строка наследует
+ConfigProvider.prefixCls. Настройка доступна и в config контекстного подтверждения,
+включая handle.update. Button использует независимый общий prefix; canonical
+CSS variables, native dialog, IDs и открытое содержимое сохраняются.
+[Raw сверка](./tests/browser/fixtures/ant-design-modal-prefix-reference.json)
+фиксирует исходный дефект Confirm: local prefix оставляет лишний header, потому
+что Source скрывает его через общий namespace. Отдельный public styles.header
+counterpart скрывает этот header; Native сохраняет один заголовок подтверждения.
+Там же отделены Source cache с потерей footer Button margin и public counterpart
+с новым local prefix. Прежние disabled-loading правила и размер native SVG сохранены;
+для них записан отдельный React-вариант через публичные button props.
+
 `theme.components.Modal` настраивает header/content/footer background, title color,
 font size/line height, внутренние отступы и wireframe. Поддерживаются aliases,
 component algorithms, CSS lengths и custom prefix; Button/Input внутри сохраняют

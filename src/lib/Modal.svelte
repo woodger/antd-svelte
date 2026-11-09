@@ -1,6 +1,8 @@
 <script lang="ts">
   import { tick } from 'svelte';
   import NoCompactStyle from './NoCompactStyle.svelte';
+  import ThemeScopeStyle from './ThemeScopeStyle.svelte';
+  import { getModalPrefixCss } from './modal-prefix.engine';
   import { useConfig } from './config-context';
   import { useComponentTheme } from './theme-component.svelte';
   import { useDesignTokenContext } from './theme-context.svelte';
@@ -13,6 +15,7 @@
   export type ModalProps = ModalComponentProps;
 
   let {
+    prefixCls: customizePrefixCls,
     open = $bindable(false),
     title,
     children,
@@ -34,6 +37,9 @@
   }: ModalProps = $props();
 
   const config = useConfig();
+  let componentPrefix = $derived(config.getPrefixCls('modal', customizePrefixCls));
+  let rootPrefix = $derived(config.getPrefixCls());
+  let prefixCss = $derived(getModalPrefixCss(componentPrefix, rootPrefix));
   const componentTheme = useComponentTheme('Modal');
   const designTheme = useDesignTokenContext();
   const watermarkPanel = useWatermarkPanel();
@@ -133,10 +139,10 @@
   :global(html:has(dialog.ant-svelte-dialog[open])) { overflow: hidden; }
   .ant-svelte-dialog { max-width: calc(100vw - 32px); max-height: calc(100dvh - 48px); padding: 0; border: 0; overflow: visible; background: transparent; color: var(--ant-color-text); }
   .ant-svelte-dialog::backdrop { background: var(--ant-color-bg-mask); }
-  .ant-modal { top: auto; max-width: none; width: 100%; margin: 0; padding: 0; }
-  .ant-modal-container { max-height: calc(100dvh - 48px); overflow: auto; }
-  .ant-modal-title { padding-inline-end: 32px; }
-  .ant-modal-close { display: flex; align-items: center; justify-content: center; }
+  [data-ant-modal-panel] { top: auto; max-width: none; width: 100%; margin: 0; padding: 0; }
+  [data-ant-modal-container] { max-height: calc(100dvh - 48px); overflow: auto; }
+  [data-ant-modal-title] { padding-inline-end: 32px; }
+  [data-ant-modal-close] { display: flex; align-items: center; justify-content: center; }
 </style>
 
 {#snippet content(value: ModalContent | undefined)}
@@ -146,7 +152,8 @@
 
 <NoCompactStyle>
 {#key container.key}
-<dialog
+{#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`modal-prefix:${componentPrefix}:${rootPrefix}`} />{/if}<dialog
+  data-ant-modal-prefix={componentPrefix} data-ant-modal-root-prefix={rootPrefix}
   bind:this={dialog}
   class={['ant-svelte-dialog ant-modal-css-var', componentTheme.className, className]}
   style={componentTheme.style}
@@ -165,17 +172,17 @@
   {@attach container.attach}
   {@attach connectDialog}
 >
-  <div class="ant-modal">
-    <div class="ant-modal-container" {@attach watermarkPanel}>
+  <div data-ant-modal-panel data-ant-modal-prefix={componentPrefix} data-ant-modal-root-prefix={rootPrefix} class={componentPrefix}>
+    <div data-ant-modal-container class={`${componentPrefix}-container`} {@attach watermarkPanel}>
       {#if closable}
-        <button type="button" class="ant-modal-close" disabled={confirmLoading} aria-label={config.locale.closeText} onclick={cancel}>
-          {#if designTheme.enabled}<span class="ant-modal-close-x"><Icon name="close" /></span>{:else}<Icon name="close" />{/if}
+        <button type="button" data-ant-modal-close class={`${componentPrefix}-close`} disabled={confirmLoading} aria-label={config.locale.closeText} onclick={cancel}>
+          {#if designTheme.enabled}<span data-ant-modal-close-x class={`${componentPrefix}-close-x`}><Icon name="close" /></span>{:else}<Icon name="close" />{/if}
         </button>
       {/if}
-      {#if hasTitle}<div class="ant-modal-header"><h2 id={titleId} class="ant-modal-title">{@render content(title)}</h2></div>{/if}
-      <div class="ant-modal-body">{@render children?.()}</div>
+      {#if hasTitle}<div data-ant-modal-header class={`${componentPrefix}-header`}><h2 id={titleId} data-ant-modal-title class={`${componentPrefix}-title`}>{@render content(title)}</h2></div>{/if}
+      <div data-ant-modal-body class={`${componentPrefix}-body`}>{@render children?.()}</div>
       {#if footer !== null}
-        <div class="ant-modal-footer">
+        <div data-ant-modal-footer class={`${componentPrefix}-footer`}>
           {#if footer}
             {@render footer()}
           {:else}

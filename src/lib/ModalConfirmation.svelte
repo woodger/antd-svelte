@@ -23,6 +23,7 @@
     confirm: 'exclamation-circle-filled'
   } as const;
   let options = $derived(confirmation.config);
+  let componentPrefix = $derived(config.getPrefixCls('modal', options.prefixCls));
   let hasTitle = $derived(options.title !== undefined
     && options.title !== null && typeof options.title !== 'boolean' && options.title !== '');
   let hasIcon = $derived(options.icon !== null && options.icon !== false);
@@ -34,7 +35,7 @@
 </script>
 
 <style>
-  :global(dialog.ant-modal-confirm .ant-modal-body) { padding: var(--ant-modal-confirm-body-padding); }
+  :global(dialog.modal-confirm-dialog [data-ant-modal-body]) { padding: var(--ant-modal-confirm-body-padding); }
 </style>
 
 {#snippet content(value: ModalContent | undefined)}
@@ -43,36 +44,37 @@
 {/snippet}
 
 <Modal
+  prefixCls={componentPrefix}
   open={confirmation.open}
   width={options.width || 416}
   closable={options.closable ?? false}
   keyboard={options.keyboard}
   mask={options.mask ?? { closable: false }}
   getContainer={options.getContainer}
-  class={['ant-modal-confirm', `ant-modal-confirm-${confirmation.type}`, options.class]
+  class={['modal-confirm-dialog', `${componentPrefix}-confirm`, `${componentPrefix}-confirm-${confirmation.type}`, options.class]
     .filter(Boolean).join(' ')}
   aria-labelledby={hasTitle ? titleId : contentId}
   onCancel={() => runtime.dismiss(id)}
   afterClose={() => runtime.complete(id)}
   footer={null}
 >
-  <div class="ant-modal-confirm-body-wrapper" {@attach mounted}>
+  <div class={`${componentPrefix}-confirm-body-wrapper`} {@attach mounted}>
     <div class={[
-      'ant-modal-confirm-body',
-      hasTitle && 'ant-modal-confirm-body-has-title',
-      !hasIcon && 'ant-modal-confirm-body-no-icon'
+      `${componentPrefix}-confirm-body`,
+      hasTitle && `${componentPrefix}-confirm-body-has-title`,
+      !hasIcon && `${componentPrefix}-confirm-body-no-icon`
     ]}>
       {#if hasIcon}
         {#if options.icon}{@render options.icon()}
         {:else}<span class="anticon" aria-hidden="true"><Icon name={icons[confirmation.type]} /></span>{/if}
       {/if}
-      <div class="ant-modal-confirm-paragraph">
-        {#if hasTitle}<span id={titleId} class="ant-modal-confirm-title">{@render content(options.title)}</span>{/if}
-        <div id={contentId} class="ant-modal-confirm-content">{@render content(options.content)}</div>
+      <div class={`${componentPrefix}-confirm-paragraph`}>
+        {#if hasTitle}<span id={titleId} class={`${componentPrefix}-confirm-title`}>{@render content(options.title)}</span>{/if}
+        <div id={contentId} class={`${componentPrefix}-confirm-content`}>{@render content(options.content)}</div>
       </div>
     </div>
     {#if options.footer === undefined}
-      <div class="ant-modal-confirm-btns">
+      <div class={`${componentPrefix}-confirm-btns`}>
         {#if okCancel}
           <Button loading={confirmation.pendingCancel} onclick={() => runtime.act(id, false)}>
             {@render content(options.cancelText ?? config.locale.cancelText)}

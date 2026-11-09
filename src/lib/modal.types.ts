@@ -5,6 +5,8 @@ export type ModalContent = string | number | boolean | null | Snippet;
 
 /** Модальный native dialog с управлением open и snippets содержимого/footer. */
 export interface ModalProps {
+  /** Локальный префикс Modal и частей; пустая строка наследует ConfigProvider. */
+  prefixCls?: string;
   /** Поддерживает bind:open. */
   open?: boolean;
   /** Необязательный заголовок; scalar или Snippet. Zero остаётся видимым. */

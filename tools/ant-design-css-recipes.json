@@ -3004,5 +3004,26 @@
     ],
     "keyframes": [],
     "header": "/* Ant Design 6.6.8 — MIT; vendor/LICENSE.ant-design.\n * Drawer prefix template: panel/mask/header/body/footer; motion/pure/inline/resizable/skeleton исключены.\n * SHA-256: 8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa\n */"
+  },
+  {
+    "id": "modal-prefix",
+    "output": "src/lib/vendor/modal-prefix.css.js",
+    "format": "module",
+    "expectedRules": 58,
+    "include": [
+      "^(?:\\.css-var-_R_0_)?\\.ant-modal(?![\\w])"
+    ],
+    "exclude": [
+      "\\.ant-(?:zoom|fade)",
+      "ant-modal-(?:pure|body-skeleton)"
+    ],
+    "replacements": [
+      {
+        "pattern": "\\.css-var-_R_0_\\.ant-modal-css-var",
+        "replacement": ".ant-modal-css-var"
+      }
+    ],
+    "keyframes": [],
+    "header": "/* Ant Design 6.6.8 — MIT; vendor/LICENSE.ant-design.\n * Modal/Confirm prefix template; zoom/fade, pure and skeleton исключены.\n * SHA-256: 8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa\n */"
   }
 ]

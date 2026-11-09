@@ -242,6 +242,13 @@ Raw button font отделён от public itemRender counterparts.
 motion/pure/inline/resizable/skeleton. Runtime меняет local classes, сохраняет
 canonical tokens и native dialog/size markers. WAA panel/mask и backdrop dismissal
 используют устойчивые атрибуты, Button namespace независим.
+Рецепт modal-prefix выводит 58 правил Modal/Confirm без zoom/fade, pure и skeleton.
+Runtime сохраняет canonical tokens, native dialog/centering/close-space selectors;
+Button namespace независим, responsive width variables следуют local prefix.
+Raw лишний Confirm header при local prefix отделён от public styles.header
+counterpart; Native сохраняет один заголовок подтверждения.
+Source cache с потерей footer Button margin записан raw/fresh; прежний native
+disabled-loading сверяется с отдельными public button props и SVG counterpart.
 Рецепт layout-prefix выводит 35 flat rules Layout/Sider; runtime выбирает свою
 группу, сохраняет Menu namespace и ограничивает defaults/state selectors корнем.
 Тот же template используется для Header/Content/Footer: выбираются selectors
