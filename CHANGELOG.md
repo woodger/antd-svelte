@@ -9,6 +9,10 @@
 
 ### Added
 
+- Pagination поддерживает local/shared prefixCls со стилями и private metric
+  namespaces. Native buttons/active colors/wireframe, отдельный Select, bindings,
+  current/active DOM и jumper draft/focus/selection сохраняются.
+
 - Menu поддерживает local/shared prefixCls во всех режимах, пунктах и подменю.
   Scoped темы, canonical tokens/link reset, DOM/refs, selection/open и фокус
   сохраняются. Source dashed Divider owner omission записан raw/matched.

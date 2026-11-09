@@ -90,7 +90,7 @@ describe('Pagination source SSR', () => {
         showSizeChanger: false
       }
     }).body;
-    const quick = body.match(/<div class="ant-pagination-options-quick-jumper[^>]*>(.*?)<\/div>/s);
+    const quick = body.match(/<div[^>]*class="ant-pagination-options-quick-jumper[^>]*>(.*?)<\/div>/s);
 
     expect(quick).not.toBeNull();
     expect(quick?.[1]).toContain('type="text"');

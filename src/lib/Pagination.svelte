@@ -21,6 +21,8 @@
   } from './pagination.types';
   import PaginationControl from './PaginationControl.svelte';
   import Select from './Select.svelte';
+  import ThemeScopeStyle from './ThemeScopeStyle.svelte';
+  import { getPaginationPrefixCss } from './pagination-prefix.engine';
 
   let { current = $bindable(), pageSize = $bindable(), ...rawProps }: PaginationProps = $props();
   let {
@@ -53,7 +55,7 @@
     classNames,
     styles,
     rootClassName,
-    prefixCls = 'ant-pagination',
+    prefixCls: customizePrefixCls,
     selectPrefixCls,
     id,
     role,
@@ -66,6 +68,9 @@
   } = $derived(rawProps);
 
   const config = useConfig();
+  let prefixCls = $derived(config.getPrefixCls('pagination', customizePrefixCls));
+  let rootPrefix = $derived(config.getPrefixCls());
+  let prefixCss = $derived(getPaginationPrefixCss(prefixCls, rootPrefix));
   const variantContext = useVariant('input');
   const componentTheme = useComponentTheme('Pagination');
   const designToken = useDesignTokenContext();
@@ -271,35 +276,35 @@
 </script>
 
 <style>
-  .ant-pagination { flex-wrap: wrap; row-gap: var(--ant-margin-xs); }
-  .ant-pagination .ant-pagination-options { display: inline-flex; align-items: center; }
-  .ant-pagination .ant-pagination-options :global(.container) { min-width: 90px; }
+  [data-ant-pagination] { flex-wrap: wrap; row-gap: var(--ant-margin-xs); }
+  [data-ant-pagination] [data-ant-pagination-options] { display: inline-flex; align-items: center; }
+  [data-ant-pagination] [data-ant-pagination-options] :global(.container) { min-width: 90px; }
   .quick-button { cursor: pointer; font: inherit; }
   input:focus-visible, .quick-button:focus-visible { outline: var(--ant-line-width-focus) solid var(--ant-color-primary-border); outline-offset: 1px; }
-  .ant-pagination-source-theme :global(.ant-pagination-item .page-button) { padding-inline: calc(var(--ant-margin-xxs) * 1.5); color: var(--ant-color-text); }
-  .ant-pagination :global(.ant-pagination-item-active .page-button) { color: var(--ant-pagination-item-active-color); }
-  .ant-pagination :global(.ant-pagination-item-active:hover .page-button) { color: var(--ant-pagination-item-active-color-hover); }
+  [data-ant-pagination-source-theme] :global([data-ant-pagination-item] .page-button) { padding-inline: calc(var(--ant-margin-xxs) * 1.5); color: var(--ant-color-text); }
+  [data-ant-pagination] :global([data-ant-pagination-active] .page-button) { color: var(--ant-pagination-item-active-color); }
+  [data-ant-pagination] :global([data-ant-pagination-active]:hover .page-button) { color: var(--ant-pagination-item-active-color-hover); }
   /* Source button сохраняет normal и при неопределённой высоте item. */
-  .ant-pagination-source-theme :global(.ant-pagination-prev button), .ant-pagination-source-theme :global(.ant-pagination-next button) { line-height: normal; }
-  .ant-pagination.ant-pagination-disabled :global(.ant-pagination-item .page-button) { color: var(--ant-color-text-disabled); }
-  .ant-pagination-source-theme.ant-pagination-disabled :global(.ant-pagination-item .page-button) { background-color: transparent; border: none; cursor: not-allowed; }
-  .ant-pagination.ant-pagination-disabled :global(.ant-pagination-item-active .page-button) { color: var(--ant-pagination-item-active-color-disabled); }
+  [data-ant-pagination-source-theme] :global([data-ant-pagination-prev] button), [data-ant-pagination-source-theme] :global([data-ant-pagination-next] button) { line-height: normal; }
+  [data-ant-pagination][data-ant-pagination-disabled] :global([data-ant-pagination-item] .page-button) { color: var(--ant-color-text-disabled); }
+  [data-ant-pagination-source-theme][data-ant-pagination-disabled] :global([data-ant-pagination-item] .page-button) { background-color: transparent; border: none; cursor: not-allowed; }
+  [data-ant-pagination][data-ant-pagination-disabled] :global([data-ant-pagination-active] .page-button) { color: var(--ant-pagination-item-active-color-disabled); }
   /* Ant Design 6.6.8 pagination/style/bordered.ts; этих правил нет в dist/antd.css. */
-  .ant-pagination-source-theme.ant-pagination-bordered :global(.ant-pagination-prev:hover button), .ant-pagination-source-theme.ant-pagination-bordered :global(.ant-pagination-next:hover button) { border-color: var(--ant-color-primary-hover); background-color: var(--ant-pagination-item-bg); }
-  .ant-pagination-source-theme.ant-pagination-bordered :global(.ant-pagination-prev .ant-pagination-item-link), .ant-pagination-source-theme.ant-pagination-bordered :global(.ant-pagination-next .ant-pagination-item-link) { background-color: var(--ant-pagination-item-link-bg); border-color: var(--ant-color-border); }
-  .ant-pagination-source-theme.ant-pagination-bordered :global(.ant-pagination-prev:hover .ant-pagination-item-link), .ant-pagination-source-theme.ant-pagination-bordered :global(.ant-pagination-next:hover .ant-pagination-item-link) { border-color: var(--ant-color-primary); background-color: var(--ant-pagination-item-bg); color: var(--ant-color-primary); }
-  .ant-pagination-source-theme.ant-pagination-bordered :global(.ant-pagination-prev.ant-pagination-disabled .ant-pagination-item-link), .ant-pagination-source-theme.ant-pagination-bordered :global(.ant-pagination-next.ant-pagination-disabled .ant-pagination-item-link) { border-color: var(--ant-color-border); color: var(--ant-color-text-disabled); }
-  .ant-pagination-source-theme.ant-pagination-bordered :global(.ant-pagination-item) { background-color: var(--ant-pagination-item-bg); border: var(--ant-line-width) var(--ant-line-type) var(--ant-color-border); }
-  .ant-pagination-source-theme.ant-pagination-bordered :global(.ant-pagination-item:hover:not(.ant-pagination-item-active)) { border-color: var(--ant-color-primary); background-color: var(--ant-pagination-item-bg); }
-  .ant-pagination-source-theme.ant-pagination-bordered :global(.ant-pagination-item:hover:not(.ant-pagination-item-active) > a), .ant-pagination-source-theme.ant-pagination-bordered :global(.ant-pagination-item:hover:not(.ant-pagination-item-active) .page-button) { color: var(--ant-color-primary); }
-  .ant-pagination-source-theme.ant-pagination-bordered :global(.ant-pagination-item-active) { border-color: var(--ant-color-primary); }
-  .ant-pagination-source-theme.ant-pagination-bordered.ant-pagination-disabled :global(.ant-pagination-item), .ant-pagination-source-theme.ant-pagination-bordered.ant-pagination-disabled :global(.ant-pagination-item-link) { background-color: var(--ant-color-bg-container-disabled); border-color: var(--ant-color-border); }
-  .ant-pagination-source-theme.ant-pagination-bordered.ant-pagination-disabled :global(.ant-pagination-item:hover:not(.ant-pagination-item-active)), .ant-pagination-source-theme.ant-pagination-bordered.ant-pagination-disabled :global(.ant-pagination-item-link:hover:not(.ant-pagination-item-active)) { background-color: var(--ant-color-bg-container-disabled); border-color: var(--ant-color-border); }
-  .ant-pagination-source-theme.ant-pagination-bordered.ant-pagination-disabled :global(.ant-pagination-item:hover:not(.ant-pagination-item-active) > a), .ant-pagination-source-theme.ant-pagination-bordered.ant-pagination-disabled :global(.ant-pagination-item:hover:not(.ant-pagination-item-active) .page-button) { color: var(--ant-color-text-disabled); }
-  .ant-pagination-source-theme.ant-pagination-bordered.ant-pagination-disabled :global(.ant-pagination-item-active) { background-color: var(--ant-pagination-item-active-bg-disabled); }
-  .ant-pagination-source-theme.ant-pagination-bordered.ant-pagination-disabled :global(.ant-pagination-prev:hover button), .ant-pagination-source-theme.ant-pagination-bordered.ant-pagination-disabled :global(.ant-pagination-next:hover button) { background-color: var(--ant-color-bg-container-disabled); border-color: var(--ant-color-border); color: var(--ant-color-text-disabled); }
-  @media (max-width: 576px) { .ant-pagination .ant-pagination-options-quick-jumper, .ant-pagination .quick-options-only { display: none; } }
-  @media (prefers-reduced-motion: reduce) { input, .ant-pagination :global(.ant-pagination-item), .ant-pagination :global(.ant-pagination-item-link) { transition: none; } }
+  [data-ant-pagination-source-theme][data-ant-pagination-bordered] :global([data-ant-pagination-prev]:hover button), [data-ant-pagination-source-theme][data-ant-pagination-bordered] :global([data-ant-pagination-next]:hover button) { border-color: var(--ant-color-primary-hover); background-color: var(--ant-pagination-item-bg); }
+  [data-ant-pagination-source-theme][data-ant-pagination-bordered] :global([data-ant-pagination-prev] :is([data-ant-pagination-link], .ant-pagination-item-link)), [data-ant-pagination-source-theme][data-ant-pagination-bordered] :global([data-ant-pagination-next] :is([data-ant-pagination-link], .ant-pagination-item-link)) { background-color: var(--ant-pagination-item-link-bg); border-color: var(--ant-color-border); }
+  [data-ant-pagination-source-theme][data-ant-pagination-bordered] :global([data-ant-pagination-prev]:hover :is([data-ant-pagination-link], .ant-pagination-item-link)), [data-ant-pagination-source-theme][data-ant-pagination-bordered] :global([data-ant-pagination-next]:hover :is([data-ant-pagination-link], .ant-pagination-item-link)) { border-color: var(--ant-color-primary); background-color: var(--ant-pagination-item-bg); color: var(--ant-color-primary); }
+  [data-ant-pagination-source-theme][data-ant-pagination-bordered] :global([data-ant-pagination-prev][data-ant-pagination-disabled] :is([data-ant-pagination-link], .ant-pagination-item-link)), [data-ant-pagination-source-theme][data-ant-pagination-bordered] :global([data-ant-pagination-next][data-ant-pagination-disabled] :is([data-ant-pagination-link], .ant-pagination-item-link)) { border-color: var(--ant-color-border); color: var(--ant-color-text-disabled); }
+  [data-ant-pagination-source-theme][data-ant-pagination-bordered] :global([data-ant-pagination-item]) { background-color: var(--ant-pagination-item-bg); border: var(--ant-line-width) var(--ant-line-type) var(--ant-color-border); }
+  [data-ant-pagination-source-theme][data-ant-pagination-bordered] :global([data-ant-pagination-item]:hover:not([data-ant-pagination-active])) { border-color: var(--ant-color-primary); background-color: var(--ant-pagination-item-bg); }
+  [data-ant-pagination-source-theme][data-ant-pagination-bordered] :global([data-ant-pagination-item]:hover:not([data-ant-pagination-active]) > a), [data-ant-pagination-source-theme][data-ant-pagination-bordered] :global([data-ant-pagination-item]:hover:not([data-ant-pagination-active]) .page-button) { color: var(--ant-color-primary); }
+  [data-ant-pagination-source-theme][data-ant-pagination-bordered] :global([data-ant-pagination-active]) { border-color: var(--ant-color-primary); }
+  [data-ant-pagination-source-theme][data-ant-pagination-bordered][data-ant-pagination-disabled] :global([data-ant-pagination-item]), [data-ant-pagination-source-theme][data-ant-pagination-bordered][data-ant-pagination-disabled] :global(:is([data-ant-pagination-link], .ant-pagination-item-link)) { background-color: var(--ant-color-bg-container-disabled); border-color: var(--ant-color-border); }
+  [data-ant-pagination-source-theme][data-ant-pagination-bordered][data-ant-pagination-disabled] :global([data-ant-pagination-item]:hover:not([data-ant-pagination-active])), [data-ant-pagination-source-theme][data-ant-pagination-bordered][data-ant-pagination-disabled] :global(:is([data-ant-pagination-link], .ant-pagination-item-link):hover:not([data-ant-pagination-active])) { background-color: var(--ant-color-bg-container-disabled); border-color: var(--ant-color-border); }
+  [data-ant-pagination-source-theme][data-ant-pagination-bordered][data-ant-pagination-disabled] :global([data-ant-pagination-item]:hover:not([data-ant-pagination-active]) > a), [data-ant-pagination-source-theme][data-ant-pagination-bordered][data-ant-pagination-disabled] :global([data-ant-pagination-item]:hover:not([data-ant-pagination-active]) .page-button) { color: var(--ant-color-text-disabled); }
+  [data-ant-pagination-source-theme][data-ant-pagination-bordered][data-ant-pagination-disabled] :global([data-ant-pagination-active]) { background-color: var(--ant-pagination-item-active-bg-disabled); }
+  [data-ant-pagination-source-theme][data-ant-pagination-bordered][data-ant-pagination-disabled] :global([data-ant-pagination-prev]:hover button), [data-ant-pagination-source-theme][data-ant-pagination-bordered][data-ant-pagination-disabled] :global([data-ant-pagination-next]:hover button) { background-color: var(--ant-color-bg-container-disabled); border-color: var(--ant-color-border); color: var(--ant-color-text-disabled); }
+  @media (max-width: 576px) { [data-ant-pagination] [data-ant-pagination-quick], [data-ant-pagination] .quick-options-only { display: none; } }
+  @media (prefers-reduced-motion: reduce) { input, [data-ant-pagination] :global([data-ant-pagination-item]), [data-ant-pagination] :global(:is([data-ant-pagination-link], .ant-pagination-item-link)) { transition: none; } }
 </style>
 
 {#snippet content(node: PaginationContent | undefined)}
@@ -319,13 +324,16 @@
   </button>
 {/snippet}
 
-{#if !hideOnSinglePage || pagination.total > pagination.pageSize}
-  <nav {...forwarded} bind:this={navigation} {id} {role} aria-label={ariaLabel ?? strings.label}
+{#if !hideOnSinglePage || pagination.total > pagination.pageSize}{#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`pagination-prefix:${prefixCls}:${rootPrefix}`} />{/if}<nav {...forwarded} bind:this={navigation} {id} {role} aria-label={ariaLabel ?? strings.label}
     aria-labelledby={ariaLabelledby} aria-describedby={ariaDescribedby} dir={config.direction}
     class={[componentTheme.className, config.pagination?.class, rootClassName,
       contextClasses.root, localClasses.root]}
     style={rootStyle}>
-    <ul class={[prefixCls, 'ant-pagination-css-var', `${prefixCls}-${resolvedSize}`,
+    <ul data-ant-pagination data-ant-pagination-prefix={prefixCls} data-ant-pagination-root-prefix={rootPrefix}
+      data-ant-pagination-source-theme={componentTheme.className ? true : undefined}
+      data-ant-pagination-disabled={blocked || undefined}
+      data-ant-pagination-bordered={designToken.enabled && designToken.state.token.wireframe || undefined}
+      class={[prefixCls, 'ant-pagination-css-var', `${prefixCls}-${resolvedSize}`,
         componentTheme.className && 'ant-pagination-source-theme',
         designToken.enabled && designToken.state.token.wireframe && `${prefixCls}-bordered`,
         mini && `${prefixCls}-mini`, align && `${prefixCls}-${align}`,
@@ -336,7 +344,7 @@
       {#if showTotal}<li class={`${prefixCls}-total-text`}>
         {@render showTotal(pagination.total, pagination.range)}
       </li>{/if}
-      <li class={[`${prefixCls}-prev`, itemClass, (blocked || pagination.current <= 1)
+      <li data-ant-pagination-prev data-ant-pagination-disabled={blocked || pagination.current <= 1 || undefined} class={[`${prefixCls}-prev`, itemClass, (blocked || pagination.current <= 1)
           && `${prefixCls}-disabled`]} style={itemStyle}
         title={showTitle ? strings.previous : undefined}>
         <PaginationControl page={Math.max(0, pagination.current - 1)} type="prev"
@@ -359,7 +367,7 @@
       {:else}
         {#each items as item (item)}
           {#if typeof item === 'number'}
-            <li class={[`${prefixCls}-item`, `${prefixCls}-item-${item}`, itemClass,
+            <li data-ant-pagination-item data-ant-pagination-active={pagination.total > 0 && item === pagination.current || undefined} class={[`${prefixCls}-item`, `${prefixCls}-item-${item}`, itemClass,
                 pagination.total > 0 && item === pagination.current && `${prefixCls}-item-active`,
                 pagination.total === 0 && `${prefixCls}-item-disabled`,
                 items[items.indexOf(item) - 1] === 'jump-prev' && `${prefixCls}-item-after-jump-prev`,
@@ -389,7 +397,7 @@
           {/if}
         {/each}
       {/if}
-      <li class={[`${prefixCls}-next`, itemClass, (blocked || pagination.current >= count)
+      <li data-ant-pagination-next data-ant-pagination-disabled={blocked || pagination.current >= count || undefined} class={[`${prefixCls}-next`, itemClass, (blocked || pagination.current >= count)
           && `${prefixCls}-disabled`]} style={itemStyle}
         title={showTitle ? strings.next : undefined}>
         <PaginationControl page={Math.min(count, pagination.current + 1)} type="next"
@@ -398,7 +406,7 @@
           onClick={event => changePage(pagination.current + 1, event)} />
       </li>
       {#if showChanger || quickGo}
-        <li class={[`${prefixCls}-options`, !showChanger && 'quick-options-only']}>
+        <li data-ant-pagination-options class={[`${prefixCls}-options`, !showChanger && 'quick-options-only']}>
           {#if showChanger}
             {#if sizeRenderer}{@render sizeRenderer(sizeInfo)}
             {:else}<Select
@@ -415,7 +423,7 @@
               }}
             />{/if}
           {/if}
-          {#if quickGo}<div class={`${prefixCls}-options-quick-jumper`}>
+          {#if quickGo}<div data-ant-pagination-quick class={`${prefixCls}-options-quick-jumper`}>
             {strings.jumpTo}<input bind:this={quickElement} type="text" value={quickText}
               disabled={blocked} aria-label={locale?.page || strings.page}
               oninput={event => {

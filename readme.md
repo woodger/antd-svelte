@@ -9616,8 +9616,17 @@ pageSizeOptions сначала преобразуются в числа. В Reac
 исходному CSS и скрывается на XS. Для controlled compositing с отказом владельца
 используйте functional bindings с getter и обработчики onChange.
 
-Генерация CSS для произвольных prefixCls/selectPrefixCls и React-specific components/dev warnings
-остаются в следующих этапах. `selectPrefixCls` доступен custom size changer info;
+PrefixCls задаёт локальный namespace Pagination; пустая строка наследует
+ConfigProvider.prefixCls. 111 исходных правил styles/media изолированы по local/global
+prefix, без четырёх общих Input Group rules. Частные item-size-actual и
+item-spacing-actual следуют общему namespace с исходным удалением точек;
+публичные token variables сохраняются. Смена префикса сохраняет current/pageSize,
+DOM активного пункта и jumper, его draft/focus/selection и callbacks.
+Source button Arial и [public itemRender counterparts с fontFamily:inherit](./tests/browser/fixtures/ant-design-pagination-prefix-reference.json)
+разделены: прежняя Native typography, active colors и wireframe сохранены.
+
+Генерация CSS selectPrefixCls и React-specific components/dev warnings остаются
+в следующих этапах. `selectPrefixCls` доступен custom size changer info;
 штатный Select сохраняет свои классы. Обычный disabled, навигация native кнопками,
 возврат focus после отключения next и SSR без DOM/media/timers сохранены.
 

@@ -53,7 +53,7 @@
 </style>
 
 {#snippet originalElement()}
-  <button type="button" {disabled} {title} aria-label={label}
+  <button data-ant-pagination-link={type !== 'page' || undefined} type="button" {disabled} {title} aria-label={label}
     aria-current={active ? 'page' : undefined} onclick={handleClick}
     class={type === 'page' ? 'page-button' : type.startsWith('jump-')
       ? `${prefix}-item-link jump-button` : `${prefix}-item-link`}>

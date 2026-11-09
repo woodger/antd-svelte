@@ -95,7 +95,7 @@ export interface PaginationProps {
   classNames?: PaginationSemantic;
   styles?: PaginationSemantic;
   rootClassName?: string;
-  /** Меняет DOM-классы; встроенный CSS рассчитан на ant-pagination. */
+  /** Локальный префикс частей Pagination; пустая строка наследует ConfigProvider. */
   prefixCls?: string;
   /** Префикс custom size changer; штатный Select сохраняет собственные классы. */
   selectPrefixCls?: string;

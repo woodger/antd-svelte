@@ -234,6 +234,10 @@ markers/variables, native popover/controller, ссылки и typeahead сохр
 прежними deprecated exclusions. Runtime сохраняет canonical variables/link reset,
 изолирует Menu/popup namespaces и общий Typography prefix. Raw dashed Divider
 owner omission отделён от public per-divider prefixCls counterparts.
+Рецепт pagination-prefix выводит 111 правил без общих Input Group selectors.
+Runtime разделяет local classes, global actual metrics и canonical tokens;
+native buttons/active colors/wireframe, media и собственный Select namespace сохранены.
+Raw button font отделён от public itemRender counterparts.
 Рецепт layout-prefix выводит 35 flat rules Layout/Sider; runtime выбирает свою
 группу, сохраняет Menu namespace и ограничивает defaults/state selectors корнем.
 Тот же template используется для Header/Content/Footer: выбираются selectors
