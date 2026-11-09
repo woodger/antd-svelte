@@ -1875,7 +1875,18 @@
         "tools/ant-design-css-recipes.json",
         "tests/package/prefix-text-boundaries.ssr.test.ts",
         "tests/browser/fixtures/PrefixTextBoundariesFixtures.svelte",
-        "tests/browser/prefix-text-boundaries.spec.ts"
+        "tests/browser/prefix-text-boundaries.spec.ts",
+        "src/lib/Pagination.svelte",
+        "src/lib/grid.engine.ts",
+        "src/lib/grid-breakpoint.model.svelte.ts",
+        "tests/browser/responsive-controls.spec.ts",
+        "tests/browser/responsive-controls-metrics.ts",
+        "tests/browser/fixtures/ResponsiveControlsScope.svelte",
+        "tests/browser/fixtures/ResponsiveControlsCase.svelte",
+        "tests/browser/fixtures/ResponsiveControlsFixtures.svelte",
+        "tests/browser/fixtures/ant-design-responsive-controls-reference.json",
+        "tests/package/responsive-controls.ssr.test.ts",
+        "readme.md"
       ],
       "features": [
         {
@@ -2012,6 +2023,48 @@
             "tests/browser/masonry-prefix.spec.ts"
           ],
           "note": "Наблюдение для отдельного разбора: unmodified Ant Design 6.6.8 с prefixCls=ant-masonry-rtl и direction=ltr получает direction:rtl от стандартного Masonry stylesheet соседнего компонента. В свежем документе без этого stylesheet тот же компонент имеет LTR и соответствующие x coordinates. Raw mixed-page и isolated measurements сохранены. Native ограничивает root/RTL selectors владельцем и наследует заданное направление, не воспроизводя случайную смену раскладки."
+        },
+        {
+          "id": "responsive-theme-breakpoints",
+          "title": "Глобальные screen tokens для responsive geometry",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Masonry.svelte",
+            "src/lib/Pagination.svelte",
+            "src/lib/grid.engine.ts",
+            "src/lib/grid-breakpoint.model.svelte.ts",
+            "tests/browser/responsive-controls.spec.ts",
+            "tests/browser/responsive-controls-metrics.ts",
+            "tests/browser/fixtures/ResponsiveControlsScope.svelte",
+            "tests/browser/fixtures/ResponsiveControlsCase.svelte",
+            "tests/browser/fixtures/ResponsiveControlsFixtures.svelte",
+            "tests/browser/fixtures/ant-design-responsive-controls-reference.json",
+            "tests/package/responsive-controls.ssr.test.ts",
+            "readme.md"
+          ],
+          "note": "Общий validated Grid resolver читает global theme.token.screen*, отдельно от component aliases. 36 raw viewport frames для Masonry columns/gutter и Pagination mini class, explicit size/responsive=false, distinct min/current thresholds и nested/reset scopes. SSR сохраняет пустой Masonry и обычный Pagination; порядок thresholds проверяется до mount, в том числе у responsive=false Pagination. Live updates заменяют queries без remount, сохраняя items/editor/Masonry ref/selection/focus, pager DOM/current/quick jump. Source stale observer записан raw; свежая geometry сравнивается с отдельным public fresh-mount counterpart."
+        },
+        {
+          "id": "native-responsive-token-updates",
+          "title": "Актуальные queries вместо stale Source observer после смены tokens",
+          "state": "partial",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Masonry.svelte",
+            "src/lib/Pagination.svelte",
+            "src/lib/grid.engine.ts",
+            "src/lib/grid-breakpoint.model.svelte.ts",
+            "tests/browser/responsive-controls.spec.ts",
+            "tests/browser/responsive-controls-metrics.ts",
+            "tests/browser/fixtures/ResponsiveControlsScope.svelte",
+            "tests/browser/fixtures/ResponsiveControlsCase.svelte",
+            "tests/browser/fixtures/ResponsiveControlsFixtures.svelte",
+            "tests/browser/fixtures/ant-design-responsive-controls-reference.json",
+            "tests/package/responsive-controls.ssr.test.ts",
+            "readme.md"
+          ],
+          "note": "Source useBreakpoint подписывается по refreshOnChange и сохраняет старые queries при token update. Raw live frame и public fresh mount записаны отдельно; Native оставляет существующий reactive breakpoint lifecycle. Geometry обновляется по свежим порогам, DOM/draft/focus/selection и page state сохраняются. Это намеренная граница переноса исходного дефекта."
         }
       ]
     },
@@ -3409,7 +3462,17 @@
         "tests/browser/fixtures/ant-design-pagination-prefix-reference.json",
         "tests/browser/pagination-prefix-metrics.ts",
         "tests/browser/pagination-prefix.spec.ts",
-        "tests/package/pagination-prefix.ssr.test.ts"
+        "tests/package/pagination-prefix.ssr.test.ts",
+        "src/lib/Masonry.svelte",
+        "src/lib/grid.engine.ts",
+        "src/lib/grid-breakpoint.model.svelte.ts",
+        "tests/browser/responsive-controls.spec.ts",
+        "tests/browser/responsive-controls-metrics.ts",
+        "tests/browser/fixtures/ResponsiveControlsScope.svelte",
+        "tests/browser/fixtures/ResponsiveControlsCase.svelte",
+        "tests/browser/fixtures/ResponsiveControlsFixtures.svelte",
+        "tests/browser/fixtures/ant-design-responsive-controls-reference.json",
+        "tests/package/responsive-controls.ssr.test.ts"
       ],
       "features": [
         {
@@ -3566,6 +3629,48 @@
             "tests/package/pagination-prefix.ssr.test.ts"
           ],
           "note": "23 raw UMD конфигурации в normal/nested/reset scopes: sizes, disabled/simple/readOnly/quick/size changer, align, wireframe, aliases/cssVar. Local/empty priority соответствует ConfigProvider; 111 исходных rules/media изолированы по local/global prefixes без четырёх общих Input Group selectors. Private item-size-actual/item-spacing-actual следуют global namespace с удалением точек; public variables canonical. Native wrapping/nav/buttons/active colors/wireframe, Select namespace и custom size renderer info сохранены. Raw prev/next button Arial отделён от public itemRender fontFamily=inherit counterparts для прежней Native typography. Live changes сохраняют current/pageSize, active/jumper DOM, draft/focus/selection и callbacks. CSS selectPrefixCls и полный Select API остаются в advanced-api."
+        },
+        {
+          "id": "responsive-theme-breakpoints",
+          "title": "Глобальные screen tokens для responsive geometry",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Masonry.svelte",
+            "src/lib/Pagination.svelte",
+            "src/lib/grid.engine.ts",
+            "src/lib/grid-breakpoint.model.svelte.ts",
+            "tests/browser/responsive-controls.spec.ts",
+            "tests/browser/responsive-controls-metrics.ts",
+            "tests/browser/fixtures/ResponsiveControlsScope.svelte",
+            "tests/browser/fixtures/ResponsiveControlsCase.svelte",
+            "tests/browser/fixtures/ResponsiveControlsFixtures.svelte",
+            "tests/browser/fixtures/ant-design-responsive-controls-reference.json",
+            "tests/package/responsive-controls.ssr.test.ts",
+            "readme.md"
+          ],
+          "note": "Общий validated Grid resolver читает global theme.token.screen*, отдельно от component aliases. 36 raw viewport frames для Masonry columns/gutter и Pagination mini class, explicit size/responsive=false, distinct min/current thresholds и nested/reset scopes. SSR сохраняет пустой Masonry и обычный Pagination; порядок thresholds проверяется до mount, в том числе у responsive=false Pagination. Live updates заменяют queries без remount, сохраняя items/editor/Masonry ref/selection/focus, pager DOM/current/quick jump. Source stale observer записан raw; свежая geometry сравнивается с отдельным public fresh-mount counterpart."
+        },
+        {
+          "id": "native-responsive-token-updates",
+          "title": "Актуальные queries вместо stale Source observer после смены tokens",
+          "state": "partial",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Masonry.svelte",
+            "src/lib/Pagination.svelte",
+            "src/lib/grid.engine.ts",
+            "src/lib/grid-breakpoint.model.svelte.ts",
+            "tests/browser/responsive-controls.spec.ts",
+            "tests/browser/responsive-controls-metrics.ts",
+            "tests/browser/fixtures/ResponsiveControlsScope.svelte",
+            "tests/browser/fixtures/ResponsiveControlsCase.svelte",
+            "tests/browser/fixtures/ResponsiveControlsFixtures.svelte",
+            "tests/browser/fixtures/ant-design-responsive-controls-reference.json",
+            "tests/package/responsive-controls.ssr.test.ts",
+            "readme.md"
+          ],
+          "note": "Source useBreakpoint подписывается по refreshOnChange и сохраняет старые queries при token update. Raw live frame и public fresh mount записаны отдельно; Native оставляет существующий reactive breakpoint lifecycle. Geometry обновляется по свежим порогам, DOM/draft/focus/selection и page state сохраняются. Это намеренная граница переноса исходного дефекта."
         }
       ]
     },

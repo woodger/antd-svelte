@@ -320,6 +320,10 @@ SSR охватывает также defaultOpen, browser — смену обще
 CSS selectors; raw прозрачный фон сохранён отдельно от public inherited-prefix
 counterpart. Svelte сохраняет прежнее оформление списка; только menu background
 сравнивается с counterpart, остальные свойства — с raw Source.
+Masonry/Pagination подключены к global breakpoint resolver. 36 raw viewport frames
+проверяют columns, обе оси gutter и mini class, explicit size/responsive=false,
+раздельные SMMin/SM и nested/reset scopes. Tokens обновляют Native subscriptions
+без remount; Source stale observer и отдельный public fresh mount сохранены раздельно.
 Descriptions responsive column/span используют тот же validated global breakpoint
 resolver, что Row. 52 raw viewport frames и отдельные live/fresh frames описывают
 пороговые значения, вложенные/reset scopes, default columns и packing spans.

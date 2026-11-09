@@ -775,6 +775,12 @@ useRefs и style. Изучены @rc-component/motion 1.3.3 (^1.3.3),
 исходника. Для responsive map используется наибольший совпавший breakpoint;
 если совпадений нет — xs, затем 1. Поддерживаются xs/sm/md/lg/xl/xxl/xxxl из Grid.
 
+Masonry использует глобальные `theme.token.screen*` для columns и обеих осей
+responsive gutter. Пороги проверяются и при SSR; после mount смена токенов
+заменяет media queries без пересоздания items. Editor/ref/focus/selection сохраняются.
+Raw stale observer Source отделён от public fresh-mount counterpart в
+[замерах responsive controls](tests/browser/fixtures/ant-design-responsive-controls-reference.json).
+
 Одиночный числовой gutter действует по обеим осям, пара разделяет horizontal и
 vertical. Каждая ось принимает responsive map. Нижнего gutter после последнего
 элемента нет. Хотя общий тип Row.gutter допускает CSS-строку, Masonry эталона
@@ -9777,10 +9783,18 @@ quick jumper и его кнопка скрыты. Вложенный в quick ju
 с тем же классом, чтобы сохранить валидную HTML-структуру; подтверждение — native button.
 
 `align` принимает start/center/end. `showTitle=false` убирает tooltip titles,
-сохраняя доступные имена. `responsive` на XS добавляет legacy class mini при
+сохраняя доступные имена. `responsive` на XS добавляет class mini при
 отсутствии явного size. В CSS Ant Design 6.6.8 этот класс сам не меняет высоту:
 её меняет size=small. Это поведение проверено на исходной React-сборке и сохранено.
 `size` и ConfigProvider.componentSize по-прежнему задают реальные размеры.
+
+Responsive Pagination читает глобальный `theme.token.screenXSMax`; явный size
+сохраняет приоритет. Пороги валидируются и при SSR, включая responsive=false,
+как в useBreakpoint исходника. Смена токенов заменяет queries, сохраняя текущую
+страницу и quick-jump draft/selection/focus. Наблюдение stale Source subscriptions
+и fresh public counterpart записаны отдельно. [Browser-проверки](tests/browser/responsive-controls.spec.ts)
+охватывают также Masonry columns/gutter; [SSR](tests/package/responsive-controls.ssr.test.ts)
+сохраняет исходные defaults и проверяет порядок порогов.
 
 `itemRender` — snippet с `(page, type, originalElement, info)`. OriginalElement
 рисует готовый native button; info содержит disabled/active/label/title/onClick

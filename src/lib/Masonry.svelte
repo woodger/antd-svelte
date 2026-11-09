@@ -6,7 +6,7 @@
   import { createBreakpoint } from './grid-breakpoint.model.svelte.js';
   import { getMasonryPrefixCss } from './masonry-prefix.engine';
   import ThemeScopeStyle from './ThemeScopeStyle.svelte';
-  import { gridGutters } from './grid.engine';
+  import { getGridMediaQueries, gridGutters } from './grid.engine';
   import { captureMasonryFocus, createMasonryRuntime } from './masonry.dom';
   import {
     equalMasonryData,
@@ -45,6 +45,9 @@
   const componentTheme = useComponentTheme('Masonry');
   const tokens = useDesignTokenContext();
   const breakpoint = createBreakpoint();
+  let mediaQueries = $derived(tokens.enabled ? getGridMediaQueries(tokens.state.token) : undefined);
+  // Source проверяет порядок порогов до подключения browser observer, включая SSR.
+  untrack(() => mediaQueries);
   let motionEnabled = $derived(!tokens.enabled || tokens.state.token.motion !== false);
   let mergedItems = $state.raw<MasonryItemType<Data>[]>([]);
   let heights = $state.raw<MasonryHeight[]>([]);
@@ -132,7 +135,7 @@
   }
 
   $effect(() => { mergedItems = items ?? []; });
-  $effect(() => breakpoint.connect(window));
+  $effect(() => breakpoint.connect(window, mediaQueries));
 
   $effect(() => {
     if (!nativeElement) return;

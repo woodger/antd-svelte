@@ -10,6 +10,7 @@
   import { useDesignTokenContext } from './theme-context.svelte';
   import { provideFormField, useFormField } from './form-context';
   import { createBreakpoint } from './grid-breakpoint.model.svelte.js';
+  import { getGridMediaQueries } from './grid.engine';
   import { getPaginationItems, getPaginationState, getPageSizeOptions } from './pagination.engine';
   import { ruRU } from './types';
   import type {
@@ -84,6 +85,10 @@
     onBlur() { field.onBlur(); }
   } : undefined);
   const breakpoint = createBreakpoint();
+  let mediaQueries = $derived(designToken.enabled
+    ? getGridMediaQueries(designToken.state.token) : undefined);
+  // useBreakpoint проверяет порядок порогов и при SSR, даже с responsive=false.
+  untrack(() => mediaQueries);
   const initialCurrent = untrack(() => defaultCurrent);
   const initialSize = untrack(() => defaultPageSize);
   let navigation = $state<HTMLElement>();
@@ -174,7 +179,7 @@
     .filter(([name]) => name.startsWith('aria-') || name.startsWith('data-'))));
 
   $effect(() => {
-    if (responsive) return breakpoint.connect(window);
+    if (responsive) return breakpoint.connect(window, mediaQueries);
   });
 
   $effect(() => {

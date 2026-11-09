@@ -9,6 +9,10 @@
 
 ### Added
 
+- Masonry columns/gutter и responsive Pagination учитывают глобальные theme.token.screen*.
+  Queries обновляются без remount, сохраняя editors, focus/selection, Masonry ref
+  и страницу Pagination. Raw stale observer Source отделён от public fresh mount.
+
 - Descriptions учитывает глобальные theme.token.screen* при responsive column/span,
   заменяет media queries после смены токенов и очищает listeners при unmount.
   Raw stale observer Source сохранён отдельно от public fresh-mount counterpart.
