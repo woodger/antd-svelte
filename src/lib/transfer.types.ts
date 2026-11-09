@@ -195,7 +195,7 @@ export interface TransferProps<RecordType extends object = TransferItem> extends
   selectionsIcon?: TransferContent;
   classNames?: TransferSemanticValue<string>;
   styles?: TransferSemanticValue<string>;
-  /** @defaultValue 'ant-transfer' */
+  /** Локальный namespace Transfer; пустая строка наследует ConfigProvider. */
   prefixCls?: string;
   rootClassName?: string;
   class?: string;

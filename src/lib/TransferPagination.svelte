@@ -1,5 +1,7 @@
 <script lang="ts">
   import { untrack } from 'svelte';
+  import ThemeScopeStyle from './ThemeScopeStyle.svelte';
+  import { getPaginationPrefixCss } from './pagination-prefix.engine';
   import { useConfig } from './config-context';
   import { useComponentTheme } from './theme-component.svelte';
   import { getPaginationState, getPageSizeOptions } from './pagination.engine';
@@ -21,6 +23,9 @@
     class?: string;
   } = $props();
   const config = useConfig();
+  let prefix = $derived(config.getPrefixCls('pagination'));
+  let rootPrefix = $derived(config.getPrefixCls());
+  let prefixCss = $derived(getPaginationPrefixCss(prefix, rootPrefix));
   const componentTheme = useComponentTheme('Pagination');
   let strings = $derived({ ...ruRU.pagination, ...config.locale.pagination });
   let paginationState = $derived(getPaginationState(total, current, pageSize));
@@ -72,36 +77,36 @@
   button:focus-visible { outline: var(--ant-line-width-focus) solid var(--ant-color-primary-border); outline-offset: 1px; }
 </style>
 
-<ul class={['ant-pagination ant-pagination-css-var ant-pagination-small ant-pagination-mini',
+{#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`transfer-pagination-prefix:${prefix}:${rootPrefix}`} />{/if}<ul data-ant-pagination-prefix={prefix} data-ant-pagination-root-prefix={rootPrefix} class={[`${prefix} ant-pagination-css-var ${prefix}-small ${prefix}-mini`,
     componentTheme.className,
-    simple && 'ant-pagination-simple',
-    disabled && 'ant-pagination-disabled', config.direction === 'rtl' && 'ant-pagination-rtl',
+    simple && `${prefix}-simple`,
+    disabled && `${prefix}-disabled`, config.direction === 'rtl' && `${prefix}-rtl`,
     className]} style={componentTheme.style} aria-label={strings.label}>
-  <li class={['ant-pagination-prev', (disabled || current <= 1) && 'ant-pagination-disabled']}>
-    <button type="button" class="ant-pagination-item-link" aria-label={strings.previous}
+  <li class={[`${prefix}-prev`, (disabled || current <= 1) && `${prefix}-disabled`]}>
+    <button type="button" class={`${prefix}-item-link`} aria-label={strings.previous}
       disabled={disabled || current <= 1} onclick={() => change(current - 1)}>
       <Icon name={config.direction === 'rtl' ? 'right' : 'left'} />
     </button>
   </li>
   {#if simple}
-    <li class="ant-pagination-simple-pager" title={`${current}/${paginationState.pageCount}`}>
+    <li class={`${prefix}-simple-pager`} title={`${current}/${paginationState.pageCount}`}>
       <input type="text" size="3" aria-label={strings.page} value={displayed} {disabled}
         oninput={handleInput} onkeyup={handleKeyUp}
         onkeydown={event => {
           if (event.key === 'ArrowUp' || event.key === 'ArrowDown') event.preventDefault();
         }} onblur={event => change(Number(read(event.currentTarget)))} />
-      <span class="ant-pagination-slash">/</span>{paginationState.pageCount}
+      <span class={`${prefix}-slash`}>/</span>{paginationState.pageCount}
     </li>
   {:else}
     {#each pages as page (page)}
       {#if typeof page === 'number'}
-        <li class={['ant-pagination-item', page === current && 'ant-pagination-item-active']}>
+        <li class={[`${prefix}-item`, page === current && `${prefix}-item-active`]}>
           <button type="button" class="page-button" aria-label={`${strings.page} ${page}`}
             aria-current={page === current ? 'page' : undefined} {disabled}
             onclick={() => change(page)}>{page}</button>
         </li>
       {:else}
-        <li class={page === 'jump-prev' ? 'ant-pagination-jump-prev' : 'ant-pagination-jump-next'}>
+        <li class={page === 'jump-prev' ? `${prefix}-jump-prev` : `${prefix}-jump-next`}>
           <button type="button" class="jump-button" {disabled}
             aria-label={page === 'jump-prev' ? strings.jumpPrevious : strings.jumpNext}
             onclick={() => change(current + (page === 'jump-prev' ? -1 : 1)
@@ -110,16 +115,16 @@
       {/if}
     {/each}
   {/if}
-  <li class={['ant-pagination-next',
-      (disabled || current >= paginationState.pageCount) && 'ant-pagination-disabled']}>
-    <button type="button" class="ant-pagination-item-link" aria-label={strings.next}
+  <li class={[`${prefix}-next`,
+      (disabled || current >= paginationState.pageCount) && `${prefix}-disabled`]}>
+    <button type="button" class={`${prefix}-item-link`} aria-label={strings.next}
       disabled={disabled || current >= paginationState.pageCount} onclick={() => change(current + 1)}>
       <Icon name={config.direction === 'rtl' ? 'left' : 'right'} />
     </button>
   </li>
   {#if showSizeChanger}
-    <li class="ant-pagination-options"><Select
-      class="ant-pagination-options-size-changer ant-pagination-options-size-changer-select"
+    <li class={`${prefix}-options`}><Select
+      class={`${prefix}-options-size-changer ${prefix}-options-size-changer-select`}
       aria-label={strings.pageSize} size="small" {disabled} showSearch
       bind:value={() => pageSize, value => {
         if (value !== undefined) change(getPaginationState(total, current, value).current, value);

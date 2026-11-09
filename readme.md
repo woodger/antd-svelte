@@ -5710,9 +5710,19 @@ SSR не публикует callbacks и не обращается к DOM. Со�
 экземпляру; меню использует существующий Dropdown.
 
 RenderEmpty подключён через ConfigProvider с исходными fallback/locale приоритетами
-и выбором array content по стороне. Генерация CSS для произвольного prefixCls и
-React-specific refs/dev warnings остаются вне этого этапа. PrefixCls меняет DOM
-классы; встроенный vendor CSS рассчитан на ant-transfer.
+и выбором array content по стороне. React-specific refs/dev warnings остаются вне переноса.
+
+`prefixCls` задаёт локальный namespace Transfer; пустое значение наследует
+`ConfigProvider.prefixCls`. Классы списков, состояний и действий получают
+соответствующий CSS, а внутренние Checkbox/Input/Button/Pagination сохраняют
+независимые общие namespaces. Canonical theme variables и semantic priorities
+сохраняются. Смена префикса не заменяет поля, checkbox или pager и сохраняет
+query, выделение текста, фокус, selection keys и текущую страницу.
+[UMD-эталон](tests/browser/fixtures/ant-design-transfer-prefix-reference.json)
+содержит 20 конфигураций в обычном, вложенном и reset scopes и три live transitions;
+[browser](tests/browser/transfer-prefix.spec.ts) и
+[SSR](tests/package/transfer-prefix.ssr.test.ts) проверяют эти границы.
+Существующий native remove font учитывается отдельно, без изменения raw measurements.
 
 `ConfigProvider.theme.components.Transfer` применяет шесть component tokens,
 alias overrides и global/component algorithms. Сохранены числовые и строковые

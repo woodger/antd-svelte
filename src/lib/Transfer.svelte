@@ -4,6 +4,8 @@
 
 <script lang="ts" generics="RecordType extends object = TransferItem">
   import { untrack } from 'svelte';
+  import ThemeScopeStyle from './ThemeScopeStyle.svelte';
+  import { getTransferPrefixCss } from './transfer-prefix.engine';
   import { useConfig } from './config-context';
   import { useComponentTheme } from './theme-component.svelte';
   import { provideFormField, useForm, useFormField } from './form-context';
@@ -47,7 +49,9 @@
   let wasControlled = untrack(() => props.selectedKeys !== undefined);
   const anchors: Record<TransferDirection, number | null> = { left: null, right: null };
   const previousKeys: Record<TransferDirection, TransferKey[]> = { left: [], right: [] };
-  let prefix = $derived(props.prefixCls ?? 'ant-transfer');
+  let prefix = $derived(config.getPrefixCls('transfer', props.prefixCls));
+  let rootPrefix = $derived(config.getPrefixCls());
+  let prefixCss = $derived(getTransferPrefixCss(prefix, rootPrefix));
   let disabled = $derived(props.disabled ?? form?.disabled ?? config.componentDisabled);
   let status = $derived(props.status || field?.status);
   let data = $derived(transferData(props.dataSource ?? [], props.targetKeys ?? [], props.rowKey));
@@ -233,7 +237,8 @@
   }
 </script>
 
-<div {...attributes} bind:this={nativeElement}
+{#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`transfer-prefix:${prefix}:${rootPrefix}`} />{/if}<div {...attributes} bind:this={nativeElement}
+  data-ant-transfer-prefix={prefix} data-ant-transfer-root-prefix={rootPrefix}
   aria-invalid={field?.invalid || attributes['aria-invalid'] || undefined}
   aria-describedby={[attributes['aria-describedby'], field?.describedBy]
     .filter(Boolean).join(' ') || undefined}

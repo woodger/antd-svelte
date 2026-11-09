@@ -9,6 +9,10 @@
 
 ### Added
 
+- Transfer поддерживает local/shared prefixCls с независимыми namespaces внутренних
+  Checkbox/Input/Button/Pagination. Canonical tokens и прежние semantic priorities,
+  query/selection/focus, refs, перенос и draft пагинации сохранены.
+
 - Tree поддерживает local/shared prefixCls для nodes, checkbox, switcher и линий.
   Canonical tokens, native focus/ARIA IDs, selection/check и pending load сохранены;
   TreeSelect сохраняет свой текущий CSS-адаптер. Raw readonly-selection observation

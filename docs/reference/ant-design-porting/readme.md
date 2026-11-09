@@ -267,6 +267,10 @@ Native file input, refs/focus и выполняющиеся запросы не 
 collapse motion. Runtime изолирует local/global scopes, сохраняет canonical tokens
 и отдельный Row namespace. Native focus/IDs/state/load и CSS-адаптер TreeSelect
 сохранены; raw style/readonly-selection отделены от public counterparts.
+Рецепт transfer-prefix выводит те же 54 правила, что transfer, как CSS data module.
+Owner classes, включая box-sizing selectors, отделены от общих Button/Input/
+Pagination/Table namespaces; canonical tokens сохраняются. Private Checkbox и
+Pagination используют соответствующие prefix engines без замены native controls.
 Рецепт layout-prefix выводит 35 flat rules Layout/Sider; runtime выбирает свою
 группу, сохраняет Menu namespace и ограничивает defaults/state selectors корнем.
 Тот же template используется для Header/Content/Footer: выбираются selectors

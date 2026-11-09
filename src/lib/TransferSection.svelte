@@ -120,7 +120,7 @@
 <style>
   .row-label { display: flex; flex: auto; align-items: center; min-width: 0; max-width: 100%; cursor: inherit; }
   .row-label > :global(*:not(:last-child)) { margin-inline-end: var(--ant-margin-xs); }
-  .row-label > :global(.ant-checkbox-wrapper) { flex: none; }
+  .row-label > :global([data-ant-transfer-checkbox]) { flex: none; }
   .dropdown-button { padding: 0; border: 0; background: transparent; color: inherit; }
   .dropdown-button:focus-visible, .remove-button:focus-visible { outline: var(--ant-line-width-focus) solid var(--ant-color-primary-border); outline-offset: 2px; }
   .remove-button { padding: 0; border: 0; background: transparent; font: inherit; }
