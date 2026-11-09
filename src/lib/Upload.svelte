@@ -2,7 +2,7 @@
   import { onDestroy, untrack } from 'svelte';
   import ThemeScopeStyle from './ThemeScopeStyle.svelte';
   import { getUploadPrefixCss } from './upload-prefix.engine';
-  import type { UploadProps, UploadFile } from './upload.types';
+  import type { UploadProps, UploadFile, UploadSemanticInfo } from './upload.types';
   import { createUploadController } from './upload-controller.engine';
   import { filterUploadFile } from './upload.engine';
   import { uploadRequest } from './upload-request.dom';
@@ -27,7 +27,7 @@
     data = {},
     headers,
     withCredentials,
-    accept = '',
+    accept: customAccept,
     multiple = false,
     directory = false,
     pastable = false,
@@ -51,7 +51,7 @@
     isImageUrl,
     iconRender,
     itemRender,
-    progress = { size: [-1, 2], showInfo: false },
+    progress,
     classNames,
     styles,
     children,
@@ -62,6 +62,13 @@
     ...attributes
   } = $derived(suppliedProps);
   const config = useConfig();
+  let accept = $derived(customAccept ?? config.upload?.accept ?? '');
+  // Shared config не фиксирует response type отдельного Upload<T>.
+  let request = $derived(
+    customRequest || config.upload?.customRequest as UploadProps<T>['customRequest']
+  );
+  let mergedProgress = $derived(config.upload?.progress || progress
+    ? { ...config.upload?.progress, ...progress } : undefined);
   let componentPrefix = $derived(config.getPrefixCls('upload', customizePrefixCls));
   let prefixCss = $derived(getUploadPrefixCss(componentPrefix));
   // В браузере сохраняются строковые attributes Source; SSR канонизирует boolean attribute.
@@ -103,15 +110,36 @@
   let semanticStyles = $derived(
     (typeof styles === 'function' ? styles(semanticInfo) : styles) ?? {}
   );
+  let sharedClasses = $derived(
+    (typeof config.upload?.classNames === 'function'
+      ? config.upload.classNames(semanticInfo as UploadSemanticInfo)
+      : config.upload?.classNames) ?? {}
+  );
+  let sharedStyles = $derived(
+    (typeof config.upload?.styles === 'function'
+      ? config.upload.styles(semanticInfo as UploadSemanticInfo)
+      : config.upload?.styles) ?? {}
+  );
+  let rootStyle = $derived(
+    [componentTheme.style, sharedStyles.root, semanticStyles.root].filter(Boolean).join(';')
+      || undefined
+  );
   // Trigger сбрасывает vendor defaults, сохраняя variables semantic root и их scope.
   let inheritedRootVariables = $derived(
-    [...getInlineStyleDeclarations([semanticStyles.root])]
+    [...getInlineStyleDeclarations([sharedStyles.root, semanticStyles.root])]
       .filter(({ property }) => property.startsWith('--'))
       .map(({ property }) => `${property}:inherit`).join(';')
   );
   // Bridge нужен и на trigger: локальный prefix должен перекрывать значение wrapper.
   let triggerStyle = $derived(
-    [componentTheme.style, inheritedRootVariables, semanticStyles.trigger, style]
+    [
+      componentTheme.style,
+      inheritedRootVariables,
+      sharedStyles.trigger,
+      config.upload?.style,
+      semanticStyles.trigger,
+      style
+    ]
       .filter(Boolean).join(';') || undefined
   );
   const controller = createUploadController({
@@ -123,7 +151,7 @@
       headers,
       withCredentials,
       beforeUpload,
-      customRequest,
+      customRequest: request,
       onChange,
       onRemove,
       maxCount
@@ -217,10 +245,10 @@
   </span>
 {/snippet}
 {#snippet list()}
-  {#if showUploadList}<div data-ant-upload-list data-ant-upload-list-type={listType} class={[`${componentPrefix}-list ${componentPrefix}-list-${listType}`, semanticClasses.list]} style={semanticStyles.list}>
+  {#if showUploadList}<div data-ant-upload-list data-ant-upload-list-type={listType} class={[`${componentPrefix}-list ${componentPrefix}-list-${listType}`, sharedClasses.list, semanticClasses.list]} style={[sharedStyles.list, semanticStyles.list].filter(Boolean).join(';') || undefined}>
     {#each files as file (file.uid)}<UploadListItem prefixCls={componentPrefix} {file} {listType} options={listOptions} fileList={files} locale={strings} disabled={blocked} onRemove={file => {
         void controller.remove(file);
-      }} {onPreview} {onDownload} {previewFile} {isImageUrl} {iconRender} {itemRender} {progress} itemClass={semanticClasses.item} itemStyle={semanticStyles.item} />{/each}
+      }} {onPreview} {onDownload} {previewFile} {isImageUrl} {iconRender} {itemRender} progress={mergedProgress} itemClass={[sharedClasses.item, semanticClasses.item].filter(Boolean).join(' ') || undefined} itemStyle={[sharedStyles.item, semanticStyles.item].filter(Boolean).join(';') || undefined} />{/each}
     {#if card && children}{@render selectTrigger()}{/if}
   </div>{/if}
 {/snippet}
@@ -229,16 +257,19 @@
       `${componentPrefix} ${componentPrefix}-select`,
       blocked && `${componentPrefix}-disabled`,
       !children && `${componentPrefix}-hidden`,
+      sharedClasses.trigger,
       semanticClasses.trigger
     ]} style={triggerStyle}>{@render trigger()}</div>
 {/snippet}
-{#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`upload-prefix:${componentPrefix}`} />{/if}<span data-ant-upload-root data-ant-upload-prefix={componentPrefix} bind:this={nativeElement} dir={config.direction} style={[componentTheme.style, semanticStyles.root].filter(Boolean).join(';') || undefined} class={[
+{#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`upload-prefix:${componentPrefix}`} />{/if}<span data-ant-upload-root data-ant-upload-prefix={componentPrefix} bind:this={nativeElement} dir={config.direction} style={rootStyle} class={[
     `${componentPrefix}-wrapper ant-upload-css-var`,
     componentTheme.className,
     config.direction === 'rtl' && `${componentPrefix}-rtl`,
     card && `${componentPrefix}-${listType}-wrapper`,
     className,
     rootClassName,
+    config.upload?.class,
+    sharedClasses.root,
     semanticClasses.root
   ]}>
   {#if type === 'drag'}
@@ -249,6 +280,7 @@
         dragState && `${componentPrefix}-drag-hover`,
         blocked && `${componentPrefix}-disabled`,
         config.direction === 'rtl' && `${componentPrefix}-rtl`,
+        sharedClasses.trigger,
         semanticClasses.trigger
       ]} style={triggerStyle} ondrop={drag} ondragover={drag} ondragleave={drag}>{@render trigger()}</div>
     {@render list()}

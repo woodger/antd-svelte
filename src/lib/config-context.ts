@@ -1,4 +1,5 @@
 import type { SelectConfig } from './select.types';
+import type { UploadConfig } from './upload.types';
 import type { FormConfig } from './form.types';
 import type { AppConfig } from './app.types';
 import type { StatisticConfig } from './statistic.types';
@@ -114,6 +115,7 @@ export interface ConfigContext {
   readonly flex?: FlexConfig;
   readonly spin?: SpinConfig;
   readonly progress?: ProgressConfig;
+  readonly upload?: UploadConfig;
   readonly skeleton?: SkeletonConfig;
   readonly empty?: EmptyConfig;
   readonly result?: ResultConfig;

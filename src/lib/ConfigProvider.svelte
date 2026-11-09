@@ -1,5 +1,6 @@
 <script lang="ts">
   import type { SelectConfig } from './select.types';
+  import type { UploadConfig } from './upload.types';
   import type { FormConfig } from './form.types';
   import type { AppConfig } from './app.types';
   import type { StatisticConfig } from './statistic.types';
@@ -132,6 +133,7 @@
     flex?: FlexConfig;
     spin?: SpinConfig;
     progress?: ProgressConfig;
+    upload?: UploadConfig;
     skeleton?: SkeletonConfig;
     empty?: EmptyConfig;
     result?: ResultConfig;
@@ -227,6 +229,7 @@
     flex,
     spin,
     progress,
+    upload,
     skeleton,
     empty,
     result,
@@ -415,6 +418,9 @@
     },
     get progress() {
       return progress ?? parent.progress;
+    },
+    get upload() {
+      return upload ?? parent.upload;
     },
     get skeleton() {
       return skeleton ?? parent.skeleton;

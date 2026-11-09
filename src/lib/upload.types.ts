@@ -88,6 +88,11 @@ export interface UploadSemanticInfo<T = unknown> {
 }
 export type UploadSemanticValue<T = unknown> = UploadSemanticSlots
   | ((info: UploadSemanticInfo<T>) => UploadSemanticSlots | undefined);
+/** Общий record заменяется целиком во вложенном provider; local props имеют приоритет. */
+export type UploadConfig = Pick<
+  UploadProps,
+  'class' | 'style' | 'classNames' | 'styles' | 'accept' | 'customRequest' | 'progress'
+>;
 /** Выбор и загрузка файлов с controlled list, beforeUpload и настраиваемым транспортом. */
 export interface UploadProps<T = unknown> extends Omit<
   HTMLAttributes<HTMLSpanElement>,

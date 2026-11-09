@@ -11449,11 +11449,11 @@
         },
         {
           "id": "extended-api",
-          "title": "Render hooks, semantic slots и полный config API",
+          "title": "Custom action icons и полный rc-upload ref/internal API",
           "state": "missing",
           "requiredForV1": false,
           "evidence": [],
-          "note": "Custom action icons, ConfigProvider.upload не перенесены. Directory/pastable, iconRender/itemRender, linkProps/progress и local semantic slots вынесены в отдельные supported features. Ref даёт abort и nativeElement/inputElement; полный rc-upload ref/internal lifecycle API отсутствует."
+          "note": "Custom action icons не перенесены. Directory/pastable, iconRender/itemRender, linkProps/progress и local semantic slots/ConfigProvider.upload вынесены в отдельные supported features. Ref даёт abort и nativeElement/inputElement; полный rc-upload ref/internal lifecycle API отсутствует."
         },
         {
           "id": "motion",
@@ -11635,7 +11635,7 @@
             "tests/package/upload-progress.ssr.test.ts",
             "readme.md"
           ],
-          "note": "UploadListProgressProps использует существующий Svelte line Progress без percent/type и deprecated line strokeWidth. Отсутствие progress задаёт size=[-1,2]/showInfo=false; явный объект заменяет defaults целиком. Size, colors/gradient, status/success, steps, format, semantic slots и ARIA передаются Progress; file aria-label/labelledby идут до progress props. Native fallback имени сохраняется при отсутствии явного имени. 16 raw UMD cases и шесть live transitions задают оформление и ARIA, во всех samples file label задан явно. Задержка 300 ms и cleanup на unmount сохранены; SSR не создаёт полосу/timers. Обновления сохраняют item/input/progress root, file percent и внешний draft/focus/selection. ConfigProvider.upload и исходный motion lifecycle остаются отдельными gaps."
+          "note": "UploadListProgressProps использует существующий Svelte line Progress без percent/type и deprecated line strokeWidth. Отсутствие progress задаёт size=[-1,2]/showInfo=false; явный объект заменяет defaults целиком. Size, colors/gradient, status/success, steps, format, semantic slots и ARIA передаются Progress; file aria-label/labelledby идут до progress props. Native fallback имени сохраняется при отсутствии явного имени. 16 raw UMD cases и шесть live transitions задают оформление и ARIA, во всех samples file label задан явно. Задержка 300 ms и cleanup на unmount сохранены; SSR не создаёт полосу/timers. Обновления сохраняют item/input/progress root, file percent и внешний draft/focus/selection. Исходный motion lifecycle остаётся отдельным gap."
         },
         {
           "id": "semantic-slots",
@@ -11654,7 +11654,50 @@
             "tests/package/upload-semantic.ssr.test.ts",
             "readme.md"
           ],
-          "note": "Local classNames/styles поддерживают object и callbacks для root/list/item/trigger; styles используют нативные CSS strings. Callback получает raw props без bindable DOM refs и resolved listType/type/multiple/hasControlInside/disabled/showUploadList; raw prefixCls сохраняется. Root оформляет wrapper, item — inner row внутри Tooltip/originNode, style остаётся на trigger после semantic trigger style. Root CSS variables наследуются trigger вместо повторного vendor default; local trigger variables сохраняют приоритет. 16 raw UMD cases и пять transitions задают classes/CSS/callback defaults, list types, drag/disabled/hidden/error и 120px/140px variable scopes. Updates сохраняют controller, wrapper/item/trigger/input DOM и внешний draft/focus/selection. ConfigProvider.upload и motion остаются отдельными gaps."
+          "note": "Local classNames/styles поддерживают object и callbacks для root/list/item/trigger; styles используют нативные CSS strings. Callback получает raw props без bindable DOM refs и resolved listType/type/multiple/hasControlInside/disabled/showUploadList; raw prefixCls сохраняется. Root оформляет wrapper, item — inner row внутри Tooltip/originNode, style остаётся на trigger после semantic trigger style. Root CSS variables наследуются trigger вместо повторного vendor default; local trigger variables сохраняют приоритет. 16 raw UMD cases и пять transitions задают classes/CSS/callback defaults, list types, drag/disabled/hidden/error и 120px/140px variable scopes. Updates сохраняют controller, wrapper/item/trigger/input DOM и внешний draft/focus/selection. Motion остаётся отдельным gap."
+        },
+        {
+          "id": "provider-config",
+          "title": "ConfigProvider.upload: стили, accept, transport и progress",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/ConfigProvider.svelte",
+            "src/lib/config-context.ts",
+            "src/lib/Upload.svelte",
+            "src/lib/UploadListItem.svelte",
+            "src/lib/upload.types.ts",
+            "tests/browser/upload-config.spec.ts",
+            "tests/browser/upload-config-metrics.ts",
+            "tests/browser/fixtures/UploadConfigScope.svelte",
+            "tests/browser/fixtures/UploadConfigFixtures.svelte",
+            "tests/browser/fixtures/ant-design-upload-config-reference.json",
+            "tests/package/upload-config.ssr.test.ts",
+            "readme.md"
+          ],
+          "note": "Общий class/style/classNames/styles/accept/customRequest/progress наследуется целым record; вложенный {} сбрасывает его, undefined наследует. Local slots накапливаются/перекрывают context; обычный style относится к trigger после своего semantic слоя. Local accept, включая пустой, и customRequest имеют исходный приоритет; callback props сохраняют raw local accept. Progress shallow merge сохраняет provider поля при local {}. 13 raw cases, четыре progress samples, два request traces и четыре live transitions задают наследование/соседние scopes/приоритеты. Updates сохраняют wrapper/item/input DOM, draft/focus/selection и активный transport; следующие файлы используют актуальный handler. SSR не создаёт requests/timers."
+        },
+        {
+          "id": "native-synchronous-request-completion",
+          "title": "Наблюдение Source: abort завершённого синхронного customRequest",
+          "state": "partial",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/ConfigProvider.svelte",
+            "src/lib/config-context.ts",
+            "src/lib/Upload.svelte",
+            "src/lib/UploadListItem.svelte",
+            "src/lib/upload.types.ts",
+            "tests/browser/upload-config.spec.ts",
+            "tests/browser/upload-config-metrics.ts",
+            "tests/browser/fixtures/UploadConfigScope.svelte",
+            "tests/browser/fixtures/UploadConfigFixtures.svelte",
+            "tests/browser/fixtures/ant-design-upload-config-reference.json",
+            "tests/package/upload-config.ssr.test.ts",
+            "readme.md",
+            "src/lib/upload-controller.engine.test.ts"
+          ],
+          "note": "В rc-upload 1.1.1 AjaxUploader.post синхронный onSuccess удаляет request до присваивания возврата customRequest в reqs[uid]. При последующем unmount abort вызывается для завершённого request. Raw requests[1] и rawUnmountEvents сохраняют исходные abort; publicRequests с deferred completion измерены после raw cases/transitions/progress и используются только для отделения этой границы. Native сохраняет существующий completed guard: нет abort после завершения, pending transport отменяется при unmount. Поведение Source не перенесено и оставлено для отдельного разбора."
         }
       ]
     },

@@ -6680,6 +6680,28 @@ Button, Progress и Tooltip получают свои component tokens. Style о
 сохранено в `zero-metrics.interactions` [эталона](./tests/browser/fixtures/ant-design-upload-theme-reference.json).
 Этот крайний случай требует отдельного решения.
 
+`ConfigProvider.upload` задаёт общие class/style, classNames/styles, accept,
+customRequest и progress. Незаполненный record наследуется; вложенный upload={{}}
+заменяет его целиком. ClassNames накапливаются с локальными slots, CSS-слои идут
+в исходном порядке: provider styles, provider style на trigger, local styles,
+local style на trigger. Локальный accept, включая пустую строку, перекрывает общий;
+customRequest использует локальный handler либо общий. Callback semantic slots
+видит исходный локальный accept, а не унаследованное значение.
+
+Progress объединяется поверх общего объекта по полям. Поэтому локальный `{}`
+сохраняет provider progress; без provider `{}` по-прежнему использует defaults
+самого Progress. Новый request handler применяется к следующим файлам;
+выполняющийся запрос, fileList и input DOM сохраняются.
+[13 случаев, четыре progress samples и события запросов](tests/browser/fixtures/ant-design-upload-config-reference.json),
+[browser](tests/browser/upload-config.spec.ts) и
+[SSR](tests/package/upload-config.ssr.test.ts) защищают наследование и приоритеты.
+
+В rc-upload 1.1.1 синхронный onSuccess может завершить запрос до его записи во
+внутреннее хранилище. Следующий unmount вызывает abort уже завершённого запроса.
+Raw requests/rawUnmountEvents сохранены в том же эталоне; publicRequests с
+отложенным completion измерены отдельно после raw cases. Svelte сохраняет
+существующую защиту завершённого транспорта; незавершённый запрос отменяется.
+
 `classNames` и `styles` задают четыре semantic slots: root, list, item, trigger.
 ClassNames содержит строки классов, styles — CSS-строки. Оба prop принимают
 callback с `{props}`: переданные props и resolved listType/type/multiple/
@@ -6797,7 +6819,7 @@ webkitdirectory как boolean attribute; в браузере сохраняют
 
 Locale/upload из ConfigProvider, собственный locale, RU/EN, RTL и theme variables
 поддержаны. Custom action icons,
-полный ref/config API и исходные
+полный rc-upload ref/internal API и исходные
 appear/exit/collapse анимации остаются отдельными пробелами реестра. Данный этап
 не заявляет полного покрытия React Upload.
 

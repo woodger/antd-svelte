@@ -325,13 +325,18 @@ transitions: object/callback, resolved defaults, style priority, list types,
 drag/disabled/hidden/error и root/trigger variables. Callback получает исходные
 props без bindable DOM refs и отдельно resolved defaults. Нормальный style
 остаётся на trigger; root variables наследуются через внутренний theme bridge.
-ConfigProvider.upload переносится отдельно.
+ConfigProvider.upload подключён для общих class/style/slots, accept,
+customRequest и progress. 13 raw cases, четыре progress samples и четыре live
+transitions проверяют whole-record inheritance/reset, sibling scopes и приоритеты.
+Raw synchronous request traces содержат abort завершённого запроса rc-upload;
+publicRequests с deferred completion следуют после всех raw measurements.
+Native сохраняет прежний completion guard и отменяет незавершённый transport.
 Upload.progress передаёт действующий line API Progress, без deprecated
 strokeWidth. 16 raw UMD cases и шесть transitions фиксируют 300 ms delay,
 defaults против пустого объекта, size/colors/gradient/status/success/steps,
 formatter, semantic styles и ARIA. Во всех samples явно задано имя файла;
 без него Native сохраняет прежний локализованный fallback. Motion exit списка
-остаётся отдельным пробелом, как и полный ConfigProvider.upload.
+остаётся отдельным пробелом.
 UploadFile.linkProps сверяется по 19 raw UMD cases и пяти transitions:
 object/JSON attributes, file URL priority, class replacement, click callback
 ordering/cancellation и отсутствие props у thumbnail/preview action. Svelte

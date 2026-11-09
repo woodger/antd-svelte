@@ -110,6 +110,7 @@ export type {
   UploadSemanticSlots,
   UploadSemanticInfo,
   UploadSemanticValue,
+  UploadConfig,
   UploadRequestOptions,
   UploadRequestHandler,
   UploadRequest

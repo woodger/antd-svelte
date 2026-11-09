@@ -1,0 +1,1253 @@
+{
+  "reference": {
+    "version": "6.6.8",
+    "revision": "984592267de88fbf9cdaecc96a56629e721c709d",
+    "archiveSha256": "8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa",
+    "renderer": "unmodified official UMD with React 18.3.1",
+    "source": "ConfigProvider.upload style/semantic slots, accept and customRequest",
+    "observation": "13 raw style/accept cases cover provider/local slots and callback raw props, empty local slots versus reset provider, nested/sibling scopes and drag. Two real input selections capture provider/customRequest override callbacks. Four live provider transitions. Raw synchronous completion leaves completed requests in rc-upload request storage, causing abort on later unmount. Native keeps its existing completion guard. Separate publicRequests use a deferred completion after all raw cases and transitions; only the cross-instance abort observation uses this counterpart. Four additional raw progress samples cover inherited settings, local showInfo override, empty local object and local size override."
+  },
+  "cases": [
+    {
+      "sample": {
+        "id": "inherited",
+        "provider": "object"
+      },
+      "result": [
+        {
+          "accept": ".txt",
+          "parts": {
+            "root": {
+              "classes": [
+                "config-class",
+                "config-root"
+              ],
+              "color": "rgb(19, 87, 144)",
+              "paddingTop": "3px",
+              "marginTop": "0px",
+              "minHeight": "0px"
+            },
+            "trigger": {
+              "classes": [
+                "config-trigger"
+              ],
+              "color": "rgb(151, 83, 16)",
+              "paddingTop": "11px",
+              "marginTop": "0px",
+              "minHeight": "0px"
+            },
+            "list": {
+              "classes": [
+                "config-list"
+              ],
+              "color": "rgb(19, 87, 144)",
+              "paddingTop": "0px",
+              "marginTop": "7px",
+              "minHeight": "0px"
+            },
+            "item": {
+              "classes": [
+                "config-item"
+              ],
+              "color": "rgb(19, 87, 144)",
+              "paddingTop": "0px",
+              "marginTop": "8px",
+              "minHeight": "33px"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "callback",
+        "provider": "callback"
+      },
+      "result": [
+        {
+          "accept": ".txt",
+          "parts": {
+            "root": {
+              "classes": [
+                "config-class",
+                "config-root",
+                "raw-none-false"
+              ],
+              "color": "rgb(19, 87, 144)",
+              "paddingTop": "3px",
+              "marginTop": "0px",
+              "minHeight": "0px"
+            },
+            "trigger": {
+              "classes": [
+                "config-trigger"
+              ],
+              "color": "rgb(151, 83, 16)",
+              "paddingTop": "11px",
+              "marginTop": "0px",
+              "minHeight": "0px"
+            },
+            "list": {
+              "classes": [
+                "config-list"
+              ],
+              "color": "rgb(19, 87, 144)",
+              "paddingTop": "0px",
+              "marginTop": "7px",
+              "minHeight": "0px"
+            },
+            "item": {
+              "classes": [
+                "config-item"
+              ],
+              "color": "rgb(19, 87, 144)",
+              "paddingTop": "0px",
+              "marginTop": "8px",
+              "minHeight": "39px"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "local-object",
+        "provider": "object",
+        "local": "object"
+      },
+      "result": [
+        {
+          "accept": ".txt",
+          "parts": {
+            "root": {
+              "classes": [
+                "config-class",
+                "config-root",
+                "local-class",
+                "local-root"
+              ],
+              "color": "rgb(19, 87, 144)",
+              "paddingTop": "3px",
+              "marginTop": "0px",
+              "minHeight": "0px"
+            },
+            "trigger": {
+              "classes": [
+                "config-trigger",
+                "local-trigger"
+              ],
+              "color": "rgb(151, 83, 16)",
+              "paddingTop": "11px",
+              "marginTop": "0px",
+              "minHeight": "0px"
+            },
+            "list": {
+              "classes": [
+                "config-list",
+                "local-list"
+              ],
+              "color": "rgb(19, 87, 144)",
+              "paddingTop": "0px",
+              "marginTop": "7px",
+              "minHeight": "0px"
+            },
+            "item": {
+              "classes": [
+                "config-item",
+                "local-item"
+              ],
+              "color": "rgb(19, 87, 144)",
+              "paddingTop": "0px",
+              "marginTop": "8px",
+              "minHeight": "33px"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "local-callback",
+        "provider": "callback",
+        "local": "callback",
+        "disabled": true
+      },
+      "result": [
+        {
+          "accept": ".txt",
+          "parts": {
+            "root": {
+              "classes": [
+                "config-class",
+                "config-root",
+                "local-class",
+                "local-root",
+                "raw-.txt-true"
+              ],
+              "color": "rgb(19, 87, 144)",
+              "paddingTop": "3px",
+              "marginTop": "0px",
+              "minHeight": "0px"
+            },
+            "trigger": {
+              "classes": [
+                "config-trigger",
+                "local-trigger"
+              ],
+              "color": "rgb(151, 83, 16)",
+              "paddingTop": "11px",
+              "marginTop": "0px",
+              "minHeight": "0px"
+            },
+            "list": {
+              "classes": [
+                "config-list",
+                "local-list"
+              ],
+              "color": "rgb(19, 87, 144)",
+              "paddingTop": "0px",
+              "marginTop": "7px",
+              "minHeight": "0px"
+            },
+            "item": {
+              "classes": [
+                "config-item",
+                "local-item"
+              ],
+              "color": "rgb(19, 87, 144)",
+              "paddingTop": "0px",
+              "marginTop": "8px",
+              "minHeight": "47px"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "local-empty",
+        "provider": "object",
+        "local": "empty"
+      },
+      "result": [
+        {
+          "accept": ".txt",
+          "parts": {
+            "root": {
+              "classes": [
+                "config-class",
+                "config-root"
+              ],
+              "color": "rgb(19, 87, 144)",
+              "paddingTop": "3px",
+              "marginTop": "0px",
+              "minHeight": "0px"
+            },
+            "trigger": {
+              "classes": [
+                "config-trigger"
+              ],
+              "color": "rgb(151, 83, 16)",
+              "paddingTop": "11px",
+              "marginTop": "0px",
+              "minHeight": "0px"
+            },
+            "list": {
+              "classes": [
+                "config-list"
+              ],
+              "color": "rgb(19, 87, 144)",
+              "paddingTop": "0px",
+              "marginTop": "7px",
+              "minHeight": "0px"
+            },
+            "item": {
+              "classes": [
+                "config-item"
+              ],
+              "color": "rgb(19, 87, 144)",
+              "paddingTop": "0px",
+              "marginTop": "8px",
+              "minHeight": "33px"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "local-accept",
+        "provider": "object",
+        "local": "accept"
+      },
+      "result": [
+        {
+          "accept": ".csv",
+          "parts": {
+            "root": {
+              "classes": [
+                "config-class",
+                "config-root"
+              ],
+              "color": "rgb(19, 87, 144)",
+              "paddingTop": "3px",
+              "marginTop": "0px",
+              "minHeight": "0px"
+            },
+            "trigger": {
+              "classes": [
+                "config-trigger"
+              ],
+              "color": "rgb(151, 83, 16)",
+              "paddingTop": "11px",
+              "marginTop": "0px",
+              "minHeight": "0px"
+            },
+            "list": {
+              "classes": [
+                "config-list"
+              ],
+              "color": "rgb(19, 87, 144)",
+              "paddingTop": "0px",
+              "marginTop": "7px",
+              "minHeight": "0px"
+            },
+            "item": {
+              "classes": [
+                "config-item"
+              ],
+              "color": "rgb(19, 87, 144)",
+              "paddingTop": "0px",
+              "marginTop": "8px",
+              "minHeight": "33px"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "empty-accept",
+        "provider": "object",
+        "local": "empty-accept"
+      },
+      "result": [
+        {
+          "accept": "",
+          "parts": {
+            "root": {
+              "classes": [
+                "config-class",
+                "config-root"
+              ],
+              "color": "rgb(19, 87, 144)",
+              "paddingTop": "3px",
+              "marginTop": "0px",
+              "minHeight": "0px"
+            },
+            "trigger": {
+              "classes": [
+                "config-trigger"
+              ],
+              "color": "rgb(151, 83, 16)",
+              "paddingTop": "11px",
+              "marginTop": "0px",
+              "minHeight": "0px"
+            },
+            "list": {
+              "classes": [
+                "config-list"
+              ],
+              "color": "rgb(19, 87, 144)",
+              "paddingTop": "0px",
+              "marginTop": "7px",
+              "minHeight": "0px"
+            },
+            "item": {
+              "classes": [
+                "config-item"
+              ],
+              "color": "rgb(19, 87, 144)",
+              "paddingTop": "0px",
+              "marginTop": "8px",
+              "minHeight": "33px"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "accept-object",
+        "provider": "accept-object"
+      },
+      "result": [
+        {
+          "accept": ".md",
+          "parts": {
+            "root": {
+              "classes": [
+                "config-class",
+                "config-root"
+              ],
+              "color": "rgb(19, 87, 144)",
+              "paddingTop": "3px",
+              "marginTop": "0px",
+              "minHeight": "0px"
+            },
+            "trigger": {
+              "classes": [
+                "config-trigger"
+              ],
+              "color": "rgb(151, 83, 16)",
+              "paddingTop": "11px",
+              "marginTop": "0px",
+              "minHeight": "0px"
+            },
+            "list": {
+              "classes": [
+                "config-list"
+              ],
+              "color": "rgb(19, 87, 144)",
+              "paddingTop": "0px",
+              "marginTop": "7px",
+              "minHeight": "0px"
+            },
+            "item": {
+              "classes": [
+                "config-item"
+              ],
+              "color": "rgb(19, 87, 144)",
+              "paddingTop": "0px",
+              "marginTop": "8px",
+              "minHeight": "33px"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "nested",
+        "provider": "object",
+        "scope": "nested"
+      },
+      "result": [
+        {
+          "accept": ".txt",
+          "parts": {
+            "root": {
+              "classes": [
+                "config-class",
+                "config-root"
+              ],
+              "color": "rgb(19, 87, 144)",
+              "paddingTop": "3px",
+              "marginTop": "0px",
+              "minHeight": "0px"
+            },
+            "trigger": {
+              "classes": [
+                "config-trigger"
+              ],
+              "color": "rgb(151, 83, 16)",
+              "paddingTop": "11px",
+              "marginTop": "0px",
+              "minHeight": "0px"
+            },
+            "list": {
+              "classes": [
+                "config-list"
+              ],
+              "color": "rgb(19, 87, 144)",
+              "paddingTop": "0px",
+              "marginTop": "7px",
+              "minHeight": "0px"
+            },
+            "item": {
+              "classes": [
+                "config-item"
+              ],
+              "color": "rgb(19, 87, 144)",
+              "paddingTop": "0px",
+              "marginTop": "8px",
+              "minHeight": "33px"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "reset",
+        "provider": "object",
+        "scope": "reset"
+      },
+      "result": [
+        {
+          "accept": "",
+          "parts": {
+            "root": {
+              "classes": [],
+              "color": "rgba(0, 0, 0, 0.88)",
+              "paddingTop": "0px",
+              "marginTop": "0px",
+              "minHeight": "0px"
+            },
+            "trigger": {
+              "classes": [],
+              "color": "rgba(0, 0, 0, 0.88)",
+              "paddingTop": "0px",
+              "marginTop": "0px",
+              "minHeight": "0px"
+            },
+            "list": {
+              "classes": [],
+              "color": "rgba(0, 0, 0, 0.88)",
+              "paddingTop": "0px",
+              "marginTop": "0px",
+              "minHeight": "0px"
+            },
+            "item": {
+              "classes": [],
+              "color": "rgba(0, 0, 0, 0.88)",
+              "paddingTop": "0px",
+              "marginTop": "8px",
+              "minHeight": "0px"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "sibling",
+        "provider": "object",
+        "scope": "sibling"
+      },
+      "result": [
+        {
+          "accept": ".txt",
+          "parts": {
+            "root": {
+              "classes": [
+                "config-class",
+                "config-root"
+              ],
+              "color": "rgb(19, 87, 144)",
+              "paddingTop": "3px",
+              "marginTop": "0px",
+              "minHeight": "0px"
+            },
+            "trigger": {
+              "classes": [
+                "config-trigger"
+              ],
+              "color": "rgb(151, 83, 16)",
+              "paddingTop": "11px",
+              "marginTop": "0px",
+              "minHeight": "0px"
+            },
+            "list": {
+              "classes": [
+                "config-list"
+              ],
+              "color": "rgb(19, 87, 144)",
+              "paddingTop": "0px",
+              "marginTop": "7px",
+              "minHeight": "0px"
+            },
+            "item": {
+              "classes": [
+                "config-item"
+              ],
+              "color": "rgb(19, 87, 144)",
+              "paddingTop": "0px",
+              "marginTop": "8px",
+              "minHeight": "33px"
+            }
+          }
+        },
+        {
+          "accept": ".csv",
+          "parts": {
+            "root": {
+              "classes": [
+                "config-sibling"
+              ],
+              "color": "rgba(0, 0, 0, 0.88)",
+              "paddingTop": "0px",
+              "marginTop": "0px",
+              "minHeight": "0px"
+            },
+            "trigger": {
+              "classes": [],
+              "color": "rgba(0, 0, 0, 0.88)",
+              "paddingTop": "0px",
+              "marginTop": "0px",
+              "minHeight": "0px"
+            },
+            "list": {
+              "classes": [],
+              "color": "rgba(0, 0, 0, 0.88)",
+              "paddingTop": "0px",
+              "marginTop": "0px",
+              "minHeight": "0px"
+            },
+            "item": {
+              "classes": [],
+              "color": "rgba(0, 0, 0, 0.88)",
+              "paddingTop": "0px",
+              "marginTop": "8px",
+              "minHeight": "0px"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "drag",
+        "provider": "object",
+        "drag": true
+      },
+      "result": [
+        {
+          "accept": ".txt",
+          "parts": {
+            "root": {
+              "classes": [
+                "config-class",
+                "config-root"
+              ],
+              "color": "rgb(19, 87, 144)",
+              "paddingTop": "3px",
+              "marginTop": "0px",
+              "minHeight": "0px"
+            },
+            "trigger": {
+              "classes": [
+                "config-trigger"
+              ],
+              "color": "rgb(151, 83, 16)",
+              "paddingTop": "11px",
+              "marginTop": "0px",
+              "minHeight": "0px"
+            },
+            "list": {
+              "classes": [
+                "config-list"
+              ],
+              "color": "rgb(19, 87, 144)",
+              "paddingTop": "0px",
+              "marginTop": "7px",
+              "minHeight": "0px"
+            },
+            "item": {
+              "classes": [
+                "config-item"
+              ],
+              "color": "rgb(19, 87, 144)",
+              "paddingTop": "0px",
+              "marginTop": "8px",
+              "minHeight": "33px"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "empty",
+        "provider": "empty"
+      },
+      "result": [
+        {
+          "accept": "",
+          "parts": {
+            "root": {
+              "classes": [],
+              "color": "rgba(0, 0, 0, 0.88)",
+              "paddingTop": "0px",
+              "marginTop": "0px",
+              "minHeight": "0px"
+            },
+            "trigger": {
+              "classes": [],
+              "color": "rgba(0, 0, 0, 0.88)",
+              "paddingTop": "0px",
+              "marginTop": "0px",
+              "minHeight": "0px"
+            },
+            "list": {
+              "classes": [],
+              "color": "rgba(0, 0, 0, 0.88)",
+              "paddingTop": "0px",
+              "marginTop": "0px",
+              "minHeight": "0px"
+            },
+            "item": {
+              "classes": [],
+              "color": "rgba(0, 0, 0, 0.88)",
+              "paddingTop": "0px",
+              "marginTop": "8px",
+              "minHeight": "0px"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "requests": [
+    {
+      "local": false,
+      "events": [
+        "change:report.txt:uploading",
+        "request:provider:report.txt",
+        "change:report.txt:done"
+      ]
+    },
+    {
+      "local": true,
+      "events": [
+        "abort:provider",
+        "change:report.txt:uploading",
+        "request:local:report.txt",
+        "change:report.txt:done"
+      ]
+    }
+  ],
+  "transitions": [
+    {
+      "provider": "object",
+      "result": [
+        {
+          "accept": ".txt",
+          "parts": {
+            "root": {
+              "classes": [
+                "config-class",
+                "config-root"
+              ],
+              "color": "rgb(19, 87, 144)",
+              "paddingTop": "3px",
+              "marginTop": "0px",
+              "minHeight": "0px"
+            },
+            "trigger": {
+              "classes": [
+                "config-trigger"
+              ],
+              "color": "rgb(151, 83, 16)",
+              "paddingTop": "11px",
+              "marginTop": "0px",
+              "minHeight": "0px"
+            },
+            "list": {
+              "classes": [
+                "config-list"
+              ],
+              "color": "rgb(19, 87, 144)",
+              "paddingTop": "0px",
+              "marginTop": "7px",
+              "minHeight": "0px"
+            },
+            "item": {
+              "classes": [
+                "config-item"
+              ],
+              "color": "rgb(19, 87, 144)",
+              "paddingTop": "0px",
+              "marginTop": "8px",
+              "minHeight": "33px"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "provider": "callback",
+      "result": [
+        {
+          "accept": ".txt",
+          "parts": {
+            "root": {
+              "classes": [
+                "config-class",
+                "config-root",
+                "raw-none-false"
+              ],
+              "color": "rgb(19, 87, 144)",
+              "paddingTop": "3px",
+              "marginTop": "0px",
+              "minHeight": "0px"
+            },
+            "trigger": {
+              "classes": [
+                "config-trigger"
+              ],
+              "color": "rgb(151, 83, 16)",
+              "paddingTop": "11px",
+              "marginTop": "0px",
+              "minHeight": "0px"
+            },
+            "list": {
+              "classes": [
+                "config-list"
+              ],
+              "color": "rgb(19, 87, 144)",
+              "paddingTop": "0px",
+              "marginTop": "7px",
+              "minHeight": "0px"
+            },
+            "item": {
+              "classes": [
+                "config-item"
+              ],
+              "color": "rgb(19, 87, 144)",
+              "paddingTop": "0px",
+              "marginTop": "8px",
+              "minHeight": "39px"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "provider": "empty",
+      "result": [
+        {
+          "accept": "",
+          "parts": {
+            "root": {
+              "classes": [],
+              "color": "rgba(0, 0, 0, 0.88)",
+              "paddingTop": "0px",
+              "marginTop": "0px",
+              "minHeight": "0px"
+            },
+            "trigger": {
+              "classes": [],
+              "color": "rgba(0, 0, 0, 0.88)",
+              "paddingTop": "0px",
+              "marginTop": "0px",
+              "minHeight": "0px"
+            },
+            "list": {
+              "classes": [],
+              "color": "rgba(0, 0, 0, 0.88)",
+              "paddingTop": "0px",
+              "marginTop": "0px",
+              "minHeight": "0px"
+            },
+            "item": {
+              "classes": [],
+              "color": "rgba(0, 0, 0, 0.88)",
+              "paddingTop": "0px",
+              "marginTop": "8px",
+              "minHeight": "0px"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "provider": "object",
+      "result": [
+        {
+          "accept": ".txt",
+          "parts": {
+            "root": {
+              "classes": [
+                "config-class",
+                "config-root"
+              ],
+              "color": "rgb(19, 87, 144)",
+              "paddingTop": "3px",
+              "marginTop": "0px",
+              "minHeight": "0px"
+            },
+            "trigger": {
+              "classes": [
+                "config-trigger"
+              ],
+              "color": "rgb(151, 83, 16)",
+              "paddingTop": "11px",
+              "marginTop": "0px",
+              "minHeight": "0px"
+            },
+            "list": {
+              "classes": [
+                "config-list"
+              ],
+              "color": "rgb(19, 87, 144)",
+              "paddingTop": "0px",
+              "marginTop": "7px",
+              "minHeight": "0px"
+            },
+            "item": {
+              "classes": [
+                "config-item"
+              ],
+              "color": "rgb(19, 87, 144)",
+              "paddingTop": "0px",
+              "marginTop": "8px",
+              "minHeight": "33px"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "rawUnmountEvents": [
+    "abort:provider",
+    "change:report.txt:uploading",
+    "request:local:report.txt",
+    "change:report.txt:done",
+    "abort:local"
+  ],
+  "progress": [
+    {
+      "sample": {
+        "id": "progress:inherited",
+        "provider": "object",
+        "progress": "inherited"
+      },
+      "result": [
+        {
+          "accept": ".txt",
+          "parts": {
+            "root": {
+              "classes": [
+                "config-class",
+                "config-root"
+              ],
+              "color": "rgb(19, 87, 144)",
+              "paddingTop": "3px",
+              "marginTop": "0px",
+              "minHeight": "0px"
+            },
+            "trigger": {
+              "classes": [
+                "config-trigger"
+              ],
+              "color": "rgb(151, 83, 16)",
+              "paddingTop": "11px",
+              "marginTop": "0px",
+              "minHeight": "0px"
+            },
+            "list": {
+              "classes": [
+                "config-list"
+              ],
+              "color": "rgb(19, 87, 144)",
+              "paddingTop": "0px",
+              "marginTop": "7px",
+              "minHeight": "0px"
+            },
+            "item": {
+              "classes": [
+                "config-item"
+              ],
+              "color": "rgb(19, 87, 144)",
+              "paddingTop": "0px",
+              "marginTop": "8px",
+              "minHeight": "33px"
+            }
+          }
+        }
+      ],
+      "progress": {
+        "classes": [
+          "ant-progress",
+          "ant-progress-line",
+          "ant-progress-line-align-end",
+          "ant-progress-line-position-outer",
+          "ant-progress-show-info",
+          "ant-progress-status-normal"
+        ],
+        "label": "File transfer",
+        "labelledby": null,
+        "value": "42",
+        "rail": {
+          "height": "5px",
+          "background-color": "rgba(0, 0, 0, 0.06)",
+          "border-radius": "100px"
+        },
+        "tracks": [
+          {
+            "height": "5px",
+            "width": "52.2188px",
+            "background-color": "rgb(22, 119, 255)",
+            "background-image": "none",
+            "border-radius": "100px"
+          }
+        ],
+        "indicator": {
+          "text": "42%",
+          "icon": null
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "progress:hidden",
+        "provider": "object",
+        "progress": "hidden"
+      },
+      "result": [
+        {
+          "accept": ".txt",
+          "parts": {
+            "root": {
+              "classes": [
+                "config-class",
+                "config-root"
+              ],
+              "color": "rgb(19, 87, 144)",
+              "paddingTop": "3px",
+              "marginTop": "0px",
+              "minHeight": "0px"
+            },
+            "trigger": {
+              "classes": [
+                "config-trigger"
+              ],
+              "color": "rgb(151, 83, 16)",
+              "paddingTop": "11px",
+              "marginTop": "0px",
+              "minHeight": "0px"
+            },
+            "list": {
+              "classes": [
+                "config-list"
+              ],
+              "color": "rgb(19, 87, 144)",
+              "paddingTop": "0px",
+              "marginTop": "7px",
+              "minHeight": "0px"
+            },
+            "item": {
+              "classes": [
+                "config-item"
+              ],
+              "color": "rgb(19, 87, 144)",
+              "paddingTop": "0px",
+              "marginTop": "8px",
+              "minHeight": "33px"
+            }
+          }
+        }
+      ],
+      "progress": {
+        "classes": [
+          "ant-progress",
+          "ant-progress-line",
+          "ant-progress-line-align-end",
+          "ant-progress-line-position-outer",
+          "ant-progress-status-normal"
+        ],
+        "label": "File transfer",
+        "labelledby": null,
+        "value": "42",
+        "rail": {
+          "height": "5px",
+          "background-color": "rgba(0, 0, 0, 0.06)",
+          "border-radius": "100px"
+        },
+        "tracks": [
+          {
+            "height": "5px",
+            "width": "67.1875px",
+            "background-color": "rgb(22, 119, 255)",
+            "background-image": "none",
+            "border-radius": "100px"
+          }
+        ],
+        "indicator": null
+      }
+    },
+    {
+      "sample": {
+        "id": "progress:empty",
+        "provider": "object",
+        "progress": "empty"
+      },
+      "result": [
+        {
+          "accept": ".txt",
+          "parts": {
+            "root": {
+              "classes": [
+                "config-class",
+                "config-root"
+              ],
+              "color": "rgb(19, 87, 144)",
+              "paddingTop": "3px",
+              "marginTop": "0px",
+              "minHeight": "0px"
+            },
+            "trigger": {
+              "classes": [
+                "config-trigger"
+              ],
+              "color": "rgb(151, 83, 16)",
+              "paddingTop": "11px",
+              "marginTop": "0px",
+              "minHeight": "0px"
+            },
+            "list": {
+              "classes": [
+                "config-list"
+              ],
+              "color": "rgb(19, 87, 144)",
+              "paddingTop": "0px",
+              "marginTop": "7px",
+              "minHeight": "0px"
+            },
+            "item": {
+              "classes": [
+                "config-item"
+              ],
+              "color": "rgb(19, 87, 144)",
+              "paddingTop": "0px",
+              "marginTop": "8px",
+              "minHeight": "33px"
+            }
+          }
+        }
+      ],
+      "progress": {
+        "classes": [
+          "ant-progress",
+          "ant-progress-line",
+          "ant-progress-line-align-end",
+          "ant-progress-line-position-outer",
+          "ant-progress-show-info",
+          "ant-progress-status-normal"
+        ],
+        "label": "File transfer",
+        "labelledby": null,
+        "value": "42",
+        "rail": {
+          "height": "5px",
+          "background-color": "rgba(0, 0, 0, 0.06)",
+          "border-radius": "100px"
+        },
+        "tracks": [
+          {
+            "height": "5px",
+            "width": "52.2188px",
+            "background-color": "rgb(22, 119, 255)",
+            "background-image": "none",
+            "border-radius": "100px"
+          }
+        ],
+        "indicator": {
+          "text": "42%",
+          "icon": null
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "progress:size",
+        "provider": "object",
+        "progress": "size"
+      },
+      "result": [
+        {
+          "accept": ".txt",
+          "parts": {
+            "root": {
+              "classes": [
+                "config-class",
+                "config-root"
+              ],
+              "color": "rgb(19, 87, 144)",
+              "paddingTop": "3px",
+              "marginTop": "0px",
+              "minHeight": "0px"
+            },
+            "trigger": {
+              "classes": [
+                "config-trigger"
+              ],
+              "color": "rgb(151, 83, 16)",
+              "paddingTop": "11px",
+              "marginTop": "0px",
+              "minHeight": "0px"
+            },
+            "list": {
+              "classes": [
+                "config-list"
+              ],
+              "color": "rgb(19, 87, 144)",
+              "paddingTop": "0px",
+              "marginTop": "7px",
+              "minHeight": "0px"
+            },
+            "item": {
+              "classes": [
+                "config-item"
+              ],
+              "color": "rgb(19, 87, 144)",
+              "paddingTop": "0px",
+              "marginTop": "8px",
+              "minHeight": "33px"
+            }
+          }
+        }
+      ],
+      "progress": {
+        "classes": [
+          "ant-progress",
+          "ant-progress-line",
+          "ant-progress-line-align-end",
+          "ant-progress-line-position-outer",
+          "ant-progress-show-info",
+          "ant-progress-status-normal"
+        ],
+        "label": "File transfer",
+        "labelledby": null,
+        "value": "42",
+        "rail": {
+          "height": "9px",
+          "background-color": "rgba(0, 0, 0, 0.06)",
+          "border-radius": "100px"
+        },
+        "tracks": [
+          {
+            "height": "9px",
+            "width": "52.2188px",
+            "background-color": "rgb(22, 119, 255)",
+            "background-image": "none",
+            "border-radius": "100px"
+          }
+        ],
+        "indicator": {
+          "text": "42%",
+          "icon": null
+        }
+      }
+    }
+  ],
+  "publicRequests": [
+    {
+      "local": false,
+      "events": [
+        "change:report.txt:uploading",
+        "request:provider:report.txt",
+        "change:report.txt:done"
+      ]
+    },
+    {
+      "local": true,
+      "events": [
+        "change:report.txt:uploading",
+        "request:local:report.txt",
+        "change:report.txt:done"
+      ]
+    }
+  ]
+}

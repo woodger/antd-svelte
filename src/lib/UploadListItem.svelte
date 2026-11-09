@@ -27,7 +27,7 @@
     isImageUrl = uploadIsImage,
     iconRender,
     itemRender,
-    progress,
+    progress = { size: [-1, 2], showInfo: false },
     itemClass,
     itemStyle,
     fileList

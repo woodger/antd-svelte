@@ -9,6 +9,11 @@
 
 ### Added
 
+- ConfigProvider.upload задаёт общие class/style, semantic slots, accept,
+  customRequest и progress. Перенесены record inheritance/reset и локальные
+  приоритеты; обновления сохраняют DOM и активный транспорт. Source abort после
+  синхронного completion записан отдельно, существующая защита Svelte сохранена.
+
 - Upload/UploadDragger поддерживают classNames/styles для root/list/item/trigger,
   включая callback props, исходный приоритет style на trigger и наследование
   root CSS variables. Обновления сохраняют controller и существующий DOM.
