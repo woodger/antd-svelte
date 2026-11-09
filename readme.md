@@ -1874,7 +1874,21 @@ popup.root.color меняет внешний popup, содержимое сох�
 reset. Проверки и 15 UMD-тем — [color-picker-theme](./tests/browser/color-picker-theme.spec.ts),
 `?fixture=color-picker-theme`.
 
-Остаются произвольный prefix CSS, полный rc-trigger overflow/motion API и React
+`prefixCls` локально меняет owner ColorPicker и перекрывает общий префикс
+ConfigProvider. Popover, Select/Input/InputNumber, Slider, Divider, Segmented и Collapse
+сохраняют свои общие namespaces; CSS variables и theme markers остаются canonical.
+Обновление префикса сохраняет открытый popup, цвет, незавершённый HEX, caret/focus,
+раскрытие пресетов и custom trigger/container. Возврат к оформлению по умолчанию
+также сохраняет эти состояния. Сверка с UMD —
+[color-picker-prefix](./tests/browser/color-picker-prefix.spec.ts),
+`?fixture=color-picker-prefix`.
+
+В Source кеш style hook при одинаковом локальном owner/theme и изменённом общем
+префиксе сохраняет selectors дочерних controls от первого provider. Native разрешает
+их независимо. Raw замеры вложенного случая хранятся отдельно от public counterpart
+с уникальным локальным prefixCls; разные классы не выдаются за одинаковый DOM.
+
+Остаются полный rc-trigger overflow/motion API и React
 development/PurePanel API. Native DOM и Svelte snippets заменяют React nodes/refs.
 Извлечённый [CSS](./src/lib/vendor/color-picker.css) воспроизводится рецептом из 94 правил.
 Логика сопровождается MIT [FastColor](./src/lib/vendor/LICENSE.fast-color) и

@@ -5238,7 +5238,7 @@
       "name": "ColorPicker",
       "category": "data-entry",
       "scope": "target",
-      "scopeReason": "Автономный перенос ColorPicker по общему поручению: исходная Color-модель, single/gradient, palette/sliders/inputs, controlled transitions, presets и semantic config. Aliases/algorithms и темы дочерних controls перенесены; полный motion/trigger engine и произвольный prefix остаются отдельно.",
+      "scopeReason": "Автономный перенос ColorPicker по общему поручению: исходная Color-модель, single/gradient, palette/sliders/inputs, controlled transitions, presets и semantic config. Aliases/algorithms и темы дочерних controls перенесены; local/shared prefix и независимые child namespaces поддерживаются; полный motion/trigger engine остаётся отдельно.",
       "upstreamPath": "components/color-picker",
       "reviewedRevision": "984592267de88fbf9cdaecc96a56629e721c709d",
       "exports": [
@@ -5338,7 +5338,18 @@
         "tests/browser/fixtures/FormRichLabelControls.svelte",
         "tests/package/prefix-text-boundaries.ssr.test.ts",
         "tests/browser/fixtures/PrefixTextBoundariesFixtures.svelte",
-        "tests/browser/prefix-text-boundaries.spec.ts"
+        "tests/browser/prefix-text-boundaries.spec.ts",
+        "src/lib/color-picker-prefix.engine.ts",
+        "src/lib/color-picker-prefix.engine.test.ts",
+        "src/lib/vendor/color-picker-prefix.css.js",
+        "tests/browser/color-picker-prefix.spec.ts",
+        "tests/browser/color-picker-prefix-metrics.ts",
+        "tests/browser/fixtures/ColorPickerPrefixFixtures.svelte",
+        "tests/browser/fixtures/ColorPickerPrefixScope.svelte",
+        "tests/browser/fixtures/ColorPickerPrefixSSRFixtures.svelte",
+        "tests/browser/fixtures/ant-design-color-picker-prefix-reference.json",
+        "tests/package/color-picker-prefix.ssr.test.ts",
+        "tools/ant-design-css-recipes.json"
       ],
       "features": [
         {
@@ -5410,11 +5421,11 @@
         },
         {
           "id": "advanced-trigger-theme",
-          "title": "Полный rc-trigger/motion, prefix CSS и diagnostics",
+          "title": "Полный rc-trigger/motion и diagnostics",
           "state": "missing",
           "requiredForV1": false,
           "evidence": [],
-          "note": "Произвольный prefix CSS, полный rc-trigger DOM boundary для nested clipping/scaled containers, motion и React diagnostics/PurePanel не перенесены. ColorPicker не имеет собственных public component tokens; alias overrides/algorithms и независимые темы дочерних controls перенесены отдельно. Числовой viewport flip/shift, все 12 placements, arrow/pointAtCenter и custom container используют общий source engine с Tour. V1-ready не означает полный React API."
+          "note": "Полный rc-trigger DOM boundary для nested clipping/scaled containers, motion и React diagnostics/PurePanel не перенесены. ColorPicker не имеет собственных public component tokens; alias overrides/algorithms и независимые темы дочерних controls перенесены отдельно. Числовой viewport flip/shift, все 12 placements, arrow/pointAtCenter и custom container используют общий source engine с Tour. V1-ready не означает полный React API."
         },
         {
           "id": "popup-container",
@@ -5457,7 +5468,7 @@
             "tests/package/color-picker-theme.ssr.test.ts",
             "docs/reference/theme-context.md"
           ],
-          "note": "Собственный public ComponentToken пуст, как 6.6.8; ColorPicker получает aliases/algorithms, Popover defaults и source content colorText reset. Collapse пресетов получает собственную тему; bright-state использует глобальный colorBgElevated. Исходные flex sizing и приоритеты CSS полей сохраняют независимые Input/InputNumber/Select/Slider themes. 15 UMD-тем / 120 scope-наборов и 60 popup metrics покрывают single/gradient, HEX/RGB/HSB, размеры, RTL, local variables, style priorities, algorithms и nesting/reset/siblings. Theme updates сохраняют DOM/position popup, цвет, draft/caret/focus, пресеты и callback order; legacy reset и cleanup проверены. Native Select сохраняет отдельную flex wrapper, поэтому сравниваются используемые размеры видимой части; внутренние flex-only min constraints не равны source DOM и не используются как oracle."
+          "note": "Собственный public ComponentToken пуст, как 6.6.8; ColorPicker получает aliases/algorithms, Popover defaults и source content colorText reset. Collapse пресетов получает собственную тему; bright-state использует глобальный colorBgElevated. Исходные flex sizing и приоритеты CSS полей сохраняют независимые Input/InputNumber/Select/Slider themes. 15 UMD-тем / 120 scope-наборов и 60 popup metrics покрывают single/gradient, HEX/RGB/HSB, размеры, RTL, local variables, style priorities, algorithms и nesting/reset/siblings. Theme updates сохраняют DOM/position popup, цвет, draft/caret/focus, пресеты и callback order; возврат к оформлению по умолчанию и cleanup проверены. Native Select сохраняет отдельную flex wrapper, поэтому сравниваются используемые размеры видимой части; внутренние flex-only min constraints не равны source DOM и не используются как oracle."
         },
         {
           "id": "format-select-variant",
@@ -5471,6 +5482,44 @@
             "docs/reference/control-variants.md"
           ],
           "note": "ColorInput 6.6.8 явно передаёт variant=borderless в Select. Native format selector сохраняет это локальное оформление внутри global filled и Form underlined, не наследуя их вместо исходного local prop; выбор RGB и соседние значения сохраняются. Input/InputNumber внутри picker продолжают читать свои обычные контексты."
+        },
+        {
+          "id": "local-shared-prefix",
+          "title": "Локальный owner и независимые общие namespaces popup/controls",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/color-picker-prefix.engine.ts",
+            "src/lib/color-picker-prefix.engine.test.ts",
+            "src/lib/vendor/color-picker-prefix.css.js",
+            "src/lib/ColorPicker.svelte",
+            "src/lib/ColorPickerPanel.svelte",
+            "src/lib/ColorPickerInputs.svelte",
+            "src/lib/ColorPickerPresets.svelte",
+            "src/lib/color-picker.types.ts",
+            "tests/browser/color-picker-prefix.spec.ts",
+            "tests/browser/color-picker-prefix-metrics.ts",
+            "tests/browser/fixtures/ColorPickerPrefixFixtures.svelte",
+            "tests/browser/fixtures/ColorPickerPrefixScope.svelte",
+            "tests/browser/fixtures/ColorPickerPrefixSSRFixtures.svelte",
+            "tests/browser/fixtures/ant-design-color-picker-prefix-reference.json",
+            "tests/package/color-picker-prefix.ssr.test.ts",
+            "tools/ant-design-css-recipes.json"
+          ],
+          "note": "ColorPicker читает ConfigProvider.getPrefixCls и локальный override, включая пустые значения и nested/reset. 94-rule template сохраняет canonical variables/marker; Popover, Select/Input/InputNumber, Slider, Divider, Segmented и Collapse сохраняют независимые общие префиксы. 24 raw UMD cases в normal/nested/sibling scopes и live transitions покрывают размеры, RTL, HEX/RGB/HSB, gradient, aliases, cssVar prefix и styles. Native buttons/поля, popup IDs, unfinished HEX/caret/focus, цвет, collapsed presets, custom trigger/container и cleanup сохраняются. Оформление по умолчанию остаётся поддерживаемым Native режимом; deprecated темы/API не добавляются."
+        },
+        {
+          "id": "source-cached-child-prefix",
+          "title": "Source кеш child selectors при одинаковом local owner/theme и изменении общего prefix",
+          "state": "partial",
+          "requiredForV1": false,
+          "evidence": [
+            "tests/browser/fixtures/ant-design-color-picker-prefix-reference.json",
+            "tests/browser/color-picker-prefix.spec.ts",
+            "tests/package/color-picker-prefix.ssr.test.ts",
+            "src/lib/color-picker-prefix.engine.ts"
+          ],
+          "note": "Официальный неизменённый UMD 6.6.8: общий suite→inner под тем же локальным colors и темой сохраняет suite child selectors style hook; вложенные Divider/Collapse/fields теряют согласованное оформление. Все raw cases/live transitions сняты до public counterpart с уникальным local prefixCls. Counterpart сохраняет props/theme/значения и общий inner namespace; совпадение paint не означает одинаковые классы. Native сохраняет существующее оформление и разрешает дочерние namespaces независимо; Source cache defect не воспроизводится. Остальные случаи сравниваются непосредственно с raw Source."
         }
       ]
     },

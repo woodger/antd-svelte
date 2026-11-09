@@ -87,7 +87,7 @@ test('ColorPicker inheritance reset keeps its focused trigger, color and DOM ide
     await expect(page.getByLabel('ColorPicker theme events nested', { exact: true })).toHaveText('[]');
   });
 
-test('ColorPicker restores legacy styling and removes its portal without changing sibling themes',
+test('ColorPicker restores default styling and removes its portal without changing sibling themes',
   async ({ page }) => {
     await page.getByLabel('ColorPicker theme popup', { exact: true }).selectOption('basic');
     const popup = page.locator('.theme-color-popup');

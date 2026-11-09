@@ -9,6 +9,10 @@
 
 ### Added
 
+- ColorPicker поддерживает local/shared prefixCls с независимыми namespaces
+  popup, полей и presets. Незавершённый HEX, caret/focus, цвет, раскрытие presets
+  и custom container/trigger сохраняются; сбой кеша child selectors Source записан отдельно.
+
 - Cascader/CascaderPanel поддерживают local/shared prefixCls для поля, tags,
   колонок/checkbox и popup. Canonical tokens, нативная ширина input и callbacks
   сохранены; raw local popup padding upstream отделён от public counterpart.

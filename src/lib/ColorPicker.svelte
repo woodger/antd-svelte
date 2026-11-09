@@ -16,6 +16,10 @@
   import type { ColorPickerProps, ColorPickerSlots, ColorPickerStyles } from './color-picker.types';
   import { colorPickerRuRU } from './color-picker.locale';
   import ColorPickerPanel from './ColorPickerPanel.svelte';
+  import { getColorPickerPrefixCss } from './color-picker-prefix.engine';
+  import { getOverlayPrefixCss } from './overlay-prefix.engine';
+  import popoverTemplate from './vendor/popover-prefix.css.js';
+  import ThemeScopeStyle from './ThemeScopeStyle.svelte';
 
   let props: ColorPickerProps = $props();
   const config = useConfig();
@@ -61,7 +65,11 @@
   let arrowStyle = $state('');
   let timer: ReturnType<typeof setTimeout> | undefined;
   let mounted = false;
-  let prefixCls = $derived(props.prefixCls ?? 'ant-color-picker');
+  let prefixCls = $derived(config.getPrefixCls('color-picker', props.prefixCls));
+  let rootPrefix = $derived(config.getPrefixCls());
+  let popoverPrefix = $derived(config.getPrefixCls('popover'));
+  let prefixCss = $derived(getColorPickerPrefixCss(prefixCls, rootPrefix));
+  let popoverCss = $derived(getOverlayPrefixCss('popover', popoverPrefix, popoverTemplate));
   let size = $derived(props.size ?? compact?.size ?? config.componentSize);
   let arrow = $derived(props.arrow ?? config.colorPicker?.arrow ?? true);
   let locale = $derived({ ...colorPickerRuRU, ...config.locale.colorPicker });
@@ -277,15 +285,15 @@
   .color-picker-button { font: inherit; color: inherit; text-align: start; line-height: normal; }
   .color-picker-button.color-picker-source-theme { font-size: var(--ant-font-size); font-family: var(--ant-font-family); }
   .color-picker-button.color-picker-source-theme:disabled { color: var(--ant-color-text-disabled); }
-  .color-picker-source-theme :global(.color-fields .ant-input-number-sm) { height: auto; min-height: var(--ant-control-height-sm); }
-  .color-picker-source-theme :global(.color-fields .ant-color-picker-format-select > .ant-select) { height: 100%; }
-  .color-picker-source-theme :global(.ant-color-picker-inner) { color: var(--ant-color-text); }
+  .color-picker-source-theme :global(.color-fields [data-ant-input-number-size="small"]) { height: auto; min-height: var(--ant-control-height-sm); }
+  .color-picker-source-theme :global(.color-fields .color-picker-format > [data-ant-select-control]) { height: 100%; }
+  .color-picker-source-theme :global([data-color-picker-inner]) { color: var(--ant-color-text); }
   .color-picker-button:focus-visible { outline: 2px solid var(--ant-color-primary); outline-offset: 2px; }
   .color-picker-trigger-clear { display: block; }
   @media (prefers-reduced-motion: reduce) { .color-picker-button { transition: none; } }
 </style>
 
-<span bind:this={host} class="ant-popover-trigger" role="presentation"
+{#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`color-picker-prefix:${prefixCls}:${rootPrefix}`} />{/if}{#if popoverCss}<ThemeScopeStyle css={popoverCss} scope={`popover-prefix:${popoverPrefix}`} />{/if}<span bind:this={host} class="ant-popover-trigger" role="presentation"
   onpointerenter={event => { if (event.pointerType !== 'touch') hover(true); }}
   onpointerleave={() => hover(false)} onclick={event => {
     if (!event.defaultPrevented && (props.trigger ?? 'click') === 'click') requestOpen(!open);
@@ -293,6 +301,7 @@
   {#if props.children}{@render props.children()}
   {:else}
     <button {...attributes} type="button" disabled={disabled} id={props.id ?? field?.id}
+      data-ant-color-picker-prefix={prefixCls} data-ant-color-picker-root-prefix={rootPrefix}
       data-ant-color-theme={config.theme.mode} data-ant-color-primary={config.theme.primary}
       aria-label={props['aria-label'] ?? field?.label ?? 'Color picker'}
       aria-labelledby={props['aria-labelledby']
@@ -362,15 +371,16 @@
   }}>
   <div bind:this={popup} id={`ant-color-picker-${id}`} role="dialog" aria-label="Color picker"
     popover="manual" hidden tabindex="-1" dir={config.direction}
-    class={['ant-popover', prefixCls, 'ant-color-picker-css-var', 'color-picker-popup',
+    data-ant-color-picker-prefix={prefixCls} data-ant-color-picker-root-prefix={rootPrefix}
+    class={[popoverPrefix, prefixCls, 'ant-color-picker-css-var', 'color-picker-popup',
       componentTheme.className, designTheme.enabled && 'color-picker-source-theme',
-      `ant-popover-placement-${actualPlacement}`, config.direction === 'rtl' && `${prefixCls}-rtl`,
+      `${popoverPrefix}-placement-${actualPlacement}`, config.direction === 'rtl' && `${prefixCls}-rtl`,
       props.rootClassName, classes.popup?.root]} style={initialPopupStyle}
     {@attach node => connectComponentTheme(node, popupThemeStyle)}
     data-ant-color-theme={config.theme.mode} data-ant-color-primary={config.theme.primary}
     onpointerenter={() => { if (timer) clearTimeout(timer); }} onpointerleave={() => hover(false)}>
-    {#if arrow}<div class="ant-popover-arrow" style={arrowStyle} aria-hidden="true"></div>{/if}
-    <div class="ant-popover-container color-picker-surface" style={localStyles?.popupOverlayInner}>
+    {#if arrow}<div class={`${popoverPrefix}-arrow`} style={arrowStyle} aria-hidden="true"></div>{/if}
+    <div class={[`${popoverPrefix}-container`, 'color-picker-surface']} style={localStyles?.popupOverlayInner}>
       {#if rendered}
         <ColorPickerPanel {prefixCls} value={color} {mode} {modes} {format} props={mergedProps}
           bind:activeIndex bind:dragging onChange={change} onComplete={complete}

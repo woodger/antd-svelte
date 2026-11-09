@@ -292,6 +292,11 @@ Select control и Cascader columns/Panel имеют независимые owner
 Тот же template используется для Header/Content/Footer: выбираются selectors
 своей роли, scoped defaults добавляются только standalone-секциям.
 Рецепт color-picker извлекает trigger, palette, sliders, inputs, presets и compact.
+Color-picker-prefix выводит те же 94 правила как CSS data module. Owner scopes
+изолированы по локальному и общему префиксу; Popover, Collapse и остальные child
+namespaces разрешаются отдельно, canonical variables/marker сохраняются.
+Raw Source cache omission для child selectors отделён от public counterpart
+с уникальным локальным prefixCls; Native сохраняет прежние controls и состояния.
 Рецепт input-number-features извлекает variants, spinner, prefix/suffix и addon;
 прежние outlined/compact файлы не перезаписываются.
 Рецепт switch побайтно воспроизводит прежние 47 правил, включая reduced motion;

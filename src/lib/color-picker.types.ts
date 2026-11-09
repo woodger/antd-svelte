@@ -75,7 +75,7 @@ export interface ColorPickerProps extends Omit<HTMLButtonAttributes,
   class?: string;
   rootClassName?: string;
   style?: string;
-  /** Меняет классы; CSS для произвольного префикса должен предоставить потребитель. */
+  /** Локальный owner перекрывает ConfigProvider.prefixCls; вложенные controls наследуют общий prefix. */
   prefixCls?: string;
   classNames?: ColorPickerSemantic<ColorPickerSlots>;
   styles?: ColorPickerSemantic<ColorPickerStyles>;

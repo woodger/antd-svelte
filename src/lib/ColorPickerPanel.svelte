@@ -31,7 +31,7 @@
   </div>
 {/snippet}
 
-<div class={`${props.prefixCls}-inner`}>
+<div class={`${props.prefixCls}-inner`} data-color-picker-inner>
   {#if props.props.panelRender}{@render props.props.panelRender(panel, { components: { Picker, Presets } })}
   {:else}{@render panel()}{/if}
 </div>

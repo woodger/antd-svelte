@@ -40,22 +40,21 @@
 </script>
 
 <style>
-  .color-fields :global(.ant-color-picker-format-select > .ant-select) { padding: 0; border: 0; background: transparent; box-shadow: none; gap: 0; font-size: var(--ant-font-size-sm); line-height: var(--ant-control-height-sm); height: calc(var(--ant-font-size) + 10px); }
-  .color-fields :global(.ant-color-picker-format-select .ant-select-content) { flex: none; width: auto; margin-inline-end: var(--ant-margin-xxs); }
-  .color-fields :global(.ant-color-picker-format-select .ant-select-input) { width: 3ch; }
+  .color-fields :global(.color-picker-format > [data-ant-select-control]) { padding: 0; border: 0; background: transparent; box-shadow: none; gap: 0; font-size: var(--ant-font-size-sm); line-height: var(--ant-control-height-sm); height: calc(var(--ant-font-size) + 10px); }
+  .color-fields :global(.color-picker-format [data-ant-select-content]) { flex: none; width: auto; margin-inline-end: var(--ant-margin-xxs); }
+  .color-fields :global(.color-picker-format [data-ant-select-input]) { width: 3ch; }
   @supports (field-sizing: content) {
-    .color-fields :global(.ant-color-picker-format-select .ant-select-input) { field-sizing: content; width: auto; }
+    .color-fields :global(.color-picker-format [data-ant-select-input]) { field-sizing: content; width: auto; }
   }
-  .color-fields :global(.ant-input-number-sm) { height: calc(var(--ant-font-size) + 10px); }
-  .color-fields :global(.ant-color-picker-hsb-input .ant-input-number-input),
-  .color-fields :global(.ant-color-picker-rgb-input .ant-input-number-input) { height: calc(var(--ant-font-size-sm) + 8px); }
+  .color-fields :global([data-ant-input-number-size="small"]) { height: calc(var(--ant-font-size) + 10px); }
+  .color-fields :global([data-color-picker-channels] input[role="spinbutton"]) { height: calc(var(--ant-font-size-sm) + 8px); }
 </style>
 
 <div class={[`${prefixCls}-input-container`, 'color-fields']}>
   {#if !disabledFormat}
     <Select bind:value={() => colorFormat, () => {}} variant="borderless"
       size="small" aria-label="Color format"
-      class={`${prefixCls}-format-select`}
+      class={`${prefixCls}-format-select color-picker-format`}
       style="min-width:0;width:max-content;flex:none;margin-inline-end:var(--ant-margin-xs)"
       options={['hex', 'hsb', 'rgb'].map(value => ({ value, label: value.toUpperCase() }))}
       onValueChange={next => onFormatChange(next as ColorFormat)} />
@@ -65,7 +64,7 @@
       <Input value={hex} onValueChange={handleHex} prefix="#" aria-label="Hex color"
         class={`${prefixCls}-hex-input`} size="small" />
     {:else}
-      <div class={`${prefixCls}-${colorFormat}-input`}>
+      <div class={`${prefixCls}-${colorFormat}-input`} data-color-picker-channels>
         {#each colorFormat === 'rgb' ? ['r', 'g', 'b'] as const : ['h', 's', 'b'] as const as channel}
           {@const number = colorFormat === 'rgb' ? value.toRgb()[channel as 'r' | 'g' | 'b']
             : value.toHsb()[channel as 'h' | 's' | 'b'] * (channel === 'h' ? 1 : 100)}
