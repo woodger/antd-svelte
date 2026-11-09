@@ -320,6 +320,12 @@ SSR охватывает также defaultOpen, browser — смену обще
 CSS selectors; raw прозрачный фон сохранён отдельно от public inherited-prefix
 counterpart. Svelte сохраняет прежнее оформление списка; только menu background
 сравнивается с counterpart, остальные свойства — с raw Source.
+Upload semantic root/list/item/trigger сверяются по 16 raw UMD cases и пяти
+transitions: object/callback, resolved defaults, style priority, list types,
+drag/disabled/hidden/error и root/trigger variables. Callback получает исходные
+props без bindable DOM refs и отдельно resolved defaults. Нормальный style
+остаётся на trigger; root variables наследуются через внутренний theme bridge.
+ConfigProvider.upload переносится отдельно.
 Upload.progress передаёт действующий line API Progress, без deprecated
 strokeWidth. 16 raw UMD cases и шесть transitions фиксируют 300 ms delay,
 defaults против пустого объекта, size/colors/gradient/status/success/steps,

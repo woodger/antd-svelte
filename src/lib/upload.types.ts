@@ -75,6 +75,19 @@ export type UploadListProgressProps = Omit<
   Extract<ProgressProps, { type?: 'line'; }>,
   'percent' | 'type' | 'strokeWidth'
 >;
+export type UploadSemanticSlots = Partial<Record<'root' | 'list' | 'item' | 'trigger', string>>;
+export interface UploadSemanticInfo<T = unknown> {
+  props: UploadProps<T> & {
+    listType: NonNullable<UploadProps<T>['listType']>;
+    type: 'select' | 'drag';
+    multiple: boolean;
+    hasControlInside: boolean;
+    disabled: boolean;
+    showUploadList: NonNullable<UploadProps<T>['showUploadList']>;
+  };
+}
+export type UploadSemanticValue<T = unknown> = UploadSemanticSlots
+  | ((info: UploadSemanticInfo<T>) => UploadSemanticSlots | undefined);
 /** Выбор и загрузка файлов с controlled list, beforeUpload и настраиваемым транспортом. */
 export interface UploadProps<T = unknown> extends Omit<
   HTMLAttributes<HTMLSpanElement>,
@@ -152,6 +165,10 @@ export interface UploadProps<T = unknown> extends Omit<
   ]>;
   /** Отсутствие задаёт size=[-1,2]/showInfo=false; переданный объект заменяет defaults. */
   progress?: UploadListProgressProps;
+  /** Классы wrapper/list/item/trigger; callback получает raw props и resolved defaults. */
+  classNames?: UploadSemanticValue<T>;
+  /** CSS-строки тех же slots; обычный style перекрывает styles.trigger. */
+  styles?: UploadSemanticValue<T>;
   locale?: UploadLocale;
   type?: 'select' | 'drag';
   children?: Snippet;

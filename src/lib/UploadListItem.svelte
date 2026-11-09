@@ -28,6 +28,8 @@
     iconRender,
     itemRender,
     progress,
+    itemClass,
+    itemStyle,
     fileList
   }: {
     prefixCls: string;
@@ -44,6 +46,8 @@
     iconRender?: UploadProps<T>['iconRender'];
     itemRender?: UploadProps<T>['itemRender'];
     progress?: UploadProps<T>['progress'];
+    itemClass?: string;
+    itemStyle?: string;
     fileList: readonly UploadFile<T>[];
   } = $props();
   let thumbnail = $state('');
@@ -132,8 +136,9 @@
 {#snippet item()}
 <div class={[
     `${prefixCls}-list-item`,
-    `${prefixCls}-list-item-${file.status ?? 'undefined'}`
-  ]}>
+    `${prefixCls}-list-item-${file.status ?? 'undefined'}`,
+    itemClass
+  ]} style={itemStyle}>
   {#if picture}
     {#if file.status === 'uploading' || !source}<div class={[
         `${prefixCls}-list-item-thumbnail`,

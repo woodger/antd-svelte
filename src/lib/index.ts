@@ -107,6 +107,9 @@ export type {
   UploadListOptions,
   UploadItemRenderActions,
   UploadListProgressProps,
+  UploadSemanticSlots,
+  UploadSemanticInfo,
+  UploadSemanticValue,
   UploadRequestOptions,
   UploadRequestHandler,
   UploadRequest

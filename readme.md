@@ -6680,6 +6680,22 @@ Button, Progress и Tooltip получают свои component tokens. Style о
 сохранено в `zero-metrics.interactions` [эталона](./tests/browser/fixtures/ant-design-upload-theme-reference.json).
 Этот крайний случай требует отдельного решения.
 
+`classNames` и `styles` задают четыре semantic slots: root, list, item, trigger.
+ClassNames содержит строки классов, styles — CSS-строки. Оба prop принимают
+callback с `{props}`: переданные props и resolved listType/type/multiple/
+hasControlInside/disabled/showUploadList. PrefixCls в этом объекте остаётся
+исходным; bindable DOM refs в callback не передаются.
+
+Root оформляет wrapper; item — внутреннюю строку, в том числе внутри error
+Tooltip и originNode itemRender. Обычный style по-прежнему относится к trigger
+и перекрывает styles.trigger. Class/rootClassName сохраняются на wrapper.
+Переменные styles.root наследуются trigger через theme bridge; его собственные
+semantic/style variables имеют приоритет. Смена slots сохраняет controller,
+wrapper/item/trigger/input DOM, внешний draft/focus/selection.
+[16 исходных случаев и пять transitions](tests/browser/fixtures/ant-design-upload-semantic-reference.json),
+[browser](tests/browser/upload-semantic.spec.ts) и
+[SSR](tests/package/upload-semantic.ssr.test.ts) защищают эту границу.
+
 `progress` настраивает line Progress в uploading-строке. Без prop применяются
 size=[-1,2] и showInfo=false. Явный объект, включая `{}`, заменяет эти defaults
 целиком и использует defaults самого Progress для пропущенных полей.
@@ -6781,7 +6797,7 @@ webkitdirectory как boolean attribute; в браузере сохраняют
 
 Locale/upload из ConfigProvider, собственный locale, RU/EN, RTL и theme variables
 поддержаны. Custom action icons,
-полный ref/config/semantic API и исходные
+полный ref/config API и исходные
 appear/exit/collapse анимации остаются отдельными пробелами реестра. Данный этап
 не заявляет полного покрытия React Upload.
 

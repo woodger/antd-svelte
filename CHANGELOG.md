@@ -9,6 +9,10 @@
 
 ### Added
 
+- Upload/UploadDragger поддерживают classNames/styles для root/list/item/trigger,
+  включая callback props, исходный приоритет style на trigger и наследование
+  root CSS variables. Обновления сохраняют controller и существующий DOM.
+
 - Upload.progress настраивает line Progress через существующий Svelte API:
   size, цвета, gradient, success/status, steps, format, semantic slots и ARIA.
   Сохранены исходное различие defaults/пустого объекта и задержка 300 ms;

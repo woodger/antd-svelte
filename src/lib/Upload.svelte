@@ -7,10 +7,16 @@
   import { filterUploadFile } from './upload.engine';
   import { uploadRequest } from './upload-request.dom';
   import { collectUploadDirectoryFiles } from './upload-directory.dom';
+  import { getInlineStyleDeclarations } from './inline-style.engine';
   import { useConfig } from './config-context';
   import { useComponentTheme } from './theme-component.svelte';
   import { useForm } from './form-context';
   import UploadListItem from './UploadListItem.svelte';
+  let {
+    nativeElement = $bindable(),
+    inputElement = $bindable(),
+    ...suppliedProps
+  }: UploadProps<T> = $props();
   let {
     prefixCls: customizePrefixCls,
     fileList,
@@ -46,15 +52,15 @@
     iconRender,
     itemRender,
     progress = { size: [-1, 2], showInfo: false },
+    classNames,
+    styles,
     children,
     id,
     class: className = '',
     rootClassName = '',
     style,
-    nativeElement = $bindable(),
-    inputElement = $bindable(),
     ...attributes
-  }: UploadProps<T> = $props();
+  } = $derived(suppliedProps);
   const config = useConfig();
   let componentPrefix = $derived(config.getPrefixCls('upload', customizePrefixCls));
   let prefixCss = $derived(getUploadPrefixCss(componentPrefix));
@@ -82,8 +88,32 @@
   );
   let listOptions = $derived(typeof showUploadList === 'object' ? showUploadList : {});
   let card = $derived(listType === 'picture-card' || listType === 'picture-circle');
+  let semanticInfo = $derived({ props: {
+    ...suppliedProps,
+    listType,
+    type,
+    multiple,
+    hasControlInside,
+    disabled: blocked,
+    showUploadList
+  } });
+  let semanticClasses = $derived(
+    (typeof classNames === 'function' ? classNames(semanticInfo) : classNames) ?? {}
+  );
+  let semanticStyles = $derived(
+    (typeof styles === 'function' ? styles(semanticInfo) : styles) ?? {}
+  );
+  // Trigger сбрасывает vendor defaults, сохраняя variables semantic root и их scope.
+  let inheritedRootVariables = $derived(
+    [...getInlineStyleDeclarations([semanticStyles.root])]
+      .filter(({ property }) => property.startsWith('--'))
+      .map(({ property }) => `${property}:inherit`).join(';')
+  );
   // Bridge нужен и на trigger: локальный prefix должен перекрывать значение wrapper.
-  let triggerStyle = $derived([componentTheme.style, style].filter(Boolean).join(';') || undefined);
+  let triggerStyle = $derived(
+    [componentTheme.style, inheritedRootVariables, semanticStyles.trigger, style]
+      .filter(Boolean).join(';') || undefined
+  );
   const controller = createUploadController({
     props: () => ({
       name,
@@ -187,10 +217,10 @@
   </span>
 {/snippet}
 {#snippet list()}
-  {#if showUploadList}<div data-ant-upload-list data-ant-upload-list-type={listType} class={`${componentPrefix}-list ${componentPrefix}-list-${listType}`}>
+  {#if showUploadList}<div data-ant-upload-list data-ant-upload-list-type={listType} class={[`${componentPrefix}-list ${componentPrefix}-list-${listType}`, semanticClasses.list]} style={semanticStyles.list}>
     {#each files as file (file.uid)}<UploadListItem prefixCls={componentPrefix} {file} {listType} options={listOptions} fileList={files} locale={strings} disabled={blocked} onRemove={file => {
         void controller.remove(file);
-      }} {onPreview} {onDownload} {previewFile} {isImageUrl} {iconRender} {itemRender} {progress} />{/each}
+      }} {onPreview} {onDownload} {previewFile} {isImageUrl} {iconRender} {itemRender} {progress} itemClass={semanticClasses.item} itemStyle={semanticStyles.item} />{/each}
     {#if card && children}{@render selectTrigger()}{/if}
   </div>{/if}
 {/snippet}
@@ -198,16 +228,18 @@
   <div data-ant-upload-control class={[
       `${componentPrefix} ${componentPrefix}-select`,
       blocked && `${componentPrefix}-disabled`,
-      !children && `${componentPrefix}-hidden`
+      !children && `${componentPrefix}-hidden`,
+      semanticClasses.trigger
     ]} style={triggerStyle}>{@render trigger()}</div>
 {/snippet}
-{#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`upload-prefix:${componentPrefix}`} />{/if}<span data-ant-upload-root data-ant-upload-prefix={componentPrefix} bind:this={nativeElement} dir={config.direction} style={componentTheme.style} class={[
+{#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`upload-prefix:${componentPrefix}`} />{/if}<span data-ant-upload-root data-ant-upload-prefix={componentPrefix} bind:this={nativeElement} dir={config.direction} style={[componentTheme.style, semanticStyles.root].filter(Boolean).join(';') || undefined} class={[
     `${componentPrefix}-wrapper ant-upload-css-var`,
     componentTheme.className,
     config.direction === 'rtl' && `${componentPrefix}-rtl`,
     card && `${componentPrefix}-${listType}-wrapper`,
     className,
-    rootClassName
+    rootClassName,
+    semanticClasses.root
   ]}>
   {#if type === 'drag'}
     <!-- svelte-ignore a11y_no_static_element_interactions -->
@@ -216,7 +248,8 @@
         files.some(file => file.status === 'uploading') && `${componentPrefix}-drag-uploading`,
         dragState && `${componentPrefix}-drag-hover`,
         blocked && `${componentPrefix}-disabled`,
-        config.direction === 'rtl' && `${componentPrefix}-rtl`
+        config.direction === 'rtl' && `${componentPrefix}-rtl`,
+        semanticClasses.trigger
       ]} style={triggerStyle} ondrop={drag} ondragover={drag} ondragleave={drag}>{@render trigger()}</div>
     {@render list()}
   {:else}
