@@ -8430,6 +8430,20 @@ Value/defaultValue — полная строка textarea. Prefix по умол�
 учёта регистра; false отключает фильтрацию, predicate получает исходный option.
 Options содержит value, label string/number/Snippet, key/disabled/class/style.
 
+CSS prefixCls не меняет текстовые triggers prefix. Непустое локальное значение
+имеет приоритет; empty/undefined наследуют ConfigProvider. Editor, mirror,
+variants/status, clear и popup/menu используют resolved prefix. Private
+cmp-mentions variables и Form feedback selector используют общий namespace;
+canonical component tokens/markers остаются прежними. Смена local/shared prefix
+сохраняет IDs, root/textarea/popup DOM, query, focus/selection и FormData.
+Native clear/ARIA/IME и правила поиска/выбора не меняются.
+Сверка: [UMD](./tests/browser/fixtures/ant-design-mentions-prefix-reference.json),
+[browser](./tests/browser/mentions-prefix.spec.ts),
+[SSR](./tests/package/mentions-prefix.ssr.test.ts), `?fixture=mentions-prefix`.
+Прежний простой locale.emptyText без renderEmpty сохраняется: raw Source Small
+Empty записан отдельно от nativeEmpty — измерения public notFoundContent с тем
+же локализованным текстом. Source результаты не заменяются этим counterpart.
+
 Поиск запускается по keyup, как rc-mentions. Программная смена value сама его не
 запускает. OnSearch(text,prefix) позволяет владельцу обновить options/loading;
 сетевых запросов внутри нет. Loading показывает disabled spinner вместо выдачи
@@ -8512,7 +8526,7 @@ hover/active цвета пунктов.
 native текст формы без popup, измеряющего textarea и timers.
 
 Semantic classNames/styles, feedback suffix,
-полный ConfigProvider.mentions API, prefixCls и
+полный ConfigProvider.mentions API и
 исходные rc-trigger motion пока отсутствуют.
 
 ## AutoComplete
@@ -10242,7 +10256,7 @@ Tooltip, Popover, Popconfirm, Slider, BorderBeam, Masonry, Splitter, Anchor и
 Space/SpaceCompact/SpaceAddon, Breadcrumb, Row/Col, Typography, Carousel, Descriptions, Tabs,
 Card с Grid/Meta, Button, FloatButton/Group/BackTop, Radio/RadioButton/RadioGroup,
 Checkbox/CheckboxGroup, Switch, Input, TextArea, InputPassword, InputSearch, InputOTP,
-InputNumber, Form/FormItem/FormList/FormErrorList, Rate, Listy и Tour.
+InputNumber, Form/FormItem/FormList/FormErrorList, Rate, Listy, Tour и Mentions.
 Подключаемые prefix/theme styles остаются в head и не добавляют текст вокруг
 корней компонентов, включая обычные и grid media styles ConfigProvider.
 Пользовательские пробелы и текст внутри controls/snippets сохраняются.

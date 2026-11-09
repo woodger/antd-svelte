@@ -216,6 +216,9 @@ headers и scrollbar. Canonical component tokens и rc-virtual-list variable
 Рецепт tour-prefix выводит 61 правило панелей, маски, primary state и стрелок.
 Runtime разделяет local Tour classes, global Button selectors и private Tooltip
 namespace; canonical tokens и прежние portals/layout/zIndex contracts сохранены.
+Рецепт mentions-prefix выводит 102 правила editor/variants/dropdown без rc-motion.
+Runtime разделяет local classes и общий namespace cmp-mentions variables/Form
+feedback selector; native measurement, triggers, clear/ARIA и popup lifecycle сохранены.
 Рецепт layout-prefix выводит 35 flat rules Layout/Sider; runtime выбирает свою
 группу, сохраняет Menu namespace и ограничивает defaults/state selectors корнем.
 Тот же template используется для Header/Content/Footer: выбираются selectors

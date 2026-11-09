@@ -36,6 +36,8 @@ export interface MentionsProps extends Omit<
   | 'onblur'
   | 'onresize'
 >, MentionsConfig {
+  /** CSS prefix; не меняет текстовые triggers prefix. Empty/undefined наследуют ConfigProvider. */
+  prefixCls?: string;
   /** Полная строка textarea; offsets выделения измеряются в UTF-16. */
   value?: string;
   /** @defaultValue '' */

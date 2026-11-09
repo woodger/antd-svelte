@@ -9,6 +9,10 @@
 
 ### Added
 
+- Mentions поддерживает local/shared prefixCls для editor/mirror, variants/status
+  и popup/menu. Private input variables используют общий namespace; trigger prefix,
+  native value/IME, refs, query/popup, focus/selection и FormData сохраняются.
+
 - Tour поддерживает local/shared prefixCls для панелей, маски, placements и стрелок.
   Button selectors/private Tooltip variables используют независимый общий prefix;
   шаг, portal DOM, draft/focus/selection и callbacks сохраняются. Source shared-class

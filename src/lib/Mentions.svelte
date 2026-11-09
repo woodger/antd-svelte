@@ -10,6 +10,8 @@
   } from './mentions.engine';
   import { connectMentionsMeasure } from './mentions.dom';
   import { useConfig } from './config-context';
+  import { getMentionsPrefixCss } from './mentions-prefix.engine';
+  import ThemeScopeStyle from './ThemeScopeStyle.svelte';
   import { useVariant } from './variant.svelte';
   import { useComponentTheme } from './theme-component.svelte';
   import { useDesignTokenContext } from './theme-context.svelte';
@@ -22,6 +24,7 @@
   import Icon from './Icon.svelte';
 
   let {
+    prefixCls: customizePrefixCls,
     value,
     defaultValue = '',
     options = [],
@@ -65,6 +68,12 @@
     ...attributes
   }: MentionsProps = $props();
   const config = useConfig();
+  let componentPrefix = $derived(config.getPrefixCls('mentions', customizePrefixCls));
+  let rootPrefix = $derived(config.getPrefixCls());
+  let prefixCss = $derived(getMentionsPrefixCss(componentPrefix, rootPrefix));
+  let prefixAttributes = $derived({
+    'data-ant-mentions-prefix': componentPrefix, 'data-ant-mentions-global': rootPrefix
+  });
   const variantContext = useVariant('mentions', () => ({ variant }));
   let appearance = $derived(variantContext.variant);
   const componentTheme = useComponentTheme('Mentions');
@@ -373,27 +382,27 @@
 </script>
 
 <style>
-  .ant-mentions { max-width: 100%; }
-  .ant-mentions-textarea { display: block; width: 100%; min-width: 0; }
-  .ant-mentions-measure { position: absolute; inset: 0 auto auto 0; overflow: hidden; visibility: hidden; pointer-events: none; white-space: pre-wrap; }
+  [data-ant-mentions-root] { max-width: 100%; }
+  [data-ant-mentions-textarea] { display: block; width: 100%; min-width: 0; }
+  [data-ant-mentions-measure] { position: absolute; inset: 0 auto auto 0; overflow: hidden; visibility: hidden; pointer-events: none; white-space: pre-wrap; }
   .caret-anchor { display: inline-block; width: 1px; height: 1em; vertical-align: text-bottom; }
   .popup { position: fixed; margin: 0; border: 0; overflow: auto; }
-  :where(.ant-mentions-dropdown-menu-item) { border: 0; width: 100%; background: transparent; font: inherit; text-align: start; }
-  .ant-mentions-clear { position: absolute; inset-inline-end: var(--ant-padding-xs); top: 50%; transform: translateY(-50%); display: flex; padding: 0; border: 0; color: var(--ant-color-text-quaternary); background: transparent; cursor: pointer; }
-  .ant-mentions-clear:focus-visible { outline: 2px solid var(--ant-color-primary); }
+  :where([data-ant-mentions-option]) { border: 0; width: 100%; background: transparent; font: inherit; text-align: start; }
+  [data-ant-mentions-clear] { position: absolute; inset-inline-end: var(--ant-padding-xs); top: 50%; transform: translateY(-50%); display: flex; padding: 0; border: 0; color: var(--ant-color-text-quaternary); background: transparent; cursor: pointer; }
+  [data-ant-mentions-clear]:focus-visible { outline: 2px solid var(--ant-color-primary); }
 </style>
 
 {#snippet menu()}
-  <div id={`${controlId}-list`} role="listbox" class="ant-mentions-dropdown-menu"
+  <div id={`${controlId}-list`} role="listbox" class={`${componentPrefix}-dropdown-menu`}
     aria-label={attributes['aria-label'] ?? config.locale.searchText} onscroll={onPopupScroll}
     aria-busy={loading || undefined} {@attach connectMenuFocus}>
     {#each filtered as option, index (option.key ?? option.value)}
-      <button type="button" role="option" tabindex="-1" id={`${controlId}-option-${index}`}
+      <button data-ant-mentions-option type="button" role="option" tabindex="-1" id={`${controlId}-option-${index}`}
         disabled={option.disabled} aria-selected={active === index}
         aria-disabled={option.disabled || undefined} class={[
-          'ant-mentions-dropdown-menu-item',
-          active === index && 'ant-mentions-dropdown-menu-item-active',
-          option.disabled && 'ant-mentions-dropdown-menu-item-disabled',
+          `${componentPrefix}-dropdown-menu-item`,
+          active === index && `${componentPrefix}-dropdown-menu-item-active`,
+          option.disabled && `${componentPrefix}-dropdown-menu-item-disabled`,
           'class' in option && option.class
         ]} style={'style' in option ? option.style : undefined} onpointermove={() => {
           if (!option.disabled) active = index;
@@ -403,7 +412,7 @@
         {:else}{'label' in option ? option.label ?? option.value : option.value}{/if}
       </button>
     {:else}
-      <div class="ant-mentions-dropdown-menu-item ant-mentions-dropdown-menu-item-disabled">
+      <div class={`${componentPrefix}-dropdown-menu-item ${componentPrefix}-dropdown-menu-item-disabled`}>
         {#snippet nativeEmpty()}{config.locale.emptyText}{/snippet}
         <RenderEmpty componentName="Mentions" local={notFoundContent} fallback={nativeEmpty} />
       </div>
@@ -411,25 +420,25 @@
   </div>
 {/snippet}
 
-<div bind:this={root} style={[componentTheme.style, style].filter(Boolean).join(';') || undefined}
+{#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`mentions-prefix:${componentPrefix}:${rootPrefix}`} />{/if}<div {...prefixAttributes} data-ant-mentions-root bind:this={root} style={[componentTheme.style, style].filter(Boolean).join(';') || undefined}
   dir={config.direction}
   class={[
-      'ant-mentions ant-mentions-css-var',
+      `${componentPrefix} ant-mentions-css-var`,
       componentTheme.className,
-      `ant-mentions-${appearance}`,
-      focused && 'ant-mentions-focused',
-      blocked && 'ant-mentions-disabled',
-      config.direction === 'rtl' && 'ant-mentions-rtl',
-      resolvedSize === 'large' && 'ant-mentions-lg',
-      resolvedSize === 'small' && 'ant-mentions-sm',
-      resolvedStatus && `ant-mentions-status-${resolvedStatus}`,
+      `${componentPrefix}-${appearance}`,
+      focused && `${componentPrefix}-focused`,
+      blocked && `${componentPrefix}-disabled`,
+      config.direction === 'rtl' && `${componentPrefix}-rtl`,
+      resolvedSize === 'large' && `${componentPrefix}-lg`,
+      resolvedSize === 'small' && `${componentPrefix}-sm`,
+      resolvedStatus && `${componentPrefix}-status-${resolvedStatus}`,
       className,
       rootClassName
     ]}>
-  <textarea {...attributes} bind:this={editor} id={controlId} name={name ?? field?.name} rows={attributes.rows ?? 1}
+  <textarea {...attributes} data-ant-mentions-textarea bind:this={editor} id={controlId} name={name ?? field?.name} rows={attributes.rows ?? 1}
     class={[
-        'ant-mentions-textarea',
-        config.direction === 'rtl' && 'ant-mentions-textarea-rtl'
+        `${componentPrefix}-textarea`,
+        config.direction === 'rtl' && `${componentPrefix}-textarea-rtl`
       ]} dir={attributes.dir ?? config.direction}
     value={text} {readonly} disabled={blocked} required={attributes.required ?? field?.required} role="combobox" aria-expanded={visible}
     aria-autocomplete="list" aria-haspopup="listbox" aria-controls={visible ? `${controlId}-list` : undefined}
@@ -445,15 +454,15 @@
         )
         || undefined}
     oninput={handleInput} onkeydown={handleKeydown} onkeyup={handleKeyup} onfocus={handleFocus} onblur={handleBlur}></textarea>
-  <div bind:this={mirror} class="ant-mentions-measure" aria-hidden="true">{text.slice(0, location)}{#if visible}<span bind:this={prefixElement}>{token}</span>{:else}{token}{/if}<span bind:this={anchor} class="caret-anchor"></span>{text.slice(location + token.length)}</div>
-  {#if allowClear && text && !blocked && !readonly}<button type="button" class="ant-mentions-clear" aria-label={config.locale.clearText}
+  <div data-ant-mentions-measure bind:this={mirror} class={`${componentPrefix}-measure`} aria-hidden="true">{text.slice(0, location)}{#if visible}<span bind:this={prefixElement}>{token}</span>{:else}{token}{/if}<span bind:this={anchor} class="caret-anchor"></span>{text.slice(location + token.length)}</div>
+  {#if allowClear && text && !blocked && !readonly}<button data-ant-mentions-clear type="button" class={`${componentPrefix}-clear`} aria-label={config.locale.clearText}
     disabled={typeof allowClear === 'object' && allowClear.disabled} onpointerdown={event => event.preventDefault()} onclick={clear}>
     {#if typeof allowClear === 'object' && allowClear.clearIcon}{@render allowClear.clearIcon()}{:else}<Icon name="close" />{/if}
   </button>{/if}
   {#key popupContainer}
     {#if mounted}
-      <div bind:this={popup} popover="manual" hidden={!visible || !shown}
-        class={['popup ant-mentions-dropdown ant-mentions-css-var',
+      <div {...prefixAttributes} bind:this={popup} popover="manual" hidden={!visible || !shown}
+        class={['popup', `${componentPrefix}-dropdown ant-mentions-css-var`,
           componentTheme.className, popupClassName]}
         {@attach node => connectComponentTheme(node, componentTheme.style)}
         dir={config.direction} {@attach portal}>
