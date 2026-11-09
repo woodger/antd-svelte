@@ -85,6 +85,11 @@ export interface UploadProps<T = unknown> extends Omit<
   /** @defaultValue false */
   multiple?: boolean;
   /**
+   * Выбор папки и обход вложенных файлов при drop/paste; сохраняет webkitRelativePath.
+   * @defaultValue false
+   */
+  directory?: boolean;
+  /**
    * Вставка файлов из paste событий документа. Disabled блокирует вставку,
    * в отличие от отсутствующего guard у rc-upload 1.1.1.
    * @defaultValue false

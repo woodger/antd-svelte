@@ -320,6 +320,12 @@ SSR охватывает также defaultOpen, browser — смену обще
 CSS selectors; raw прозрачный фон сохранён отдельно от public inherited-prefix
 counterpart. Svelte сохраняет прежнее оформление списка; только menu background
 сравнивается с counterpart, остальные свойства — с raw Source.
+Upload directory сверяется по 12 raw UMD cases с управляемым FileSystemEntry API:
+BFS, порции directory reader, input/drop/paste, accept и relative paths. Адаптер
+задаёт данные platform callbacks, не порядок обхода или expected result. Source
+не передаёт error callback чтения файла и блокирует очередь; Native завершает
+ошибку и продолжает. Отдельный public sample без нечитаемого файла следует после
+всех raw cases. SSR сохраняет boolean семантику webkitdirectory.
 Upload pastable сверяется по 11 raw UMD cases, трём prop transitions и unmount:
 file/text paste, multiple/accept/native/custom filters, document scope. Disabled
 Source всё ещё обрабатывает paste; Native сохраняет блокировку. Наблюдение остаётся

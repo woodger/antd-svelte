@@ -11359,7 +11359,15 @@
         "tests/browser/fixtures/UploadPasteFixtures.svelte",
         "tests/browser/fixtures/ant-design-upload-paste-reference.json",
         "tests/package/upload-paste.ssr.test.ts",
-        "readme.md"
+        "readme.md",
+        "src/lib/upload-directory.dom.ts",
+        "src/lib/upload-directory.dom.test.ts",
+        "tests/browser/upload-directory.spec.ts",
+        "tests/browser/fixtures/UploadDirectoryScope.svelte",
+        "tests/browser/fixtures/UploadDirectoryFixtures.svelte",
+        "tests/browser/fixtures/upload-directory-transfer.dom.ts",
+        "tests/browser/fixtures/ant-design-upload-directory-reference.json",
+        "tests/package/upload-directory.ssr.test.ts"
       ],
       "features": [
         {
@@ -11435,7 +11443,7 @@
         },
         {
           "id": "extended-api",
-          "title": "Directory, render hooks, semantic slots и полный config API",
+          "title": "Render hooks, semantic slots и полный config API",
           "state": "missing",
           "requiredForV1": false,
           "evidence": [],
@@ -11505,6 +11513,46 @@
             "readme.md"
           ],
           "note": "Rc-upload 1.1.1 AjaxUploader.onFilePaste не проверяет disabled, хотя render отключает click/drop controls. Raw UMD local/provider disabled cases по-прежнему вызывают beforeUpload/onChange и preventDefault. Native сохраняет существующую disabled boundary для всех каналов ввода: document listener снимается и handler дополнительно проверяет актуальные props. Исходное поведение записано для отдельного разбора и не перенесено."
+        },
+        {
+          "id": "directory-upload",
+          "title": "Выбор папки и FileSystemEntry drop/paste с relative paths",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Upload.svelte",
+            "src/lib/upload.types.ts",
+            "src/lib/upload-directory.dom.ts",
+            "src/lib/upload-directory.dom.test.ts",
+            "tests/browser/upload-directory.spec.ts",
+            "tests/browser/fixtures/UploadDirectoryScope.svelte",
+            "tests/browser/fixtures/UploadDirectoryFixtures.svelte",
+            "tests/browser/fixtures/upload-directory-transfer.dom.ts",
+            "tests/browser/fixtures/ant-design-upload-directory-reference.json",
+            "tests/package/upload-directory.ssr.test.ts",
+            "readme.md"
+          ],
+          "note": "Directory=false по умолчанию; input directory/webkitdirectory, BFS всех entries, повторные readEntries до пустой порции, сохранение существующего webkitRelativePath. Directory picker фильтрует accept; drop/paste не ограничивают содержимое папки multiple=false, как Source. 12 raw UMD cases задают атрибуты, порядок и callback metadata; fixture adapter моделирует platform callbacks без Source patches. Input/trigger DOM/ref/focus сохраняются при prop update; позднее чтение после disable/unmount не запускает beforeUpload. SSR канонизирует webkitdirectory в boolean attribute, CSR сохраняет строковый attribute Source."
+        },
+        {
+          "id": "native-file-read-errors",
+          "title": "Завершение ошибки чтения файла вместо зависшей Source очереди",
+          "state": "partial",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Upload.svelte",
+            "src/lib/upload.types.ts",
+            "src/lib/upload-directory.dom.ts",
+            "src/lib/upload-directory.dom.test.ts",
+            "tests/browser/upload-directory.spec.ts",
+            "tests/browser/fixtures/UploadDirectoryScope.svelte",
+            "tests/browser/fixtures/UploadDirectoryFixtures.svelte",
+            "tests/browser/fixtures/upload-directory-transfer.dom.ts",
+            "tests/browser/fixtures/ant-design-upload-directory-reference.json",
+            "tests/package/upload-directory.ssr.test.ts",
+            "readme.md"
+          ],
+          "note": "Rc-upload 1.1.1 traverseFileTree.readFile передаёт FileSystemFileEntry.file только success callback. Контролируемая ошибка оставляет Promise pending; Raw Source не вызывает beforeUpload/onChange и не читает следующий good.txt. Native передаёт error callback, пропускает нечитаемый файл и продолжает. Metadata оставшихся файлов сверяется с отдельным public Source sample без bad entry, после всех raw cases. Ошибки directory reader сохраняют уже прочитанные порции, как исходник."
         }
       ]
     },

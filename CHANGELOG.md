@@ -9,6 +9,10 @@
 
 ### Added
 
+- Upload/UploadDragger поддерживают directory: выбор папки, обход вложенных drop/paste
+  в ширину, порционное чтение и webkitRelativePath. Нечитаемый файл пропускается
+  без зависания остальных; callbacks после disable/unmount не публикуются.
+
 - Upload/UploadDragger поддерживают pastable: файлы из paste проходят существующие
   accept/beforeUpload/controller/customRequest. Listener обновляется при смене props
   и удаляется при unmount; disabled блокирует paste, пропущенный guard upstream записан raw.

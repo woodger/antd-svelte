@@ -6680,6 +6680,25 @@ Button, Progress и Tooltip получают свои component tokens. Style о
 сохранено в `zero-metrics.interactions` [эталона](./tests/browser/fixtures/ant-design-upload-theme-reference.json).
 Этот крайний случай требует отдельного решения.
 
+`directory=true` разрешает выбор папки и обход вложенных файлов при drop/paste.
+Input получает directory/webkitdirectory; multiple сохраняет своё значение,
+потому что режим папки обрабатывает все принятые файлы и при multiple=false.
+Обход идёт в ширину, directory reader читается порциями до конца, accept действует
+и для выбора папки. Путь доступен в File.webkitRelativePath у beforeUpload и в
+fileList[*].originFileObj; существующее непустое значение не перезаписывается.
+Смена directory сохраняет input/trigger refs и фокус. SSR канонизирует
+webkitdirectory как boolean attribute; в браузере сохраняются значения Source.
+
+Ошибка чтения каталога завершает его перечисление, как upstream. Для ошибки файла
+в rc-upload 1.1.1 отсутствует error callback: Promise остаётся pending и блокирует
+остальные файлы. Native пропускает нечитаемый файл и продолжает обход. Raw case
+и отдельный public Source sample с оставшимся читаемым файлом сохранены в
+[замерах directory](tests/browser/fixtures/ant-design-upload-directory-reference.json).
+После disable/unmount завершившееся чтение не вызывает beforeUpload.
+[Browser](tests/browser/upload-directory.spec.ts),
+[SSR](tests/package/upload-directory.ssr.test.ts) и
+[обходчик](src/lib/upload-directory.dom.test.ts) защищают эти границы.
+
 `pastable=true` включает paste файлов в документе, как AjaxUploader 1.1.1;
 по умолчанию false. UploadDragger наследует этот prop. Наличие файлов отменяет
 обычную вставку; текст без файлов не перехватывается. Multiple использует accept,
@@ -6695,7 +6714,7 @@ Button, Progress и Tooltip получают свои component tokens. Style о
 [SSR](tests/package/upload-paste.ssr.test.ts) не создаёт browser listeners.
 
 Locale/upload из ConfigProvider, собственный locale, RU/EN, RTL и theme variables
-поддержаны. Directory, itemRender/iconRender/custom action icons,
+поддержаны. ItemRender/iconRender/custom action icons,
 progress customization, linkProps, полный ref/config/semantic API и исходные
 appear/exit/collapse анимации остаются отдельными пробелами реестра. Данный этап
 не заявляет полного покрытия React Upload.

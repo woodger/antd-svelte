@@ -6,6 +6,7 @@
   import { createUploadController } from './upload-controller.engine';
   import { filterUploadFile } from './upload.engine';
   import { uploadRequest } from './upload-request.dom';
+  import { collectUploadDirectoryFiles } from './upload-directory.dom';
   import { useConfig } from './config-context';
   import { useComponentTheme } from './theme-component.svelte';
   import { useForm } from './form-context';
@@ -22,6 +23,7 @@
     withCredentials,
     accept = '',
     multiple = false,
+    directory = false,
     pastable = false,
     capture,
     disabled,
@@ -53,6 +55,9 @@
   const config = useConfig();
   let componentPrefix = $derived(config.getPrefixCls('upload', customizePrefixCls));
   let prefixCss = $derived(getUploadPrefixCss(componentPrefix));
+  // В браузере сохраняются строковые attributes Source; SSR канонизирует boolean attribute.
+  let directoryAttributes = $derived<Record<string, string>>(directory
+    ? { directory: 'directory', webkitdirectory: 'webkitdirectory' } : {});
   const componentTheme = useComponentTheme('Upload');
   const form = useForm();
   const generatedId = $props.id();
@@ -119,7 +124,7 @@
   }
   function changed(event: Event & { currentTarget: EventTarget & HTMLInputElement; }) {
     const selected = [...event.currentTarget.files ?? []].filter(
-      file => filterUploadFile(file, accept, false)
+      file => filterUploadFile(file, accept, directory)
     );
     event.currentTarget.value = '';
     void controller.upload(selected);
@@ -128,6 +133,17 @@
     const all = [...transfer?.files ?? []];
     // rc-upload single paste/drop берёт первый исходный файл до accept filtering.
     return multiple ? all.filter(file => filterUploadFile(file, accept, true)) : all.slice(0, 1);
+  }
+  async function uploadTransfer(transfer: DataTransfer | null) {
+    const selected = directory
+      ? await collectUploadDirectoryFiles(
+        transfer?.items ?? [],
+        file => filterUploadFile(file, accept, directory)
+      )
+      : transferFiles(transfer);
+    if (blocked || !nativeElement) return;
+
+    await controller.upload(selected);
   }
   function handlePaste(event: ClipboardEvent) {
     if (!pastable || blocked) return;
@@ -138,7 +154,7 @@
     if (!hasFiles) return;
 
     event.preventDefault();
-    void controller.upload(transferFiles(transfer));
+    void uploadTransfer(transfer);
   }
   function drag(event: DragEvent) {
     event.preventDefault();
@@ -146,7 +162,7 @@
     if (event.type !== 'drop') return;
     onDrop?.(event);
     if (blocked) return;
-    void controller.upload(transferFiles(event.dataTransfer));
+    void uploadTransfer(event.dataTransfer);
   }
 </script>
 <style>
@@ -163,7 +179,7 @@
         if (type === 'select')
           drag(event);
       }} ondragover={event => event.preventDefault()}>
-    <input {...attributes} bind:this={inputElement} id={children && !blocked ? id : undefined} type="file" {name} accept={typeof accept === 'string' ? accept : accept.format} {multiple} {capture} disabled={blocked} style="display:none" onchange={changed} onclick={event => event.stopPropagation()} />
+    <input {...attributes} {...directoryAttributes} bind:this={inputElement} id={children && !blocked ? id : undefined} type="file" {name} accept={typeof accept === 'string' ? accept : accept.format} {multiple} {capture} disabled={blocked} style="display:none" onchange={changed} onclick={event => event.stopPropagation()} />
     {#if children}{#if type === 'drag'}<div class={`${componentPrefix}-drag-container`}>{@render children()}</div>{:else}{@render children()}{/if}{/if}
   </span>
 {/snippet}

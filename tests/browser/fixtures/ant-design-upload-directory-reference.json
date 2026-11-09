@@ -1,0 +1,1733 @@
+{
+  "reference": {
+    "version": "6.6.8",
+    "revision": "984592267de88fbf9cdaecc96a56629e721c709d",
+    "archiveSha256": "8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa",
+    "renderer": "unmodified official UMD with React 18.3.1",
+    "source": "Upload and @rc-component/upload 1.1.1 AjaxUploader/traverseFileTree",
+    "observation": "Callback FileSystemEntry boundary is controlled by the fixture adapter; Source traversal is unmodified. Raw breadth-first order, repeated readEntries batches, relative paths, accept, picker, paste/drop and directory errors. file-error records missing error callback: after a controlled failed read Source has no beforeUpload/onChange and never reads the following good file. Native must settle file failures and keep remaining files, preserving the Source healthy path. A separate public sample without the unreadable entry follows all raw cases; only recovered file metadata uses that counterpart. Input attributes retain Source strings; boolean property is measured separately."
+  },
+  "cases": [
+    {
+      "sample": {
+        "id": "drop-tree",
+        "directory": true,
+        "nodes": [
+          {
+            "kind": "directory",
+            "name": "docs",
+            "fullPath": "/docs",
+            "pages": [
+              [
+                {
+                  "kind": "file",
+                  "name": "first.txt",
+                  "fullPath": "/docs/first.txt"
+                },
+                {
+                  "kind": "directory",
+                  "name": "nested",
+                  "fullPath": "/docs/nested",
+                  "pages": [
+                    [
+                      {
+                        "kind": "file",
+                        "name": "deep.txt",
+                        "fullPath": "/docs/nested/deep.txt"
+                      }
+                    ]
+                  ]
+                }
+              ],
+              [
+                {
+                  "kind": "file",
+                  "name": "last.png",
+                  "fullPath": "/docs/last.png",
+                  "type": "image/png"
+                }
+              ]
+            ]
+          },
+          {
+            "kind": "file",
+            "name": "root.txt",
+            "fullPath": "/root.txt"
+          }
+        ]
+      },
+      "attributes": {
+        "directory": "directory",
+        "webkitdirectory": "webkitdirectory",
+        "directoryProperty": true,
+        "multiple": false
+      },
+      "prevented": true,
+      "before": [
+        {
+          "file": {
+            "name": "root.txt",
+            "path": "root.txt"
+          },
+          "batch": [
+            {
+              "name": "root.txt",
+              "path": "root.txt"
+            },
+            {
+              "name": "first.txt",
+              "path": "docs/first.txt"
+            },
+            {
+              "name": "last.png",
+              "path": "docs/last.png"
+            },
+            {
+              "name": "deep.txt",
+              "path": "docs/nested/deep.txt"
+            }
+          ]
+        },
+        {
+          "file": {
+            "name": "first.txt",
+            "path": "docs/first.txt"
+          },
+          "batch": [
+            {
+              "name": "root.txt",
+              "path": "root.txt"
+            },
+            {
+              "name": "first.txt",
+              "path": "docs/first.txt"
+            },
+            {
+              "name": "last.png",
+              "path": "docs/last.png"
+            },
+            {
+              "name": "deep.txt",
+              "path": "docs/nested/deep.txt"
+            }
+          ]
+        },
+        {
+          "file": {
+            "name": "last.png",
+            "path": "docs/last.png"
+          },
+          "batch": [
+            {
+              "name": "root.txt",
+              "path": "root.txt"
+            },
+            {
+              "name": "first.txt",
+              "path": "docs/first.txt"
+            },
+            {
+              "name": "last.png",
+              "path": "docs/last.png"
+            },
+            {
+              "name": "deep.txt",
+              "path": "docs/nested/deep.txt"
+            }
+          ]
+        },
+        {
+          "file": {
+            "name": "deep.txt",
+            "path": "docs/nested/deep.txt"
+          },
+          "batch": [
+            {
+              "name": "root.txt",
+              "path": "root.txt"
+            },
+            {
+              "name": "first.txt",
+              "path": "docs/first.txt"
+            },
+            {
+              "name": "last.png",
+              "path": "docs/last.png"
+            },
+            {
+              "name": "deep.txt",
+              "path": "docs/nested/deep.txt"
+            }
+          ]
+        }
+      ],
+      "changes": [
+        {
+          "name": "root.txt",
+          "files": [
+            {
+              "name": "root.txt",
+              "path": "root.txt"
+            },
+            {
+              "name": "first.txt",
+              "path": "docs/first.txt"
+            },
+            {
+              "name": "last.png",
+              "path": "docs/last.png"
+            },
+            {
+              "name": "deep.txt",
+              "path": "docs/nested/deep.txt"
+            }
+          ]
+        },
+        {
+          "name": "first.txt",
+          "files": [
+            {
+              "name": "root.txt",
+              "path": "root.txt"
+            },
+            {
+              "name": "first.txt",
+              "path": "docs/first.txt"
+            },
+            {
+              "name": "last.png",
+              "path": "docs/last.png"
+            },
+            {
+              "name": "deep.txt",
+              "path": "docs/nested/deep.txt"
+            }
+          ]
+        },
+        {
+          "name": "last.png",
+          "files": [
+            {
+              "name": "root.txt",
+              "path": "root.txt"
+            },
+            {
+              "name": "first.txt",
+              "path": "docs/first.txt"
+            },
+            {
+              "name": "last.png",
+              "path": "docs/last.png"
+            },
+            {
+              "name": "deep.txt",
+              "path": "docs/nested/deep.txt"
+            }
+          ]
+        },
+        {
+          "name": "deep.txt",
+          "files": [
+            {
+              "name": "root.txt",
+              "path": "root.txt"
+            },
+            {
+              "name": "first.txt",
+              "path": "docs/first.txt"
+            },
+            {
+              "name": "last.png",
+              "path": "docs/last.png"
+            },
+            {
+              "name": "deep.txt",
+              "path": "docs/nested/deep.txt"
+            }
+          ]
+        }
+      ],
+      "calls": [
+        {
+          "path": "/docs",
+          "operation": "readEntries",
+          "errorHandler": true
+        },
+        {
+          "path": "/docs",
+          "operation": "readEntries",
+          "errorHandler": true
+        },
+        {
+          "path": "/docs",
+          "operation": "readEntries",
+          "errorHandler": true
+        },
+        {
+          "path": "/root.txt",
+          "operation": "file",
+          "errorHandler": false
+        },
+        {
+          "path": "/docs/first.txt",
+          "operation": "file",
+          "errorHandler": false
+        },
+        {
+          "path": "/docs/nested",
+          "operation": "readEntries",
+          "errorHandler": true
+        },
+        {
+          "path": "/docs/nested",
+          "operation": "readEntries",
+          "errorHandler": true
+        },
+        {
+          "path": "/docs/last.png",
+          "operation": "file",
+          "errorHandler": false
+        },
+        {
+          "path": "/docs/nested/deep.txt",
+          "operation": "file",
+          "errorHandler": false
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "drop-multiple",
+        "directory": true,
+        "multiple": true,
+        "nodes": [
+          {
+            "kind": "directory",
+            "name": "docs",
+            "fullPath": "/docs",
+            "pages": [
+              [
+                {
+                  "kind": "file",
+                  "name": "first.txt",
+                  "fullPath": "/docs/first.txt"
+                },
+                {
+                  "kind": "directory",
+                  "name": "nested",
+                  "fullPath": "/docs/nested",
+                  "pages": [
+                    [
+                      {
+                        "kind": "file",
+                        "name": "deep.txt",
+                        "fullPath": "/docs/nested/deep.txt"
+                      }
+                    ]
+                  ]
+                }
+              ],
+              [
+                {
+                  "kind": "file",
+                  "name": "last.png",
+                  "fullPath": "/docs/last.png",
+                  "type": "image/png"
+                }
+              ]
+            ]
+          },
+          {
+            "kind": "file",
+            "name": "root.txt",
+            "fullPath": "/root.txt"
+          }
+        ]
+      },
+      "attributes": {
+        "directory": "directory",
+        "webkitdirectory": "webkitdirectory",
+        "directoryProperty": true,
+        "multiple": true
+      },
+      "prevented": true,
+      "before": [
+        {
+          "file": {
+            "name": "root.txt",
+            "path": "root.txt"
+          },
+          "batch": [
+            {
+              "name": "root.txt",
+              "path": "root.txt"
+            },
+            {
+              "name": "first.txt",
+              "path": "docs/first.txt"
+            },
+            {
+              "name": "last.png",
+              "path": "docs/last.png"
+            },
+            {
+              "name": "deep.txt",
+              "path": "docs/nested/deep.txt"
+            }
+          ]
+        },
+        {
+          "file": {
+            "name": "first.txt",
+            "path": "docs/first.txt"
+          },
+          "batch": [
+            {
+              "name": "root.txt",
+              "path": "root.txt"
+            },
+            {
+              "name": "first.txt",
+              "path": "docs/first.txt"
+            },
+            {
+              "name": "last.png",
+              "path": "docs/last.png"
+            },
+            {
+              "name": "deep.txt",
+              "path": "docs/nested/deep.txt"
+            }
+          ]
+        },
+        {
+          "file": {
+            "name": "last.png",
+            "path": "docs/last.png"
+          },
+          "batch": [
+            {
+              "name": "root.txt",
+              "path": "root.txt"
+            },
+            {
+              "name": "first.txt",
+              "path": "docs/first.txt"
+            },
+            {
+              "name": "last.png",
+              "path": "docs/last.png"
+            },
+            {
+              "name": "deep.txt",
+              "path": "docs/nested/deep.txt"
+            }
+          ]
+        },
+        {
+          "file": {
+            "name": "deep.txt",
+            "path": "docs/nested/deep.txt"
+          },
+          "batch": [
+            {
+              "name": "root.txt",
+              "path": "root.txt"
+            },
+            {
+              "name": "first.txt",
+              "path": "docs/first.txt"
+            },
+            {
+              "name": "last.png",
+              "path": "docs/last.png"
+            },
+            {
+              "name": "deep.txt",
+              "path": "docs/nested/deep.txt"
+            }
+          ]
+        }
+      ],
+      "changes": [
+        {
+          "name": "root.txt",
+          "files": [
+            {
+              "name": "root.txt",
+              "path": "root.txt"
+            },
+            {
+              "name": "first.txt",
+              "path": "docs/first.txt"
+            },
+            {
+              "name": "last.png",
+              "path": "docs/last.png"
+            },
+            {
+              "name": "deep.txt",
+              "path": "docs/nested/deep.txt"
+            }
+          ]
+        },
+        {
+          "name": "first.txt",
+          "files": [
+            {
+              "name": "root.txt",
+              "path": "root.txt"
+            },
+            {
+              "name": "first.txt",
+              "path": "docs/first.txt"
+            },
+            {
+              "name": "last.png",
+              "path": "docs/last.png"
+            },
+            {
+              "name": "deep.txt",
+              "path": "docs/nested/deep.txt"
+            }
+          ]
+        },
+        {
+          "name": "last.png",
+          "files": [
+            {
+              "name": "root.txt",
+              "path": "root.txt"
+            },
+            {
+              "name": "first.txt",
+              "path": "docs/first.txt"
+            },
+            {
+              "name": "last.png",
+              "path": "docs/last.png"
+            },
+            {
+              "name": "deep.txt",
+              "path": "docs/nested/deep.txt"
+            }
+          ]
+        },
+        {
+          "name": "deep.txt",
+          "files": [
+            {
+              "name": "root.txt",
+              "path": "root.txt"
+            },
+            {
+              "name": "first.txt",
+              "path": "docs/first.txt"
+            },
+            {
+              "name": "last.png",
+              "path": "docs/last.png"
+            },
+            {
+              "name": "deep.txt",
+              "path": "docs/nested/deep.txt"
+            }
+          ]
+        }
+      ],
+      "calls": [
+        {
+          "path": "/docs",
+          "operation": "readEntries",
+          "errorHandler": true
+        },
+        {
+          "path": "/docs",
+          "operation": "readEntries",
+          "errorHandler": true
+        },
+        {
+          "path": "/docs",
+          "operation": "readEntries",
+          "errorHandler": true
+        },
+        {
+          "path": "/root.txt",
+          "operation": "file",
+          "errorHandler": false
+        },
+        {
+          "path": "/docs/first.txt",
+          "operation": "file",
+          "errorHandler": false
+        },
+        {
+          "path": "/docs/nested",
+          "operation": "readEntries",
+          "errorHandler": true
+        },
+        {
+          "path": "/docs/nested",
+          "operation": "readEntries",
+          "errorHandler": true
+        },
+        {
+          "path": "/docs/last.png",
+          "operation": "file",
+          "errorHandler": false
+        },
+        {
+          "path": "/docs/nested/deep.txt",
+          "operation": "file",
+          "errorHandler": false
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "drop-filter",
+        "directory": true,
+        "accept": ".txt",
+        "nodes": [
+          {
+            "kind": "directory",
+            "name": "docs",
+            "fullPath": "/docs",
+            "pages": [
+              [
+                {
+                  "kind": "file",
+                  "name": "first.txt",
+                  "fullPath": "/docs/first.txt"
+                },
+                {
+                  "kind": "directory",
+                  "name": "nested",
+                  "fullPath": "/docs/nested",
+                  "pages": [
+                    [
+                      {
+                        "kind": "file",
+                        "name": "deep.txt",
+                        "fullPath": "/docs/nested/deep.txt"
+                      }
+                    ]
+                  ]
+                }
+              ],
+              [
+                {
+                  "kind": "file",
+                  "name": "last.png",
+                  "fullPath": "/docs/last.png",
+                  "type": "image/png"
+                }
+              ]
+            ]
+          },
+          {
+            "kind": "file",
+            "name": "root.txt",
+            "fullPath": "/root.txt"
+          }
+        ]
+      },
+      "attributes": {
+        "directory": "directory",
+        "webkitdirectory": "webkitdirectory",
+        "directoryProperty": true,
+        "multiple": false
+      },
+      "prevented": true,
+      "before": [
+        {
+          "file": {
+            "name": "root.txt",
+            "path": "root.txt"
+          },
+          "batch": [
+            {
+              "name": "root.txt",
+              "path": "root.txt"
+            },
+            {
+              "name": "first.txt",
+              "path": "docs/first.txt"
+            },
+            {
+              "name": "deep.txt",
+              "path": "docs/nested/deep.txt"
+            }
+          ]
+        },
+        {
+          "file": {
+            "name": "first.txt",
+            "path": "docs/first.txt"
+          },
+          "batch": [
+            {
+              "name": "root.txt",
+              "path": "root.txt"
+            },
+            {
+              "name": "first.txt",
+              "path": "docs/first.txt"
+            },
+            {
+              "name": "deep.txt",
+              "path": "docs/nested/deep.txt"
+            }
+          ]
+        },
+        {
+          "file": {
+            "name": "deep.txt",
+            "path": "docs/nested/deep.txt"
+          },
+          "batch": [
+            {
+              "name": "root.txt",
+              "path": "root.txt"
+            },
+            {
+              "name": "first.txt",
+              "path": "docs/first.txt"
+            },
+            {
+              "name": "deep.txt",
+              "path": "docs/nested/deep.txt"
+            }
+          ]
+        }
+      ],
+      "changes": [
+        {
+          "name": "root.txt",
+          "files": [
+            {
+              "name": "root.txt",
+              "path": "root.txt"
+            },
+            {
+              "name": "first.txt",
+              "path": "docs/first.txt"
+            },
+            {
+              "name": "deep.txt",
+              "path": "docs/nested/deep.txt"
+            }
+          ]
+        },
+        {
+          "name": "first.txt",
+          "files": [
+            {
+              "name": "root.txt",
+              "path": "root.txt"
+            },
+            {
+              "name": "first.txt",
+              "path": "docs/first.txt"
+            },
+            {
+              "name": "deep.txt",
+              "path": "docs/nested/deep.txt"
+            }
+          ]
+        },
+        {
+          "name": "deep.txt",
+          "files": [
+            {
+              "name": "root.txt",
+              "path": "root.txt"
+            },
+            {
+              "name": "first.txt",
+              "path": "docs/first.txt"
+            },
+            {
+              "name": "deep.txt",
+              "path": "docs/nested/deep.txt"
+            }
+          ]
+        }
+      ],
+      "calls": [
+        {
+          "path": "/docs",
+          "operation": "readEntries",
+          "errorHandler": true
+        },
+        {
+          "path": "/docs",
+          "operation": "readEntries",
+          "errorHandler": true
+        },
+        {
+          "path": "/docs",
+          "operation": "readEntries",
+          "errorHandler": true
+        },
+        {
+          "path": "/root.txt",
+          "operation": "file",
+          "errorHandler": false
+        },
+        {
+          "path": "/docs/first.txt",
+          "operation": "file",
+          "errorHandler": false
+        },
+        {
+          "path": "/docs/nested",
+          "operation": "readEntries",
+          "errorHandler": true
+        },
+        {
+          "path": "/docs/nested",
+          "operation": "readEntries",
+          "errorHandler": true
+        },
+        {
+          "path": "/docs/last.png",
+          "operation": "file",
+          "errorHandler": false
+        },
+        {
+          "path": "/docs/nested/deep.txt",
+          "operation": "file",
+          "errorHandler": false
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "drop-native-filter",
+        "directory": true,
+        "accept": ".txt",
+        "filter": "native",
+        "nodes": [
+          {
+            "kind": "directory",
+            "name": "docs",
+            "fullPath": "/docs",
+            "pages": [
+              [
+                {
+                  "kind": "file",
+                  "name": "first.txt",
+                  "fullPath": "/docs/first.txt"
+                },
+                {
+                  "kind": "directory",
+                  "name": "nested",
+                  "fullPath": "/docs/nested",
+                  "pages": [
+                    [
+                      {
+                        "kind": "file",
+                        "name": "deep.txt",
+                        "fullPath": "/docs/nested/deep.txt"
+                      }
+                    ]
+                  ]
+                }
+              ],
+              [
+                {
+                  "kind": "file",
+                  "name": "last.png",
+                  "fullPath": "/docs/last.png",
+                  "type": "image/png"
+                }
+              ]
+            ]
+          },
+          {
+            "kind": "file",
+            "name": "root.txt",
+            "fullPath": "/root.txt"
+          }
+        ]
+      },
+      "attributes": {
+        "directory": "directory",
+        "webkitdirectory": "webkitdirectory",
+        "directoryProperty": true,
+        "multiple": false
+      },
+      "prevented": true,
+      "before": [
+        {
+          "file": {
+            "name": "root.txt",
+            "path": "root.txt"
+          },
+          "batch": [
+            {
+              "name": "root.txt",
+              "path": "root.txt"
+            },
+            {
+              "name": "first.txt",
+              "path": "docs/first.txt"
+            },
+            {
+              "name": "last.png",
+              "path": "docs/last.png"
+            },
+            {
+              "name": "deep.txt",
+              "path": "docs/nested/deep.txt"
+            }
+          ]
+        },
+        {
+          "file": {
+            "name": "first.txt",
+            "path": "docs/first.txt"
+          },
+          "batch": [
+            {
+              "name": "root.txt",
+              "path": "root.txt"
+            },
+            {
+              "name": "first.txt",
+              "path": "docs/first.txt"
+            },
+            {
+              "name": "last.png",
+              "path": "docs/last.png"
+            },
+            {
+              "name": "deep.txt",
+              "path": "docs/nested/deep.txt"
+            }
+          ]
+        },
+        {
+          "file": {
+            "name": "last.png",
+            "path": "docs/last.png"
+          },
+          "batch": [
+            {
+              "name": "root.txt",
+              "path": "root.txt"
+            },
+            {
+              "name": "first.txt",
+              "path": "docs/first.txt"
+            },
+            {
+              "name": "last.png",
+              "path": "docs/last.png"
+            },
+            {
+              "name": "deep.txt",
+              "path": "docs/nested/deep.txt"
+            }
+          ]
+        },
+        {
+          "file": {
+            "name": "deep.txt",
+            "path": "docs/nested/deep.txt"
+          },
+          "batch": [
+            {
+              "name": "root.txt",
+              "path": "root.txt"
+            },
+            {
+              "name": "first.txt",
+              "path": "docs/first.txt"
+            },
+            {
+              "name": "last.png",
+              "path": "docs/last.png"
+            },
+            {
+              "name": "deep.txt",
+              "path": "docs/nested/deep.txt"
+            }
+          ]
+        }
+      ],
+      "changes": [
+        {
+          "name": "root.txt",
+          "files": [
+            {
+              "name": "root.txt",
+              "path": "root.txt"
+            },
+            {
+              "name": "first.txt",
+              "path": "docs/first.txt"
+            },
+            {
+              "name": "last.png",
+              "path": "docs/last.png"
+            },
+            {
+              "name": "deep.txt",
+              "path": "docs/nested/deep.txt"
+            }
+          ]
+        },
+        {
+          "name": "first.txt",
+          "files": [
+            {
+              "name": "root.txt",
+              "path": "root.txt"
+            },
+            {
+              "name": "first.txt",
+              "path": "docs/first.txt"
+            },
+            {
+              "name": "last.png",
+              "path": "docs/last.png"
+            },
+            {
+              "name": "deep.txt",
+              "path": "docs/nested/deep.txt"
+            }
+          ]
+        },
+        {
+          "name": "last.png",
+          "files": [
+            {
+              "name": "root.txt",
+              "path": "root.txt"
+            },
+            {
+              "name": "first.txt",
+              "path": "docs/first.txt"
+            },
+            {
+              "name": "last.png",
+              "path": "docs/last.png"
+            },
+            {
+              "name": "deep.txt",
+              "path": "docs/nested/deep.txt"
+            }
+          ]
+        },
+        {
+          "name": "deep.txt",
+          "files": [
+            {
+              "name": "root.txt",
+              "path": "root.txt"
+            },
+            {
+              "name": "first.txt",
+              "path": "docs/first.txt"
+            },
+            {
+              "name": "last.png",
+              "path": "docs/last.png"
+            },
+            {
+              "name": "deep.txt",
+              "path": "docs/nested/deep.txt"
+            }
+          ]
+        }
+      ],
+      "calls": [
+        {
+          "path": "/docs",
+          "operation": "readEntries",
+          "errorHandler": true
+        },
+        {
+          "path": "/docs",
+          "operation": "readEntries",
+          "errorHandler": true
+        },
+        {
+          "path": "/docs",
+          "operation": "readEntries",
+          "errorHandler": true
+        },
+        {
+          "path": "/root.txt",
+          "operation": "file",
+          "errorHandler": false
+        },
+        {
+          "path": "/docs/first.txt",
+          "operation": "file",
+          "errorHandler": false
+        },
+        {
+          "path": "/docs/nested",
+          "operation": "readEntries",
+          "errorHandler": true
+        },
+        {
+          "path": "/docs/nested",
+          "operation": "readEntries",
+          "errorHandler": true
+        },
+        {
+          "path": "/docs/last.png",
+          "operation": "file",
+          "errorHandler": false
+        },
+        {
+          "path": "/docs/nested/deep.txt",
+          "operation": "file",
+          "errorHandler": false
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "paste-tree",
+        "directory": true,
+        "paste": true,
+        "nodes": [
+          {
+            "kind": "directory",
+            "name": "docs",
+            "fullPath": "/docs",
+            "pages": [
+              [
+                {
+                  "kind": "file",
+                  "name": "first.txt",
+                  "fullPath": "/docs/first.txt"
+                },
+                {
+                  "kind": "directory",
+                  "name": "nested",
+                  "fullPath": "/docs/nested",
+                  "pages": [
+                    [
+                      {
+                        "kind": "file",
+                        "name": "deep.txt",
+                        "fullPath": "/docs/nested/deep.txt"
+                      }
+                    ]
+                  ]
+                }
+              ],
+              [
+                {
+                  "kind": "file",
+                  "name": "last.png",
+                  "fullPath": "/docs/last.png",
+                  "type": "image/png"
+                }
+              ]
+            ]
+          },
+          {
+            "kind": "file",
+            "name": "root.txt",
+            "fullPath": "/root.txt"
+          }
+        ]
+      },
+      "attributes": {
+        "directory": "directory",
+        "webkitdirectory": "webkitdirectory",
+        "directoryProperty": true,
+        "multiple": false
+      },
+      "prevented": true,
+      "before": [
+        {
+          "file": {
+            "name": "root.txt",
+            "path": "root.txt"
+          },
+          "batch": [
+            {
+              "name": "root.txt",
+              "path": "root.txt"
+            },
+            {
+              "name": "first.txt",
+              "path": "docs/first.txt"
+            },
+            {
+              "name": "last.png",
+              "path": "docs/last.png"
+            },
+            {
+              "name": "deep.txt",
+              "path": "docs/nested/deep.txt"
+            }
+          ]
+        },
+        {
+          "file": {
+            "name": "first.txt",
+            "path": "docs/first.txt"
+          },
+          "batch": [
+            {
+              "name": "root.txt",
+              "path": "root.txt"
+            },
+            {
+              "name": "first.txt",
+              "path": "docs/first.txt"
+            },
+            {
+              "name": "last.png",
+              "path": "docs/last.png"
+            },
+            {
+              "name": "deep.txt",
+              "path": "docs/nested/deep.txt"
+            }
+          ]
+        },
+        {
+          "file": {
+            "name": "last.png",
+            "path": "docs/last.png"
+          },
+          "batch": [
+            {
+              "name": "root.txt",
+              "path": "root.txt"
+            },
+            {
+              "name": "first.txt",
+              "path": "docs/first.txt"
+            },
+            {
+              "name": "last.png",
+              "path": "docs/last.png"
+            },
+            {
+              "name": "deep.txt",
+              "path": "docs/nested/deep.txt"
+            }
+          ]
+        },
+        {
+          "file": {
+            "name": "deep.txt",
+            "path": "docs/nested/deep.txt"
+          },
+          "batch": [
+            {
+              "name": "root.txt",
+              "path": "root.txt"
+            },
+            {
+              "name": "first.txt",
+              "path": "docs/first.txt"
+            },
+            {
+              "name": "last.png",
+              "path": "docs/last.png"
+            },
+            {
+              "name": "deep.txt",
+              "path": "docs/nested/deep.txt"
+            }
+          ]
+        }
+      ],
+      "changes": [
+        {
+          "name": "root.txt",
+          "files": [
+            {
+              "name": "root.txt",
+              "path": "root.txt"
+            },
+            {
+              "name": "first.txt",
+              "path": "docs/first.txt"
+            },
+            {
+              "name": "last.png",
+              "path": "docs/last.png"
+            },
+            {
+              "name": "deep.txt",
+              "path": "docs/nested/deep.txt"
+            }
+          ]
+        },
+        {
+          "name": "first.txt",
+          "files": [
+            {
+              "name": "root.txt",
+              "path": "root.txt"
+            },
+            {
+              "name": "first.txt",
+              "path": "docs/first.txt"
+            },
+            {
+              "name": "last.png",
+              "path": "docs/last.png"
+            },
+            {
+              "name": "deep.txt",
+              "path": "docs/nested/deep.txt"
+            }
+          ]
+        },
+        {
+          "name": "last.png",
+          "files": [
+            {
+              "name": "root.txt",
+              "path": "root.txt"
+            },
+            {
+              "name": "first.txt",
+              "path": "docs/first.txt"
+            },
+            {
+              "name": "last.png",
+              "path": "docs/last.png"
+            },
+            {
+              "name": "deep.txt",
+              "path": "docs/nested/deep.txt"
+            }
+          ]
+        },
+        {
+          "name": "deep.txt",
+          "files": [
+            {
+              "name": "root.txt",
+              "path": "root.txt"
+            },
+            {
+              "name": "first.txt",
+              "path": "docs/first.txt"
+            },
+            {
+              "name": "last.png",
+              "path": "docs/last.png"
+            },
+            {
+              "name": "deep.txt",
+              "path": "docs/nested/deep.txt"
+            }
+          ]
+        }
+      ],
+      "calls": [
+        {
+          "path": "/docs",
+          "operation": "readEntries",
+          "errorHandler": true
+        },
+        {
+          "path": "/docs",
+          "operation": "readEntries",
+          "errorHandler": true
+        },
+        {
+          "path": "/docs",
+          "operation": "readEntries",
+          "errorHandler": true
+        },
+        {
+          "path": "/root.txt",
+          "operation": "file",
+          "errorHandler": false
+        },
+        {
+          "path": "/docs/first.txt",
+          "operation": "file",
+          "errorHandler": false
+        },
+        {
+          "path": "/docs/nested",
+          "operation": "readEntries",
+          "errorHandler": true
+        },
+        {
+          "path": "/docs/nested",
+          "operation": "readEntries",
+          "errorHandler": true
+        },
+        {
+          "path": "/docs/last.png",
+          "operation": "file",
+          "errorHandler": false
+        },
+        {
+          "path": "/docs/nested/deep.txt",
+          "operation": "file",
+          "errorHandler": false
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "missing",
+        "directory": true,
+        "nodes": [
+          {
+            "kind": "missing",
+            "name": "gone"
+          }
+        ]
+      },
+      "attributes": {
+        "directory": "directory",
+        "webkitdirectory": "webkitdirectory",
+        "directoryProperty": true,
+        "multiple": false
+      },
+      "prevented": true,
+      "before": [],
+      "changes": [],
+      "calls": []
+    },
+    {
+      "sample": {
+        "id": "directory-error",
+        "directory": true,
+        "nodes": [
+          {
+            "kind": "directory",
+            "name": "bad",
+            "readError": true
+          }
+        ]
+      },
+      "attributes": {
+        "directory": "directory",
+        "webkitdirectory": "webkitdirectory",
+        "directoryProperty": true,
+        "multiple": false
+      },
+      "prevented": true,
+      "before": [],
+      "changes": [],
+      "calls": [
+        {
+          "path": "/bad",
+          "operation": "readEntries",
+          "errorHandler": true
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "existing-path",
+        "directory": true,
+        "nodes": [
+          {
+            "kind": "file",
+            "name": "kept.txt",
+            "fullPath": "/changed/kept.txt",
+            "existingPath": "original/kept.txt"
+          }
+        ]
+      },
+      "attributes": {
+        "directory": "directory",
+        "webkitdirectory": "webkitdirectory",
+        "directoryProperty": true,
+        "multiple": false
+      },
+      "prevented": true,
+      "before": [
+        {
+          "file": {
+            "name": "kept.txt",
+            "path": "original/kept.txt"
+          },
+          "batch": [
+            {
+              "name": "kept.txt",
+              "path": "original/kept.txt"
+            }
+          ]
+        }
+      ],
+      "changes": [
+        {
+          "name": "kept.txt",
+          "files": [
+            {
+              "name": "kept.txt",
+              "path": "original/kept.txt"
+            }
+          ]
+        }
+      ],
+      "calls": [
+        {
+          "path": "/changed/kept.txt",
+          "operation": "file",
+          "errorHandler": false
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "picker",
+        "directory": true,
+        "files": [
+          {
+            "name": "first.txt",
+            "path": "docs/first.txt"
+          },
+          {
+            "name": "last.png",
+            "path": "docs/last.png",
+            "type": "image/png"
+          }
+        ]
+      },
+      "attributes": {
+        "directory": "directory",
+        "webkitdirectory": "webkitdirectory",
+        "directoryProperty": true,
+        "multiple": false
+      },
+      "prevented": null,
+      "before": [
+        {
+          "file": {
+            "name": "first.txt",
+            "path": "docs/first.txt"
+          },
+          "batch": [
+            {
+              "name": "first.txt",
+              "path": "docs/first.txt"
+            },
+            {
+              "name": "last.png",
+              "path": "docs/last.png"
+            }
+          ]
+        },
+        {
+          "file": {
+            "name": "last.png",
+            "path": "docs/last.png"
+          },
+          "batch": [
+            {
+              "name": "first.txt",
+              "path": "docs/first.txt"
+            },
+            {
+              "name": "last.png",
+              "path": "docs/last.png"
+            }
+          ]
+        }
+      ],
+      "changes": [
+        {
+          "name": "first.txt",
+          "files": [
+            {
+              "name": "first.txt",
+              "path": "docs/first.txt"
+            },
+            {
+              "name": "last.png",
+              "path": "docs/last.png"
+            }
+          ]
+        },
+        {
+          "name": "last.png",
+          "files": [
+            {
+              "name": "first.txt",
+              "path": "docs/first.txt"
+            },
+            {
+              "name": "last.png",
+              "path": "docs/last.png"
+            }
+          ]
+        }
+      ],
+      "calls": []
+    },
+    {
+      "sample": {
+        "id": "picker-filter",
+        "directory": true,
+        "accept": ".txt",
+        "files": [
+          {
+            "name": "first.txt",
+            "path": "docs/first.txt"
+          },
+          {
+            "name": "last.png",
+            "path": "docs/last.png",
+            "type": "image/png"
+          }
+        ]
+      },
+      "attributes": {
+        "directory": "directory",
+        "webkitdirectory": "webkitdirectory",
+        "directoryProperty": true,
+        "multiple": false
+      },
+      "prevented": null,
+      "before": [
+        {
+          "file": {
+            "name": "first.txt",
+            "path": "docs/first.txt"
+          },
+          "batch": [
+            {
+              "name": "first.txt",
+              "path": "docs/first.txt"
+            }
+          ]
+        }
+      ],
+      "changes": [
+        {
+          "name": "first.txt",
+          "files": [
+            {
+              "name": "first.txt",
+              "path": "docs/first.txt"
+            }
+          ]
+        }
+      ],
+      "calls": []
+    },
+    {
+      "sample": {
+        "id": "picker-no-directory",
+        "accept": ".txt",
+        "files": [
+          {
+            "name": "last.png",
+            "path": "docs/last.png",
+            "type": "image/png"
+          }
+        ]
+      },
+      "attributes": {
+        "directory": null,
+        "webkitdirectory": null,
+        "directoryProperty": false,
+        "multiple": false
+      },
+      "prevented": null,
+      "before": [
+        {
+          "file": {
+            "name": "last.png",
+            "path": "docs/last.png"
+          },
+          "batch": [
+            {
+              "name": "last.png",
+              "path": "docs/last.png"
+            }
+          ]
+        }
+      ],
+      "changes": [
+        {
+          "name": "last.png",
+          "files": [
+            {
+              "name": "last.png",
+              "path": "docs/last.png"
+            }
+          ]
+        }
+      ],
+      "calls": []
+    },
+    {
+      "sample": {
+        "id": "file-error",
+        "directory": true,
+        "nodes": [
+          {
+            "kind": "file",
+            "name": "bad.txt",
+            "fullPath": "/bad.txt",
+            "readError": true
+          },
+          {
+            "kind": "file",
+            "name": "good.txt",
+            "fullPath": "/good.txt"
+          }
+        ]
+      },
+      "attributes": {
+        "directory": "directory",
+        "webkitdirectory": "webkitdirectory",
+        "directoryProperty": true,
+        "multiple": false
+      },
+      "prevented": true,
+      "before": [],
+      "changes": [],
+      "calls": [
+        {
+          "path": "/bad.txt",
+          "operation": "file",
+          "errorHandler": false
+        }
+      ],
+      "readableCounterpart": {
+        "before": [
+          {
+            "file": {
+              "name": "good.txt",
+              "path": "good.txt"
+            },
+            "batch": [
+              {
+                "name": "good.txt",
+                "path": "good.txt"
+              }
+            ]
+          }
+        ],
+        "changes": [
+          {
+            "name": "good.txt",
+            "files": [
+              {
+                "name": "good.txt",
+                "path": "good.txt"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}
