@@ -6634,6 +6634,13 @@ unmount не публикуют изменения. Вложенный upload п
 [SSR](tests/package/upload-ref.ssr.test.ts) и
 [controller](src/lib/upload-controller.engine.test.ts) защищают lifecycle API.
 
+Если первый onChange синхронно размонтирует компонент, оставшийся batch
+останавливается до следующих callbacks, изменений статуса и отправки запросов.
+В Ant Design 6.6.8 цикл onBatchStart вызывает второй callback уже после unmount;
+[raw observation](tests/browser/fixtures/ant-design-upload-batch-disposal-observation.json)
+сохраняет это поведение отдельно. Native прекращает цикл и сохраняет прежний
+cleanup contract; browser-регрессия проверяет и ref batch, и выбор нескольких файлов.
+
 Передавайте uid для каждого элемента списка. Callback onChange({file,fileList,event?})
 предлагает полный новый список; владелец может отклонить изменение. Progress/success/error
 файла, уже исключённого владельцем из списка, не вызывают onChange.

@@ -355,6 +355,11 @@ raw cases проверяют реальный customRequest, повторный 
 Прямой abort и прежние bindable DOM refs сохранены; SSR не вызывает lifecycle callbacks.
 React.Component/saveUploader и React-specific render boundaries остаются
 отдельными ограничениями.
+Два исходных замера фиксируют callback второго файла уже после
+синхронного unmount из первого onChange. Native останавливает обработку оставшихся
+элементов, включая изменение статусов и transport; это сохраняет прежний cleanup
+contract. Browser-регрессия проверяет public ref batch и native multiple picker
+для Upload и Dragger, а unit-тест проверяет остановку внутри onChange.
 Upload progress motion сверяется по 12 raw UMD cases: четыре list types,
 percent missing/undefined, motion=false, local/shared prefix, глобальная и
 компонентная duration, первый enter после done. Samples явно задают aria-label;

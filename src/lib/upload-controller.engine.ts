@@ -64,6 +64,7 @@ export function createUploadController<T = unknown>(
     const items = accepted.map(item => uploadFileObject<T>(item.file));
     for (const item of items) list = updateUploadList(item, list);
     accepted.forEach((item, index) => {
+      if (disposed) return;
       if (item.parsedFile) {
         items[index].status = 'uploading';
         publish(items[index], list);

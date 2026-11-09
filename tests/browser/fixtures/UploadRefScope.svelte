@@ -8,7 +8,7 @@
 </script>
 
 <script lang="ts">
-  import { tick, untrack } from 'svelte';
+  import { flushSync, tick, untrack } from 'svelte';
   import {
     ConfigProvider, Upload, UploadDragger, UPLOAD_LIST_IGNORE,
     type UploadRef, type UploadFile, type UploadRcFile, type UploadRequestOptions
@@ -26,6 +26,7 @@
   let held = $state.raw<UploadRef>();
   let host = $state<HTMLElement>();
   let mounted = $state(true);
+  let unmountFirst = $state(false);
   let result = $state('');
   let callbackCount = $state(0);
   let beforeCount = $state(0);
@@ -89,6 +90,13 @@
 
 <section>
   <button type="button" onclick={capture}>Run Upload ref scenario</button>
+  <label><input type="checkbox" bind:checked={unmountFirst} />
+    Unmount during first Upload callback
+  </label>
+  <button type="button" onclick={() => {
+    const batch = ['a', 'b'].map(makeFile);
+    instance?.onBatchStart(batch.map(file => ({ file, parsedFile: file })));
+  }}>Run reentrant Upload batch</button>
   <button type="button" onclick={() => { instance?.upload?.abort(); }}>Abort delegated Upload</button>
   <button type="button" onclick={() => {
     if (request) instance?.onSuccess('{"imperative":true}', request.file);
@@ -120,6 +128,7 @@
   <section data-upload-ref-host bind:this={host}>
     {#if mounted}
       <Widget bind:this={instance} defaultFileList={initial}
+        multiple={unmountFirst}
         fileList={sample.mode.startsWith('controlled') ? files : undefined}
         maxCount={sample.maxCount} id="ref-picker"
         beforeUpload={() => { beforeCount++; return true; }}
@@ -132,6 +141,10 @@
           callbackCount++;
           captured.push(describeUploadRefChange(info));
           if (sample.mode === 'controlled-accept') files = info.fileList;
+          if (unmountFirst && callbackCount === 1) {
+            held = instance;
+            flushSync(() => { mounted = false; });
+          }
         }}>
         <button type="button">Choose file</button>
       </Widget>

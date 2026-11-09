@@ -3,11 +3,12 @@ import { describe, expect, it, vi } from 'vitest';
 import registry from 'antd-svelte/porting/registry.json';
 import reference from '../browser/fixtures/ant-design-upload-ref-reference.json';
 import transport from '../browser/fixtures/ant-design-upload-ref-transport-reference.json';
+import disposal from '../browser/fixtures/ant-design-upload-batch-disposal-observation.json';
 import UploadRefScope from '../browser/fixtures/UploadRefScope.svelte';
 
 describe('Upload imperative ref SSR', () => {
   it('pins the public lifecycle captures to the source revision', () => {
-    for (const evidence of [reference.reference, transport.reference]) {
+    for (const evidence of [reference.reference, transport.reference, disposal.reference]) {
       expect(evidence).toMatchObject({
         version: registry.upstream.version,
         revision: registry.upstream.revision,
@@ -17,6 +18,9 @@ describe('Upload imperative ref SSR', () => {
     }
     expect(reference.cases).toHaveLength(18);
     expect(transport.cases).toHaveLength(2);
+    expect(disposal.cases).toHaveLength(2);
+    expect(disposal.cases.every(entry => entry.result.events.some(event => !event.mounted)))
+      .toBe(true);
   });
 
   it.each(reference.cases)('renders $sample.id without invoking ref operations', ({ sample }) => {

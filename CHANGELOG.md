@@ -1499,6 +1499,9 @@
 
 ### Fixed
 
+- Upload прекращает batch, если первый onChange синхронно размонтировал компонент:
+  оставшиеся файлы не меняют статус и не публикуют callbacks после disposal.
+
 - UploadDragger card/circle больше не создаёт второй select, file input и кнопку.
   Upload с пустым children сохраняет скрытый input и выбранные файлы, как upstream.
 

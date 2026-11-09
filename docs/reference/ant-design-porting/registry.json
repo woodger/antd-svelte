@@ -11901,6 +11901,22 @@
             "readme.md"
           ],
           "note": "Активный UploadRef из Upload.tsx предоставляет onBatchStart/onProgress/onSuccess/onError, getter текущего fileList и upload.abort; Dragger передаёт те же методы. 18 raw UMD cases задают manual/mixed batch, LIST_IGNORE, maxCount, controlled hold/accept, membership guards, JSON/plain success, xhr и error. onBatchStart не запускает beforeUpload или транспорт. Два дополнительных raw UMD cases проверяют реальный customRequest, imperative completion, повторный abort и следующий progress. Прямые callbacks не закрывают transport request; imperative success сохраняет возможность abort. Прежний прямой abort и bindable nativeElement/inputElement сохранены, refs также доступны через bind:this. Native held ref после unmount не публикует callbacks и очищает DOM refs/делегированный upload; внешний draft/focus сохраняется. SSR не запускает callbacks или browser resources. React.Component/saveUploader renderer binding и opaque ReactElement rendering относятся к отдельной framework boundary."
+        },
+        {
+          "id": "native-batch-disposal",
+          "title": "Остановка batch после синхронного unmount внутри onChange",
+          "state": "partial",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/upload-controller.engine.ts",
+            "src/lib/upload-controller.engine.test.ts",
+            "tests/browser/upload-ref.spec.ts",
+            "tests/browser/fixtures/UploadRefScope.svelte",
+            "tests/browser/fixtures/ant-design-upload-batch-disposal-observation.json",
+            "tests/package/upload-ref.ssr.test.ts",
+            "readme.md"
+          ],
+          "note": "Два raw UMD observations Upload/Dragger показывают второй onChange после синхронного unmount из первого callback. Такое же продолжение было в прежнем Native batch loop. Native проверяет disposal перед обработкой следующего элемента: не меняет его status, не создаёт копию File для callback и не публикует следующий onChange; post loop по-прежнему не запускает transport после disposal. Это намеренно сохраняет Native cleanup contract вместо переноса Source defect. Unit проверяет отсутствие дальнейшей мутации/уведомлений; browser проверяет реальный sync unmount для ref batch и multiple picker в Upload и Dragger, DOM refs, отсутствие transport и внешний draft/focus. Raw Source outcome хранится без исправления expected data."
         }
       ]
     },

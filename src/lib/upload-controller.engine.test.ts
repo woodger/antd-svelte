@@ -139,6 +139,18 @@ describe('Upload imperative lifecycle', () => {
     expect(h.events).toHaveLength(2);
   });
 
+  it('stops remaining batch callbacks and status mutations when onChange disposes the controller',
+    () => {
+      const h = setup([], { onChange: () => { h.controller.dispose(); } });
+      const batch = ['a', 'b'].map(name => Object.assign(file(`${name}.txt`), { uid: name }));
+
+      h.controller.onBatchStart(batch.map(raw => ({ file: raw, parsedFile: raw })));
+
+      expect(h.events).toHaveLength(1);
+      expect(h.files.map(item => item.status)).toEqual(['uploading', undefined]);
+      expect(h.requests).toEqual([]);
+    });
+
   it('ignores callbacks for removed files and all held ref operations after disposal', async () => {
     const h = setup();
     const raw = Object.assign(file(), { uid: 'removed' });

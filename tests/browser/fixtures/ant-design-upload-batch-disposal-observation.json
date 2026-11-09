@@ -1,0 +1,93 @@
+{
+  "reference": {
+    "version": "6.6.8",
+    "revision": "984592267de88fbf9cdaecc96a56629e721c709d",
+    "archiveSha256": "8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa",
+    "files": [
+      "components/upload/Upload.tsx"
+    ],
+    "delegate": "@rc-component/upload 1.1.1"
+  },
+  "cases": [
+    {
+      "sample": {
+        "id": "upload",
+        "drag": false
+      },
+      "result": {
+        "events": [
+          {
+            "file": "a.txt",
+            "mounted": true,
+            "list": [
+              {
+                "name": "a.txt",
+                "status": "uploading"
+              },
+              {
+                "name": "b.txt",
+                "status": null
+              }
+            ]
+          },
+          {
+            "file": "b.txt",
+            "mounted": false,
+            "list": [
+              {
+                "name": "a.txt",
+                "status": "uploading"
+              },
+              {
+                "name": "b.txt",
+                "status": "uploading"
+              }
+            ]
+          }
+        ],
+        "refCleared": true,
+        "rootCount": 0
+      }
+    },
+    {
+      "sample": {
+        "id": "dragger",
+        "drag": true
+      },
+      "result": {
+        "events": [
+          {
+            "file": "a.txt",
+            "mounted": true,
+            "list": [
+              {
+                "name": "a.txt",
+                "status": "uploading"
+              },
+              {
+                "name": "b.txt",
+                "status": null
+              }
+            ]
+          },
+          {
+            "file": "b.txt",
+            "mounted": false,
+            "list": [
+              {
+                "name": "a.txt",
+                "status": "uploading"
+              },
+              {
+                "name": "b.txt",
+                "status": "uploading"
+              }
+            ]
+          }
+        ],
+        "refCleared": true,
+        "rootCount": 0
+      }
+    }
+  ]
+}
