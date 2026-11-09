@@ -11453,7 +11453,7 @@
           "state": "missing",
           "requiredForV1": false,
           "evidence": [],
-          "note": "Custom action icons, progress customization, ConfigProvider.upload и semantic classNames/styles не перенесены. Directory/pastable, iconRender/itemRender и linkProps вынесены в отдельные supported features. Ref даёт abort и nativeElement/inputElement; полный rc-upload ref/internal lifecycle API отсутствует."
+          "note": "Custom action icons, ConfigProvider.upload и semantic classNames/styles не перенесены. Directory/pastable, iconRender/itemRender, linkProps и progress вынесены в отдельные supported features. Ref даёт abort и nativeElement/inputElement; полный rc-upload ref/internal lifecycle API отсутствует."
         },
         {
           "id": "motion",
@@ -11617,6 +11617,25 @@
             "readme.md"
           ],
           "note": "LinkProps принимает native HTMLAnchorAttributes или JSON с class/onclick/style string. Defaults target/rel/title перекрываются; file.url и внутренний click handler сохраняют приоритет. Consumer onclick вызывается до preview, preventDefault останавливает preview; return false/stopPropagation не отменяют его. Thumbnail/preview action и filename без url не получают props. 19 raw UMD cases и пять live transitions задают атрибуты и callbacks; generated Svelte scope classes исключены reader без изменения Source данных. Updates сохраняют filename/item/input DOM и внешний draft/focus/selection. Невалидный JSON выбрасывает SyntaxError, как исходный renderer."
+        },
+        {
+          "id": "list-progress-props",
+          "title": "Настройка line Progress и ARIA файла",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Upload.svelte",
+            "src/lib/UploadListItem.svelte",
+            "src/lib/upload.types.ts",
+            "tests/browser/upload-progress.spec.ts",
+            "tests/browser/upload-progress-metrics.ts",
+            "tests/browser/fixtures/UploadProgressScope.svelte",
+            "tests/browser/fixtures/UploadProgressFixtures.svelte",
+            "tests/browser/fixtures/ant-design-upload-progress-reference.json",
+            "tests/package/upload-progress.ssr.test.ts",
+            "readme.md"
+          ],
+          "note": "UploadListProgressProps использует существующий Svelte line Progress без percent/type и deprecated line strokeWidth. Отсутствие progress задаёт size=[-1,2]/showInfo=false; явный объект заменяет defaults целиком. Size, colors/gradient, status/success, steps, format, semantic slots и ARIA передаются Progress; file aria-label/labelledby идут до progress props. Native fallback имени сохраняется при отсутствии явного имени. 16 raw UMD cases и шесть live transitions задают оформление и ARIA, во всех samples file label задан явно. Задержка 300 ms и cleanup на unmount сохранены; SSR не создаёт полосу/timers. Обновления сохраняют item/input/progress root, file percent и внешний draft/focus/selection. ConfigProvider.upload и исходный motion lifecycle остаются отдельными gaps."
         }
       ]
     },

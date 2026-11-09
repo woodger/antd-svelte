@@ -106,6 +106,7 @@ export type {
   UploadLocale,
   UploadListOptions,
   UploadItemRenderActions,
+  UploadListProgressProps,
   UploadRequestOptions,
   UploadRequestHandler,
   UploadRequest

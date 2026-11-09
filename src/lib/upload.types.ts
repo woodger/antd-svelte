@@ -1,5 +1,6 @@
 import type { Snippet } from 'svelte';
 import type { HTMLAnchorAttributes, HTMLAttributes } from 'svelte/elements';
+import type { ProgressProps } from './progress.types';
 export interface UploadRcFile extends File {
   uid: string;
   lastModifiedDate?: Date;
@@ -23,6 +24,9 @@ export interface UploadFile<T = unknown> {
   crossOrigin?: 'anonymous' | 'use-credentials' | '';
   /** Атрибуты filename link или их JSON; class/onclick/style используют нативный Svelte API. */
   linkProps?: HTMLAnchorAttributes | string;
+  /** Доступное имя progress этого файла; progress props могут его перекрыть. */
+  'aria-label'?: string;
+  'aria-labelledby'?: string;
 }
 export interface UploadLocale {
   uploading?: string;
@@ -66,6 +70,11 @@ export interface UploadListOptions<T = unknown> {
   showPreviewIcon?: boolean | ((file: UploadFile<T>) => boolean);
   extra?: Snippet<[UploadFile<T>]>;
 }
+/** Line Progress без percent/type и deprecated strokeWidth; percent принадлежит файлу. */
+export type UploadListProgressProps = Omit<
+  Extract<ProgressProps, { type?: 'line'; }>,
+  'percent' | 'type' | 'strokeWidth'
+>;
 /** Выбор и загрузка файлов с controlled list, beforeUpload и настраиваемым транспортом. */
 export interface UploadProps<T = unknown> extends Omit<
   HTMLAttributes<HTMLSpanElement>,
@@ -141,6 +150,8 @@ export interface UploadProps<T = unknown> extends Omit<
     fileList: readonly UploadFile<T>[],
     actions: UploadItemRenderActions
   ]>;
+  /** Отсутствие задаёт size=[-1,2]/showInfo=false; переданный объект заменяет defaults. */
+  progress?: UploadListProgressProps;
   locale?: UploadLocale;
   type?: 'select' | 'drag';
   children?: Snippet;

@@ -320,6 +320,12 @@ SSR охватывает также defaultOpen, browser — смену обще
 CSS selectors; raw прозрачный фон сохранён отдельно от public inherited-prefix
 counterpart. Svelte сохраняет прежнее оформление списка; только menu background
 сравнивается с counterpart, остальные свойства — с raw Source.
+Upload.progress передаёт действующий line API Progress, без deprecated
+strokeWidth. 16 raw UMD cases и шесть transitions фиксируют 300 ms delay,
+defaults против пустого объекта, size/colors/gradient/status/success/steps,
+formatter, semantic styles и ARIA. Во всех samples явно задано имя файла;
+без него Native сохраняет прежний локализованный fallback. Motion exit списка
+остаётся отдельным пробелом, как и полный ConfigProvider.upload.
 UploadFile.linkProps сверяется по 19 raw UMD cases и пяти transitions:
 object/JSON attributes, file URL priority, class replacement, click callback
 ordering/cancellation и отсутствие props у thumbnail/preview action. Svelte

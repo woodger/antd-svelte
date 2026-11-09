@@ -9,6 +9,11 @@
 
 ### Added
 
+- Upload.progress настраивает line Progress через существующий Svelte API:
+  size, цвета, gradient, success/status, steps, format, semantic slots и ARIA.
+  Сохранены исходное различие defaults/пустого объекта и задержка 300 ms;
+  обновления сохраняют item/input/progress DOM. Deprecated line strokeWidth исключён.
+
 - UploadFile.linkProps задаёт атрибуты filename link через объект или JSON.
   URL файла сохраняет приоритет; onclick может отменить preview, а обновление
   props сохраняет ссылку и file input.

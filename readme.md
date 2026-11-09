@@ -6680,6 +6680,22 @@ Button, Progress и Tooltip получают свои component tokens. Style о
 сохранено в `zero-metrics.interactions` [эталона](./tests/browser/fixtures/ant-design-upload-theme-reference.json).
 Этот крайний случай требует отдельного решения.
 
+`progress` настраивает line Progress в uploading-строке. Без prop применяются
+size=[-1,2] и showInfo=false. Явный объект, включая `{}`, заменяет эти defaults
+целиком и использует defaults самого Progress для пропущенных полей.
+Percent принадлежит UploadFile; type и deprecated line strokeWidth не входят
+в UploadListProgressProps. Используйте size для толщины полосы.
+
+Передаются size, цвета/gradient, success/status, steps, format, semantic slots
+и ARIA существующего Svelte Progress. Поля UploadFile['aria-label'] и
+['aria-labelledby'] задают имя прогресса файла; progress props имеют приоритет.
+Без явного имени сохраняется прежнее локализованное имя с filename.
+Показ по-прежнему отложен на 300 ms; SSR не создаёт полосу и browser timer.
+Обновления props/percent сохраняют item/input/progress root и внешний editor.
+[16 исходных случаев и шесть transitions](tests/browser/fixtures/ant-design-upload-progress-reference.json),
+[browser](tests/browser/upload-progress.spec.ts) и
+[SSR](tests/package/upload-progress.ssr.test.ts) защищают эти границы.
+
 `UploadFile.linkProps` задаёт атрибуты ссылки имени файла: объект либо JSON
 с теми же нативными Svelte keys (`class`, `onclick`, строковый `style`).
 По умолчанию target="_blank", rel="noopener noreferrer", title=file.name;
@@ -6765,7 +6781,7 @@ webkitdirectory как boolean attribute; в браузере сохраняют
 
 Locale/upload из ConfigProvider, собственный locale, RU/EN, RTL и theme variables
 поддержаны. Custom action icons,
-progress customization, полный ref/config/semantic API и исходные
+полный ref/config/semantic API и исходные
 appear/exit/collapse анимации остаются отдельными пробелами реестра. Данный этап
 не заявляет полного покрытия React Upload.
 
