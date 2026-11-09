@@ -166,7 +166,11 @@ variables, внешний anticon namespace и прежний native max-width a
 resize/autoSize, affix, clear/count, variants/sizes и Compact. Deprecated Group и
 семейства InputNumber/Search/OTP исключены; runtime сохраняет canonical token
 variables/markers и ограничивает defaults владельцем. Password/Search/OTP имеют
-отдельные prefix API и подключаются следующим этапом.
+отдельные prefix API; Password подключён отдельным рецептом.
+Рецепт input-password-prefix выводит четыре исходных icon rules. Runtime независимо
+адресует Input root и Password icon, исправляя Source предположение об общем имени;
+raw и public paired-prefix counterpart сохранены в browser reference. Native toggle
+reset, token variables и события не меняются.
 Рецепт segmented-prefix выводит data module из 38 правил Segmented для локального
 prefixCls; runtime сохраняет CSS variables/marker и ограничивает defaults корнем.
 Рецепт flex-prefix выводит data module из 32 правил Flex без typography reset;

@@ -7016,7 +7016,17 @@
         "tests/browser/fixtures/ant-design-input-prefix-reference.json",
         "tests/browser/input-prefix-metrics.ts",
         "tests/browser/input-prefix.spec.ts",
-        "tests/package/input-prefix.ssr.test.ts"
+        "tests/package/input-prefix.ssr.test.ts",
+        "src/lib/input-password-prefix.engine.ts",
+        "src/lib/input-password-prefix.engine.test.ts",
+        "src/lib/vendor/input-password-prefix.css.js",
+        "tests/browser/fixtures/InputPasswordPrefixScope.svelte",
+        "tests/browser/fixtures/InputPasswordPrefixFixtures.svelte",
+        "tests/browser/fixtures/InputPasswordPrefixSSRFixtures.svelte",
+        "tests/browser/fixtures/ant-design-input-password-prefix-reference.json",
+        "tests/browser/input-password-prefix-metrics.ts",
+        "tests/browser/input-password-prefix.spec.ts",
+        "tests/package/input-password-prefix.ssr.test.ts"
       ],
       "features": [
         {
@@ -7087,7 +7097,7 @@
             "tests/package/input-password.ssr.test.ts",
             "tests/browser/input-password.spec.ts"
           ],
-          "note": "Отдельный InputPassword сохраняет API Input, controlled/local visibility, click/mouseover и Enter/Space без repeat, disabled/tabIndex, suffix/iconRender, inputPassword config/semantic slots и locale.global.show/hide. Native button заменяет React span role=button, bind:this и именованные DOM bindings заменяют InputRef. Общие ограничения Input для prefixCls, tokens и value conventions сохраняются; семейство в целом unreviewed. В hover сохранён всплывающий mouseover: смена SVG под указателем может вызвать дополнительные переключения, как в React 6.6.8."
+          "note": "Отдельный InputPassword сохраняет API Input, controlled/local visibility, click/mouseover и Enter/Space без repeat, disabled/tabIndex, suffix/iconRender, inputPassword config/semantic slots и locale.global.show/hide. Native button заменяет React span role=button, bind:this и именованные DOM bindings заменяют InputRef. Local/shared prefixCls и независимый inputPrefixCls, component tokens и variant inheritance подключены; согласованные value/ref conventions сохраняются; семейство в целом unreviewed. В hover сохранён всплывающий mouseover: смена SVG под указателем может вызвать дополнительные переключения, как в React 6.6.8."
         },
         {
           "id": "input-search",
@@ -7165,7 +7175,7 @@
             "tests/browser/control-theme.spec.ts",
             "docs/reference/theme-context.md"
           ],
-          "note": "Компонентные tokens Input и composed Password/Search/OTP подключены к CSS. Local/shared prefixCls обычного Input подключён; самостоятельные prefix API Password/Search/OTP ещё в работе. Deprecated internal hooks исключены. Согласованные string bind:value, native refs/hidden и React dev diagnostics сохраняют прежнюю границу."
+          "note": "Компонентные tokens Input и composed Password/Search/OTP подключены к CSS. Local/shared prefixCls обычного Input подключён; Password имеет независимые prefixCls/inputPrefixCls; самостоятельные prefix API Search/OTP ещё в работе. Deprecated internal hooks исключены. Согласованные string bind:value, native refs/hidden и React dev diagnostics сохраняют прежнюю границу."
         },
         {
           "id": "textarea-remaining",
@@ -7246,6 +7256,28 @@
             "tests/package/input-prefix.ssr.test.ts"
           ],
           "note": "Nonempty local prefix wins; empty/undefined наследуют ConfigProvider. 142 Source CSS rules охватывают leaf/affix, clear/count, sizes/variants/RTL, Compact и textarea resize. Canonical variables/markers, semantic props и приоритет стилей сохранены. Official UMD matrix проверяет nested/sibling providers, custom cssVar prefix, component aliases и live changes. DOM/ref, value, selection/focus, FormData и callbacks не меняются. Native IME/reset/clear/resize/autoSize/measurement сохраняют существующие контракты; SSR не запускает browser resources. Самостоятельные prefix API Password/Search/OTP не включены."
+        },
+        {
+          "id": "input-password-prefix-cls",
+          "title": "Независимые локальные и общие Password/Input namespaces",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/InputPassword.svelte",
+            "src/lib/input-password.types.ts",
+            "src/lib/input-password-prefix.engine.ts",
+            "src/lib/input-password-prefix.engine.test.ts",
+            "src/lib/vendor/input-password-prefix.css.js",
+            "tools/ant-design-css-recipes.json",
+            "tests/browser/fixtures/InputPasswordPrefixScope.svelte",
+            "tests/browser/fixtures/InputPasswordPrefixFixtures.svelte",
+            "tests/browser/fixtures/InputPasswordPrefixSSRFixtures.svelte",
+            "tests/browser/fixtures/ant-design-input-password-prefix-reference.json",
+            "tests/browser/input-password-prefix-metrics.ts",
+            "tests/browser/input-password-prefix.spec.ts",
+            "tests/package/input-password-prefix.ssr.test.ts"
+          ],
+          "note": "PrefixCls управляет Password/icon, inputPrefixCls — вложенным Input; nonempty local wins, empty/undefined наследуют ConfigProvider. Canonical variables/markers и приоритет semantic styles сохранены. Source ошибочно связывает icon selector с Input prefix: raw UMD results сохранены, expectedNative отдельно измерен с public paired prefixes. Четыре исходных CSS rules адресуют независимые namespaces без переноса этого дефекта. Live updates сохраняют DOM/ref, visibility, value, selection/focus, FormData и callbacks. Native toggle button, keyboard, password attribute timers и SSR cleanup contract не меняются."
         }
       ]
     },

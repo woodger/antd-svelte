@@ -9,6 +9,8 @@
   import { useVariant } from './variant.svelte';
   import { useForm, useFormField } from './form-context';
   import { inputPasswordIcons } from './input-password-icons';
+  import { getInputPasswordPrefixCss } from './input-password-prefix.engine';
+  import ThemeScopeStyle from './ThemeScopeStyle.svelte';
   import type { InputPasswordProps } from './input-password.types';
   import type { InputSemanticSlots } from './input.types';
 
@@ -22,6 +24,8 @@
     disabled,
     variant,
     suffix,
+    prefixCls: customizePrefixCls,
+    inputPrefixCls: customizeInputPrefixCls,
     class: className = '',
     style,
     classNames,
@@ -30,6 +34,9 @@
   }: InputPasswordProps = $props();
 
   const config = useConfig();
+  let componentPrefix = $derived(config.getPrefixCls('input-password', customizePrefixCls));
+  let inputPrefix = $derived(config.getPrefixCls('input', customizeInputPrefixCls));
+  let prefixCss = $derived(getInputPasswordPrefixCss(inputPrefix, componentPrefix));
   const variantContext = useVariant('inputPassword', () => ({ variant }), 'input');
   const form = useForm();
   const field = useFormField();
@@ -67,6 +74,8 @@
       disabled: blocked,
       variant: appearance,
       suffix,
+      prefixCls: customizePrefixCls,
+      inputPrefixCls: customizeInputPrefixCls,
       class: className,
       style,
       classNames,
@@ -160,17 +169,21 @@
 </script>
 
 <style>
-  .ant-input-password-icon { border: 0; padding: 0; background: transparent; font: inherit; }
+  [data-ant-input-password-icon] { border: 0; padding: 0; background: transparent; font: inherit; }
   .anticon { display: inline-flex; align-items: center; line-height: 0; }
   svg { width: 1em; height: 1em; }
 </style>
 
+{#if prefixCss}
+  <ThemeScopeStyle css={prefixCss} scope={`input-password-prefix:${inputPrefix}:${componentPrefix}`} />
+{/if}
 {#snippet passwordSuffix()}
   {#if visibilityToggle}
     <!-- svelte-ignore a11y_mouse_events_have_key_events (Как в upstream, клавиатура переключает по Enter/Space, а не при фокусе.) -->
     <button
       type="button"
-      class="ant-input-password-icon"
+      class={`${componentPrefix}-icon`}
+      data-ant-input-password-icon
       tabindex={blocked ? -1 : typeof visibilityToggle === 'object'
         ? visibilityToggle.tabIndex ?? 0
         : 0}
@@ -204,13 +217,14 @@
   bind:nativeElement
   bind:this={input}
   type={visible ? 'text' : 'password'}
+  prefixCls={inputPrefix}
   disabled={blocked}
   variant={appearance}
   class={[
-    'ant-input-password',
+    componentPrefix,
     config.inputPassword?.class,
     className,
-    attributes.size && `ant-input-password-${attributes.size}`
+    attributes.size && `${componentPrefix}-${attributes.size}`
   ].filter(Boolean).join(' ')}
   classNames={mergedClasses}
   styles={mergedStyles}

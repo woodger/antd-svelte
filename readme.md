@@ -6521,8 +6521,8 @@ value, refs, selection/focus и FormData. Сверка с официальным
 autoSize и прежний приоритет semantic styles.
 
 Input.Password, Input.Search и Input.OTP доступны как
-InputPassword, InputSearch и InputOTP. Их самостоятельные prefixCls
-остаются отдельной задачей; компонентные tokens Input уже подключены. Deprecated internal
+InputPassword, InputSearch и InputOTP. Самостоятельные prefixCls
+InputSearch/InputOTP остаются отдельной задачей; компонентные tokens Input уже подключены. Deprecated internal
 classes/structures исключены из переноса. Согласованный string bind:value
 сохраняется вместо React controlled rejection/broad value types; native DOM events
 и именованные Svelte bindings заменяют SyntheticEvent/ref object. Общий аудит
@@ -6577,8 +6577,21 @@ global наследует остальные поля. Explicit size добав�
 очищаются при unmount. Bind:inputElement/nativeElement и bind:this методы
 focus/blur/select/setSelectionRange делегируются Input. SSR не запускает timers
 или callbacks. Фикстура `?fixture=input-password`, source SSR и проверки публичного
-пакета покрывают эти сценарии, темы, RTL, локаль и FormItem. Общие ограничения
-Input для prefixCls, variant/token engine и React value/ref conventions сохраняются.
+пакета покрывают эти сценарии, темы, RTL, локаль и FormItem. Component token engine
+Input и variant inheritance подключены; согласованные value/ref conventions сохраняются.
+
+PrefixCls задаёт классы Password и toggle icon, inputPrefixCls — независимые классы
+вложенного Input. Empty/undefined наследуют соответствующие ConfigProvider prefixes.
+Canonical token variables и native toggle button сохраняются. Смена любого prefix
+не заменяет DOM/ref и сохраняет visibility, value, selection/focus и FormData.
+
+В React 6.6.8 CSS иконки ошибочно предполагает связь этих имён: при независимых
+prefixes исчезают color/cursor. Здесь четыре исходных правила адресуют оба prefix.
+Исходные UMD measurements и public paired-prefix counterpart хранятся раздельно в
+[эталоне](./tests/browser/fixtures/ant-design-input-password-prefix-reference.json).
+Проверки — `?fixture=input-password-prefix`,
+[browser](./tests/browser/input-password-prefix.spec.ts) и
+[SSR](./tests/package/input-password-prefix.ssr.test.ts).
 
 ## InputSearch (Input.Search)
 
@@ -10124,7 +10137,7 @@ Empty, Skeleton с primitives, Spin, Progress, Result, Alert, Collapse, Affix,
 Tooltip, Popover, Popconfirm, Slider, BorderBeam, Masonry, Splitter, Anchor и
 Space/SpaceCompact/SpaceAddon, Breadcrumb, Row, Typography, Carousel, Descriptions, Tabs,
 Card с Grid/Meta, Button, FloatButton/Group/BackTop, Radio/RadioButton/RadioGroup,
-Checkbox/CheckboxGroup, Switch, Input и TextArea.
+Checkbox/CheckboxGroup, Switch, Input, TextArea и InputPassword.
 Остальные семейства подключаются отдельно. Например,
 ConfigProvider prefixCls="suite" создаёт suite-app, suite-layout,
 suite-layout-sider и suite-layout-header без изменения имён Svelte-компонентов.

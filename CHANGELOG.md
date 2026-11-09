@@ -9,6 +9,10 @@
 
 ### Added
 
+- InputPassword поддерживает независимые prefixCls/inputPrefixCls и общий prefix.
+  Иконка сохраняет Source CSS при любом сочетании имён; исходный пропуск её стилей
+  в React сохранён отдельными raw/matched замерами. Видимость, refs и focus прежние.
+
 - Input/TextArea поддерживают local/shared prefixCls для leaf, affix, вариантов,
   clear/count и Compact. Native value/IME, resize/autoSize, refs, формы, focus и
   selection сохранены; отдельные prefix API Password/Search/OTP ещё в работе.
