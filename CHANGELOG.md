@@ -1329,6 +1329,10 @@
 
 ### Fixed
 
+- Подключение prefix CSS Input/TextArea больше не добавляет whitespace text nodes
+  вокруг native control. Input внутри rich help снова имеет пустой textContent;
+  SSR сохраняет тот же контракт для canonical и custom prefixes.
+
 - Editable/custom Tabs прокручивает выбранную ячейку целиком, включая remove.
   Активная вкладка больше не попадает в More, когда виден только её внутренний текст.
 

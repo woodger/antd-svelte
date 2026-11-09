@@ -3,6 +3,12 @@ import { describe, expect, it } from 'vitest';
 import TextArea from './TextArea.svelte';
 
 describe('TextArea SSR', () => {
+  it.each(['ant-input', 'field'])('adds no text beyond the %s native value', prefixCls => {
+    const body = render(TextArea, { props: { prefixCls, value: 'Draft' } }).body;
+
+    expect(body.replace(/<!--[\s\S]*?-->|<[^>]*>/g, '')).toBe('Draft');
+  });
+
   it(
     'escapes multiline content and forwards native constraints without truncating controlled values',
     () => {

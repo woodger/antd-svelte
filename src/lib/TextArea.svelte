@@ -325,9 +325,6 @@
   @media (prefers-reduced-motion: reduce) { textarea[data-ant-input-node], textarea[data-ant-input-node][data-ant-input-mouse-active], [data-ant-input-affix] { transition: none; } }
 </style>
 
-{#if prefixCss}
-  <ThemeScopeStyle css={prefixCss} scope={`input-prefix:${componentPrefix}`} />
-{/if}
 {#snippet control()}
   <textarea {...attributes} bind:this={nativeElement} id={id ?? field?.id} name={name ?? field?.name} value={text}
     data-ant-input-node data-ant-input-prefix={prefixCss ? componentPrefix : undefined}
@@ -390,7 +387,7 @@
       ]}></textarea>
 {/snippet}
 
-{#if wrapped}
+{#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`input-prefix:${componentPrefix}`} />{/if}{#if wrapped}
   <span bind:this={wrapper} {hidden} dir={config.direction}
     data-ant-input-affix data-ant-input-prefix={prefixCss ? componentPrefix : undefined} class={[
       `${componentPrefix}-affix-wrapper ${componentPrefix}-textarea-affix-wrapper`,

@@ -311,9 +311,6 @@
   @media (prefers-reduced-motion: reduce) { input, [data-ant-input-affix] { transition: none; } }
 </style>
 
-{#if prefixCss}
-  <ThemeScopeStyle css={prefixCss} scope={`input-prefix:${componentPrefix}`} />
-{/if}
 {#snippet content(node: InputContent | undefined)}
   {#if typeof node === 'function'}{@render node()}{:else if node !== true && node !== false}{node ?? ''}{/if}
 {/snippet}
@@ -506,4 +503,4 @@
   {:else}{@render control()}{/if}
 {/snippet}
 
-{@render fieldControl()}
+{#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`input-prefix:${componentPrefix}`} />{/if}{@render fieldControl()}

@@ -3,6 +3,12 @@ import { describe, expect, it } from 'vitest';
 import Input from './Input.svelte';
 
 describe('Input SSR', () => {
+  it.each(['ant-input', 'field'])('adds no text nodes around a bare %s control', prefixCls => {
+    const body = render(Input, { props: { prefixCls, value: 'Draft' } }).body;
+
+    expect(body.replace(/<!--[\s\S]*?-->|<[^>]*>/g, '')).toBe('');
+  });
+
   it(
     'keeps the default native input shape and escapes content without clipping external values',
     () => {

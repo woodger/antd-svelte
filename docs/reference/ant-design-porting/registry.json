@@ -7341,9 +7341,11 @@
             "tests/browser/fixtures/ant-design-input-prefix-reference.json",
             "tests/browser/input-prefix-metrics.ts",
             "tests/browser/input-prefix.spec.ts",
-            "tests/package/input-prefix.ssr.test.ts"
+            "tests/package/input-prefix.ssr.test.ts",
+            "src/lib/input.ssr.test.ts",
+            "src/lib/textarea.ssr.test.ts"
           ],
-          "note": "Nonempty local prefix wins; empty/undefined наследуют ConfigProvider. 142 Source CSS rules охватывают leaf/affix, clear/count, sizes/variants/RTL, Compact и textarea resize. Canonical variables/markers, semantic props и приоритет стилей сохранены. Official UMD matrix проверяет nested/sibling providers, custom cssVar prefix, component aliases и live changes. DOM/ref, value, selection/focus, FormData и callbacks не меняются. Native IME/reset/clear/resize/autoSize/measurement сохраняют существующие контракты; SSR не запускает browser resources. Самостоятельные prefix API Password/Search/OTP не включены."
+          "note": "Nonempty local prefix wins; empty/undefined наследуют ConfigProvider. 142 Source CSS rules охватывают leaf/affix, clear/count, sizes/variants/RTL, Compact и textarea resize. Canonical variables/markers, semantic props и приоритет стилей сохранены. Official UMD matrix проверяет nested/sibling providers, custom cssVar prefix, component aliases и live changes. DOM/ref, value, selection/focus, FormData и callbacks не меняются. Native IME/reset/clear/resize/autoSize/measurement сохраняют существующие контракты; SSR не запускает browser resources. Самостоятельные prefix API Password/Search/OTP не включены. Prefix CSS не добавляет text nodes вокруг native control; SSR и rich help сохраняют textContent boundary."
         },
         {
           "id": "input-password-prefix-cls",
