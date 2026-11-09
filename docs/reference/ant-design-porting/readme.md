@@ -275,6 +275,8 @@ Pagination используют соответствующие prefix engines б
 compact, включая hover:none; slide-up motion selectors исключены. Owner classes
 и служебные variables имеют независимые namespaces, canonical tokens сохраняются.
 Native wrapper/option buttons, compact bridge, forms/reset и popup lifecycle сохранены.
+AutoComplete использует этот же template и отдельный общий Input namespace для
+custom controls; свой upstream style hook у него отсутствует.
 Рецепт layout-prefix выводит 35 flat rules Layout/Sider; runtime выбирает свою
 группу, сохраняет Menu namespace и ограничивает defaults/state selectors корнем.
 Тот же template используется для Header/Content/Footer: выбираются selectors

@@ -68,6 +68,8 @@ export interface AutoCompleteProps extends Omit<
   | 'onkeyup'
   | 'onclick'
 > {
+  /** Локальный namespace Select; пустая строка наследует ConfigProvider. */
+  prefixCls?: string;
   options?: readonly AutoCompleteItem[];
   /** Произвольная строка; соответствие options не требуется. */
   value?: string;

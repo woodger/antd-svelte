@@ -8722,7 +8722,18 @@ Custom Input сохраняет собственные `components.Input` и р�
 сохраняет native editor, option content, выделение, фокус, FormData и положение
 открытого popup. Native-only темы сохраняют прежнее оформление.
 
-Virtual/scrollTo, fieldNames, optionRender/popupRender, prefix/searchIcon,
+`prefixCls` использует namespace Select, как upstream AutoComplete: непустое
+локальное значение перекрывает `ConfigProvider.prefixCls`, пустое наследует его.
+Control/content/clear/groups/options/popup получают соответствующие классы и CSS;
+вложенный Input/TextArea сохраняет собственный общий namespace. Служебные Select
+variables отделены от canonical theme tokens. Смена префикса сохраняет editor,
+popup/options, generated IDs, refs, query, text selection, focus, FormData и callbacks.
+[28 UMD-конфигураций](tests/browser/fixtures/ant-design-auto-complete-prefix-reference.json)
+в normal/nested/reset scopes включают custom Input/TextArea, filled и disabled Input;
+[browser](tests/browser/auto-complete-prefix.spec.ts) и
+[SSR](tests/package/auto-complete-prefix.ssr.test.ts) проверяют эти границы.
+
+Virtual/scrollTo, fieldNames, optionRender/popupRender, searchIcon,
 остальной semantic/config API пока отсутствует. Deprecated dataSource/Option
 и dropdown aliases исключены из переноса. Generic numeric/object values не входят в первый этап.
 

@@ -18,6 +18,8 @@ describe('Select prefix stylesheet', () => {
     expect(css).toContain('--ant-select-multiple-item-height');
     expect(css).toContain('--ant-select-option-font-size');
     expect(css).toContain('.suite-typography');
+    expect(css).toContain('.suite-input-filled');
+    expect(css).toContain('.suite-input-affix-wrapper-disabled');
     expect(css).toMatch(/@media\s*\(hover:\s*none\)/);
     expect(css).not.toContain('.ant-select-input');
   });

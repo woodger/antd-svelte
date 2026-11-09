@@ -13,6 +13,8 @@
     autoCompleteOption
   } from './auto-complete.engine';
   import { useConfig } from './config-context';
+  import ThemeScopeStyle from './ThemeScopeStyle.svelte';
+  import { getSelectPrefixCss } from './select-prefix.engine';
   import { useVariant } from './variant.svelte';
   import { useCompact } from './space-compact-context';
   import { compactClasses } from './space-compact.engine';
@@ -24,6 +26,7 @@
   import Icon from './Icon.svelte';
 
   let {
+    prefixCls,
     options = [],
     value,
     defaultValue,
@@ -62,6 +65,10 @@
     ...attributes
   }: AutoCompleteProps = $props();
   const config = useConfig();
+  let prefix = $derived(config.getPrefixCls('select', prefixCls));
+  let rootPrefix = $derived(config.getPrefixCls());
+  let privateNamespace = $derived(rootPrefix.replaceAll('.', ''));
+  let prefixCss = $derived(getSelectPrefixCss(prefix, rootPrefix));
   const variantContext = useVariant('select', () => ({ variant }));
   let appearance = $derived(variantContext.variant);
   const controlRef = {
@@ -357,60 +364,66 @@
 
 <style>
   .auto-complete { display: inline-flex; width: 100%; min-width: 0; }
-  .auto-complete.ant-select-customize { height: auto; min-height: var(--ant-select-height); padding: 0; }
-  .ant-select-content { flex: 1; min-width: 0; }
-  .auto-complete .ant-select-input { position: relative; inset: auto; width: 100%; min-width: 0; padding: 0; border: 0; outline: 0; background: transparent; color: inherit; font: inherit; line-height: inherit; opacity: 1; }
-  .ant-select-input::placeholder { color: var(--ant-color-text-placeholder); }
+  .auto-complete[data-ant-auto-complete-customize] { height: auto; min-height: var(--ant-native-select-height); padding: 0; }
+  [data-ant-auto-complete-content] { flex: 1; min-width: 0; }
+  .auto-complete [data-ant-auto-complete-input] { position: relative; inset: auto; width: 100%; min-width: 0; padding: 0; border: 0; outline: 0; background: transparent; color: inherit; font: inherit; line-height: inherit; opacity: 1; }
+  [data-ant-auto-complete-input]::placeholder { color: var(--ant-color-text-placeholder); }
   .auto-complete:focus-within { outline: 2px solid var(--ant-color-primary); outline-offset: 2px; }
-  .auto-complete.ant-select-source-theme:focus-within { outline: 0; outline-offset: 0; }
-  .auto-complete.ant-select-source-theme.ant-select-customize { min-height: 0; }
+  .auto-complete[data-ant-auto-complete-source-theme]:focus-within { outline: 0; outline-offset: 0; }
+  .auto-complete[data-ant-auto-complete-source-theme][data-ant-auto-complete-customize] { min-height: 0; }
   .clear { display: flex; flex: none; padding: 0; border: 0; background: none; color: var(--ant-color-text-tertiary); cursor: pointer; }
   .clear:focus-visible { outline: 2px solid var(--ant-color-primary); }
-  .ant-select-source-theme .clear { display: inline-block; color: var(--ant-color-text-quaternary); }
-  .ant-select-source-theme .clear:hover { color: var(--ant-color-icon); }
-  .ant-select-source-theme .clear:focus-visible { opacity: 1; }
+  [data-ant-auto-complete-source-theme] .clear { display: inline-block; color: var(--ant-color-text-quaternary); }
+  [data-ant-auto-complete-source-theme] .clear:hover { color: var(--ant-color-icon); }
+  [data-ant-auto-complete-source-theme] .clear:focus-visible { opacity: 1; }
   .popup { position: fixed; margin: 0; border: 0; overflow-y: auto; }
-  .ant-select-item { display: block; width: 100%; border: 0; background: transparent; color: inherit; font: inherit; text-align: start; }
+  [data-ant-auto-complete-item] { display: block; width: 100%; border: 0; background: transparent; color: inherit; font: inherit; text-align: start; }
   /* Options повторяют flex column rc-select, пустая выдача остаётся обычным блоком. */
-  .popup.ant-select-source-popup:not([hidden]) { display: flex; flex-direction: column; }
-  .ant-select-source-popup .ant-select-item { flex: none; font-size: var(--ant-select-option-font-size); line-height: var(--ant-select-option-line-height); font-weight: 400; color: var(--ant-color-text); }
-  .ant-select-source-popup .ant-select-item-option { display: flex; }
-  .ant-select-source-popup .ant-select-item-group { font-size: var(--ant-font-size-sm); color: var(--ant-color-text-description); }
-  .ant-select-source-popup .ant-select-item-option-disabled { color: var(--ant-color-text-disabled); }
+  .popup[data-ant-auto-complete-source-popup]:not([hidden]) { display: flex; flex-direction: column; }
+  [data-ant-auto-complete-source-popup] [data-ant-auto-complete-item] { flex: none; font-size: var(--ant-select-option-font-size); line-height: var(--ant-select-option-line-height); font-weight: 400; color: var(--ant-color-text); }
+  [data-ant-auto-complete-source-popup] [data-ant-auto-complete-item-option] { display: flex; }
+  [data-ant-auto-complete-source-popup] [data-ant-auto-complete-item-group] { font-size: var(--ant-font-size-sm); color: var(--ant-color-text-description); }
+  [data-ant-auto-complete-source-popup] [data-ant-auto-complete-item-option-disabled] { color: var(--ant-color-text-disabled); }
 </style>
 
 <svelte:document onreset={handleReset} />
-<div bind:this={root} dir={config.direction}
+{#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`auto-complete-prefix:${prefix}:${rootPrefix}`} />{/if}<div data-ant-select-prefix={prefix} data-ant-select-root-prefix={rootPrefix}
+  data-ant-auto-complete-source-theme={Boolean(componentTheme.className) || undefined}
+  data-ant-auto-complete-customize={Boolean(children) || undefined}
+  style:--ant-native-select-height={`var(--${privateNamespace}-select-height)`}
+  bind:this={root} dir={config.direction}
   style={[componentTheme.style, style].filter(Boolean).join(';') || undefined}
   class={[
-      'auto-complete ant-select ant-select-css-var ant-select-single ant-select-auto-complete ant-select-show-search',
+      `auto-complete ${prefix} ant-select-css-var ${prefix}-single ${prefix}-auto-complete ${prefix}-show-search`,
       componentTheme.className,
-      componentTheme.className && 'ant-select-source-theme',
-      componentTheme.className && showClear && 'ant-select-allow-clear',
-      componentTheme.className && config.direction === 'rtl' && 'ant-select-rtl',
-      `ant-select-${appearance}`,
-      resolvedSize === 'large' && 'ant-select-lg',
-      resolvedSize === 'small' && 'ant-select-sm',
-      focused && 'ant-select-focused',
-      visible && 'ant-select-open',
-      blocked && 'ant-select-disabled',
-      resolvedStatus && `ant-select-status-${resolvedStatus}`,
-      children && 'ant-select-customize',
-      compactClasses('ant-select', config.direction, compact),
+      componentTheme.className && `${prefix}-source-theme`,
+      componentTheme.className && showClear && `${prefix}-allow-clear`,
+      componentTheme.className && config.direction === 'rtl' && `${prefix}-rtl`,
+      `${prefix}-${appearance}`,
+      resolvedSize === 'large' && `${prefix}-lg`,
+      resolvedSize === 'small' && `${prefix}-sm`,
+      focused && `${prefix}-focused`,
+      visible && `${prefix}-open`,
+      blocked && `${prefix}-disabled`,
+      resolvedStatus && `${prefix}-status-${resolvedStatus}`,
+      children && `${prefix}-customize`,
+      compactClasses(prefix, config.direction, compact),
       className,
       rootClassName
     ]}>
-  <div class="ant-select-content">
-    {#if children}{@render children(input)}{:else}<input {...attributes} {...input.attributes} use:register class="ant-select-input" type="text" />{/if}
+  <div data-ant-auto-complete-content class={`${prefix}-content`}>
+    {#if children}{@render children(input)}{:else}<input {...attributes} {...input.attributes} use:register data-ant-auto-complete-input class={`${prefix}-input`} type="text" />{/if}
   </div>
-  {#if showClear}<button type="button" class={['clear', componentTheme.className && 'ant-select-clear']} aria-label={config.locale.clearText} onpointerdown={event => event.preventDefault()} onclick={clear}>
+  {#if showClear}<button type="button" class={['clear', componentTheme.className && `${prefix}-clear`]} aria-label={config.locale.clearText} onpointerdown={event => event.preventDefault()} onclick={clear}>
     {#if typeof allowClear === 'object' && allowClear.clearIcon}{@render allowClear.clearIcon()}{:else}<Icon name="close" />{/if}
   </button>{/if}
   {#if mounted}
-    <div bind:this={popup} popover="manual" hidden={!visible || !shown} id={`${controlId}-list`} role="listbox"
-      class={['popup ant-select-dropdown ant-select-css-var', componentTheme.className,
-          componentTheme.className && entries.length > 0 && 'ant-select-source-popup',
-          componentTheme.className && config.direction === 'rtl' && 'ant-select-dropdown-rtl',
+    <div data-ant-select-prefix={prefix} data-ant-select-root-prefix={rootPrefix}
+      data-ant-auto-complete-source-popup={Boolean(componentTheme.className) && entries.length > 0 || undefined}
+      bind:this={popup} popover="manual" hidden={!visible || !shown} id={`${controlId}-list`} role="listbox"
+      class={[`popup ${prefix}-dropdown ant-select-css-var`, componentTheme.className,
+          componentTheme.className && entries.length > 0 && `${prefix}-source-popup`,
+          componentTheme.className && config.direction === 'rtl' && `${prefix}-dropdown-rtl`,
           classNames?.popup?.root]} dir={config.direction}
       {@attach node => connectComponentTheme(node, componentTheme.style)}
       {@attach portal}
@@ -421,15 +434,17 @@
           ?? attributes.placeholder
           ?? config.locale.searchText}>
       {#each entries as entry, index (entry.key)}
-        {#if entry.group}<div class="ant-select-item ant-select-item-group">{#if typeof entry.option.label === 'function'}{@render entry.option.label()}{:else}{entry.option.label ?? ''}{/if}</div>
+        {#if entry.group}<div data-ant-auto-complete-item data-ant-auto-complete-item-group class={`${prefix}-item ${prefix}-item-group`}>{#if typeof entry.option.label === 'function'}{@render entry.option.label()}{:else}{entry.option.label ?? ''}{/if}</div>
         {:else if 'value' in entry.option}
-          <button type="button" role="option" tabindex="-1" id={`${controlId}-option-${index}`} disabled={entry.option.disabled}
+          <button data-ant-auto-complete-item data-ant-auto-complete-item-option
+            data-ant-auto-complete-item-option-disabled={entry.option.disabled || undefined}
+            type="button" role="option" tabindex="-1" id={`${controlId}-option-${index}`} disabled={entry.option.disabled}
             aria-selected={entry.option.value.toLowerCase() === text.toLowerCase()} aria-disabled={entry.option.disabled || undefined}
             class={[
-                'ant-select-item ant-select-item-option',
-                componentTheme.className && entry.grouped && 'ant-select-item-option-grouped',
-                index === active && 'ant-select-item-option-active',
-                entry.option.disabled && 'ant-select-item-option-disabled',
+                `${prefix}-item ${prefix}-item-option`,
+                componentTheme.className && entry.grouped && `${prefix}-item-option-grouped`,
+                index === active && `${prefix}-item-option-active`,
+                entry.option.disabled && `${prefix}-item-option-disabled`,
                 entry.option.class
               ]}
             style={entry.option.style} title={entry.option.title
@@ -446,12 +461,12 @@
                 if (option)
                   choose(option);
               }}>
-            <span class={componentTheme.className ? 'ant-select-item-option-content' : undefined}>
+            <span class={componentTheme.className ? `${prefix}-item-option-content` : undefined}>
               {#if typeof entry.option.label === 'function'}{@render entry.option.label()}{:else}{entry.option.label ?? entry.option.value}{/if}
             </span>
           </button>
         {/if}
-      {:else}<div class="ant-select-item-empty">{#if typeof notFoundContent === 'function'}{@render notFoundContent()}{:else}{notFoundContent ?? ''}{/if}</div>{/each}
+      {:else}<div class={`${prefix}-item-empty`}>{#if typeof notFoundContent === 'function'}{@render notFoundContent()}{:else}{notFoundContent ?? ''}{/if}</div>{/each}
     </div>
   {/if}
 </div>

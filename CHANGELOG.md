@@ -9,6 +9,10 @@
 
 ### Added
 
+- AutoComplete поддерживает local/shared prefixCls через Select CSS, сохраняя
+  отдельный namespace вложенного Input/TextArea. Editor, refs, IDs, query/selection,
+  focus, FormData и открытый popup сохраняются при обновлении префиксов.
+
 - Select поддерживает local/shared prefixCls для control/tags/popup и независимый
   namespace служебных CSS variables. Сохранены native forms/reset, compact geometry,
   поиск, text selection, focus и открытый popup, включая внешний container.
