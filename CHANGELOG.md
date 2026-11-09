@@ -9,6 +9,10 @@
 
 ### Added
 
+- TreeSelect поддерживает local/shared prefixCls для Select control/tags и popup,
+  сохраняя общий Native Tree adapter, query/selection/focus, refs/IDs и форму.
+  Несогласованность локальных tree classes/style hooks upstream записана отдельно.
+
 - AutoComplete поддерживает local/shared prefixCls через Select CSS, сохраняя
   отдельный namespace вложенного Input/TextArea. Editor, refs, IDs, query/selection,
   focus, FormData и открытый popup сохраняются при обновлении префиксов.

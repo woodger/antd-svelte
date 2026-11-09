@@ -277,6 +277,11 @@ compact, включая hover:none; slide-up motion selectors исключены
 Native wrapper/option buttons, compact bridge, forms/reset и popup lifecycle сохранены.
 AutoComplete использует этот же template и отдельный общий Input namespace для
 custom controls; свой upstream style hook у него отсутствует.
+Рецепт tree-select-prefix выводит те же 92 правила dropdown/tree/checkbox/RTL,
+что tree-select; внутренние tree selectors сохраняют существующий Native adapter.
+Select control и TreeSelect dropdown имеют отдельные scopes и общий private
+namespace variables. Raw local tree style omission отделён от public counterpart
+без local override; сравнение tree/nodes не заявляет одинаковые классы.
 Рецепт layout-prefix выводит 35 flat rules Layout/Sider; runtime выбирает свою
 группу, сохраняет Menu namespace и ограничивает defaults/state selectors корнем.
 Тот же template используется для Header/Content/Footer: выбираются selectors

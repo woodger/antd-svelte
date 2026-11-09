@@ -6342,6 +6342,25 @@ tag/popup render hooks, treeExpandAction, остальные semantic slots/conf
 и исходные motion API ещё не перенесены. Deprecated React extras исключены.
 Класс popup задаётся через classNames.popup.root; popupClassName удалён.
 
+`prefixCls` задаёт локальные классы Select control, tags и TreeSelect popup;
+пустое значение наследует `ConfigProvider.prefixCls`. Служебные Select variables
+следуют общему namespace, canonical token names сохраняются. Общий Native Tree
+адаптер с внутренними `ant-tree` classes и generated IDs остаётся прежним.
+Смена префикса сохраняет поиск, выделение, refs/focus, значения формы и открытое дерево.
+[26 UMD-конфигураций](tests/browser/fixtures/ant-design-tree-select-prefix-reference.json)
+в обычной, вложенной и reset областях проверяются в
+[browser](tests/browser/tree-select-prefix.spec.ts) и
+[SSR](tests/package/tree-select-prefix.ssr.test.ts).
+
+У Ant Design 6.6.8 локальный prefixCls выявил несогласованность style hook и
+вложенного дерева: при `prefixCls="choices"` стили адресуют `choices`, а rc-tree-select
+создаёт `choices-tree`. В записанном случае пять строк занимают 110px вместо 140px
+и теряют фон. Raw measurements сохранены отдельно от public counterpart без
+локального override при том же ConfigProvider. Только tree/nodes сравниваются
+с этим counterpart; control/popup остаются raw. Его классы отличаются, поэтому
+сверка подтверждает оформление, а не одинаковую разметку. Svelte сохраняет
+согласованный Native Tree adapter и оформление при локальном префиксе.
+
 ## Tree
 
 Tree переносит Ant Design 6.6.8 и @rc-component/tree 1.4.0. Чистые engines отвечают

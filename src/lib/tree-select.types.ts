@@ -50,6 +50,8 @@ export interface TreeSelectProps<ValueType extends TreeSelectValue = TreeSelectV
   HTMLInputAttributes,
   'value' | 'defaultValue' | 'size' | 'type' | 'children' | 'onchange' | 'oninput'
 > {
+  /** Локальный namespace Select/TreeSelect; пустая строка наследует ConfigProvider. */
+  prefixCls?: string;
   treeData?: readonly TreeSelectNode[];
   /** Управляемое значение; владелец принимает результат через onChange. */
   value?: ValueType;

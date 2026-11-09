@@ -3168,5 +3168,29 @@
     "keyframes": [],
     "header": "/* Ant Design 6.6.8 — MIT; см. LICENSE.ant-design.\n * Select prefix template: single/multiple/tags, variants, options и compact.\n * Owner selectors и private variable namespace независимы от canonical tokens.\n * Motion selectors исключены; hover:none at-rule сохраняется.\n * https://registry.npmjs.org/antd/-/antd-6.6.8.tgz\n * SHA-256: 8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa\n */",
     "format": "module"
+  },
+  {
+    "id": "tree-select-prefix",
+    "output": "src/lib/vendor/tree-select-prefix.css.js",
+    "expectedRules": 92,
+    "include": [
+      "^(?:\\.css-var-_R_0_)?\\.ant-tree-select"
+    ],
+    "exclude": [
+      "\\.ant-motion-collapse"
+    ],
+    "replacements": [
+      {
+        "pattern": "\\.css-var-_R_0_\\.ant-tree-select-css-var",
+        "replacement": ".ant-tree-select-css-var"
+      },
+      {
+        "pattern": "\\.ant-select-tree(?!-select)",
+        "replacement": ".ant-tree"
+      }
+    ],
+    "keyframes": [],
+    "header": "/* Ant Design 6.6.8 — MIT; vendor/LICENSE.ant-design.\n * TreeSelect: dropdown/checkbox/RTL; .ant-select-tree заменён на общий .ant-tree.\n * SHA-256: 8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa\n */",
+    "format": "module"
   }
 ]
