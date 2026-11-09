@@ -6,6 +6,8 @@ export type DrawerSize = 'default' | 'large' | number | (string & {});
 
 /** Модальная выдвижная панель с управлением open, фокусом и жизненным циклом children. */
 export interface DrawerProps {
+  /** Локальный CSS-префикс Drawer и его частей; пустая строка наследует ConfigProvider. */
+  prefixCls?: string;
   /** Поддерживает bind:open. */
   open?: boolean;
   title?: string | Snippet;

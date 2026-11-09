@@ -3815,6 +3815,14 @@ aria-label заменяет автоматически созданную свя
 Aria-describedby связывает внешнее описание. Id/class/style относятся к
 корневому dialog; дополнительные semantic classNames/styles не поддерживаются.
 
+PrefixCls задаёт локальный namespace Drawer, его mask/panel/header/body/footer.
+Пустая строка наследует ConfigProvider.prefixCls. 32 исходных CSS-правила без
+motion/pure/inline/resizable/skeleton изолированы по корню; canonical variables
+и приватные native dialog/size markers сохраняются. Button в extra/footer
+использует собственный общий prefix. Смена namespace сохраняет открытый dialog,
+panel/input DOM, draft/focus/selection, IDs, scroll lock и возврат фокуса.
+Внутренние motion/backdrop механизмы используют атрибуты, не BEM-классы.
+
 Placement — физическая сторона top/right/bottom/left, по умолчанию right.
 RTL меняет направление содержимого, сохраняя выбранную сторону. Size задаёт
 ширину для left/right и высоту для top/bottom: default=378px, large=736px,

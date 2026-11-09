@@ -9,6 +9,10 @@
 
 ### Added
 
+- Drawer поддерживает local/shared prefixCls для panel/mask/placements и частей
+  содержимого. Native dialog/motion/backdrop, draft/focus/selection, IDs и scroll
+  сохраняются; Button namespace и canonical tokens независимы.
+
 - Pagination поддерживает local/shared prefixCls со стилями и private metric
   namespaces. Native buttons/active colors/wireframe, отдельный Select, bindings,
   current/active DOM и jumper draft/focus/selection сохраняются.

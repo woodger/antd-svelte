@@ -4,8 +4,8 @@ import type { DrawerPlacement } from './drawer.types';
 export function createDrawerDialog(dialog: HTMLDialogElement, onClosing: (
   closing: boolean
 ) => void) {
-  const panel = dialog.querySelector<HTMLElement>('.ant-drawer-content-wrapper')!;
-  const mask = dialog.querySelector<HTMLElement>('.ant-drawer-mask')!;
+  const panel = dialog.querySelector<HTMLElement>('[data-ant-drawer-content-wrapper]')!;
+  const mask = dialog.querySelector<HTMLElement>('[data-ant-drawer-mask]')!;
   const view = dialog.ownerDocument.defaultView!;
   const reducedMotion = view.matchMedia('(prefers-reduced-motion: reduce)');
   let animations: Animation[] = [];

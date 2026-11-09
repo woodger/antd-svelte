@@ -238,6 +238,10 @@ owner omission отделён от public per-divider prefixCls counterparts.
 Runtime разделяет local classes, global actual metrics и canonical tokens;
 native buttons/active colors/wireframe, media и собственный Select namespace сохранены.
 Raw button font отделён от public itemRender counterparts.
+Рецепт drawer-prefix выводит 32 правила panel/mask/header/body/footer без
+motion/pure/inline/resizable/skeleton. Runtime меняет local classes, сохраняет
+canonical tokens и native dialog/size markers. WAA panel/mask и backdrop dismissal
+используют устойчивые атрибуты, Button namespace независим.
 Рецепт layout-prefix выводит 35 flat rules Layout/Sider; runtime выбирает свою
 группу, сохраняет Menu namespace и ограничивает defaults/state selectors корнем.
 Тот же template используется для Header/Content/Footer: выбираются selectors
