@@ -9,7 +9,7 @@ export function snapshotUploadLinkProps() {
       tag: name.tagName,
       text: name.textContent,
       class: name.getAttribute('class')?.split(/\s+/)
-        .filter(value => !value.startsWith('svelte-') && !/^s--[\w-]+$/.test(value))
+        .filter(value => !value.startsWith('svelte-') && !/^s-[\w-]{12}$/.test(value))
         .join(' ') ?? null,
       title: name.getAttribute('title'),
       href: name.getAttribute('href'),
