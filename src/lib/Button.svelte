@@ -12,6 +12,8 @@
   import { useForm } from './form-context';
   import { buttonAppearance, buttonHasContent, buttonLoading, buttonText } from './button.engine';
   import { connectButtonText } from './button.dom';
+  import { getButtonPrefixCss } from './button-prefix.engine';
+  import ThemeScopeStyle from './ThemeScopeStyle.svelte';
   import Icon from './Icon.svelte';
   import type { ButtonColor, ButtonContent, ButtonElementProps } from './button.types';
   let {
@@ -43,6 +45,7 @@
     styles,
     class: className = '',
     rootClassName = '',
+    prefixCls: customizePrefixCls,
     style,
     nativeElement = $bindable(),
     _skipSemantic,
@@ -57,8 +60,11 @@
   const wave = useWave('Button', () => innerLoading);
   const compact = useCompact();
   const form = useForm();
+  let prefixCls = $derived(config.getPrefixCls('btn', customizePrefixCls));
+  let rootPrefixCls = $derived(config.getPrefixCls());
+  let prefixCss = $derived(getButtonPrefixCss(prefixCls, rootPrefixCls));
   let resolvedSize = $derived(size ?? compact?.size ?? config.componentSize);
-  let compactItemClasses = $derived(compactClasses('ant-btn', config.direction, compact));
+  let compactItemClasses = $derived(compactClasses(prefixCls, config.direction, compact));
   let appearance = $derived(buttonAppearance(type, danger, color, variant, ghost, config.button));
   let resolvedShape = $derived(shape || config.button?.shape || 'default');
   let blocked = $derived(disabled ?? form?.disabled ?? config.componentDisabled);
@@ -110,6 +116,7 @@
       styles,
       class: className,
       rootClassName,
+      prefixCls: customizePrefixCls,
       style,
       onclick,
       onClick
@@ -135,26 +142,27 @@
   let slots = $derived(typeof styles === 'function' ? styles(info) ?? {} : styles ?? {});
   let rootClasses = $derived(
     [
-      'ant-btn',
+      prefixCls,
+      prefixCss && 'ant-btn-css-var',
       componentTheme.className,
-      `ant-btn-${type || 'default'}`,
-      `ant-btn-color-${appearance.color === 'danger' ? 'dangerous' : appearance.color}`,
-      `ant-btn-variant-${appearance.variant}`,
-      resolvedSize === 'large' && 'ant-btn-lg',
-      resolvedSize === 'small' && 'ant-btn-sm',
-      innerLoading && 'ant-btn-loading',
-      danger && 'ant-btn-dangerous',
-      block && 'ant-btn-block',
-      resolvedShape !== 'default' && resolvedShape !== 'square' && `ant-btn-${resolvedShape}`,
-      !children && children !== 0 && Boolean(innerLoading || icon) && 'ant-btn-icon-only',
+      `${prefixCls}-${type || 'default'}`,
+      `${prefixCls}-color-${appearance.color === 'danger' ? 'dangerous' : appearance.color}`,
+      `${prefixCls}-variant-${appearance.variant}`,
+      resolvedSize === 'large' && `${prefixCls}-lg`,
+      resolvedSize === 'small' && `${prefixCls}-sm`,
+      innerLoading && `${prefixCls}-loading`,
+      danger && `${prefixCls}-dangerous`,
+      block && `${prefixCls}-block`,
+      resolvedShape !== 'default' && resolvedShape !== 'square' && `${prefixCls}-${resolvedShape}`,
+      !children && children !== 0 && Boolean(innerLoading || icon) && `${prefixCls}-icon-only`,
       ghost
       && appearance.variant !== 'text'
       && appearance.variant !== 'link'
-      && 'ant-btn-background-ghost',
-      twoCN && insert && !innerLoading && 'ant-btn-two-chinese-chars',
-      config.direction === 'rtl' && 'ant-btn-rtl',
-      placement === 'end' && 'ant-btn-icon-end',
-      href !== undefined && blocked && 'ant-btn-disabled',
+      && `${prefixCls}-background-ghost`,
+      twoCN && insert && !innerLoading && `${prefixCls}-two-chinese-chars`,
+      config.direction === 'rtl' && `${prefixCls}-rtl`,
+      placement === 'end' && `${prefixCls}-icon-end`,
+      href !== undefined && blocked && `${prefixCls}-disabled`,
       compactItemClasses,
       className,
       rootClassName,
@@ -211,10 +219,16 @@
   }
 </script>
 
+{#if prefixCss}
+  <ThemeScopeStyle css={prefixCss} scope={`button-prefix:${prefixCls}:${rootPrefixCls}`} />
+{/if}
 {#snippet value(node: ButtonContent, spacing = false)}
   {#if typeof node === 'function'}{@render node()}{:else if node !== true && node !== false}{typeof node === 'string' ? buttonText(node, spacing) : node ?? ''}{/if}
 {/snippet}
 <svelte:element this={href !== undefined ? 'a' : 'button'} {...attributes} bind:this={nativeElement}
+  data-ant-button-root
+  data-ant-button-prefix={prefixCss ? prefixCls : undefined}
+  data-ant-button-global={prefixCss ? rootPrefixCls : undefined}
   {@attach href === undefined && appearance.variant !== 'text' && appearance.variant !== 'link'
     ? wave : undefined}
   type={href === undefined ? htmlType : undefined} href={href !== undefined && !blocked ? href : undefined} {target} {rel} {download} {hreflang} {referrerpolicy}
@@ -222,8 +236,8 @@
   tabindex={href !== undefined ? blocked ? -1 : 0 : attributes.tabindex} class={rootClasses} style={rootStyle} onclick={click}>
   {#if innerLoading || icon}
     <span class={[
-        'ant-btn-icon',
-        innerLoading && !loadingIcon && 'ant-btn-loading-icon',
+        `${prefixCls}-icon`,
+        innerLoading && !loadingIcon && `${prefixCls}-loading-icon`,
         contextClasses.icon,
         classes.icon
       ]} style={[contextStyles.icon, slots.icon].filter(Boolean).join(';')}>

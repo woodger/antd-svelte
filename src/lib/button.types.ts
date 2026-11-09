@@ -67,6 +67,8 @@ export interface ButtonProps extends Omit<
   styles?: ButtonSlots | ((info: { props: ButtonSemanticProps; }) => ButtonSlots | undefined);
   class?: string;
   rootClassName?: string;
+  /** Локальный префикс классов; по умолчанию наследует ConfigProvider.prefixCls. */
+  prefixCls?: string;
   style?: HTMLButtonAttributes['style'];
   /** Нативный ref доступен после mount и очищается при unmount. */
   nativeElement?: HTMLButtonElement | HTMLAnchorElement;

@@ -15,7 +15,7 @@ Candidate означает запись каталога, для которой 
 
 | Семейство | Категория | Scope | Экспорты Svelte | Аудит v1 | Известные пробелы |
 | --- | --- | --- | --- | --- | --- |
-| [Button](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/button) | general | target | Button | Согласованный v1 покрыт | Автопробел для двух китайских символов (partial); Source Wave, loading icon enter/leave и prefixCls (partial) |
+| [Button](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/button) | general | target | Button | Согласованный v1 покрыт | Автопробел для двух китайских символов (partial); Source Wave и loading icon enter/leave (partial) |
 | [FloatButton](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/float-button) | general | target | FloatButton, FloatButtonGroup, FloatButtonBackTop | Согласованный v1 покрыт | Произвольный prefixCls и общий z-index context (missing) |
 | [Icon](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/icon) | general | candidate | — | Нет публичной реализации | Подробный аудит согласованного API v1 (unreviewed) |
 | [Typography](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/typography) | general | target | Typography, TypographyText, TypographyTitle, TypographyParagraph, TypographyLink | Согласованный v1 покрыт | Границы ReactNode и непрозрачных Svelte snippets (partial); Расширенные delegated Tooltip props (missing); Исходные stale action classes при смене prefix (partial) |

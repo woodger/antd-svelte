@@ -141,6 +141,10 @@ percentPosition; первый сохраняет один keyframe, второй
 defaults ограничены корнем, shared marker и CSS variable names сохраняются.
 Рецепт divider-prefix выводит аналогичный data module из 27 правил Divider;
 defaults ограничены корнем, интеграция ColorPicker исключена.
+Рецепт button-prefix выводит 113 правил Button, включая варианты, размеры,
+loading и Compact. Deprecated ButtonGroup и token declarations исключены;
+component defaults имеют нулевую specificity, чтобы сохранить legacy theme bridge.
+Runtime разделяет local classes и общий namespace служебных переменных.
 Рецепт segmented-prefix выводит data module из 38 правил Segmented для локального
 prefixCls; runtime сохраняет CSS variables/marker и ограничивает defaults корнем.
 Рецепт flex-prefix выводит data module из 32 правил Flex без typography reset;

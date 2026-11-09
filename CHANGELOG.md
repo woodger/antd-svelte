@@ -9,6 +9,10 @@
 
 ### Added
 
+- Button поддерживает local/shared prefixCls для вариантов, размеров, shapes,
+  icon/loading и Compact. Общий namespace служебных variables независим от local
+  class; темы, приоритет стилей, DOM/ref, focus и native form actions сохранены.
+
 - Card/Grid/Meta поддерживает local/shared prefixCls и наследование от владельца.
   Typography/Tabs namespaces независимы; direct Grid detection, DOM/ref, active tab
   и draft/selection/focus/FormData сохранены. Source пропуск child prefix и shared

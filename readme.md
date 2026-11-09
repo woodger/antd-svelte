@@ -269,13 +269,22 @@ Svelte Snippet непрозрачен для SSR; после hydration пров�
 ASCII-пробела, в отличие от scalar children. Изменения текста наблюдаются с cleanup.
 Эта адаптация явно учитывается как partial coverage в реестре.
 
-Enter/leave анимация loading icon и prefixCls пока отсутствуют; прежний spinner
-сохранён. Source component tokens и [Wave](./docs/reference/wave.md) подключены.
+Button поддерживает local/shared prefixCls для root, icon/loading, вариантов,
+размеров, shapes и Compact. Непустой локальный prefix имеет приоритет; пустой
+или undefined наследует ConfigProvider.prefixCls. Служебные переменные вариантов
+и Compact используют общий namespace независимо от local class и cssVar.prefix;
+component tokens и legacy themes сохраняют прежний namespace и приоритет стилей.
+Смена prefix сохраняет DOM/ref, focus, draft/selection и native submit.
+
+Enter/leave анимация loading icon пока отсутствует; прежний spinner сохранён.
+Source component tokens и [Wave](./docs/reference/wave.md) подключены.
 Общий механизм тем,
 RTL, Form disabled и Compact остаётся прежним. Фикстура — ?fixture=button;
 расширенный пример — /ant-design#buttons. Unit/SSR/Chromium проверяют приоритеты,
-формы/ссылки, delay/cancel, CJK, nested config, Group/Compact и совместимость
-с Popconfirm. CSS Button уже входит в vendor/antd.css и не дублируется.
+формы/ссылки, delay/cancel, CJK, nested config, Compact и совместимость
+с Popconfirm. Фикстура ?fixture=button-prefix сравнивает оформление с официальным
+UMD и сохраняемое состояние. Default CSS Button входит в vendor/antd.css;
+button-prefix выводит отдельный template без deprecated ButtonGroup.
 
 ## Divider
 
