@@ -11367,7 +11367,13 @@
         "tests/browser/fixtures/UploadDirectoryFixtures.svelte",
         "tests/browser/fixtures/upload-directory-transfer.dom.ts",
         "tests/browser/fixtures/ant-design-upload-directory-reference.json",
-        "tests/package/upload-directory.ssr.test.ts"
+        "tests/package/upload-directory.ssr.test.ts",
+        "tests/browser/upload-icon-render.spec.ts",
+        "tests/browser/upload-icon-render-metrics.ts",
+        "tests/browser/fixtures/UploadIconRenderScope.svelte",
+        "tests/browser/fixtures/UploadIconRenderFixtures.svelte",
+        "tests/browser/fixtures/ant-design-upload-icon-render-reference.json",
+        "tests/package/upload-icon-render.ssr.test.ts"
       ],
       "features": [
         {
@@ -11553,6 +11559,25 @@
             "readme.md"
           ],
           "note": "Rc-upload 1.1.1 traverseFileTree.readFile передаёт FileSystemFileEntry.file только success callback. Контролируемая ошибка оставляет Promise pending; Raw Source не вызывает beforeUpload/onChange и не читает следующий good.txt. Native передаёт error callback, пропускает нечитаемый файл и продолжает. Metadata оставшихся файлов сверяется с отдельным public Source sample без bad entry, после всех raw cases. Ошибки directory reader сохраняют уже прочитанные порции, как исходник."
+        },
+        {
+          "id": "file-icon-render",
+          "title": "IconRender с контекстом file/listType",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Upload.svelte",
+            "src/lib/UploadListItem.svelte",
+            "src/lib/upload.types.ts",
+            "tests/browser/upload-icon-render.spec.ts",
+            "tests/browser/upload-icon-render-metrics.ts",
+            "tests/browser/fixtures/UploadIconRenderScope.svelte",
+            "tests/browser/fixtures/UploadIconRenderFixtures.svelte",
+            "tests/browser/fixtures/ant-design-upload-icon-render-reference.json",
+            "tests/package/upload-icon-render.ssr.test.ts",
+            "readme.md"
+          ],
+          "note": "Snippet заменяет видимую иконку text/picture/card/circle во всех статусах; пустое содержимое не выбирает default, zero отображается, готовая thumbnail сохраняет image. Без prop действуют прежние icons/locale defaults. 25 raw UMD cases и четыре live transitions фиксируют видимое содержимое; React render invocation side effects не воспроизводятся Snippet. Updates сохраняют item/filename/file-input DOM, внешний draft/focus/selection; SSR не вызывает browser timers."
         }
       ]
     },

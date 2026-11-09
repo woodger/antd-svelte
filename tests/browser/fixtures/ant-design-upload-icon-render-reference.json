@@ -1,0 +1,445 @@
+{
+  "reference": {
+    "version": "6.6.8",
+    "revision": "984592267de88fbf9cdaecc96a56629e721c709d",
+    "archiveSha256": "8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa",
+    "renderer": "unmodified official UMD with React 18.3.1",
+    "source": "UploadList.internalIconRender and ListItem thumbnail/icon slots",
+    "observation": "25 raw cases cover all list types, statuses, absent/empty/zero/custom iconRender and actual image precedence; four live renderer updates. Renderer receives file and effective listType. No Source modifications; snapshot covers visible icon content rather than React render invocation side effects."
+  },
+  "cases": [
+    {
+      "sample": {
+        "id": "text:done",
+        "listType": "text",
+        "status": "done"
+      },
+      "result": {
+        "custom": {
+          "name": "report.txt",
+          "listType": "text",
+          "status": "done",
+          "text": "report.txt:text:done"
+        },
+        "holderText": "report.txt:text:done",
+        "svg": 0,
+        "images": 0
+      }
+    },
+    {
+      "sample": {
+        "id": "text:uploading",
+        "listType": "text",
+        "status": "uploading"
+      },
+      "result": {
+        "custom": {
+          "name": "report.txt",
+          "listType": "text",
+          "status": "uploading",
+          "text": "report.txt:text:uploading"
+        },
+        "holderText": "report.txt:text:uploading",
+        "svg": 0,
+        "images": 0
+      }
+    },
+    {
+      "sample": {
+        "id": "text:error",
+        "listType": "text",
+        "status": "error"
+      },
+      "result": {
+        "custom": {
+          "name": "report.txt",
+          "listType": "text",
+          "status": "error",
+          "text": "report.txt:text:error"
+        },
+        "holderText": "report.txt:text:error",
+        "svg": 0,
+        "images": 0
+      }
+    },
+    {
+      "sample": {
+        "id": "text:empty",
+        "listType": "text",
+        "mode": "empty"
+      },
+      "result": {
+        "custom": null,
+        "holderText": "",
+        "svg": 0,
+        "images": 0
+      }
+    },
+    {
+      "sample": {
+        "id": "text:zero",
+        "listType": "text",
+        "mode": "zero"
+      },
+      "result": {
+        "custom": null,
+        "holderText": "0",
+        "svg": 0,
+        "images": 0
+      }
+    },
+    {
+      "sample": {
+        "id": "text:default",
+        "listType": "text",
+        "mode": "default"
+      },
+      "result": {
+        "custom": null,
+        "holderText": "",
+        "svg": 1,
+        "images": 0
+      }
+    },
+    {
+      "sample": {
+        "id": "picture:done",
+        "listType": "picture",
+        "status": "done"
+      },
+      "result": {
+        "custom": {
+          "name": "report.txt",
+          "listType": "picture",
+          "status": "done",
+          "text": "report.txt:picture:done"
+        },
+        "holderText": "report.txt:picture:done",
+        "svg": 0,
+        "images": 0
+      }
+    },
+    {
+      "sample": {
+        "id": "picture:uploading",
+        "listType": "picture",
+        "status": "uploading"
+      },
+      "result": {
+        "custom": {
+          "name": "report.txt",
+          "listType": "picture",
+          "status": "uploading",
+          "text": "report.txt:picture:uploading"
+        },
+        "holderText": "report.txt:picture:uploading",
+        "svg": 0,
+        "images": 0
+      }
+    },
+    {
+      "sample": {
+        "id": "picture:error",
+        "listType": "picture",
+        "status": "error"
+      },
+      "result": {
+        "custom": {
+          "name": "report.txt",
+          "listType": "picture",
+          "status": "error",
+          "text": "report.txt:picture:error"
+        },
+        "holderText": "report.txt:picture:error",
+        "svg": 0,
+        "images": 0
+      }
+    },
+    {
+      "sample": {
+        "id": "picture:empty",
+        "listType": "picture",
+        "mode": "empty"
+      },
+      "result": {
+        "custom": null,
+        "holderText": "",
+        "svg": 0,
+        "images": 0
+      }
+    },
+    {
+      "sample": {
+        "id": "picture:zero",
+        "listType": "picture",
+        "mode": "zero"
+      },
+      "result": {
+        "custom": null,
+        "holderText": "0",
+        "svg": 0,
+        "images": 0
+      }
+    },
+    {
+      "sample": {
+        "id": "picture:default",
+        "listType": "picture",
+        "mode": "default"
+      },
+      "result": {
+        "custom": null,
+        "holderText": "",
+        "svg": 1,
+        "images": 0
+      }
+    },
+    {
+      "sample": {
+        "id": "picture-card:done",
+        "listType": "picture-card",
+        "status": "done"
+      },
+      "result": {
+        "custom": {
+          "name": "report.txt",
+          "listType": "picture-card",
+          "status": "done",
+          "text": "report.txt:picture-card:done"
+        },
+        "holderText": "report.txt:picture-card:done",
+        "svg": 0,
+        "images": 0
+      }
+    },
+    {
+      "sample": {
+        "id": "picture-card:uploading",
+        "listType": "picture-card",
+        "status": "uploading"
+      },
+      "result": {
+        "custom": {
+          "name": "report.txt",
+          "listType": "picture-card",
+          "status": "uploading",
+          "text": "report.txt:picture-card:uploading"
+        },
+        "holderText": "report.txt:picture-card:uploading",
+        "svg": 0,
+        "images": 0
+      }
+    },
+    {
+      "sample": {
+        "id": "picture-card:error",
+        "listType": "picture-card",
+        "status": "error"
+      },
+      "result": {
+        "custom": {
+          "name": "report.txt",
+          "listType": "picture-card",
+          "status": "error",
+          "text": "report.txt:picture-card:error"
+        },
+        "holderText": "report.txt:picture-card:error",
+        "svg": 0,
+        "images": 0
+      }
+    },
+    {
+      "sample": {
+        "id": "picture-card:empty",
+        "listType": "picture-card",
+        "mode": "empty"
+      },
+      "result": {
+        "custom": null,
+        "holderText": "",
+        "svg": 0,
+        "images": 0
+      }
+    },
+    {
+      "sample": {
+        "id": "picture-card:zero",
+        "listType": "picture-card",
+        "mode": "zero"
+      },
+      "result": {
+        "custom": null,
+        "holderText": "0",
+        "svg": 0,
+        "images": 0
+      }
+    },
+    {
+      "sample": {
+        "id": "picture-card:default",
+        "listType": "picture-card",
+        "mode": "default"
+      },
+      "result": {
+        "custom": null,
+        "holderText": "",
+        "svg": 1,
+        "images": 0
+      }
+    },
+    {
+      "sample": {
+        "id": "picture-circle:done",
+        "listType": "picture-circle",
+        "status": "done"
+      },
+      "result": {
+        "custom": {
+          "name": "report.txt",
+          "listType": "picture-circle",
+          "status": "done",
+          "text": "report.txt:picture-circle:done"
+        },
+        "holderText": "report.txt:picture-circle:done",
+        "svg": 0,
+        "images": 0
+      }
+    },
+    {
+      "sample": {
+        "id": "picture-circle:uploading",
+        "listType": "picture-circle",
+        "status": "uploading"
+      },
+      "result": {
+        "custom": {
+          "name": "report.txt",
+          "listType": "picture-circle",
+          "status": "uploading",
+          "text": "report.txt:picture-circle:uploading"
+        },
+        "holderText": "report.txt:picture-circle:uploading",
+        "svg": 0,
+        "images": 0
+      }
+    },
+    {
+      "sample": {
+        "id": "picture-circle:error",
+        "listType": "picture-circle",
+        "status": "error"
+      },
+      "result": {
+        "custom": {
+          "name": "report.txt",
+          "listType": "picture-circle",
+          "status": "error",
+          "text": "report.txt:picture-circle:error"
+        },
+        "holderText": "report.txt:picture-circle:error",
+        "svg": 0,
+        "images": 0
+      }
+    },
+    {
+      "sample": {
+        "id": "picture-circle:empty",
+        "listType": "picture-circle",
+        "mode": "empty"
+      },
+      "result": {
+        "custom": null,
+        "holderText": "",
+        "svg": 0,
+        "images": 0
+      }
+    },
+    {
+      "sample": {
+        "id": "picture-circle:zero",
+        "listType": "picture-circle",
+        "mode": "zero"
+      },
+      "result": {
+        "custom": null,
+        "holderText": "0",
+        "svg": 0,
+        "images": 0
+      }
+    },
+    {
+      "sample": {
+        "id": "picture-circle:default",
+        "listType": "picture-circle",
+        "mode": "default"
+      },
+      "result": {
+        "custom": null,
+        "holderText": "",
+        "svg": 1,
+        "images": 0
+      }
+    },
+    {
+      "sample": {
+        "id": "thumbnail",
+        "listType": "picture-card",
+        "thumbnail": true
+      },
+      "result": {
+        "custom": null,
+        "holderText": "",
+        "svg": 0,
+        "images": 1
+      }
+    }
+  ],
+  "transitions": [
+    {
+      "mode": "custom",
+      "result": {
+        "custom": {
+          "name": "report.txt",
+          "listType": "text",
+          "status": "done",
+          "text": "report.txt:text:done"
+        },
+        "holderText": "report.txt:text:done",
+        "svg": 0,
+        "images": 0
+      }
+    },
+    {
+      "mode": "empty",
+      "result": {
+        "custom": null,
+        "holderText": "",
+        "svg": 0,
+        "images": 0
+      }
+    },
+    {
+      "mode": "default",
+      "result": {
+        "custom": null,
+        "holderText": "",
+        "svg": 1,
+        "images": 0
+      }
+    },
+    {
+      "mode": "custom",
+      "result": {
+        "custom": {
+          "name": "report.txt",
+          "listType": "text",
+          "status": "done",
+          "text": "report.txt:text:done"
+        },
+        "holderText": "report.txt:text:done",
+        "svg": 0,
+        "images": 0
+      }
+    }
+  ]
+}

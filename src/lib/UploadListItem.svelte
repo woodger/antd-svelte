@@ -18,7 +18,8 @@
     onPreview,
     onDownload,
     previewFile = previewImage,
-    isImageUrl = uploadIsImage
+    isImageUrl = uploadIsImage,
+    iconRender
   }: {
     prefixCls: string;
     file: UploadFile<T>;
@@ -31,6 +32,7 @@
     onDownload?: UploadProps<T>['onDownload'];
     previewFile?: UploadProps<T>['previewFile'];
     isImageUrl?: UploadProps<T>['isImageUrl'];
+    iconRender?: UploadProps<T>['iconRender'];
   } = $props();
   let thumbnail = $state('');
   let showProgress = $state(false);
@@ -90,7 +92,7 @@
   button[data-ant-upload-item-name] { padding:0;border:0;background:transparent;color:inherit;font:inherit;text-align:inherit;cursor:pointer; }
   [data-ant-upload-item-name]:focus-visible { outline:2px solid var(--ant-color-primary); }
 </style>
-{#snippet fileIcon()}{#if file.status === 'uploading'}{#if card}{locale.uploading}{:else}<UploadIcon name="loading" />{/if}{:else}<UploadIcon name={picture ? image ? 'picture' : 'file' : 'paper-clip'} />{/if}{/snippet}
+{#snippet fileIcon()}{#if iconRender}{@render iconRender(file, listType)}{:else}{#if file.status === 'uploading'}{#if card}{locale.uploading}{:else}<UploadIcon name="loading" />{/if}{:else}<UploadIcon name={picture ? image ? 'picture' : 'file' : 'paper-clip'} />{/if}{/if}{/snippet}
 {#snippet downloadIcon()}<UploadIcon name="download" />{/snippet}
 {#snippet removeIcon()}<UploadIcon name="delete" />{/snippet}
 {#snippet actions()}

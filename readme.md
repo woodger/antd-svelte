@@ -6680,6 +6680,16 @@ Button, Progress и Tooltip получают свои component tokens. Style о
 сохранено в `zero-metrics.interactions` [эталона](./tests/browser/fixtures/ant-design-upload-theme-reference.json).
 Этот крайний случай требует отдельного решения.
 
+`iconRender` — snippet `(file, listType)`, заменяющий видимую иконку файла
+во всех list types и статусах. Пустой snippet сохраняет пустое содержимое;
+числовой 0 отображается. Готовая image thumbnail сохраняет приоритет над иконкой.
+Без prop работают прежние loading/file/picture/paper-clip defaults.
+Смена renderer сохраняет строку, filename и input DOM, а также фокус editor.
+[25 исходных вариантов](tests/browser/fixtures/ant-design-upload-icon-render-reference.json),
+[browser](tests/browser/upload-icon-render.spec.ts) и
+[SSR](tests/package/upload-icon-render.ssr.test.ts) проверяют видимое содержимое;
+Snippet не воспроизводит side effects вызова React render function.
+
 `directory=true` разрешает выбор папки и обход вложенных файлов при drop/paste.
 Input получает directory/webkitdirectory; multiple сохраняет своё значение,
 потому что режим папки обрабатывает все принятые файлы и при multiple=false.
@@ -6714,7 +6724,7 @@ webkitdirectory как boolean attribute; в браузере сохраняют
 [SSR](tests/package/upload-paste.ssr.test.ts) не создаёт browser listeners.
 
 Locale/upload из ConfigProvider, собственный locale, RU/EN, RTL и theme variables
-поддержаны. ItemRender/iconRender/custom action icons,
+поддержаны. ItemRender/custom action icons,
 progress customization, linkProps, полный ref/config/semantic API и исходные
 appear/exit/collapse анимации остаются отдельными пробелами реестра. Данный этап
 не заявляет полного покрытия React Upload.

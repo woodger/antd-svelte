@@ -9,6 +9,10 @@
 
 ### Added
 
+- Upload.iconRender заменяет иконку файла через snippet с file/listType, сохраняя
+  default icons, image thumbnail priority и пустое/нулевое содержимое renderer.
+  Изменения renderer сохраняют item/filename/input DOM и внешний focus/selection.
+
 - Upload/UploadDragger поддерживают directory: выбор папки, обход вложенных drop/paste
   в ширину, порционное чтение и webkitRelativePath. Нечитаемый файл пропускается
   без зависания остальных; callbacks после disable/unmount не публикуются.

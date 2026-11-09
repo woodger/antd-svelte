@@ -43,6 +43,7 @@
     type = 'select',
     previewFile,
     isImageUrl,
+    iconRender,
     children,
     id,
     class: className = '',
@@ -187,7 +188,7 @@
   {#if showUploadList}<div data-ant-upload-list data-ant-upload-list-type={listType} class={`${componentPrefix}-list ${componentPrefix}-list-${listType}`}>
     {#each files as file (file.uid)}<UploadListItem prefixCls={componentPrefix} {file} {listType} options={listOptions} locale={strings} disabled={blocked} onRemove={file => {
         void controller.remove(file);
-      }} {onPreview} {onDownload} {previewFile} {isImageUrl} />{/each}
+      }} {onPreview} {onDownload} {previewFile} {isImageUrl} {iconRender} />{/each}
     {#if card && children}{@render selectTrigger()}{/if}
   </div>{/if}
 {/snippet}

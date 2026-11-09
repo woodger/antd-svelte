@@ -124,6 +124,8 @@ export interface UploadProps<T = unknown> extends Omit<
   listType?: 'text' | 'picture' | 'picture-card' | 'picture-circle';
   previewFile?: (file: File | Blob) => PromiseLike<string>;
   isImageUrl?: (file: UploadFile<T>) => boolean;
+  /** Иконка файла с контекстом file/listType; готовая thumbnail по-прежнему показывает изображение. */
+  iconRender?: Snippet<[file: UploadFile<T>, listType: NonNullable<UploadProps<T>['listType']>]>;
   locale?: UploadLocale;
   type?: 'select' | 'drag';
   children?: Snippet;
