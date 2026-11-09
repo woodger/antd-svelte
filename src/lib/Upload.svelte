@@ -12,6 +12,7 @@
   import { useComponentTheme } from './theme-component.svelte';
   import { useForm } from './form-context';
   import UploadList from './UploadList.svelte';
+  import UploadSelectTrigger from './UploadSelectTrigger.svelte';
   let {
     nativeElement = $bindable(),
     inputElement = $bindable(),
@@ -255,16 +256,14 @@
     style={[sharedStyles.list, semanticStyles.list].filter(Boolean).join(';') || undefined}
     itemClass={[sharedClasses.item, semanticClasses.item].filter(Boolean).join(' ') || undefined}
     itemStyle={[sharedStyles.item, semanticStyles.item].filter(Boolean).join(';') || undefined}
-    appendAction={card && children ? selectTrigger : undefined} />{/if}
+    appendAction={type !== 'drag' && card ? listTrigger : undefined} />{/if}
 {/snippet}
-{#snippet selectTrigger()}
-  <div data-ant-upload-control class={[
-      `${componentPrefix} ${componentPrefix}-select`,
-      blocked && `${componentPrefix}-disabled`,
-      !children && `${componentPrefix}-hidden`,
-      sharedClasses.trigger,
-      semanticClasses.trigger
-    ]} style={triggerStyle}>{@render trigger()}</div>
+{#snippet listTrigger(appear: boolean)}{@render selectTrigger(true, appear)}{/snippet}
+{#snippet selectTrigger(animated = false, appear = false)}
+  <UploadSelectTrigger prefixCls={componentPrefix} disabled={blocked} visible={!!children}
+    {animated} motionAppear={appear}
+    class={[sharedClasses.trigger, semanticClasses.trigger].filter(Boolean).join(' ') || undefined}
+    style={triggerStyle} children={trigger} />
 {/snippet}
 {#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`upload-prefix:${componentPrefix}`} />{/if}<span data-ant-upload-root data-ant-upload-prefix={componentPrefix} bind:this={nativeElement} dir={config.direction} style={rootStyle} class={[
     `${componentPrefix}-wrapper ant-upload-css-var`,

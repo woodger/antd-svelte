@@ -38,7 +38,7 @@
     style?: string;
     itemClass?: string;
     itemStyle?: string;
-    appendAction?: Snippet;
+    appendAction?: Snippet<[motionAppear: boolean]>;
   } = $props();
   let items = $state.raw(untrack(() => getUploadMotionItems([], files)));
   let ready = $state(false);
@@ -65,5 +65,5 @@
       visible={item.status !== 'remove'} motionAppear={ready}
       onMotionEnd={() => finishLeave(item.key)} />
   {/each}
-  {@render appendAction?.()}
+  {@render appendAction?.(ready)}
 </div>

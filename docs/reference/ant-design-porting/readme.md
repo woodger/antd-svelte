@@ -339,7 +339,14 @@ CSS end event завершается только на собственном co
 возврат uid, reduced motion и unmount сохраняют cleanup. Девять raw diffKeys cases
 задают порядок retention; ещё два raw observations показывают дубликаты inherited
 имён uid в @rc-component/motion 1.3.3. Native использует Map; этот дефект не перенесён.
-Motion trigger остаётся отдельно непокрытым.
+Upload trigger сохраняет forceRender input при пустом children; Dragger не
+получает appendAction select в card/circle. 16 raw UMD cases задают состав controls,
+id/hidden и четыре list types; шесть motion cases фиксируют начальный skip appear,
+leave/enter, identity input/root и style priority. Motion pointer-events:none идёт
+до обычного style; hidden class может быть перекрыт явным display.
+Native сохраняет выбранный FileList без change event через hide/return, внешний
+draft/focus/selection и cleanup после deadline/unmount. Source refs/internal APIs
+и React-specific render boundaries остаются отдельными ограничениями.
 Upload progress motion сверяется по 12 raw UMD cases: четыре list types,
 percent missing/undefined, motion=false, local/shared prefix, глобальная и
 компонентная duration, первый enter после done. Samples явно задают aria-label;

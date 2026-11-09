@@ -1,0 +1,584 @@
+{
+  "reference": {
+    "version": "6.6.8",
+    "revision": "984592267de88fbf9cdaecc96a56629e721c709d",
+    "archiveSha256": "8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa",
+    "renderer": "unmodified official UMD with React18.3.1",
+    "source": "UploadList appendAction CSSMotion forceRender, visibility and user style priority"
+  },
+  "cases": [
+    {
+      "sample": {
+        "id": "card",
+        "listType": "picture-card"
+      },
+      "initial": {
+        "classes": [],
+        "display": "block",
+        "pointerEvents": "auto",
+        "inputId": "source-picker",
+        "buttons": [
+          "Choose file"
+        ],
+        "animations": []
+      },
+      "hidden": {
+        "classes": [
+          "ant-upload-animate-inline-leave",
+          "ant-upload-animate-inline-leave-active",
+          "ant-upload-animate-inline"
+        ],
+        "display": "none",
+        "pointerEvents": "none",
+        "inputId": null,
+        "buttons": [],
+        "animations": []
+      },
+      "returned": {
+        "classes": [
+          "ant-upload-animate-inline-enter",
+          "ant-upload-animate-inline-enter-active",
+          "ant-upload-animate-inline"
+        ],
+        "display": "block",
+        "pointerEvents": "none",
+        "inputId": "source-picker",
+        "buttons": [
+          "Choose file"
+        ],
+        "animations": [
+          {
+            "kind": "CSSAnimation",
+            "keyframes": [
+              {
+                "offset": 0,
+                "easing": "cubic-bezier(0.78, 0.14, 0.15, 0.86)",
+                "composite": "auto",
+                "marginBottom": "-4px",
+                "paddingBottom": "0px",
+                "marginLeft": "-4px",
+                "paddingLeft": "0px",
+                "marginTop": "-4px",
+                "paddingRight": "0px",
+                "paddingTop": "0px",
+                "opacity": "0",
+                "marginRight": "-4px",
+                "width": "0px",
+                "height": "0px"
+              },
+              {
+                "offset": 1,
+                "easing": "cubic-bezier(0.78, 0.14, 0.15, 0.86)",
+                "composite": "replace",
+                "marginBottom": "0px",
+                "paddingBottom": "0px",
+                "marginLeft": "0px",
+                "paddingLeft": "0px",
+                "marginTop": "0px",
+                "paddingRight": "0px",
+                "paddingTop": "0px",
+                "opacity": "1",
+                "marginRight": "0px",
+                "width": "102px",
+                "height": "102px"
+              }
+            ],
+            "duration": 300,
+            "easing": "linear"
+          }
+        ]
+      },
+      "identity": {
+        "trigger": true,
+        "input": true
+      },
+      "settled": {
+        "classes": [],
+        "display": "block",
+        "pointerEvents": "auto",
+        "inputId": "source-picker",
+        "buttons": [
+          "Choose file"
+        ],
+        "animations": []
+      }
+    },
+    {
+      "sample": {
+        "id": "circle",
+        "listType": "picture-circle"
+      },
+      "initial": {
+        "classes": [],
+        "display": "block",
+        "pointerEvents": "auto",
+        "inputId": "source-picker",
+        "buttons": [
+          "Choose file"
+        ],
+        "animations": []
+      },
+      "hidden": {
+        "classes": [
+          "ant-upload-animate-inline-leave",
+          "ant-upload-animate-inline-leave-active",
+          "ant-upload-animate-inline"
+        ],
+        "display": "none",
+        "pointerEvents": "none",
+        "inputId": null,
+        "buttons": [],
+        "animations": []
+      },
+      "returned": {
+        "classes": [
+          "ant-upload-animate-inline-enter",
+          "ant-upload-animate-inline-enter-active",
+          "ant-upload-animate-inline"
+        ],
+        "display": "block",
+        "pointerEvents": "none",
+        "inputId": "source-picker",
+        "buttons": [
+          "Choose file"
+        ],
+        "animations": [
+          {
+            "kind": "CSSAnimation",
+            "keyframes": [
+              {
+                "offset": 0,
+                "easing": "cubic-bezier(0.78, 0.14, 0.15, 0.86)",
+                "composite": "auto",
+                "marginBottom": "-4px",
+                "paddingBottom": "0px",
+                "marginLeft": "-4px",
+                "paddingLeft": "0px",
+                "marginTop": "-4px",
+                "paddingRight": "0px",
+                "paddingTop": "0px",
+                "opacity": "0",
+                "marginRight": "-4px",
+                "width": "0px",
+                "height": "0px"
+              },
+              {
+                "offset": 1,
+                "easing": "cubic-bezier(0.78, 0.14, 0.15, 0.86)",
+                "composite": "replace",
+                "marginBottom": "0px",
+                "paddingBottom": "0px",
+                "marginLeft": "0px",
+                "paddingLeft": "0px",
+                "marginTop": "0px",
+                "paddingRight": "0px",
+                "paddingTop": "0px",
+                "opacity": "1",
+                "marginRight": "0px",
+                "width": "102px",
+                "height": "102px"
+              }
+            ],
+            "duration": 300,
+            "easing": "linear"
+          }
+        ]
+      },
+      "identity": {
+        "trigger": true,
+        "input": true
+      },
+      "settled": {
+        "classes": [],
+        "display": "block",
+        "pointerEvents": "auto",
+        "inputId": "source-picker",
+        "buttons": [
+          "Choose file"
+        ],
+        "animations": []
+      }
+    },
+    {
+      "sample": {
+        "id": "static",
+        "motion": false
+      },
+      "initial": {
+        "classes": [],
+        "display": "block",
+        "pointerEvents": "auto",
+        "inputId": "source-picker",
+        "buttons": [
+          "Choose file"
+        ],
+        "animations": []
+      },
+      "hidden": {
+        "classes": [],
+        "display": "none",
+        "pointerEvents": "auto",
+        "inputId": null,
+        "buttons": [],
+        "animations": []
+      },
+      "returned": {
+        "classes": [],
+        "display": "block",
+        "pointerEvents": "auto",
+        "inputId": "source-picker",
+        "buttons": [
+          "Choose file"
+        ],
+        "animations": []
+      },
+      "identity": {
+        "trigger": true,
+        "input": true
+      },
+      "settled": {
+        "classes": [],
+        "display": "block",
+        "pointerEvents": "auto",
+        "inputId": "source-picker",
+        "buttons": [
+          "Choose file"
+        ],
+        "animations": []
+      }
+    },
+    {
+      "sample": {
+        "id": "pointer-style",
+        "style": {
+          "pointerEvents": "auto"
+        }
+      },
+      "initial": {
+        "classes": [],
+        "display": "block",
+        "pointerEvents": "auto",
+        "inputId": "source-picker",
+        "buttons": [
+          "Choose file"
+        ],
+        "animations": []
+      },
+      "hidden": {
+        "classes": [
+          "ant-upload-animate-inline-leave",
+          "ant-upload-animate-inline-leave-active",
+          "ant-upload-animate-inline"
+        ],
+        "display": "none",
+        "pointerEvents": "auto",
+        "inputId": null,
+        "buttons": [],
+        "animations": []
+      },
+      "returned": {
+        "classes": [
+          "ant-upload-animate-inline-enter",
+          "ant-upload-animate-inline-enter-active",
+          "ant-upload-animate-inline"
+        ],
+        "display": "block",
+        "pointerEvents": "auto",
+        "inputId": "source-picker",
+        "buttons": [
+          "Choose file"
+        ],
+        "animations": [
+          {
+            "kind": "CSSAnimation",
+            "keyframes": [
+              {
+                "offset": 0,
+                "easing": "cubic-bezier(0.78, 0.14, 0.15, 0.86)",
+                "composite": "auto",
+                "marginBottom": "-4px",
+                "paddingBottom": "0px",
+                "marginLeft": "-4px",
+                "paddingLeft": "0px",
+                "marginTop": "-4px",
+                "paddingRight": "0px",
+                "paddingTop": "0px",
+                "opacity": "0",
+                "marginRight": "-4px",
+                "width": "0px",
+                "height": "0px"
+              },
+              {
+                "offset": 1,
+                "easing": "cubic-bezier(0.78, 0.14, 0.15, 0.86)",
+                "composite": "replace",
+                "marginBottom": "0px",
+                "paddingBottom": "0px",
+                "marginLeft": "0px",
+                "paddingLeft": "0px",
+                "marginTop": "0px",
+                "paddingRight": "0px",
+                "paddingTop": "0px",
+                "opacity": "1",
+                "marginRight": "0px",
+                "width": "102px",
+                "height": "102px"
+              }
+            ],
+            "duration": 300,
+            "easing": "linear"
+          }
+        ]
+      },
+      "identity": {
+        "trigger": true,
+        "input": true
+      },
+      "settled": {
+        "classes": [],
+        "display": "block",
+        "pointerEvents": "auto",
+        "inputId": "source-picker",
+        "buttons": [
+          "Choose file"
+        ],
+        "animations": []
+      }
+    },
+    {
+      "sample": {
+        "id": "display-style",
+        "style": {
+          "display": "inline-block"
+        }
+      },
+      "initial": {
+        "classes": [],
+        "display": "block",
+        "pointerEvents": "auto",
+        "inputId": "source-picker",
+        "buttons": [
+          "Choose file"
+        ],
+        "animations": []
+      },
+      "hidden": {
+        "classes": [
+          "ant-upload-animate-inline-leave",
+          "ant-upload-animate-inline-leave-active",
+          "ant-upload-animate-inline"
+        ],
+        "display": "block",
+        "pointerEvents": "none",
+        "inputId": null,
+        "buttons": [],
+        "animations": [
+          {
+            "kind": "CSSAnimation",
+            "keyframes": [
+              {
+                "offset": 0,
+                "easing": "cubic-bezier(0.78, 0.14, 0.15, 0.86)",
+                "composite": "replace",
+                "marginBottom": "0px",
+                "paddingBottom": "0px",
+                "marginLeft": "0px",
+                "paddingLeft": "0px",
+                "marginTop": "0px",
+                "paddingRight": "0px",
+                "paddingTop": "0px",
+                "opacity": "1",
+                "marginRight": "0px",
+                "width": "102px",
+                "height": "102px"
+              },
+              {
+                "offset": 1,
+                "easing": "cubic-bezier(0.78, 0.14, 0.15, 0.86)",
+                "composite": "auto",
+                "marginBottom": "-4px",
+                "paddingBottom": "0px",
+                "marginLeft": "-4px",
+                "paddingLeft": "0px",
+                "marginTop": "-4px",
+                "paddingRight": "0px",
+                "paddingTop": "0px",
+                "opacity": "0",
+                "marginRight": "-4px",
+                "width": "0px",
+                "height": "0px"
+              }
+            ],
+            "duration": 300,
+            "easing": "linear"
+          }
+        ]
+      },
+      "returned": {
+        "classes": [
+          "ant-upload-animate-inline-enter",
+          "ant-upload-animate-inline-enter-active",
+          "ant-upload-animate-inline"
+        ],
+        "display": "block",
+        "pointerEvents": "none",
+        "inputId": "source-picker",
+        "buttons": [
+          "Choose file"
+        ],
+        "animations": [
+          {
+            "kind": "CSSAnimation",
+            "keyframes": [
+              {
+                "offset": 0,
+                "easing": "cubic-bezier(0.78, 0.14, 0.15, 0.86)",
+                "composite": "auto",
+                "marginBottom": "-4px",
+                "paddingBottom": "0px",
+                "marginLeft": "-4px",
+                "paddingLeft": "0px",
+                "marginTop": "-4px",
+                "paddingRight": "0px",
+                "paddingTop": "0px",
+                "opacity": "0",
+                "marginRight": "-4px",
+                "width": "0px",
+                "height": "0px"
+              },
+              {
+                "offset": 1,
+                "easing": "cubic-bezier(0.78, 0.14, 0.15, 0.86)",
+                "composite": "replace",
+                "marginBottom": "0px",
+                "paddingBottom": "0px",
+                "marginLeft": "0px",
+                "paddingLeft": "0px",
+                "marginTop": "0px",
+                "paddingRight": "0px",
+                "paddingTop": "0px",
+                "opacity": "1",
+                "marginRight": "0px",
+                "width": "102px",
+                "height": "102px"
+              }
+            ],
+            "duration": 300,
+            "easing": "linear"
+          }
+        ]
+      },
+      "identity": {
+        "trigger": true,
+        "input": true
+      },
+      "settled": {
+        "classes": [],
+        "display": "block",
+        "pointerEvents": "auto",
+        "inputId": "source-picker",
+        "buttons": [
+          "Choose file"
+        ],
+        "animations": []
+      }
+    },
+    {
+      "sample": {
+        "id": "local-shared-prefix",
+        "prefix": "acme",
+        "localPrefix": "files"
+      },
+      "initial": {
+        "classes": [],
+        "display": "block",
+        "pointerEvents": "auto",
+        "inputId": "source-picker",
+        "buttons": [
+          "Choose file"
+        ],
+        "animations": []
+      },
+      "hidden": {
+        "classes": [
+          "files-animate-inline-leave",
+          "files-animate-inline-leave-active",
+          "files-animate-inline"
+        ],
+        "display": "none",
+        "pointerEvents": "none",
+        "inputId": null,
+        "buttons": [],
+        "animations": []
+      },
+      "returned": {
+        "classes": [
+          "files-animate-inline-enter",
+          "files-animate-inline-enter-active",
+          "files-animate-inline"
+        ],
+        "display": "block",
+        "pointerEvents": "none",
+        "inputId": "source-picker",
+        "buttons": [
+          "Choose file"
+        ],
+        "animations": [
+          {
+            "kind": "CSSAnimation",
+            "keyframes": [
+              {
+                "offset": 0,
+                "easing": "cubic-bezier(0.78, 0.14, 0.15, 0.86)",
+                "composite": "auto",
+                "marginBottom": "-4px",
+                "paddingBottom": "0px",
+                "marginLeft": "-4px",
+                "paddingLeft": "0px",
+                "marginTop": "-4px",
+                "paddingRight": "0px",
+                "paddingTop": "0px",
+                "opacity": "0",
+                "marginRight": "-4px",
+                "width": "0px",
+                "height": "0px"
+              },
+              {
+                "offset": 1,
+                "easing": "cubic-bezier(0.78, 0.14, 0.15, 0.86)",
+                "composite": "replace",
+                "marginBottom": "0px",
+                "paddingBottom": "0px",
+                "marginLeft": "0px",
+                "paddingLeft": "0px",
+                "marginTop": "0px",
+                "paddingRight": "0px",
+                "paddingTop": "0px",
+                "opacity": "1",
+                "marginRight": "0px",
+                "width": "102px",
+                "height": "102px"
+              }
+            ],
+            "duration": 300,
+            "easing": "linear"
+          }
+        ]
+      },
+      "identity": {
+        "trigger": true,
+        "input": true
+      },
+      "settled": {
+        "classes": [],
+        "display": "block",
+        "pointerEvents": "auto",
+        "inputId": "source-picker",
+        "buttons": [
+          "Choose file"
+        ],
+        "animations": []
+      }
+    }
+  ]
+}

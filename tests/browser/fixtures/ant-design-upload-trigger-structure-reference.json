@@ -1,0 +1,387 @@
+{
+  "reference": {
+    "version": "6.6.8",
+    "revision": "984592267de88fbf9cdaecc96a56629e721c709d",
+    "archiveSha256": "8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa",
+    "renderer": "unmodified official UMD with React 18.3.1",
+    "source": "Upload renderUploadList appendAction vs drag branch, hidden children forceRender"
+  },
+  "cases": [
+    {
+      "sample": {
+        "id": "upload:text:children",
+        "listType": "text",
+        "drag": false,
+        "children": true
+      },
+      "result": {
+        "inputs": [
+          {
+            "id": "source-picker",
+            "disabled": false
+          }
+        ],
+        "selectCount": 1,
+        "dragCount": 0,
+        "buttons": [
+          "Choose file"
+        ],
+        "selects": [
+          {
+            "display": "inline-block",
+            "hiddenClass": false
+          }
+        ]
+      }
+    },
+    {
+      "sample": {
+        "id": "upload:text:empty",
+        "listType": "text",
+        "drag": false,
+        "children": false
+      },
+      "result": {
+        "inputs": [
+          {
+            "id": null,
+            "disabled": false
+          }
+        ],
+        "selectCount": 1,
+        "dragCount": 0,
+        "buttons": [],
+        "selects": [
+          {
+            "display": "none",
+            "hiddenClass": true
+          }
+        ]
+      }
+    },
+    {
+      "sample": {
+        "id": "dragger:text:children",
+        "listType": "text",
+        "drag": true,
+        "children": true
+      },
+      "result": {
+        "inputs": [
+          {
+            "id": "source-picker",
+            "disabled": false
+          }
+        ],
+        "selectCount": 0,
+        "dragCount": 1,
+        "buttons": [
+          "Choose file"
+        ],
+        "selects": []
+      }
+    },
+    {
+      "sample": {
+        "id": "dragger:text:empty",
+        "listType": "text",
+        "drag": true,
+        "children": false
+      },
+      "result": {
+        "inputs": [
+          {
+            "id": null,
+            "disabled": false
+          }
+        ],
+        "selectCount": 0,
+        "dragCount": 1,
+        "buttons": [],
+        "selects": []
+      }
+    },
+    {
+      "sample": {
+        "id": "upload:picture:children",
+        "listType": "picture",
+        "drag": false,
+        "children": true
+      },
+      "result": {
+        "inputs": [
+          {
+            "id": "source-picker",
+            "disabled": false
+          }
+        ],
+        "selectCount": 1,
+        "dragCount": 0,
+        "buttons": [
+          "Choose file"
+        ],
+        "selects": [
+          {
+            "display": "inline-block",
+            "hiddenClass": false
+          }
+        ]
+      }
+    },
+    {
+      "sample": {
+        "id": "upload:picture:empty",
+        "listType": "picture",
+        "drag": false,
+        "children": false
+      },
+      "result": {
+        "inputs": [
+          {
+            "id": null,
+            "disabled": false
+          }
+        ],
+        "selectCount": 1,
+        "dragCount": 0,
+        "buttons": [],
+        "selects": [
+          {
+            "display": "none",
+            "hiddenClass": true
+          }
+        ]
+      }
+    },
+    {
+      "sample": {
+        "id": "dragger:picture:children",
+        "listType": "picture",
+        "drag": true,
+        "children": true
+      },
+      "result": {
+        "inputs": [
+          {
+            "id": "source-picker",
+            "disabled": false
+          }
+        ],
+        "selectCount": 0,
+        "dragCount": 1,
+        "buttons": [
+          "Choose file"
+        ],
+        "selects": []
+      }
+    },
+    {
+      "sample": {
+        "id": "dragger:picture:empty",
+        "listType": "picture",
+        "drag": true,
+        "children": false
+      },
+      "result": {
+        "inputs": [
+          {
+            "id": null,
+            "disabled": false
+          }
+        ],
+        "selectCount": 0,
+        "dragCount": 1,
+        "buttons": [],
+        "selects": []
+      }
+    },
+    {
+      "sample": {
+        "id": "upload:picture-card:children",
+        "listType": "picture-card",
+        "drag": false,
+        "children": true
+      },
+      "result": {
+        "inputs": [
+          {
+            "id": "source-picker",
+            "disabled": false
+          }
+        ],
+        "selectCount": 1,
+        "dragCount": 0,
+        "buttons": [
+          "Choose file"
+        ],
+        "selects": [
+          {
+            "display": "block",
+            "hiddenClass": false
+          }
+        ]
+      }
+    },
+    {
+      "sample": {
+        "id": "upload:picture-card:empty",
+        "listType": "picture-card",
+        "drag": false,
+        "children": false
+      },
+      "result": {
+        "inputs": [
+          {
+            "id": null,
+            "disabled": false
+          }
+        ],
+        "selectCount": 1,
+        "dragCount": 0,
+        "buttons": [],
+        "selects": [
+          {
+            "display": "none",
+            "hiddenClass": true
+          }
+        ]
+      }
+    },
+    {
+      "sample": {
+        "id": "dragger:picture-card:children",
+        "listType": "picture-card",
+        "drag": true,
+        "children": true
+      },
+      "result": {
+        "inputs": [
+          {
+            "id": "source-picker",
+            "disabled": false
+          }
+        ],
+        "selectCount": 0,
+        "dragCount": 1,
+        "buttons": [
+          "Choose file"
+        ],
+        "selects": []
+      }
+    },
+    {
+      "sample": {
+        "id": "dragger:picture-card:empty",
+        "listType": "picture-card",
+        "drag": true,
+        "children": false
+      },
+      "result": {
+        "inputs": [
+          {
+            "id": null,
+            "disabled": false
+          }
+        ],
+        "selectCount": 0,
+        "dragCount": 1,
+        "buttons": [],
+        "selects": []
+      }
+    },
+    {
+      "sample": {
+        "id": "upload:picture-circle:children",
+        "listType": "picture-circle",
+        "drag": false,
+        "children": true
+      },
+      "result": {
+        "inputs": [
+          {
+            "id": "source-picker",
+            "disabled": false
+          }
+        ],
+        "selectCount": 1,
+        "dragCount": 0,
+        "buttons": [
+          "Choose file"
+        ],
+        "selects": [
+          {
+            "display": "block",
+            "hiddenClass": false
+          }
+        ]
+      }
+    },
+    {
+      "sample": {
+        "id": "upload:picture-circle:empty",
+        "listType": "picture-circle",
+        "drag": false,
+        "children": false
+      },
+      "result": {
+        "inputs": [
+          {
+            "id": null,
+            "disabled": false
+          }
+        ],
+        "selectCount": 1,
+        "dragCount": 0,
+        "buttons": [],
+        "selects": [
+          {
+            "display": "none",
+            "hiddenClass": true
+          }
+        ]
+      }
+    },
+    {
+      "sample": {
+        "id": "dragger:picture-circle:children",
+        "listType": "picture-circle",
+        "drag": true,
+        "children": true
+      },
+      "result": {
+        "inputs": [
+          {
+            "id": "source-picker",
+            "disabled": false
+          }
+        ],
+        "selectCount": 0,
+        "dragCount": 1,
+        "buttons": [
+          "Choose file"
+        ],
+        "selects": []
+      }
+    },
+    {
+      "sample": {
+        "id": "dragger:picture-circle:empty",
+        "listType": "picture-circle",
+        "drag": true,
+        "children": false
+      },
+      "result": {
+        "inputs": [
+          {
+            "id": null,
+            "disabled": false
+          }
+        ],
+        "selectCount": 0,
+        "dragCount": 1,
+        "buttons": [],
+        "selects": []
+      }
+    }
+  ]
+}

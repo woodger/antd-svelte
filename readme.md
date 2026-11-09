@@ -6683,6 +6683,17 @@ Upload prefixCls; duration наследует глобальные и компо
 [SSR](tests/package/upload-progress-motion.ssr.test.ts) защищают эти границы.
 Во всех raw samples имя полосы задано явно; прежний Native fallback имени сохранён.
 
+Upload хранит один native file input во всех list types. При пустом children
+карточка select остаётся скрытой, сохраняя input и его выбранные файлы; id у
+скрытого/disabled input удаляется. Dragger не добавляет второй select в card/circle.
+Card/circle trigger пропускает начальный appear, сохраняет input при hide/return
+и использует исходные leave/enter keyframes. Во время перехода pointer-events:none
+идёт до пользовательского style; явный pointer-events/display сохраняет приоритет.
+[16 raw случаев структуры](tests/browser/fixtures/ant-design-upload-trigger-structure-reference.json)
+и [шесть motion-сценариев](tests/browser/fixtures/ant-design-upload-trigger-motion-reference.json),
+[browser](tests/browser/upload-trigger.spec.ts) и
+[SSR](tests/package/upload-trigger.ssr.test.ts) проверяют controls, identity и cleanup.
+
 В `diffKeys` @rc-component/motion 1.3.3 перестановка `[a, __proto__]` в
 `[__proto__, a]` возвращает дубликаты ключа; то же происходит с `constructor`.
 [Исходные результаты](tools/fixtures/ant-design-upload-motion-keys-reference.json)
@@ -6885,8 +6896,8 @@ webkitdirectory как boolean attribute; в браузере сохраняют
 [SSR](tests/package/upload-paste.ssr.test.ts) не создаёт browser listeners.
 
 Locale/upload из ConfigProvider, собственный locale, RU/EN, RTL и theme variables
-поддержаны. Полный rc-upload ref/internal API, ReactElement clone/event forwarding,
-motion trigger остаётся отдельным пробелом реестра. Данный этап
+поддержаны. Полный rc-upload ref/internal API и ReactElement clone/event forwarding
+остаются отдельными пробелами реестра. Данный этап
 не заявляет полного покрытия React Upload.
 
 ## Input

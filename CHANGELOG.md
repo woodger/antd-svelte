@@ -9,6 +9,9 @@
 
 ### Added
 
+- Upload card/circle сохраняет trigger и native input при hide/return и повторяет
+  исходные enter/leave keyframes с приоритетом пользовательских styles.
+
 - Upload progress переносит исходный fade после задержки 300 ms, удерживает DOM
   при завершении и отменяет уход при возврате в uploading. Перенесены отдельный
   shared fade namespace, aliases duration и различие percent missing/undefined;
@@ -1491,6 +1494,9 @@
   тип результата `createMessage` подготовлен к генерации деклараций.
 
 ### Fixed
+
+- UploadDragger card/circle больше не создаёт второй select, file input и кнопку.
+  Upload с пустым children сохраняет скрытый input и выбранные файлы, как upstream.
 
 - Upload использует file.url для thumbnail и preview при пустом thumbUrl,
   как Ant Design 6.6.8. Пустой thumbUrl по-прежнему запрещает генерацию previewFile;
