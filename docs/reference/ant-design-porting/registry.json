@@ -12434,7 +12434,17 @@
         "tests/browser/fixtures/CalendarFixtures.svelte",
         "tests/browser/fixtures/calendar-date-adapter.ts",
         "tools/ant-design-css-recipes.json",
-        "readme.md"
+        "readme.md",
+        "src/lib/calendar-prefix.engine.ts",
+        "src/lib/calendar-prefix.engine.test.ts",
+        "src/lib/vendor/calendar-prefix.css.js",
+        "tests/browser/calendar-prefix.spec.ts",
+        "tests/browser/calendar-prefix-metrics.ts",
+        "tests/browser/fixtures/CalendarPrefixFixtures.svelte",
+        "tests/browser/fixtures/CalendarPrefixScope.svelte",
+        "tests/browser/fixtures/CalendarPrefixSSRFixtures.svelte",
+        "tests/browser/fixtures/ant-design-calendar-prefix-reference.json",
+        "tests/package/calendar-prefix.ssr.test.ts"
       ],
       "features": [
         {
@@ -12493,17 +12503,17 @@
             "tools/ant-design-css-recipes.json",
             "tests/browser/calendar-header.spec.ts"
           ],
-          "note": "123 исходных CSS rules, full/mini и mobile header. Все шесть semantic slots, functions и root style priority, component config replacement. Calendar locale отдельна от DatePicker; props.locale deep merge. Default ruRU сохраняет библиотечный контракт. Grid/roving focus и Enter/Space/Home/End/arrows — явная Svelte accessibility adaptation к pointer-only standalone PickerPanel. Локальная геометрия CalendarHeader учитывает внешние div Select: legacy desktop widths 80/70px, source min-width с intrinsic readonly text, nowrap mode switch; mobile поля рядом и режим ниже. Проверяются реальные границы controls при 300/360px и viewport 1280/390/320, обе панели, en/ru, compact/RTL и клавиатура без CSS сайта."
+          "note": "123 исходных CSS rules, full/mini и mobile header. Все шесть semantic slots, functions и root style priority, component config replacement. Calendar locale отдельна от DatePicker; props.locale deep merge. Default ruRU сохраняет библиотечный контракт. Grid/roving focus и Enter/Space/Home/End/arrows — явная Svelte accessibility adaptation к pointer-only standalone PickerPanel. Локальная геометрия CalendarHeader учитывает внешние div Select: desktop widths 80/70px без source theme, source min-width с intrinsic readonly text, nowrap mode switch; mobile поля рядом и режим ниже. Проверяются реальные границы controls при 300/360px и viewport 1280/390/320, обе панели, en/ru, compact/RTL и клавиатура без CSS сайта."
         },
         {
           "id": "theme-prefix-diagnostics",
-          "title": "PrefixCls, все locales и React diagnostics",
+          "title": "Все locales и React diagnostics",
           "state": "missing",
           "requiredForV1": false,
           "evidence": [
             "readme.md"
           ],
-          "note": "Произвольный prefix CSS, полный каталог locale exports, React deprecated/invalid-value warnings и неаудированные возможности используемых Select/Radio не объявляются перенесёнными. Адаптация: class/styles strings, snippets, отдельный factory и nativeElement binding вместо React refs/statics."
+          "note": "Полный каталог locale exports, React deprecated/invalid-value warnings и неаудированные возможности используемых Select/Radio не объявляются перенесёнными. Адаптация: class/styles strings, snippets, отдельный factory и nativeElement binding вместо React refs/statics."
         },
         {
           "id": "component-theme",
@@ -12522,6 +12532,43 @@
             "tests/browser/fixtures/ant-design-calendar-theme-reference.json"
           ],
           "note": "YearControlWidth/MonthControlWidth/MiniContentHeight/FullBg/FullPanelBg/ItemActiveBg и initPanelComponentToken defaults подключены к общему bridge. Внутренние 21 default не добавляют multiple/time API. Font/color/spacing aliases, global/component algorithms, custom cssVar prefix, config/semantic/local priorities и CSS variables сохраняются. 17 официальных UMD-тем / 136 наборов сверяют full/mini month/year панели в normal/RTL/priority, mini-month во всех восьми scopes; четыре дополнительных темы проверены при viewport 400px. Измеряются selected/today/disabled/default cells, header controls/Radio, backgrounds и panel/table metrics, string/zero/undefined размеры. Source header использует min-width и intrinsic text sizer readonly Select вместо fixed width, поэтому 0/10px не обрезают выбранный текст; legacy ширины 80/70 и public default Select остаются прежними. Theme update сохраняет DOM cells/input/options, focus, selected value, popup и прежние callbacks с UTC/milliseconds; inheritance/legacy reset и unmount не меняют sibling scopes. SSR не создаёт browser effects."
+        },
+        {
+          "id": "local-shared-prefix",
+          "title": "Локальный picker prefix и независимые общие Select/Radio шапки",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/CalendarCore.svelte",
+            "src/lib/CalendarHeader.svelte",
+            "src/lib/calendar.types.ts",
+            "src/lib/calendar-prefix.engine.ts",
+            "src/lib/calendar-prefix.engine.test.ts",
+            "src/lib/vendor/calendar-prefix.css.js",
+            "tests/browser/calendar-prefix.spec.ts",
+            "tests/browser/calendar-prefix-metrics.ts",
+            "tests/browser/fixtures/CalendarPrefixFixtures.svelte",
+            "tests/browser/fixtures/CalendarPrefixScope.svelte",
+            "tests/browser/fixtures/CalendarPrefixSSRFixtures.svelte",
+            "tests/browser/fixtures/ant-design-calendar-prefix-reference.json",
+            "tests/package/calendar-prefix.ssr.test.ts",
+            "tools/ant-design-css-recipes.json"
+          ],
+          "note": "Calendar использует getPrefixCls(picker, local) и добавляет -calendar для root/header/date classes; cellRender.info.prefixCls и originNode получают фактический picker prefix. Select/Radio сохраняют общий namespace, variables/marker canonical. 21 raw UMD case в normal/nested/sibling scopes покрывает full/mini, month/year, week, ranges, RTL, cssVar prefix, aliases/styles и media 480/481px. Prefix updates сохраняют DOM/ref/IDs, выбранную дату/timestamp, focus и Native selection, открытые options и keyboard selection. Source readonly Select хранит подпись вне пустого input; Native сохраняет существующее значение input и проверяет его отдельно от raw Source payload."
+        },
+        {
+          "id": "native-header-nowrap",
+          "title": "Сохранённая Native шапка без переноса отдельных кнопок режима",
+          "state": "partial",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/CalendarHeader.svelte",
+            "tests/browser/calendar-header.spec.ts",
+            "tests/browser/calendar-prefix.spec.ts",
+            "tests/browser/fixtures/ant-design-calendar-prefix-reference.json",
+            "tests/package/calendar-prefix.ssr.test.ts"
+          ],
+          "note": "Raw UMD 6.6.8 при mini width=320 и увеличенных Calendar/Select/Radio tokens переносит mode labels и растягивает year/month controls до 48px. Native сохраняет существующие flex-shrink:0/flex-wrap:nowrap CalendarHeader. После всех raw cases/live transitions отдельно снят public Calendar style.width=400 counterpart; только mode/year/month heights сравниваются с ним (25.5625px), все остальные метрики — с raw 320px. Это сохранённая граница Native header, не новый перенос Source wrapping и не заявление одинаковой геометрии при разных widths."
         }
       ]
     },

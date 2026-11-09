@@ -86,6 +86,8 @@ export interface CalendarProps<DateType = Dayjs> extends Omit<
   fullCellRender?: Snippet<[DateType, CalendarCellRenderInfo<DateType>]>;
   class?: string;
   rootClassName?: string;
+  /** Локальный picker prefix перекрывает ConfigProvider; Calendar добавляет к нему -calendar. */
+  prefixCls?: string;
   /** После context и semantic root styles. */
   style?: string;
   classNames?: CalendarSemantic<DateType>;

@@ -10,6 +10,7 @@
   import type { GenerateConfig } from './date-generate.types';
 
   let {
+    prefixCls,
     value,
     mode,
     fullscreen,
@@ -21,6 +22,7 @@
     onChange,
     onModeChange
   }: {
+    prefixCls: string;
     value: DateType;
     mode: CalendarMode | undefined;
     fullscreen: boolean;
@@ -71,19 +73,19 @@
 
 <style>
   /* Auto width внешнего div Select зависит от intrinsic ширины native input. */
-  .ant-picker-calendar-header :global(.ant-picker-calendar-year-select),
-  .ant-picker-calendar-header :global(.ant-picker-calendar-month-select) { display: inline-block; flex: none; vertical-align: top; }
-  .ant-picker-calendar-header :global(.ant-picker-calendar-mode-switch) { flex-shrink: 0; flex-wrap: nowrap; }
+  .calendar-header :global(.calendar-year-select),
+  .calendar-header :global(.calendar-month-select) { display: inline-block; flex: none; vertical-align: top; }
+  .calendar-header :global(.calendar-mode-switch) { flex-shrink: 0; flex-wrap: nowrap; }
   @media (width > 480px) {
-    .ant-picker-calendar-header:not(.source-header) :global(.ant-picker-calendar-year-select) { width: var(--ant-calendar-year-control-width); }
-    .ant-picker-calendar-header:not(.source-header) :global(.ant-picker-calendar-month-select) { width: var(--ant-calendar-month-control-width); }
+    .calendar-header:not(.source-header) :global(.calendar-year-select) { width: var(--ant-calendar-year-control-width); }
+    .calendar-header:not(.source-header) :global(.calendar-month-select) { width: var(--ant-calendar-month-control-width); }
   }
 </style>
 
-<div class={['ant-picker-calendar-header', designToken.enabled && 'source-header', className]} {style}>
+<div class={[`${prefixCls}-header`, 'calendar-header', designToken.enabled && 'source-header', className]} {style}>
   <Select
     _autoWidth={designToken.enabled}
-    class="ant-picker-calendar-year-select"
+    class={`${prefixCls}-year-select calendar-year-select`}
     aria-label={locale.yearSelect ?? locale.year}
     size={fullscreen ? undefined : 'small'}
     options={years}
@@ -95,7 +97,7 @@
   />{#if mode === 'month'}
     <Select
       _autoWidth={designToken.enabled}
-      class="ant-picker-calendar-month-select"
+      class={`${prefixCls}-month-select calendar-month-select`}
       aria-label={locale.monthSelect ?? locale.month}
       size={fullscreen ? undefined : 'small'}
       options={months}
@@ -105,7 +107,7 @@
       }}
     />
   {/if}<RadioGroup
-    class="ant-picker-calendar-mode-switch"
+    class={`${prefixCls}-mode-switch calendar-mode-switch`}
     aria-label={`${locale.month} / ${locale.year}`}
     size={fullscreen ? undefined : 'small'}
     bind:value={() => mode, () => {}}

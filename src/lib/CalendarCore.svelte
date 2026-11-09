@@ -3,6 +3,8 @@
   import CalendarHeader from './CalendarHeader.svelte';
   import { useConfig } from './config-context';
   import { useComponentTheme } from './theme-component.svelte';
+  import { getCalendarPrefixCss } from './calendar-prefix.engine';
+  import ThemeScopeStyle from './ThemeScopeStyle.svelte';
   import {
     calendarDateDisabled,
     calendarFilledLocale,
@@ -42,6 +44,7 @@
     class: className,
     rootClassName,
     style,
+    prefixCls,
     classNames,
     styles,
     nativeElement = $bindable(),
@@ -50,6 +53,9 @@
 
   const config = useConfig();
   const componentTheme = useComponentTheme('Calendar');
+  let prefix = $derived(config.getPrefixCls('picker', prefixCls));
+  let calendarPrefix = $derived(`${prefix}-calendar`);
+  let prefixCss = $derived(getCalendarPrefixCss(prefix));
   let innerValue = $state.raw<DateType | undefined>(
     untrack(() => defaultValue || generateConfig.getNow())
   );
@@ -84,6 +90,7 @@
       class: className,
       rootClassName,
       style,
+      prefixCls,
       classNames,
       styles,
       nativeElement
@@ -248,7 +255,7 @@
 
   function cellInfo(date: DateType, originNode: Snippet): CalendarCellRenderInfo<DateType> {
     return {
-      prefixCls: 'ant-picker',
+      prefixCls: prefix,
       originNode,
       today,
       type: panelType,
@@ -266,18 +273,19 @@
 </script>
 
 <style>
-  .ant-picker-cell:focus-visible { outline: 2px solid var(--ant-color-primary); outline-offset: -2px; }
+  [data-calendar-position]:focus-visible { outline: 2px solid var(--ant-color-primary); outline-offset: -2px; }
   .week-name { position: absolute; width: 0; height: 0; overflow: hidden; opacity: 0; }
 </style>
 
-<div
+{#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`calendar-prefix:${prefix}`} />{/if}<div
   {...attributes}
   bind:this={nativeElement}
+  data-ant-calendar-prefix={prefix}
   class={[
-    'ant-picker-calendar',
+    calendarPrefix,
     componentTheme.className,
-    fullscreen ? 'ant-picker-calendar-full' : 'ant-picker-calendar-mini',
-    config.direction === 'rtl' && 'ant-picker-calendar-rtl',
+    fullscreen ? `${calendarPrefix}-full` : `${calendarPrefix}-mini`,
+    config.direction === 'rtl' && `${calendarPrefix}-rtl`,
     config.calendar?.class,
     className,
     rootClassName,
@@ -295,6 +303,7 @@
     })}
   {:else}
     <CalendarHeader
+      prefixCls={calendarPrefix}
       value={actualValue || today}
       mode={actualMode}
       {fullscreen}
@@ -307,16 +316,16 @@
       onModeChange={changeMode}
     />
   {/if}
-  <div class="ant-picker-panel">
+  <div class={`${prefix}-panel`}>
     {#key panelType}
       <div class={[
-        `ant-picker-${panelType}-panel`,
-        showWeek && panelType === 'date' && 'ant-picker-date-panel-show-week'
+        `${prefix}-${panelType}-panel`,
+        showWeek && panelType === 'date' && `${prefix}-date-panel-show-week`
       ]}>
-        <div class={['ant-picker-body', slotClass('body')]} style={slotStyle('body')}>
+        <div class={[`${prefix}-body`, slotClass('body')]} style={slotStyle('body')}>
           <table
             role="grid"
-            class={['ant-picker-content', slotClass('content')]}
+            class={[`${prefix}-content`, slotClass('content')]}
             style={slotStyle('content')}
             aria-label={generateConfig.locale.format(filledLocale.locale, pickerValue,
               panelType === 'date' ? filledLocale.fieldMonthFormat! : filledLocale.yearFormat!)}
@@ -341,12 +350,12 @@
                       aria-current={!cell.week && panelType === 'date' && cell.isToday ? 'date' : undefined}
                       tabindex={tabStop === cell.index ? 0 : -1}
                       class={[
-                        'ant-picker-cell',
-                        cell.week ? 'ant-picker-cell-week' : slotClass('item'),
-                        cell.disabled && 'ant-picker-cell-disabled',
-                        cell.selected && 'ant-picker-cell-selected',
-                        cell.inView && 'ant-picker-cell-in-view',
-                        !cell.week && panelType === 'date' && cell.isToday && 'ant-picker-cell-today'
+                        `${prefix}-cell`,
+                        cell.week ? `${prefix}-cell-week` : slotClass('item'),
+                        cell.disabled && `${prefix}-cell-disabled`,
+                        cell.selected && `${prefix}-cell-selected`,
+                        cell.inView && `${prefix}-cell-in-view`,
+                        !cell.week && panelType === 'date' && cell.isToday && `${prefix}-cell-today`
                       ]}
                       style={cell.week ? undefined : slotStyle('item')}
                       onclick={() => chooseCell(cell)}
@@ -354,21 +363,21 @@
                       onkeydown={event => handleKeydown(event, cell)}
                     >
                       {#if cell.week}
-                        <div class="ant-picker-cell-inner">{generateConfig.locale.getWeek(filledLocale.locale, cell.date)}</div>
+                        <div class={`${prefix}-cell-inner`}>{generateConfig.locale.getWeek(filledLocale.locale, cell.date)}</div>
                       {:else}
-                        {#snippet originNode()}<div class="ant-picker-cell-inner">{originText(cell.date)}</div>{/snippet}
+                        {#snippet originNode()}<div class={`${prefix}-cell-inner`}>{originText(cell.date)}</div>{/snippet}
                         {@const renderInfo = cellInfo(cell.date, originNode)}
                         {#if fullCellRender}
                           {@render fullCellRender(cell.date, renderInfo)}
                         {:else}
                           <div class={[
-                            'ant-picker-cell-inner ant-picker-calendar-date',
-                            cell.isToday && 'ant-picker-calendar-date-today'
+                            `${prefix}-cell-inner ${calendarPrefix}-date`,
+                            cell.isToday && `${calendarPrefix}-date-today`
                           ]}>
-                            <div class="ant-picker-calendar-date-value">{panelType === 'date'
+                            <div class={`${calendarPrefix}-date-value`}>{panelType === 'date'
                               ? String(generateConfig.getDate(cell.date)).padStart(2, '0')
                               : months[generateConfig.getMonth(cell.date)]}</div>
-                            <div class={['ant-picker-calendar-date-content', slotClass('itemContent')]} style={slotStyle('itemContent')}>
+                            <div class={[`${calendarPrefix}-date-content`, slotClass('itemContent')]} style={slotStyle('itemContent')}>
                               {#if cellRender}{@render cellRender(cell.date, renderInfo)}
                               {/if}
                             </div>

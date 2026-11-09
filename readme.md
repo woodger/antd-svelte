@@ -5446,7 +5446,7 @@ control предотвращает выбор родительской ячей�
 
 Из архива извлечены 123 CSS-правила Calendar, включая full/mini, week и mobile
 header. Темы, primary, compact и RTL используют текущие tokens библиотеки.
-В desktop-шапке legacy обёртки Select сохраняют ширины 80/70px. При source theme
+В desktop-шапке без source theme обёртки Select сохраняют ширины 80/70px. При source theme
 yearControlWidth/monthControlWidth задают минимальную ширину, как upstream;
 скрытый текстовый sizer сохраняет intrinsic размер readonly input даже при 0/10px.
 Переключатель режима не переносит отдельные кнопки.
@@ -5470,7 +5470,7 @@ outside. Дополнительные замеры сделаны при viewpor
 метрики ячеек и шапки, string/zero/undefined размеры и независимые child themes.
 [Browser-проверки](tests/browser/calendar-theme.spec.ts) защищают фокус/выбор даты,
 точные timestamps callbacks, открытые options и DOM input при theme update,
-inherit reset и возврате к legacy. Декларации сверяются с UMD отдельным
+inherit reset и возврате к оформлению по умолчанию. Декларации сверяются с UMD отдельным
 [unit-набором](src/lib/theme-calendar-tokens-reference.test.ts),
 [SSR](tests/package/calendar-theme.ssr.test.ts) не создаёт browser resources.
 
@@ -5478,8 +5478,26 @@ inherit reset и возврате к legacy. Декларации сверяют
 [SSR](./src/lib/calendar.ssr.test.ts),
 [public package](./tests/package/calendar.ssr.test.ts),
 [browser](./tests/browser/calendar.spec.ts) и `?fixture=calendar`, включая
-фабрику с собственным UTC Date adapter. PrefixCls,
-полный каталог locales, React warnings и неперенесённые возможности используемых
+фабрику с собственным UTC Date adapter.
+
+Calendar принимает локальный `prefixCls` для Picker и добавляет `-calendar` к
+корневому классу; без override использует ConfigProvider.prefixCls. Ячейки,
+originNode и `cellRender.info.prefixCls` следуют тому же Picker prefix, а Select/Radio
+шапки сохраняют независимые общие namespaces. Canonical tokens и theme marker
+не переименовываются. Смена префикса сохраняет DOM/ref/IDs, дату и её timestamp,
+выделение текста/focus, открытые options и keyboard navigation.
+[Сверка с официальным UMD](./tests/browser/calendar-prefix.spec.ts),
+`?fixture=calendar-prefix`, включает full/mini, month/year, week, RTL,
+aliases/styles, nested/reset и responsive-порог 480/481px.
+
+Существующий запрет переноса отдельных кнопок режима сохраняется. Raw Source
+при увеличенных токенах в 320px переносит кнопки и растягивает controls до 48px.
+Для трёх высот шапки отдельно записан public counterpart с `style.width=400px`;
+остальные метрики сравниваются с raw 320px. Native readonly Select показывает
+подпись года в input, Source — рядом с пустым search input; значение и выделение
+Native input проверяются по собственному существующему контракту.
+
+Полный каталог locales, React warnings и неперенесённые возможности используемых
 Select/Radio остаются за пределами подтверждённого объёма этого этапа.
 
 ## Cascader / CascaderPanel

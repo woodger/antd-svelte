@@ -9,6 +9,10 @@
 
 ### Added
 
+- Calendar поддерживает local/shared picker prefixCls для корня, ячеек и renderers
+  с независимыми Select/Radio шапки. DOM/ref/IDs, выбор даты, точность timestamp,
+  focus/selection и прежний запрет переноса кнопок режима сохранены.
+
 - ColorPicker поддерживает local/shared prefixCls с независимыми namespaces
   popup, полей и presets. Незавершённый HEX, caret/focus, цвет, раскрытие presets
   и custom container/trigger сохраняются; сбой кеша child selectors Source записан отдельно.

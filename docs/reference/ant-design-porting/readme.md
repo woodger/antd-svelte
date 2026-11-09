@@ -297,6 +297,11 @@ Color-picker-prefix выводит те же 94 правила как CSS data m
 namespaces разрешаются отдельно, canonical variables/marker сохраняются.
 Raw Source cache omission для child selectors отделён от public counterpart
 с уникальным локальным prefixCls; Native сохраняет прежние controls и состояния.
+Calendar-prefix выводит те же 123 правила, что calendar, включая media 480px.
+Picker owner и Calendar root states ограничены своим scope, canonical variables/marker
+сохраняются. Header Select/Radio используют независимые общие namespaces.
+Raw constrained-header wrapping отделён от public width=400px counterpart;
+он используется только для трёх высот controls, Native сохраняет прежний nowrap.
 Рецепт input-number-features извлекает variants, spinner, prefix/suffix и addon;
 прежние outlined/compact файлы не перезаписываются.
 Рецепт switch побайтно воспроизводит прежние 47 правил, включая reduced motion;

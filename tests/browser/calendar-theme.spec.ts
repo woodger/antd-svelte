@@ -106,7 +106,7 @@ test('Calendar inheritance reset preserves focused cells and its controlled valu
   await expect(host.getByLabel('Calendar theme events nested', { exact: true })).toHaveText('[]');
 });
 
-test('Calendar restores legacy controls without replacing fields or changing sibling tokens',
+test('Calendar restores default styling without replacing fields or changing sibling tokens',
   async ({ page }) => {
     const host = page.locator('[data-calendar-theme="normal"]');
     const full = host.locator('[data-calendar-panel="full-month"]');
