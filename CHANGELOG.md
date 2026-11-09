@@ -9,6 +9,10 @@
 
 ### Added
 
+- FloatButton/Group/BackTop поддерживает local/shared prefixCls с наследованием
+  от Group. Progress и анимация используют общий namespace; DOM/ref, открытое меню,
+  scroll и focus сохранены. Source owner/cache observations записаны отдельно.
+
 - Button поддерживает local/shared prefixCls для вариантов, размеров, shapes,
   icon/loading и Compact. Общий namespace служебных variables независим от local
   class; темы, приоритет стилей, DOM/ref, focus и native form actions сохранены.

@@ -6837,6 +6837,19 @@ Items создают отдельные Compact slots и имеют приори
 Snippet геометрия квадратных краёв определяется CSS siblings, без точного
 воспроизведения Compact edge classes. Circle использует Flex, square — Compact.
 Trigger click/hover включает меню; без trigger показывается список без trigger.
+FloatButton/Group/BackTop поддерживают local/shared prefixCls. У Group это базовый
+prefix кнопки без суффикса -group. Дочерние кнопки наследуют owner prefix при
+undefined; непустое локальное значение имеет приоритет, пустое выбирает общий
+ConfigProvider. Button/Badge/Tooltip/Compact сохраняют собственные namespaces;
+progress и параметры анимации используют общий prefix независимо от local class.
+Смена prefix сохраняет DOM/ref, открытое меню, scroll/progress, draft/selection/focus.
+
+В Ant Design Group не передаёт local prefix детям и trigger. Raw UMD замеры
+сохранены отдельно от matched public child prefixes и trigger semantic aliases/
+styles. В Svelte owner prefix наследуется. Shared local class в nested provider
+также обнаружил Source cache defect: BackTop теряет progress background. Fresh
+Inner measurement сохранён отдельно; Native изолирует class и global namespace.
+
 Placement top/bottom/left/right остаётся физическим и при RTL. Open + onOpenChange
 дают controlled mode: владелец может отклонить запрос; без open состояние внутреннее.
 Disabled блокирует переключение меню, но сам по себе не отключает детей.

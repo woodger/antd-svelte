@@ -145,6 +145,10 @@ defaults ограничены корнем, интеграция ColorPicker и�
 loading и Compact. Deprecated ButtonGroup и token declarations исключены;
 component defaults имеют нулевую specificity, чтобы сохранить legacy theme bridge.
 Runtime разделяет local classes и общий namespace служебных переменных.
+Рецепт float-button-prefix выводит 42 правила FloatButton/Group/BackTop. Runtime
+сохраняет component tokens, разделяет local classes и global Button/progress
+namespace; root selector сохраняет исходный приоритет FloatButton после Button
+при любом порядке head styles. Существующий scoped WAAPI fade остаётся в Native.
 Рецепт segmented-prefix выводит data module из 38 правил Segmented для локального
 prefixCls; runtime сохраняет CSS variables/marker и ограничивает defaults корнем.
 Рецепт flex-prefix выводит data module из 32 правил Flex без typography reset;

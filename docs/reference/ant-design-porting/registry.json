@@ -303,7 +303,21 @@
         "tests/browser/float-button-motion.spec.ts",
         "tests/browser/fixtures/ant-design-float-back-top-motion-reference.json",
         "docs/reference/theme-context.md",
-        "readme.md"
+        "readme.md",
+        "src/lib/FloatButtonSlot.svelte",
+        "src/lib/float-button.types.ts",
+        "src/lib/float-button-context.ts",
+        "src/lib/float-button-prefix.engine.ts",
+        "src/lib/float-button-prefix.engine.test.ts",
+        "src/lib/vendor/float-button-prefix.css.js",
+        "tools/ant-design-css-recipes.json",
+        "tests/browser/fixtures/FloatButtonPrefixScope.svelte",
+        "tests/browser/fixtures/FloatButtonPrefixFixtures.svelte",
+        "tests/browser/fixtures/FloatButtonPrefixSSRFixtures.svelte",
+        "tests/browser/fixtures/ant-design-float-button-prefix-reference.json",
+        "tests/browser/float-button-prefix-metrics.ts",
+        "tests/browser/float-button-prefix.spec.ts",
+        "tests/package/float-button-prefix.ssr.test.ts"
       ],
       "features": [
         {
@@ -352,11 +366,11 @@
         },
         {
           "id": "global-parity",
-          "title": "Произвольный prefixCls и общий z-index context",
+          "title": "Общий z-index context",
           "state": "missing",
           "requiredForV1": false,
           "evidence": [],
-          "note": "Общие React prefix/z-index механизмы ещё не перенесены; CSS popup base используется без нового stacking context API. FloatButton aliases/algorithms покрыты отдельной feature component-theme; ограничения Button/Badge/Tooltip сохраняются."
+          "note": "Общий React z-index context ещё не перенесён; CSS popup base используется без нового stacking context API. Prefix подключён отдельной feature; ограничения Button/Badge/Tooltip сохраняются."
         },
         {
           "id": "source-wave",
@@ -406,6 +420,46 @@
             "readme.md"
           ],
           "note": "FloatButtonBackTop fade анимирует только opacity по linear, как antFadeIn/antFadeOut. Raw UMD enter/leave кадры на50/200ms, локальный transform и cleanup после завершения проверяются через настоящий приостановленный WAAPI. Геометрия и easing меню группы сохраняются."
+        },
+        {
+          "id": "prefix-cls",
+          "title": "Локальный и общий FloatButton/Group/BackTop prefixCls",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/FloatButton.svelte",
+            "src/lib/FloatButtonGroup.svelte",
+            "src/lib/FloatButtonBackTop.svelte",
+            "src/lib/FloatButtonSlot.svelte",
+            "src/lib/float-button.types.ts",
+            "src/lib/float-button-context.ts",
+            "src/lib/float-button-motion.dom.ts",
+            "src/lib/float-button-prefix.engine.ts",
+            "src/lib/float-button-prefix.engine.test.ts",
+            "src/lib/vendor/float-button-prefix.css.js",
+            "tools/ant-design-css-recipes.json",
+            "tests/browser/fixtures/FloatButtonPrefixScope.svelte",
+            "tests/browser/fixtures/FloatButtonPrefixFixtures.svelte",
+            "tests/browser/fixtures/FloatButtonPrefixSSRFixtures.svelte",
+            "tests/browser/fixtures/ant-design-float-button-prefix-reference.json",
+            "tests/browser/float-button-prefix-metrics.ts",
+            "tests/browser/float-button-prefix.spec.ts",
+            "tests/package/float-button-prefix.ssr.test.ts"
+          ],
+          "note": "Local nonempty prefix wins; Group prefix задаётся без -group. Child undefined наследует owner, explicit empty выбирает provider. Button/Badge/Tooltip/Flex/Compact namespaces независимы; progress/size/list-motion private variables используют общий prefix без точек. 42 исходных CSS rules плюс scoped geometry priority adapter сохраняют порядок Source FloatButton после Button, не перекрывая более специфичные Compact margins. Canonical tokens/native themes/WAAPI contracts сохранены. Structured items и opaque square geometry, четыре placements, nested/sibling/alias themes, progress при scrollTop=120, DOM/ref/open/focus/selection/FormData и реальный closing transform сверяются с Source. String Badge count включает Source layout; legacy numeric DOM/spacing сохраняется без изменений."
+        },
+        {
+          "id": "prefix-owner-cache-observations",
+          "title": "Source Group owner omission и shared-local-class BackTop progress cache",
+          "state": "partial",
+          "requiredForV1": false,
+          "evidence": [
+            "tests/browser/fixtures/ant-design-float-button-prefix-reference.json",
+            "tests/browser/float-button-prefix.spec.ts",
+            "tests/package/float-button-prefix.ssr.test.ts",
+            "readme.md"
+          ],
+          "note": "Raw result сохраняет Source global-prefix children/trigger внутри local Group. Matched использует public child prefixCls, trigger semantic owner class aliases и public trigger styles position:relative/inset:auto. Native undefined child prefix наследует owner. Aliases matched сохраняет потерю nested Inner BackTop background-image и border progress; freshNested — unmodified Source fresh Inner provider с теми же public theme/props, expectedNative меняет только этот scope. Native two-axis CSS и общий namespace progress обходят stale Source cache. Явные child overrides не заменяются owner prefix."
         }
       ]
     },
@@ -19806,9 +19860,14 @@
             "tests/package/grid-row-prefix.ssr.test.ts",
             "src/lib/Button.svelte",
             "tests/browser/button-prefix.spec.ts",
-            "tests/package/button-prefix.ssr.test.ts"
+            "tests/package/button-prefix.ssr.test.ts",
+            "src/lib/FloatButton.svelte",
+            "src/lib/FloatButtonGroup.svelte",
+            "src/lib/FloatButtonBackTop.svelte",
+            "tests/browser/float-button-prefix.spec.ts",
+            "tests/package/float-button-prefix.ssr.test.ts"
           ],
-          "note": "Общий source resolver: local nonempty prefix wins, undefined/empty provider prefix наследует parent, suffix сохраняет точную роль. App/Layout/Sider/Header/Content/Footer, Statistic/Timer, QRCode, Timeline, Steps, Divider, Flex, Segmented, Avatar/Group, Badge/Ribbon, Tag/CheckableTag/Group, Empty, Skeleton/primitives, Spin, Progress, Result, Alert, Collapse, Affix, Tooltip/Popover/Popconfirm, Slider, BorderBeam, Masonry, Splitter, Anchor, Space/Compact/Addon, Breadcrumb и Row подключены; остальные families пока используют свои local/default prefixes. Source theme namespace fallback следует class prefix, inherited/local cssVar.prefix приоритетнее; explicit undefined сбрасывает inherited namespace к текущему provider. Theme/color defaults без настройки prefix не меняются. 13 raw UMD cases и 3 transitions, включая nested/reset/sibling scopes, live prefix/value identity и SSR. Display components отдельно сверяются с девятью raw UMD cases и тремя transitions; ambient typography/direction совпадают с Native provider DOM, текущее время Timer исключено из metrics. Divider/Flex/Segmented сверяются ещё с девятью raw UMD cases и тремя transitions; текущий FormData Segmented сохраняет исходное on. Status/display группа сверяется по 17 вариантам в девяти raw UMD cases и трём transitions. Прежние Native group spacing, Tag default и CheckableTag RTL classes, Skeleton wrappers учитываются явно; Badge number и Ribbon CSS отдельно используют общий prefix. Alert/Collapse/активный Affix сверяются ещё с девятью raw UMD cases и тремя transitions; SSR Affix не закрепляется, prefix update сохраняет редактор внутри раскрытой панели. Popup/single/range группа сверяется с 45 raw UMD cases и 15 transitions; delegated Tooltip/Popover namespaces независимы от local owner prefix, открытые DOM surfaces сохраняются. BorderBeam подключает также private variable namespace и двухмерный CSS scope; исходный shared-class cache defect записан отдельно и не перенесён. Masonry подключён с local priority, root/item/motion classes и отдельным global namespace inline width; source RTL-alias observation сохранён отдельно. Splitter подключён для всех частей и отдельного global namespace lazy preview; обновления сохраняют активный drag и существующее поведение hidden panels. Source shared-class CSS cache observation записан отдельно. Anchor подключён с inherited item prefixes, explicit per-item override и независимым Affix prefix. Source omission local owner→items записан raw/matched observations; Native сохраняет coherent classes/spacing/ink. Space family подключена с независимыми local prefixes, global Badge selector и Addon private variable namespace. Source shared-class Badge cache observation записан отдельно; существующие Compact adapters сохранены. Breadcrumb подключён для root/items/links/overlay/separators; исходный local separator namespace omission записан raw/matched measurements. Unbound Dropdown state сохраняется при parent spread updates, с прежними Native bind/callback/default fallback contracts. Row подключён отдельно от Col с прежним gutter context и responsive observer; Col/private namespace/Form CSS остаются отдельной миграцией. Button подключён для root/parts/states/Compact с независимым global namespace служебных variant variables; legacy theme bridge и Native disabled loading сохранены."
+          "note": "Общий source resolver: local nonempty prefix wins, undefined/empty provider prefix наследует parent, suffix сохраняет точную роль. App/Layout/Sider/Header/Content/Footer, Statistic/Timer, QRCode, Timeline, Steps, Divider, Flex, Segmented, Avatar/Group, Badge/Ribbon, Tag/CheckableTag/Group, Empty, Skeleton/primitives, Spin, Progress, Result, Alert, Collapse, Affix, Tooltip/Popover/Popconfirm, Slider, BorderBeam, Masonry, Splitter, Anchor, Space/Compact/Addon, Breadcrumb и Row подключены; остальные families пока используют свои local/default prefixes. Source theme namespace fallback следует class prefix, inherited/local cssVar.prefix приоритетнее; explicit undefined сбрасывает inherited namespace к текущему provider. Theme/color defaults без настройки prefix не меняются. 13 raw UMD cases и 3 transitions, включая nested/reset/sibling scopes, live prefix/value identity и SSR. Display components отдельно сверяются с девятью raw UMD cases и тремя transitions; ambient typography/direction совпадают с Native provider DOM, текущее время Timer исключено из metrics. Divider/Flex/Segmented сверяются ещё с девятью raw UMD cases и тремя transitions; текущий FormData Segmented сохраняет исходное on. Status/display группа сверяется по 17 вариантам в девяти raw UMD cases и трём transitions. Прежние Native group spacing, Tag default и CheckableTag RTL classes, Skeleton wrappers учитываются явно; Badge number и Ribbon CSS отдельно используют общий prefix. Alert/Collapse/активный Affix сверяются ещё с девятью raw UMD cases и тремя transitions; SSR Affix не закрепляется, prefix update сохраняет редактор внутри раскрытой панели. Popup/single/range группа сверяется с 45 raw UMD cases и 15 transitions; delegated Tooltip/Popover namespaces независимы от local owner prefix, открытые DOM surfaces сохраняются. BorderBeam подключает также private variable namespace и двухмерный CSS scope; исходный shared-class cache defect записан отдельно и не перенесён. Masonry подключён с local priority, root/item/motion classes и отдельным global namespace inline width; source RTL-alias observation сохранён отдельно. Splitter подключён для всех частей и отдельного global namespace lazy preview; обновления сохраняют активный drag и существующее поведение hidden panels. Source shared-class CSS cache observation записан отдельно. Anchor подключён с inherited item prefixes, explicit per-item override и независимым Affix prefix. Source omission local owner→items записан raw/matched observations; Native сохраняет coherent classes/spacing/ink. Space family подключена с независимыми local prefixes, global Badge selector и Addon private variable namespace. Source shared-class Badge cache observation записан отдельно; существующие Compact adapters сохранены. Breadcrumb подключён для root/items/links/overlay/separators; исходный local separator namespace omission записан raw/matched measurements. Unbound Dropdown state сохраняется при parent spread updates, с прежними Native bind/callback/default fallback contracts. Row подключён отдельно от Col с прежним gutter context и responsive observer; Col/private namespace/Form CSS остаются отдельной миграцией. Button подключён для root/parts/states/Compact с независимым global namespace служебных variant variables; legacy theme bridge и Native disabled loading сохранены. FloatButton family подключена с owner inheritance, независимым Button namespace, global progress/WAAPI variables и отдельно записанными Source owner/cache observations."
         },
         {
           "id": "native-legacy-prefix-namespace",

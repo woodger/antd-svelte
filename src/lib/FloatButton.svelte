@@ -7,6 +7,8 @@
   import { useConfig } from './config-context';
   import { useComponentTheme } from './theme-component.svelte';
   import { useFloatButton } from './float-button-context';
+  import { getFloatButtonPrefixCss } from './float-button-prefix.engine';
+  import ThemeScopeStyle from './ThemeScopeStyle.svelte';
   import { connectFeedbackFocus } from './feedback.dom';
   import type { BadgeProps } from './badge.types';
   import type { TooltipProps } from './tooltip.types';
@@ -23,12 +25,17 @@
     class: className = '',
     rootClassName = '',
     style,
+    prefixCls: customizePrefixCls,
     nativeElement = $bindable(),
     ...rest
   }: FloatButtonProps = $props();
   const config = useConfig();
   const componentTheme = useComponentTheme('FloatButton');
   const group = useFloatButton();
+  let prefixCls = $derived(customizePrefixCls === undefined && group?.prefixCls
+    ? group.prefixCls : config.getPrefixCls('float-btn', customizePrefixCls));
+  let rootPrefixCls = $derived(config.getPrefixCls());
+  let prefixCss = $derived(getFloatButtonPrefixCss(prefixCls, rootPrefixCls));
   let actualShape = $derived(group?.shape || shape);
   let individual = $derived(group?.individual ?? true);
   let actualIcon = $derived(!buttonHasContent(content) && !icon ? defaultIcon : icon);
@@ -46,7 +53,8 @@
         styles,
         class: className,
         rootClassName,
-        style
+        style,
+        prefixCls: customizePrefixCls
       }
     }
   );
@@ -57,10 +65,10 @@
   let combinedClasses = $derived(
     {
       root: [group?.classNames.root, classes.root].filter(Boolean).join(' '),
-      icon: ['ant-float-btn-icon', group?.classNames.icon, classes.icon].filter(Boolean).join(
+      icon: [`${prefixCls}-icon`, group?.classNames.icon, classes.icon].filter(Boolean).join(
         ' '
       ),
-      content: ['ant-float-btn-content', group?.classNames.content, classes.content].filter(
+      content: [`${prefixCls}-content`, group?.classNames.content, classes.content].filter(
         Boolean
       )
         .join(
@@ -109,8 +117,8 @@
     <span class={combinedClasses.content} style={combinedStyles.content}>{#if typeof content === 'function'}{@render content()}{:else}{buttonText(content, insert)}{/if}</span>
   {/if}
   {#if badge !== undefined}<Badge {...cleanBadge} class={[
-      'ant-float-btn-badge',
-      cleanBadge.dot && 'ant-float-btn-badge-dot',
+      `${prefixCls}-badge`,
+      cleanBadge.dot && `${prefixCls}-badge-dot`,
       cleanBadge.class,
       combinedClasses.content
     ].filter(
@@ -123,15 +131,18 @@
 {/snippet}
 {#snippet node()}
   <Button {...rest} {type} shape={actualShape} size="large" icon={actualIcon} children={contentNode} _skipSemantic _skipContentWrapper
+    data-ant-float-root
+    data-ant-float-prefix={prefixCss ? prefixCls : undefined}
+    data-ant-float-global={prefixCss ? rootPrefixCls : undefined}
     _themeStyle={componentTheme.style}
     class={[
-        'ant-float-btn ant-float-btn-css-var',
+        `${prefixCls} ant-float-btn-css-var`,
         componentTheme.className,
-        `ant-float-btn-${type}`,
-        `ant-float-btn-${actualShape}`,
-        config.direction === 'rtl' && 'ant-float-btn-rtl',
-        individual && 'ant-float-btn-individual',
-        !buttonHasContent(content) && 'ant-float-btn-icon-only',
+        `${prefixCls}-${type}`,
+        `${prefixCls}-${actualShape}`,
+        config.direction === 'rtl' && `${prefixCls}-rtl`,
+        individual && `${prefixCls}-individual`,
+        !buttonHasContent(content) && `${prefixCls}-icon-only`,
         className,
         rootClassName
       ].filter(
@@ -143,3 +154,6 @@
 {/snippet}
 {#if tooltipProps}<Tooltip {...tooltipProps} style={[group
     && 'display:contents', tooltipProps.style].filter(Boolean).join(';')}>{@render node()}</Tooltip>{:else}{@render node()}{/if}
+{#if prefixCss}
+  <ThemeScopeStyle css={prefixCss} scope={`float-button-prefix:${prefixCls}:${rootPrefixCls}`} />
+{/if}

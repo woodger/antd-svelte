@@ -4,6 +4,9 @@
   import type { FloatButtonContext } from './float-button-context';
   let { context, children }: { context: FloatButtonContext; children?: Snippet; } = $props();
   provideFloatButton({
+    get prefixCls() {
+      return context.prefixCls;
+    },
     get shape() {
       return context.shape;
     },

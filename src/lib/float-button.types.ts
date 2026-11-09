@@ -31,6 +31,8 @@ export interface FloatButtonProps extends Omit<
   | '_themeStyle'
   | 'prefixCls'
 > {
+  /** У кнопки undefined наследует prefix Group; пустой prefix выбирает ConfigProvider. */
+  prefixCls?: string;
   type?: FloatButtonType;
   /** @defaultValue 'circle' */
   shape?: FloatButtonShape;
@@ -61,6 +63,8 @@ export interface FloatButtonGroupProps extends Omit<
   FloatButtonProps,
   'classNames' | 'styles' | 'nativeElement'
 > {
+  /** Базовый prefix без -group; empty/undefined наследуют ConfigProvider. */
+  prefixCls?: string;
   children?: Snippet;
   items?: readonly { key: string | number; children: Snippet; }[];
   trigger?: 'click' | 'hover';

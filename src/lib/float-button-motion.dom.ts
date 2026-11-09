@@ -2,7 +2,8 @@ export function createFloatButtonMotion(
   node: Element,
   menu: boolean,
   remove: () => void,
-  initialTarget?: boolean
+  initialTarget?: boolean,
+  getRootPrefix: () => string = () => 'ant'
 ) {
   const view = node.ownerDocument.defaultView!;
   const reduced = view.matchMedia('(prefers-reduced-motion: reduce)');
@@ -48,7 +49,7 @@ export function createFloatButtonMotion(
         return;
       }
       const shift = menu
-        ? style.getPropertyValue('--ant-float-btn-list-transform-start').trim()
+        ? style.getPropertyValue(`--${getRootPrefix().replace(/\./g, '')}-float-btn-list-transform-start`).trim()
         || 'translate(0,40px)'
         : 'none';
       const current = revision;
