@@ -181,6 +181,9 @@ wrappers/mask/input/separator; вложенный Input использует о�
 Canonical variables/markers сохранены, Input tokens применяются к группе.
 Source пропуск локального mask prefix записан raw/matched public ConfigProvider
 замерами; native values/keyboard/ref/selection contracts не меняются.
+Рецепт input-number-prefix выводит 124 исходных правила обоих modes, вариантов,
+размеров, affixes/actions и Compact. Deprecated addons/token declarations исключены;
+canonical component variables/marker и native geometry adapters сохранены.
 Рецепт segmented-prefix выводит data module из 38 правил Segmented для локального
 prefixCls; runtime сохраняет CSS variables/marker и ограничивает defaults корнем.
 Рецепт flex-prefix выводит data module из 32 правил Flex без typography reset;

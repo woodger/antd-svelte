@@ -9,6 +9,10 @@
 
 ### Added
 
+- InputNumber поддерживает local/shared prefixCls со стилями обоих modes, вариантов,
+  affixes, actions и Compact. Native geometry adapters, арифметика, draft/selection,
+  refs, клавиатура и canonical FormData сохранены.
+
 - InputOTP поддерживает local/shared prefixCls для группы, ячеек, separators и маски.
   Source tokens применяются к группе; global Input namespace и прежние значения,
   клавиатура, refs/focus сохранены. Source mask prefix defect записан raw/matched.

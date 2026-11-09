@@ -7423,7 +7423,18 @@
         "tests/browser/fixtures/ConfigVariantsFixtures.svelte",
         "tests/browser/config-variants-metrics.ts",
         "tests/browser/config-variants.spec.ts",
-        "tests/package/config-variants.ssr.test.ts"
+        "tests/package/config-variants.ssr.test.ts",
+        "src/lib/input-number-prefix.engine.ts",
+        "src/lib/input-number-prefix.engine.test.ts",
+        "src/lib/vendor/input-number-prefix.css.js",
+        "tools/ant-design-css-recipes.json",
+        "tests/browser/fixtures/InputNumberPrefixScope.svelte",
+        "tests/browser/fixtures/InputNumberPrefixFixtures.svelte",
+        "tests/browser/fixtures/InputNumberPrefixSSRFixtures.svelte",
+        "tests/browser/fixtures/ant-design-input-number-prefix-reference.json",
+        "tests/browser/input-number-prefix-metrics.ts",
+        "tests/browser/input-number-prefix.spec.ts",
+        "tests/package/input-number-prefix.ssr.test.ts"
       ],
       "features": [
         {
@@ -7536,7 +7547,7 @@
             "tests/browser/control-theme.spec.ts",
             "docs/reference/theme-context.md"
           ],
-          "note": "Source component tokens, подготовка padding/fonts/shadows/handles и runtime algorithms подключены к CSS при source-настройках. Native-only compact/focus CSS сохраняется. PrefixCls CSS, общий Form feedback/variant context, React diagnostics/PurePanel и полный renderer остаются в работе."
+          "note": "Source component tokens, подготовка padding/fonts/shadows/handles и runtime algorithms подключены к CSS при source-настройках. Native-only compact/focus CSS сохраняется. Local/shared prefixCls CSS подключён. Общий Form feedback, React diagnostics и полный renderer остаются в работе; internal PurePanel не входит в публичный перенос."
         },
         {
           "id": "control-theme-tokens",
@@ -7575,6 +7586,28 @@
             "tests/package/config-variants.ssr.test.ts"
           ],
           "note": "Control читает общий source priority local/Form/inputNumber/global. Decimal values, editor drafts, native bindings/refs и semantic styles сохраняются."
+        },
+        {
+          "id": "prefix-cls",
+          "title": "Локальный и общий InputNumber prefixCls с CSS",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/InputNumberControl.svelte",
+            "src/lib/input-number.types.ts",
+            "src/lib/input-number-prefix.engine.ts",
+            "src/lib/input-number-prefix.engine.test.ts",
+            "src/lib/vendor/input-number-prefix.css.js",
+            "tools/ant-design-css-recipes.json",
+            "tests/browser/fixtures/InputNumberPrefixScope.svelte",
+            "tests/browser/fixtures/InputNumberPrefixFixtures.svelte",
+            "tests/browser/fixtures/InputNumberPrefixSSRFixtures.svelte",
+            "tests/browser/fixtures/ant-design-input-number-prefix-reference.json",
+            "tests/browser/input-number-prefix-metrics.ts",
+            "tests/browser/input-number-prefix.spec.ts",
+            "tests/package/input-number-prefix.ssr.test.ts"
+          ],
+          "note": "Nonempty local prefix wins, empty/undefined наследуют ConfigProvider. 124 Source CSS rules покрывают input/spinner, variants, sizes/RTL, affixes/actions и Compact без deprecated addons. Canonical component variables/marker и native geometry/reduced-motion adapters сохранены; semantic props/style priority прежние. Official UMD matrix использует stringMode и проверяет nested/sibling scopes, component aliases и cssVar prefix. Live changes сохраняют root/input/ref, decimal draft, selection/focus и callback count. Source FormData сохраняет draft text; Native hidden field сохраняет canonical decimal value по прежнему контракту. Обычный parser/commit/validation/reset и keyboard arithmetic не меняются. Source rc focus class не совпадает с action CSS: raw measurements и public className counterpart сохранены раздельно; Native сохраняет прежний mode-focused class."
         }
       ]
     },

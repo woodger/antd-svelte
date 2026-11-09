@@ -1763,9 +1763,10 @@ focus/blur доступны также через bind:this. Mouse callbacks с 
 finite number/null, safe-integer defaults, проверку формы и commit черновика.
 Точность step не добавляет нули к отображению автоматически. Это явно отличается
 от rc-input-number; stringMode использует исходный десятичный алгоритм.
-Общий token engine, точное соответствие compact/focus цветов и React diagnostics/
-PurePanel остаются пробелами переноса. Нативные кнопки и Svelte snippets заменяют
-React spans/nodes. CSS-рецепт input-number-features извлекает 65 новых правил,
+Source component tokens и runtime algorithms подключены; native-only compact/focus
+оформление сохраняет прежний контракт. React diagnostics и полный style renderer
+остаются в работе; internal PurePanel не входит в публичный перенос. Нативные кнопки
+и Svelte snippets заменяют React spans/nodes. CSS-рецепт input-number-features извлекает 64 правила,
 не перезаписывая прежние outlined/compact стили; арифметика сопровождается
 [MIT mini-decimal](./src/lib/vendor/LICENSE.rc-mini-decimal).
 
@@ -1773,6 +1774,24 @@ React spans/nodes. CSS-рецепт input-number-features извлекает 65 
 Новые сценарии: `?fixture=input-number-features`,
 [browser](./tests/browser/input-number-features.spec.ts) и
 [package SSR](./tests/package/input-number-features.ssr.test.ts).
+
+
+InputNumber поддерживает local/shared prefixCls вместе с CSS обоих modes,
+вариантов, размеров, affixes/actions и Compact. Непустой local prefix имеет
+приоритет; empty/undefined наследуют ConfigProvider. Canonical token variables
+и marker сохраняются; native geometry и reduced-motion adapters используют
+стабильные классы/атрибуты. Смена prefix сохраняет root/input/ref, текстовый draft,
+selection/focus, callbacks, keyboard и canonical FormData. Source measurements
+снимаются в stringMode; Source FormData хранит редактируемый текст, а Native
+hidden field — каноническое decimal value, как прежде. Проверки —
+`?fixture=input-number-prefix`,
+[browser](./tests/browser/input-number-prefix.spec.ts),
+[SSR](./tests/package/input-number-prefix.ssr.test.ts),
+[эталон UMD](./tests/browser/fixtures/ant-design-input-number-prefix-reference.json).
+Рецепт input-number-prefix выводит 124 исходных CSS rules без deprecated addons.
+В rc-input-number 1.6.2 focus class не совпадает с классом, ожидаемым CSS стрелок.
+Raw focused measurements и counterpart с public className сохранены раздельно;
+Native сохраняет прежний mode-focused class и видимые стрелки.
 
 ## ColorPicker
 
@@ -10173,7 +10192,7 @@ Empty, Skeleton с primitives, Spin, Progress, Result, Alert, Collapse, Affix,
 Tooltip, Popover, Popconfirm, Slider, BorderBeam, Masonry, Splitter, Anchor и
 Space/SpaceCompact/SpaceAddon, Breadcrumb, Row, Typography, Carousel, Descriptions, Tabs,
 Card с Grid/Meta, Button, FloatButton/Group/BackTop, Radio/RadioButton/RadioGroup,
-Checkbox/CheckboxGroup, Switch, Input, TextArea, InputPassword, InputSearch и InputOTP.
+Checkbox/CheckboxGroup, Switch, Input, TextArea, InputPassword, InputSearch, InputOTP и InputNumber.
 Остальные семейства подключаются отдельно. Например,
 ConfigProvider prefixCls="suite" создаёт suite-app, suite-layout,
 suite-layout-sider и suite-layout-header без изменения имён Svelte-компонентов.

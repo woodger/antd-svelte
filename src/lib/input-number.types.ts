@@ -75,7 +75,7 @@ export interface InputNumberProps<Value extends InputNumberValue = number> exten
   prefix?: InputNumberContent;
   suffix?: InputNumberContent;
   rootClassName?: string;
-  /** Меняет классы; CSS для произвольного префикса предоставляет потребитель. */
+  /** CSS prefix control и его частей; empty/undefined наследуют ConfigProvider. */
   prefixCls?: string;
   class?: string;
   style?: string;

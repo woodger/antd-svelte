@@ -3,6 +3,8 @@
   import { useConfig } from './config-context';
   import { useVariant } from './variant.svelte';
   import { useComponentTheme } from './theme-component.svelte';
+  import { getInputNumberPrefixCss } from './input-number-prefix.engine';
+  import ThemeScopeStyle from './ThemeScopeStyle.svelte';
   import { useCompact } from './space-compact-context';
   import { compactClasses } from './space-compact.engine';
   import { useForm, useFormField } from './form-context';
@@ -71,7 +73,8 @@
   let disabled = $derived(props.disabled ?? field?.disabled ?? form?.disabled
     ?? config.componentDisabled);
   let readonly = $derived(props.readonly ?? props.readOnly);
-  let prefixCls = $derived(props.prefixCls ?? 'ant-input-number');
+  let prefixCls = $derived(config.getPrefixCls('input-number', props.prefixCls));
+  let prefixCss = $derived(getInputNumberPrefixCss(prefixCls));
   let variant = $derived(variantContext.variant);
   let mode = $derived(props.mode ?? 'input');
   let controls = $derived(props.controls !== false && !disabled && !readonly);
@@ -433,8 +436,8 @@
 
 <style>
   .input-number-root { max-width: 100%; height: var(--ant-control-height); min-height: calc(var(--ant-input-number-input-font-size) * var(--ant-line-height) + var(--ant-input-number-padding-block) * 2 + var(--ant-line-width) * 2); }
-  .input-number-root.ant-input-number-lg { height: var(--ant-control-height-lg); min-height: calc(var(--ant-input-number-input-font-size-lg) * var(--ant-line-height-lg) + var(--ant-input-number-padding-block-lg) * 2 + var(--ant-line-width) * 2); }
-  .input-number-root.ant-input-number-sm { height: var(--ant-control-height-sm); min-height: calc(var(--ant-input-number-input-font-size-sm) * var(--ant-line-height) + var(--ant-input-number-padding-block-sm) * 2 + var(--ant-line-width) * 2); }
+  .input-number-root[data-ant-input-number-size='large'] { height: var(--ant-control-height-lg); min-height: calc(var(--ant-input-number-input-font-size-lg) * var(--ant-line-height-lg) + var(--ant-input-number-padding-block-lg) * 2 + var(--ant-line-width) * 2); }
+  .input-number-root[data-ant-input-number-size='small'] { height: var(--ant-control-height-sm); min-height: calc(var(--ant-input-number-input-font-size-sm) * var(--ant-line-height) + var(--ant-input-number-padding-block-sm) * 2 + var(--ant-line-width) * 2); }
   .input-number-input { min-width: 0; height: 100%; }
   .input-number-root .input-number-suffix { height: auto; }
   @media (prefers-reduced-motion: reduce) {
@@ -449,6 +452,9 @@
     onStep={() => changeStep(direction === 'up' ? 1 : -1, 'handler')} />
 {/snippet}
 
+{#if prefixCss}
+  <ThemeScopeStyle css={prefixCss} scope={`input-number-prefix:${prefixCls}`} />
+{/if}
 <svelte:document onreset={handleReset} />
 <!-- svelte-ignore a11y_no_static_element_interactions, a11y_click_events_have_key_events, a11y_mouse_events_have_key_events (Mouse callbacks принадлежат root; клавиатурой и фокусом управляет native input.) -->
 <div bind:this={nativeElement} class={[
@@ -462,6 +468,8 @@
   compactClasses(prefixCls, config.direction, compact), config.inputNumber?.class,
   props.class, props.rootClassName, classes.root
 ]} style={styles.root} data-ant-number-theme={config.theme.mode}
+  data-ant-input-number-prefix={prefixCss ? prefixCls : undefined}
+  data-ant-input-number-size={size}
   onmousedown={event => {
     if (!alive) return;
 
