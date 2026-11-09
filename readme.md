@@ -6418,6 +6418,18 @@ switcherIcon/switcherLoadingIcon, titleRender и filterTreeNode поддержа
 Height ограничивает native scroll viewport; виртуализация пока не применяется.
 SSR рендерит видимые строки без загрузки и browser APIs.
 
+`prefixCls` меняет namespace дерева, nodes, checkbox, switcher и линий; пустая
+строка наследует ConfigProvider.prefixCls. Canonical Tree tokens и generated IDs
+сохранены; общий Row selector независим от local prefix. Шаблон tree-prefix
+воспроизводит 98 исходных правил с изоляцией root/RTL/line scopes.
+[Raw замеры](./tests/browser/fixtures/ant-design-tree-prefix-reference.json)
+отделены от public root-style и readonly-selection counterparts. Прежний Native
+Tree сохраняет заданный selection при selectable=false; React при initial render
+его отбрасывает. Отдельный public вариант запрещает selection на каждом узле.
+Смена prefix сохраняет DOM/ref, active descendant, focus, checked/selected state
+и pending load. Внутренний TreeSelect пока использует canonical Tree namespace
+своего существующего CSS-адаптера; его собственный prefix API переносится отдельно.
+
 `ConfigProvider.theme.components.Tree` подключён к общему механизму компонентной
 темы: метрики title/switcher/indent, hover/selected colors, alias overrides,
 global/component algorithms и custom cssVar prefix. Локальные CSS variables и

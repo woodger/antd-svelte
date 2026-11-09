@@ -1,5 +1,7 @@
 <script lang="ts">
   import { onDestroy, tick, untrack } from 'svelte';
+  import ThemeScopeStyle from './ThemeScopeStyle.svelte';
+  import { getTreePrefixCss } from './tree-prefix.engine';
   import type { TreeProps, TreeKey, TreeEventNode, TreeCheckedKeys } from './tree.types';
   import {
     buildTreeEntities,
@@ -19,6 +21,7 @@
   import { useForm } from './form-context';
   import TreeIcon from './TreeIcon.svelte';
   let {
+    prefixCls: customizePrefixCls,
     treeData = [],
     expandedKeys,
     defaultExpandedKeys = [],
@@ -67,6 +70,9 @@
     ...attributes
   }: TreeProps = $props();
   const config = useConfig();
+  let componentPrefix = $derived(config.getPrefixCls('tree', customizePrefixCls));
+  let rootPrefix = $derived(config.getPrefixCls());
+  let prefixCss = $derived(getTreePrefixCss(componentPrefix, rootPrefix));
   const componentTheme = useComponentTheme('Tree');
   let themeStyle = $derived(_themeStyle ?? componentTheme.style);
   const form = useForm();
@@ -364,36 +370,36 @@
   }
 </script>
 <style>
-  button.ant-tree-switcher, button.ant-tree-node-content-wrapper { padding:0;border:0;background:transparent;color:inherit;font:inherit;text-align:inherit; }
-  button.ant-tree-node-content-wrapper { padding:0 var(--ant-padding-xs); }
-  .ant-tree-list-holder-inner { display:flex;flex-direction:column; }
-  .ant-tree-checkbox { flex-shrink:0;padding:0;cursor:pointer; }
+  button[data-ant-tree-switcher], button[data-ant-tree-content] { padding:0;border:0;background:transparent;color:inherit;font:inherit;text-align:inherit; }
+  button[data-ant-tree-content] { padding:0 var(--ant-padding-xs); }
+  [data-ant-tree-list-inner] { display:flex;flex-direction:column; }
+  [data-ant-tree-checkbox] { flex-shrink:0;padding:0;cursor:pointer; }
   /* Source TreeSelect использует рамку и фон checkbox из своего vendor scope. */
-  .ant-tree-checkbox:not(:where(.ant-tree-select-source-tree *)) { border:0;background:transparent; }
-  .ant-tree-checkbox:focus-visible { outline:2px solid var(--ant-color-primary); }
-  .ant-tree-switcher:focus-visible { outline:2px solid var(--ant-color-primary); }
+  [data-ant-tree-checkbox]:not(:where(.ant-tree-select-source-tree *)) { border:0;background:transparent; }
+  [data-ant-tree-checkbox]:focus-visible { outline:2px solid var(--ant-color-primary); }
+  [data-ant-tree-switcher]:focus-visible { outline:2px solid var(--ant-color-primary); }
 </style>
-<div bind:this={nativeElement} class={[
-    'ant-tree ant-tree-css-var',
+{#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`tree-prefix:${componentPrefix}:${rootPrefix}`} />{/if}<div data-ant-tree-root data-ant-tree-prefix={componentPrefix} data-ant-tree-root-prefix={rootPrefix} bind:this={nativeElement} class={[
+    `${componentPrefix} ant-tree-css-var`,
     componentTheme.className,
-    showLine && 'ant-tree-show-line',
-    !showIcon && 'ant-tree-icon-hide',
-    blockNode && 'ant-tree-block-node',
-    !selectable && 'ant-tree-unselectable',
-    blocked && 'ant-tree-disabled',
-    focused && 'ant-tree-focused',
-    config.direction === 'rtl' && 'ant-tree-rtl',
+    showLine && `${componentPrefix}-show-line`,
+    !showIcon && `${componentPrefix}-icon-hide`,
+    blockNode && `${componentPrefix}-block-node`,
+    !selectable && `${componentPrefix}-unselectable`,
+    blocked && `${componentPrefix}-disabled`,
+    focused && `${componentPrefix}-focused`,
+    config.direction === 'rtl' && `${componentPrefix}-rtl`,
     className,
     rootClassName
   ]} style={themeStyle ? [themeStyle, style].filter(Boolean).join(';') : style} dir={config.direction}>
-  <div {...attributes} bind:this={focusElement} class="ant-tree-list" role="tree" tabindex={!blocked && focusable ? tabindex : undefined} aria-multiselectable={multiple || undefined} aria-disabled={blocked || undefined} aria-activedescendant={visible.some(entry => entry.key === active)
+  <div {...attributes} bind:this={focusElement} class={`${componentPrefix}-list`} role="tree" tabindex={!blocked && focusable ? tabindex : undefined} aria-multiselectable={multiple || undefined} aria-disabled={blocked || undefined} aria-activedescendant={visible.some(entry => entry.key === active)
       ? nodeId(active!)
       : undefined} onkeydown={keyboard} onfocus={focusIn} onblur={event => {
           focused = false;
           onblur?.(event);
         }}>
-    <div class="ant-tree-list-holder" style:max-height={height === undefined ? undefined : `${height}px`} style:overflow={height === undefined ? undefined : 'auto'}>
-    <div class="ant-tree-list-holder-inner">
+    <div class={`${componentPrefix}-list-holder`} style:max-height={height === undefined ? undefined : `${height}px`} style:overflow={height === undefined ? undefined : 'auto'}>
+    <div data-ant-tree-list-inner class={`${componentPrefix}-list-holder-inner`}>
       {#each visible as entry (entry.key)}
         {@const node = eventNode(entry)}
         {@const isLeaf = leaf(entry)}
@@ -405,45 +411,45 @@
                 ? node.halfChecked ? 'mixed' : node.checked
                 : undefined} aria-disabled={unavailable} aria-busy={node.loading || undefined}
           class={[
-              'ant-tree-treenode',
-              `ant-tree-treenode-switcher-${node.expanded ? 'open' : 'close'}`,
-              unavailable && 'ant-tree-treenode-disabled',
-              node.selected && 'ant-tree-treenode-selected',
-              node.checked && 'ant-tree-treenode-checkbox-checked',
-              node.halfChecked && 'ant-tree-treenode-checkbox-indeterminate',
-              node.loading && 'ant-tree-treenode-loading',
-              active === entry.key && 'ant-tree-treenode-active',
-              isLeaf && 'ant-tree-treenode-leaf',
-              entry.ends.at(-1) && 'ant-tree-treenode-leaf-last',
+              `${componentPrefix}-treenode`,
+              `${componentPrefix}-treenode-switcher-${node.expanded ? 'open' : 'close'}`,
+              unavailable && `${componentPrefix}-treenode-disabled`,
+              node.selected && `${componentPrefix}-treenode-selected`,
+              node.checked && `${componentPrefix}-treenode-checkbox-checked`,
+              node.halfChecked && `${componentPrefix}-treenode-checkbox-indeterminate`,
+              node.loading && `${componentPrefix}-treenode-loading`,
+              active === entry.key && `${componentPrefix}-treenode-active`,
+              isLeaf && `${componentPrefix}-treenode-leaf`,
+              entry.ends.at(-1) && `${componentPrefix}-treenode-leaf-last`,
               filterTreeNode?.(node) && 'filter-node',
               entry.node.class
             ]} style={entry.node.style}>
-          <span class="ant-tree-indent" aria-hidden="true">{#each entry.ends.slice(0, -1) as end}<span class={[
-              'ant-tree-indent-unit',
-              !end && 'ant-tree-indent-unit-start',
-              end && 'ant-tree-indent-unit-end'
+          <span class={`${componentPrefix}-indent`} aria-hidden="true">{#each entry.ends.slice(0, -1) as end}<span class={[
+              `${componentPrefix}-indent-unit`,
+              !end && `${componentPrefix}-indent-unit-start`,
+              end && `${componentPrefix}-indent-unit-end`
             ]}></span>{/each}</span>
-          {#if isLeaf}<span class="ant-tree-switcher ant-tree-switcher-noop" aria-hidden="true">{#if showLine}{#if typeof showLine === 'object' && showLine.showLeafIcon}<TreeIcon name="file" class="ant-tree-switcher-line-icon" />{:else}<span class="ant-tree-switcher-leaf-line"></span>{/if}{/if}</span>
-          {:else}<button type="button" tabindex="-1" class={[
-              'ant-tree-switcher',
-              `ant-tree-switcher_${node.expanded ? 'open' : 'close'}`
+          {#if isLeaf}<span data-ant-tree-switcher class={`${componentPrefix}-switcher ${componentPrefix}-switcher-noop`} aria-hidden="true">{#if showLine}{#if typeof showLine === 'object' && showLine.showLeafIcon}<TreeIcon name="file" class={`${componentPrefix}-switcher-line-icon`} />{:else}<span class={`${componentPrefix}-switcher-leaf-line`}></span>{/if}{/if}</span>
+          {:else}<button type="button" data-ant-tree-switcher tabindex="-1" class={[
+              `${componentPrefix}-switcher`,
+              `${componentPrefix}-switcher_${node.expanded ? 'open' : 'close'}`
             ]} aria-label={node.expanded
                 ? config.locale.tree?.collapse ?? 'Collapse'
-                : config.locale.tree?.expand ?? 'Expand'} aria-expanded={node.expanded} onmousedown={mouseFocus} onclick={event => expand(entry, event)}>{#if node.loading}{#if switcherLoadingIcon}{@render switcherLoadingIcon(node)}{:else}<TreeIcon name="loading" class="ant-tree-switcher-loading-icon" />{/if}{:else if switcherIcon}{@render switcherIcon(node)}{:else}<TreeIcon name={showLine ? node.expanded ? 'minus' : 'plus' : 'caret'} class={showLine
-                  ? 'ant-tree-switcher-line-icon'
-                  : 'ant-tree-switcher-icon'} />{/if}</button>{/if}
-          {#if hasCheck}<button type="button" role="checkbox" tabindex="-1" aria-checked={node.halfChecked ? 'mixed' : node.checked} aria-labelledby={`${nodeId(entry.key)}-title`} disabled={unavailable || entry.node.disableCheckbox} class={[
-              'ant-tree-checkbox',
-              node.checked && 'ant-tree-checkbox-checked',
-              node.halfChecked && 'ant-tree-checkbox-indeterminate',
-              (unavailable || entry.node.disableCheckbox) && 'ant-tree-checkbox-disabled'
-            ]} onmousedown={mouseFocus} onclick={event => check(entry, event)}><span class="ant-tree-checkbox-inner"></span></button>{/if}
-          <button type="button" tabindex="-1" class={[
-              'ant-tree-node-content-wrapper',
-              `ant-tree-node-content-wrapper-${isLeaf
+                : config.locale.tree?.expand ?? 'Expand'} aria-expanded={node.expanded} onmousedown={mouseFocus} onclick={event => expand(entry, event)}>{#if node.loading}{#if switcherLoadingIcon}{@render switcherLoadingIcon(node)}{:else}<TreeIcon name="loading" class={`${componentPrefix}-switcher-loading-icon`} />{/if}{:else if switcherIcon}{@render switcherIcon(node)}{:else}<TreeIcon name={showLine ? node.expanded ? 'minus' : 'plus' : 'caret'} class={showLine
+                  ? `${componentPrefix}-switcher-line-icon`
+                  : `${componentPrefix}-switcher-icon`} />{/if}</button>{/if}
+          {#if hasCheck}<button type="button" data-ant-tree-checkbox role="checkbox" tabindex="-1" aria-checked={node.halfChecked ? 'mixed' : node.checked} aria-labelledby={`${nodeId(entry.key)}-title`} disabled={unavailable || entry.node.disableCheckbox} class={[
+              `${componentPrefix}-checkbox`,
+              node.checked && `${componentPrefix}-checkbox-checked`,
+              node.halfChecked && `${componentPrefix}-checkbox-indeterminate`,
+              (unavailable || entry.node.disableCheckbox) && `${componentPrefix}-checkbox-disabled`
+            ]} onmousedown={mouseFocus} onclick={event => check(entry, event)}><span class={`${componentPrefix}-checkbox-inner`}></span></button>{/if}
+          <button type="button" data-ant-tree-content tabindex="-1" class={[
+              `${componentPrefix}-node-content-wrapper`,
+              `${componentPrefix}-node-content-wrapper-${isLeaf
                 ? 'normal'
                 : node.expanded ? 'open' : 'close'}`,
-              !unavailable && node.selected && 'ant-tree-node-selected'
+              !unavailable && node.selected && `${componentPrefix}-node-selected`
             ]} onmousedown={mouseFocus} onclick={event => click(entry, event)} ondblclick={event => onDoubleClick?.(event, node)} oncontextmenu={event => {
                 if (onRightClick) {
                   event.preventDefault();
@@ -451,10 +457,10 @@
                 }
               }}>
             {#if showIcon}<span class={[
-                'ant-tree-iconEle',
-                `ant-tree-icon__${isLeaf ? 'docu' : node.expanded ? 'open' : 'close'}`
+                `${componentPrefix}-iconEle`,
+                `${componentPrefix}-icon__${isLeaf ? 'docu' : node.expanded ? 'open' : 'close'}`
               ]}>{#if entry.node.icon}{@render entry.node.icon(node)}{:else if icon}{@render icon(node)}{/if}</span>{/if}
-            <span id={`${nodeId(entry.key)}-title`} class="ant-tree-title">{#if titleRender}{@render titleRender(entry.node)}{:else if typeof entry.node.title === 'function'}{@render entry.node.title(entry.node)}{:else}{entry.node.title ?? '---'}{/if}</span>
+            <span id={`${nodeId(entry.key)}-title`} class={`${componentPrefix}-title`}>{#if titleRender}{@render titleRender(entry.node)}{:else if typeof entry.node.title === 'function'}{@render entry.node.title(entry.node)}{:else}{entry.node.title ?? '---'}{/if}</span>
           </button>
         </div>
       {/each}

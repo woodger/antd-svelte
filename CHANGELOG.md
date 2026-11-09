@@ -9,6 +9,11 @@
 
 ### Added
 
+- Tree поддерживает local/shared prefixCls для nodes, checkbox, switcher и линий.
+  Canonical tokens, native focus/ARIA IDs, selection/check и pending load сохранены;
+  TreeSelect сохраняет свой текущий CSS-адаптер. Raw readonly-selection observation
+  отделён от public counterpart.
+
 - Upload/UploadDragger поддерживают local/shared prefixCls для trigger, списка
   и состояний. Canonical tokens/link reset и отдельные Button/Progress/Tooltip
   namespaces сохранены; DOM/refs/focus и выполняющийся запрос не пересоздаются.

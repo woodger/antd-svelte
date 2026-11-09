@@ -263,6 +263,10 @@ Raw замеры отделены от public close/wrapping и same-key refresh
 Runtime изолирует wrapper/RTL scopes и меняет owner classes всех controls/list
 states; canonical tokens/link reset и Button/Progress/Tooltip namespaces сохранены.
 Native file input, refs/focus и выполняющиеся запросы не зависят от публичных классов.
+Рецепт tree-prefix выводит 98 правил Tree/checkbox/line/RTL с прежним исключением
+collapse motion. Runtime изолирует local/global scopes, сохраняет canonical tokens
+и отдельный Row namespace. Native focus/IDs/state/load и CSS-адаптер TreeSelect
+сохранены; raw style/readonly-selection отделены от public counterparts.
 Рецепт layout-prefix выводит 35 flat rules Layout/Sider; runtime выбирает свою
 группу, сохраняет Menu namespace и ограничивает defaults/state selectors корнем.
 Тот же template используется для Header/Content/Footer: выбираются selectors
