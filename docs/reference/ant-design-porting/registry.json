@@ -9386,7 +9386,17 @@
         "tests/package/wave.ssr.test.ts",
         "tests/browser/wave.spec.ts",
         "tests/browser/fixtures/WaveFixtures.svelte",
-        "docs/reference/wave.md"
+        "docs/reference/wave.md",
+        "src/lib/switch-prefix.engine.ts",
+        "src/lib/switch-prefix.engine.test.ts",
+        "src/lib/vendor/switch-prefix.css.js",
+        "tests/browser/fixtures/SwitchPrefixScope.svelte",
+        "tests/browser/fixtures/SwitchPrefixFixtures.svelte",
+        "tests/browser/fixtures/SwitchPrefixSSRFixtures.svelte",
+        "tests/browser/fixtures/ant-design-switch-prefix-reference.json",
+        "tests/browser/switch-prefix-metrics.ts",
+        "tests/browser/switch-prefix.spec.ts",
+        "tests/package/switch-prefix.ssr.test.ts"
       ],
       "features": [
         {
@@ -9488,13 +9498,13 @@
         },
         {
           "id": "advanced-theme",
-          "title": "Source themes/Wave, произвольный prefix CSS и React diagnostics/statics",
+          "title": "Source themes/Wave и React diagnostics/statics",
           "state": "partial",
           "requiredForV1": false,
           "evidence": [
             "docs/reference/theme-context.md"
           ],
-          "note": "Source theme tokens и algorithms применяются к CSS; Wave подключён. произвольный prefixCls CSS и React diagnostics/statics остаются пробелами; native-only mode/primary/compact сохраняют прежнее оформление. V1-ready не означает полный React API."
+          "note": "Source theme tokens и algorithms применяются к CSS; Wave подключён. Local/shared prefixCls CSS подключён; React diagnostics/statics остаются пробелами; native-only mode/primary/compact сохраняют прежнее оформление. V1-ready не означает полный React API."
         },
         {
           "id": "source-wave",
@@ -9516,6 +9526,28 @@
             "docs/reference/wave.md"
           ],
           "note": "Capture listener, пять source triggers и RAF debounce последнего события, disabled/showEffect и полный текущий GlobalToken/native event/hash. Стандартные target/color/geometry/resize, ordinary/quick appear, opacity end и 5000ms deadline; cleanup RAF/timers/observers/DOM при unmount. SSR не создаёт effect DOM, native callbacks/form/focus сохраняются. Config wave records наследуются при отсутствии и заменяются при явном объекте. Восемь CSS rules из закреплённого архива; без React runtime."
+        },
+        {
+          "id": "prefix-cls",
+          "title": "Локальный и общий Switch prefixCls",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Switch.svelte",
+            "src/lib/switch.types.ts",
+            "src/lib/switch-prefix.engine.ts",
+            "src/lib/switch-prefix.engine.test.ts",
+            "src/lib/vendor/switch-prefix.css.js",
+            "tools/ant-design-css-recipes.json",
+            "tests/browser/fixtures/SwitchPrefixScope.svelte",
+            "tests/browser/fixtures/SwitchPrefixFixtures.svelte",
+            "tests/browser/fixtures/SwitchPrefixSSRFixtures.svelte",
+            "tests/browser/fixtures/ant-design-switch-prefix-reference.json",
+            "tests/browser/switch-prefix-metrics.ts",
+            "tests/browser/switch-prefix.spec.ts",
+            "tests/package/switch-prefix.ssr.test.ts"
+          ],
+          "note": "Local nonempty prefix wins; empty/undefined наследуют ConfigProvider. 47 правил подключены для root/checked/disabled/loading/size/RTL, handle, captions и loading icon. Canonical component variables, внешний anticon namespace и native max-width adapter сохранены; raw semantic props и приоритет style не меняются. UMD matrix охватывает sizes/loading/disabled/labels/RTL, nested/sibling providers, custom cssVar prefix и overrides. Live updates сохраняют DOM/ref, checked, draft/selection/focus и callback count. Native hidden form field, bindings/aliases, reset, keyboard и отменяемый click продолжают действовать; Source не имеет эквивалента hidden field. SSR не создаёт browser resources."
         }
       ]
     },
@@ -19969,9 +20001,12 @@
             "src/lib/Checkbox.svelte",
             "src/lib/CheckboxGroup.svelte",
             "tests/browser/checkbox-prefix.spec.ts",
-            "tests/package/checkbox-prefix.ssr.test.ts"
+            "tests/package/checkbox-prefix.ssr.test.ts",
+            "src/lib/Switch.svelte",
+            "tests/browser/switch-prefix.spec.ts",
+            "tests/package/switch-prefix.ssr.test.ts"
           ],
-          "note": "Общий source resolver: local nonempty prefix wins, undefined/empty provider prefix наследует parent, suffix сохраняет точную роль. App/Layout/Sider/Header/Content/Footer, Statistic/Timer, QRCode, Timeline, Steps, Divider, Flex, Segmented, Avatar/Group, Badge/Ribbon, Tag/CheckableTag/Group, Empty, Skeleton/primitives, Spin, Progress, Result, Alert, Collapse, Affix, Tooltip/Popover/Popconfirm, Slider, BorderBeam, Masonry, Splitter, Anchor, Space/Compact/Addon, Breadcrumb и Row подключены; остальные families пока используют свои local/default prefixes. Source theme namespace fallback следует class prefix, inherited/local cssVar.prefix приоритетнее; explicit undefined сбрасывает inherited namespace к текущему provider. Theme/color defaults без настройки prefix не меняются. 13 raw UMD cases и 3 transitions, включая nested/reset/sibling scopes, live prefix/value identity и SSR. Display components отдельно сверяются с девятью raw UMD cases и тремя transitions; ambient typography/direction совпадают с Native provider DOM, текущее время Timer исключено из metrics. Divider/Flex/Segmented сверяются ещё с девятью raw UMD cases и тремя transitions; текущий FormData Segmented сохраняет исходное on. Status/display группа сверяется по 17 вариантам в девяти raw UMD cases и трём transitions. Прежние Native group spacing, Tag default и CheckableTag RTL classes, Skeleton wrappers учитываются явно; Badge number и Ribbon CSS отдельно используют общий prefix. Alert/Collapse/активный Affix сверяются ещё с девятью raw UMD cases и тремя transitions; SSR Affix не закрепляется, prefix update сохраняет редактор внутри раскрытой панели. Popup/single/range группа сверяется с 45 raw UMD cases и 15 transitions; delegated Tooltip/Popover namespaces независимы от local owner prefix, открытые DOM surfaces сохраняются. BorderBeam подключает также private variable namespace и двухмерный CSS scope; исходный shared-class cache defect записан отдельно и не перенесён. Masonry подключён с local priority, root/item/motion classes и отдельным global namespace inline width; source RTL-alias observation сохранён отдельно. Splitter подключён для всех частей и отдельного global namespace lazy preview; обновления сохраняют активный drag и существующее поведение hidden panels. Source shared-class CSS cache observation записан отдельно. Anchor подключён с inherited item prefixes, explicit per-item override и независимым Affix prefix. Source omission local owner→items записан raw/matched observations; Native сохраняет coherent classes/spacing/ink. Space family подключена с независимыми local prefixes, global Badge selector и Addon private variable namespace. Source shared-class Badge cache observation записан отдельно; существующие Compact adapters сохранены. Breadcrumb подключён для root/items/links/overlay/separators; исходный local separator namespace omission записан raw/matched measurements. Unbound Dropdown state сохраняется при parent spread updates, с прежними Native bind/callback/default fallback contracts. Row подключён отдельно от Col с прежним gutter context и responsive observer; Col/private namespace/Form CSS остаются отдельной миграцией. Button подключён для root/parts/states/Compact с независимым global namespace служебных variant variables; legacy theme bridge и Native disabled loading сохранены. FloatButton family подключена с owner inheritance, независимым Button namespace, global progress/WAAPI variables и отдельно записанными Source owner/cache observations. Radio/RadioButton/RadioGroup подключены с generated-option prefixes, независимым Badge namespace и сохранением Native fieldset/input/form/reset contracts; Source defaultChecked/no-op selector observations записаны отдельно. Checkbox/CheckboxGroup подключены с generated-option prefixes, независимым Row namespace и сохранёнными native mixed/form/reset contracts; Source Row cache observation записан raw/fresh."
+          "note": "Общий source resolver: local nonempty prefix wins, undefined/empty provider prefix наследует parent, suffix сохраняет точную роль. App/Layout/Sider/Header/Content/Footer, Statistic/Timer, QRCode, Timeline, Steps, Divider, Flex, Segmented, Avatar/Group, Badge/Ribbon, Tag/CheckableTag/Group, Empty, Skeleton/primitives, Spin, Progress, Result, Alert, Collapse, Affix, Tooltip/Popover/Popconfirm, Slider, BorderBeam, Masonry, Splitter, Anchor, Space/Compact/Addon, Breadcrumb и Row подключены; остальные families пока используют свои local/default prefixes. Source theme namespace fallback следует class prefix, inherited/local cssVar.prefix приоритетнее; explicit undefined сбрасывает inherited namespace к текущему provider. Theme/color defaults без настройки prefix не меняются. 13 raw UMD cases и 3 transitions, включая nested/reset/sibling scopes, live prefix/value identity и SSR. Display components отдельно сверяются с девятью raw UMD cases и тремя transitions; ambient typography/direction совпадают с Native provider DOM, текущее время Timer исключено из metrics. Divider/Flex/Segmented сверяются ещё с девятью raw UMD cases и тремя transitions; текущий FormData Segmented сохраняет исходное on. Status/display группа сверяется по 17 вариантам в девяти raw UMD cases и трём transitions. Прежние Native group spacing, Tag default и CheckableTag RTL classes, Skeleton wrappers учитываются явно; Badge number и Ribbon CSS отдельно используют общий prefix. Alert/Collapse/активный Affix сверяются ещё с девятью raw UMD cases и тремя transitions; SSR Affix не закрепляется, prefix update сохраняет редактор внутри раскрытой панели. Popup/single/range группа сверяется с 45 raw UMD cases и 15 transitions; delegated Tooltip/Popover namespaces независимы от local owner prefix, открытые DOM surfaces сохраняются. BorderBeam подключает также private variable namespace и двухмерный CSS scope; исходный shared-class cache defect записан отдельно и не перенесён. Masonry подключён с local priority, root/item/motion classes и отдельным global namespace inline width; source RTL-alias observation сохранён отдельно. Splitter подключён для всех частей и отдельного global namespace lazy preview; обновления сохраняют активный drag и существующее поведение hidden panels. Source shared-class CSS cache observation записан отдельно. Anchor подключён с inherited item prefixes, explicit per-item override и независимым Affix prefix. Source omission local owner→items записан raw/matched observations; Native сохраняет coherent classes/spacing/ink. Space family подключена с независимыми local prefixes, global Badge selector и Addon private variable namespace. Source shared-class Badge cache observation записан отдельно; существующие Compact adapters сохранены. Breadcrumb подключён для root/items/links/overlay/separators; исходный local separator namespace omission записан raw/matched measurements. Unbound Dropdown state сохраняется при parent spread updates, с прежними Native bind/callback/default fallback contracts. Row подключён отдельно от Col с прежним gutter context и responsive observer; Col/private namespace/Form CSS остаются отдельной миграцией. Button подключён для root/parts/states/Compact с независимым global namespace служебных variant variables; legacy theme bridge и Native disabled loading сохранены. FloatButton family подключена с owner inheritance, независимым Button namespace, global progress/WAAPI variables и отдельно записанными Source owner/cache observations. Radio/RadioButton/RadioGroup подключены с generated-option prefixes, независимым Badge namespace и сохранением Native fieldset/input/form/reset contracts; Source defaultChecked/no-op selector observations записаны отдельно. Checkbox/CheckboxGroup подключены с generated-option prefixes, независимым Row namespace и сохранёнными native mixed/form/reset contracts; Source Row cache observation записан raw/fresh. Switch подключён для root/parts/states с canonical variables и сохранением Native form/binding/reset/callback/focus contracts."
         },
         {
           "id": "native-legacy-prefix-namespace",

@@ -9314,8 +9314,8 @@ CheckedChildren/unCheckedChildren принимают string, number или snipp
 которые наследуются вложенным provider. ClassNames/styles принимают объекты или
 функции от props с resolved size/disabled. Content относится к обеим внутренним
 подписям, indicator — к handle. Приоритет root style: config.styles.root, config.style,
-styles.root, style. PrefixCls меняет классы, rootClassName относится к button;
-CSS произвольного префикса предоставляет потребитель.
+styles.root, style. PrefixCls меняет классы и подключает извлечённый CSS;
+rootClassName относится к button.
 
 Bind:ref и bind:nativeElement возвращают native button и очищаются при unmount;
 focus(options?)/blur() доступны и через bind:this. AutoFocus вызывает focus при
@@ -9324,13 +9324,20 @@ Native form/reset/hidden field, отменяемый onclick, скрытые о�
 подписи и span handle сохраняют прежний Svelte контракт. React использует div handle
 и controlled state/event/ref conventions. Source Switch tokens и отдельные theme
 algorithms применяются к обоим размерам; native-only темы сохраняют прежнее
-оформление. Wave подключён; произвольный prefix CSS и React diagnostics/statics пока не перенесены.
+оформление. Local/shared prefix CSS и Wave подключены; React diagnostics/statics пока не перенесены.
 
 Изучены Ant Design 6.6.8, @rc-component/switch 1.0.3 и @rc-component/util 1.14.0.
 Рецепт switch побайтно воспроизводит прежние 47 правил vendor CSS, включая reduced
 motion; keyframes не добавляются. Типы — [switch.types.ts](./src/lib/switch.types.ts),
 проверки — [browser](./tests/browser/switch-features.spec.ts) и
 [package SSR](./tests/package/switch-features.ssr.test.ts).
+
+Switch поддерживает local/shared prefixCls для root, checked/loading/disabled/size/RTL,
+ручки, подписей и loading icon. Empty/undefined наследуют ConfigProvider; непустой
+local prefix имеет приоритет. Canonical token variables и внешний anticon
+namespace сохраняются. Смена prefix сохраняет DOM/ref, checked, focus/selection
+и native hidden form field. Сверка с UMD — `?fixture=switch-prefix` и
+[browser](./tests/browser/switch-prefix.spec.ts).
 
 ## Pagination
 
@@ -10106,8 +10113,9 @@ LayoutHeader/Content/Footer, Statistic/Timer, QRCode, Timeline, Steps, Divider, 
 Segmented, Avatar/AvatarGroup, Badge/BadgeRibbon, Tag/CheckableTag/CheckableTagGroup,
 Empty, Skeleton с primitives, Spin, Progress, Result, Alert, Collapse, Affix,
 Tooltip, Popover, Popconfirm, Slider, BorderBeam, Masonry, Splitter, Anchor и
-Space/SpaceCompact/SpaceAddon, Breadcrumb, Row, Typography, Carousel, Descriptions, Tabs
-и Card с Grid/Meta.
+Space/SpaceCompact/SpaceAddon, Breadcrumb, Row, Typography, Carousel, Descriptions, Tabs,
+Card с Grid/Meta, Button, FloatButton/Group/BackTop, Radio/RadioButton/RadioGroup,
+Checkbox/CheckboxGroup и Switch.
 Остальные семейства подключаются отдельно. Например,
 ConfigProvider prefixCls="suite" создаёт suite-app, suite-layout,
 suite-layout-sider и suite-layout-header без изменения имён Svelte-компонентов.

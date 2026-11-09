@@ -8,6 +8,8 @@
   import { useComponentTheme } from './theme-component.svelte';
   import { useWave } from './wave.svelte';
   import { useForm, useFormField } from './form-context';
+  import { getSwitchPrefixCss } from './switch-prefix.engine';
+  import ThemeScopeStyle from './ThemeScopeStyle.svelte';
   import Icon from './Icon.svelte';
   import type { SwitchEvent, SwitchProps } from './switch.types';
 
@@ -28,7 +30,8 @@
   const resets = new Set<ReturnType<typeof setTimeout>>();
   let alive = true;
   let control = $derived(nativeElement);
-  let prefix = $derived(props.prefixCls ?? 'ant-switch');
+  let prefix = $derived(config.getPrefixCls('switch', props.prefixCls));
+  let prefixCss = $derived(getSwitchPrefixCss(prefix));
   let resolvedChecked = $derived(checked ?? value ?? initialDefault);
   let resolvedDisabled = $derived(
     Boolean(props.loading || (props.disabled ?? field?.disabled ?? form?.disabled
@@ -165,15 +168,20 @@
 </script>
 
 <style>
-  .ant-switch { max-width: 100%; }
+  [data-ant-switch-root] { max-width: 100%; }
 </style>
 
 <svelte:document onreset={handleReset} />
+{#if prefixCss}
+  <ThemeScopeStyle css={prefixCss} scope={`switch-prefix:${prefix}`} />
+{/if}
 
 <!-- svelte-ignore a11y_autofocus (Сохраняются публичный autoFocus и нативный autofocus.) -->
 <button
   {...attributes}
   bind:this={nativeElement}
+  data-ant-switch-root
+  data-ant-switch-prefix={prefixCss ? prefix : undefined}
   {@attach wave}
   type="button"
   role="switch"

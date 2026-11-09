@@ -9,6 +9,9 @@
 
 ### Added
 
+- Switch поддерживает local/shared prefixCls для корня, ручки, подписей и loading.
+  Bindings, клавиатура, native форма, refs, checked state и focus сохранены.
+
 - Checkbox/CheckboxGroup поддерживает local/shared prefixCls и независимый Row
   namespace. Mixed/disabled, выбор, формы, refs и focus сохранены; Source stale
   Row selector записан raw/fresh замерами и не перенесён.

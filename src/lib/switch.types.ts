@@ -48,7 +48,7 @@ export interface SwitchProps extends Omit<
   /** Один раз вызывает native focus при mount; lowercase autofocus сохраняется. */
   autoFocus?: boolean;
   tabIndex?: number;
-  /** Меняет классы; CSS произвольного префикса предоставляет потребитель. */
+  /** Локальный prefix; empty/undefined наследуют ConfigProvider.prefixCls. */
   prefixCls?: string;
   rootClassName?: string;
   classNames?: SwitchSemantic;
