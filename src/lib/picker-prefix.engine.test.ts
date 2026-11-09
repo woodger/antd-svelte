@@ -18,6 +18,7 @@ describe('Date/Time picker prefix stylesheet', () => {
     expect(css).toContain('--ant-date-picker-active-bg');
     expect(css).not.toContain('--ant-date-picker-affix-color');
     expect(css).not.toContain('.ant-picker-time-panel');
+    expect(css).toMatch(/:where\(\.ant-picker-css-var[^\n]+\)\{--ant-date-picker-line-width-focus:/);
   });
 
   it('keeps literal prefix text and escapes closing style tags', () => {

@@ -17,6 +17,7 @@ describe('Calendar prefix stylesheet', () => {
     expect(css).toContain('--ant-calendar-mini-content-height');
     expect(css).toContain('@media');
     expect(css).not.toContain('.ant-picker-cell');
+    expect(css).toMatch(/:where\(\.ant-picker-calendar-css-var[^\n]+\)\{--ant-calendar-/);
   });
 
   it('keeps literal prefix text and escapes closing style tags', () => {

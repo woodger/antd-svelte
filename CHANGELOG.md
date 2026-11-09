@@ -1431,6 +1431,10 @@
 
 ### Fixed
 
+- Prefix CSS Date/TimePicker и Calendar сохраняет Native defaults при поздней
+  вставке в head: тень фокуса, dark background и compact cell metrics совпадают
+  с canonical ant. Source theme overrides сохраняют приоритет.
+
 - Подключаемые prefix/theme стили больше не добавляют пробелы вокруг корней
   компонентов и ConfigProvider. Inline-композиция сохраняет исходную ширину;
   текст внутри controls, snippets и пользовательские пробелы не меняются.

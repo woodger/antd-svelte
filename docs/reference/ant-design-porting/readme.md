@@ -302,12 +302,17 @@ Picker owner и Calendar root states ограничены своим scope, cano
 сохраняются. Header Select/Radio используют независимые общие namespaces.
 Raw constrained-header wrapping отделён от public width=400px counterpart;
 он используется только для трёх высот controls, Native сохраняет прежний nowrap.
+Defaults Calendar-prefix имеют нулевую specificity, чтобы сохранить Native
+dark/compact bridge после поздней вставки stylesheet в head.
 Date-picker-prefix выводит те же 262 правила single/range date/time, что date-picker,
 как CSS data module. Owner scopes разделены по local/shared prefix; только private
 affix-color следует общему namespace, component tokens/marker остаются canonical.
 Time columns и arrows используют стабильные DOM hooks; Footer Button сохраняет
 общий prefix. Value/display guards сохраняют draft при смене контекста и продолжают
 синхронизацию при реальном изменении value или format.
+Defaults date-picker-prefix также имеют нулевую specificity; оформление по умолчанию
+сверяется с canonical ant в трёх сочетаниях mode/primary/compact. Source token
+overrides и aliases сохраняют свой приоритет.
 Рецепт input-number-features извлекает variants, spinner, prefix/suffix и addon;
 прежние outlined/compact файлы не перезаписываются.
 Рецепт switch побайтно воспроизводит прежние 47 правил, включая reduced motion;

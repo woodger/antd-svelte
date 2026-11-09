@@ -5126,6 +5126,10 @@ draft. Реальное изменение format продолжает обно�
 `?fixture=picker-prefix`, включает 33 варианта в normal/nested/reset scopes
 и live draft transitions всех четырёх controls, а также оформление по умолчанию
 и custom container cleanup.
+Defaults в prefix stylesheet имеют нулевую specificity: canonical Native bridge
+продолжает задавать фон, тень фокуса и размеры без source theme. Сравнение с `ant`
+в light/blue, dark/green и compact/purple —
+[prefix-default-styling](./tests/browser/prefix-default-styling.spec.ts).
 
 Остальные picker/multiple modes, generatePicker factory, single presets,
 cellRender/panelRender, mask format, hover preview, полный semantic/component config
@@ -5505,6 +5509,8 @@ originNode и `cellRender.info.prefixCls` следуют тому же Picker pr
 [Сверка с официальным UMD](./tests/browser/calendar-prefix.spec.ts),
 `?fixture=calendar-prefix`, включает full/mini, month/year, week, RTL,
 aliases/styles, nested/reset и responsive-порог 480/481px.
+Defaults prefix stylesheet не перекрывают Native bridge; тёмный фон и compact
+метрики сохраняются при переходе от канонического `ant` к общему префиксу.
 
 Существующий запрет переноса отдельных кнопок режима сохраняется. Raw Source
 при увеличенных токенах в 320px переносит кнопки и растягивает controls до 48px.
