@@ -592,8 +592,7 @@
   [data-picker-current] { padding:0;border:0;background:transparent;color:var(--ant-color-link);font:inherit;cursor:pointer; }
   [data-picker-current]:disabled { color:var(--ant-color-text-disabled);cursor:not-allowed; }
   [data-picker-presets] button { width:100%;padding:0;border:0;background:transparent;color:inherit;font:inherit;text-align:inherit;cursor:pointer; }
-</style>{#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`picker-prefix:${prefix}:${rootPrefix}`} />{/if}
-{#snippet timePanelLayout()}
+</style>{#snippet timePanelLayout()}
   <div class={`${prefix}-panel-layout`}>
     {#if time?.presets?.length}
       <div data-picker-presets class={`${prefix}-presets`}><ul>
@@ -666,9 +665,7 @@
       {/if}
     </div>
   </div>
-{/snippet}
-
-{#snippet clearButton()}
+{/snippet}{#snippet clearButton()}
   {#if (time ? timeAllowClear : allowClear)
       && (time ? hoverValue || draft : mergedValue) && !blocked}
     <button
@@ -693,9 +690,7 @@
     {:else if time && clearContent !== undefined}{clearContent}
     {:else}<Icon name="close-circle-filled" />{/if}</button>
   {/if}
-{/snippet}
-
-<div bind:this={rootElement} data-ant-picker-prefix={prefix} data-ant-picker-root-prefix={rootPrefix} role={time ? 'presentation' : 'group'} style={
+{/snippet}{#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`picker-prefix:${prefix}:${rootPrefix}`} />{/if}<div bind:this={rootElement} data-ant-picker-prefix={prefix} data-ant-picker-root-prefix={rootPrefix} role={time ? 'presentation' : 'group'} style={
     componentTheme.style || time
       ? [componentTheme.style, time && semantic?.styles.root, style].filter(Boolean).join(';')
       : style}
@@ -792,10 +787,7 @@
     {#if time}{@render clearButton()}{/if}
   </div>
   {#if !time}{@render clearButton()}{/if}
-</div>
-<NoCompactStyle>
-  {#key container.target}
-  {#if visible}
+</div><NoCompactStyle>{#key container.target}{#if visible}
     {@const initialPopupStyle = untrack(() => popupThemeStyle)}
     <div bind:this={popup} data-picker-popup data-ant-picker-prefix={prefix} data-ant-picker-root-prefix={rootPrefix} id={`ant-picker-${generatedId}`} popover="manual" role="dialog" aria-label={attributes['aria-label'] ?? (time ? placeholderText || actualLocale.timeSelect : actualLocale.placeholder)} hidden={!shown} onfocusout={blurWithin} class={[
         `${prefix}-dropdown ant-picker-css-var`,
@@ -846,6 +838,4 @@
       </div></div></div></div>
       {/if}
     </div>
-  {/if}
-  {/key}
-</NoCompactStyle>
+{/if}{/key}</NoCompactStyle>

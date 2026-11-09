@@ -5654,7 +5654,10 @@
         "tests/package/picker-prefix.ssr.test.ts",
         "tools/ant-design-css-recipes.json",
         "tests/browser/prefix-default-styling.spec.ts",
-        "tests/browser/fixtures/PrefixDefaultStylingFixtures.svelte"
+        "tests/browser/fixtures/PrefixDefaultStylingFixtures.svelte",
+        "tests/package/prefix-text-boundaries.ssr.test.ts",
+        "tests/browser/prefix-text-boundaries.spec.ts",
+        "tests/browser/fixtures/PrefixTextBoundariesFixtures.svelte"
       ],
       "features": [
         {
@@ -5861,9 +5864,12 @@
             "tests/package/picker-prefix.ssr.test.ts",
             "tools/ant-design-css-recipes.json",
             "tests/browser/prefix-default-styling.spec.ts",
-            "tests/browser/fixtures/PrefixDefaultStylingFixtures.svelte"
+            "tests/browser/fixtures/PrefixDefaultStylingFixtures.svelte",
+            "tests/package/prefix-text-boundaries.ssr.test.ts",
+            "tests/browser/prefix-text-boundaries.spec.ts",
+            "tests/browser/fixtures/PrefixTextBoundariesFixtures.svelte"
           ],
-          "note": "Single/Range date/time используют getPrefixCls(picker, local) и отдельный scoped template из 262 правил. Private affix-color следует общему prefix; component tokens/marker canonical, Tag/Button namespaces независимы. Time cellRender.info.prefixCls и originNode получают фактический picker owner. 33 raw UMD cases x normal/nested/sibling и 12 live transitions покрывают date/datetime/time, range, RTL, sizes/variants/status/affix, aliases и cssVar prefix. DOM/ref/IDs, unfinished input/caret/focus, pending datetime и собственный portal сохраняются. DatePicker/RangePicker синхронизируют текст по value и его отображению, поэтому prefix-only context repaint не сбрасывает draft; реальные value/format updates продолжают синхронизацию. UTC/precision, default millisecondStep=100, последовательное подтверждение границ и callbacks не меняются. Прежнее оформление без source theme и cleanup проверены отдельно. Canonical Native default styles сравниваются с custom shared prefix в light/blue, dark/green и compact/purple, включая открытые панели и focus. Component defaults Date/TimePicker и Calendar имеют нулевую specificity и не перекрывают поздней вставкой Native bridge; Source theme overrides/aliases сохраняются."
+          "note": "Single/Range date/time используют getPrefixCls(picker, local) и отдельный scoped template из 262 правил. Private affix-color следует общему prefix; component tokens/marker canonical, Tag/Button namespaces независимы. Time cellRender.info.prefixCls и originNode получают фактический picker owner. 33 raw UMD cases x normal/nested/sibling и 12 live transitions покрывают date/datetime/time, range, RTL, sizes/variants/status/affix, aliases и cssVar prefix. DOM/ref/IDs, unfinished input/caret/focus, pending datetime и собственный portal сохраняются. DatePicker/RangePicker синхронизируют текст по value и его отображению, поэтому prefix-only context repaint не сбрасывает draft; реальные value/format updates продолжают синхронизацию. UTC/precision, default millisecondStep=100, последовательное подтверждение границ и callbacks не меняются. Прежнее оформление без source theme и cleanup проверены отдельно. Canonical Native default styles сравниваются с custom shared prefix в light/blue, dark/green и compact/purple, включая открытые панели и focus. Component defaults Date/TimePicker и Calendar имеют нулевую specificity и не перекрывают поздней вставкой Native bridge; Source theme overrides/aliases сохраняются. Head stylesheet/snippet/NoCompactStyle boundaries не создают внешние text nodes; default и local prefix, closed/defaultOpen и live shared-prefix updates сохраняют соседний текст."
         }
       ]
     },
@@ -10427,7 +10433,10 @@
         "tests/package/picker-prefix.ssr.test.ts",
         "tools/ant-design-css-recipes.json",
         "tests/browser/prefix-default-styling.spec.ts",
-        "tests/browser/fixtures/PrefixDefaultStylingFixtures.svelte"
+        "tests/browser/fixtures/PrefixDefaultStylingFixtures.svelte",
+        "tests/package/prefix-text-boundaries.ssr.test.ts",
+        "tests/browser/prefix-text-boundaries.spec.ts",
+        "tests/browser/fixtures/PrefixTextBoundariesFixtures.svelte"
       ],
       "features": [
         {
@@ -10620,9 +10629,12 @@
             "tests/package/picker-prefix.ssr.test.ts",
             "tools/ant-design-css-recipes.json",
             "tests/browser/prefix-default-styling.spec.ts",
-            "tests/browser/fixtures/PrefixDefaultStylingFixtures.svelte"
+            "tests/browser/fixtures/PrefixDefaultStylingFixtures.svelte",
+            "tests/package/prefix-text-boundaries.ssr.test.ts",
+            "tests/browser/prefix-text-boundaries.spec.ts",
+            "tests/browser/fixtures/PrefixTextBoundariesFixtures.svelte"
           ],
-          "note": "Single/Range date/time используют getPrefixCls(picker, local) и отдельный scoped template из 262 правил. Private affix-color следует общему prefix; component tokens/marker canonical, Tag/Button namespaces независимы. Time cellRender.info.prefixCls и originNode получают фактический picker owner. 33 raw UMD cases x normal/nested/sibling и 12 live transitions покрывают date/datetime/time, range, RTL, sizes/variants/status/affix, aliases и cssVar prefix. DOM/ref/IDs, unfinished input/caret/focus, pending datetime и собственный portal сохраняются. DatePicker/RangePicker синхронизируют текст по value и его отображению, поэтому prefix-only context repaint не сбрасывает draft; реальные value/format updates продолжают синхронизацию. UTC/precision, default millisecondStep=100, последовательное подтверждение границ и callbacks не меняются. Прежнее оформление без source theme и cleanup проверены отдельно. Canonical Native default styles сравниваются с custom shared prefix в light/blue, dark/green и compact/purple, включая открытые панели и focus. Component defaults Date/TimePicker и Calendar имеют нулевую specificity и не перекрывают поздней вставкой Native bridge; Source theme overrides/aliases сохраняются."
+          "note": "Single/Range date/time используют getPrefixCls(picker, local) и отдельный scoped template из 262 правил. Private affix-color следует общему prefix; component tokens/marker canonical, Tag/Button namespaces независимы. Time cellRender.info.prefixCls и originNode получают фактический picker owner. 33 raw UMD cases x normal/nested/sibling и 12 live transitions покрывают date/datetime/time, range, RTL, sizes/variants/status/affix, aliases и cssVar prefix. DOM/ref/IDs, unfinished input/caret/focus, pending datetime и собственный portal сохраняются. DatePicker/RangePicker синхронизируют текст по value и его отображению, поэтому prefix-only context repaint не сбрасывает draft; реальные value/format updates продолжают синхронизацию. UTC/precision, default millisecondStep=100, последовательное подтверждение границ и callbacks не меняются. Прежнее оформление без source theme и cleanup проверены отдельно. Canonical Native default styles сравниваются с custom shared prefix в light/blue, dark/green и compact/purple, включая открытые панели и focus. Component defaults Date/TimePicker и Calendar имеют нулевую specificity и не перекрывают поздней вставкой Native bridge; Source theme overrides/aliases сохраняются. Head stylesheet/snippet/NoCompactStyle boundaries не создают внешние text nodes; default и local prefix, closed/defaultOpen и live shared-prefix updates сохраняют соседний текст."
         }
       ]
     },

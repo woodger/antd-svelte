@@ -313,6 +313,9 @@ Time columns и arrows используют стабильные DOM hooks; Foot
 Defaults date-picker-prefix также имеют нулевую specificity; оформление по умолчанию
 сверяется с canonical ant в трёх сочетаниях mode/primary/compact. Source token
 overrides и aliases сохраняют свой приоритет.
+Head stylesheet Date/TimePicker расположен непосредственно перед корнем после
+snippet declarations. Границы snippets и NoCompactStyle не добавляют внешние text nodes;
+SSR охватывает также defaultOpen, browser — смену общего prefix без потери соседнего текста.
 Рецепт input-number-features извлекает variants, spinner, prefix/suffix и addon;
 прежние outlined/compact файлы не перезаписываются.
 Рецепт switch побайтно воспроизводит прежние 47 правил, включая reduced motion;

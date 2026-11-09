@@ -1,7 +1,7 @@
 <script lang="ts">
   import {
     Avatar, AvatarGroup, Button, Checkbox, ConfigProvider, InputPassword, InputSearch,
-    InputOTP, Radio, Switch, Tag
+    InputOTP, Radio, Switch, Tag, DatePicker, RangePicker, TimePicker, TimeRangePicker
   } from 'antd-svelte';
 
   let prefix = $state('suite');
@@ -19,6 +19,7 @@
     <span data-text-boundary="password"><InputPassword aria-label="Boundary password" /></span>
     <span data-text-boundary="search"><InputSearch aria-label="Boundary search" /></span>
     <span data-text-boundary="otp"><InputOTP aria-label="Boundary code" /></span>
+    <span data-text-boundary="pickers"><DatePicker aria-label="Boundary date" /><RangePicker aria-label="Boundary range" /><TimePicker aria-label="Boundary time" /><TimeRangePicker aria-label="Boundary time range" /></span>
     <span data-user-boundary><b>Before</b> A <Button>Action</Button> Z <b>After</b></span>
   </ConfigProvider>
 </section>

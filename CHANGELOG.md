@@ -1431,6 +1431,9 @@
 
 ### Fixed
 
+- Date/TimePicker не добавляют внешние пробелы между snippets, head stylesheet,
+  корнем поля и скрытым popup; текст соседнего содержимого сохраняется.
+
 - Prefix CSS Date/TimePicker и Calendar сохраняет Native defaults при поздней
   вставке в head: тень фокуса, dark background и compact cell metrics совпадают
   с canonical ant. Source theme overrides сохраняют приоритет.

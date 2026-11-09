@@ -5,6 +5,17 @@ import * as UI from 'antd-svelte';
 
 const content = createRawSnippet(() => ({ render: () => '<span>Content</span>' }));
 const cases: Record<string, (prefixCls?: string) => ReturnType<typeof render>> = {
+  Calendar: prefixCls => render(UI.Calendar, { props: { prefixCls } }),
+  DatePicker: prefixCls => render(UI.DatePicker, { props: { prefixCls } }),
+  RangePicker: prefixCls => render(UI.RangePicker, { props: { prefixCls } }),
+  TimePicker: prefixCls => render(UI.TimePicker, { props: { prefixCls } }),
+  TimeRangePicker: prefixCls => render(UI.TimeRangePicker, { props: { prefixCls } }),
+  DatePickerOpen: prefixCls => render(UI.DatePicker, { props: { prefixCls, defaultOpen: true } }),
+  RangePickerOpen: prefixCls => render(UI.RangePicker, { props: { prefixCls, defaultOpen: true } }),
+  TimePickerOpen: prefixCls => render(UI.TimePicker, { props: { prefixCls, defaultOpen: true } }),
+  TimeRangePickerOpen: prefixCls => render(UI.TimeRangePicker, {
+    props: { prefixCls, defaultOpen: true }
+  }),
   Affix: prefixCls => render(UI.Affix, { props: { prefixCls, children: content } }),
   Alert: prefixCls => render(UI.Alert, { props: { prefixCls, title: 'Alert' } }),
   Anchor: prefixCls => render(UI.Anchor, { props: {

@@ -937,7 +937,7 @@
   [data-picker-current] { padding:0;border:0;background:transparent;color:var(--ant-color-link);font:inherit;cursor:pointer; }
   [data-picker-current]:disabled { color:var(--ant-color-text-disabled);cursor:not-allowed; }
   [data-picker-presets] button { border:0;padding:0;background:transparent;color:inherit;font:inherit;cursor:pointer; }
-</style>{#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`picker-prefix:${prefix}:${rootPrefix}`} />{/if}
+</style>
 
 {#snippet timePanelLayout()}
   <div class={`${prefix}-panel-layout`}>
@@ -1010,9 +1010,7 @@
       {/if}
     </div>
   </div>
-{/snippet}
-
-<div
+{/snippet}{#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`picker-prefix:${prefix}:${rootPrefix}`} />{/if}<div
   bind:this={rootElement} data-ant-picker-prefix={prefix} data-ant-picker-root-prefix={rootPrefix}
   role={time ? 'presentation' : 'group'}
   style={componentTheme.style || time || config.rangePicker?.style
@@ -1129,10 +1127,7 @@
     {:else if time && clearContent !== undefined}{clearContent}
     {:else}<Icon name="close-circle-filled" />{/if}</button>
   {/if}
-</div>
-<NoCompactStyle>
-  {#key container.target}
-  {#if visible}
+</div><NoCompactStyle>{#key container.target}{#if visible}
     {@const initialPopupStyle = untrack(() => popupThemeStyle)}
     <div bind:this={popup} data-picker-popup data-ant-picker-prefix={prefix} data-ant-picker-root-prefix={rootPrefix} id={`ant-range-picker-${generatedId}`} popover="manual" role="dialog" tabindex="-1" aria-label={attributes['aria-label'] ?? (time ? lang.timeSelect : lang.placeholder)} hidden={!shown} onfocusout={blurWithin}
       class={[
@@ -1243,6 +1238,4 @@
       </div></div>
       {/if}
     </div>
-  {/if}
-  {/key}
-</NoCompactStyle>
+{/if}{/key}</NoCompactStyle>

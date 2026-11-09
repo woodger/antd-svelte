@@ -5130,6 +5130,8 @@ Defaults в prefix stylesheet имеют нулевую specificity: canonical N
 продолжает задавать фон, тень фокуса и размеры без source theme. Сравнение с `ant`
 в light/blue, dark/green и compact/purple —
 [prefix-default-styling](./tests/browser/prefix-default-styling.spec.ts).
+Служебные snippets/head/popup boundaries не добавляют текст рядом с controls;
+SSR проверяет также defaultOpen, browser — обновление общего префикса.
 
 Остальные picker/multiple modes, generatePicker factory, single presets,
 cellRender/panelRender, mask format, hover preview, полный semantic/component config
