@@ -1,5 +1,7 @@
 <script lang="ts" generics="T = unknown">
   import { onDestroy, untrack } from 'svelte';
+  import ThemeScopeStyle from './ThemeScopeStyle.svelte';
+  import { getUploadPrefixCss } from './upload-prefix.engine';
   import type { UploadProps, UploadFile } from './upload.types';
   import { createUploadController } from './upload-controller.engine';
   import { filterUploadFile } from './upload.engine';
@@ -9,6 +11,7 @@
   import { useForm } from './form-context';
   import UploadListItem from './UploadListItem.svelte';
   let {
+    prefixCls: customizePrefixCls,
     fileList,
     defaultFileList = [],
     name = 'file',
@@ -47,6 +50,8 @@
     ...attributes
   }: UploadProps<T> = $props();
   const config = useConfig();
+  let componentPrefix = $derived(config.getPrefixCls('upload', customizePrefixCls));
+  let prefixCss = $derived(getUploadPrefixCss(componentPrefix));
   const componentTheme = useComponentTheme('Upload');
   const form = useForm();
   const generatedId = $props.id();
@@ -126,54 +131,54 @@
   }
 </script>
 <style>
-  .ant-upload:focus-visible { outline:2px solid var(--ant-color-primary);outline-offset:2px; }
+  [data-ant-upload-control]:focus-visible { outline:2px solid var(--ant-color-primary);outline-offset:2px; }
 </style>
 {#snippet trigger()}
   <!-- svelte-ignore a11y_no_static_element_interactions, a11y_no_noninteractive_tabindex — tabindex появляется только вместе с role=button. -->
-  <span class={[
-      'ant-upload',
-      type === 'drag' && 'ant-upload-btn',
-      blocked && 'ant-upload-disabled'
+  <span data-ant-upload-control class={[
+      componentPrefix,
+      type === 'drag' && `${componentPrefix}-btn`,
+      blocked && `${componentPrefix}-disabled`
     ]} role={hasControlInside ? undefined : 'button'} tabindex={!blocked && !hasControlInside ? 0 : undefined} aria-disabled={blocked || undefined}
     onclick={openDialog} onkeydown={openDialog} ondrop={event => {
         if (type === 'select')
           drag(event);
       }} ondragover={event => event.preventDefault()}>
     <input {...attributes} bind:this={inputElement} id={children && !blocked ? id : undefined} type="file" {name} accept={typeof accept === 'string' ? accept : accept.format} {multiple} {capture} disabled={blocked} style="display:none" onchange={changed} onclick={event => event.stopPropagation()} />
-    {#if children}{#if type === 'drag'}<div class="ant-upload-drag-container">{@render children()}</div>{:else}{@render children()}{/if}{/if}
+    {#if children}{#if type === 'drag'}<div class={`${componentPrefix}-drag-container`}>{@render children()}</div>{:else}{@render children()}{/if}{/if}
   </span>
 {/snippet}
 {#snippet list()}
-  {#if showUploadList}<div class={`ant-upload-list ant-upload-list-${listType}`}>
-    {#each files as file (file.uid)}<UploadListItem {file} {listType} options={listOptions} locale={strings} disabled={blocked} onRemove={file => {
+  {#if showUploadList}<div data-ant-upload-list data-ant-upload-list-type={listType} class={`${componentPrefix}-list ${componentPrefix}-list-${listType}`}>
+    {#each files as file (file.uid)}<UploadListItem prefixCls={componentPrefix} {file} {listType} options={listOptions} locale={strings} disabled={blocked} onRemove={file => {
         void controller.remove(file);
       }} {onPreview} {onDownload} {previewFile} {isImageUrl} />{/each}
     {#if card && children}{@render selectTrigger()}{/if}
   </div>{/if}
 {/snippet}
 {#snippet selectTrigger()}
-  <div class={[
-      'ant-upload ant-upload-select',
-      blocked && 'ant-upload-disabled',
-      !children && 'ant-upload-hidden'
+  <div data-ant-upload-control class={[
+      `${componentPrefix} ${componentPrefix}-select`,
+      blocked && `${componentPrefix}-disabled`,
+      !children && `${componentPrefix}-hidden`
     ]} style={triggerStyle}>{@render trigger()}</div>
 {/snippet}
-<span bind:this={nativeElement} dir={config.direction} style={componentTheme.style} class={[
-    'ant-upload-wrapper ant-upload-css-var',
+{#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`upload-prefix:${componentPrefix}`} />{/if}<span data-ant-upload-root data-ant-upload-prefix={componentPrefix} bind:this={nativeElement} dir={config.direction} style={componentTheme.style} class={[
+    `${componentPrefix}-wrapper ant-upload-css-var`,
     componentTheme.className,
-    config.direction === 'rtl' && 'ant-upload-rtl',
-    card && `ant-upload-${listType}-wrapper`,
+    config.direction === 'rtl' && `${componentPrefix}-rtl`,
+    card && `${componentPrefix}-${listType}-wrapper`,
     className,
     rootClassName
   ]}>
   {#if type === 'drag'}
     <!-- svelte-ignore a11y_no_static_element_interactions -->
-    <div class={[
-        'ant-upload ant-upload-drag',
-        files.some(file => file.status === 'uploading') && 'ant-upload-drag-uploading',
-        dragState && 'ant-upload-drag-hover',
-        blocked && 'ant-upload-disabled',
-        config.direction === 'rtl' && 'ant-upload-rtl'
+    <div data-ant-upload-control data-ant-upload-prefix={componentPrefix} class={[
+        `${componentPrefix} ${componentPrefix}-drag`,
+        files.some(file => file.status === 'uploading') && `${componentPrefix}-drag-uploading`,
+        dragState && `${componentPrefix}-drag-hover`,
+        blocked && `${componentPrefix}-disabled`,
+        config.direction === 'rtl' && `${componentPrefix}-rtl`
       ]} style={triggerStyle} ondrop={drag} ondragover={drag} ondragleave={drag}>{@render trigger()}</div>
     {@render list()}
   {:else}

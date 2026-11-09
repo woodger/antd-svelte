@@ -63,6 +63,8 @@ export interface UploadProps<T = unknown> extends Omit<
   HTMLAttributes<HTMLSpanElement>,
   'children' | 'onchange' | 'ondrop' | 'onerror' | 'onprogress'
 > {
+  /** Локальный namespace Upload/Dragger и списка; пустая строка наследует ConfigProvider. */
+  prefixCls?: string;
   /** Управляемый список; изменения публикуются через onChange и ожидают принятия владельцем. */
   fileList?: readonly UploadFile<T>[];
   /** Начальный список при отсутствии fileList. */

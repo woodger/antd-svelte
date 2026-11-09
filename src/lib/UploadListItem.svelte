@@ -8,6 +8,7 @@
   import Progress from './Progress.svelte';
   import Tooltip from './Tooltip.svelte';
   let {
+    prefixCls,
     file,
     listType = 'text',
     options,
@@ -19,6 +20,7 @@
     previewFile = previewImage,
     isImageUrl = uploadIsImage
   }: {
+    prefixCls: string;
     file: UploadFile<T>;
     listType: UploadProps<T>['listType'];
     options: UploadListOptions<T>;
@@ -82,40 +84,40 @@
   });
 </script>
 <style>
-  .ant-upload-list-item-container :global(.ant-tooltip-trigger) { display:block; }
-  :global(.ant-upload-list-picture-card) .ant-upload-list-item-container :global(.ant-tooltip-trigger),
-  :global(.ant-upload-list-picture-circle) .ant-upload-list-item-container :global(.ant-tooltip-trigger) { height:100%; }
-  button.ant-upload-list-item-name { padding:0;border:0;background:transparent;color:inherit;font:inherit;text-align:inherit;cursor:pointer; }
-  .ant-upload-list-item-name:focus-visible { outline:2px solid var(--ant-color-primary); }
+  [data-ant-upload-item-container] :global(.ant-tooltip-trigger) { display:block; }
+  :global([data-ant-upload-list-type="picture-card"]) [data-ant-upload-item-container] :global(.ant-tooltip-trigger),
+  :global([data-ant-upload-list-type="picture-circle"]) [data-ant-upload-item-container] :global(.ant-tooltip-trigger) { height:100%; }
+  button[data-ant-upload-item-name] { padding:0;border:0;background:transparent;color:inherit;font:inherit;text-align:inherit;cursor:pointer; }
+  [data-ant-upload-item-name]:focus-visible { outline:2px solid var(--ant-color-primary); }
 </style>
 {#snippet fileIcon()}{#if file.status === 'uploading'}{#if card}{locale.uploading}{:else}<UploadIcon name="loading" />{/if}{:else}<UploadIcon name={picture ? image ? 'picture' : 'file' : 'paper-clip'} />{/if}{/snippet}
 {#snippet downloadIcon()}<UploadIcon name="download" />{/snippet}
 {#snippet removeIcon()}<UploadIcon name="delete" />{/snippet}
 {#snippet actions()}
   {#if card && show(options.showPreviewIcon, true) && source}<a href={file.url || source} target="_blank" rel="noopener noreferrer" aria-label={locale.previewFile} title={locale.previewFile} onclick={preview}><UploadIcon name="eye" /></a>{/if}
-  {#if show(options.showDownloadIcon, false) && file.status === 'done'}<Button type="text" size="small" class="ant-upload-list-item-action" disabled={false} aria-label={locale.downloadFile} title={locale.downloadFile} onclick={download} icon={downloadIcon} />{/if}
-  {#if show(options.showRemoveIcon, !disabled)}<Button type="text" size="small" class="ant-upload-list-item-action" {disabled} aria-label={locale.removeFile} title={locale.removeFile} onclick={() => onRemove(file)} icon={removeIcon} />{/if}
+  {#if show(options.showDownloadIcon, false) && file.status === 'done'}<Button type="text" size="small" class={`${prefixCls}-list-item-action`} disabled={false} aria-label={locale.downloadFile} title={locale.downloadFile} onclick={download} icon={downloadIcon} />{/if}
+  {#if show(options.showRemoveIcon, !disabled)}<Button type="text" size="small" class={`${prefixCls}-list-item-action`} {disabled} aria-label={locale.removeFile} title={locale.removeFile} onclick={() => onRemove(file)} icon={removeIcon} />{/if}
 {/snippet}
 {#snippet item()}
 <div class={[
-    'ant-upload-list-item',
-    `ant-upload-list-item-${file.status ?? 'undefined'}`
+    `${prefixCls}-list-item`,
+    `${prefixCls}-list-item-${file.status ?? 'undefined'}`
   ]}>
   {#if picture}
     {#if file.status === 'uploading' || !source}<div class={[
-        'ant-upload-list-item-thumbnail',
-        file.status !== 'uploading' && 'ant-upload-list-item-file'
+        `${prefixCls}-list-item-thumbnail`,
+        file.status !== 'uploading' && `${prefixCls}-list-item-file`
       ]}>{@render fileIcon()}</div>
     {:else}<a class={[
-        'ant-upload-list-item-thumbnail',
-        !image && 'ant-upload-list-item-file'
-      ]} href={file.url || source} target="_blank" rel="noopener noreferrer" onclick={preview}>{#if image}<img class="ant-upload-list-item-image" src={source} alt={file.name} crossorigin={file.crossOrigin} />{:else}{@render fileIcon()}{/if}</a>{/if}
-  {:else}<div class="ant-upload-icon">{@render fileIcon()}</div>{/if}
-  {#if file.url}<a class="ant-upload-list-item-name" title={file.name} href={file.url} target="_blank" rel="noopener noreferrer" onclick={preview}>{file.name}{#if options.extra}<span class="ant-upload-list-item-extra">{@render options.extra(file)}</span>{/if}</a>
-  {:else if onPreview}<button type="button" class="ant-upload-list-item-name" title={file.name} onclick={() => onPreview?.(file)}>{file.name}{#if options.extra}<span class="ant-upload-list-item-extra">{@render options.extra(file)}</span>{/if}</button>
-  {:else}<span class="ant-upload-list-item-name" title={file.name}>{file.name}{#if options.extra}<span class="ant-upload-list-item-extra">{@render options.extra(file)}</span>{/if}</span>{/if}
-  {#if !card || file.status !== 'uploading'}<span class={['ant-upload-list-item-actions', listType === 'picture' && 'picture']}>{@render actions()}</span>{/if}
-  {#if showProgress && file.status === 'uploading' && file.percent !== undefined}<div class="ant-upload-list-item-progress"><Progress percent={file.percent} size={[-1, 2]} showInfo={false} aria-label={`${locale.uploading} ${file.name}`} /></div>{/if}
+        `${prefixCls}-list-item-thumbnail`,
+        !image && `${prefixCls}-list-item-file`
+      ]} href={file.url || source} target="_blank" rel="noopener noreferrer" onclick={preview}>{#if image}<img class={`${prefixCls}-list-item-image`} src={source} alt={file.name} crossorigin={file.crossOrigin} />{:else}{@render fileIcon()}{/if}</a>{/if}
+  {:else}<div class={`${prefixCls}-icon`}>{@render fileIcon()}</div>{/if}
+  {#if file.url}<a data-ant-upload-item-name class={`${prefixCls}-list-item-name`} title={file.name} href={file.url} target="_blank" rel="noopener noreferrer" onclick={preview}>{file.name}{#if options.extra}<span class={`${prefixCls}-list-item-extra`}>{@render options.extra(file)}</span>{/if}</a>
+  {:else if onPreview}<button type="button" data-ant-upload-item-name class={`${prefixCls}-list-item-name`} title={file.name} onclick={() => onPreview?.(file)}>{file.name}{#if options.extra}<span class={`${prefixCls}-list-item-extra`}>{@render options.extra(file)}</span>{/if}</button>
+  {:else}<span data-ant-upload-item-name class={`${prefixCls}-list-item-name`} title={file.name}>{file.name}{#if options.extra}<span class={`${prefixCls}-list-item-extra`}>{@render options.extra(file)}</span>{/if}</span>{/if}
+  {#if !card || file.status !== 'uploading'}<span class={[`${prefixCls}-list-item-actions`, listType === 'picture' && 'picture']}>{@render actions()}</span>{/if}
+  {#if showProgress && file.status === 'uploading' && file.percent !== undefined}<div class={`${prefixCls}-list-item-progress`}><Progress percent={file.percent} size={[-1, 2]} showInfo={false} aria-label={`${locale.uploading} ${file.name}`} /></div>{/if}
 </div>
 {/snippet}
-<div class="ant-upload-list-item-container">{#if file.status === 'error'}<Tooltip title={message}>{@render item()}</Tooltip>{:else}{@render item()}{/if}</div>
+<div data-ant-upload-item-container class={`${prefixCls}-list-item-container`}>{#if file.status === 'error'}<Tooltip title={message}>{@render item()}</Tooltip>{:else}{@render item()}{/if}</div>

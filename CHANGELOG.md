@@ -9,6 +9,10 @@
 
 ### Added
 
+- Upload/UploadDragger поддерживают local/shared prefixCls для trigger, списка
+  и состояний. Canonical tokens/link reset и отдельные Button/Progress/Tooltip
+  namespaces сохранены; DOM/refs/focus и выполняющийся запрос не пересоздаются.
+
 - NotificationHolder и App.notification поддерживают local/shared prefixCls
   во всех placements и частях карточки. Canonical tokens/status backgrounds,
   native viewport/motion, DOM/ARIA IDs, draft/focus/selection, очередь и deadlines

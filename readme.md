@@ -6453,6 +6453,15 @@ Upload переносит Ant Design 6.6.8 и AjaxUploader/request из @rc-comp
 внутри Upload; цвета error rows сохраняют приоритет.
 Иконки взяты из закреплённого @ant-design/icons-svg 4.6.0 с существующей лицензией.
 
+`prefixCls` задаёт namespace Upload/Dragger, списка и всех состояний; пустая строка
+наследует ConfigProvider.prefixCls. Canonical variables и link reset сохранены,
+Button/Progress/Tooltip используют свои namespaces. CSS-рецепт upload-prefix
+воспроизводит те же 82 правила в изолированном шаблоне.
+[Сверка с официальным UMD](./tests/browser/fixtures/ant-design-upload-prefix-reference.json)
+покрывает все list types, drag, RTL, states и вложенные/reset scopes. Смена prefix
+сохраняет wrapper/input/filename DOM, refs, фокус и выполняющийся запрос; completion
+и remove публикуют прежние callbacks. Consumer slot classes автоматически не переименовываются.
+
 ```svelte
 <script lang="ts">
   import { Upload, Button, UPLOAD_LIST_IGNORE, type UploadFile } from 'antd-svelte';
