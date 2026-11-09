@@ -1,0 +1,557 @@
+{
+  "reference": {
+    "version": "6.6.8",
+    "revision": "984592267de88fbf9cdaecc96a56629e721c709d",
+    "archiveSha256": "8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa",
+    "renderer": "unmodified official UMD with React 18.3.1",
+    "source": "UploadList/ListItem thumbUrl/url fallback and previewFile undefined guard",
+    "observation": "24 raw cases across picture/card/circle cover absent/empty/present thumbUrl, URL fallback, no URL, non-image file and empty thumb with originFileObj. Empty thumb skips previewFile generation while existing URL remains visible. Five live transitions retain the row and input; thumbnail tag changes when the source disappears."
+  },
+  "cases": [
+    {
+      "sample": {
+        "id": "picture:url-only",
+        "listType": "picture",
+        "mode": "url-only"
+      },
+      "result": {
+        "thumbnail": {
+          "tag": "A",
+          "href": "data:image/svg+xml,%3Csvg xmlns=\"http://www.w3.org/2000/svg\" width=\"8\" height=\"8\" fill=\"red\"/%3E",
+          "src": "data:image/svg+xml,%3Csvg xmlns=\"http://www.w3.org/2000/svg\" width=\"8\" height=\"8\" fill=\"red\"/%3E",
+          "icons": []
+        },
+        "previewHref": null,
+        "previewCalls": 0
+      }
+    },
+    {
+      "sample": {
+        "id": "picture:empty-thumb",
+        "listType": "picture",
+        "mode": "empty-thumb"
+      },
+      "result": {
+        "thumbnail": {
+          "tag": "A",
+          "href": "data:image/svg+xml,%3Csvg xmlns=\"http://www.w3.org/2000/svg\" width=\"8\" height=\"8\" fill=\"red\"/%3E",
+          "src": "data:image/svg+xml,%3Csvg xmlns=\"http://www.w3.org/2000/svg\" width=\"8\" height=\"8\" fill=\"red\"/%3E",
+          "icons": []
+        },
+        "previewHref": null,
+        "previewCalls": 0
+      }
+    },
+    {
+      "sample": {
+        "id": "picture:thumb-and-url",
+        "listType": "picture",
+        "mode": "thumb-and-url"
+      },
+      "result": {
+        "thumbnail": {
+          "tag": "A",
+          "href": "data:image/svg+xml,%3Csvg xmlns=\"http://www.w3.org/2000/svg\" width=\"8\" height=\"8\" fill=\"red\"/%3E",
+          "src": "data:image/svg+xml,%3Csvg xmlns=\"http://www.w3.org/2000/svg\" width=\"8\" height=\"8\" fill=\"blue\"/%3E",
+          "icons": []
+        },
+        "previewHref": null,
+        "previewCalls": 0
+      }
+    },
+    {
+      "sample": {
+        "id": "picture:thumb-only",
+        "listType": "picture",
+        "mode": "thumb-only"
+      },
+      "result": {
+        "thumbnail": {
+          "tag": "A",
+          "href": "data:image/svg+xml,%3Csvg xmlns=\"http://www.w3.org/2000/svg\" width=\"8\" height=\"8\" fill=\"blue\"/%3E",
+          "src": "data:image/svg+xml,%3Csvg xmlns=\"http://www.w3.org/2000/svg\" width=\"8\" height=\"8\" fill=\"blue\"/%3E",
+          "icons": []
+        },
+        "previewHref": null,
+        "previewCalls": 0
+      }
+    },
+    {
+      "sample": {
+        "id": "picture:empty-no-url",
+        "listType": "picture",
+        "mode": "empty-no-url"
+      },
+      "result": {
+        "thumbnail": {
+          "tag": "DIV",
+          "href": null,
+          "src": null,
+          "icons": [
+            {
+              "viewBox": "64 64 896 896",
+              "paths": [
+                "M928 160H96c-17.7 0-32 14.3-32 32v640c0 17.7 14.3 32 32 32h832c17.7 0 32-14.3 32-32V192c0-17.7-14.3-32-32-32zm-40 632H136v-39.9l138.5-164.3 150.1 178L658.1 489 888 761.6V792zm0-129.8L664.2 396.8c-3.2-3.8-9-3.8-12.2 0L424.6 666.4l-144-170.7c-3.2-3.8-9-3.8-12.2 0L136 652.7V232h752v430.2zM304 456a88 88 0 100-176 88 88 0 000 176zm0-116c15.5 0 28 12.5 28 28s-12.5 28-28 28-28-12.5-28-28 12.5-28 28-28z"
+              ]
+            }
+          ]
+        },
+        "previewHref": null,
+        "previewCalls": 0
+      }
+    },
+    {
+      "sample": {
+        "id": "picture:no-images",
+        "listType": "picture",
+        "mode": "no-images"
+      },
+      "result": {
+        "thumbnail": {
+          "tag": "DIV",
+          "href": null,
+          "src": null,
+          "icons": [
+            {
+              "viewBox": "64 64 896 896",
+              "paths": [
+                "M928 160H96c-17.7 0-32 14.3-32 32v640c0 17.7 14.3 32 32 32h832c17.7 0 32-14.3 32-32V192c0-17.7-14.3-32-32-32zm-40 632H136v-39.9l138.5-164.3 150.1 178L658.1 489 888 761.6V792zm0-129.8L664.2 396.8c-3.2-3.8-9-3.8-12.2 0L424.6 666.4l-144-170.7c-3.2-3.8-9-3.8-12.2 0L136 652.7V232h752v430.2zM304 456a88 88 0 100-176 88 88 0 000 176zm0-116c15.5 0 28 12.5 28 28s-12.5 28-28 28-28-12.5-28-28 12.5-28 28-28z"
+              ]
+            }
+          ]
+        },
+        "previewHref": null,
+        "previewCalls": 0
+      }
+    },
+    {
+      "sample": {
+        "id": "picture:non-image-url",
+        "listType": "picture",
+        "mode": "non-image-url"
+      },
+      "result": {
+        "thumbnail": {
+          "tag": "A",
+          "href": "data:image/svg+xml,%3Csvg xmlns=\"http://www.w3.org/2000/svg\" width=\"8\" height=\"8\" fill=\"red\"/%3E",
+          "src": null,
+          "icons": [
+            {
+              "viewBox": "64 64 896 896",
+              "paths": [
+                "M854.6 288.6L639.4 73.4c-6-6-14.1-9.4-22.6-9.4H192c-17.7 0-32 14.3-32 32v832c0 17.7 14.3 32 32 32h640c17.7 0 32-14.3 32-32V311.3c0-8.5-3.4-16.7-9.4-22.7zM790.2 326H602V137.8L790.2 326zm1.8 562H232V136h302v216a42 42 0 0042 42h216v494z"
+              ]
+            }
+          ]
+        },
+        "previewHref": null,
+        "previewCalls": 0
+      }
+    },
+    {
+      "sample": {
+        "id": "picture:empty-with-origin",
+        "listType": "picture",
+        "mode": "empty-with-origin"
+      },
+      "result": {
+        "thumbnail": {
+          "tag": "A",
+          "href": "data:image/svg+xml,%3Csvg xmlns=\"http://www.w3.org/2000/svg\" width=\"8\" height=\"8\" fill=\"red\"/%3E",
+          "src": "data:image/svg+xml,%3Csvg xmlns=\"http://www.w3.org/2000/svg\" width=\"8\" height=\"8\" fill=\"red\"/%3E",
+          "icons": []
+        },
+        "previewHref": null,
+        "previewCalls": 0
+      }
+    },
+    {
+      "sample": {
+        "id": "picture-card:url-only",
+        "listType": "picture-card",
+        "mode": "url-only"
+      },
+      "result": {
+        "thumbnail": {
+          "tag": "A",
+          "href": "data:image/svg+xml,%3Csvg xmlns=\"http://www.w3.org/2000/svg\" width=\"8\" height=\"8\" fill=\"red\"/%3E",
+          "src": "data:image/svg+xml,%3Csvg xmlns=\"http://www.w3.org/2000/svg\" width=\"8\" height=\"8\" fill=\"red\"/%3E",
+          "icons": []
+        },
+        "previewHref": "data:image/svg+xml,%3Csvg xmlns=\"http://www.w3.org/2000/svg\" width=\"8\" height=\"8\" fill=\"red\"/%3E",
+        "previewCalls": 0
+      }
+    },
+    {
+      "sample": {
+        "id": "picture-card:empty-thumb",
+        "listType": "picture-card",
+        "mode": "empty-thumb"
+      },
+      "result": {
+        "thumbnail": {
+          "tag": "A",
+          "href": "data:image/svg+xml,%3Csvg xmlns=\"http://www.w3.org/2000/svg\" width=\"8\" height=\"8\" fill=\"red\"/%3E",
+          "src": "data:image/svg+xml,%3Csvg xmlns=\"http://www.w3.org/2000/svg\" width=\"8\" height=\"8\" fill=\"red\"/%3E",
+          "icons": []
+        },
+        "previewHref": "data:image/svg+xml,%3Csvg xmlns=\"http://www.w3.org/2000/svg\" width=\"8\" height=\"8\" fill=\"red\"/%3E",
+        "previewCalls": 0
+      }
+    },
+    {
+      "sample": {
+        "id": "picture-card:thumb-and-url",
+        "listType": "picture-card",
+        "mode": "thumb-and-url"
+      },
+      "result": {
+        "thumbnail": {
+          "tag": "A",
+          "href": "data:image/svg+xml,%3Csvg xmlns=\"http://www.w3.org/2000/svg\" width=\"8\" height=\"8\" fill=\"red\"/%3E",
+          "src": "data:image/svg+xml,%3Csvg xmlns=\"http://www.w3.org/2000/svg\" width=\"8\" height=\"8\" fill=\"blue\"/%3E",
+          "icons": []
+        },
+        "previewHref": "data:image/svg+xml,%3Csvg xmlns=\"http://www.w3.org/2000/svg\" width=\"8\" height=\"8\" fill=\"red\"/%3E",
+        "previewCalls": 0
+      }
+    },
+    {
+      "sample": {
+        "id": "picture-card:thumb-only",
+        "listType": "picture-card",
+        "mode": "thumb-only"
+      },
+      "result": {
+        "thumbnail": {
+          "tag": "A",
+          "href": "data:image/svg+xml,%3Csvg xmlns=\"http://www.w3.org/2000/svg\" width=\"8\" height=\"8\" fill=\"blue\"/%3E",
+          "src": "data:image/svg+xml,%3Csvg xmlns=\"http://www.w3.org/2000/svg\" width=\"8\" height=\"8\" fill=\"blue\"/%3E",
+          "icons": []
+        },
+        "previewHref": "data:image/svg+xml,%3Csvg xmlns=\"http://www.w3.org/2000/svg\" width=\"8\" height=\"8\" fill=\"blue\"/%3E",
+        "previewCalls": 0
+      }
+    },
+    {
+      "sample": {
+        "id": "picture-card:empty-no-url",
+        "listType": "picture-card",
+        "mode": "empty-no-url"
+      },
+      "result": {
+        "thumbnail": {
+          "tag": "DIV",
+          "href": null,
+          "src": null,
+          "icons": [
+            {
+              "viewBox": "64 64 896 896",
+              "paths": [
+                "M928 160H96c-17.7 0-32 14.3-32 32v640c0 17.7 14.3 32 32 32h832c17.7 0 32-14.3 32-32V192c0-17.7-14.3-32-32-32zm-40 632H136v-39.9l138.5-164.3 150.1 178L658.1 489 888 761.6V792zm0-129.8L664.2 396.8c-3.2-3.8-9-3.8-12.2 0L424.6 666.4l-144-170.7c-3.2-3.8-9-3.8-12.2 0L136 652.7V232h752v430.2zM304 456a88 88 0 100-176 88 88 0 000 176zm0-116c15.5 0 28 12.5 28 28s-12.5 28-28 28-28-12.5-28-28 12.5-28 28-28z"
+              ]
+            }
+          ]
+        },
+        "previewHref": null,
+        "previewCalls": 0
+      }
+    },
+    {
+      "sample": {
+        "id": "picture-card:no-images",
+        "listType": "picture-card",
+        "mode": "no-images"
+      },
+      "result": {
+        "thumbnail": {
+          "tag": "DIV",
+          "href": null,
+          "src": null,
+          "icons": [
+            {
+              "viewBox": "64 64 896 896",
+              "paths": [
+                "M928 160H96c-17.7 0-32 14.3-32 32v640c0 17.7 14.3 32 32 32h832c17.7 0 32-14.3 32-32V192c0-17.7-14.3-32-32-32zm-40 632H136v-39.9l138.5-164.3 150.1 178L658.1 489 888 761.6V792zm0-129.8L664.2 396.8c-3.2-3.8-9-3.8-12.2 0L424.6 666.4l-144-170.7c-3.2-3.8-9-3.8-12.2 0L136 652.7V232h752v430.2zM304 456a88 88 0 100-176 88 88 0 000 176zm0-116c15.5 0 28 12.5 28 28s-12.5 28-28 28-28-12.5-28-28 12.5-28 28-28z"
+              ]
+            }
+          ]
+        },
+        "previewHref": null,
+        "previewCalls": 0
+      }
+    },
+    {
+      "sample": {
+        "id": "picture-card:non-image-url",
+        "listType": "picture-card",
+        "mode": "non-image-url"
+      },
+      "result": {
+        "thumbnail": {
+          "tag": "A",
+          "href": "data:image/svg+xml,%3Csvg xmlns=\"http://www.w3.org/2000/svg\" width=\"8\" height=\"8\" fill=\"red\"/%3E",
+          "src": null,
+          "icons": [
+            {
+              "viewBox": "64 64 896 896",
+              "paths": [
+                "M854.6 288.6L639.4 73.4c-6-6-14.1-9.4-22.6-9.4H192c-17.7 0-32 14.3-32 32v832c0 17.7 14.3 32 32 32h640c17.7 0 32-14.3 32-32V311.3c0-8.5-3.4-16.7-9.4-22.7zM790.2 326H602V137.8L790.2 326zm1.8 562H232V136h302v216a42 42 0 0042 42h216v494z"
+              ]
+            }
+          ]
+        },
+        "previewHref": "data:image/svg+xml,%3Csvg xmlns=\"http://www.w3.org/2000/svg\" width=\"8\" height=\"8\" fill=\"red\"/%3E",
+        "previewCalls": 0
+      }
+    },
+    {
+      "sample": {
+        "id": "picture-card:empty-with-origin",
+        "listType": "picture-card",
+        "mode": "empty-with-origin"
+      },
+      "result": {
+        "thumbnail": {
+          "tag": "A",
+          "href": "data:image/svg+xml,%3Csvg xmlns=\"http://www.w3.org/2000/svg\" width=\"8\" height=\"8\" fill=\"red\"/%3E",
+          "src": "data:image/svg+xml,%3Csvg xmlns=\"http://www.w3.org/2000/svg\" width=\"8\" height=\"8\" fill=\"red\"/%3E",
+          "icons": []
+        },
+        "previewHref": "data:image/svg+xml,%3Csvg xmlns=\"http://www.w3.org/2000/svg\" width=\"8\" height=\"8\" fill=\"red\"/%3E",
+        "previewCalls": 0
+      }
+    },
+    {
+      "sample": {
+        "id": "picture-circle:url-only",
+        "listType": "picture-circle",
+        "mode": "url-only"
+      },
+      "result": {
+        "thumbnail": {
+          "tag": "A",
+          "href": "data:image/svg+xml,%3Csvg xmlns=\"http://www.w3.org/2000/svg\" width=\"8\" height=\"8\" fill=\"red\"/%3E",
+          "src": "data:image/svg+xml,%3Csvg xmlns=\"http://www.w3.org/2000/svg\" width=\"8\" height=\"8\" fill=\"red\"/%3E",
+          "icons": []
+        },
+        "previewHref": "data:image/svg+xml,%3Csvg xmlns=\"http://www.w3.org/2000/svg\" width=\"8\" height=\"8\" fill=\"red\"/%3E",
+        "previewCalls": 0
+      }
+    },
+    {
+      "sample": {
+        "id": "picture-circle:empty-thumb",
+        "listType": "picture-circle",
+        "mode": "empty-thumb"
+      },
+      "result": {
+        "thumbnail": {
+          "tag": "A",
+          "href": "data:image/svg+xml,%3Csvg xmlns=\"http://www.w3.org/2000/svg\" width=\"8\" height=\"8\" fill=\"red\"/%3E",
+          "src": "data:image/svg+xml,%3Csvg xmlns=\"http://www.w3.org/2000/svg\" width=\"8\" height=\"8\" fill=\"red\"/%3E",
+          "icons": []
+        },
+        "previewHref": "data:image/svg+xml,%3Csvg xmlns=\"http://www.w3.org/2000/svg\" width=\"8\" height=\"8\" fill=\"red\"/%3E",
+        "previewCalls": 0
+      }
+    },
+    {
+      "sample": {
+        "id": "picture-circle:thumb-and-url",
+        "listType": "picture-circle",
+        "mode": "thumb-and-url"
+      },
+      "result": {
+        "thumbnail": {
+          "tag": "A",
+          "href": "data:image/svg+xml,%3Csvg xmlns=\"http://www.w3.org/2000/svg\" width=\"8\" height=\"8\" fill=\"red\"/%3E",
+          "src": "data:image/svg+xml,%3Csvg xmlns=\"http://www.w3.org/2000/svg\" width=\"8\" height=\"8\" fill=\"blue\"/%3E",
+          "icons": []
+        },
+        "previewHref": "data:image/svg+xml,%3Csvg xmlns=\"http://www.w3.org/2000/svg\" width=\"8\" height=\"8\" fill=\"red\"/%3E",
+        "previewCalls": 0
+      }
+    },
+    {
+      "sample": {
+        "id": "picture-circle:thumb-only",
+        "listType": "picture-circle",
+        "mode": "thumb-only"
+      },
+      "result": {
+        "thumbnail": {
+          "tag": "A",
+          "href": "data:image/svg+xml,%3Csvg xmlns=\"http://www.w3.org/2000/svg\" width=\"8\" height=\"8\" fill=\"blue\"/%3E",
+          "src": "data:image/svg+xml,%3Csvg xmlns=\"http://www.w3.org/2000/svg\" width=\"8\" height=\"8\" fill=\"blue\"/%3E",
+          "icons": []
+        },
+        "previewHref": "data:image/svg+xml,%3Csvg xmlns=\"http://www.w3.org/2000/svg\" width=\"8\" height=\"8\" fill=\"blue\"/%3E",
+        "previewCalls": 0
+      }
+    },
+    {
+      "sample": {
+        "id": "picture-circle:empty-no-url",
+        "listType": "picture-circle",
+        "mode": "empty-no-url"
+      },
+      "result": {
+        "thumbnail": {
+          "tag": "DIV",
+          "href": null,
+          "src": null,
+          "icons": [
+            {
+              "viewBox": "64 64 896 896",
+              "paths": [
+                "M928 160H96c-17.7 0-32 14.3-32 32v640c0 17.7 14.3 32 32 32h832c17.7 0 32-14.3 32-32V192c0-17.7-14.3-32-32-32zm-40 632H136v-39.9l138.5-164.3 150.1 178L658.1 489 888 761.6V792zm0-129.8L664.2 396.8c-3.2-3.8-9-3.8-12.2 0L424.6 666.4l-144-170.7c-3.2-3.8-9-3.8-12.2 0L136 652.7V232h752v430.2zM304 456a88 88 0 100-176 88 88 0 000 176zm0-116c15.5 0 28 12.5 28 28s-12.5 28-28 28-28-12.5-28-28 12.5-28 28-28z"
+              ]
+            }
+          ]
+        },
+        "previewHref": null,
+        "previewCalls": 0
+      }
+    },
+    {
+      "sample": {
+        "id": "picture-circle:no-images",
+        "listType": "picture-circle",
+        "mode": "no-images"
+      },
+      "result": {
+        "thumbnail": {
+          "tag": "DIV",
+          "href": null,
+          "src": null,
+          "icons": [
+            {
+              "viewBox": "64 64 896 896",
+              "paths": [
+                "M928 160H96c-17.7 0-32 14.3-32 32v640c0 17.7 14.3 32 32 32h832c17.7 0 32-14.3 32-32V192c0-17.7-14.3-32-32-32zm-40 632H136v-39.9l138.5-164.3 150.1 178L658.1 489 888 761.6V792zm0-129.8L664.2 396.8c-3.2-3.8-9-3.8-12.2 0L424.6 666.4l-144-170.7c-3.2-3.8-9-3.8-12.2 0L136 652.7V232h752v430.2zM304 456a88 88 0 100-176 88 88 0 000 176zm0-116c15.5 0 28 12.5 28 28s-12.5 28-28 28-28-12.5-28-28 12.5-28 28-28z"
+              ]
+            }
+          ]
+        },
+        "previewHref": null,
+        "previewCalls": 0
+      }
+    },
+    {
+      "sample": {
+        "id": "picture-circle:non-image-url",
+        "listType": "picture-circle",
+        "mode": "non-image-url"
+      },
+      "result": {
+        "thumbnail": {
+          "tag": "A",
+          "href": "data:image/svg+xml,%3Csvg xmlns=\"http://www.w3.org/2000/svg\" width=\"8\" height=\"8\" fill=\"red\"/%3E",
+          "src": null,
+          "icons": [
+            {
+              "viewBox": "64 64 896 896",
+              "paths": [
+                "M854.6 288.6L639.4 73.4c-6-6-14.1-9.4-22.6-9.4H192c-17.7 0-32 14.3-32 32v832c0 17.7 14.3 32 32 32h640c17.7 0 32-14.3 32-32V311.3c0-8.5-3.4-16.7-9.4-22.7zM790.2 326H602V137.8L790.2 326zm1.8 562H232V136h302v216a42 42 0 0042 42h216v494z"
+              ]
+            }
+          ]
+        },
+        "previewHref": "data:image/svg+xml,%3Csvg xmlns=\"http://www.w3.org/2000/svg\" width=\"8\" height=\"8\" fill=\"red\"/%3E",
+        "previewCalls": 0
+      }
+    },
+    {
+      "sample": {
+        "id": "picture-circle:empty-with-origin",
+        "listType": "picture-circle",
+        "mode": "empty-with-origin"
+      },
+      "result": {
+        "thumbnail": {
+          "tag": "A",
+          "href": "data:image/svg+xml,%3Csvg xmlns=\"http://www.w3.org/2000/svg\" width=\"8\" height=\"8\" fill=\"red\"/%3E",
+          "src": "data:image/svg+xml,%3Csvg xmlns=\"http://www.w3.org/2000/svg\" width=\"8\" height=\"8\" fill=\"red\"/%3E",
+          "icons": []
+        },
+        "previewHref": "data:image/svg+xml,%3Csvg xmlns=\"http://www.w3.org/2000/svg\" width=\"8\" height=\"8\" fill=\"red\"/%3E",
+        "previewCalls": 0
+      }
+    }
+  ],
+  "transitions": [
+    {
+      "mode": "url-only",
+      "result": {
+        "thumbnail": {
+          "tag": "A",
+          "href": "data:image/svg+xml,%3Csvg xmlns=\"http://www.w3.org/2000/svg\" width=\"8\" height=\"8\" fill=\"red\"/%3E",
+          "src": "data:image/svg+xml,%3Csvg xmlns=\"http://www.w3.org/2000/svg\" width=\"8\" height=\"8\" fill=\"red\"/%3E",
+          "icons": []
+        },
+        "previewHref": "data:image/svg+xml,%3Csvg xmlns=\"http://www.w3.org/2000/svg\" width=\"8\" height=\"8\" fill=\"red\"/%3E",
+        "previewCalls": 0
+      }
+    },
+    {
+      "mode": "empty-thumb",
+      "result": {
+        "thumbnail": {
+          "tag": "A",
+          "href": "data:image/svg+xml,%3Csvg xmlns=\"http://www.w3.org/2000/svg\" width=\"8\" height=\"8\" fill=\"red\"/%3E",
+          "src": "data:image/svg+xml,%3Csvg xmlns=\"http://www.w3.org/2000/svg\" width=\"8\" height=\"8\" fill=\"red\"/%3E",
+          "icons": []
+        },
+        "previewHref": "data:image/svg+xml,%3Csvg xmlns=\"http://www.w3.org/2000/svg\" width=\"8\" height=\"8\" fill=\"red\"/%3E",
+        "previewCalls": 0
+      }
+    },
+    {
+      "mode": "thumb-and-url",
+      "result": {
+        "thumbnail": {
+          "tag": "A",
+          "href": "data:image/svg+xml,%3Csvg xmlns=\"http://www.w3.org/2000/svg\" width=\"8\" height=\"8\" fill=\"red\"/%3E",
+          "src": "data:image/svg+xml,%3Csvg xmlns=\"http://www.w3.org/2000/svg\" width=\"8\" height=\"8\" fill=\"blue\"/%3E",
+          "icons": []
+        },
+        "previewHref": "data:image/svg+xml,%3Csvg xmlns=\"http://www.w3.org/2000/svg\" width=\"8\" height=\"8\" fill=\"red\"/%3E",
+        "previewCalls": 0
+      }
+    },
+    {
+      "mode": "empty-no-url",
+      "result": {
+        "thumbnail": {
+          "tag": "DIV",
+          "href": null,
+          "src": null,
+          "icons": [
+            {
+              "viewBox": "64 64 896 896",
+              "paths": [
+                "M928 160H96c-17.7 0-32 14.3-32 32v640c0 17.7 14.3 32 32 32h832c17.7 0 32-14.3 32-32V192c0-17.7-14.3-32-32-32zm-40 632H136v-39.9l138.5-164.3 150.1 178L658.1 489 888 761.6V792zm0-129.8L664.2 396.8c-3.2-3.8-9-3.8-12.2 0L424.6 666.4l-144-170.7c-3.2-3.8-9-3.8-12.2 0L136 652.7V232h752v430.2zM304 456a88 88 0 100-176 88 88 0 000 176zm0-116c15.5 0 28 12.5 28 28s-12.5 28-28 28-28-12.5-28-28 12.5-28 28-28z"
+              ]
+            }
+          ]
+        },
+        "previewHref": null,
+        "previewCalls": 0
+      }
+    },
+    {
+      "mode": "url-only",
+      "result": {
+        "thumbnail": {
+          "tag": "A",
+          "href": "data:image/svg+xml,%3Csvg xmlns=\"http://www.w3.org/2000/svg\" width=\"8\" height=\"8\" fill=\"red\"/%3E",
+          "src": "data:image/svg+xml,%3Csvg xmlns=\"http://www.w3.org/2000/svg\" width=\"8\" height=\"8\" fill=\"red\"/%3E",
+          "icons": []
+        },
+        "previewHref": "data:image/svg+xml,%3Csvg xmlns=\"http://www.w3.org/2000/svg\" width=\"8\" height=\"8\" fill=\"red\"/%3E",
+        "previewCalls": 0
+      }
+    }
+  ]
+}

@@ -330,6 +330,11 @@ Upload error Tooltip сверяется по десяти raw UMD cases и че�
 string response, error.statusText, error.message, пустые значения, response object,
 Error/ProgressEvent и locale fallback. Sample metadata содержит строки. Текст
 открытого Tooltip меняется без замены строки; SSR сохраняет прежний hidden popover.
+Upload thumbnail fallback сверяется по 24 raw UMD cases и пяти transitions:
+picture/card/circle, absent/empty/present thumbUrl, URL priority, пустые источники
+и non-image файлы. Пустой thumbUrl сохраняет URL изображения/preview и запрещает
+previewFile даже при originFileObj. Обновления сохраняют row/input и внешний
+draft/focus/selection; thumbnail anchor сохраняется, пока источник не исчезает.
 Upload action icon snippets сверяются по 21 raw UMD case, двум action traces
 и пяти transitions. Empty/zero samples используют React Fragment, соответствующий
 opaque Snippet content; falsy render return fallback и ReactElement clone/onClick

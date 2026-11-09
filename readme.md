@@ -6651,6 +6651,14 @@ Snippet<[UploadFile]>. ListType: text, picture, picture-card, picture-circle;
 previewFile/isImageUrl настраивают thumbnail. По умолчанию thumbnails повторяют
 исходный 200px canvas preview, включая GIF/SVG. Progress появляется через 300 ms.
 
+Непустой `thumbUrl` имеет приоритет над `url`. Пустой `thumbUrl` сохраняет
+изображение и preview по `url`, но не запускает `previewFile`: генерация нужна
+только при `thumbUrl === undefined` и наличии `originFileObj`.
+[Raw-замеры](tests/browser/fixtures/ant-design-upload-thumbnail-fallback-reference.json),
+[browser](tests/browser/upload-thumbnail-fallback.spec.ts) и
+[SSR](tests/package/upload-thumbnail-fallback.ssr.test.ts) проверяют picture/card/circle,
+пустые URL, не-изображения и обновления без потери строки, input и внешнего фокуса.
+
 UploadDragger принимает height и по умолчанию hasControlInside=false: его trigger
 имеет role=button и открывает chooser клавиатурой. Обычный Upload по умолчанию
 ожидает native control внутри children snippet; локальный disabled нужно передавать

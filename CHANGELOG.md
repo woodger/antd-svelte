@@ -1481,6 +1481,10 @@
 
 ### Fixed
 
+- Upload использует file.url для thumbnail и preview при пустом thumbUrl,
+  как Ant Design 6.6.8. Пустой thumbUrl по-прежнему запрещает генерацию previewFile;
+  SSR и обновления списка сохраняют существующие контракты.
+
 - Modal/Drawer не зависают при смене getContainer, в том числе во время ухода
   Drawer с destroyOnHidden. Head-style anchors остаются вне keyed dialog,
   чтобы portal сохранял исходный parent и observer темы не наблюдал сам dialog.

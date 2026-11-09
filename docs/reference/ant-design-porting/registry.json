@@ -11735,6 +11735,24 @@
             "readme.md"
           ],
           "note": "Непустой string response идёт перед error.statusText, error.message и locale.uploadError, как ListItem 6.6.8. Error/ProgressEvent сохранены; controlled string metadata включены в тип UploadFile.error. Пустые значения и response object не подменяют fallback; primitive/unavailable metadata не вызывают in-operator TypeError. Десять raw UMD cases и четыре live transitions измеряют строковые metadata и Error/ProgressEvent. Обновление открытого Tooltip сохраняет row/input DOM. SSR сохраняет прежний hidden popover без browser resources; ReactNode-valued arbitrary error metadata не заявлены."
+        },
+        {
+          "id": "thumbnail-url-fallback",
+          "title": "Thumbnail/preview URL fallback при пустом thumbUrl",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/UploadListItem.svelte",
+            "src/lib/upload.types.ts",
+            "tests/browser/upload-thumbnail-fallback.spec.ts",
+            "tests/browser/upload-thumbnail-fallback-metrics.ts",
+            "tests/browser/fixtures/UploadThumbnailFallbackScope.svelte",
+            "tests/browser/fixtures/UploadThumbnailFallbackFixtures.svelte",
+            "tests/browser/fixtures/ant-design-upload-thumbnail-fallback-reference.json",
+            "tests/package/upload-thumbnail-fallback.ssr.test.ts",
+            "readme.md"
+          ],
+          "note": "Непустой thumbUrl имеет приоритет над url; пустой thumbUrl сохраняет URL изображения и preview, но не вызывает previewFile при originFileObj. Генерация сохраняет guard thumbUrl===undefined. 24 raw UMD cases для picture/card/circle и пять transitions задают absent/empty/present thumbnail, URL priority, пустые источники и non-image файл. Updates сохраняют item/input DOM, thumbnail anchor до исчезновения источника и внешний draft/focus/selection. SSR использует URL без previewFile и browser resources."
         }
       ]
     },

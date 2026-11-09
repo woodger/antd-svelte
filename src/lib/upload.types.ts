@@ -21,6 +21,7 @@ export interface UploadFile<T = unknown> {
   error?: Error | ProgressEvent | { statusText?: string; message?: string; };
   xhr?: XMLHttpRequest;
   url?: string;
+  /** Пустая строка сохраняет fallback на url и запрещает генерацию через previewFile. */
   thumbUrl?: string;
   crossOrigin?: 'anonymous' | 'use-credentials' | '';
   /** Атрибуты filename link или их JSON; class/onclick/style используют нативный Svelte API. */
@@ -162,6 +163,7 @@ export interface UploadProps<T = unknown> extends Omit<
   showUploadList?: boolean | UploadListOptions<T>;
   /** @defaultValue 'text' */
   listType?: 'text' | 'picture' | 'picture-card' | 'picture-circle';
+  /** Генератор thumbnail для picture-списков при originFileObj и thumbUrl === undefined. */
   previewFile?: (file: File | Blob) => PromiseLike<string>;
   isImageUrl?: (file: UploadFile<T>) => boolean;
   /** Иконка файла с контекстом file/listType; готовая thumbnail по-прежнему показывает изображение. */

@@ -54,7 +54,7 @@
   let showProgress = $state(false);
   let picture = $derived(listType !== 'text');
   let card = $derived(listType === 'picture-card' || listType === 'picture-circle');
-  let source = $derived(file.thumbUrl ?? (thumbnail || file.url));
+  let source = $derived(file.thumbUrl || thumbnail || file.url);
   let image = $derived(isImageUrl({ ...file, thumbUrl: file.thumbUrl ?? thumbnail }));
   let linkAttributes = $derived(resolveUploadLinkProps(file.linkProps));
   let message = $derived(getUploadErrorMessage(file.response, file.error, locale.uploadError));
