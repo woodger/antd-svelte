@@ -10,6 +10,8 @@
   import { useForm, useFormField } from './form-context';
   import { useCheckboxGroup } from './checkbox-context';
   import { createCheckableClickLock } from './checkable.dom';
+  import { getCheckboxPrefixCss } from './checkbox-prefix.engine';
+  import ThemeScopeStyle from './ThemeScopeStyle.svelte';
   import type { CheckboxChangeEvent, CheckboxProps } from './checkbox.types';
 
   let {
@@ -31,7 +33,9 @@
   const initialDefault = untrack(() => props.defaultChecked ?? false);
   const clickLock = createCheckableClickLock();
   let alive = true;
-  let prefix = $derived(props.prefixCls ?? 'ant-checkbox');
+  let prefix = $derived(config.getPrefixCls('checkbox', props.prefixCls));
+  let rootPrefix = $derived(config.getPrefixCls());
+  let prefixCss = $derived(getCheckboxPrefixCss(prefix, rootPrefix));
   let inGroup = $derived(Boolean(group && !props.skipGroup));
   let groupValue = $derived(typeof value === 'string' || typeof value === 'number'
     || typeof value === 'boolean' ? value : undefined);
@@ -162,6 +166,9 @@
   }
 </script>
 
+{#if prefixCss}
+  <ThemeScopeStyle css={prefixCss} scope={`checkbox-prefix:${prefix}:${rootPrefix}`} />
+{/if}
 <!-- svelte-ignore a11y_click_events_have_key_events, a11y_no_noninteractive_element_interactions (Label блокирует повторный click; клавиатурой и фокусом управляет native input.) -->
 <label class={[
   `${prefix}-wrapper ant-checkbox-css-var`,
@@ -176,6 +183,9 @@
   localClasses?.root,
   props.rootClassName
 ]} style={rootStyle} onclick={clickLock.label} {@attach wave}
+  data-ant-checkbox-wrapper
+  data-ant-checkbox-prefix={prefixCss ? prefix : undefined}
+  data-ant-checkbox-global={prefixCss ? rootPrefix : undefined}
   onmouseenter={event => props.onMouseEnter?.(event)}
   onmouseleave={event => props.onMouseLeave?.(event)}>
   <span bind:this={nativeElement} class={[
@@ -219,7 +229,7 @@
       }} />
   </span>
   {#if props.children}
-    <span class={[`${prefix}-label`, contextClasses?.label, localClasses?.label]}
+    <span class={[`${prefix}-label`, contextClasses?.label, localClasses?.label]} data-ant-checkbox-label
       style={[contextStyles?.label, localStyles?.label].filter(Boolean).join(';') || undefined}>
       {@render props.children()}
     </span>

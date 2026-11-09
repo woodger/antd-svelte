@@ -62,7 +62,7 @@ export interface CheckboxProps extends Omit<
   /** Один раз вызывает focus при mount; lowercase autofocus сохраняет HTML-поведение. */
   autoFocus?: boolean;
   tabIndex?: number;
-  /** Меняет классы; CSS произвольного префикса предоставляет потребитель. */
+  /** Локальный prefix; empty/undefined наследуют ConfigProvider.prefixCls. */
   prefixCls?: string;
   classNames?: CheckboxSemantic;
   styles?: CheckboxSemantic;

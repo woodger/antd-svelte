@@ -3,6 +3,8 @@
   import Checkbox from './Checkbox.svelte';
   import { useConfig } from './config-context';
   import { useComponentTheme } from './theme-component.svelte';
+  import { getCheckboxPrefixCss } from './checkbox-prefix.engine';
+  import ThemeScopeStyle from './ThemeScopeStyle.svelte';
   import { useForm, useFormField } from './form-context';
   import { provideCheckboxGroup } from './checkbox-context';
   import {
@@ -25,7 +27,7 @@
     name,
     onValueChange,
     onChange,
-    prefixCls = 'ant-checkbox',
+    prefixCls: customizePrefixCls,
     rootClassName,
     role = 'group',
     nativeElement = $bindable(),
@@ -40,6 +42,9 @@
   const componentTheme = useComponentTheme('Checkbox');
   const form = useForm();
   const field = useFormField(() => nativeElement);
+  let prefixCls = $derived(config.getPrefixCls('checkbox', customizePrefixCls));
+  let rootPrefix = $derived(config.getPrefixCls());
+  let prefixCss = $derived(getCheckboxPrefixCss(prefixCls, rootPrefix));
   const generatedId = $props.id();
   const initialDefault = untrack(() => [...(defaultValue ?? [])]);
   const resets = new Set<ReturnType<typeof setTimeout>>();
@@ -156,13 +161,16 @@
 </script>
 
 <style>
-  .ant-checkbox-group { min-width: 0; max-width: 100%; border: 0; row-gap: var(--ant-margin-xs); }
-  .ant-checkbox-group:focus-visible { outline: 2px solid var(--ant-color-primary); outline-offset: 2px; }
-  .ant-checkbox-group :global(.ant-checkbox-wrapper) { min-width: 0; max-width: 100%; overflow-wrap: anywhere; }
-  .ant-checkbox-group :global(.ant-checkbox-label) { min-width: 0; }
+  [data-ant-checkbox-group] { min-width: 0; max-width: 100%; border: 0; row-gap: var(--ant-margin-xs); }
+  [data-ant-checkbox-group]:focus-visible { outline: 2px solid var(--ant-color-primary); outline-offset: 2px; }
+  [data-ant-checkbox-group] :global([data-ant-checkbox-wrapper]) { min-width: 0; max-width: 100%; overflow-wrap: anywhere; }
+  [data-ant-checkbox-group] :global([data-ant-checkbox-label]) { min-width: 0; }
 </style>
 
 <svelte:document onreset={handleReset} />
+{#if prefixCss}
+  <ThemeScopeStyle css={prefixCss} scope={`checkbox-prefix:${prefixCls}:${rootPrefix}`} />
+{/if}
 
 <fieldset
   {...attributes}
@@ -178,6 +186,9 @@
       className,
       rootClassName
     ]}
+  data-ant-checkbox-group
+  data-ant-checkbox-prefix={prefixCss ? prefixCls : undefined}
+  data-ant-checkbox-global={prefixCss ? rootPrefix : undefined}
   disabled={resolvedDisabled}
   aria-label={attributes['aria-label']
       ?? (attributes['aria-labelledby']

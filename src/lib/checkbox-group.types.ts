@@ -32,6 +32,7 @@ export interface CheckboxGroupProps<Value extends CheckboxGroupValue = string> e
   onValueChange?: (value: Value[]) => void;
   /** Массив доступных зарегистрированных значений; вызывается перед onValueChange. */
   onChange?: (value: Value[]) => void;
+  /** Базовый prefix группы и generated options; children выбирают свой отдельно. */
   prefixCls?: string;
   rootClassName?: string;
   /** Bindable fieldset с прежними native form/reset/disabled контрактами. */

@@ -155,6 +155,10 @@ Source selector с button-wrapper исключён; defaultChecked wrapper obser
 хранится raw и с public checked=true counterpart. В radio-button восстановлены
 три пропущенных Group/Badge rules: vertical width/margin и z-index счётчика;
 normal radio.css сохраняется.
+Рецепт checkbox-prefix выводит 31 правило Checkbox/Group, включая hover media
+query, mixed/disabled и интеграцию Row. Runtime сохраняет token markers и общий
+namespace Row. Raw/fresh Inner measurements отдельно фиксируют Source cache
+shared local class; native input/form/fieldset contracts не меняются.
 Рецепт segmented-prefix выводит data module из 38 правил Segmented для локального
 prefixCls; runtime сохраняет CSS variables/marker и ограничивает defaults корнем.
 Рецепт flex-prefix выводит data module из 32 правил Flex без typography reset;

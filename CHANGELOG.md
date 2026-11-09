@@ -9,6 +9,10 @@
 
 ### Added
 
+- Checkbox/CheckboxGroup поддерживает local/shared prefixCls и независимый Row
+  namespace. Mixed/disabled, выбор, формы, refs и focus сохранены; Source stale
+  Row selector записан raw/fresh замерами и не перенесён.
+
 - Radio/RadioButton/RadioGroup поддерживают local/shared prefixCls и независимый
   Badge namespace. Native fieldset/input, checked state, формы, refs и focus
   сохранены; Source defaultChecked wrapper observation записан raw/matched.

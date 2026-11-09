@@ -9035,13 +9035,23 @@ skipGroup, как в upstream. Group.nativeElement — bindable fieldset; rootCl
 prefixCls и явный role относятся к корню. PrefixCls передаётся в generated options,
 а children задают собственный prefixCls.
 
+Checkbox/CheckboxGroup подключают CSS для local/shared prefixCls. Непустой
+локальный prefix имеет приоритет; empty/undefined наследуют ConfigProvider.
+Row использует общий namespace независимо от local Checkbox class; canonical
+token markers и Wave target сохраняются. Смена prefix сохраняет group/input DOM,
+refs, checked/mixed, выбранный массив, focus/selection и FormData.
+В Source shared local class может сохранить Row selector первого provider:
+nested Inner Row получает flex-grow:0, а fresh Inner с теми же props/theme — 1.
+Оба замера сохранены; Native изолирует CSS по local class и global namespace.
+
 Сохранены native fieldset/form/reset/required, принудительный disabled группы,
 primitive values и deduplication options, bind:indeterminate и defaults. Они
 отличаются от React state/ref conventions, child disabled override и controlled
 indeterminate. Source Checkbox aliases и отдельные theme algorithms применяются
 к Checkbox/CheckboxGroup; native-only темы сохраняют прежнее оформление.
-Wave подключён; произвольный prefix CSS и React diagnostics/statics остаются
-неперенесёнными. Типы —
+Local/shared prefix CSS и Wave подключены; React diagnostics/statics остаются
+неперенесёнными. Сверка с официальным UMD — `?fixture=checkbox-prefix` и
+[browser](./tests/browser/checkbox-prefix.spec.ts). Типы —
 [checkbox.types.ts](./src/lib/checkbox.types.ts) и
 [checkbox-group.types.ts](./src/lib/checkbox-group.types.ts); проверки —
 [browser](./tests/browser/checkbox-features.spec.ts),

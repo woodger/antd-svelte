@@ -1623,6 +1623,24 @@
     "format": "module"
   },
   {
+    "id": "checkbox-prefix",
+    "output": "src/lib/vendor/checkbox-prefix.css.js",
+    "expectedRules": 31,
+    "include": [
+      "^(?:\\.css-var-_R_0_)?\\.ant-checkbox(?![\\w])"
+    ],
+    "exclude": [],
+    "replacements": [
+      {
+        "pattern": "\\.css-var-_R_0_\\.ant-checkbox-css-var",
+        "replacement": ":where(.ant-checkbox-css-var)"
+      }
+    ],
+    "keyframes": [],
+    "header": "/* Ant Design 6.6.8 — MIT; см. LICENSE.ant-design.\n * Checkbox/Group prefix template: checked, indeterminate, disabled, hover и Row.\n * https://registry.npmjs.org/antd/-/antd-6.6.8.tgz\n * SHA-256: 8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa\n */",
+    "format": "module"
+  },
+  {
     "id": "calendar",
     "output": "src/lib/vendor/calendar.css",
     "expectedRules": 123,
