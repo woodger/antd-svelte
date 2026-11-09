@@ -7882,8 +7882,15 @@ onClick, как upstream. Image не наследует Form/ConfigProvider cont
 
 PrefixCls задаёт локальный базовый префикс Image; пустая строка наследует общий
 ConfigProvider.prefixCls. Классы миниатюры, placeholder/cover и preview используют
-этот префикс; viewer добавляет суффикс -preview. Смена префикса сохраняет DOM,
-refs, открытый viewer, масштаб и фокус. Canonical theme variables не переименовываются.
+этот префикс; viewer по умолчанию добавляет суффикс -preview. Смена префикса
+сохраняет DOM, refs, открытый viewer, масштаб и фокус. Canonical theme variables не переименовываются.
+
+Image.previewPrefixCls задаёт полное независимое имя viewer. Undefined оставляет
+производное имя; пустая строка сохраняется, как в rc-image. Настройка не меняет
+классы миниатюры и игнорируется групповым viewer. Стили подключаются для обоих
+namespaces. В официальном wrapper независимое имя теряет CSS; [raw замеры и отдельные
+оформленные counterparts](./tests/browser/fixtures/ant-design-image-independent-preview-reference.json)
+сохранены. Svelte подключает недостающие стили и сохраняет dialog, transform и фокус.
 
 Fallback подставляется при ошибке исходного src; root сохраняет ant-image-error,
 даже если fallback загрузился. Новый src сбрасывает ошибку. Source probe повторяет
@@ -7941,7 +7948,7 @@ ProgressAnimationDuration пока доступен только как CSS vari
 
 Из semantic API пока перенесены styles.root у Image и classNames.popup.root у
 Image/ImagePreviewGroup. Остальные slots, placeholder progress/render,
-ConfigProvider.image, независимый Image.previewPrefixCls, getContainer, icons/React info.icons wrappers и
+ConfigProvider.image, getContainer, icons/React info.icons wrappers и
 исходные fade/appear/leave/mousePosition motion пока отсутствуют. Deprecated aliases
 исключены из переноса. [Замер текущих полей оформления](./tools/fixtures/ant-design-image-current-styling-observation.json)
 подтверждает styles.root и classNames.popup.root в закреплённом UMD; вложенный

@@ -11,6 +11,7 @@
 
   let {
     prefixCls: customizePrefixCls,
+    previewPrefixCls,
     src,
     alt,
     width,
@@ -34,7 +35,7 @@
   }: ImageProps = $props();
   const context = useConfig();
   let componentPrefix = $derived(context.getPrefixCls('image', customizePrefixCls));
-  let prefixCss = $derived(getImagePrefixCss(componentPrefix));
+  let prefixCss = $derived(getImagePrefixCss(componentPrefix, previewPrefixCls));
   const componentTheme = useComponentTheme('Image');
   const group = useImageGroup();
   const id = $props.id();
@@ -124,7 +125,7 @@
   .image-trigger:focus-visible { outline: 2px solid var(--ant-color-primary); outline-offset: 2px; }
 </style>
 
-{#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`image-prefix:${componentPrefix}`} />{/if}<svelte:element this={canPreview ? 'button' : 'div'} data-ant-image-prefix={componentPrefix} bind:this={nativeElement} type={canPreview ? 'button' : undefined} role={canPreview ? 'button' : undefined}
+{#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`image-prefix:${componentPrefix}:${previewPrefixCls ?? `${componentPrefix}-preview`}`} />{/if}<svelte:element this={canPreview ? 'button' : 'div'} data-ant-image-prefix={componentPrefix} bind:this={nativeElement} type={canPreview ? 'button' : undefined} role={canPreview ? 'button' : undefined}
   class={[
       `image-trigger ${componentPrefix} ant-image-css-var`,
       componentTheme.className,
@@ -181,4 +182,4 @@
     </div>
   {/if}
 </svelte:element>
-{#if canPreview && !group}<ImagePreview imagePrefix={componentPrefix} open={actualOpen} image={{ url: previewSource, alt: alt ?? undefined, width, height }} config={config} className={classNames?.popup?.root} {fallback} imageAttributes={common} onClose={() => requestOpen(false)} />{/if}
+{#if canPreview && !group}<ImagePreview imagePrefix={componentPrefix} previewPrefix={previewPrefixCls} open={actualOpen} image={{ url: previewSource, alt: alt ?? undefined, width, height }} config={config} className={classNames?.popup?.root} {fallback} imageAttributes={common} onClose={() => requestOpen(false)} />{/if}

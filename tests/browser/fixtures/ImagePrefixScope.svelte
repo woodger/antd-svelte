@@ -9,6 +9,7 @@
     variablePrefix?: string;
     local?: string;
     groupLocal?: string;
+    previewPrefix?: string;
     rtl?: boolean;
     aliases?: boolean;
     group?: boolean;
@@ -36,7 +37,7 @@
 
 {#snippet cover()}Cover{/snippet}
 {#snippet first()}
-  <Image prefixCls={local ? sample.local : undefined} src={imageOne} alt="First image"
+  <Image previewPrefixCls={sample.previewPrefix} prefixCls={local ? sample.local : undefined} src={imageOne} alt="First image"
     width={120} height={90} {preview} placeholder={sample.placeholder}
     rootClassName="fixture-image-prefix" classNames={{ popup: { root: 'fixture-image-preview' } }}
     style={sample.userStyle ? 'border-radius:9px' : undefined}
@@ -50,7 +51,7 @@
       preview={{ onOpenChange: value => openings.push(value),
         onTransform: info => transforms.push(info.transform) }}>
       {@render first()}
-      <Image prefixCls={local ? sample.local : undefined} src={imageTwo} alt="Second image"
+      <Image previewPrefixCls={sample.previewPrefix} prefixCls={local ? sample.local : undefined} src={imageTwo} alt="Second image"
         width={120} height={90} />
     </ImagePreviewGroup>
   {:else}{@render first()}{/if}

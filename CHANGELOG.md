@@ -9,6 +9,10 @@
 
 ### Added
 
+- Image.previewPrefixCls задаёт независимый полный префикс viewer, включая пустой.
+  CSS подключается для нового namespace; upstream omission записан raw/styled.
+  Смена имени сохраняет открытый dialog, image/action DOM, масштаб и фокус.
+
 - Image поддерживает local/shared prefixCls для миниатюры и preview;
   ImagePreviewGroup.previewPrefixCls задаёт независимый базовый prefix viewer.
   Canonical tokens, DOM/refs, открытый viewer, масштаб, текущий кадр и фокус сохраняются.

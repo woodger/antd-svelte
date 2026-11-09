@@ -90,8 +90,10 @@ export interface ImageProps extends Omit<
   | 'placeholder'
   | 'children'
 > {
-  /** Локальный CSS-префикс Image; пустая строка наследует ConfigProvider, viewer добавляет -preview. */
+  /** Локальный CSS-префикс Image; пустая строка наследует ConfigProvider, viewer по умолчанию добавляет -preview. */
   prefixCls?: string;
+  /** Полный префикс viewer; undefined даёт prefixCls + -preview, пустая строка сохраняется. */
+  previewPrefixCls?: string;
   width?: number | string;
   height?: number | string;
   /** @defaultValue true */

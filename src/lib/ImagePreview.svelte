@@ -23,6 +23,7 @@
   let {
     open,
     imagePrefix = 'ant-image',
+    previewPrefix: customizePreviewPrefix,
     image,
     config: preview = {},
     fallback,
@@ -37,6 +38,7 @@
   }: {
     open: boolean;
     imagePrefix?: string;
+    previewPrefix?: string;
     image: ImageInfo;
     config?: ImagePreviewConfig;
     className?: string;
@@ -50,7 +52,7 @@
     countRender?: import('svelte').Snippet<[number, number]>;
   } = $props();
   const context = useConfig();
-  let previewPrefix = $derived(`${imagePrefix}-preview`);
+  let previewPrefix = $derived(customizePreviewPrefix ?? `${imagePrefix}-preview`);
   const componentTheme = useComponentTheme('Image');
   let dialog = $state<HTMLDialogElement>();
   let element = $state<HTMLImageElement>();
@@ -328,7 +330,7 @@
 {/snippet}
 {#if mounted}
   <NoCompactStyle>
-    <dialog data-ant-image-prefix={imagePrefix} bind:this={dialog} tabindex="-1" class={[
+    <dialog data-ant-image-prefix={imagePrefix} data-ant-image-preview-prefix={previewPrefix} bind:this={dialog} tabindex="-1" class={[
         `image-preview-dialog ${previewPrefix} ant-image-css-var`,
         componentTheme.className,
         className,

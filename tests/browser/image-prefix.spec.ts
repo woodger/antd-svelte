@@ -18,13 +18,13 @@ for (const entry of reference.cases) {
         .selectOption(scope);
       await page.mouse.move(1090, 5);
 
-      await expect.poll(() => page.evaluate(snapshotImagePrefix)).toEqual(entry.result[scope].closed);
+      await expect.poll(() => page.evaluate(snapshotImagePrefix, undefined)).toEqual(entry.result[scope].closed);
       if (entry.result[scope].opened) {
         await page.locator('.fixture-image-prefix').click();
         await expect(page.getByRole('dialog')).toBeVisible();
         await page.mouse.move(1090, 5);
 
-        await expect.poll(() => page.evaluate(snapshotImagePrefix)).toEqual(entry.result[scope].opened);
+        await expect.poll(() => page.evaluate(snapshotImagePrefix, undefined)).toEqual(entry.result[scope].opened);
       } else {
         await expect(page.locator('dialog')).toHaveCount(0);
       }
@@ -63,7 +63,7 @@ for (const group of [false, true]) {
     for (const step of reference.transitions.filter(step => step.group === group)) {
       await setPrefix(page, 'Live Image prefix value', step.prefix);
 
-      await expect.poll(() => page.evaluate(snapshotImagePrefix)).toEqual(step.result);
+      await expect.poll(() => page.evaluate(snapshotImagePrefix, undefined)).toEqual(step.result);
       expect(await root.evaluate((node, old) => node === old, oldRoot)).toBe(step.sameRoot);
       expect(await viewer.evaluate((node, old) => node === old, oldViewer)).toBe(step.sameViewer);
       expect(await picture.evaluate((node, old) => node === old, oldImage)).toBe(step.sameImage);

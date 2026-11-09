@@ -1,9 +1,10 @@
-export function snapshotImagePrefix() {
+export function snapshotImagePrefix(override?: string) {
   const host = document.querySelector('[data-image-prefix-scope]')!;
   const thumbnail = host.querySelector<HTMLElement>('.fixture-image-prefix')!;
   const viewer = [...document.querySelectorAll<HTMLElement>('[role="dialog"],dialog')]
     .find(node => node.querySelector('img') && node.getClientRects().length) ?? null;
-  const previewPrefix = viewer ? [...viewer.classList].find(value => value.endsWith('-preview')) : '';
+  const previewPrefix = override ?? (viewer
+    ? [...viewer.classList].find(value => value.endsWith('-preview')) : '');
   function css(node: Element | null, keys: string[]) {
     if (!node) return null;
     const style = getComputedStyle(node);
