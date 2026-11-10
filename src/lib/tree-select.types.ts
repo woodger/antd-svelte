@@ -6,6 +6,18 @@ import type { SelectTagInfo } from './select.types';
 export type TreeSelectRawValue = string | number;
 export type TreeSelectLabel = string | number | boolean | null | undefined | Snippet
   | readonly TreeSelectLabel[];
+export interface TreeSelectSuffixInfo {
+  searchValue: string;
+  open: boolean;
+  focused: boolean;
+  showSearch: boolean | undefined;
+  loading: boolean | undefined;
+}
+export type TreeSelectSuffix = Exclude<TreeSelectLabel, Snippet> | Snippet<[TreeSelectSuffixInfo]>;
+export interface TreeSelectAllowClear {
+  clearIcon?: TreeSelectLabel;
+  label?: string;
+}
 /** Пустые имена используют стандартные поля; key всегда берётся из value field. */
 export interface TreeSelectFieldNames {
   value?: string;
@@ -71,7 +83,7 @@ export interface TreeSelectProps<
   Data extends object = TreeSelectNode
 > extends Omit<
   HTMLInputAttributes,
-  'value' | 'defaultValue' | 'size' | 'type' | 'children' | 'onchange' | 'oninput'
+  'value' | 'defaultValue' | 'size' | 'type' | 'prefix' | 'children' | 'onchange' | 'oninput'
 > {
   /** Локальный namespace Select/TreeSelect; пустая строка наследует ConfigProvider. */
   prefixCls?: string;
@@ -114,9 +126,18 @@ export interface TreeSelectProps<
   /** @defaultValue false */
   defaultOpen?: boolean;
   onOpenChange?: (open: boolean) => void;
+  prefix?: TreeSelectLabel;
+  /** Содержимое или snippet с состоянием поля. null/undefined используют suffixIcon. */
+  suffix?: TreeSelectSuffix;
+  /** null скрывает стандартную стрелку. */
+  suffixIcon?: TreeSelectLabel;
   /** @defaultValue false */
-  allowClear?: boolean;
+  allowClear?: boolean | TreeSelectAllowClear;
   onClear?: () => void;
+  /** Иконка удаления обычного тега. Пользовательский tagRender задаёт своё содержимое. */
+  removeIcon?: TreeSelectLabel;
+  /** Snippet получает исходное содержимое панели. */
+  popupRender?: Snippet<[Snippet]>;
   notFoundContent?: TreeSelectLabel | null;
   /** @defaultValue false */
   loading?: boolean;

@@ -6478,6 +6478,41 @@ Label связывает renderer и исходную запись. Его мо�
 onChange. Native обновляет новые labels сразу; сохранённые ранее snippets
 остаются связанными с прежним renderer и записью.
 
+`prefix` выводит содержимое перед полем. `suffixIcon` заменяет стандартный
+значок, а `suffixIcon={null}` скрывает его. Стандартный значок учитывает загрузку
+и открытую панель с явно включённым поиском. `suffix` имеет приоритет над
+`suffixIcon`. Значения `null` и `undefined` возвращают выбор к `suffixIcon`.
+`suffix` принимает содержимое или
+`Snippet<[TreeSelectSuffixInfo]>` с `searchValue`, `open`, `focused`, `showSearch`
+и `loading`. Последние два поля могут быть `undefined`, объект `showSearch`
+даёт `true`. Для переданного snippet сохраняется обёртка, даже если он пуст.
+
+`allowClear` принимает boolean или объект с `clearIcon` и `label`. `true` выводит
+стандартный значок, объект без значка использует `×`. По умолчанию кнопка получает
+локализованное имя. Очистка вызывает `onClear`, `onChange` и `onSearch('')`, если
+в поле был поисковый запрос. Клик закрывает single popup, клавиатурная активация
+кнопки сохраняет открытое состояние. `removeIcon` меняет содержимое кнопки
+обычного тега, `null` использует `×`. `tagRender` задаёт своё содержимое целиком.
+
+`popupRender` принимает `Snippet<[Snippet]>`. Чтобы оставить дерево или empty
+state в пользовательской панели, вызовите `{@render menu()}` внутри snippet.
+Вложенные поля можно фокусировать. Клик по фону сохраняет открытую панель и запрос.
+Граница панели сбрасывает привязку и статус внешнего FormItem и контекст
+Space.Compact. Содержимое монтируется при первом открытии и сохраняет состояние
+между открытиями. Escape закрывает также панель с заменённым или пустым меню.
+При исходном `open` или `defaultOpen` Svelte рендерит скрытую панель на сервере и
+при hydration переносит тот же DOM в `getPopupContainer`.
+
+Порядок слотов, приоритеты, callbacks и lifecycle сверены по 29 UMD-сценариям и
+29 серверным рендерам. React 6.6.8 оставляет пустую панель открытой после Escape и
+создаёт DOM открытой панели после запуска клиента. Отдельная иконка feedback
+Form.Item остаётся частью переноса Form.
+[UMD](tests/browser/fixtures/ant-design-tree-select-surface-reference.json),
+[Source SSR](tests/browser/fixtures/ant-design-tree-select-surface-ssr-reference.json),
+[browser](tests/browser/tree-select-surface.spec.ts),
+[SSR](tests/package/tree-select-surface.ssr.test.ts),
+[hydration](tests/browser/tree-select-surface-hydration.spec.ts).
+
 ShowSearch по умолчанию false для single и true для multiple. Объект showSearch
 поддерживает searchValue/onSearch, autoClearSearchValue, filterTreeNode и
 treeNodeFilterProp. Одноимённые deprecated top-level props удалены.

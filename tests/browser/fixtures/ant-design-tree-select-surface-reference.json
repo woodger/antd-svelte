@@ -1,0 +1,3420 @@
+{
+  "reference": {
+    "version": "6.6.8",
+    "react": "18.3.1",
+    "revision": "984592267de88fbf9cdaecc96a56629e721c709d",
+    "treeSelect": "1.16.1",
+    "select": "1.10.1",
+    "archiveSha256": "8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa",
+    "method": "Unmodified official UMD; control and popup DOM projected after actual interactions",
+    "domAvailableDuringRender": true,
+    "errors": []
+  },
+  "cases": [
+    {
+      "id": "default",
+      "initial": {
+        "open": false,
+        "editorFocused": false,
+        "showArrow": true,
+        "loading": false,
+        "allowClear": true,
+        "order": [
+          "content",
+          "suffix",
+          "clear"
+        ],
+        "prefix": null,
+        "suffix": {
+          "text": "",
+          "icons": [
+            "down"
+          ],
+          "rich": []
+        },
+        "suffixLoading": false,
+        "info": null,
+        "clear": {
+          "text": "",
+          "icons": [
+            "close-circle"
+          ],
+          "rich": [],
+          "label": "Clear",
+          "tag": "BUTTON"
+        },
+        "remove": [],
+        "tag": null,
+        "popup": null,
+        "events": [],
+        "lifecycle": []
+      },
+      "steps": [
+        {
+          "action": "open",
+          "view": {
+            "open": true,
+            "editorFocused": true,
+            "showArrow": true,
+            "loading": false,
+            "allowClear": true,
+            "order": [
+              "content",
+              "suffix",
+              "clear"
+            ],
+            "prefix": null,
+            "suffix": {
+              "text": "",
+              "icons": [
+                "down"
+              ],
+              "rich": []
+            },
+            "suffixLoading": false,
+            "info": null,
+            "clear": {
+              "text": "",
+              "icons": [
+                "close-circle"
+              ],
+              "rich": [],
+              "label": "Clear",
+              "tag": "BUTTON"
+            },
+            "remove": [],
+            "tag": null,
+            "popup": {
+              "visible": true,
+              "container": true,
+              "custom": false,
+              "tree": true,
+              "empty": false,
+              "draft": null,
+              "draftFocused": false,
+              "fieldStatus": false,
+              "compact": false
+            },
+            "events": [
+              [
+                "open",
+                true
+              ]
+            ],
+            "lifecycle": []
+          }
+        },
+        {
+          "action": "choose",
+          "view": {
+            "open": false,
+            "editorFocused": true,
+            "showArrow": true,
+            "loading": false,
+            "allowClear": true,
+            "order": [
+              "content",
+              "suffix",
+              "clear"
+            ],
+            "prefix": null,
+            "suffix": {
+              "text": "",
+              "icons": [
+                "down"
+              ],
+              "rich": []
+            },
+            "suffixLoading": false,
+            "info": null,
+            "clear": {
+              "text": "",
+              "icons": [
+                "close-circle"
+              ],
+              "rich": [],
+              "label": "Clear",
+              "tag": "BUTTON"
+            },
+            "remove": [],
+            "tag": null,
+            "popup": {
+              "visible": false,
+              "container": true,
+              "custom": false,
+              "tree": true,
+              "empty": false,
+              "draft": null,
+              "draftFocused": false,
+              "fieldStatus": false,
+              "compact": false
+            },
+            "events": [
+              [
+                "open",
+                true
+              ],
+              [
+                "change",
+                "b",
+                [
+                  "Beta"
+                ],
+                "b"
+              ],
+              [
+                "select",
+                "b"
+              ],
+              [
+                "open",
+                false
+              ]
+            ],
+            "lifecycle": []
+          }
+        },
+        {
+          "action": "clear",
+          "view": {
+            "open": false,
+            "editorFocused": true,
+            "showArrow": true,
+            "loading": false,
+            "allowClear": false,
+            "order": [
+              "content",
+              "suffix"
+            ],
+            "prefix": null,
+            "suffix": {
+              "text": "",
+              "icons": [
+                "down"
+              ],
+              "rich": []
+            },
+            "suffixLoading": false,
+            "info": null,
+            "clear": null,
+            "remove": [],
+            "tag": null,
+            "popup": {
+              "visible": false,
+              "container": true,
+              "custom": false,
+              "tree": true,
+              "empty": false,
+              "draft": null,
+              "draftFocused": false,
+              "fieldStatus": false,
+              "compact": false
+            },
+            "events": [
+              [
+                "open",
+                true
+              ],
+              [
+                "change",
+                "b",
+                [
+                  "Beta"
+                ],
+                "b"
+              ],
+              [
+                "select",
+                "b"
+              ],
+              [
+                "open",
+                false
+              ],
+              [
+                "clear"
+              ],
+              [
+                "change",
+                null,
+                [],
+                null
+              ]
+            ],
+            "lifecycle": []
+          }
+        }
+      ],
+      "unmount": []
+    },
+    {
+      "id": "prefix-rich",
+      "initial": {
+        "open": false,
+        "editorFocused": false,
+        "showArrow": true,
+        "loading": false,
+        "allowClear": false,
+        "order": [
+          "prefix",
+          "content",
+          "suffix"
+        ],
+        "prefix": {
+          "text": "Prefix Custom0",
+          "icons": [],
+          "rich": [
+            "Custom"
+          ]
+        },
+        "suffix": {
+          "text": "",
+          "icons": [
+            "down"
+          ],
+          "rich": []
+        },
+        "suffixLoading": false,
+        "info": null,
+        "clear": null,
+        "remove": [],
+        "tag": null,
+        "popup": null,
+        "events": [],
+        "lifecycle": []
+      },
+      "steps": [],
+      "unmount": []
+    },
+    {
+      "id": "affix-zero",
+      "initial": {
+        "open": false,
+        "editorFocused": false,
+        "showArrow": true,
+        "loading": false,
+        "allowClear": false,
+        "order": [
+          "content"
+        ],
+        "prefix": null,
+        "suffix": null,
+        "suffixLoading": false,
+        "info": null,
+        "clear": null,
+        "remove": [
+          {
+            "text": "0",
+            "icons": [],
+            "rich": []
+          }
+        ],
+        "tag": null,
+        "popup": null,
+        "events": [],
+        "lifecycle": []
+      },
+      "steps": [],
+      "unmount": []
+    },
+    {
+      "id": "affix-false",
+      "initial": {
+        "open": false,
+        "editorFocused": false,
+        "showArrow": true,
+        "loading": false,
+        "allowClear": false,
+        "order": [
+          "content"
+        ],
+        "prefix": null,
+        "suffix": null,
+        "suffixLoading": false,
+        "info": null,
+        "clear": null,
+        "remove": [
+          {
+            "text": "",
+            "icons": [],
+            "rich": []
+          }
+        ],
+        "tag": null,
+        "popup": null,
+        "events": [],
+        "lifecycle": []
+      },
+      "steps": [],
+      "unmount": []
+    },
+    {
+      "id": "affix-empty",
+      "initial": {
+        "open": false,
+        "editorFocused": false,
+        "showArrow": true,
+        "loading": false,
+        "allowClear": false,
+        "order": [
+          "content"
+        ],
+        "prefix": null,
+        "suffix": null,
+        "suffixLoading": false,
+        "info": null,
+        "clear": null,
+        "remove": [
+          {
+            "text": "",
+            "icons": [],
+            "rich": []
+          }
+        ],
+        "tag": null,
+        "popup": null,
+        "events": [],
+        "lifecycle": []
+      },
+      "steps": [],
+      "unmount": []
+    },
+    {
+      "id": "affix-array",
+      "initial": {
+        "open": false,
+        "editorFocused": false,
+        "showArrow": true,
+        "loading": false,
+        "allowClear": false,
+        "order": [
+          "prefix",
+          "content",
+          "suffix"
+        ],
+        "prefix": {
+          "text": "",
+          "icons": [],
+          "rich": []
+        },
+        "suffix": {
+          "text": "",
+          "icons": [],
+          "rich": []
+        },
+        "suffixLoading": false,
+        "info": null,
+        "clear": null,
+        "remove": [],
+        "tag": null,
+        "popup": null,
+        "events": [],
+        "lifecycle": []
+      },
+      "steps": [],
+      "unmount": []
+    },
+    {
+      "id": "icon-null",
+      "initial": {
+        "open": false,
+        "editorFocused": false,
+        "showArrow": false,
+        "loading": true,
+        "allowClear": false,
+        "order": [
+          "content"
+        ],
+        "prefix": null,
+        "suffix": null,
+        "suffixLoading": false,
+        "info": null,
+        "clear": null,
+        "remove": [],
+        "tag": null,
+        "popup": null,
+        "events": [],
+        "lifecycle": []
+      },
+      "steps": [],
+      "unmount": []
+    },
+    {
+      "id": "icon-false",
+      "initial": {
+        "open": false,
+        "editorFocused": false,
+        "showArrow": true,
+        "loading": true,
+        "allowClear": false,
+        "order": [
+          "prefix",
+          "content",
+          "suffix"
+        ],
+        "prefix": {
+          "text": "",
+          "icons": [],
+          "rich": []
+        },
+        "suffix": {
+          "text": "",
+          "icons": [],
+          "rich": []
+        },
+        "suffixLoading": true,
+        "info": null,
+        "clear": null,
+        "remove": [],
+        "tag": null,
+        "popup": null,
+        "events": [],
+        "lifecycle": []
+      },
+      "steps": [],
+      "unmount": []
+    },
+    {
+      "id": "icon-zero",
+      "initial": {
+        "open": false,
+        "editorFocused": false,
+        "showArrow": true,
+        "loading": false,
+        "allowClear": false,
+        "order": [
+          "content",
+          "suffix"
+        ],
+        "prefix": null,
+        "suffix": {
+          "text": "0",
+          "icons": [],
+          "rich": []
+        },
+        "suffixLoading": false,
+        "info": null,
+        "clear": null,
+        "remove": [],
+        "tag": null,
+        "popup": null,
+        "events": [],
+        "lifecycle": []
+      },
+      "steps": [],
+      "unmount": []
+    },
+    {
+      "id": "icon-empty",
+      "initial": {
+        "open": false,
+        "editorFocused": false,
+        "showArrow": true,
+        "loading": false,
+        "allowClear": false,
+        "order": [
+          "content",
+          "suffix"
+        ],
+        "prefix": null,
+        "suffix": {
+          "text": "",
+          "icons": [],
+          "rich": []
+        },
+        "suffixLoading": false,
+        "info": null,
+        "clear": null,
+        "remove": [],
+        "tag": null,
+        "popup": null,
+        "events": [],
+        "lifecycle": []
+      },
+      "steps": [],
+      "unmount": []
+    },
+    {
+      "id": "icon-rich-rtl",
+      "initial": {
+        "open": false,
+        "editorFocused": false,
+        "showArrow": true,
+        "loading": true,
+        "allowClear": false,
+        "order": [
+          "prefix",
+          "content",
+          "suffix"
+        ],
+        "prefix": {
+          "text": "Custom",
+          "icons": [],
+          "rich": [
+            "Custom"
+          ]
+        },
+        "suffix": {
+          "text": "Custom",
+          "icons": [],
+          "rich": [
+            "Custom"
+          ]
+        },
+        "suffixLoading": true,
+        "info": null,
+        "clear": null,
+        "remove": [],
+        "tag": null,
+        "popup": null,
+        "events": [],
+        "lifecycle": []
+      },
+      "steps": [
+        {
+          "action": "open",
+          "view": {
+            "open": true,
+            "editorFocused": true,
+            "showArrow": true,
+            "loading": true,
+            "allowClear": false,
+            "order": [
+              "prefix",
+              "content",
+              "suffix"
+            ],
+            "prefix": {
+              "text": "Custom",
+              "icons": [],
+              "rich": [
+                "Custom"
+              ]
+            },
+            "suffix": {
+              "text": "Custom",
+              "icons": [],
+              "rich": [
+                "Custom"
+              ]
+            },
+            "suffixLoading": true,
+            "info": null,
+            "clear": null,
+            "remove": [],
+            "tag": null,
+            "popup": {
+              "visible": true,
+              "container": true,
+              "custom": false,
+              "tree": true,
+              "empty": false,
+              "draft": null,
+              "draftFocused": false,
+              "fieldStatus": false,
+              "compact": false
+            },
+            "events": [
+              [
+                "open",
+                true
+              ]
+            ],
+            "lifecycle": []
+          }
+        },
+        {
+          "action": "outside",
+          "view": {
+            "open": false,
+            "editorFocused": false,
+            "showArrow": true,
+            "loading": true,
+            "allowClear": false,
+            "order": [
+              "prefix",
+              "content",
+              "suffix"
+            ],
+            "prefix": {
+              "text": "Custom",
+              "icons": [],
+              "rich": [
+                "Custom"
+              ]
+            },
+            "suffix": {
+              "text": "Custom",
+              "icons": [],
+              "rich": [
+                "Custom"
+              ]
+            },
+            "suffixLoading": true,
+            "info": null,
+            "clear": null,
+            "remove": [],
+            "tag": null,
+            "popup": {
+              "visible": false,
+              "container": true,
+              "custom": false,
+              "tree": true,
+              "empty": false,
+              "draft": null,
+              "draftFocused": false,
+              "fieldStatus": false,
+              "compact": false
+            },
+            "events": [
+              [
+                "open",
+                true
+              ],
+              [
+                "open",
+                false
+              ]
+            ],
+            "lifecycle": []
+          }
+        }
+      ],
+      "unmount": []
+    },
+    {
+      "id": "suffix-override",
+      "initial": {
+        "open": false,
+        "editorFocused": false,
+        "showArrow": true,
+        "loading": true,
+        "allowClear": false,
+        "order": [
+          "content",
+          "suffix"
+        ],
+        "prefix": null,
+        "suffix": {
+          "text": "Custom end",
+          "icons": [],
+          "rich": [
+            "Custom"
+          ]
+        },
+        "suffixLoading": true,
+        "info": null,
+        "clear": null,
+        "remove": [],
+        "tag": null,
+        "popup": null,
+        "events": [],
+        "lifecycle": []
+      },
+      "steps": [],
+      "unmount": []
+    },
+    {
+      "id": "suffix-state",
+      "initial": {
+        "open": false,
+        "editorFocused": false,
+        "showArrow": true,
+        "loading": false,
+        "allowClear": false,
+        "order": [
+          "content",
+          "suffix"
+        ],
+        "prefix": null,
+        "suffix": {
+          "text": "Suffix",
+          "icons": [],
+          "rich": []
+        },
+        "suffixLoading": false,
+        "info": {
+          "searchValue": "",
+          "open": false,
+          "focused": false,
+          "showSearch": true
+        },
+        "clear": null,
+        "remove": [],
+        "tag": null,
+        "popup": null,
+        "events": [],
+        "lifecycle": []
+      },
+      "steps": [
+        {
+          "action": "focus",
+          "view": {
+            "open": false,
+            "editorFocused": true,
+            "showArrow": true,
+            "loading": false,
+            "allowClear": false,
+            "order": [
+              "content",
+              "suffix"
+            ],
+            "prefix": null,
+            "suffix": {
+              "text": "Suffix",
+              "icons": [],
+              "rich": []
+            },
+            "suffixLoading": false,
+            "info": {
+              "searchValue": "",
+              "open": false,
+              "focused": true,
+              "showSearch": true
+            },
+            "clear": null,
+            "remove": [],
+            "tag": null,
+            "popup": null,
+            "events": [],
+            "lifecycle": []
+          }
+        },
+        {
+          "action": "open",
+          "view": {
+            "open": true,
+            "editorFocused": true,
+            "showArrow": true,
+            "loading": false,
+            "allowClear": false,
+            "order": [
+              "content",
+              "suffix"
+            ],
+            "prefix": null,
+            "suffix": {
+              "text": "Suffix",
+              "icons": [],
+              "rich": []
+            },
+            "suffixLoading": false,
+            "info": {
+              "searchValue": "",
+              "open": true,
+              "focused": true,
+              "showSearch": true
+            },
+            "clear": null,
+            "remove": [],
+            "tag": null,
+            "popup": {
+              "visible": true,
+              "container": true,
+              "custom": false,
+              "tree": true,
+              "empty": false,
+              "draft": null,
+              "draftFocused": false,
+              "fieldStatus": false,
+              "compact": false
+            },
+            "events": [
+              [
+                "open",
+                true
+              ]
+            ],
+            "lifecycle": []
+          }
+        },
+        {
+          "action": "search",
+          "view": {
+            "open": true,
+            "editorFocused": true,
+            "showArrow": true,
+            "loading": false,
+            "allowClear": false,
+            "order": [
+              "content",
+              "suffix"
+            ],
+            "prefix": null,
+            "suffix": {
+              "text": "Suffix",
+              "icons": [],
+              "rich": []
+            },
+            "suffixLoading": false,
+            "info": {
+              "searchValue": "b",
+              "open": true,
+              "focused": true,
+              "showSearch": true
+            },
+            "clear": null,
+            "remove": [],
+            "tag": null,
+            "popup": {
+              "visible": true,
+              "container": true,
+              "custom": false,
+              "tree": true,
+              "empty": false,
+              "draft": null,
+              "draftFocused": false,
+              "fieldStatus": false,
+              "compact": false
+            },
+            "events": [
+              [
+                "open",
+                true
+              ],
+              [
+                "search",
+                "b"
+              ]
+            ],
+            "lifecycle": []
+          }
+        },
+        {
+          "action": "reset-search",
+          "view": {
+            "open": true,
+            "editorFocused": true,
+            "showArrow": true,
+            "loading": false,
+            "allowClear": false,
+            "order": [
+              "content",
+              "suffix"
+            ],
+            "prefix": null,
+            "suffix": {
+              "text": "Suffix",
+              "icons": [],
+              "rich": []
+            },
+            "suffixLoading": false,
+            "info": {
+              "searchValue": "",
+              "open": true,
+              "focused": true,
+              "showSearch": true
+            },
+            "clear": null,
+            "remove": [],
+            "tag": null,
+            "popup": {
+              "visible": true,
+              "container": true,
+              "custom": false,
+              "tree": true,
+              "empty": false,
+              "draft": null,
+              "draftFocused": false,
+              "fieldStatus": false,
+              "compact": false
+            },
+            "events": [
+              [
+                "open",
+                true
+              ],
+              [
+                "search",
+                "b"
+              ],
+              [
+                "search",
+                ""
+              ]
+            ],
+            "lifecycle": []
+          }
+        },
+        {
+          "action": "outside",
+          "view": {
+            "open": false,
+            "editorFocused": false,
+            "showArrow": true,
+            "loading": false,
+            "allowClear": false,
+            "order": [
+              "content",
+              "suffix"
+            ],
+            "prefix": null,
+            "suffix": {
+              "text": "Suffix",
+              "icons": [],
+              "rich": []
+            },
+            "suffixLoading": false,
+            "info": {
+              "searchValue": "",
+              "open": false,
+              "focused": false,
+              "showSearch": true
+            },
+            "clear": null,
+            "remove": [],
+            "tag": null,
+            "popup": {
+              "visible": false,
+              "container": true,
+              "custom": false,
+              "tree": true,
+              "empty": false,
+              "draft": null,
+              "draftFocused": false,
+              "fieldStatus": false,
+              "compact": false
+            },
+            "events": [
+              [
+                "open",
+                true
+              ],
+              [
+                "search",
+                "b"
+              ],
+              [
+                "search",
+                ""
+              ],
+              [
+                "open",
+                false
+              ]
+            ],
+            "lifecycle": []
+          }
+        }
+      ],
+      "unmount": []
+    },
+    {
+      "id": "suffix-default-search",
+      "initial": {
+        "open": false,
+        "editorFocused": false,
+        "showArrow": true,
+        "loading": false,
+        "allowClear": false,
+        "order": [
+          "content",
+          "suffix"
+        ],
+        "prefix": null,
+        "suffix": {
+          "text": "Suffix",
+          "icons": [],
+          "rich": []
+        },
+        "suffixLoading": false,
+        "info": {
+          "searchValue": "",
+          "open": false,
+          "focused": false
+        },
+        "clear": null,
+        "remove": [],
+        "tag": null,
+        "popup": null,
+        "events": [],
+        "lifecycle": []
+      },
+      "steps": [],
+      "unmount": []
+    },
+    {
+      "id": "suffix-controlled-search",
+      "initial": {
+        "open": true,
+        "editorFocused": false,
+        "showArrow": true,
+        "loading": false,
+        "allowClear": false,
+        "order": [
+          "content",
+          "suffix"
+        ],
+        "prefix": null,
+        "suffix": {
+          "text": "Suffix",
+          "icons": [],
+          "rich": []
+        },
+        "suffixLoading": false,
+        "info": {
+          "searchValue": "b",
+          "open": true,
+          "focused": false,
+          "showSearch": true,
+          "loading": false
+        },
+        "clear": null,
+        "remove": [],
+        "tag": null,
+        "popup": {
+          "visible": true,
+          "container": true,
+          "custom": false,
+          "tree": true,
+          "empty": false,
+          "draft": null,
+          "draftFocused": false,
+          "fieldStatus": false,
+          "compact": false
+        },
+        "events": [],
+        "lifecycle": []
+      },
+      "steps": [],
+      "unmount": []
+    },
+    {
+      "id": "search-icon",
+      "initial": {
+        "open": false,
+        "editorFocused": false,
+        "showArrow": true,
+        "loading": false,
+        "allowClear": false,
+        "order": [
+          "content",
+          "suffix"
+        ],
+        "prefix": null,
+        "suffix": {
+          "text": "",
+          "icons": [
+            "down"
+          ],
+          "rich": []
+        },
+        "suffixLoading": false,
+        "info": null,
+        "clear": null,
+        "remove": [],
+        "tag": null,
+        "popup": null,
+        "events": [],
+        "lifecycle": []
+      },
+      "steps": [
+        {
+          "action": "open",
+          "view": {
+            "open": true,
+            "editorFocused": true,
+            "showArrow": true,
+            "loading": false,
+            "allowClear": false,
+            "order": [
+              "content",
+              "suffix"
+            ],
+            "prefix": null,
+            "suffix": {
+              "text": "",
+              "icons": [
+                "search"
+              ],
+              "rich": []
+            },
+            "suffixLoading": false,
+            "info": null,
+            "clear": null,
+            "remove": [],
+            "tag": null,
+            "popup": {
+              "visible": true,
+              "container": true,
+              "custom": false,
+              "tree": true,
+              "empty": false,
+              "draft": null,
+              "draftFocused": false,
+              "fieldStatus": false,
+              "compact": false
+            },
+            "events": [
+              [
+                "open",
+                true
+              ]
+            ],
+            "lifecycle": []
+          }
+        },
+        {
+          "action": "outside",
+          "view": {
+            "open": false,
+            "editorFocused": false,
+            "showArrow": true,
+            "loading": false,
+            "allowClear": false,
+            "order": [
+              "content",
+              "suffix"
+            ],
+            "prefix": null,
+            "suffix": {
+              "text": "",
+              "icons": [
+                "down"
+              ],
+              "rich": []
+            },
+            "suffixLoading": false,
+            "info": null,
+            "clear": null,
+            "remove": [],
+            "tag": null,
+            "popup": {
+              "visible": false,
+              "container": true,
+              "custom": false,
+              "tree": true,
+              "empty": false,
+              "draft": null,
+              "draftFocused": false,
+              "fieldStatus": false,
+              "compact": false
+            },
+            "events": [
+              [
+                "open",
+                true
+              ],
+              [
+                "open",
+                false
+              ]
+            ],
+            "lifecycle": []
+          }
+        }
+      ],
+      "unmount": []
+    },
+    {
+      "id": "loading-icon",
+      "initial": {
+        "open": true,
+        "editorFocused": false,
+        "showArrow": true,
+        "loading": true,
+        "allowClear": false,
+        "order": [
+          "content",
+          "suffix"
+        ],
+        "prefix": null,
+        "suffix": {
+          "text": "",
+          "icons": [
+            "loading"
+          ],
+          "rich": []
+        },
+        "suffixLoading": true,
+        "info": null,
+        "clear": null,
+        "remove": [],
+        "tag": null,
+        "popup": {
+          "visible": true,
+          "container": true,
+          "custom": false,
+          "tree": true,
+          "empty": false,
+          "draft": null,
+          "draftFocused": false,
+          "fieldStatus": false,
+          "compact": false
+        },
+        "events": [],
+        "lifecycle": []
+      },
+      "steps": [],
+      "unmount": []
+    },
+    {
+      "id": "clear-remove",
+      "initial": {
+        "open": false,
+        "editorFocused": false,
+        "showArrow": true,
+        "loading": false,
+        "allowClear": true,
+        "order": [
+          "content",
+          "suffix",
+          "clear"
+        ],
+        "prefix": null,
+        "suffix": {
+          "text": "",
+          "icons": [
+            "down"
+          ],
+          "rich": []
+        },
+        "suffixLoading": false,
+        "info": null,
+        "clear": {
+          "text": "Custom",
+          "icons": [],
+          "rich": [
+            "Custom"
+          ],
+          "label": "Reset selection",
+          "tag": "BUTTON"
+        },
+        "remove": [
+          {
+            "text": "Custom×",
+            "icons": [],
+            "rich": [
+              "Custom"
+            ]
+          },
+          {
+            "text": "Custom×",
+            "icons": [],
+            "rich": [
+              "Custom"
+            ]
+          }
+        ],
+        "tag": null,
+        "popup": null,
+        "events": [],
+        "lifecycle": []
+      },
+      "steps": [
+        {
+          "action": "open",
+          "view": {
+            "open": true,
+            "editorFocused": true,
+            "showArrow": true,
+            "loading": false,
+            "allowClear": true,
+            "order": [
+              "content",
+              "suffix",
+              "clear"
+            ],
+            "prefix": null,
+            "suffix": {
+              "text": "",
+              "icons": [
+                "down"
+              ],
+              "rich": []
+            },
+            "suffixLoading": false,
+            "info": null,
+            "clear": {
+              "text": "Custom",
+              "icons": [],
+              "rich": [
+                "Custom"
+              ],
+              "label": "Reset selection",
+              "tag": "BUTTON"
+            },
+            "remove": [
+              {
+                "text": "Custom×",
+                "icons": [],
+                "rich": [
+                  "Custom"
+                ]
+              },
+              {
+                "text": "Custom×",
+                "icons": [],
+                "rich": [
+                  "Custom"
+                ]
+              }
+            ],
+            "tag": null,
+            "popup": {
+              "visible": true,
+              "container": true,
+              "custom": false,
+              "tree": true,
+              "empty": false,
+              "draft": null,
+              "draftFocused": false,
+              "fieldStatus": false,
+              "compact": false
+            },
+            "events": [
+              [
+                "open",
+                true
+              ]
+            ],
+            "lifecycle": []
+          }
+        },
+        {
+          "action": "remove",
+          "view": {
+            "open": true,
+            "editorFocused": true,
+            "showArrow": true,
+            "loading": false,
+            "allowClear": true,
+            "order": [
+              "content",
+              "suffix",
+              "clear"
+            ],
+            "prefix": null,
+            "suffix": {
+              "text": "",
+              "icons": [
+                "down"
+              ],
+              "rich": []
+            },
+            "suffixLoading": false,
+            "info": null,
+            "clear": {
+              "text": "Custom",
+              "icons": [],
+              "rich": [
+                "Custom"
+              ],
+              "label": "Reset selection",
+              "tag": "BUTTON"
+            },
+            "remove": [
+              {
+                "text": "Custom×",
+                "icons": [],
+                "rich": [
+                  "Custom"
+                ]
+              }
+            ],
+            "tag": null,
+            "popup": {
+              "visible": true,
+              "container": true,
+              "custom": false,
+              "tree": true,
+              "empty": false,
+              "draft": null,
+              "draftFocused": false,
+              "fieldStatus": false,
+              "compact": false
+            },
+            "events": [
+              [
+                "open",
+                true
+              ],
+              [
+                "change",
+                [
+                  "b"
+                ],
+                [
+                  "Beta"
+                ],
+                "a"
+              ],
+              [
+                "deselect",
+                "a"
+              ]
+            ],
+            "lifecycle": []
+          }
+        },
+        {
+          "action": "clear-key",
+          "view": {
+            "open": true,
+            "editorFocused": true,
+            "showArrow": true,
+            "loading": false,
+            "allowClear": false,
+            "order": [
+              "content",
+              "suffix"
+            ],
+            "prefix": null,
+            "suffix": {
+              "text": "",
+              "icons": [
+                "down"
+              ],
+              "rich": []
+            },
+            "suffixLoading": false,
+            "info": null,
+            "clear": null,
+            "remove": [],
+            "tag": null,
+            "popup": {
+              "visible": true,
+              "container": true,
+              "custom": false,
+              "tree": true,
+              "empty": false,
+              "draft": null,
+              "draftFocused": false,
+              "fieldStatus": false,
+              "compact": false
+            },
+            "events": [
+              [
+                "open",
+                true
+              ],
+              [
+                "change",
+                [
+                  "b"
+                ],
+                [
+                  "Beta"
+                ],
+                "a"
+              ],
+              [
+                "deselect",
+                "a"
+              ],
+              [
+                "clear"
+              ],
+              [
+                "change",
+                [],
+                [],
+                null
+              ]
+            ],
+            "lifecycle": []
+          }
+        }
+      ],
+      "unmount": []
+    },
+    {
+      "id": "clear-empty",
+      "initial": {
+        "open": false,
+        "editorFocused": false,
+        "showArrow": true,
+        "loading": false,
+        "allowClear": true,
+        "order": [
+          "content",
+          "suffix",
+          "clear"
+        ],
+        "prefix": null,
+        "suffix": {
+          "text": "",
+          "icons": [
+            "down"
+          ],
+          "rich": []
+        },
+        "suffixLoading": false,
+        "info": null,
+        "clear": {
+          "text": "×",
+          "icons": [],
+          "rich": [],
+          "label": "Clear",
+          "tag": "BUTTON"
+        },
+        "remove": [],
+        "tag": null,
+        "popup": null,
+        "events": [],
+        "lifecycle": []
+      },
+      "steps": [],
+      "unmount": []
+    },
+    {
+      "id": "clear-open-single",
+      "initial": {
+        "open": false,
+        "editorFocused": false,
+        "showArrow": true,
+        "loading": false,
+        "allowClear": true,
+        "order": [
+          "content",
+          "suffix",
+          "clear"
+        ],
+        "prefix": null,
+        "suffix": {
+          "text": "",
+          "icons": [
+            "down"
+          ],
+          "rich": []
+        },
+        "suffixLoading": false,
+        "info": null,
+        "clear": {
+          "text": "Custom",
+          "icons": [],
+          "rich": [
+            "Custom"
+          ],
+          "label": "Clear",
+          "tag": "BUTTON"
+        },
+        "remove": [],
+        "tag": null,
+        "popup": null,
+        "events": [],
+        "lifecycle": []
+      },
+      "steps": [
+        {
+          "action": "open",
+          "view": {
+            "open": true,
+            "editorFocused": true,
+            "showArrow": true,
+            "loading": false,
+            "allowClear": true,
+            "order": [
+              "content",
+              "suffix",
+              "clear"
+            ],
+            "prefix": null,
+            "suffix": {
+              "text": "",
+              "icons": [
+                "down"
+              ],
+              "rich": []
+            },
+            "suffixLoading": false,
+            "info": null,
+            "clear": {
+              "text": "Custom",
+              "icons": [],
+              "rich": [
+                "Custom"
+              ],
+              "label": "Clear",
+              "tag": "BUTTON"
+            },
+            "remove": [],
+            "tag": null,
+            "popup": {
+              "visible": true,
+              "container": true,
+              "custom": false,
+              "tree": true,
+              "empty": false,
+              "draft": null,
+              "draftFocused": false,
+              "fieldStatus": false,
+              "compact": false
+            },
+            "events": [
+              [
+                "open",
+                true
+              ]
+            ],
+            "lifecycle": []
+          }
+        },
+        {
+          "action": "clear",
+          "view": {
+            "open": false,
+            "editorFocused": true,
+            "showArrow": true,
+            "loading": false,
+            "allowClear": false,
+            "order": [
+              "content",
+              "suffix"
+            ],
+            "prefix": null,
+            "suffix": {
+              "text": "",
+              "icons": [
+                "down"
+              ],
+              "rich": []
+            },
+            "suffixLoading": false,
+            "info": null,
+            "clear": null,
+            "remove": [],
+            "tag": null,
+            "popup": {
+              "visible": false,
+              "container": true,
+              "custom": false,
+              "tree": true,
+              "empty": false,
+              "draft": null,
+              "draftFocused": false,
+              "fieldStatus": false,
+              "compact": false
+            },
+            "events": [
+              [
+                "open",
+                true
+              ],
+              [
+                "clear"
+              ],
+              [
+                "change",
+                null,
+                [],
+                null
+              ],
+              [
+                "open",
+                false
+              ]
+            ],
+            "lifecycle": []
+          }
+        }
+      ],
+      "unmount": []
+    },
+    {
+      "id": "clear-empty-label",
+      "initial": {
+        "open": false,
+        "editorFocused": false,
+        "showArrow": true,
+        "loading": false,
+        "allowClear": true,
+        "order": [
+          "content",
+          "suffix",
+          "clear"
+        ],
+        "prefix": null,
+        "suffix": {
+          "text": "",
+          "icons": [
+            "down"
+          ],
+          "rich": []
+        },
+        "suffixLoading": false,
+        "info": null,
+        "clear": {
+          "text": "×",
+          "icons": [],
+          "rich": [],
+          "label": "",
+          "tag": "BUTTON"
+        },
+        "remove": [
+          {
+            "text": "×",
+            "icons": [],
+            "rich": []
+          }
+        ],
+        "tag": null,
+        "popup": null,
+        "events": [],
+        "lifecycle": []
+      },
+      "steps": [],
+      "unmount": []
+    },
+    {
+      "id": "clear-disabled",
+      "initial": {
+        "open": false,
+        "editorFocused": false,
+        "showArrow": true,
+        "loading": false,
+        "allowClear": false,
+        "order": [
+          "content",
+          "suffix"
+        ],
+        "prefix": null,
+        "suffix": {
+          "text": "",
+          "icons": [
+            "down"
+          ],
+          "rich": []
+        },
+        "suffixLoading": false,
+        "info": null,
+        "clear": null,
+        "remove": [],
+        "tag": null,
+        "popup": null,
+        "events": [],
+        "lifecycle": []
+      },
+      "steps": [],
+      "unmount": []
+    },
+    {
+      "id": "clear-search-only",
+      "initial": {
+        "open": false,
+        "editorFocused": false,
+        "showArrow": true,
+        "loading": false,
+        "allowClear": false,
+        "order": [
+          "content",
+          "suffix"
+        ],
+        "prefix": null,
+        "suffix": {
+          "text": "Suffix",
+          "icons": [],
+          "rich": []
+        },
+        "suffixLoading": false,
+        "info": {
+          "searchValue": "",
+          "open": false,
+          "focused": false,
+          "showSearch": true
+        },
+        "clear": null,
+        "remove": [],
+        "tag": null,
+        "popup": null,
+        "events": [],
+        "lifecycle": []
+      },
+      "steps": [
+        {
+          "action": "search",
+          "view": {
+            "open": true,
+            "editorFocused": true,
+            "showArrow": true,
+            "loading": false,
+            "allowClear": true,
+            "order": [
+              "content",
+              "suffix",
+              "clear"
+            ],
+            "prefix": null,
+            "suffix": {
+              "text": "Suffix",
+              "icons": [],
+              "rich": []
+            },
+            "suffixLoading": false,
+            "info": {
+              "searchValue": "b",
+              "open": true,
+              "focused": true,
+              "showSearch": true
+            },
+            "clear": {
+              "text": "×",
+              "icons": [],
+              "rich": [],
+              "label": "Reset selection",
+              "tag": "BUTTON"
+            },
+            "remove": [],
+            "tag": null,
+            "popup": {
+              "visible": true,
+              "container": true,
+              "custom": false,
+              "tree": true,
+              "empty": false,
+              "draft": null,
+              "draftFocused": false,
+              "fieldStatus": false,
+              "compact": false
+            },
+            "events": [
+              [
+                "search",
+                "b"
+              ],
+              [
+                "open",
+                true
+              ]
+            ],
+            "lifecycle": []
+          }
+        },
+        {
+          "action": "clear-key",
+          "view": {
+            "open": true,
+            "editorFocused": true,
+            "showArrow": true,
+            "loading": false,
+            "allowClear": false,
+            "order": [
+              "content",
+              "suffix"
+            ],
+            "prefix": null,
+            "suffix": {
+              "text": "Suffix",
+              "icons": [],
+              "rich": []
+            },
+            "suffixLoading": false,
+            "info": {
+              "searchValue": "",
+              "open": true,
+              "focused": true,
+              "showSearch": true
+            },
+            "clear": null,
+            "remove": [],
+            "tag": null,
+            "popup": {
+              "visible": true,
+              "container": true,
+              "custom": false,
+              "tree": true,
+              "empty": false,
+              "draft": null,
+              "draftFocused": false,
+              "fieldStatus": false,
+              "compact": false
+            },
+            "events": [
+              [
+                "search",
+                "b"
+              ],
+              [
+                "open",
+                true
+              ],
+              [
+                "clear"
+              ],
+              [
+                "change",
+                null,
+                [],
+                null
+              ],
+              [
+                "search",
+                ""
+              ]
+            ],
+            "lifecycle": []
+          }
+        }
+      ],
+      "unmount": []
+    },
+    {
+      "id": "clear-hold-value",
+      "initial": {
+        "open": false,
+        "editorFocused": false,
+        "showArrow": true,
+        "loading": false,
+        "allowClear": true,
+        "order": [
+          "content",
+          "suffix",
+          "clear"
+        ],
+        "prefix": null,
+        "suffix": {
+          "text": "",
+          "icons": [
+            "down"
+          ],
+          "rich": []
+        },
+        "suffixLoading": false,
+        "info": null,
+        "clear": {
+          "text": "Custom",
+          "icons": [],
+          "rich": [
+            "Custom"
+          ],
+          "label": "Reset selection",
+          "tag": "BUTTON"
+        },
+        "remove": [
+          {
+            "text": "",
+            "icons": [
+              "close"
+            ],
+            "rich": []
+          }
+        ],
+        "tag": null,
+        "popup": null,
+        "events": [],
+        "lifecycle": []
+      },
+      "steps": [
+        {
+          "action": "clear",
+          "view": {
+            "open": false,
+            "editorFocused": true,
+            "showArrow": true,
+            "loading": false,
+            "allowClear": true,
+            "order": [
+              "content",
+              "suffix",
+              "clear"
+            ],
+            "prefix": null,
+            "suffix": {
+              "text": "",
+              "icons": [
+                "down"
+              ],
+              "rich": []
+            },
+            "suffixLoading": false,
+            "info": null,
+            "clear": {
+              "text": "Custom",
+              "icons": [],
+              "rich": [
+                "Custom"
+              ],
+              "label": "Reset selection",
+              "tag": "BUTTON"
+            },
+            "remove": [
+              {
+                "text": "",
+                "icons": [
+                  "close"
+                ],
+                "rich": []
+              }
+            ],
+            "tag": null,
+            "popup": null,
+            "events": [
+              [
+                "clear"
+              ],
+              [
+                "change",
+                [],
+                [],
+                null
+              ],
+              [
+                "search",
+                ""
+              ]
+            ],
+            "lifecycle": []
+          }
+        }
+      ],
+      "unmount": []
+    },
+    {
+      "id": "custom-tag",
+      "initial": {
+        "open": false,
+        "editorFocused": false,
+        "showArrow": true,
+        "loading": false,
+        "allowClear": false,
+        "order": [
+          "content",
+          "suffix"
+        ],
+        "prefix": null,
+        "suffix": {
+          "text": "",
+          "icons": [
+            "down"
+          ],
+          "rich": []
+        },
+        "suffixLoading": false,
+        "info": null,
+        "clear": null,
+        "remove": [],
+        "tag": "Alpha",
+        "popup": null,
+        "events": [],
+        "lifecycle": []
+      },
+      "steps": [],
+      "unmount": []
+    },
+    {
+      "id": "popup-wrap",
+      "initial": {
+        "open": false,
+        "editorFocused": false,
+        "showArrow": true,
+        "loading": false,
+        "allowClear": false,
+        "order": [
+          "content",
+          "suffix"
+        ],
+        "prefix": null,
+        "suffix": {
+          "text": "Suffix",
+          "icons": [],
+          "rich": []
+        },
+        "suffixLoading": false,
+        "info": {
+          "searchValue": "",
+          "open": false,
+          "focused": false,
+          "showSearch": true
+        },
+        "clear": null,
+        "remove": [],
+        "tag": null,
+        "popup": null,
+        "events": [],
+        "lifecycle": []
+      },
+      "steps": [
+        {
+          "action": "open",
+          "view": {
+            "open": true,
+            "editorFocused": true,
+            "showArrow": true,
+            "loading": false,
+            "allowClear": false,
+            "order": [
+              "content",
+              "suffix"
+            ],
+            "prefix": null,
+            "suffix": {
+              "text": "Suffix",
+              "icons": [],
+              "rich": []
+            },
+            "suffixLoading": false,
+            "info": {
+              "searchValue": "",
+              "open": true,
+              "focused": true,
+              "showSearch": true
+            },
+            "clear": null,
+            "remove": [],
+            "tag": null,
+            "popup": {
+              "visible": true,
+              "container": true,
+              "custom": true,
+              "tree": true,
+              "empty": false,
+              "draft": "Draft",
+              "draftFocused": false,
+              "fieldStatus": false,
+              "compact": false
+            },
+            "events": [
+              [
+                "open",
+                true
+              ]
+            ],
+            "lifecycle": [
+              "mount"
+            ]
+          }
+        },
+        {
+          "action": "search",
+          "view": {
+            "open": true,
+            "editorFocused": true,
+            "showArrow": true,
+            "loading": false,
+            "allowClear": false,
+            "order": [
+              "content",
+              "suffix"
+            ],
+            "prefix": null,
+            "suffix": {
+              "text": "Suffix",
+              "icons": [],
+              "rich": []
+            },
+            "suffixLoading": false,
+            "info": {
+              "searchValue": "b",
+              "open": true,
+              "focused": true,
+              "showSearch": true
+            },
+            "clear": null,
+            "remove": [],
+            "tag": null,
+            "popup": {
+              "visible": true,
+              "container": true,
+              "custom": true,
+              "tree": true,
+              "empty": false,
+              "draft": "Draft",
+              "draftFocused": false,
+              "fieldStatus": false,
+              "compact": false
+            },
+            "events": [
+              [
+                "open",
+                true
+              ],
+              [
+                "search",
+                "b"
+              ]
+            ],
+            "lifecycle": [
+              "mount"
+            ]
+          }
+        },
+        {
+          "action": "popup-background",
+          "view": {
+            "open": true,
+            "editorFocused": false,
+            "showArrow": true,
+            "loading": false,
+            "allowClear": false,
+            "order": [
+              "content",
+              "suffix"
+            ],
+            "prefix": null,
+            "suffix": {
+              "text": "Suffix",
+              "icons": [],
+              "rich": []
+            },
+            "suffixLoading": false,
+            "info": {
+              "searchValue": "b",
+              "open": true,
+              "focused": false,
+              "showSearch": true
+            },
+            "clear": null,
+            "remove": [],
+            "tag": null,
+            "popup": {
+              "visible": true,
+              "container": true,
+              "custom": true,
+              "tree": true,
+              "empty": false,
+              "draft": "Draft",
+              "draftFocused": false,
+              "fieldStatus": false,
+              "compact": false
+            },
+            "events": [
+              [
+                "open",
+                true
+              ],
+              [
+                "search",
+                "b"
+              ]
+            ],
+            "lifecycle": [
+              "mount"
+            ]
+          }
+        },
+        {
+          "action": "focus",
+          "view": {
+            "open": true,
+            "editorFocused": true,
+            "showArrow": true,
+            "loading": false,
+            "allowClear": false,
+            "order": [
+              "content",
+              "suffix"
+            ],
+            "prefix": null,
+            "suffix": {
+              "text": "Suffix",
+              "icons": [],
+              "rich": []
+            },
+            "suffixLoading": false,
+            "info": {
+              "searchValue": "b",
+              "open": true,
+              "focused": true,
+              "showSearch": true
+            },
+            "clear": null,
+            "remove": [],
+            "tag": null,
+            "popup": {
+              "visible": true,
+              "container": true,
+              "custom": true,
+              "tree": true,
+              "empty": false,
+              "draft": "Draft",
+              "draftFocused": false,
+              "fieldStatus": false,
+              "compact": false
+            },
+            "events": [
+              [
+                "open",
+                true
+              ],
+              [
+                "search",
+                "b"
+              ]
+            ],
+            "lifecycle": [
+              "mount"
+            ]
+          }
+        },
+        {
+          "action": "reset-search",
+          "view": {
+            "open": true,
+            "editorFocused": true,
+            "showArrow": true,
+            "loading": false,
+            "allowClear": false,
+            "order": [
+              "content",
+              "suffix"
+            ],
+            "prefix": null,
+            "suffix": {
+              "text": "Suffix",
+              "icons": [],
+              "rich": []
+            },
+            "suffixLoading": false,
+            "info": {
+              "searchValue": "",
+              "open": true,
+              "focused": true,
+              "showSearch": true
+            },
+            "clear": null,
+            "remove": [],
+            "tag": null,
+            "popup": {
+              "visible": true,
+              "container": true,
+              "custom": true,
+              "tree": true,
+              "empty": false,
+              "draft": "Draft",
+              "draftFocused": false,
+              "fieldStatus": false,
+              "compact": false
+            },
+            "events": [
+              [
+                "open",
+                true
+              ],
+              [
+                "search",
+                "b"
+              ],
+              [
+                "search",
+                ""
+              ]
+            ],
+            "lifecycle": [
+              "mount"
+            ]
+          }
+        },
+        {
+          "action": "draft",
+          "view": {
+            "open": true,
+            "editorFocused": false,
+            "showArrow": true,
+            "loading": false,
+            "allowClear": false,
+            "order": [
+              "content",
+              "suffix"
+            ],
+            "prefix": null,
+            "suffix": {
+              "text": "Suffix",
+              "icons": [],
+              "rich": []
+            },
+            "suffixLoading": false,
+            "info": {
+              "searchValue": "",
+              "open": true,
+              "focused": false,
+              "showSearch": true
+            },
+            "clear": null,
+            "remove": [],
+            "tag": null,
+            "popup": {
+              "visible": true,
+              "container": true,
+              "custom": true,
+              "tree": true,
+              "empty": false,
+              "draft": "Keep popup draft",
+              "draftFocused": true,
+              "fieldStatus": false,
+              "compact": false
+            },
+            "events": [
+              [
+                "open",
+                true
+              ],
+              [
+                "search",
+                "b"
+              ],
+              [
+                "search",
+                ""
+              ]
+            ],
+            "lifecycle": [
+              "mount"
+            ]
+          }
+        },
+        {
+          "action": "popup-background",
+          "view": {
+            "open": true,
+            "editorFocused": false,
+            "showArrow": true,
+            "loading": false,
+            "allowClear": false,
+            "order": [
+              "content",
+              "suffix"
+            ],
+            "prefix": null,
+            "suffix": {
+              "text": "Suffix",
+              "icons": [],
+              "rich": []
+            },
+            "suffixLoading": false,
+            "info": {
+              "searchValue": "",
+              "open": true,
+              "focused": false,
+              "showSearch": true
+            },
+            "clear": null,
+            "remove": [],
+            "tag": null,
+            "popup": {
+              "visible": true,
+              "container": true,
+              "custom": true,
+              "tree": true,
+              "empty": false,
+              "draft": "Keep popup draft",
+              "draftFocused": false,
+              "fieldStatus": false,
+              "compact": false
+            },
+            "events": [
+              [
+                "open",
+                true
+              ],
+              [
+                "search",
+                "b"
+              ],
+              [
+                "search",
+                ""
+              ]
+            ],
+            "lifecycle": [
+              "mount"
+            ]
+          }
+        },
+        {
+          "action": "outside",
+          "view": {
+            "open": false,
+            "editorFocused": false,
+            "showArrow": true,
+            "loading": false,
+            "allowClear": false,
+            "order": [
+              "content",
+              "suffix"
+            ],
+            "prefix": null,
+            "suffix": {
+              "text": "Suffix",
+              "icons": [],
+              "rich": []
+            },
+            "suffixLoading": false,
+            "info": {
+              "searchValue": "",
+              "open": false,
+              "focused": false,
+              "showSearch": true
+            },
+            "clear": null,
+            "remove": [],
+            "tag": null,
+            "popup": {
+              "visible": false,
+              "container": true,
+              "custom": true,
+              "tree": true,
+              "empty": false,
+              "draft": "Keep popup draft",
+              "draftFocused": false,
+              "fieldStatus": false,
+              "compact": false
+            },
+            "events": [
+              [
+                "open",
+                true
+              ],
+              [
+                "search",
+                "b"
+              ],
+              [
+                "search",
+                ""
+              ],
+              [
+                "open",
+                false
+              ]
+            ],
+            "lifecycle": [
+              "mount"
+            ]
+          }
+        },
+        {
+          "action": "open",
+          "view": {
+            "open": true,
+            "editorFocused": true,
+            "showArrow": true,
+            "loading": false,
+            "allowClear": false,
+            "order": [
+              "content",
+              "suffix"
+            ],
+            "prefix": null,
+            "suffix": {
+              "text": "Suffix",
+              "icons": [],
+              "rich": []
+            },
+            "suffixLoading": false,
+            "info": {
+              "searchValue": "",
+              "open": true,
+              "focused": true,
+              "showSearch": true
+            },
+            "clear": null,
+            "remove": [],
+            "tag": null,
+            "popup": {
+              "visible": true,
+              "container": true,
+              "custom": true,
+              "tree": true,
+              "empty": false,
+              "draft": "Keep popup draft",
+              "draftFocused": false,
+              "fieldStatus": false,
+              "compact": false
+            },
+            "events": [
+              [
+                "open",
+                true
+              ],
+              [
+                "search",
+                "b"
+              ],
+              [
+                "search",
+                ""
+              ],
+              [
+                "open",
+                false
+              ],
+              [
+                "open",
+                true
+              ]
+            ],
+            "lifecycle": [
+              "mount"
+            ]
+          }
+        },
+        {
+          "action": "choose",
+          "view": {
+            "open": false,
+            "editorFocused": true,
+            "showArrow": true,
+            "loading": false,
+            "allowClear": false,
+            "order": [
+              "content",
+              "suffix"
+            ],
+            "prefix": null,
+            "suffix": {
+              "text": "Suffix",
+              "icons": [],
+              "rich": []
+            },
+            "suffixLoading": false,
+            "info": {
+              "searchValue": "",
+              "open": false,
+              "focused": true,
+              "showSearch": true
+            },
+            "clear": null,
+            "remove": [],
+            "tag": null,
+            "popup": {
+              "visible": false,
+              "container": true,
+              "custom": true,
+              "tree": true,
+              "empty": false,
+              "draft": "Keep popup draft",
+              "draftFocused": false,
+              "fieldStatus": false,
+              "compact": false
+            },
+            "events": [
+              [
+                "open",
+                true
+              ],
+              [
+                "search",
+                "b"
+              ],
+              [
+                "search",
+                ""
+              ],
+              [
+                "open",
+                false
+              ],
+              [
+                "open",
+                true
+              ],
+              [
+                "change",
+                "b",
+                [
+                  "Beta"
+                ],
+                "b"
+              ],
+              [
+                "select",
+                "b"
+              ],
+              [
+                "open",
+                false
+              ]
+            ],
+            "lifecycle": [
+              "mount"
+            ]
+          }
+        }
+      ],
+      "unmount": [
+        "mount",
+        "destroy"
+      ]
+    },
+    {
+      "id": "popup-replace",
+      "initial": {
+        "open": false,
+        "editorFocused": false,
+        "showArrow": true,
+        "loading": false,
+        "allowClear": false,
+        "order": [
+          "content",
+          "suffix"
+        ],
+        "prefix": null,
+        "suffix": {
+          "text": "",
+          "icons": [
+            "down"
+          ],
+          "rich": []
+        },
+        "suffixLoading": false,
+        "info": null,
+        "clear": null,
+        "remove": [],
+        "tag": null,
+        "popup": null,
+        "events": [],
+        "lifecycle": []
+      },
+      "steps": [
+        {
+          "action": "open",
+          "view": {
+            "open": true,
+            "editorFocused": true,
+            "showArrow": true,
+            "loading": false,
+            "allowClear": false,
+            "order": [
+              "content",
+              "suffix"
+            ],
+            "prefix": null,
+            "suffix": {
+              "text": "",
+              "icons": [
+                "down"
+              ],
+              "rich": []
+            },
+            "suffixLoading": false,
+            "info": null,
+            "clear": null,
+            "remove": [],
+            "tag": null,
+            "popup": {
+              "visible": true,
+              "container": true,
+              "custom": true,
+              "tree": false,
+              "empty": false,
+              "draft": "Draft",
+              "draftFocused": false,
+              "fieldStatus": false,
+              "compact": false
+            },
+            "events": [
+              [
+                "open",
+                true
+              ]
+            ],
+            "lifecycle": [
+              "mount"
+            ]
+          }
+        },
+        {
+          "action": "enter",
+          "view": {
+            "open": true,
+            "editorFocused": true,
+            "showArrow": true,
+            "loading": false,
+            "allowClear": false,
+            "order": [
+              "content",
+              "suffix"
+            ],
+            "prefix": null,
+            "suffix": {
+              "text": "",
+              "icons": [
+                "down"
+              ],
+              "rich": []
+            },
+            "suffixLoading": false,
+            "info": null,
+            "clear": null,
+            "remove": [],
+            "tag": null,
+            "popup": {
+              "visible": true,
+              "container": true,
+              "custom": true,
+              "tree": false,
+              "empty": false,
+              "draft": "Draft",
+              "draftFocused": false,
+              "fieldStatus": false,
+              "compact": false
+            },
+            "events": [
+              [
+                "open",
+                true
+              ]
+            ],
+            "lifecycle": [
+              "mount"
+            ]
+          }
+        },
+        {
+          "action": "toggle-menu",
+          "view": {
+            "open": true,
+            "editorFocused": false,
+            "showArrow": true,
+            "loading": false,
+            "allowClear": false,
+            "order": [
+              "content",
+              "suffix"
+            ],
+            "prefix": null,
+            "suffix": {
+              "text": "",
+              "icons": [
+                "down"
+              ],
+              "rich": []
+            },
+            "suffixLoading": false,
+            "info": null,
+            "clear": null,
+            "remove": [],
+            "tag": null,
+            "popup": {
+              "visible": true,
+              "container": true,
+              "custom": true,
+              "tree": true,
+              "empty": false,
+              "draft": "Draft",
+              "draftFocused": false,
+              "fieldStatus": false,
+              "compact": false
+            },
+            "events": [
+              [
+                "open",
+                true
+              ]
+            ],
+            "lifecycle": [
+              "mount"
+            ]
+          }
+        },
+        {
+          "action": "focus",
+          "view": {
+            "open": true,
+            "editorFocused": true,
+            "showArrow": true,
+            "loading": false,
+            "allowClear": false,
+            "order": [
+              "content",
+              "suffix"
+            ],
+            "prefix": null,
+            "suffix": {
+              "text": "",
+              "icons": [
+                "down"
+              ],
+              "rich": []
+            },
+            "suffixLoading": false,
+            "info": null,
+            "clear": null,
+            "remove": [],
+            "tag": null,
+            "popup": {
+              "visible": true,
+              "container": true,
+              "custom": true,
+              "tree": true,
+              "empty": false,
+              "draft": "Draft",
+              "draftFocused": false,
+              "fieldStatus": false,
+              "compact": false
+            },
+            "events": [
+              [
+                "open",
+                true
+              ]
+            ],
+            "lifecycle": [
+              "mount"
+            ]
+          }
+        },
+        {
+          "action": "toggle-menu",
+          "view": {
+            "open": true,
+            "editorFocused": false,
+            "showArrow": true,
+            "loading": false,
+            "allowClear": false,
+            "order": [
+              "content",
+              "suffix"
+            ],
+            "prefix": null,
+            "suffix": {
+              "text": "",
+              "icons": [
+                "down"
+              ],
+              "rich": []
+            },
+            "suffixLoading": false,
+            "info": null,
+            "clear": null,
+            "remove": [],
+            "tag": null,
+            "popup": {
+              "visible": true,
+              "container": true,
+              "custom": true,
+              "tree": false,
+              "empty": false,
+              "draft": "Draft",
+              "draftFocused": false,
+              "fieldStatus": false,
+              "compact": false
+            },
+            "events": [
+              [
+                "open",
+                true
+              ]
+            ],
+            "lifecycle": [
+              "mount"
+            ]
+          }
+        },
+        {
+          "action": "enter",
+          "view": {
+            "open": true,
+            "editorFocused": true,
+            "showArrow": true,
+            "loading": false,
+            "allowClear": false,
+            "order": [
+              "content",
+              "suffix"
+            ],
+            "prefix": null,
+            "suffix": {
+              "text": "",
+              "icons": [
+                "down"
+              ],
+              "rich": []
+            },
+            "suffixLoading": false,
+            "info": null,
+            "clear": null,
+            "remove": [],
+            "tag": null,
+            "popup": {
+              "visible": true,
+              "container": true,
+              "custom": true,
+              "tree": false,
+              "empty": false,
+              "draft": "Draft",
+              "draftFocused": false,
+              "fieldStatus": false,
+              "compact": false
+            },
+            "events": [
+              [
+                "open",
+                true
+              ]
+            ],
+            "lifecycle": [
+              "mount"
+            ]
+          }
+        },
+        {
+          "action": "toggle-menu",
+          "view": {
+            "open": true,
+            "editorFocused": false,
+            "showArrow": true,
+            "loading": false,
+            "allowClear": false,
+            "order": [
+              "content",
+              "suffix"
+            ],
+            "prefix": null,
+            "suffix": {
+              "text": "",
+              "icons": [
+                "down"
+              ],
+              "rich": []
+            },
+            "suffixLoading": false,
+            "info": null,
+            "clear": null,
+            "remove": [],
+            "tag": null,
+            "popup": {
+              "visible": true,
+              "container": true,
+              "custom": true,
+              "tree": true,
+              "empty": false,
+              "draft": "Draft",
+              "draftFocused": false,
+              "fieldStatus": false,
+              "compact": false
+            },
+            "events": [
+              [
+                "open",
+                true
+              ]
+            ],
+            "lifecycle": [
+              "mount"
+            ]
+          }
+        },
+        {
+          "action": "focus",
+          "view": {
+            "open": true,
+            "editorFocused": true,
+            "showArrow": true,
+            "loading": false,
+            "allowClear": false,
+            "order": [
+              "content",
+              "suffix"
+            ],
+            "prefix": null,
+            "suffix": {
+              "text": "",
+              "icons": [
+                "down"
+              ],
+              "rich": []
+            },
+            "suffixLoading": false,
+            "info": null,
+            "clear": null,
+            "remove": [],
+            "tag": null,
+            "popup": {
+              "visible": true,
+              "container": true,
+              "custom": true,
+              "tree": true,
+              "empty": false,
+              "draft": "Draft",
+              "draftFocused": false,
+              "fieldStatus": false,
+              "compact": false
+            },
+            "events": [
+              [
+                "open",
+                true
+              ]
+            ],
+            "lifecycle": [
+              "mount"
+            ]
+          }
+        },
+        {
+          "action": "choose",
+          "view": {
+            "open": false,
+            "editorFocused": true,
+            "showArrow": true,
+            "loading": false,
+            "allowClear": false,
+            "order": [
+              "content",
+              "suffix"
+            ],
+            "prefix": null,
+            "suffix": {
+              "text": "",
+              "icons": [
+                "down"
+              ],
+              "rich": []
+            },
+            "suffixLoading": false,
+            "info": null,
+            "clear": null,
+            "remove": [],
+            "tag": null,
+            "popup": {
+              "visible": false,
+              "container": true,
+              "custom": true,
+              "tree": true,
+              "empty": false,
+              "draft": "Draft",
+              "draftFocused": false,
+              "fieldStatus": false,
+              "compact": false
+            },
+            "events": [
+              [
+                "open",
+                true
+              ],
+              [
+                "change",
+                "b",
+                [
+                  "Beta"
+                ],
+                "b"
+              ],
+              [
+                "select",
+                "b"
+              ],
+              [
+                "open",
+                false
+              ]
+            ],
+            "lifecycle": [
+              "mount"
+            ]
+          }
+        }
+      ],
+      "unmount": [
+        "mount",
+        "destroy"
+      ]
+    },
+    {
+      "id": "popup-empty",
+      "initial": {
+        "open": false,
+        "editorFocused": false,
+        "showArrow": true,
+        "loading": false,
+        "allowClear": false,
+        "order": [
+          "content",
+          "suffix"
+        ],
+        "prefix": null,
+        "suffix": {
+          "text": "",
+          "icons": [
+            "down"
+          ],
+          "rich": []
+        },
+        "suffixLoading": false,
+        "info": null,
+        "clear": null,
+        "remove": [],
+        "tag": null,
+        "popup": null,
+        "events": [],
+        "lifecycle": []
+      },
+      "steps": [
+        {
+          "action": "open",
+          "view": {
+            "open": true,
+            "editorFocused": true,
+            "showArrow": true,
+            "loading": false,
+            "allowClear": false,
+            "order": [
+              "content",
+              "suffix"
+            ],
+            "prefix": null,
+            "suffix": {
+              "text": "",
+              "icons": [
+                "down"
+              ],
+              "rich": []
+            },
+            "suffixLoading": false,
+            "info": null,
+            "clear": null,
+            "remove": [],
+            "tag": null,
+            "popup": {
+              "visible": true,
+              "container": true,
+              "custom": false,
+              "tree": false,
+              "empty": false,
+              "draft": null,
+              "draftFocused": false,
+              "fieldStatus": false,
+              "compact": false
+            },
+            "events": [
+              [
+                "open",
+                true
+              ]
+            ],
+            "lifecycle": []
+          }
+        },
+        {
+          "action": "enter",
+          "view": {
+            "open": true,
+            "editorFocused": true,
+            "showArrow": true,
+            "loading": false,
+            "allowClear": false,
+            "order": [
+              "content",
+              "suffix"
+            ],
+            "prefix": null,
+            "suffix": {
+              "text": "",
+              "icons": [
+                "down"
+              ],
+              "rich": []
+            },
+            "suffixLoading": false,
+            "info": null,
+            "clear": null,
+            "remove": [],
+            "tag": null,
+            "popup": {
+              "visible": true,
+              "container": true,
+              "custom": false,
+              "tree": false,
+              "empty": false,
+              "draft": null,
+              "draftFocused": false,
+              "fieldStatus": false,
+              "compact": false
+            },
+            "events": [
+              [
+                "open",
+                true
+              ]
+            ],
+            "lifecycle": []
+          }
+        },
+        {
+          "action": "escape",
+          "view": {
+            "open": true,
+            "editorFocused": true,
+            "showArrow": true,
+            "loading": false,
+            "allowClear": false,
+            "order": [
+              "content",
+              "suffix"
+            ],
+            "prefix": null,
+            "suffix": {
+              "text": "",
+              "icons": [
+                "down"
+              ],
+              "rich": []
+            },
+            "suffixLoading": false,
+            "info": null,
+            "clear": null,
+            "remove": [],
+            "tag": null,
+            "popup": {
+              "visible": true,
+              "container": true,
+              "custom": false,
+              "tree": false,
+              "empty": false,
+              "draft": null,
+              "draftFocused": false,
+              "fieldStatus": false,
+              "compact": false
+            },
+            "events": [
+              [
+                "open",
+                true
+              ]
+            ],
+            "lifecycle": []
+          }
+        }
+      ],
+      "unmount": []
+    },
+    {
+      "id": "popup-empty-data",
+      "initial": {
+        "open": true,
+        "editorFocused": false,
+        "showArrow": true,
+        "loading": false,
+        "allowClear": false,
+        "order": [
+          "content",
+          "suffix"
+        ],
+        "prefix": null,
+        "suffix": {
+          "text": "",
+          "icons": [
+            "down"
+          ],
+          "rich": []
+        },
+        "suffixLoading": false,
+        "info": null,
+        "clear": null,
+        "remove": [],
+        "tag": null,
+        "popup": {
+          "visible": true,
+          "container": true,
+          "custom": true,
+          "tree": false,
+          "empty": true,
+          "draft": "Draft",
+          "draftFocused": false,
+          "fieldStatus": false,
+          "compact": false
+        },
+        "events": [],
+        "lifecycle": [
+          "mount"
+        ]
+      },
+      "steps": [],
+      "unmount": [
+        "mount",
+        "destroy"
+      ]
+    }
+  ]
+}

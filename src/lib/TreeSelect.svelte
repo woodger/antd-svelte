@@ -24,6 +24,7 @@
   import { treeSelectLimit } from './tree-select-limit.engine';
   import { createTreeSelectLabelCache } from './tree-select-labels';
   import TreeSelectLabelBinding from './TreeSelectLabelBinding.svelte';
+  import TreeSelectPopupContent from './TreeSelectPopupContent.svelte';
   import { treeSelectTagText, treeSelectTagOverflow } from './tree-select-tags.engine';
   import { connectSelectTagOverflow, measureSelectInput } from './select-tag-overflow.dom';
   import { useConfig } from './config-context';
@@ -31,6 +32,7 @@
   import { getSelectPrefixCss } from './select-prefix.engine';
   import { getTreeSelectPrefixCss } from './tree-select-prefix.engine';
   import { useVariant } from './variant.svelte';
+  import RenderContent from './RenderContent.svelte';
   import RenderEmpty from './RenderEmpty.svelte';
   import { useForm, useFormField } from './form-context';
   import { useCompact } from './space-compact-context';
@@ -68,10 +70,15 @@
     open,
     defaultOpen = false,
     onOpenChange,
+    prefix: leading,
+    suffix,
+    suffixIcon,
     allowClear = false,
     onClear,
+    removeIcon,
+    popupRender,
     notFoundContent,
-    loading = false,
+    loading,
     treeExpandedKeys,
     treeDefaultExpandedKeys = [],
     treeDefaultExpandAll = false,
@@ -186,10 +193,12 @@
       ? String(maxTagPlaceholder) : undefined);
   let tagContent = $state<HTMLDivElement>();
   const tagElements = new Map<TreeSelectRawValue, HTMLElement>();
-  let tagClose: MessageChannel | undefined;
+  let pendingClose: MessageChannel | undefined;
   let internalSearch = $state('');
   let search = $derived(searchConfig.searchValue ?? internalSearch);
-  let canSearch = $derived(typeof showSearch === 'object' ? true : showSearch ?? isMultiple);
+  // Suffix получает исходный showSearch, включая undefined.
+  let suffixSearch = $derived(typeof showSearch === 'object' ? true : showSearch);
+  let canSearch = $derived(suffixSearch ?? isMultiple);
   let autoClear = $derived(searchConfig.autoClearSearchValue ?? true);
   let filtered = $derived(filterTreeSelect(data, search, searchConfig, fieldNames));
   let filteredIndex = $derived(treeSelectIndex(filtered, fieldNames));
@@ -198,6 +207,11 @@
   );
   let resolvedSize = $derived(size ?? compact?.size ?? config.componentSize);
   let resolvedStatus = $derived(status ?? field?.status);
+  let canClear = $derived(Boolean(allowClear && !blocked && (display.length || search)));
+  let clearConfig = $derived(typeof allowClear === 'object' ? allowClear : undefined);
+  let showArrow = $derived(suffix != null || suffixIcon !== null);
+  let defaultSuffix = $derived(suffix == null && suffixIcon === undefined);
+  let customPopup = $derived(Boolean(popupRender));
   let controlId = $derived(id ?? field?.id ?? `ant-tree-select-${generated}`);
   let internalOpen = $state(untrack(() => defaultOpen));
   let visible = $derived((open ?? internalOpen) && !blocked);
@@ -208,9 +222,12 @@
   let mounted = $state(untrack(() => defaultOpen || open === true));
   let shown = $state(false);
   let focused = $state(false);
+  let editorFocused = $state(false);
   let root = $state<HTMLDivElement>();
   let editor = $state<HTMLInputElement>();
   let popup = $state<HTMLDivElement>();
+  let menuElement = $state<HTMLDivElement>();
+  let popupMouseDownTimer: ReturnType<typeof setTimeout> | undefined;
   const portal = createPopupContainer(() => ({
     open: visible,
     reference: root,
@@ -242,7 +259,10 @@
   let previousOpen = false;
   let previousSearch = '';
   let previousProps = untrack(() => ({ value, open, search: searchConfig.searchValue }));
-  $effect(() => () => cancelTagClose());
+  $effect(() => () => {
+    cancelClose();
+    clearTimeout(popupMouseDownTimer);
+  });
   $effect.pre(() => {
     const visible = new Set(tagOverflow.visible.map(item => item.value));
     const input = editor;
@@ -300,7 +320,7 @@
     if (next.value !== previousProps.value)
       internalValue = next.value;
     if (next.open !== previousProps.open) {
-      cancelTagClose();
+      cancelClose();
       internalOpen = Boolean(next.open);
     }
     if (next.search !== previousProps.search)
@@ -351,7 +371,7 @@
       autoAdjustOverflow: true,
       maxWidth: '100vw',
       matchAnchorWidth: popupMatchSelectWidth !== false,
-      preserveFocus: true,
+      preserveFocus: !customPopup,
       onPlacement: () => { },
       onVisibilityChange: next => {
         shown = next;
@@ -397,7 +417,7 @@
     return text(labelCache.original(item.label) ?? item.value);
   }
   function requestOpen(next: boolean) {
-    cancelTagClose();
+    cancelClose();
     if (next && blocked || next === visible) return;
     if (next) {
       initializePanel();
@@ -491,25 +511,28 @@
   function customTagMouseDown(event: MouseEvent) {
     event.preventDefault();
     event.stopPropagation();
-    cancelTagClose();
-    if (!visible) {
-      requestOpen(true);
-      return;
-    }
+    if (visible) scheduleClose();
+    else requestOpen(true);
+  }
+  function clearPointerDown(event: PointerEvent) {
+    event.preventDefault();
+    if (!isMultiple && visible) scheduleClose();
+  }
+  function scheduleClose() {
+    cancelClose();
     // rc-select useOpen задерживает false через MessageChannel до click/close callbacks.
     const channel = new MessageChannel();
-    tagClose = channel;
+    pendingClose = channel;
     channel.port1.onmessage = () => {
-      if (tagClose !== channel) return;
-      cancelTagClose();
+      if (pendingClose !== channel) return;
       requestOpen(false);
     };
     channel.port2.postMessage(null);
   }
-  function cancelTagClose() {
-    tagClose?.port1.close();
-    tagClose?.port2.close();
-    tagClose = undefined;
+  function cancelClose() {
+    pendingClose?.port1.close();
+    pendingClose?.port2.close();
+    pendingClose = undefined;
   }
   function connectTagElement(node: HTMLElement, value: TreeSelectRawValue) {
     tagElements.set(value, node);
@@ -517,9 +540,14 @@
   }
   function clear() {
     if (blocked) return;
+    const hadSearch = Boolean(search);
     onClear?.();
-    publish([]);
     editor?.focus();
+    publish([]);
+    if (hadSearch) {
+      internalSearch = '';
+      searchConfig.onSearch?.('');
+    }
   }
   function panelSelect(node: TreeEventNode) {
     choose(node.key as TreeSelectRawValue);
@@ -541,6 +569,10 @@
     )
       ?? Promise.resolve();
   }
+  function popupMouseDown() {
+    clearTimeout(popupMouseDownTimer);
+    popupMouseDownTimer = setTimeout(() => { popupMouseDownTimer = undefined; }, 0);
+  }
   function blurWithin(event: FocusEvent) {
     const element = root;
     if (!element) return;
@@ -549,6 +581,7 @@
         || popup?.contains(
           event.relatedTarget
         ))) return;
+    const mouseDownInPopup = popupMouseDownTimer !== undefined;
     queueMicrotask(() => {
       if (root !== element || !element.isConnected) return;
       const target = getPopupActiveElement(element);
@@ -557,6 +590,7 @@
         || popupTarget && popup?.contains(popupTarget)) return;
       focused = false;
       field?.onBlur();
+      if (mouseDownInPopup) return;
       requestOpen(false);
       if (autoClear)
         internalSearch = '';
@@ -593,7 +627,7 @@
         requestOpen(true);
         return;
       }
-      const node = active !== null && index.values.get(active as TreeSelectRawValue);
+      const node = treeElement?.isConnected && active !== null && index.values.get(active as TreeSelectRawValue);
       if (node && Reflect.get(node, 'selectable') !== false)
         choose(active as TreeSelectRawValue);
       return;
@@ -636,10 +670,12 @@
   [data-ant-tree-choice-source-theme][data-ant-tree-choice-multiple] [data-ant-tree-choice-selection-item] { max-width:calc(100% - var(--ant-select-internal_fixed_item_margin) * 2); }
   [data-ant-tree-choice-selection-item-remove],.clear { padding:0;border:0;background:transparent;cursor:pointer;flex:none; }
   .clear { margin-inline-end:4px;color:var(--ant-color-text-tertiary);display:flex; }
-  .suffix { display:flex;flex:none;color:var(--ant-color-text-quaternary);pointer-events:none; }
+  .suffix { display:flex;flex:none;color:var(--ant-color-text-quaternary); }
+  .default-suffix { pointer-events:none; }
+  [data-ant-tree-choice-control]:not([data-ant-tree-choice-source-theme]) > .suffix { order:1; }
   [data-ant-tree-choice-source-theme] .clear { display:inline-block;margin-inline-end:0;color:var(--ant-color-text-quaternary); }
   [data-ant-tree-choice-source-theme] .clear:hover { color:var(--ant-color-icon); }
-  [data-ant-tree-choice-source-theme] .clear:focus-visible { opacity:1; }
+  .clear:focus-visible { opacity:1; }
   [data-ant-tree-choice-source-theme]:has(.clear):hover .suffix,[data-ant-tree-choice-source-theme]:has(.clear:focus-visible) .suffix { opacity:0; }
   .single-snippet { position:absolute;pointer-events:none;inset-inline-start:0; }
   .measure-tag { position:absolute;inset-block-start:0;inset-inline-start:0;visibility:hidden;pointer-events:none; }
@@ -676,11 +712,13 @@
     }
   }} dir={config.direction}
   style={[componentStyle, style].filter(Boolean).join(';') || undefined} class={[
-      `${prefix} ant-select-css-var ant-tree-select-css-var ${prefix}-show-arrow`,
+      `${prefix} ant-select-css-var ant-tree-select-css-var`,
       selectTheme.className,
       selectTheme.className && `${prefix}-source-theme`,
       selectTheme.className && canSearch && `${prefix}-show-search`,
-      selectTheme.className && allowClear && `${prefix}-allow-clear`,
+      showArrow && `${prefix}-show-arrow`,
+      canClear && `${prefix}-allow-clear`,
+      loading && `${prefix}-loading`,
       `${prefix}-${appearance}`,
       isMultiple ? `${prefix}-multiple` : `${prefix}-single`,
       visible && `${prefix}-open`,
@@ -694,6 +732,8 @@
       className,
       rootClassName
     ]}>
+  {#if name??field?.name}{#each display as item(item.value)}<input type="hidden" name={name ?? field?.name} value={String(item.value)} disabled={blocked} />{/each}{/if}
+  {#if leading}<div class={`${prefix}-prefix`}><RenderContent value={leading} /></div>{/if}
   <div data-ant-tree-choice-content class={`${prefix}-content`} bind:this={tagContent}>
     {#if isMultiple}{#each renderedTags as item, index(item.value)}
       {@const hidden = responsiveTags && (!tagsReady || !visibleTagKeys.has(item.value))}
@@ -715,7 +755,12 @@
             choose(item.value, 'selection', false);
           }
         })}{:else}
-          <span class={`${prefix}-selection-item-content`}>{@render tagLabel()}</span>{#if !blocked&&!item.disabled}<button type="button" data-ant-tree-choice-selection-item-remove class={`${prefix}-selection-item-remove`} aria-label={`${config.locale.removeText ?? 'Remove'} ${tagText(item)}`} onpointerdown={event => event.preventDefault()} onclick={() => choose(item.value, 'selection')}><Icon name="close" /></button>{/if}
+          <span class={`${prefix}-selection-item-content`}>{@render tagLabel()}</span>{#if !blocked && !item.disabled}
+            <button type="button" data-ant-tree-choice-selection-item-remove class={`${prefix}-selection-item-remove`}
+              aria-label={`${config.locale.removeText ?? 'Remove'} ${tagText(item)}`}
+              onpointerdown={event => event.preventDefault()} onclick={() => choose(item.value, 'selection')}>
+              {#if removeIcon === undefined}<Icon name="close" />{:else}<RenderContent value={removeIcon ?? '×'} />{/if}
+            </button>{/if}
         {/if}
       </span>
     {/each}
@@ -742,7 +787,7 @@
       </span>
     {/if}
     {:else if (!visible || !canSearch) && (treeTitleRender || typeof display[0]?.label==='function' || Array.isArray(display[0]?.label)) && display[0]}<span class="single-snippet">{@render labelNode(display[0])}</span>{/if}
-    <input {...attributes} bind:this={editor} id={controlId} data-ant-tree-choice-input class={`${prefix}-input`} type="text" role="combobox" aria-haspopup="tree" aria-controls={`${controlId}-list`} aria-expanded={visible} aria-autocomplete={canSearch ? 'list' : 'none'} aria-activedescendant={visible ? activeDescendant : undefined} aria-invalid={field?.invalid || resolvedStatus === 'error'
+    <input {...attributes} bind:this={editor} id={controlId} data-ant-tree-choice-input class={`${prefix}-input`} type="text" role="combobox" aria-haspopup="tree" aria-controls={!popupRender || menuElement ? `${controlId}-list` : undefined} aria-expanded={visible} aria-autocomplete={canSearch ? 'list' : 'none'} aria-activedescendant={visible && treeElement ? activeDescendant : undefined} aria-invalid={field?.invalid || resolvedStatus === 'error'
         || attributes['aria-invalid']
         || undefined} aria-describedby={[attributes['aria-describedby'], field?.describedBy].filter(
             Boolean
@@ -752,21 +797,38 @@
             )
             || undefined} aria-required={attributes.required ?? field?.required} aria-busy={loading || undefined} autocomplete="off" disabled={blocked} readonly={!canSearch} placeholder={display.length ? '' : placeholder} value={inputValue} oninput={event => searchInput(event.currentTarget.value)} onclick={() => requestOpen(true)} onkeydown={keyboard} onfocus={event => {
             focused = true;
+            editorFocused = true;
             onfocus?.(event);
           }} onblur={event => {
+          editorFocused = false;
           onblur?.(event);
           blurWithin(event);
         }} />
   </div>
-  {#if allowClear&&!blocked&&(display.length||search)}<button type="button" class={['clear', selectTheme.className && `${prefix}-clear`]} aria-label={config.locale.clearText} onpointerdown={event => event.preventDefault()} onclick={clear}><Icon name="close-circle-filled" /></button>{/if}
-  <span class={['suffix', selectTheme.className && `${prefix}-suffix`]} aria-hidden="true"><Icon name={loading ? 'loading' : 'down'} /></span>
-  {#if name??field?.name}{#each display as item(item.value)}<input type="hidden" name={name ?? field?.name} value={String(item.value)} disabled={blocked} />{/each}{/if}
+  {#if suffix != null ? suffix : showArrow}
+    <div class={['suffix', defaultSuffix && 'default-suffix', (selectTheme.className || !defaultSuffix) && `${prefix}-suffix`,
+        loading && `${prefix}-suffix-loading`]} aria-hidden={defaultSuffix || undefined}>
+      {#if typeof suffix === 'function'}{@render suffix({ searchValue: search, open: visible,
+          focused: editorFocused, showSearch: suffixSearch, loading })}
+      {:else if suffix != null}<RenderContent value={suffix} />
+      {:else if defaultSuffix}<Icon name={loading ? 'loading' : visible && suffixSearch ? 'search' : 'down'} />
+      {:else}<RenderContent value={suffixIcon} />{/if}
+    </div>
+  {/if}
+  {#if canClear}
+    <button type="button" class={['clear', (selectTheme.className || clearConfig) && `${prefix}-clear`]}
+      aria-label={clearConfig?.label ?? config.locale.clearText}
+      onpointerdown={clearPointerDown} onclick={clear}>
+      {#if allowClear === true}<Icon name="close-circle-filled" />
+      {:else}<RenderContent value={clearConfig?.clearIcon || '×'} />{/if}
+    </button>
+  {/if}
 </div>
 <NoCompactStyle>{#if mounted}
 {@const initialPopupStyle = untrack(() => componentStyle)}
 <div data-ant-select-prefix={prefix} data-ant-select-root-prefix={rootPrefix}
   data-ant-tree-select-prefix={treePrefix} data-ant-tree-select-root-prefix={rootPrefix}
-  bind:this={popup} popover="manual" hidden={!visible || !shown} dir={config.direction} class={[
+  bind:this={popup} role="presentation" popover="manual" hidden={!visible || !shown} dir={config.direction} class={[
     `popup ${prefix}-dropdown ant-select-css-var ${treePrefix}-dropdown ant-tree-select-css-var`,
     selectTheme.className,
     selectTheme.className && 'ant-tree-select-source-popup',
@@ -777,8 +839,10 @@
   {@attach portal}
   style:width={typeof popupMatchSelectWidth === 'number'
       ? `${popupMatchSelectWidth}px`
-      : undefined} onfocusout={blurWithin}>
-  <div class="popup-body" style:max-height={`${listHeight}px`} onscroll={onPopupScroll}>
+      : undefined} onfocusout={blurWithin} onmousedown={customPopup ? popupMouseDown : undefined}>
+  {#snippet menu()}
+  <div class="popup-body" role="presentation" bind:this={menuElement} style:max-height={`${listHeight}px`} onscroll={onPopupScroll}
+    onpointerdown={customPopup ? event => event.preventDefault() : undefined}>
     {#if filtered.length}<Tree prefixCls="ant-tree" motion={false} _themeStyle={componentStyle} _componentConfig={false} _nodeDisabled={node => limit.disabled.has(node.key as TreeSelectRawValue)} bind:nativeElement={treeElement} treeData={filteredIndex.data} id={`${controlId}-list`} class={treeSelectTheme.className && 'ant-tree-select-source-tree'} aria-label={attributes['aria-label'] ?? placeholder ?? config.locale.searchText} focusable={false} multiple={isMultiple} checkable={checkable} checkStrictly checkedKeys={{ checked: checks.checked, halfChecked: checks.halfChecked }} selectedKeys={checkable ? [] : checks.checked} expandedKeys={panelExpanded} expandAction={treeExpandAction} activeKey={active} onActiveChange={key => {
         active = key;
       }} onSelect={(_keys, info) => panelSelect(info.node)} onCheck={(_keys, info) => panelSelect(info.node)} onExpand={expandPanel} loadedKeys={treeLoadedKeys ?? loaded} onLoad={(keys) => {
@@ -800,4 +864,6 @@
       <RenderEmpty componentName="TreeSelect" local={notFoundContent} fallback={nativeEmpty} />
     </div>{/if}
   </div>
+  {/snippet}
+  {#if popupRender}<TreeSelectPopupContent {popupRender} {menu} />{:else}{@render menu()}{/if}
 </div>{/if}</NoCompactStyle>

@@ -9,6 +9,12 @@
 
 ### Added
 
+- TreeSelect поддерживает `popupRender`, `prefix`, `suffix`, `suffixIcon`,
+  `removeIcon` и объект `allowClear` с собственным значком и именем кнопки.
+  Пользовательская панель сохраняет черновики между открытиями и позволяет
+  сфокусировать вложенные поля. Очистка сбрасывает поисковый запрос и сообщает
+  об этом через `onSearch`.
+
 - TreeSelect возвращает связанные с `treeTitleRender` snippets в onChange и
   maxTagPlaceholder. Сохранённые labels можно вывести после unmount; они берут
   контекст места рендера. Новые labels учитывают смену renderer сразу, сохраняя

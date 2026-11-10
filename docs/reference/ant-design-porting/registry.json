@@ -11033,7 +11033,7 @@
       "name": "TreeSelect",
       "category": "data-entry",
       "scope": "target",
-      "scopeReason": "TreeSelect по Ant Design 6.6.8 и rc-tree-select 1.16.1: значения, check/стратегии, поиск, loadData, fieldNames/simple mode, generic data, title expansion, maxCount, tag display и renderer label API; оставшийся API, virtual и motion переносятся отдельно.",
+      "scopeReason": "TreeSelect по Ant Design 6.6.8 и rc-tree-select 1.16.1. Перенесены значения, check/стратегии, поиск, loadData, fieldNames/simple mode, generic data, title expansion, maxCount, tag display, renderer labels, popupRender и содержимое control slots. Оставшийся API, virtual и motion переносятся отдельно.",
       "upstreamPath": "components/tree-select",
       "reviewedRevision": "984592267de88fbf9cdaecc96a56629e721c709d",
       "exports": [
@@ -11175,7 +11175,22 @@
         "tests/browser/fixtures/tree-select-labels-hydration.client.ts",
         "tests/browser/fixtures/tree-select-labels-hydration.server.ts",
         "tests/browser/fixtures/tree-select-labels-hydration.html",
-        "tests/package/tree-select-labels.ssr.test.ts"
+        "tests/package/tree-select-labels.ssr.test.ts",
+        "src/lib/TreeSelectPopupContent.svelte",
+        "src/lib/RenderContent.svelte",
+        "tests/browser/fixtures/tree-select-surface-cases.ts",
+        "tests/browser/fixtures/TreeSelectSurfaceFixtures.svelte",
+        "tests/browser/fixtures/TreeSelectSurfaceScope.svelte",
+        "tests/browser/fixtures/TreeSelectSurfacePopup.svelte",
+        "tests/browser/fixtures/ant-design-tree-select-surface-reference.json",
+        "tests/browser/fixtures/ant-design-tree-select-surface-ssr-reference.json",
+        "tests/browser/tree-select-surface-metrics.ts",
+        "tests/browser/tree-select-surface.spec.ts",
+        "tests/browser/fixtures/tree-select-surface-hydration.client.ts",
+        "tests/browser/fixtures/tree-select-surface-hydration.server.ts",
+        "tests/browser/fixtures/tree-select-surface-hydration.html",
+        "tests/browser/tree-select-surface-hydration.spec.ts",
+        "tests/package/tree-select-surface.ssr.test.ts"
       ],
       "features": [
         {
@@ -11239,7 +11254,7 @@
         },
         {
           "id": "extended-api",
-          "title": "Popup hooks и остальные semantic/config/ref API",
+          "title": "Оставшиеся TreeNode, semantic, config и ref API",
           "state": "partial",
           "requiredForV1": false,
           "evidence": [
@@ -11259,7 +11274,7 @@
             "tests/package/tree-select-data.ssr.test.ts",
             "readme.md"
           ],
-          "note": "FieldNames, treeDataSimpleMode, generic raw data, treeExpandAction, maxCount, tag text/count/placeholder/render API и renderer labels в callbacks/omitted records перенесены. Остаются TreeNode children, popupRender/prefix/suffix customization, component config и полный semantic/ref API. Deprecated extra.triggerNode/allCheckedNodes и node.props React wrappers исключены; собственное поле props данных сохраняется."
+          "note": "FieldNames, treeDataSimpleMode, generic raw data, treeExpandAction, maxCount, tag text/count/placeholder/render API, renderer labels и popup/control slots перенесены. Остаются TreeNode children, полный switcherIcon/treeLine, component config, semantic/ref API и Form feedback. Deprecated extra.triggerNode/allCheckedNodes и node.props React wrappers исключены. Собственное поле props данных сохраняется."
         },
         {
           "id": "virtual-motion",
@@ -11605,6 +11620,51 @@
             "readme.md"
           ],
           "note": "Ant Design6.6.8 / 984592267de88fbf9cdaecc96a56629e721c709d, rc-tree-select1.16.1, unmodified official UMD/React18.3.1. Raw stale-renderer и removed-renderer: convert2LabelValues не зависит от treeTitleRender. После замены/снятия prop при неизменных data/value summary остаётся прежним, а первый следующий onChange отдаёт старые ReactNode labels. Public fresh-renderer-counterpart/plain-counterpart с теми же финальными props дают актуальные labels. Native обновляет summary и callback labels сразу; ранее выданные snippets остаются привязаны к своей записи и renderer, input и focus сохраняются."
+        },
+        {
+          "id": "control-slots",
+          "title": "Prefix, suffix, suffixIcon, allowClear и removeIcon",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/TreeSelect.svelte",
+            "src/lib/tree-select.types.ts",
+            "tests/browser/fixtures/ant-design-tree-select-surface-reference.json",
+            "tests/browser/fixtures/ant-design-tree-select-surface-ssr-reference.json",
+            "tests/browser/tree-select-surface.spec.ts",
+            "tests/package/tree-select-surface.ssr.test.ts",
+            "readme.md"
+          ],
+          "note": "Ant Design 6.6.8 повторно объявляет публичный suffixIcon, унаследованный suffix имеет собственный приоритет и renderer metadata. Проверены literal falsy/null/arrays/snippets, show-arrow, down/search/loading, RTL/local prefix, clear label/icon/controlled state, explicit search reset, pointer/keyboard close order и remove icon. Пустой suffix snippet сохраняет wrapper. Native сохраняет локализованные имена, кнопки удаления и автоматический поиск в multiple. Form feedback учитывается в оставшемся API."
+        },
+        {
+          "id": "popup-render",
+          "title": "PopupRender с исходным меню, порталом и изоляцией поля",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/TreeSelect.svelte",
+            "src/lib/TreeSelectPopupContent.svelte",
+            "tests/browser/fixtures/ant-design-tree-select-surface-reference.json",
+            "tests/browser/fixtures/ant-design-tree-select-surface-ssr-reference.json",
+            "tests/browser/tree-select-surface.spec.ts",
+            "tests/browser/tree-select-surface-hydration.spec.ts",
+            "tests/package/tree-select-surface.ssr.test.ts",
+            "readme.md"
+          ],
+          "note": "Snippet<[Snippet]> оборачивает или заменяет origin menu с Tree/empty. Popup сохраняет DOM и черновики между открытиями, getPopupContainer получает owner, origin удерживает фокус редактора. Клик по фону сохраняет открытую панель и поиск. Custom fields получают фокус с изоляцией binding, visual status и Compact текущего поля. При замене меню обновляются ARIA references. Source SSR откладывает portal до клиента. Native сохраняет скрытый initial-open shell и гидратирует его на месте до переноса в контейнер."
+        },
+        {
+          "id": "source-empty-popup-escape",
+          "title": "Source оставляет пустую пользовательскую панель открытой по Escape",
+          "state": "partial",
+          "requiredForV1": false,
+          "evidence": [
+            "tests/browser/fixtures/ant-design-tree-select-surface-reference.json",
+            "tests/browser/tree-select-surface.spec.ts",
+            "readme.md"
+          ],
+          "note": "Ant Design 6.6.8 / 984592267de88fbf9cdaecc96a56629e721c709d, rc-select 1.10.1, rc-tree-select 1.16.1, официальный UMD. В popup-empty popupRender возвращает null. После открытия Enter не выбирает узел, Escape оставляет aria-expanded=true без onOpenChange. Native сохраняет закрытие по Escape с onOpenChange(false) и без скрытого выбора."
         }
       ]
     },
