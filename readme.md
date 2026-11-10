@@ -6323,7 +6323,7 @@ React development warnings остаются за пределами перено
 
 ## TreeSelect
 
-TreeSelect переносит первый объём Ant Design 6.6.8 / rc-tree-select 1.16.1.
+TreeSelect переносит Ant Design 6.6.8 / rc-tree-select 1.16.1 поэтапно.
 Панель использует существующий Tree; checkbox conduction считается по полному
 дереву, а display values и фильтрованная панель вычисляются отдельно.
 React-зависимости не устанавливаются. Лицензия сохранена в
@@ -6344,9 +6344,27 @@ vendor/LICENSE.rc-tree-select. Рецепт CSS извлекает 92 прави
 Узел содержит уникальный value (string/number), title/label, children,
 disabled/disableCheckbox/checkable/selectable/isLeaf. Внутренняя идентичность —
 value, как в upstream fieldNames; key можно не задавать. Значения должны быть
-уникальны также после String(value). Title/label могут быть string/number/Snippet.
-TreeTitleRender принимает snippet с исходным TreeSelectNode и задаёт заголовки
-панели и выбранных значений.
+уникальны также после String(value). Title/label принимают string/number, boolean,
+null, Snippet и вложенные массивы этих значений. Boolean/null не создают текст;
+отсутствующий заголовок панели использует fallback Tree. TreeTitleRender принимает
+snippet с исходным типом записи и задаёт заголовки панели и выбранных значений.
+
+`fieldNames={{value:'code',label:'caption',children:'nodes'}}` подключает другую
+схему без предварительного преобразования. Пустые имена возвращают стандартные
+поля; без label используется первый определённый title/label, включая null.
+Generic `TreeSelectProps<ValueType, Data>` выводит Data из treeData без index
+signature. OnSelect/onDeselect и filterTreeNode получают shallow copy исходной
+записи, treeTitleRender — исходную запись; вложенный payload сохраняет ссылки.
+LoadData получает те же пользовательские поля с вычисленными key/state, как Tree.
+Пользовательское поле props сохраняется; deprecated React wrapper не создаётся.
+
+`treeDataSimpleMode` строит дерево из плоского списка id/pId. Объект настраивает
+имена id/pId и rootPId; по умолчанию rootPId=null оставляет все узлы без найденного
+родителя корнями. Другое значение, включая 0, сравнивается строго. Порядок
+определяется первым появлением id, повторный id заменяет запись. Как Source,
+simple mode всегда создаёт canonical children независимо от fieldNames.children;
+для такой иерархии имя children следует оставить стандартным. Исходные записи и
+массивы children не меняются, readonly данные допустимы.
 
 Value/defaultValue принимают scalar, массив или {value,label?,halfChecked?}.
 Null очищает; undefined включает внутреннее состояние. Value/open/showSearch.searchValue —
@@ -6356,7 +6374,7 @@ Enter игнорирует активный узел, удалённый из tr
 значения по-прежнему можно удалить через теги.
 Multiple включает массивы. TreeCheckable включает checkbox и multiple;
 treeCheckStrictly также включает checkbox/multiple и принудительно labelInValue.
-Параметр типа TreeSelectProps<ValueType> сохраняет конкретный тип callback value;
+Параметр типа TreeSelectProps<ValueType, Data> сохраняет конкретный тип callback value;
 режим и переданный тип должны соответствовать друг другу, как в upstream.
 
 OnChange(value,labels,extra) получает scalar либо массив; при labelInValue/strict
@@ -6384,7 +6402,8 @@ value без подписи отображается самим значение
 ShowSearch по умолчанию false для single и true для multiple. Объект showSearch
 поддерживает searchValue/onSearch, autoClearSearchValue, filterTreeNode и
 treeNodeFilterProp. Одноимённые deprecated top-level props удалены.
-Default filter prop — value, не title. Поиск без учёта регистра сохраняет предков
+Default filter prop — буквальное value даже при fieldNames.value='code'; для другой
+схемы задаётся treeNodeFilterProp. Поиск без учёта регистра сохраняет предков
 совпадения и всех потомков совпавшего родителя. FilterTreeNode=false сохраняет
 всё дерево; callback задаёт predicate. Отметка фильтрованного родителя всё равно
 считается по полному дереву. AutoClearSearchValue=true очищает внутренний search
@@ -6430,9 +6449,11 @@ DOM панели, фокус и выделение; ShadowRoot требует с
 TreeSelect/Cascader с 40 сценариями официального UMD —
 [choice-container](./tests/browser/choice-container.spec.ts), `?fixture=choice-container`.
 
-Virtual/scrollTo, fieldNames/simple mode, TreeNode children, maxCount/maxTagCount,
+Virtual/scrollTo, TreeNode children, maxCount/maxTagCount,
 tag/popup render hooks, treeExpandAction, остальные semantic slots/config/ref API
-и исходные motion API ещё не перенесены. Deprecated React extras исключены.
+и исходные motion API ещё не перенесены. TreeTitleRender оформляет выбранные
+значения, но onChange пока возвращает подписи данных, а не bound renderer snippets.
+Deprecated React extras исключены.
 Класс popup задаётся через classNames.popup.root; popupClassName удалён.
 
 `prefixCls` задаёт локальные классы Select control, tags и TreeSelect popup;
@@ -6453,6 +6474,17 @@ tag/popup render hooks, treeExpandAction, остальные semantic slots/conf
 с этим counterpart; control/popup остаются raw. Его классы отличаются, поэтому
 сверка подтверждает оформление, а не одинаковую разметку. Svelte сохраняет
 согласованный Native Tree adapter и оформление при локальном префиксе.
+
+[32 сценария данных](tests/browser/fixtures/ant-design-tree-select-data-reference.json)
+сверены с неизменённым официальным UMD: aliases, simple topology, search/check
+strategies, literal labels и обновления data/schema/mode. Независимый
+[SSR-эталон](tests/browser/fixtures/ant-design-tree-select-data-ssr-reference.json)
+получен без DOM и timers; [browser](tests/browser/tree-select-data.spec.ts),
+[native lifecycle](tests/browser/tree-select-data-native.spec.ts) и
+[SSR](tests/package/tree-select-data.ssr.test.ts) проверяют соответствующие границы.
+Два дефекта Source записаны отдельно: simple mode дописывает детей во входной
+children array, а raw renderer сначала получает labeled value вместо data node.
+Native сохраняет входной массив и передаёт renderer полную запись с payload.
 
 ## Tree
 

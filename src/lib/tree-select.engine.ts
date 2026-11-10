@@ -1,5 +1,6 @@
 import { buildTreeEntities, conductTreeCheck, treeCheckDisabled } from './tree.engine';
 import type { TreeDataNode, TreeKey } from './tree.types';
+import { treeSelectChildren, treeSelectFields, treeSelectNodeLabel, treeSelectNodeValue } from './tree-select-data.engine';
 import type {
   TreeSelectNode,
   TreeSelectRawValue,
@@ -7,29 +8,32 @@ import type {
   TreeSelectLabeledValue,
   TreeSelectStrategy,
   TreeSelectSearchConfig,
-  TreeSelectLabel
+  TreeSelectFieldNames
 } from './tree-select.types';
 // rc-tree-select 1.16.1; MIT, vendor/LICENSE.rc-tree-select.
 export const TREE_SELECT_SHOW_ALL = 'SHOW_ALL';
 export const TREE_SELECT_SHOW_PARENT = 'SHOW_PARENT';
 export const TREE_SELECT_SHOW_CHILD = 'SHOW_CHILD';
-export function treeSelectIndex(nodes: readonly TreeSelectNode[]) {
-  const values = new Map<TreeSelectRawValue, TreeSelectNode>();
-  function map(list: readonly TreeSelectNode[]): TreeDataNode[] {
+export function treeSelectIndex<Data extends object>(nodes: readonly Data[], fieldNames?: TreeSelectFieldNames) {
+  const fields = treeSelectFields(fieldNames);
+  const values = new Map<TreeSelectRawValue, Data>();
+  function map(list: readonly Data[]): TreeDataNode[] {
     return list.map(node => {
-      values.set(node.value, node);
+      const value = treeSelectNodeValue(node, fields);
+      const children = treeSelectChildren(node, fields);
+      values.set(value, node);
       return {
         ...node,
-        key: node.value,
-        title: node.title ?? node.label,
-        children: node.children ? map(node.children) : undefined
+        key: value,
+        title: treeSelectNodeLabel(node, fields),
+        children: Reflect.get(node, fields.children) ? map(children) : undefined
       };
     });
   }
   const data = map(nodes);
-  return { ...buildTreeEntities(data), data, values };
+  return { ...buildTreeEntities(data), data, values, fields };
 }
-export type TreeSelectIndex = ReturnType<typeof treeSelectIndex>;
+export type TreeSelectIndex<Data extends object = TreeSelectNode> = ReturnType<typeof treeSelectIndex<Data>>;
 export function treeSelectLabeled(value: TreeSelectValue): TreeSelectLabeledValue[] {
   const values = value === undefined || value === null
     ? []
@@ -39,7 +43,7 @@ export function treeSelectLabeled(value: TreeSelectValue): TreeSelectLabeledValu
 export function treeSelectChecks(
   items: readonly TreeSelectLabeledValue[],
   conduction: boolean,
-  index: TreeSelectIndex
+  index: TreeSelectIndex<object>
 ) {
   const raw = items.filter(item => !item.halfChecked).map(item => item.value);
   if (!conduction) return {
@@ -59,7 +63,7 @@ export function treeSelectChecks(
 export function treeSelectStrategy(
   values: readonly TreeSelectRawValue[],
   strategy: TreeSelectStrategy,
-  index: TreeSelectIndex
+  index: TreeSelectIndex<object>
 ): TreeSelectRawValue[] {
   const selected = new Set<TreeKey>(values);
   return values.filter(key => {
@@ -80,9 +84,9 @@ export function treeSelectStrategy(
     return true;
   });
 }
-export function treeSelectLabels(
+export function treeSelectLabels<Data extends object>(
   items: readonly TreeSelectLabeledValue[],
-  index: TreeSelectIndex,
+  index: TreeSelectIndex<Data>,
   labelProp?: string,
   previous: readonly TreeSelectLabeledValue[] = items
 ): TreeSelectLabeledValue[] {
@@ -91,31 +95,33 @@ export function treeSelectLabels(
     return {
       label: item.label
         ?? (node
-          ? labelProp ? node[labelProp] as TreeSelectLabel | undefined : node.title ?? node.label
+          ? treeSelectNodeLabel(node, index.fields, labelProp)
           : previous.find(old => old.value === item.value)?.label),
       value: item.value,
       halfChecked: item.halfChecked,
-      disabled: node?.disabled
+      disabled: node ? Reflect.get(node, 'disabled') as boolean | undefined : undefined
     };
   });
 }
-export function filterTreeSelect(
-  nodes: readonly TreeSelectNode[],
+export function filterTreeSelect<Data extends object>(
+  nodes: readonly Data[],
   search: string,
-  config: TreeSelectSearchConfig
-): readonly TreeSelectNode[] {
+  config: TreeSelectSearchConfig<Data>,
+  fieldNames?: TreeSelectFieldNames
+): readonly Data[] {
   if (!search || config.filterTreeNode === false) return nodes;
   const filter = typeof config.filterTreeNode === 'function'
     ? config.filterTreeNode
-    : (text: string, node: TreeSelectNode) => String(node[config.treeNodeFilterProp
-      ?? 'value']).toUpperCase().includes(
+    : (text: string, node: Data) => String(Reflect.get(node, config.treeNodeFilterProp
+      ?? 'value')).toUpperCase().includes(
         text.toUpperCase()
       );
-  function visit(list: readonly TreeSelectNode[], keepAll = false): TreeSelectNode[] {
+  const fields = treeSelectFields(fieldNames);
+  function visit(list: readonly Data[], keepAll = false): Data[] {
     return list.flatMap(node => {
       const match = keepAll || filter(search, { ...node });
-      const children = visit(node.children ?? [], match);
-      return match || children.length ? [{ ...node, isLeaf: undefined, children }] : [];
+      const children = visit(treeSelectChildren(node, fields), match);
+      return match || children.length ? [{ ...node, isLeaf: undefined, [fields.children]: children }] : [];
     });
   }
   return visit(nodes);
@@ -126,7 +132,7 @@ export function toggleTreeSelect(
   items: readonly TreeSelectLabeledValue[],
   checks: ReturnType<typeof treeSelectChecks>,
   conduction: boolean,
-  index: TreeSelectIndex
+  index: TreeSelectIndex<object>
 ): TreeSelectRawValue[] {
   const raw = selected
     ? [...items.filter(item => !item.halfChecked).map(item => item.value), value]

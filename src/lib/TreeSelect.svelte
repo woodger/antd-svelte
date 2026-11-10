@@ -1,4 +1,4 @@
-<script lang="ts" generics="ValueType extends TreeSelectValue = TreeSelectValue">
+<script lang="ts" generics="ValueType extends TreeSelectValue = TreeSelectValue, Data extends object = TreeSelectNode">
   import { tick, untrack } from 'svelte';
   import type {
     TreeSelectProps,
@@ -6,7 +6,8 @@
     TreeSelectValue,
     TreeSelectRawValue,
     TreeSelectLabeledValue,
-    TreeSelectLabel
+    TreeSelectLabel,
+    TreeSelectNode
   } from './tree-select.types';
   import type { TreeDataNode, TreeEventNode, TreeKey } from './tree.types';
   import {
@@ -19,6 +20,7 @@
     toggleTreeSelect
   } from './tree-select.engine';
   import { expandTreeParents, treeCheckDisabled } from './tree.engine';
+  import { treeSelectChildren, treeSelectData, treeSelectNodeValue } from './tree-select-data.engine';
   import { useConfig } from './config-context';
   import ThemeScopeStyle from './ThemeScopeStyle.svelte';
   import { getSelectPrefixCss } from './select-prefix.engine';
@@ -33,11 +35,14 @@
   import { useComponentTheme } from './theme-component.svelte';
   import { connectComponentTheme } from './theme-component.dom';
   import Tree from './Tree.svelte';
+  import TreeTitle from './TreeTitle.svelte';
   import Icon from './Icon.svelte';
   import NoCompactStyle from './NoCompactStyle.svelte';
   let {
     prefixCls,
     treeData = [],
+    fieldNames,
+    treeDataSimpleMode,
     value,
     defaultValue,
     multiple = false,
@@ -91,7 +96,7 @@
     onblur,
     ...attributes
   }: TreeSelectProps<
-    ValueType
+    ValueType, Data
   > = $props();
   const config = useConfig();
   let prefix = $derived(config.getPrefixCls('select', prefixCls));
@@ -120,7 +125,8 @@
   let internalValue = $state.raw<TreeSelectValue>(untrack(() => defaultValue));
   let actualValue = $derived(value === undefined ? internalValue : value);
   let items = $derived(treeSelectLabeled(actualValue));
-  let index = $derived(treeSelectIndex(treeData));
+  let data = $derived(treeSelectData(treeData, treeDataSimpleMode));
+  let index = $derived(treeSelectIndex(data, fieldNames));
   let checkable = $derived(treeCheckable || treeCheckStrictly);
   let isMultiple = $derived(checkable || multiple);
   let labeled = $derived(treeCheckStrictly || labelInValue);
@@ -142,15 +148,15 @@
       item => ({ ...item, label: item.label ?? item.value })
     )
   );
-  let searchConfig = $derived<TreeSelectSearchConfig>(
+  let searchConfig = $derived<TreeSelectSearchConfig<Data>>(
     { ...(typeof showSearch === 'object' ? showSearch : {}) }
   );
   let internalSearch = $state('');
   let search = $derived(searchConfig.searchValue ?? internalSearch);
   let canSearch = $derived(typeof showSearch === 'object' ? true : showSearch ?? isMultiple);
   let autoClear = $derived(searchConfig.autoClearSearchValue ?? true);
-  let filtered = $derived(filterTreeSelect(treeData, search, searchConfig));
-  let filteredIndex = $derived(treeSelectIndex(filtered));
+  let filtered = $derived(filterTreeSelect(data, search, searchConfig, fieldNames));
+  let filteredIndex = $derived(treeSelectIndex(filtered, fieldNames));
   let blocked = $derived(
     disabled ?? field?.disabled ?? form?.disabled ?? config.componentDisabled
   );
@@ -160,7 +166,8 @@
   let internalOpen = $state(untrack(() => defaultOpen));
   let visible = $derived((open ?? internalOpen) && !blocked);
   let inputValue = $derived(
-    isMultiple || visible && canSearch ? search : treeTitleRender ? '' : text(display[0]?.label)
+    isMultiple || visible && canSearch ? search
+      : treeTitleRender || Array.isArray(display[0]?.label) ? '' : text(display[0]?.label)
   );
   let mounted = $state(untrack(() => defaultOpen || open === true));
   let shown = $state(false);
@@ -286,19 +293,20 @@
   });
   function firstNode(nodes: typeof treeData): TreeKey | null {
     for (const node of nodes) {
-      if (node.disabled || node.selectable === false)
+      if (Reflect.get(node, 'disabled') || Reflect.get(node, 'selectable') === false)
         continue;
       if (!search
-        || String(node[searchConfig.treeNodeFilterProp ?? 'value']).toLowerCase().includes(
+        || String(Reflect.get(node, searchConfig.treeNodeFilterProp ?? 'value')).toLowerCase().includes(
           search.toLowerCase()
-        )) return node.value;
-      const child = firstNode(node.children ?? []);
+        )) return treeSelectNodeValue(node, index.fields);
+      const child = firstNode(treeSelectChildren(node, index.fields));
       if (child !== null) return child;
     }
     return null;
   }
-  function text(label: TreeSelectLabel | undefined) {
-    return typeof label === 'function' ? '' : label === undefined ? '' : String(label);
+  function text(label: TreeSelectLabel | undefined): string {
+    return Array.isArray(label) ? label.map(text).join('')
+      : typeof label === 'function' || typeof label === 'boolean' || label == null ? '' : String(label);
   }
   function requestOpen(next: boolean) {
     if (next && blocked || next === visible) return;
@@ -360,7 +368,7 @@
     if (blocked
       || source === 'option'
       && (!node
-        || node.disabled
+        || Reflect.get(node, 'disabled')
         || checkable
         && treeCheckDisabled(
           index.entities.get(String(raw))!.node
@@ -396,16 +404,14 @@
     onTreeExpand?.(keys);
   }
   function loadPanel(node: TreeEventNode) {
+    const { key, expanded, selected, checked, halfChecked, loaded, loading, pos, active,
+      dragOver, dragOverGapTop, dragOverGapBottom } = node;
     return loadData?.(
       {
-        ...node,
-        ...index
-          .values
-          .get(node
-            .key as TreeSelectRawValue),
-        key: node
-          .key
-      } as TreeEventNode & typeof treeData[number]
+        ...index.values.get(key as TreeSelectRawValue),
+        key, expanded, selected, checked, halfChecked, loaded, loading, pos, active,
+        dragOver, dragOverGapTop, dragOverGapBottom
+      } as TreeEventNode<Data>
     )
       ?? Promise.resolve();
   }
@@ -461,7 +467,8 @@
         requestOpen(true);
         return;
       }
-      if (active !== null && index.values.get(active as TreeSelectRawValue)?.selectable !== false)
+      const node = active !== null && index.values.get(active as TreeSelectRawValue);
+      if (node && Reflect.get(node, 'selectable') !== false)
         choose(active as TreeSelectRawValue);
       return;
     }
@@ -518,16 +525,11 @@
     [data-ant-tree-choice-source-theme]:has(.clear) .suffix { opacity:0; }
   }
 </style>
-{#snippet labelNode(item:TreeSelectLabeledValue)}{#if treeTitleRender && index.values.has(item.value)}{@render treeTitleRender(index.values.get(item.value)!)}{:else if typeof item.label==='function'}{@render item.label()}{:else}{item.label ?? item.value}{/if}{/snippet}
-{#snippet panelTitle(node:TreeDataNode)}{@render labelNode(
-    {
-      value: node.key as TreeSelectRawValue,
-      label: index.values.get(node.key as TreeSelectRawValue)?.title
-        ?? index.values.get(
-          node.key as TreeSelectRawValue
-        )?.label
-    }
-  )}{/snippet}
+{#snippet labelNode(item:TreeSelectLabeledValue)}{#if treeTitleRender && index.values.has(item.value)}{@render treeTitleRender(index.values.get(item.value)!)}{:else}<TreeTitle value={item.label ?? item.value} node={index.values.get(item.value) ?? {}} />{/if}{/snippet}
+{#snippet panelTitle(node:TreeDataNode)}
+  {@const original = filteredIndex.values.get(node.key as TreeSelectRawValue)}
+  {#if treeTitleRender && original}{@render treeTitleRender(original)}{/if}
+{/snippet}
 {#if selectPrefixCss}<ThemeScopeStyle css={selectPrefixCss} scope={`tree-select-control-prefix:${prefix}:${rootPrefix}`} />{/if}{#if treePrefixCss}<ThemeScopeStyle css={treePrefixCss} scope={`tree-select-prefix:${treePrefix}:${rootPrefix}`} />{/if}<div data-ant-tree-choice-control data-ant-select-prefix={prefix} data-ant-select-root-prefix={rootPrefix}
   data-ant-tree-select-prefix={treePrefix} data-ant-tree-select-root-prefix={rootPrefix}
   data-ant-tree-choice-source-theme={Boolean(selectTheme.className) || undefined}
@@ -566,7 +568,7 @@
         `${prefix}-selection-item`,
         (blocked || item.disabled) && `${prefix}-selection-item-disabled`
       ]} title={text(item.label)}><span class={`${prefix}-selection-item-content`}>{@render labelNode(item)}</span>{#if !blocked&&!item.disabled}<button type="button" data-ant-tree-choice-selection-item-remove class={`${prefix}-selection-item-remove`} aria-label={`${config.locale.removeText ?? 'Remove'} ${text(item.label)}`} onpointerdown={event => event.preventDefault()} onclick={() => choose(item.value, 'selection')}><Icon name="close" /></button>{/if}</span>{/each}
-    {:else if (!visible || !canSearch) && (treeTitleRender || typeof display[0]?.label==='function') && display[0]}<span class="single-snippet">{@render labelNode(display[0])}</span>{/if}
+    {:else if (!visible || !canSearch) && (treeTitleRender || typeof display[0]?.label==='function' || Array.isArray(display[0]?.label)) && display[0]}<span class="single-snippet">{@render labelNode(display[0])}</span>{/if}
     <input {...attributes} bind:this={editor} id={controlId} data-ant-tree-choice-input class={`${prefix}-input`} type="text" role="combobox" aria-haspopup="tree" aria-controls={`${controlId}-list`} aria-expanded={visible} aria-autocomplete={canSearch ? 'list' : 'none'} aria-activedescendant={visible ? activeDescendant : undefined} aria-invalid={field?.invalid || resolvedStatus === 'error'
         || attributes['aria-invalid']
         || undefined} aria-describedby={[attributes['aria-describedby'], field?.describedBy].filter(
@@ -610,11 +612,12 @@
           onTreeLoad?.(keys);
           if (treeLoadedKeys === undefined)
             loaded = keys;
-        }} loadData={visible && !search && loadData ? loadPanel : undefined} showLine={treeLine} showIcon={treeIcon} {switcherIcon} titleRender={panelTitle} filterTreeNode={node => Boolean(
+        }} loadData={visible && !search && loadData ? loadPanel : undefined} showLine={treeLine} showIcon={treeIcon} {switcherIcon} titleRender={treeTitleRender ? panelTitle : undefined} filterTreeNode={node => Boolean(
           search
           && String(
-            index.values.get(node.key as TreeSelectRawValue)?.[searchConfig.treeNodeFilterProp
-            ?? 'value']
+            index.values.has(node.key as TreeSelectRawValue)
+              ? Reflect.get(index.values.get(node.key as TreeSelectRawValue)!, searchConfig.treeNodeFilterProp ?? 'value')
+              : undefined
           ).toLowerCase().includes(
             search.toLowerCase()
           )

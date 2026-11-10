@@ -9,6 +9,12 @@
 
 ### Added
 
+- TreeSelect поддерживает fieldNames и treeDataSimpleMode, generic data без index
+  signature, literal label arrays/null и обновления схемы. Selection/filter/render
+  callbacks сохраняют raw payload, loadData получает canonical state. 32 UMD/SSR
+  сценария фиксируют исходное поведение; ошибки Source с мутацией входного массива
+  и raw renderer записаны отдельно, Native сохраняет данные и полный renderer node.
+
 - Tree/DirectoryTree поддерживают collapse/appear motion по rc-tree1.4.0 и
   rc-motion1.3.3: custom phase names/hooks, async prepare, измерение группы,
   deadline, virtual ranges и semantic config. Native сохраняет соседние controls,

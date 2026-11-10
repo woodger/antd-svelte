@@ -82,7 +82,10 @@ export type {
   TreeSelectLabeledValue,
   TreeSelectStrategy,
   TreeSelectSearchConfig,
-  TreeSelectChangeInfo
+  TreeSelectChangeInfo,
+  TreeSelectFieldNames,
+  TreeSelectSimpleModeConfig,
+  TreeSelectSimpleMode
 } from './tree-select.types';
 export { default as Tree } from './Tree.svelte';
 export { default as DirectoryTree } from './DirectoryTree.svelte';

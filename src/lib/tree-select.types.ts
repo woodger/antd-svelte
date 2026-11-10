@@ -3,7 +3,22 @@ import type { HTMLInputAttributes, HTMLAttributes } from 'svelte/elements';
 import type { ComponentSize } from './types';
 import type { TreeEventNode, TreeKey } from './tree.types';
 export type TreeSelectRawValue = string | number;
-export type TreeSelectLabel = string | number | Snippet;
+export type TreeSelectLabel = string | number | boolean | null | undefined | Snippet
+  | readonly TreeSelectLabel[];
+/** Пустые имена используют стандартные поля; key всегда берётся из value field. */
+export interface TreeSelectFieldNames {
+  value?: string;
+  label?: string;
+  children?: string;
+}
+/** Связи плоского списка: имена id/pId полей и значение родителя корней. */
+export interface TreeSelectSimpleModeConfig {
+  id?: string | number;
+  pId?: string | number;
+  /** По умолчанию null: все узлы без найденного родителя становятся корнями. */
+  rootPId?: TreeSelectRawValue | null;
+}
+export type TreeSelectSimpleMode = boolean | TreeSelectSimpleModeConfig;
 export interface TreeSelectLabeledValue {
   value: TreeSelectRawValue;
   label?: TreeSelectLabel;
@@ -31,11 +46,11 @@ export interface TreeSelectNode {
 }
 export type TreeSelectStrategy = 'SHOW_ALL' | 'SHOW_PARENT' | 'SHOW_CHILD';
 /** Поиск и фильтрация дерева TreeSelect, включая controlled searchValue. */
-export interface TreeSelectSearchConfig {
+export interface TreeSelectSearchConfig<Data extends object = TreeSelectNode> {
   searchValue?: string;
   onSearch?: (value: string) => void;
   autoClearSearchValue?: boolean;
-  filterTreeNode?: boolean | ((search: string, node: TreeSelectNode) => boolean);
+  filterTreeNode?: boolean | ((search: string, node: Data) => boolean);
   treeNodeFilterProp?: string;
 }
 export interface TreeSelectChangeInfo {
@@ -46,13 +61,19 @@ export interface TreeSelectConfig {
   variant?: TreeSelectProps['variant'];
 }
 /** Single/multiple выбор узлов дерева с check strategies, поиском и lazy load. */
-export interface TreeSelectProps<ValueType extends TreeSelectValue = TreeSelectValue> extends Omit<
+export interface TreeSelectProps<
+  ValueType extends TreeSelectValue = TreeSelectValue,
+  Data extends object = TreeSelectNode
+> extends Omit<
   HTMLInputAttributes,
   'value' | 'defaultValue' | 'size' | 'type' | 'children' | 'onchange' | 'oninput'
 > {
   /** Локальный namespace Select/TreeSelect; пустая строка наследует ConfigProvider. */
   prefixCls?: string;
-  treeData?: readonly TreeSelectNode[];
+  treeData?: readonly Data[];
+  fieldNames?: TreeSelectFieldNames;
+  /** Плоский список; false/undefined сохраняют вложенную структуру. */
+  treeDataSimpleMode?: TreeSelectSimpleMode;
   /** Управляемое значение; владелец принимает результат через onChange. */
   value?: ValueType;
   /** Начальное локальное значение; последующие изменения prop не переинициализируют состояние. */
@@ -71,9 +92,9 @@ export interface TreeSelectProps<ValueType extends TreeSelectValue = TreeSelectV
     labels: TreeSelectLabel[] | null,
     extra: TreeSelectChangeInfo
   ) => void;
-  onSelect?: (value: TreeSelectRawValue, node: TreeSelectNode | undefined) => void;
-  onDeselect?: (value: TreeSelectRawValue, node: TreeSelectNode | undefined) => void;
-  showSearch?: boolean | TreeSelectSearchConfig;
+  onSelect?: (value: TreeSelectRawValue, node: Data | undefined) => void;
+  onDeselect?: (value: TreeSelectRawValue, node: Data | undefined) => void;
+  showSearch?: boolean | TreeSelectSearchConfig<Data>;
   treeNodeLabelProp?: string;
   open?: boolean;
   /** @defaultValue false */
@@ -93,13 +114,13 @@ export interface TreeSelectProps<ValueType extends TreeSelectValue = TreeSelectV
   treeLoadedKeys?: readonly TreeKey[];
   onTreeLoad?: (keys: TreeKey[]) => void;
   /** Асинхронная загрузка children; во время поиска не запускается. */
-  loadData?: (node: TreeEventNode & TreeSelectNode) => PromiseLike<unknown>;
+  loadData?: (node: TreeEventNode<Data>) => PromiseLike<unknown>;
   /** @defaultValue false */
   treeLine?: boolean | { showLeafIcon: boolean; };
   /** @defaultValue false */
   treeIcon?: boolean;
   switcherIcon?: Snippet<[TreeEventNode]>;
-  treeTitleRender?: Snippet<[TreeSelectNode]>;
+  treeTitleRender?: Snippet<[Data]>;
   /** @defaultValue 256 */
   listHeight?: number;
   /** @defaultValue true */

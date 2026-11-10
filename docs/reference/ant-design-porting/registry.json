@@ -11033,7 +11033,7 @@
       "name": "TreeSelect",
       "category": "data-entry",
       "scope": "target",
-      "scopeReason": "Первый этап TreeSelect по Ant Design 6.6.8 и rc-tree-select 1.16.1: значения, check/стратегии, поиск, loadData и native popup; расширенный API и virtual отдельно.",
+      "scopeReason": "TreeSelect по Ant Design 6.6.8 и rc-tree-select 1.16.1: значения, check/стратегии, поиск, loadData, fieldNames/simple mode и generic data; оставшийся API, virtual и motion переносятся отдельно.",
       "upstreamPath": "components/tree-select",
       "reviewedRevision": "984592267de88fbf9cdaecc96a56629e721c709d",
       "exports": [
@@ -11113,7 +11113,22 @@
         "tests/browser/fixtures/TreeSelectPrefixSSRFixtures.svelte",
         "tests/browser/tree-select-prefix-metrics.ts",
         "tests/browser/tree-select-prefix.spec.ts",
-        "tests/package/tree-select-prefix.ssr.test.ts"
+        "tests/package/tree-select-prefix.ssr.test.ts",
+        "src/lib/tree-select-data.engine.ts",
+        "src/lib/tree-select-data.engine.test.ts",
+        "src/lib/tree-select.engine.ts",
+        "src/lib/tree-select.types.ts",
+        "tests/browser/fixtures/tree-select-data-cases.ts",
+        "tests/browser/fixtures/TreeSelectDataFixtures.svelte",
+        "tests/browser/fixtures/TreeSelectDataScope.svelte",
+        "tests/browser/fixtures/TreeSelectDataGeneric.svelte",
+        "tests/browser/fixtures/ant-design-tree-select-data-reference.json",
+        "tests/browser/fixtures/ant-design-tree-select-data-ssr-reference.json",
+        "tests/browser/tree-select-data-metrics.ts",
+        "tests/browser/tree-select-data.spec.ts",
+        "tests/browser/tree-select-data-native.spec.ts",
+        "tests/package/tree-select-data.ssr.test.ts",
+        "readme.md"
       ],
       "features": [
         {
@@ -11152,12 +11167,52 @@
           "note": "Панель — существующий Tree с native popover, input сохраняет focus и aria-activedescendant. Во время поиска loadData отключён; закрытый popup не начинает новые загрузки. TreeExpanded/Loaded keys и callbacks, onPopupScroll/listHeight. Form raw values/required/reset, locale, themes/RTL и Compact. 92 CSS-правила; prefix внутренних узлов нормализован к общему Tree."
         },
         {
+          "id": "data-schema",
+          "title": "FieldNames, flat simple mode и generic raw data callbacks",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/tree-select-data.engine.ts",
+            "src/lib/tree-select-data.engine.test.ts",
+            "src/lib/tree-select.engine.ts",
+            "src/lib/tree-select.types.ts",
+            "tests/browser/fixtures/tree-select-data-cases.ts",
+            "tests/browser/fixtures/TreeSelectDataFixtures.svelte",
+            "tests/browser/fixtures/TreeSelectDataScope.svelte",
+            "tests/browser/fixtures/TreeSelectDataGeneric.svelte",
+            "tests/browser/fixtures/ant-design-tree-select-data-reference.json",
+            "tests/browser/fixtures/ant-design-tree-select-data-ssr-reference.json",
+            "tests/browser/tree-select-data-metrics.ts",
+            "tests/browser/tree-select-data.spec.ts",
+            "tests/browser/tree-select-data-native.spec.ts",
+            "tests/package/tree-select-data.ssr.test.ts",
+            "readme.md"
+          ],
+          "note": "FieldNames value/label/children с исходными пустыми defaults, title/label defined priority, literal arrays/boolean/null и идентичностью по value. Generic Data выводится без index signature; selection/filter получают shallow copies с исходным payload, renderer — data node, loadData — raw поля и canonical key/state. Simple mode повторяет Map ordering/dedup, strict id/pId/rootPId и key OR synthesis, всегда строит canonical children независимо от fieldNames.children. Default search prop остаётся literal value. 32 неизменённых UMD случаев и отдельные DOM-free SSR renders фиксируют aliases/check/search/labels, controlled и live data/schema/mode updates. Native refs/focus/active IDs, FormData, lazy resolve/unmount и readonly input проверяются отдельно. Полный extended API не заявлен."
+        },
+        {
           "id": "extended-api",
           "title": "FieldNames/simple mode, maxCount/tags/render hooks и остальные semantic/config/ref API",
-          "state": "missing",
+          "state": "partial",
           "requiredForV1": false,
-          "evidence": [],
-          "note": "Нет fieldNames, treeDataSimpleMode, TreeNode children, maxCount/maxTagCount/tagRender, popupRender/prefix/suffix customization, treeExpandAction, component config и полного semantic/ref API. Deprecated extra.triggerNode/allCheckedNodes и node.props React wrappers не перенесены."
+          "evidence": [
+            "src/lib/tree-select-data.engine.ts",
+            "src/lib/tree-select-data.engine.test.ts",
+            "src/lib/tree-select.engine.ts",
+            "src/lib/tree-select.types.ts",
+            "tests/browser/fixtures/tree-select-data-cases.ts",
+            "tests/browser/fixtures/TreeSelectDataFixtures.svelte",
+            "tests/browser/fixtures/TreeSelectDataScope.svelte",
+            "tests/browser/fixtures/TreeSelectDataGeneric.svelte",
+            "tests/browser/fixtures/ant-design-tree-select-data-reference.json",
+            "tests/browser/fixtures/ant-design-tree-select-data-ssr-reference.json",
+            "tests/browser/tree-select-data-metrics.ts",
+            "tests/browser/tree-select-data.spec.ts",
+            "tests/browser/tree-select-data-native.spec.ts",
+            "tests/package/tree-select-data.ssr.test.ts",
+            "readme.md"
+          ],
+          "note": "FieldNames, treeDataSimpleMode и generic raw data перенесены. Остаются TreeNode children, maxCount/maxTagCount/tagRender, popupRender/prefix/suffix customization, treeExpandAction, component config и полный semantic/ref API. TreeTitleRender оформляет выбранные значения, но onChange пока возвращает подписи данных вместо bound renderer snippets. Deprecated extra.triggerNode/allCheckedNodes и node.props React wrappers исключены; собственное поле props данных сохраняется."
         },
         {
           "id": "virtual-motion",
@@ -11273,6 +11328,32 @@
             "readme.md"
           ],
           "note": "Ant Design 6.6.8 / 984592267de88fbf9cdaecc96a56629e721c709d, unmodified official UMD/React18.3.1. components/tree-select передаёт local prefixCls буквально в tree style hook, а RcTreeSelect создаёт tree classes как owner-tree. При local choices tree получает choices-tree, стили адресуют choices; пять строк занимают110px вместо140px, фон прозрачный и оформление узлов/checkbox теряется. Raw cases/transitions записаны до counterparts. Native сохраняет прежний общий Tree adapter и согласованный CSS. Public counterpart оставляет тот же ConfigProvider/theme/data/props и убирает только local override; здоровые tree/nodes paint сравниваются отдельно от raw control/popup. Его classes отличаются, одинаковая DOM-разметка не заявлена. Наблюдение сохранено для отдельного разбора."
+        },
+        {
+          "id": "source-simple-input-mutation",
+          "title": "Source simple mode дописывает flat children во входной массив",
+          "state": "partial",
+          "requiredForV1": false,
+          "evidence": [
+            "tests/browser/fixtures/ant-design-tree-select-data-reference.json",
+            "src/lib/tree-select-data.engine.test.ts",
+            "tests/browser/tree-select-data-native.spec.ts",
+            "readme.md"
+          ],
+          "note": "Ant Design 6.6.8 / 984592267de88fbf9cdaecc96a56629e721c709d, rc-tree-select1.16.1, unmodified official UMD/React18.3.1. Raw observation simple-input-mutation: root с существующим children array и отдельный flat child. useTreeData shallow clone сохраняет исходный array, push меняет входные данные. Native копирует только этот массив, сохраняет payload refs и ту же видимую иерархию; frozen input допустим. Дефект Source не воспроизводится."
+        },
+        {
+          "id": "source-raw-renderer-data",
+          "title": "Source raw renderer сначала получает labeled value вместо data node",
+          "state": "partial",
+          "requiredForV1": false,
+          "evidence": [
+            "tests/browser/fixtures/ant-design-tree-select-data-reference.json",
+            "tests/browser/fixtures/TreeSelectDataGeneric.svelte",
+            "tests/browser/tree-select-data-native.spec.ts",
+            "readme.md"
+          ],
+          "note": "Ant Design 6.6.8 / 984592267de88fbf9cdaecc96a56629e721c709d, rc-tree-select1.16.1, unmodified official UMD/React18.3.1. Raw observation raw-renderer-data: custom fieldNames, raw selected value и renderer читающий payload. В displayValues Source сначала вызывает renderer с labeled value без payload; прямое чтение payload.ordinal выбрасывает ошибку. Defensive probe записывает недостающие data, затем обычный render получает полный node. Native всегда передаёт renderer исходный data node, обновляет label при новой data reference и сохраняет payload refs."
         }
       ]
     },

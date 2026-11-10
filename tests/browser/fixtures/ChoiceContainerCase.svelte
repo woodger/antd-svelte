@@ -10,7 +10,8 @@
     type CascaderOption,
     type CascaderPath,
     type CascaderTriggerInfo,
-    type ConfigProviderProps
+    type ConfigProviderProps,
+    type TreeSelectNode
   } from 'antd-svelte';
   import type { ChoiceContainerCase } from './choice-container-presets';
   import ChoiceContainerContent from './ChoiceContainerContent.svelte';
@@ -44,7 +45,7 @@
   let loads = $state(0);
   let completed = $state(0);
   let completeLoad = $state<() => void>();
-  let treeData = $derived(lazy ? [{
+  let treeData = $derived<readonly TreeSelectNode[]>(lazy ? [{
     value: 'lazy', title: 'Lazy', isLeaf: false,
     children: lazyChildren ? [{ value: 'alpha', title: 'Alpha' }] : undefined
   }] : [{ value: 'parent', title: 'Parent', children: [
