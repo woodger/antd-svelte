@@ -6453,9 +6453,30 @@ Source разрывает Unicode pair, скрывает весь список �
 summary даже для помещающихся тегов. Native сохраняет принятые Select исправления;
 для последнего случая public counterpart меняет только неиспользуемый placeholder
 при той же ширине 320px. Прежние Native tooltip для literal arrays и treeTitleRender
-сохранены; одинаковый rich-label DOM не заявлен. Renderer-derived labels в
-onChange и omitted records пока требуют отдельного переноса; tagRender.label
-уже передаётся как bound snippet.
+сохранены, в том числе accessible remove names после изменения выбора.
+
+Для известного узла `treeTitleRender` задаёт label в `onChange` и в записях
+`maxTagPlaceholder`, даже если `value` при labelInValue уже содержит label. Без labelInValue
+snippets приходят в массиве labels; в labelInValue и strict-режиме они находятся
+в записях значения, а второй аргумент `onChange` равен null. Для отсутствующего
+узла сохраняется переданная или ранее полученная подпись. Поля value, halfChecked,
+disabled и данные onSelect/onDeselect сохраняют свои значения.
+
+Label связывает renderer и исходную запись. Его можно сохранить и затем вывести
+через `{@render label()}` после проверки `typeof label === 'function'`, в том
+числе после unmount TreeSelect. Содержимое использует контекст места рендера;
+создание label не запускает его lifecycle. SSR включает `<head>` и IDs. Hydration
+сохраняет DOM, фокус и черновики вложенных полей. Summary связывает labels внутри
+своего рендера без вложенного mount или дополнительного DOM-элемента.
+
+[28 браузерных сценариев и два наблюдения](tests/browser/fixtures/ant-design-tree-select-labels-reference.json),
+[30 DOM-free SSR renders](tests/browser/fixtures/ant-design-tree-select-labels-ssr-reference.json),
+[рендер возвращённых labels](tests/browser/tree-select-labels.spec.ts),
+[SSR](tests/package/tree-select-labels.ssr.test.ts) и
+[hydration](tests/browser/tree-select-labels-hydration.spec.ts) проверяют этот API.
+В Source замена или снятие renderer оставляет старый renderer в summary и следующем
+onChange. Native обновляет новые labels сразу; сохранённые ранее snippets
+остаются связанными с прежним renderer и записью.
 
 ShowSearch по умолчанию false для single и true для multiple. Объект showSearch
 поддерживает searchValue/onSearch, autoClearSearchValue, filterTreeNode и
@@ -6524,8 +6545,7 @@ TreeSelect/Cascader с 40 сценариями официального UMD —
 [choice-container](./tests/browser/choice-container.spec.ts), `?fixture=choice-container`.
 
 Virtual/scrollTo, TreeNode children, popup render hooks, остальные semantic slots/config/ref API
-и исходные motion API ещё не перенесены. TreeTitleRender оформляет выбранные
-значения, но onChange пока возвращает подписи данных, а не bound renderer snippets.
+и исходные motion API ещё не перенесены.
 Deprecated React extras исключены.
 Класс popup задаётся через classNames.popup.root; popupClassName удалён.
 

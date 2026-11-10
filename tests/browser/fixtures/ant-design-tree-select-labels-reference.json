@@ -1,0 +1,6964 @@
+{
+  "reference": {
+    "version": "6.6.8",
+    "revision": "984592267de88fbf9cdaecc96a56629e721c709d",
+    "treeSelect": "1.16.1",
+    "select": "1.10.1",
+    "react": "18.3.1",
+    "archiveSha256": "8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa",
+    "method": "unmodified official UMD; returned ReactNode labels rendered by public consumers and inspected in Chromium",
+    "errors": [],
+    "warnings": []
+  },
+  "cases": [
+    {
+      "sample": {
+        "id": "multiple",
+        "actions": [
+          {
+            "kind": "open"
+          },
+          {
+            "kind": "choose",
+            "value": "tail"
+          },
+          {
+            "kind": "key",
+            "value": "Backspace"
+          }
+        ]
+      },
+      "initial": {
+        "opened": false,
+        "omitted": [
+          {
+            "value": 0,
+            "kind": "rendered",
+            "key": false,
+            "text": "Old|header|Alphabet",
+            "rendered": [
+              {
+                "value": "0",
+                "payload": "0",
+                "context": "header"
+              }
+            ]
+          },
+          {
+            "value": 1,
+            "kind": "rendered",
+            "key": false,
+            "text": "Old|header|Beta",
+            "rendered": [
+              {
+                "value": "1",
+                "payload": "1",
+                "context": "header"
+              }
+            ]
+          }
+        ],
+        "history": [],
+        "events": []
+      },
+      "steps": [
+        {
+          "action": {
+            "kind": "open"
+          },
+          "view": {
+            "opened": true,
+            "omitted": [
+              {
+                "value": 0,
+                "kind": "rendered",
+                "key": false,
+                "text": "Old|header|Alphabet",
+                "rendered": [
+                  {
+                    "value": "0",
+                    "payload": "0",
+                    "context": "header"
+                  }
+                ]
+              },
+              {
+                "value": 1,
+                "kind": "rendered",
+                "key": false,
+                "text": "Old|header|Beta",
+                "rendered": [
+                  {
+                    "value": "1",
+                    "payload": "1",
+                    "context": "header"
+                  }
+                ]
+              }
+            ],
+            "history": [],
+            "events": [
+              {
+                "kind": "open",
+                "open": true
+              }
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "choose",
+            "value": "tail"
+          },
+          "view": {
+            "opened": true,
+            "omitted": [
+              {
+                "value": 0,
+                "kind": "rendered",
+                "key": false,
+                "text": "Old|header|Alphabet",
+                "rendered": [
+                  {
+                    "value": "0",
+                    "payload": "0",
+                    "context": "header"
+                  }
+                ]
+              },
+              {
+                "value": 1,
+                "kind": "rendered",
+                "key": false,
+                "text": "Old|header|Beta",
+                "rendered": [
+                  {
+                    "value": "1",
+                    "payload": "1",
+                    "context": "header"
+                  }
+                ]
+              },
+              {
+                "value": "tail",
+                "kind": "rendered",
+                "key": false,
+                "text": "Old|header|Tail",
+                "rendered": [
+                  {
+                    "value": "tail",
+                    "payload": "tail",
+                    "context": "header"
+                  }
+                ]
+              }
+            ],
+            "history": [
+              [
+                {
+                  "value": 0,
+                  "kind": "rendered",
+                  "key": false,
+                  "text": "Old|callback|Alphabet",
+                  "rendered": [
+                    {
+                      "value": "0",
+                      "payload": "0",
+                      "context": "callback"
+                    }
+                  ]
+                },
+                {
+                  "value": 1,
+                  "kind": "rendered",
+                  "key": false,
+                  "text": "Old|callback|Beta",
+                  "rendered": [
+                    {
+                      "value": "1",
+                      "payload": "1",
+                      "context": "callback"
+                    }
+                  ]
+                },
+                {
+                  "value": "tail",
+                  "kind": "rendered",
+                  "key": false,
+                  "text": "Old|callback|Tail",
+                  "rendered": [
+                    {
+                      "value": "tail",
+                      "payload": "tail",
+                      "context": "callback"
+                    }
+                  ]
+                }
+              ]
+            ],
+            "events": [
+              {
+                "kind": "open",
+                "open": true
+              },
+              {
+                "kind": "change",
+                "value": [
+                  0,
+                  1,
+                  "tail"
+                ],
+                "labels": [
+                  "[rendered]",
+                  "[rendered]",
+                  "[rendered]"
+                ],
+                "triggerValue": "tail"
+              },
+              {
+                "kind": "select",
+                "value": "tail",
+                "node": {
+                  "value": "tail",
+                  "label": "Tail",
+                  "payload": {
+                    "id": "tail"
+                  },
+                  "payloadRef": true
+                }
+              }
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "key",
+            "value": "Backspace"
+          },
+          "view": {
+            "opened": true,
+            "omitted": [
+              {
+                "value": 0,
+                "kind": "rendered",
+                "key": false,
+                "text": "Old|header|Alphabet",
+                "rendered": [
+                  {
+                    "value": "0",
+                    "payload": "0",
+                    "context": "header"
+                  }
+                ]
+              },
+              {
+                "value": 1,
+                "kind": "rendered",
+                "key": false,
+                "text": "Old|header|Beta",
+                "rendered": [
+                  {
+                    "value": "1",
+                    "payload": "1",
+                    "context": "header"
+                  }
+                ]
+              }
+            ],
+            "history": [
+              [
+                {
+                  "value": 0,
+                  "kind": "rendered",
+                  "key": false,
+                  "text": "Old|callback|Alphabet",
+                  "rendered": [
+                    {
+                      "value": "0",
+                      "payload": "0",
+                      "context": "callback"
+                    }
+                  ]
+                },
+                {
+                  "value": 1,
+                  "kind": "rendered",
+                  "key": false,
+                  "text": "Old|callback|Beta",
+                  "rendered": [
+                    {
+                      "value": "1",
+                      "payload": "1",
+                      "context": "callback"
+                    }
+                  ]
+                },
+                {
+                  "value": "tail",
+                  "kind": "rendered",
+                  "key": false,
+                  "text": "Old|callback|Tail",
+                  "rendered": [
+                    {
+                      "value": "tail",
+                      "payload": "tail",
+                      "context": "callback"
+                    }
+                  ]
+                }
+              ],
+              [
+                {
+                  "value": 0,
+                  "kind": "rendered",
+                  "key": false,
+                  "text": "Old|callback|Alphabet",
+                  "rendered": [
+                    {
+                      "value": "0",
+                      "payload": "0",
+                      "context": "callback"
+                    }
+                  ]
+                },
+                {
+                  "value": 1,
+                  "kind": "rendered",
+                  "key": false,
+                  "text": "Old|callback|Beta",
+                  "rendered": [
+                    {
+                      "value": "1",
+                      "payload": "1",
+                      "context": "callback"
+                    }
+                  ]
+                }
+              ]
+            ],
+            "events": [
+              {
+                "kind": "open",
+                "open": true
+              },
+              {
+                "kind": "change",
+                "value": [
+                  0,
+                  1,
+                  "tail"
+                ],
+                "labels": [
+                  "[rendered]",
+                  "[rendered]",
+                  "[rendered]"
+                ],
+                "triggerValue": "tail"
+              },
+              {
+                "kind": "select",
+                "value": "tail",
+                "node": {
+                  "value": "tail",
+                  "label": "Tail",
+                  "payload": {
+                    "id": "tail"
+                  },
+                  "payloadRef": true
+                }
+              },
+              {
+                "kind": "change",
+                "value": [
+                  0,
+                  1
+                ],
+                "labels": [
+                  "[rendered]",
+                  "[rendered]"
+                ],
+                "triggerValue": "tail"
+              },
+              {
+                "kind": "deselect",
+                "value": "tail",
+                "node": {
+                  "value": "tail",
+                  "label": "Tail",
+                  "payload": {
+                    "id": "tail"
+                  },
+                  "payloadRef": true
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "single",
+        "single": true,
+        "actions": [
+          {
+            "kind": "open"
+          },
+          {
+            "kind": "choose",
+            "value": 1
+          },
+          {
+            "kind": "clear"
+          }
+        ]
+      },
+      "initial": {
+        "opened": false,
+        "omitted": [],
+        "history": [],
+        "events": []
+      },
+      "steps": [
+        {
+          "action": {
+            "kind": "open"
+          },
+          "view": {
+            "opened": true,
+            "omitted": [],
+            "history": [],
+            "events": [
+              {
+                "kind": "open",
+                "open": true
+              }
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "choose",
+            "value": 1
+          },
+          "view": {
+            "opened": false,
+            "omitted": [],
+            "history": [
+              [
+                {
+                  "value": 1,
+                  "kind": "rendered",
+                  "key": false,
+                  "text": "Old|callback|Beta",
+                  "rendered": [
+                    {
+                      "value": "1",
+                      "payload": "1",
+                      "context": "callback"
+                    }
+                  ]
+                }
+              ]
+            ],
+            "events": [
+              {
+                "kind": "open",
+                "open": true
+              },
+              {
+                "kind": "change",
+                "value": 1,
+                "labels": [
+                  "[rendered]"
+                ],
+                "triggerValue": 1
+              },
+              {
+                "kind": "select",
+                "value": 1,
+                "node": {
+                  "value": 1,
+                  "label": "Beta",
+                  "payload": {
+                    "id": 1
+                  },
+                  "payloadRef": true
+                }
+              },
+              {
+                "kind": "open",
+                "open": false
+              }
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "clear"
+          },
+          "view": {
+            "opened": false,
+            "omitted": [],
+            "history": [
+              [
+                {
+                  "value": 1,
+                  "kind": "rendered",
+                  "key": false,
+                  "text": "Old|callback|Beta",
+                  "rendered": [
+                    {
+                      "value": "1",
+                      "payload": "1",
+                      "context": "callback"
+                    }
+                  ]
+                }
+              ],
+              []
+            ],
+            "events": [
+              {
+                "kind": "open",
+                "open": true
+              },
+              {
+                "kind": "change",
+                "value": 1,
+                "labels": [
+                  "[rendered]"
+                ],
+                "triggerValue": 1
+              },
+              {
+                "kind": "select",
+                "value": 1,
+                "node": {
+                  "value": 1,
+                  "label": "Beta",
+                  "payload": {
+                    "id": 1
+                  },
+                  "payloadRef": true
+                }
+              },
+              {
+                "kind": "open",
+                "open": false
+              },
+              {
+                "kind": "clear"
+              },
+              {
+                "kind": "change",
+                "value": null,
+                "labels": []
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "labeled",
+        "labeled": true,
+        "value": [
+          {
+            "value": 0,
+            "label": "Custom"
+          },
+          {
+            "value": 1
+          }
+        ],
+        "actions": [
+          {
+            "kind": "open"
+          },
+          {
+            "kind": "choose",
+            "value": "tail"
+          }
+        ]
+      },
+      "initial": {
+        "opened": false,
+        "omitted": [
+          {
+            "value": 0,
+            "kind": "rendered",
+            "key": false,
+            "text": "Old|header|Alphabet",
+            "rendered": [
+              {
+                "value": "0",
+                "payload": "0",
+                "context": "header"
+              }
+            ]
+          },
+          {
+            "value": 1,
+            "kind": "rendered",
+            "key": false,
+            "text": "Old|header|Beta",
+            "rendered": [
+              {
+                "value": "1",
+                "payload": "1",
+                "context": "header"
+              }
+            ]
+          }
+        ],
+        "history": [],
+        "events": []
+      },
+      "steps": [
+        {
+          "action": {
+            "kind": "open"
+          },
+          "view": {
+            "opened": true,
+            "omitted": [
+              {
+                "value": 0,
+                "kind": "rendered",
+                "key": false,
+                "text": "Old|header|Alphabet",
+                "rendered": [
+                  {
+                    "value": "0",
+                    "payload": "0",
+                    "context": "header"
+                  }
+                ]
+              },
+              {
+                "value": 1,
+                "kind": "rendered",
+                "key": false,
+                "text": "Old|header|Beta",
+                "rendered": [
+                  {
+                    "value": "1",
+                    "payload": "1",
+                    "context": "header"
+                  }
+                ]
+              }
+            ],
+            "history": [],
+            "events": [
+              {
+                "kind": "open",
+                "open": true
+              }
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "choose",
+            "value": "tail"
+          },
+          "view": {
+            "opened": true,
+            "omitted": [
+              {
+                "value": 0,
+                "kind": "rendered",
+                "key": false,
+                "text": "Old|header|Alphabet",
+                "rendered": [
+                  {
+                    "value": "0",
+                    "payload": "0",
+                    "context": "header"
+                  }
+                ]
+              },
+              {
+                "value": 1,
+                "kind": "rendered",
+                "key": false,
+                "text": "Old|header|Beta",
+                "rendered": [
+                  {
+                    "value": "1",
+                    "payload": "1",
+                    "context": "header"
+                  }
+                ]
+              },
+              {
+                "value": "tail",
+                "kind": "rendered",
+                "key": false,
+                "text": "Old|header|Tail",
+                "rendered": [
+                  {
+                    "value": "tail",
+                    "payload": "tail",
+                    "context": "header"
+                  }
+                ]
+              }
+            ],
+            "history": [
+              [
+                {
+                  "value": 0,
+                  "kind": "rendered",
+                  "key": false,
+                  "text": "Old|callback|Alphabet",
+                  "rendered": [
+                    {
+                      "value": "0",
+                      "payload": "0",
+                      "context": "callback"
+                    }
+                  ]
+                },
+                {
+                  "value": 1,
+                  "kind": "rendered",
+                  "key": false,
+                  "text": "Old|callback|Beta",
+                  "rendered": [
+                    {
+                      "value": "1",
+                      "payload": "1",
+                      "context": "callback"
+                    }
+                  ]
+                },
+                {
+                  "value": "tail",
+                  "kind": "rendered",
+                  "key": false,
+                  "text": "Old|callback|Tail",
+                  "rendered": [
+                    {
+                      "value": "tail",
+                      "payload": "tail",
+                      "context": "callback"
+                    }
+                  ]
+                }
+              ]
+            ],
+            "events": [
+              {
+                "kind": "open",
+                "open": true
+              },
+              {
+                "kind": "change",
+                "value": [
+                  {
+                    "label": "[rendered]",
+                    "value": 0
+                  },
+                  {
+                    "label": "[rendered]",
+                    "value": 1
+                  },
+                  {
+                    "label": "[rendered]",
+                    "value": "tail"
+                  }
+                ],
+                "labels": null,
+                "triggerValue": "tail"
+              },
+              {
+                "kind": "select",
+                "value": "tail",
+                "node": {
+                  "value": "tail",
+                  "label": "Tail",
+                  "payload": {
+                    "id": "tail"
+                  },
+                  "payloadRef": true
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "single-labeled",
+        "single": true,
+        "labeled": true,
+        "value": {
+          "value": 0,
+          "label": "Custom"
+        },
+        "actions": [
+          {
+            "kind": "open"
+          },
+          {
+            "kind": "choose",
+            "value": 1
+          }
+        ]
+      },
+      "initial": {
+        "opened": false,
+        "omitted": [],
+        "history": [],
+        "events": []
+      },
+      "steps": [
+        {
+          "action": {
+            "kind": "open"
+          },
+          "view": {
+            "opened": true,
+            "omitted": [],
+            "history": [],
+            "events": [
+              {
+                "kind": "open",
+                "open": true
+              }
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "choose",
+            "value": 1
+          },
+          "view": {
+            "opened": false,
+            "omitted": [],
+            "history": [
+              [
+                {
+                  "value": 1,
+                  "kind": "rendered",
+                  "key": false,
+                  "text": "Old|callback|Beta",
+                  "rendered": [
+                    {
+                      "value": "1",
+                      "payload": "1",
+                      "context": "callback"
+                    }
+                  ]
+                }
+              ]
+            ],
+            "events": [
+              {
+                "kind": "open",
+                "open": true
+              },
+              {
+                "kind": "change",
+                "value": {
+                  "label": "[rendered]",
+                  "value": 1
+                },
+                "labels": null,
+                "triggerValue": 1
+              },
+              {
+                "kind": "select",
+                "value": 1,
+                "node": {
+                  "value": 1,
+                  "label": "Beta",
+                  "payload": {
+                    "id": 1
+                  },
+                  "payloadRef": true
+                }
+              },
+              {
+                "kind": "open",
+                "open": false
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "strict-half",
+        "strict": true,
+        "value": [
+          {
+            "value": 0
+          },
+          {
+            "value": 1
+          },
+          {
+            "value": "p",
+            "halfChecked": true
+          }
+        ],
+        "actions": [
+          {
+            "kind": "open"
+          },
+          {
+            "kind": "choose",
+            "value": "tail"
+          }
+        ]
+      },
+      "initial": {
+        "opened": false,
+        "omitted": [
+          {
+            "value": 0,
+            "kind": "rendered",
+            "key": false,
+            "text": "Old|header|Alphabet",
+            "rendered": [
+              {
+                "value": "0",
+                "payload": "0",
+                "context": "header"
+              }
+            ]
+          },
+          {
+            "value": 1,
+            "kind": "rendered",
+            "key": false,
+            "text": "Old|header|Beta",
+            "rendered": [
+              {
+                "value": "1",
+                "payload": "1",
+                "context": "header"
+              }
+            ]
+          }
+        ],
+        "history": [],
+        "events": []
+      },
+      "steps": [
+        {
+          "action": {
+            "kind": "open"
+          },
+          "view": {
+            "opened": true,
+            "omitted": [
+              {
+                "value": 0,
+                "kind": "rendered",
+                "key": false,
+                "text": "Old|header|Alphabet",
+                "rendered": [
+                  {
+                    "value": "0",
+                    "payload": "0",
+                    "context": "header"
+                  }
+                ]
+              },
+              {
+                "value": 1,
+                "kind": "rendered",
+                "key": false,
+                "text": "Old|header|Beta",
+                "rendered": [
+                  {
+                    "value": "1",
+                    "payload": "1",
+                    "context": "header"
+                  }
+                ]
+              }
+            ],
+            "history": [],
+            "events": [
+              {
+                "kind": "open",
+                "open": true
+              }
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "choose",
+            "value": "tail"
+          },
+          "view": {
+            "opened": true,
+            "omitted": [
+              {
+                "value": 0,
+                "kind": "rendered",
+                "key": false,
+                "text": "Old|header|Alphabet",
+                "rendered": [
+                  {
+                    "value": "0",
+                    "payload": "0",
+                    "context": "header"
+                  }
+                ]
+              },
+              {
+                "value": 1,
+                "kind": "rendered",
+                "key": false,
+                "text": "Old|header|Beta",
+                "rendered": [
+                  {
+                    "value": "1",
+                    "payload": "1",
+                    "context": "header"
+                  }
+                ]
+              },
+              {
+                "value": "tail",
+                "kind": "rendered",
+                "key": false,
+                "text": "Old|header|Tail",
+                "rendered": [
+                  {
+                    "value": "tail",
+                    "payload": "tail",
+                    "context": "header"
+                  }
+                ]
+              }
+            ],
+            "history": [
+              [
+                {
+                  "value": 0,
+                  "kind": "rendered",
+                  "key": false,
+                  "text": "Old|callback|Alphabet",
+                  "rendered": [
+                    {
+                      "value": "0",
+                      "payload": "0",
+                      "context": "callback"
+                    }
+                  ]
+                },
+                {
+                  "value": 1,
+                  "kind": "rendered",
+                  "key": false,
+                  "text": "Old|callback|Beta",
+                  "rendered": [
+                    {
+                      "value": "1",
+                      "payload": "1",
+                      "context": "callback"
+                    }
+                  ]
+                },
+                {
+                  "value": "tail",
+                  "kind": "rendered",
+                  "key": false,
+                  "text": "Old|callback|Tail",
+                  "rendered": [
+                    {
+                      "value": "tail",
+                      "payload": "tail",
+                      "context": "callback"
+                    }
+                  ]
+                },
+                {
+                  "value": "p",
+                  "halfChecked": true,
+                  "kind": "rendered",
+                  "key": false,
+                  "text": "Old|callback|Parent",
+                  "rendered": [
+                    {
+                      "value": "p",
+                      "payload": "p",
+                      "context": "callback"
+                    }
+                  ]
+                }
+              ]
+            ],
+            "events": [
+              {
+                "kind": "open",
+                "open": true
+              },
+              {
+                "kind": "change",
+                "value": [
+                  {
+                    "label": "[rendered]",
+                    "value": 0
+                  },
+                  {
+                    "label": "[rendered]",
+                    "value": 1
+                  },
+                  {
+                    "label": "[rendered]",
+                    "value": "tail"
+                  },
+                  {
+                    "label": "[rendered]",
+                    "value": "p",
+                    "halfChecked": true
+                  }
+                ],
+                "labels": null,
+                "triggerValue": "tail"
+              },
+              {
+                "kind": "select",
+                "value": "tail",
+                "node": {
+                  "value": "tail",
+                  "label": "Tail",
+                  "payload": {
+                    "id": "tail"
+                  },
+                  "payloadRef": true
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "strict-missing-half",
+        "strict": true,
+        "value": [
+          {
+            "value": 0
+          },
+          {
+            "value": 99,
+            "label": "Outside half",
+            "halfChecked": true
+          }
+        ],
+        "actions": [
+          {
+            "kind": "open"
+          },
+          {
+            "kind": "choose",
+            "value": "tail"
+          }
+        ]
+      },
+      "initial": {
+        "opened": false,
+        "omitted": [
+          {
+            "value": 0,
+            "kind": "rendered",
+            "key": false,
+            "text": "Old|header|Alphabet",
+            "rendered": [
+              {
+                "value": "0",
+                "payload": "0",
+                "context": "header"
+              }
+            ]
+          }
+        ],
+        "history": [],
+        "events": []
+      },
+      "steps": [
+        {
+          "action": {
+            "kind": "open"
+          },
+          "view": {
+            "opened": true,
+            "omitted": [
+              {
+                "value": 0,
+                "kind": "rendered",
+                "key": false,
+                "text": "Old|header|Alphabet",
+                "rendered": [
+                  {
+                    "value": "0",
+                    "payload": "0",
+                    "context": "header"
+                  }
+                ]
+              }
+            ],
+            "history": [],
+            "events": [
+              {
+                "kind": "open",
+                "open": true
+              }
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "choose",
+            "value": "tail"
+          },
+          "view": {
+            "opened": true,
+            "omitted": [
+              {
+                "value": 0,
+                "kind": "rendered",
+                "key": false,
+                "text": "Old|header|Alphabet",
+                "rendered": [
+                  {
+                    "value": "0",
+                    "payload": "0",
+                    "context": "header"
+                  }
+                ]
+              },
+              {
+                "value": "tail",
+                "kind": "rendered",
+                "key": false,
+                "text": "Old|header|Tail",
+                "rendered": [
+                  {
+                    "value": "tail",
+                    "payload": "tail",
+                    "context": "header"
+                  }
+                ]
+              }
+            ],
+            "history": [
+              [
+                {
+                  "value": 0,
+                  "kind": "rendered",
+                  "key": false,
+                  "text": "Old|callback|Alphabet",
+                  "rendered": [
+                    {
+                      "value": "0",
+                      "payload": "0",
+                      "context": "callback"
+                    }
+                  ]
+                },
+                {
+                  "value": "tail",
+                  "kind": "rendered",
+                  "key": false,
+                  "text": "Old|callback|Tail",
+                  "rendered": [
+                    {
+                      "value": "tail",
+                      "payload": "tail",
+                      "context": "callback"
+                    }
+                  ]
+                },
+                {
+                  "value": 99,
+                  "halfChecked": true,
+                  "kind": "string",
+                  "key": false,
+                  "text": "Outside half",
+                  "rendered": []
+                }
+              ]
+            ],
+            "events": [
+              {
+                "kind": "open",
+                "open": true
+              },
+              {
+                "kind": "change",
+                "value": [
+                  {
+                    "label": "[rendered]",
+                    "value": 0
+                  },
+                  {
+                    "label": "[rendered]",
+                    "value": "tail"
+                  },
+                  {
+                    "label": "Outside half",
+                    "value": 99,
+                    "halfChecked": true
+                  }
+                ],
+                "labels": null,
+                "triggerValue": "tail"
+              },
+              {
+                "kind": "select",
+                "value": "tail",
+                "node": {
+                  "value": "tail",
+                  "label": "Tail",
+                  "payload": {
+                    "id": "tail"
+                  },
+                  "payloadRef": true
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "child",
+        "checkable": true,
+        "value": [
+          "p"
+        ],
+        "actions": [
+          {
+            "kind": "open"
+          },
+          {
+            "kind": "choose",
+            "value": "tail"
+          }
+        ]
+      },
+      "initial": {
+        "opened": false,
+        "omitted": [
+          {
+            "value": 0,
+            "kind": "rendered",
+            "key": false,
+            "text": "Old|header|Alphabet",
+            "rendered": [
+              {
+                "value": "0",
+                "payload": "0",
+                "context": "header"
+              }
+            ]
+          },
+          {
+            "value": 1,
+            "kind": "rendered",
+            "key": false,
+            "text": "Old|header|Beta",
+            "rendered": [
+              {
+                "value": "1",
+                "payload": "1",
+                "context": "header"
+              }
+            ]
+          }
+        ],
+        "history": [],
+        "events": []
+      },
+      "steps": [
+        {
+          "action": {
+            "kind": "open"
+          },
+          "view": {
+            "opened": true,
+            "omitted": [
+              {
+                "value": 0,
+                "kind": "rendered",
+                "key": false,
+                "text": "Old|header|Alphabet",
+                "rendered": [
+                  {
+                    "value": "0",
+                    "payload": "0",
+                    "context": "header"
+                  }
+                ]
+              },
+              {
+                "value": 1,
+                "kind": "rendered",
+                "key": false,
+                "text": "Old|header|Beta",
+                "rendered": [
+                  {
+                    "value": "1",
+                    "payload": "1",
+                    "context": "header"
+                  }
+                ]
+              }
+            ],
+            "history": [],
+            "events": [
+              {
+                "kind": "open",
+                "open": true
+              }
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "choose",
+            "value": "tail"
+          },
+          "view": {
+            "opened": true,
+            "omitted": [
+              {
+                "value": "tail",
+                "kind": "rendered",
+                "key": false,
+                "text": "Old|header|Tail",
+                "rendered": [
+                  {
+                    "value": "tail",
+                    "payload": "tail",
+                    "context": "header"
+                  }
+                ]
+              },
+              {
+                "value": 0,
+                "kind": "rendered",
+                "key": false,
+                "text": "Old|header|Alphabet",
+                "rendered": [
+                  {
+                    "value": "0",
+                    "payload": "0",
+                    "context": "header"
+                  }
+                ]
+              },
+              {
+                "value": 1,
+                "kind": "rendered",
+                "key": false,
+                "text": "Old|header|Beta",
+                "rendered": [
+                  {
+                    "value": "1",
+                    "payload": "1",
+                    "context": "header"
+                  }
+                ]
+              }
+            ],
+            "history": [
+              [
+                {
+                  "value": "tail",
+                  "kind": "rendered",
+                  "key": false,
+                  "text": "Old|callback|Tail",
+                  "rendered": [
+                    {
+                      "value": "tail",
+                      "payload": "tail",
+                      "context": "callback"
+                    }
+                  ]
+                },
+                {
+                  "value": 0,
+                  "kind": "rendered",
+                  "key": false,
+                  "text": "Old|callback|Alphabet",
+                  "rendered": [
+                    {
+                      "value": "0",
+                      "payload": "0",
+                      "context": "callback"
+                    }
+                  ]
+                },
+                {
+                  "value": 1,
+                  "kind": "rendered",
+                  "key": false,
+                  "text": "Old|callback|Beta",
+                  "rendered": [
+                    {
+                      "value": "1",
+                      "payload": "1",
+                      "context": "callback"
+                    }
+                  ]
+                }
+              ]
+            ],
+            "events": [
+              {
+                "kind": "open",
+                "open": true
+              },
+              {
+                "kind": "change",
+                "value": [
+                  "tail",
+                  0,
+                  1
+                ],
+                "labels": [
+                  "[rendered]",
+                  "[rendered]",
+                  "[rendered]"
+                ],
+                "triggerValue": "tail"
+              },
+              {
+                "kind": "select",
+                "value": "tail",
+                "node": {
+                  "value": "tail",
+                  "label": "Tail",
+                  "payload": {
+                    "id": "tail"
+                  },
+                  "payloadRef": true
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "all",
+        "checkable": true,
+        "strategy": "SHOW_ALL",
+        "value": [
+          "p"
+        ],
+        "actions": [
+          {
+            "kind": "open"
+          },
+          {
+            "kind": "choose",
+            "value": "tail"
+          }
+        ]
+      },
+      "initial": {
+        "opened": false,
+        "omitted": [
+          {
+            "value": "p",
+            "kind": "rendered",
+            "key": false,
+            "text": "Old|header|Parent",
+            "rendered": [
+              {
+                "value": "p",
+                "payload": "p",
+                "context": "header"
+              }
+            ]
+          },
+          {
+            "value": 0,
+            "kind": "rendered",
+            "key": false,
+            "text": "Old|header|Alphabet",
+            "rendered": [
+              {
+                "value": "0",
+                "payload": "0",
+                "context": "header"
+              }
+            ]
+          },
+          {
+            "value": 1,
+            "kind": "rendered",
+            "key": false,
+            "text": "Old|header|Beta",
+            "rendered": [
+              {
+                "value": "1",
+                "payload": "1",
+                "context": "header"
+              }
+            ]
+          }
+        ],
+        "history": [],
+        "events": []
+      },
+      "steps": [
+        {
+          "action": {
+            "kind": "open"
+          },
+          "view": {
+            "opened": true,
+            "omitted": [
+              {
+                "value": "p",
+                "kind": "rendered",
+                "key": false,
+                "text": "Old|header|Parent",
+                "rendered": [
+                  {
+                    "value": "p",
+                    "payload": "p",
+                    "context": "header"
+                  }
+                ]
+              },
+              {
+                "value": 0,
+                "kind": "rendered",
+                "key": false,
+                "text": "Old|header|Alphabet",
+                "rendered": [
+                  {
+                    "value": "0",
+                    "payload": "0",
+                    "context": "header"
+                  }
+                ]
+              },
+              {
+                "value": 1,
+                "kind": "rendered",
+                "key": false,
+                "text": "Old|header|Beta",
+                "rendered": [
+                  {
+                    "value": "1",
+                    "payload": "1",
+                    "context": "header"
+                  }
+                ]
+              }
+            ],
+            "history": [],
+            "events": [
+              {
+                "kind": "open",
+                "open": true
+              }
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "choose",
+            "value": "tail"
+          },
+          "view": {
+            "opened": true,
+            "omitted": [
+              {
+                "value": "p",
+                "kind": "rendered",
+                "key": false,
+                "text": "Old|header|Parent",
+                "rendered": [
+                  {
+                    "value": "p",
+                    "payload": "p",
+                    "context": "header"
+                  }
+                ]
+              },
+              {
+                "value": "tail",
+                "kind": "rendered",
+                "key": false,
+                "text": "Old|header|Tail",
+                "rendered": [
+                  {
+                    "value": "tail",
+                    "payload": "tail",
+                    "context": "header"
+                  }
+                ]
+              },
+              {
+                "value": 0,
+                "kind": "rendered",
+                "key": false,
+                "text": "Old|header|Alphabet",
+                "rendered": [
+                  {
+                    "value": "0",
+                    "payload": "0",
+                    "context": "header"
+                  }
+                ]
+              },
+              {
+                "value": 1,
+                "kind": "rendered",
+                "key": false,
+                "text": "Old|header|Beta",
+                "rendered": [
+                  {
+                    "value": "1",
+                    "payload": "1",
+                    "context": "header"
+                  }
+                ]
+              }
+            ],
+            "history": [
+              [
+                {
+                  "value": "p",
+                  "kind": "rendered",
+                  "key": false,
+                  "text": "Old|callback|Parent",
+                  "rendered": [
+                    {
+                      "value": "p",
+                      "payload": "p",
+                      "context": "callback"
+                    }
+                  ]
+                },
+                {
+                  "value": "tail",
+                  "kind": "rendered",
+                  "key": false,
+                  "text": "Old|callback|Tail",
+                  "rendered": [
+                    {
+                      "value": "tail",
+                      "payload": "tail",
+                      "context": "callback"
+                    }
+                  ]
+                },
+                {
+                  "value": 0,
+                  "kind": "rendered",
+                  "key": false,
+                  "text": "Old|callback|Alphabet",
+                  "rendered": [
+                    {
+                      "value": "0",
+                      "payload": "0",
+                      "context": "callback"
+                    }
+                  ]
+                },
+                {
+                  "value": 1,
+                  "kind": "rendered",
+                  "key": false,
+                  "text": "Old|callback|Beta",
+                  "rendered": [
+                    {
+                      "value": "1",
+                      "payload": "1",
+                      "context": "callback"
+                    }
+                  ]
+                }
+              ]
+            ],
+            "events": [
+              {
+                "kind": "open",
+                "open": true
+              },
+              {
+                "kind": "change",
+                "value": [
+                  "p",
+                  "tail",
+                  0,
+                  1
+                ],
+                "labels": [
+                  "[rendered]",
+                  "[rendered]",
+                  "[rendered]",
+                  "[rendered]"
+                ],
+                "triggerValue": "tail"
+              },
+              {
+                "kind": "select",
+                "value": "tail",
+                "node": {
+                  "value": "tail",
+                  "label": "Tail",
+                  "payload": {
+                    "id": "tail"
+                  },
+                  "payloadRef": true
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "parent",
+        "checkable": true,
+        "strategy": "SHOW_PARENT",
+        "value": [
+          "p"
+        ],
+        "actions": [
+          {
+            "kind": "open"
+          },
+          {
+            "kind": "choose",
+            "value": "tail"
+          }
+        ]
+      },
+      "initial": {
+        "opened": false,
+        "omitted": [
+          {
+            "value": "p",
+            "kind": "rendered",
+            "key": false,
+            "text": "Old|header|Parent",
+            "rendered": [
+              {
+                "value": "p",
+                "payload": "p",
+                "context": "header"
+              }
+            ]
+          }
+        ],
+        "history": [],
+        "events": []
+      },
+      "steps": [
+        {
+          "action": {
+            "kind": "open"
+          },
+          "view": {
+            "opened": true,
+            "omitted": [
+              {
+                "value": "p",
+                "kind": "rendered",
+                "key": false,
+                "text": "Old|header|Parent",
+                "rendered": [
+                  {
+                    "value": "p",
+                    "payload": "p",
+                    "context": "header"
+                  }
+                ]
+              }
+            ],
+            "history": [],
+            "events": [
+              {
+                "kind": "open",
+                "open": true
+              }
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "choose",
+            "value": "tail"
+          },
+          "view": {
+            "opened": true,
+            "omitted": [
+              {
+                "value": "p",
+                "kind": "rendered",
+                "key": false,
+                "text": "Old|header|Parent",
+                "rendered": [
+                  {
+                    "value": "p",
+                    "payload": "p",
+                    "context": "header"
+                  }
+                ]
+              },
+              {
+                "value": "tail",
+                "kind": "rendered",
+                "key": false,
+                "text": "Old|header|Tail",
+                "rendered": [
+                  {
+                    "value": "tail",
+                    "payload": "tail",
+                    "context": "header"
+                  }
+                ]
+              }
+            ],
+            "history": [
+              [
+                {
+                  "value": "p",
+                  "kind": "rendered",
+                  "key": false,
+                  "text": "Old|callback|Parent",
+                  "rendered": [
+                    {
+                      "value": "p",
+                      "payload": "p",
+                      "context": "callback"
+                    }
+                  ]
+                },
+                {
+                  "value": "tail",
+                  "kind": "rendered",
+                  "key": false,
+                  "text": "Old|callback|Tail",
+                  "rendered": [
+                    {
+                      "value": "tail",
+                      "payload": "tail",
+                      "context": "callback"
+                    }
+                  ]
+                }
+              ]
+            ],
+            "events": [
+              {
+                "kind": "open",
+                "open": true
+              },
+              {
+                "kind": "change",
+                "value": [
+                  "p",
+                  "tail"
+                ],
+                "labels": [
+                  "[rendered]",
+                  "[rendered]"
+                ],
+                "triggerValue": "tail"
+              },
+              {
+                "kind": "select",
+                "value": "tail",
+                "node": {
+                  "value": "tail",
+                  "label": "Tail",
+                  "payload": {
+                    "id": "tail"
+                  },
+                  "payloadRef": true
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "parent-labeled",
+        "checkable": true,
+        "strategy": "SHOW_PARENT",
+        "labeled": true,
+        "value": [
+          {
+            "value": "p",
+            "label": "Custom parent"
+          }
+        ],
+        "actions": [
+          {
+            "kind": "open"
+          },
+          {
+            "kind": "choose",
+            "value": "tail"
+          }
+        ]
+      },
+      "initial": {
+        "opened": false,
+        "omitted": [
+          {
+            "value": "p",
+            "kind": "rendered",
+            "key": false,
+            "text": "Old|header|Parent",
+            "rendered": [
+              {
+                "value": "p",
+                "payload": "p",
+                "context": "header"
+              }
+            ]
+          }
+        ],
+        "history": [],
+        "events": []
+      },
+      "steps": [
+        {
+          "action": {
+            "kind": "open"
+          },
+          "view": {
+            "opened": true,
+            "omitted": [
+              {
+                "value": "p",
+                "kind": "rendered",
+                "key": false,
+                "text": "Old|header|Parent",
+                "rendered": [
+                  {
+                    "value": "p",
+                    "payload": "p",
+                    "context": "header"
+                  }
+                ]
+              }
+            ],
+            "history": [],
+            "events": [
+              {
+                "kind": "open",
+                "open": true
+              }
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "choose",
+            "value": "tail"
+          },
+          "view": {
+            "opened": true,
+            "omitted": [
+              {
+                "value": "p",
+                "kind": "rendered",
+                "key": false,
+                "text": "Old|header|Parent",
+                "rendered": [
+                  {
+                    "value": "p",
+                    "payload": "p",
+                    "context": "header"
+                  }
+                ]
+              },
+              {
+                "value": "tail",
+                "kind": "rendered",
+                "key": false,
+                "text": "Old|header|Tail",
+                "rendered": [
+                  {
+                    "value": "tail",
+                    "payload": "tail",
+                    "context": "header"
+                  }
+                ]
+              }
+            ],
+            "history": [
+              [
+                {
+                  "value": "p",
+                  "kind": "rendered",
+                  "key": false,
+                  "text": "Old|callback|Parent",
+                  "rendered": [
+                    {
+                      "value": "p",
+                      "payload": "p",
+                      "context": "callback"
+                    }
+                  ]
+                },
+                {
+                  "value": "tail",
+                  "kind": "rendered",
+                  "key": false,
+                  "text": "Old|callback|Tail",
+                  "rendered": [
+                    {
+                      "value": "tail",
+                      "payload": "tail",
+                      "context": "callback"
+                    }
+                  ]
+                }
+              ]
+            ],
+            "events": [
+              {
+                "kind": "open",
+                "open": true
+              },
+              {
+                "kind": "change",
+                "value": [
+                  {
+                    "label": "[rendered]",
+                    "value": "p"
+                  },
+                  {
+                    "label": "[rendered]",
+                    "value": "tail"
+                  }
+                ],
+                "labels": null,
+                "triggerValue": "tail"
+              },
+              {
+                "kind": "select",
+                "value": "tail",
+                "node": {
+                  "value": "tail",
+                  "label": "Tail",
+                  "payload": {
+                    "id": "tail"
+                  },
+                  "payloadRef": true
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "missing",
+        "labeled": true,
+        "value": [
+          {
+            "value": 99,
+            "label": "Outside"
+          },
+          {
+            "value": 0
+          }
+        ],
+        "actions": [
+          {
+            "kind": "open"
+          },
+          {
+            "kind": "choose",
+            "value": "tail"
+          }
+        ]
+      },
+      "initial": {
+        "opened": false,
+        "omitted": [
+          {
+            "value": 99,
+            "kind": "string",
+            "key": false,
+            "text": "Outside",
+            "rendered": []
+          },
+          {
+            "value": 0,
+            "kind": "rendered",
+            "key": false,
+            "text": "Old|header|Alphabet",
+            "rendered": [
+              {
+                "value": "0",
+                "payload": "0",
+                "context": "header"
+              }
+            ]
+          }
+        ],
+        "history": [],
+        "events": []
+      },
+      "steps": [
+        {
+          "action": {
+            "kind": "open"
+          },
+          "view": {
+            "opened": true,
+            "omitted": [
+              {
+                "value": 99,
+                "kind": "string",
+                "key": false,
+                "text": "Outside",
+                "rendered": []
+              },
+              {
+                "value": 0,
+                "kind": "rendered",
+                "key": false,
+                "text": "Old|header|Alphabet",
+                "rendered": [
+                  {
+                    "value": "0",
+                    "payload": "0",
+                    "context": "header"
+                  }
+                ]
+              }
+            ],
+            "history": [],
+            "events": [
+              {
+                "kind": "open",
+                "open": true
+              }
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "choose",
+            "value": "tail"
+          },
+          "view": {
+            "opened": true,
+            "omitted": [
+              {
+                "value": 99,
+                "kind": "string",
+                "key": false,
+                "text": "Outside",
+                "rendered": []
+              },
+              {
+                "value": 0,
+                "kind": "rendered",
+                "key": false,
+                "text": "Old|header|Alphabet",
+                "rendered": [
+                  {
+                    "value": "0",
+                    "payload": "0",
+                    "context": "header"
+                  }
+                ]
+              },
+              {
+                "value": "tail",
+                "kind": "rendered",
+                "key": false,
+                "text": "Old|header|Tail",
+                "rendered": [
+                  {
+                    "value": "tail",
+                    "payload": "tail",
+                    "context": "header"
+                  }
+                ]
+              }
+            ],
+            "history": [
+              [
+                {
+                  "value": 99,
+                  "kind": "string",
+                  "key": false,
+                  "text": "Outside",
+                  "rendered": []
+                },
+                {
+                  "value": 0,
+                  "kind": "rendered",
+                  "key": false,
+                  "text": "Old|callback|Alphabet",
+                  "rendered": [
+                    {
+                      "value": "0",
+                      "payload": "0",
+                      "context": "callback"
+                    }
+                  ]
+                },
+                {
+                  "value": "tail",
+                  "kind": "rendered",
+                  "key": false,
+                  "text": "Old|callback|Tail",
+                  "rendered": [
+                    {
+                      "value": "tail",
+                      "payload": "tail",
+                      "context": "callback"
+                    }
+                  ]
+                }
+              ]
+            ],
+            "events": [
+              {
+                "kind": "open",
+                "open": true
+              },
+              {
+                "kind": "change",
+                "value": [
+                  {
+                    "label": "Outside",
+                    "value": 99
+                  },
+                  {
+                    "label": "[rendered]",
+                    "value": 0
+                  },
+                  {
+                    "label": "[rendered]",
+                    "value": "tail"
+                  }
+                ],
+                "labels": null,
+                "triggerValue": "tail"
+              },
+              {
+                "kind": "select",
+                "value": "tail",
+                "node": {
+                  "value": "tail",
+                  "label": "Tail",
+                  "payload": {
+                    "id": "tail"
+                  },
+                  "payloadRef": true
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "aliases",
+        "alias": true,
+        "actions": [
+          {
+            "kind": "open"
+          },
+          {
+            "kind": "choose",
+            "value": "tail"
+          }
+        ]
+      },
+      "initial": {
+        "opened": false,
+        "omitted": [
+          {
+            "value": 0,
+            "kind": "rendered",
+            "key": false,
+            "text": "Old|header|Alphabet",
+            "rendered": [
+              {
+                "value": "0",
+                "payload": "0",
+                "context": "header"
+              }
+            ]
+          },
+          {
+            "value": 1,
+            "kind": "rendered",
+            "key": false,
+            "text": "Old|header|Beta",
+            "rendered": [
+              {
+                "value": "1",
+                "payload": "1",
+                "context": "header"
+              }
+            ]
+          }
+        ],
+        "history": [],
+        "events": []
+      },
+      "steps": [
+        {
+          "action": {
+            "kind": "open"
+          },
+          "view": {
+            "opened": true,
+            "omitted": [
+              {
+                "value": 0,
+                "kind": "rendered",
+                "key": false,
+                "text": "Old|header|Alphabet",
+                "rendered": [
+                  {
+                    "value": "0",
+                    "payload": "0",
+                    "context": "header"
+                  }
+                ]
+              },
+              {
+                "value": 1,
+                "kind": "rendered",
+                "key": false,
+                "text": "Old|header|Beta",
+                "rendered": [
+                  {
+                    "value": "1",
+                    "payload": "1",
+                    "context": "header"
+                  }
+                ]
+              }
+            ],
+            "history": [],
+            "events": [
+              {
+                "kind": "open",
+                "open": true
+              }
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "choose",
+            "value": "tail"
+          },
+          "view": {
+            "opened": true,
+            "omitted": [
+              {
+                "value": 0,
+                "kind": "rendered",
+                "key": false,
+                "text": "Old|header|Alphabet",
+                "rendered": [
+                  {
+                    "value": "0",
+                    "payload": "0",
+                    "context": "header"
+                  }
+                ]
+              },
+              {
+                "value": 1,
+                "kind": "rendered",
+                "key": false,
+                "text": "Old|header|Beta",
+                "rendered": [
+                  {
+                    "value": "1",
+                    "payload": "1",
+                    "context": "header"
+                  }
+                ]
+              },
+              {
+                "value": "tail",
+                "kind": "rendered",
+                "key": false,
+                "text": "Old|header|Tail",
+                "rendered": [
+                  {
+                    "value": "tail",
+                    "payload": "tail",
+                    "context": "header"
+                  }
+                ]
+              }
+            ],
+            "history": [
+              [
+                {
+                  "value": 0,
+                  "kind": "rendered",
+                  "key": false,
+                  "text": "Old|callback|Alphabet",
+                  "rendered": [
+                    {
+                      "value": "0",
+                      "payload": "0",
+                      "context": "callback"
+                    }
+                  ]
+                },
+                {
+                  "value": 1,
+                  "kind": "rendered",
+                  "key": false,
+                  "text": "Old|callback|Beta",
+                  "rendered": [
+                    {
+                      "value": "1",
+                      "payload": "1",
+                      "context": "callback"
+                    }
+                  ]
+                },
+                {
+                  "value": "tail",
+                  "kind": "rendered",
+                  "key": false,
+                  "text": "Old|callback|Tail",
+                  "rendered": [
+                    {
+                      "value": "tail",
+                      "payload": "tail",
+                      "context": "callback"
+                    }
+                  ]
+                }
+              ]
+            ],
+            "events": [
+              {
+                "kind": "open",
+                "open": true
+              },
+              {
+                "kind": "change",
+                "value": [
+                  0,
+                  1,
+                  "tail"
+                ],
+                "labels": [
+                  "[rendered]",
+                  "[rendered]",
+                  "[rendered]"
+                ],
+                "triggerValue": "tail"
+              },
+              {
+                "kind": "select",
+                "value": "tail",
+                "node": {
+                  "value": "tail",
+                  "label": "Tail",
+                  "payload": {
+                    "id": "tail"
+                  },
+                  "payloadRef": true
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "simple",
+        "simple": true,
+        "actions": [
+          {
+            "kind": "open"
+          },
+          {
+            "kind": "choose",
+            "value": "tail"
+          }
+        ]
+      },
+      "initial": {
+        "opened": false,
+        "omitted": [
+          {
+            "value": 0,
+            "kind": "rendered",
+            "key": false,
+            "text": "Old|header|Alphabet",
+            "rendered": [
+              {
+                "value": "0",
+                "payload": "0",
+                "context": "header"
+              }
+            ]
+          },
+          {
+            "value": 1,
+            "kind": "rendered",
+            "key": false,
+            "text": "Old|header|Beta",
+            "rendered": [
+              {
+                "value": "1",
+                "payload": "1",
+                "context": "header"
+              }
+            ]
+          }
+        ],
+        "history": [],
+        "events": []
+      },
+      "steps": [
+        {
+          "action": {
+            "kind": "open"
+          },
+          "view": {
+            "opened": true,
+            "omitted": [
+              {
+                "value": 0,
+                "kind": "rendered",
+                "key": false,
+                "text": "Old|header|Alphabet",
+                "rendered": [
+                  {
+                    "value": "0",
+                    "payload": "0",
+                    "context": "header"
+                  }
+                ]
+              },
+              {
+                "value": 1,
+                "kind": "rendered",
+                "key": false,
+                "text": "Old|header|Beta",
+                "rendered": [
+                  {
+                    "value": "1",
+                    "payload": "1",
+                    "context": "header"
+                  }
+                ]
+              }
+            ],
+            "history": [],
+            "events": [
+              {
+                "kind": "open",
+                "open": true
+              }
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "choose",
+            "value": "tail"
+          },
+          "view": {
+            "opened": true,
+            "omitted": [
+              {
+                "value": 0,
+                "kind": "rendered",
+                "key": false,
+                "text": "Old|header|Alphabet",
+                "rendered": [
+                  {
+                    "value": "0",
+                    "payload": "0",
+                    "context": "header"
+                  }
+                ]
+              },
+              {
+                "value": 1,
+                "kind": "rendered",
+                "key": false,
+                "text": "Old|header|Beta",
+                "rendered": [
+                  {
+                    "value": "1",
+                    "payload": "1",
+                    "context": "header"
+                  }
+                ]
+              },
+              {
+                "value": "tail",
+                "kind": "rendered",
+                "key": false,
+                "text": "Old|header|Tail",
+                "rendered": [
+                  {
+                    "value": "tail",
+                    "payload": "tail",
+                    "context": "header"
+                  }
+                ]
+              }
+            ],
+            "history": [
+              [
+                {
+                  "value": 0,
+                  "kind": "rendered",
+                  "key": false,
+                  "text": "Old|callback|Alphabet",
+                  "rendered": [
+                    {
+                      "value": "0",
+                      "payload": "0",
+                      "context": "callback"
+                    }
+                  ]
+                },
+                {
+                  "value": 1,
+                  "kind": "rendered",
+                  "key": false,
+                  "text": "Old|callback|Beta",
+                  "rendered": [
+                    {
+                      "value": "1",
+                      "payload": "1",
+                      "context": "callback"
+                    }
+                  ]
+                },
+                {
+                  "value": "tail",
+                  "kind": "rendered",
+                  "key": false,
+                  "text": "Old|callback|Tail",
+                  "rendered": [
+                    {
+                      "value": "tail",
+                      "payload": "tail",
+                      "context": "callback"
+                    }
+                  ]
+                }
+              ]
+            ],
+            "events": [
+              {
+                "kind": "open",
+                "open": true
+              },
+              {
+                "kind": "change",
+                "value": [
+                  0,
+                  1,
+                  "tail"
+                ],
+                "labels": [
+                  "[rendered]",
+                  "[rendered]",
+                  "[rendered]"
+                ],
+                "triggerValue": "tail"
+              },
+              {
+                "kind": "select",
+                "value": "tail",
+                "node": {
+                  "value": "tail",
+                  "label": "Tail",
+                  "payload": {
+                    "id": "tail"
+                  },
+                  "payloadRef": true
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "aliases-simple",
+        "alias": true,
+        "simple": true,
+        "actions": [
+          {
+            "kind": "open"
+          },
+          {
+            "kind": "choose",
+            "value": "tail"
+          }
+        ]
+      },
+      "initial": {
+        "opened": false,
+        "omitted": [
+          {
+            "value": 0,
+            "kind": "rendered",
+            "key": false,
+            "text": "Old|header|Alphabet",
+            "rendered": [
+              {
+                "value": "0",
+                "payload": "0",
+                "context": "header"
+              }
+            ]
+          },
+          {
+            "value": 1,
+            "kind": "rendered",
+            "key": false,
+            "text": "Old|header|Beta",
+            "rendered": [
+              {
+                "value": "1",
+                "payload": "1",
+                "context": "header"
+              }
+            ]
+          }
+        ],
+        "history": [],
+        "events": []
+      },
+      "steps": [
+        {
+          "action": {
+            "kind": "open"
+          },
+          "view": {
+            "opened": true,
+            "omitted": [
+              {
+                "value": 0,
+                "kind": "rendered",
+                "key": false,
+                "text": "Old|header|Alphabet",
+                "rendered": [
+                  {
+                    "value": "0",
+                    "payload": "0",
+                    "context": "header"
+                  }
+                ]
+              },
+              {
+                "value": 1,
+                "kind": "rendered",
+                "key": false,
+                "text": "Old|header|Beta",
+                "rendered": [
+                  {
+                    "value": "1",
+                    "payload": "1",
+                    "context": "header"
+                  }
+                ]
+              }
+            ],
+            "history": [],
+            "events": [
+              {
+                "kind": "open",
+                "open": true
+              }
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "choose",
+            "value": "tail"
+          },
+          "view": {
+            "opened": true,
+            "omitted": [
+              {
+                "value": 0,
+                "kind": "rendered",
+                "key": false,
+                "text": "Old|header|Alphabet",
+                "rendered": [
+                  {
+                    "value": "0",
+                    "payload": "0",
+                    "context": "header"
+                  }
+                ]
+              },
+              {
+                "value": 1,
+                "kind": "rendered",
+                "key": false,
+                "text": "Old|header|Beta",
+                "rendered": [
+                  {
+                    "value": "1",
+                    "payload": "1",
+                    "context": "header"
+                  }
+                ]
+              },
+              {
+                "value": "tail",
+                "kind": "rendered",
+                "key": false,
+                "text": "Old|header|Tail",
+                "rendered": [
+                  {
+                    "value": "tail",
+                    "payload": "tail",
+                    "context": "header"
+                  }
+                ]
+              }
+            ],
+            "history": [
+              [
+                {
+                  "value": 0,
+                  "kind": "rendered",
+                  "key": false,
+                  "text": "Old|callback|Alphabet",
+                  "rendered": [
+                    {
+                      "value": "0",
+                      "payload": "0",
+                      "context": "callback"
+                    }
+                  ]
+                },
+                {
+                  "value": 1,
+                  "kind": "rendered",
+                  "key": false,
+                  "text": "Old|callback|Beta",
+                  "rendered": [
+                    {
+                      "value": "1",
+                      "payload": "1",
+                      "context": "callback"
+                    }
+                  ]
+                },
+                {
+                  "value": "tail",
+                  "kind": "rendered",
+                  "key": false,
+                  "text": "Old|callback|Tail",
+                  "rendered": [
+                    {
+                      "value": "tail",
+                      "payload": "tail",
+                      "context": "callback"
+                    }
+                  ]
+                }
+              ]
+            ],
+            "events": [
+              {
+                "kind": "open",
+                "open": true
+              },
+              {
+                "kind": "change",
+                "value": [
+                  0,
+                  1,
+                  "tail"
+                ],
+                "labels": [
+                  "[rendered]",
+                  "[rendered]",
+                  "[rendered]"
+                ],
+                "triggerValue": "tail"
+              },
+              {
+                "kind": "select",
+                "value": "tail",
+                "node": {
+                  "value": "tail",
+                  "label": "Tail",
+                  "payload": {
+                    "id": "tail"
+                  },
+                  "payloadRef": true
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "label-prop",
+        "labelProp": "alt",
+        "actions": [
+          {
+            "kind": "open"
+          },
+          {
+            "kind": "choose",
+            "value": "tail"
+          }
+        ]
+      },
+      "initial": {
+        "opened": false,
+        "omitted": [
+          {
+            "value": 0,
+            "kind": "rendered",
+            "key": false,
+            "text": "Old|header|Alphabet",
+            "rendered": [
+              {
+                "value": "0",
+                "payload": "0",
+                "context": "header"
+              }
+            ]
+          },
+          {
+            "value": 1,
+            "kind": "rendered",
+            "key": false,
+            "text": "Old|header|Beta",
+            "rendered": [
+              {
+                "value": "1",
+                "payload": "1",
+                "context": "header"
+              }
+            ]
+          }
+        ],
+        "history": [],
+        "events": []
+      },
+      "steps": [
+        {
+          "action": {
+            "kind": "open"
+          },
+          "view": {
+            "opened": true,
+            "omitted": [
+              {
+                "value": 0,
+                "kind": "rendered",
+                "key": false,
+                "text": "Old|header|Alphabet",
+                "rendered": [
+                  {
+                    "value": "0",
+                    "payload": "0",
+                    "context": "header"
+                  }
+                ]
+              },
+              {
+                "value": 1,
+                "kind": "rendered",
+                "key": false,
+                "text": "Old|header|Beta",
+                "rendered": [
+                  {
+                    "value": "1",
+                    "payload": "1",
+                    "context": "header"
+                  }
+                ]
+              }
+            ],
+            "history": [],
+            "events": [
+              {
+                "kind": "open",
+                "open": true
+              }
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "choose",
+            "value": "tail"
+          },
+          "view": {
+            "opened": true,
+            "omitted": [
+              {
+                "value": 0,
+                "kind": "rendered",
+                "key": false,
+                "text": "Old|header|Alphabet",
+                "rendered": [
+                  {
+                    "value": "0",
+                    "payload": "0",
+                    "context": "header"
+                  }
+                ]
+              },
+              {
+                "value": 1,
+                "kind": "rendered",
+                "key": false,
+                "text": "Old|header|Beta",
+                "rendered": [
+                  {
+                    "value": "1",
+                    "payload": "1",
+                    "context": "header"
+                  }
+                ]
+              },
+              {
+                "value": "tail",
+                "kind": "rendered",
+                "key": false,
+                "text": "Old|header|Tail",
+                "rendered": [
+                  {
+                    "value": "tail",
+                    "payload": "tail",
+                    "context": "header"
+                  }
+                ]
+              }
+            ],
+            "history": [
+              [
+                {
+                  "value": 0,
+                  "kind": "rendered",
+                  "key": false,
+                  "text": "Old|callback|Alphabet",
+                  "rendered": [
+                    {
+                      "value": "0",
+                      "payload": "0",
+                      "context": "callback"
+                    }
+                  ]
+                },
+                {
+                  "value": 1,
+                  "kind": "rendered",
+                  "key": false,
+                  "text": "Old|callback|Beta",
+                  "rendered": [
+                    {
+                      "value": "1",
+                      "payload": "1",
+                      "context": "callback"
+                    }
+                  ]
+                },
+                {
+                  "value": "tail",
+                  "kind": "rendered",
+                  "key": false,
+                  "text": "Old|callback|Tail",
+                  "rendered": [
+                    {
+                      "value": "tail",
+                      "payload": "tail",
+                      "context": "callback"
+                    }
+                  ]
+                }
+              ]
+            ],
+            "events": [
+              {
+                "kind": "open",
+                "open": true
+              },
+              {
+                "kind": "change",
+                "value": [
+                  0,
+                  1,
+                  "tail"
+                ],
+                "labels": [
+                  "[rendered]",
+                  "[rendered]",
+                  "[rendered]"
+                ],
+                "triggerValue": "tail"
+              },
+              {
+                "kind": "select",
+                "value": "tail",
+                "node": {
+                  "value": "tail",
+                  "label": "Tail",
+                  "payload": {
+                    "id": "tail"
+                  },
+                  "payloadRef": true
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "controlled-accept",
+        "controlled": "accept",
+        "actions": [
+          {
+            "kind": "open"
+          },
+          {
+            "kind": "choose",
+            "value": "tail"
+          }
+        ]
+      },
+      "initial": {
+        "opened": false,
+        "omitted": [
+          {
+            "value": 0,
+            "kind": "rendered",
+            "key": false,
+            "text": "Old|header|Alphabet",
+            "rendered": [
+              {
+                "value": "0",
+                "payload": "0",
+                "context": "header"
+              }
+            ]
+          },
+          {
+            "value": 1,
+            "kind": "rendered",
+            "key": false,
+            "text": "Old|header|Beta",
+            "rendered": [
+              {
+                "value": "1",
+                "payload": "1",
+                "context": "header"
+              }
+            ]
+          }
+        ],
+        "history": [],
+        "events": []
+      },
+      "steps": [
+        {
+          "action": {
+            "kind": "open"
+          },
+          "view": {
+            "opened": true,
+            "omitted": [
+              {
+                "value": 0,
+                "kind": "rendered",
+                "key": false,
+                "text": "Old|header|Alphabet",
+                "rendered": [
+                  {
+                    "value": "0",
+                    "payload": "0",
+                    "context": "header"
+                  }
+                ]
+              },
+              {
+                "value": 1,
+                "kind": "rendered",
+                "key": false,
+                "text": "Old|header|Beta",
+                "rendered": [
+                  {
+                    "value": "1",
+                    "payload": "1",
+                    "context": "header"
+                  }
+                ]
+              }
+            ],
+            "history": [],
+            "events": [
+              {
+                "kind": "open",
+                "open": true
+              }
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "choose",
+            "value": "tail"
+          },
+          "view": {
+            "opened": true,
+            "omitted": [
+              {
+                "value": 0,
+                "kind": "rendered",
+                "key": false,
+                "text": "Old|header|Alphabet",
+                "rendered": [
+                  {
+                    "value": "0",
+                    "payload": "0",
+                    "context": "header"
+                  }
+                ]
+              },
+              {
+                "value": 1,
+                "kind": "rendered",
+                "key": false,
+                "text": "Old|header|Beta",
+                "rendered": [
+                  {
+                    "value": "1",
+                    "payload": "1",
+                    "context": "header"
+                  }
+                ]
+              },
+              {
+                "value": "tail",
+                "kind": "rendered",
+                "key": false,
+                "text": "Old|header|Tail",
+                "rendered": [
+                  {
+                    "value": "tail",
+                    "payload": "tail",
+                    "context": "header"
+                  }
+                ]
+              }
+            ],
+            "history": [
+              [
+                {
+                  "value": 0,
+                  "kind": "rendered",
+                  "key": false,
+                  "text": "Old|callback|Alphabet",
+                  "rendered": [
+                    {
+                      "value": "0",
+                      "payload": "0",
+                      "context": "callback"
+                    }
+                  ]
+                },
+                {
+                  "value": 1,
+                  "kind": "rendered",
+                  "key": false,
+                  "text": "Old|callback|Beta",
+                  "rendered": [
+                    {
+                      "value": "1",
+                      "payload": "1",
+                      "context": "callback"
+                    }
+                  ]
+                },
+                {
+                  "value": "tail",
+                  "kind": "rendered",
+                  "key": false,
+                  "text": "Old|callback|Tail",
+                  "rendered": [
+                    {
+                      "value": "tail",
+                      "payload": "tail",
+                      "context": "callback"
+                    }
+                  ]
+                }
+              ]
+            ],
+            "events": [
+              {
+                "kind": "open",
+                "open": true
+              },
+              {
+                "kind": "change",
+                "value": [
+                  0,
+                  1,
+                  "tail"
+                ],
+                "labels": [
+                  "[rendered]",
+                  "[rendered]",
+                  "[rendered]"
+                ],
+                "triggerValue": "tail"
+              },
+              {
+                "kind": "select",
+                "value": "tail",
+                "node": {
+                  "value": "tail",
+                  "label": "Tail",
+                  "payload": {
+                    "id": "tail"
+                  },
+                  "payloadRef": true
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "controlled-hold",
+        "controlled": "hold",
+        "labeled": true,
+        "value": [
+          {
+            "value": 0,
+            "label": "Custom"
+          },
+          {
+            "value": 1
+          }
+        ],
+        "actions": [
+          {
+            "kind": "open"
+          },
+          {
+            "kind": "choose",
+            "value": "tail"
+          }
+        ]
+      },
+      "initial": {
+        "opened": false,
+        "omitted": [
+          {
+            "value": 0,
+            "kind": "rendered",
+            "key": false,
+            "text": "Old|header|Alphabet",
+            "rendered": [
+              {
+                "value": "0",
+                "payload": "0",
+                "context": "header"
+              }
+            ]
+          },
+          {
+            "value": 1,
+            "kind": "rendered",
+            "key": false,
+            "text": "Old|header|Beta",
+            "rendered": [
+              {
+                "value": "1",
+                "payload": "1",
+                "context": "header"
+              }
+            ]
+          }
+        ],
+        "history": [],
+        "events": []
+      },
+      "steps": [
+        {
+          "action": {
+            "kind": "open"
+          },
+          "view": {
+            "opened": true,
+            "omitted": [
+              {
+                "value": 0,
+                "kind": "rendered",
+                "key": false,
+                "text": "Old|header|Alphabet",
+                "rendered": [
+                  {
+                    "value": "0",
+                    "payload": "0",
+                    "context": "header"
+                  }
+                ]
+              },
+              {
+                "value": 1,
+                "kind": "rendered",
+                "key": false,
+                "text": "Old|header|Beta",
+                "rendered": [
+                  {
+                    "value": "1",
+                    "payload": "1",
+                    "context": "header"
+                  }
+                ]
+              }
+            ],
+            "history": [],
+            "events": [
+              {
+                "kind": "open",
+                "open": true
+              }
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "choose",
+            "value": "tail"
+          },
+          "view": {
+            "opened": true,
+            "omitted": [
+              {
+                "value": 0,
+                "kind": "rendered",
+                "key": false,
+                "text": "Old|header|Alphabet",
+                "rendered": [
+                  {
+                    "value": "0",
+                    "payload": "0",
+                    "context": "header"
+                  }
+                ]
+              },
+              {
+                "value": 1,
+                "kind": "rendered",
+                "key": false,
+                "text": "Old|header|Beta",
+                "rendered": [
+                  {
+                    "value": "1",
+                    "payload": "1",
+                    "context": "header"
+                  }
+                ]
+              }
+            ],
+            "history": [
+              [
+                {
+                  "value": 0,
+                  "kind": "rendered",
+                  "key": false,
+                  "text": "Old|callback|Alphabet",
+                  "rendered": [
+                    {
+                      "value": "0",
+                      "payload": "0",
+                      "context": "callback"
+                    }
+                  ]
+                },
+                {
+                  "value": 1,
+                  "kind": "rendered",
+                  "key": false,
+                  "text": "Old|callback|Beta",
+                  "rendered": [
+                    {
+                      "value": "1",
+                      "payload": "1",
+                      "context": "callback"
+                    }
+                  ]
+                },
+                {
+                  "value": "tail",
+                  "kind": "rendered",
+                  "key": false,
+                  "text": "Old|callback|Tail",
+                  "rendered": [
+                    {
+                      "value": "tail",
+                      "payload": "tail",
+                      "context": "callback"
+                    }
+                  ]
+                }
+              ]
+            ],
+            "events": [
+              {
+                "kind": "open",
+                "open": true
+              },
+              {
+                "kind": "change",
+                "value": [
+                  {
+                    "label": "[rendered]",
+                    "value": 0
+                  },
+                  {
+                    "label": "[rendered]",
+                    "value": 1
+                  },
+                  {
+                    "label": "[rendered]",
+                    "value": "tail"
+                  }
+                ],
+                "labels": null,
+                "triggerValue": "tail"
+              },
+              {
+                "kind": "select",
+                "value": "tail",
+                "node": {
+                  "value": "tail",
+                  "label": "Tail",
+                  "payload": {
+                    "id": "tail"
+                  },
+                  "payloadRef": true
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "one-visible",
+        "count": 1,
+        "actions": [
+          {
+            "kind": "open"
+          },
+          {
+            "kind": "choose",
+            "value": "tail"
+          }
+        ]
+      },
+      "initial": {
+        "opened": false,
+        "omitted": [
+          {
+            "value": 1,
+            "kind": "rendered",
+            "key": false,
+            "text": "Old|header|Beta",
+            "rendered": [
+              {
+                "value": "1",
+                "payload": "1",
+                "context": "header"
+              }
+            ]
+          }
+        ],
+        "history": [],
+        "events": []
+      },
+      "steps": [
+        {
+          "action": {
+            "kind": "open"
+          },
+          "view": {
+            "opened": true,
+            "omitted": [
+              {
+                "value": 1,
+                "kind": "rendered",
+                "key": false,
+                "text": "Old|header|Beta",
+                "rendered": [
+                  {
+                    "value": "1",
+                    "payload": "1",
+                    "context": "header"
+                  }
+                ]
+              }
+            ],
+            "history": [],
+            "events": [
+              {
+                "kind": "open",
+                "open": true
+              }
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "choose",
+            "value": "tail"
+          },
+          "view": {
+            "opened": true,
+            "omitted": [
+              {
+                "value": 1,
+                "kind": "rendered",
+                "key": false,
+                "text": "Old|header|Beta",
+                "rendered": [
+                  {
+                    "value": "1",
+                    "payload": "1",
+                    "context": "header"
+                  }
+                ]
+              },
+              {
+                "value": "tail",
+                "kind": "rendered",
+                "key": false,
+                "text": "Old|header|Tail",
+                "rendered": [
+                  {
+                    "value": "tail",
+                    "payload": "tail",
+                    "context": "header"
+                  }
+                ]
+              }
+            ],
+            "history": [
+              [
+                {
+                  "value": 0,
+                  "kind": "rendered",
+                  "key": false,
+                  "text": "Old|callback|Alphabet",
+                  "rendered": [
+                    {
+                      "value": "0",
+                      "payload": "0",
+                      "context": "callback"
+                    }
+                  ]
+                },
+                {
+                  "value": 1,
+                  "kind": "rendered",
+                  "key": false,
+                  "text": "Old|callback|Beta",
+                  "rendered": [
+                    {
+                      "value": "1",
+                      "payload": "1",
+                      "context": "callback"
+                    }
+                  ]
+                },
+                {
+                  "value": "tail",
+                  "kind": "rendered",
+                  "key": false,
+                  "text": "Old|callback|Tail",
+                  "rendered": [
+                    {
+                      "value": "tail",
+                      "payload": "tail",
+                      "context": "callback"
+                    }
+                  ]
+                }
+              ]
+            ],
+            "events": [
+              {
+                "kind": "open",
+                "open": true
+              },
+              {
+                "kind": "change",
+                "value": [
+                  0,
+                  1,
+                  "tail"
+                ],
+                "labels": [
+                  "[rendered]",
+                  "[rendered]",
+                  "[rendered]"
+                ],
+                "triggerValue": "tail"
+              },
+              {
+                "kind": "select",
+                "value": "tail",
+                "node": {
+                  "value": "tail",
+                  "label": "Tail",
+                  "payload": {
+                    "id": "tail"
+                  },
+                  "payloadRef": true
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "custom-tags",
+        "count": 1,
+        "customTag": true,
+        "actions": [
+          {
+            "kind": "open"
+          },
+          {
+            "kind": "choose",
+            "value": "tail"
+          }
+        ]
+      },
+      "initial": {
+        "opened": false,
+        "omitted": [
+          {
+            "value": 1,
+            "kind": "rendered",
+            "key": false,
+            "text": "Old|header|Beta",
+            "rendered": [
+              {
+                "value": "1",
+                "payload": "1",
+                "context": "header"
+              }
+            ]
+          }
+        ],
+        "history": [],
+        "events": []
+      },
+      "steps": [
+        {
+          "action": {
+            "kind": "open"
+          },
+          "view": {
+            "opened": true,
+            "omitted": [
+              {
+                "value": 1,
+                "kind": "rendered",
+                "key": false,
+                "text": "Old|header|Beta",
+                "rendered": [
+                  {
+                    "value": "1",
+                    "payload": "1",
+                    "context": "header"
+                  }
+                ]
+              }
+            ],
+            "history": [],
+            "events": [
+              {
+                "kind": "open",
+                "open": true
+              }
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "choose",
+            "value": "tail"
+          },
+          "view": {
+            "opened": true,
+            "omitted": [
+              {
+                "value": 1,
+                "kind": "rendered",
+                "key": false,
+                "text": "Old|header|Beta",
+                "rendered": [
+                  {
+                    "value": "1",
+                    "payload": "1",
+                    "context": "header"
+                  }
+                ]
+              },
+              {
+                "value": "tail",
+                "kind": "rendered",
+                "key": false,
+                "text": "Old|header|Tail",
+                "rendered": [
+                  {
+                    "value": "tail",
+                    "payload": "tail",
+                    "context": "header"
+                  }
+                ]
+              }
+            ],
+            "history": [
+              [
+                {
+                  "value": 0,
+                  "kind": "rendered",
+                  "key": false,
+                  "text": "Old|callback|Alphabet",
+                  "rendered": [
+                    {
+                      "value": "0",
+                      "payload": "0",
+                      "context": "callback"
+                    }
+                  ]
+                },
+                {
+                  "value": 1,
+                  "kind": "rendered",
+                  "key": false,
+                  "text": "Old|callback|Beta",
+                  "rendered": [
+                    {
+                      "value": "1",
+                      "payload": "1",
+                      "context": "callback"
+                    }
+                  ]
+                },
+                {
+                  "value": "tail",
+                  "kind": "rendered",
+                  "key": false,
+                  "text": "Old|callback|Tail",
+                  "rendered": [
+                    {
+                      "value": "tail",
+                      "payload": "tail",
+                      "context": "callback"
+                    }
+                  ]
+                }
+              ]
+            ],
+            "events": [
+              {
+                "kind": "open",
+                "open": true
+              },
+              {
+                "kind": "change",
+                "value": [
+                  0,
+                  1,
+                  "tail"
+                ],
+                "labels": [
+                  "[rendered]",
+                  "[rendered]",
+                  "[rendered]"
+                ],
+                "triggerValue": "tail"
+              },
+              {
+                "kind": "select",
+                "value": "tail",
+                "node": {
+                  "value": "tail",
+                  "label": "Tail",
+                  "payload": {
+                    "id": "tail"
+                  },
+                  "payloadRef": true
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "array-data",
+        "kind": "array",
+        "actions": [
+          {
+            "kind": "open"
+          },
+          {
+            "kind": "choose",
+            "value": "tail"
+          }
+        ]
+      },
+      "initial": {
+        "opened": false,
+        "omitted": [
+          {
+            "value": 0,
+            "kind": "rendered",
+            "key": false,
+            "text": "Old|header|Array0 label",
+            "rendered": [
+              {
+                "value": "0",
+                "payload": "0",
+                "context": "header"
+              }
+            ]
+          },
+          {
+            "value": 1,
+            "kind": "rendered",
+            "key": false,
+            "text": "Old|header|Beta",
+            "rendered": [
+              {
+                "value": "1",
+                "payload": "1",
+                "context": "header"
+              }
+            ]
+          }
+        ],
+        "history": [],
+        "events": []
+      },
+      "steps": [
+        {
+          "action": {
+            "kind": "open"
+          },
+          "view": {
+            "opened": true,
+            "omitted": [
+              {
+                "value": 0,
+                "kind": "rendered",
+                "key": false,
+                "text": "Old|header|Array0 label",
+                "rendered": [
+                  {
+                    "value": "0",
+                    "payload": "0",
+                    "context": "header"
+                  }
+                ]
+              },
+              {
+                "value": 1,
+                "kind": "rendered",
+                "key": false,
+                "text": "Old|header|Beta",
+                "rendered": [
+                  {
+                    "value": "1",
+                    "payload": "1",
+                    "context": "header"
+                  }
+                ]
+              }
+            ],
+            "history": [],
+            "events": [
+              {
+                "kind": "open",
+                "open": true
+              }
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "choose",
+            "value": "tail"
+          },
+          "view": {
+            "opened": true,
+            "omitted": [
+              {
+                "value": 0,
+                "kind": "rendered",
+                "key": false,
+                "text": "Old|header|Array0 label",
+                "rendered": [
+                  {
+                    "value": "0",
+                    "payload": "0",
+                    "context": "header"
+                  }
+                ]
+              },
+              {
+                "value": 1,
+                "kind": "rendered",
+                "key": false,
+                "text": "Old|header|Beta",
+                "rendered": [
+                  {
+                    "value": "1",
+                    "payload": "1",
+                    "context": "header"
+                  }
+                ]
+              },
+              {
+                "value": "tail",
+                "kind": "rendered",
+                "key": false,
+                "text": "Old|header|Tail",
+                "rendered": [
+                  {
+                    "value": "tail",
+                    "payload": "tail",
+                    "context": "header"
+                  }
+                ]
+              }
+            ],
+            "history": [
+              [
+                {
+                  "value": 0,
+                  "kind": "rendered",
+                  "key": false,
+                  "text": "Old|callback|Array0 label",
+                  "rendered": [
+                    {
+                      "value": "0",
+                      "payload": "0",
+                      "context": "callback"
+                    }
+                  ]
+                },
+                {
+                  "value": 1,
+                  "kind": "rendered",
+                  "key": false,
+                  "text": "Old|callback|Beta",
+                  "rendered": [
+                    {
+                      "value": "1",
+                      "payload": "1",
+                      "context": "callback"
+                    }
+                  ]
+                },
+                {
+                  "value": "tail",
+                  "kind": "rendered",
+                  "key": false,
+                  "text": "Old|callback|Tail",
+                  "rendered": [
+                    {
+                      "value": "tail",
+                      "payload": "tail",
+                      "context": "callback"
+                    }
+                  ]
+                }
+              ]
+            ],
+            "events": [
+              {
+                "kind": "open",
+                "open": true
+              },
+              {
+                "kind": "change",
+                "value": [
+                  0,
+                  1,
+                  "tail"
+                ],
+                "labels": [
+                  "[rendered]",
+                  "[rendered]",
+                  "[rendered]"
+                ],
+                "triggerValue": "tail"
+              },
+              {
+                "kind": "select",
+                "value": "tail",
+                "node": {
+                  "value": "tail",
+                  "label": "Tail",
+                  "payload": {
+                    "id": "tail"
+                  },
+                  "payloadRef": true
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "zero-data",
+        "kind": "zero",
+        "actions": [
+          {
+            "kind": "open"
+          },
+          {
+            "kind": "choose",
+            "value": "tail"
+          }
+        ]
+      },
+      "initial": {
+        "opened": false,
+        "omitted": [
+          {
+            "value": 0,
+            "kind": "rendered",
+            "key": false,
+            "text": "Old|header|0",
+            "rendered": [
+              {
+                "value": "0",
+                "payload": "0",
+                "context": "header"
+              }
+            ]
+          },
+          {
+            "value": 1,
+            "kind": "rendered",
+            "key": false,
+            "text": "Old|header|Beta",
+            "rendered": [
+              {
+                "value": "1",
+                "payload": "1",
+                "context": "header"
+              }
+            ]
+          }
+        ],
+        "history": [],
+        "events": []
+      },
+      "steps": [
+        {
+          "action": {
+            "kind": "open"
+          },
+          "view": {
+            "opened": true,
+            "omitted": [
+              {
+                "value": 0,
+                "kind": "rendered",
+                "key": false,
+                "text": "Old|header|0",
+                "rendered": [
+                  {
+                    "value": "0",
+                    "payload": "0",
+                    "context": "header"
+                  }
+                ]
+              },
+              {
+                "value": 1,
+                "kind": "rendered",
+                "key": false,
+                "text": "Old|header|Beta",
+                "rendered": [
+                  {
+                    "value": "1",
+                    "payload": "1",
+                    "context": "header"
+                  }
+                ]
+              }
+            ],
+            "history": [],
+            "events": [
+              {
+                "kind": "open",
+                "open": true
+              }
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "choose",
+            "value": "tail"
+          },
+          "view": {
+            "opened": true,
+            "omitted": [
+              {
+                "value": 0,
+                "kind": "rendered",
+                "key": false,
+                "text": "Old|header|0",
+                "rendered": [
+                  {
+                    "value": "0",
+                    "payload": "0",
+                    "context": "header"
+                  }
+                ]
+              },
+              {
+                "value": 1,
+                "kind": "rendered",
+                "key": false,
+                "text": "Old|header|Beta",
+                "rendered": [
+                  {
+                    "value": "1",
+                    "payload": "1",
+                    "context": "header"
+                  }
+                ]
+              },
+              {
+                "value": "tail",
+                "kind": "rendered",
+                "key": false,
+                "text": "Old|header|Tail",
+                "rendered": [
+                  {
+                    "value": "tail",
+                    "payload": "tail",
+                    "context": "header"
+                  }
+                ]
+              }
+            ],
+            "history": [
+              [
+                {
+                  "value": 0,
+                  "kind": "rendered",
+                  "key": false,
+                  "text": "Old|callback|0",
+                  "rendered": [
+                    {
+                      "value": "0",
+                      "payload": "0",
+                      "context": "callback"
+                    }
+                  ]
+                },
+                {
+                  "value": 1,
+                  "kind": "rendered",
+                  "key": false,
+                  "text": "Old|callback|Beta",
+                  "rendered": [
+                    {
+                      "value": "1",
+                      "payload": "1",
+                      "context": "callback"
+                    }
+                  ]
+                },
+                {
+                  "value": "tail",
+                  "kind": "rendered",
+                  "key": false,
+                  "text": "Old|callback|Tail",
+                  "rendered": [
+                    {
+                      "value": "tail",
+                      "payload": "tail",
+                      "context": "callback"
+                    }
+                  ]
+                }
+              ]
+            ],
+            "events": [
+              {
+                "kind": "open",
+                "open": true
+              },
+              {
+                "kind": "change",
+                "value": [
+                  0,
+                  1,
+                  "tail"
+                ],
+                "labels": [
+                  "[rendered]",
+                  "[rendered]",
+                  "[rendered]"
+                ],
+                "triggerValue": "tail"
+              },
+              {
+                "kind": "select",
+                "value": "tail",
+                "node": {
+                  "value": "tail",
+                  "label": "Tail",
+                  "payload": {
+                    "id": "tail"
+                  },
+                  "payloadRef": true
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "disabled-record",
+        "value": [
+          "locked",
+          0
+        ],
+        "actions": [
+          {
+            "kind": "open"
+          },
+          {
+            "kind": "choose",
+            "value": "tail"
+          }
+        ]
+      },
+      "initial": {
+        "opened": false,
+        "omitted": [
+          {
+            "value": "locked",
+            "disabled": true,
+            "kind": "rendered",
+            "key": false,
+            "text": "Old|header|Locked",
+            "rendered": [
+              {
+                "value": "locked",
+                "payload": "locked",
+                "context": "header"
+              }
+            ]
+          },
+          {
+            "value": 0,
+            "kind": "rendered",
+            "key": false,
+            "text": "Old|header|Alphabet",
+            "rendered": [
+              {
+                "value": "0",
+                "payload": "0",
+                "context": "header"
+              }
+            ]
+          }
+        ],
+        "history": [],
+        "events": []
+      },
+      "steps": [
+        {
+          "action": {
+            "kind": "open"
+          },
+          "view": {
+            "opened": true,
+            "omitted": [
+              {
+                "value": "locked",
+                "disabled": true,
+                "kind": "rendered",
+                "key": false,
+                "text": "Old|header|Locked",
+                "rendered": [
+                  {
+                    "value": "locked",
+                    "payload": "locked",
+                    "context": "header"
+                  }
+                ]
+              },
+              {
+                "value": 0,
+                "kind": "rendered",
+                "key": false,
+                "text": "Old|header|Alphabet",
+                "rendered": [
+                  {
+                    "value": "0",
+                    "payload": "0",
+                    "context": "header"
+                  }
+                ]
+              }
+            ],
+            "history": [],
+            "events": [
+              {
+                "kind": "open",
+                "open": true
+              }
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "choose",
+            "value": "tail"
+          },
+          "view": {
+            "opened": true,
+            "omitted": [
+              {
+                "value": "locked",
+                "disabled": true,
+                "kind": "rendered",
+                "key": false,
+                "text": "Old|header|Locked",
+                "rendered": [
+                  {
+                    "value": "locked",
+                    "payload": "locked",
+                    "context": "header"
+                  }
+                ]
+              },
+              {
+                "value": 0,
+                "kind": "rendered",
+                "key": false,
+                "text": "Old|header|Alphabet",
+                "rendered": [
+                  {
+                    "value": "0",
+                    "payload": "0",
+                    "context": "header"
+                  }
+                ]
+              },
+              {
+                "value": "tail",
+                "kind": "rendered",
+                "key": false,
+                "text": "Old|header|Tail",
+                "rendered": [
+                  {
+                    "value": "tail",
+                    "payload": "tail",
+                    "context": "header"
+                  }
+                ]
+              }
+            ],
+            "history": [
+              [
+                {
+                  "value": "locked",
+                  "kind": "rendered",
+                  "key": false,
+                  "text": "Old|callback|Locked",
+                  "rendered": [
+                    {
+                      "value": "locked",
+                      "payload": "locked",
+                      "context": "callback"
+                    }
+                  ]
+                },
+                {
+                  "value": 0,
+                  "kind": "rendered",
+                  "key": false,
+                  "text": "Old|callback|Alphabet",
+                  "rendered": [
+                    {
+                      "value": "0",
+                      "payload": "0",
+                      "context": "callback"
+                    }
+                  ]
+                },
+                {
+                  "value": "tail",
+                  "kind": "rendered",
+                  "key": false,
+                  "text": "Old|callback|Tail",
+                  "rendered": [
+                    {
+                      "value": "tail",
+                      "payload": "tail",
+                      "context": "callback"
+                    }
+                  ]
+                }
+              ]
+            ],
+            "events": [
+              {
+                "kind": "open",
+                "open": true
+              },
+              {
+                "kind": "change",
+                "value": [
+                  "locked",
+                  0,
+                  "tail"
+                ],
+                "labels": [
+                  "[rendered]",
+                  "[rendered]",
+                  "[rendered]"
+                ],
+                "triggerValue": "tail"
+              },
+              {
+                "kind": "select",
+                "value": "tail",
+                "node": {
+                  "value": "tail",
+                  "label": "Tail",
+                  "payload": {
+                    "id": "tail"
+                  },
+                  "payloadRef": true
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "data-update",
+        "actions": [
+          {
+            "kind": "open"
+          },
+          {
+            "kind": "choose",
+            "value": "tail"
+          },
+          {
+            "kind": "update-data"
+          },
+          {
+            "kind": "choose",
+            "value": 1
+          }
+        ]
+      },
+      "initial": {
+        "opened": false,
+        "omitted": [
+          {
+            "value": 0,
+            "kind": "rendered",
+            "key": false,
+            "text": "Old|header|Alphabet",
+            "rendered": [
+              {
+                "value": "0",
+                "payload": "0",
+                "context": "header"
+              }
+            ]
+          },
+          {
+            "value": 1,
+            "kind": "rendered",
+            "key": false,
+            "text": "Old|header|Beta",
+            "rendered": [
+              {
+                "value": "1",
+                "payload": "1",
+                "context": "header"
+              }
+            ]
+          }
+        ],
+        "history": [],
+        "events": []
+      },
+      "steps": [
+        {
+          "action": {
+            "kind": "open"
+          },
+          "view": {
+            "opened": true,
+            "omitted": [
+              {
+                "value": 0,
+                "kind": "rendered",
+                "key": false,
+                "text": "Old|header|Alphabet",
+                "rendered": [
+                  {
+                    "value": "0",
+                    "payload": "0",
+                    "context": "header"
+                  }
+                ]
+              },
+              {
+                "value": 1,
+                "kind": "rendered",
+                "key": false,
+                "text": "Old|header|Beta",
+                "rendered": [
+                  {
+                    "value": "1",
+                    "payload": "1",
+                    "context": "header"
+                  }
+                ]
+              }
+            ],
+            "history": [],
+            "events": [
+              {
+                "kind": "open",
+                "open": true
+              }
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "choose",
+            "value": "tail"
+          },
+          "view": {
+            "opened": true,
+            "omitted": [
+              {
+                "value": 0,
+                "kind": "rendered",
+                "key": false,
+                "text": "Old|header|Alphabet",
+                "rendered": [
+                  {
+                    "value": "0",
+                    "payload": "0",
+                    "context": "header"
+                  }
+                ]
+              },
+              {
+                "value": 1,
+                "kind": "rendered",
+                "key": false,
+                "text": "Old|header|Beta",
+                "rendered": [
+                  {
+                    "value": "1",
+                    "payload": "1",
+                    "context": "header"
+                  }
+                ]
+              },
+              {
+                "value": "tail",
+                "kind": "rendered",
+                "key": false,
+                "text": "Old|header|Tail",
+                "rendered": [
+                  {
+                    "value": "tail",
+                    "payload": "tail",
+                    "context": "header"
+                  }
+                ]
+              }
+            ],
+            "history": [
+              [
+                {
+                  "value": 0,
+                  "kind": "rendered",
+                  "key": false,
+                  "text": "Old|callback|Alphabet",
+                  "rendered": [
+                    {
+                      "value": "0",
+                      "payload": "0",
+                      "context": "callback"
+                    }
+                  ]
+                },
+                {
+                  "value": 1,
+                  "kind": "rendered",
+                  "key": false,
+                  "text": "Old|callback|Beta",
+                  "rendered": [
+                    {
+                      "value": "1",
+                      "payload": "1",
+                      "context": "callback"
+                    }
+                  ]
+                },
+                {
+                  "value": "tail",
+                  "kind": "rendered",
+                  "key": false,
+                  "text": "Old|callback|Tail",
+                  "rendered": [
+                    {
+                      "value": "tail",
+                      "payload": "tail",
+                      "context": "callback"
+                    }
+                  ]
+                }
+              ]
+            ],
+            "events": [
+              {
+                "kind": "open",
+                "open": true
+              },
+              {
+                "kind": "change",
+                "value": [
+                  0,
+                  1,
+                  "tail"
+                ],
+                "labels": [
+                  "[rendered]",
+                  "[rendered]",
+                  "[rendered]"
+                ],
+                "triggerValue": "tail"
+              },
+              {
+                "kind": "select",
+                "value": "tail",
+                "node": {
+                  "value": "tail",
+                  "label": "Tail",
+                  "payload": {
+                    "id": "tail"
+                  },
+                  "payloadRef": true
+                }
+              }
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "update-data"
+          },
+          "view": {
+            "opened": true,
+            "omitted": [
+              {
+                "value": 0,
+                "kind": "rendered",
+                "key": false,
+                "text": "Old|header|Alphabet updated",
+                "rendered": [
+                  {
+                    "value": "0",
+                    "payload": "0",
+                    "context": "header"
+                  }
+                ]
+              },
+              {
+                "value": 1,
+                "kind": "rendered",
+                "key": false,
+                "text": "Old|header|Beta updated",
+                "rendered": [
+                  {
+                    "value": "1",
+                    "payload": "1",
+                    "context": "header"
+                  }
+                ]
+              },
+              {
+                "value": "tail",
+                "kind": "rendered",
+                "key": false,
+                "text": "Old|header|Tail updated",
+                "rendered": [
+                  {
+                    "value": "tail",
+                    "payload": "tail",
+                    "context": "header"
+                  }
+                ]
+              }
+            ],
+            "history": [
+              [
+                {
+                  "value": 0,
+                  "kind": "rendered",
+                  "key": false,
+                  "text": "Old|callback|Alphabet",
+                  "rendered": [
+                    {
+                      "value": "0",
+                      "payload": "0",
+                      "context": "callback"
+                    }
+                  ]
+                },
+                {
+                  "value": 1,
+                  "kind": "rendered",
+                  "key": false,
+                  "text": "Old|callback|Beta",
+                  "rendered": [
+                    {
+                      "value": "1",
+                      "payload": "1",
+                      "context": "callback"
+                    }
+                  ]
+                },
+                {
+                  "value": "tail",
+                  "kind": "rendered",
+                  "key": false,
+                  "text": "Old|callback|Tail",
+                  "rendered": [
+                    {
+                      "value": "tail",
+                      "payload": "tail",
+                      "context": "callback"
+                    }
+                  ]
+                }
+              ]
+            ],
+            "events": [
+              {
+                "kind": "open",
+                "open": true
+              },
+              {
+                "kind": "change",
+                "value": [
+                  0,
+                  1,
+                  "tail"
+                ],
+                "labels": [
+                  "[rendered]",
+                  "[rendered]",
+                  "[rendered]"
+                ],
+                "triggerValue": "tail"
+              },
+              {
+                "kind": "select",
+                "value": "tail",
+                "node": {
+                  "value": "tail",
+                  "label": "Tail",
+                  "payload": {
+                    "id": "tail"
+                  },
+                  "payloadRef": true
+                }
+              }
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "choose",
+            "value": 1
+          },
+          "view": {
+            "opened": true,
+            "omitted": [
+              {
+                "value": 0,
+                "kind": "rendered",
+                "key": false,
+                "text": "Old|header|Alphabet updated",
+                "rendered": [
+                  {
+                    "value": "0",
+                    "payload": "0",
+                    "context": "header"
+                  }
+                ]
+              },
+              {
+                "value": "tail",
+                "kind": "rendered",
+                "key": false,
+                "text": "Old|header|Tail updated",
+                "rendered": [
+                  {
+                    "value": "tail",
+                    "payload": "tail",
+                    "context": "header"
+                  }
+                ]
+              }
+            ],
+            "history": [
+              [
+                {
+                  "value": 0,
+                  "kind": "rendered",
+                  "key": false,
+                  "text": "Old|callback|Alphabet",
+                  "rendered": [
+                    {
+                      "value": "0",
+                      "payload": "0",
+                      "context": "callback"
+                    }
+                  ]
+                },
+                {
+                  "value": 1,
+                  "kind": "rendered",
+                  "key": false,
+                  "text": "Old|callback|Beta",
+                  "rendered": [
+                    {
+                      "value": "1",
+                      "payload": "1",
+                      "context": "callback"
+                    }
+                  ]
+                },
+                {
+                  "value": "tail",
+                  "kind": "rendered",
+                  "key": false,
+                  "text": "Old|callback|Tail",
+                  "rendered": [
+                    {
+                      "value": "tail",
+                      "payload": "tail",
+                      "context": "callback"
+                    }
+                  ]
+                }
+              ],
+              [
+                {
+                  "value": 0,
+                  "kind": "rendered",
+                  "key": false,
+                  "text": "Old|callback|Alphabet updated",
+                  "rendered": [
+                    {
+                      "value": "0",
+                      "payload": "0",
+                      "context": "callback"
+                    }
+                  ]
+                },
+                {
+                  "value": "tail",
+                  "kind": "rendered",
+                  "key": false,
+                  "text": "Old|callback|Tail updated",
+                  "rendered": [
+                    {
+                      "value": "tail",
+                      "payload": "tail",
+                      "context": "callback"
+                    }
+                  ]
+                }
+              ]
+            ],
+            "events": [
+              {
+                "kind": "open",
+                "open": true
+              },
+              {
+                "kind": "change",
+                "value": [
+                  0,
+                  1,
+                  "tail"
+                ],
+                "labels": [
+                  "[rendered]",
+                  "[rendered]",
+                  "[rendered]"
+                ],
+                "triggerValue": "tail"
+              },
+              {
+                "kind": "select",
+                "value": "tail",
+                "node": {
+                  "value": "tail",
+                  "label": "Tail",
+                  "payload": {
+                    "id": "tail"
+                  },
+                  "payloadRef": true
+                }
+              },
+              {
+                "kind": "change",
+                "value": [
+                  0,
+                  "tail"
+                ],
+                "labels": [
+                  "[rendered]",
+                  "[rendered]"
+                ],
+                "triggerValue": 1
+              },
+              {
+                "kind": "deselect",
+                "value": 1,
+                "node": {
+                  "value": 1,
+                  "label": "Beta updated",
+                  "payload": {
+                    "id": 1
+                  },
+                  "payloadRef": true
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "data-remove",
+        "labeled": true,
+        "actions": [
+          {
+            "kind": "open"
+          },
+          {
+            "kind": "choose",
+            "value": "tail"
+          },
+          {
+            "kind": "remove-data"
+          },
+          {
+            "kind": "choose",
+            "value": 1
+          }
+        ]
+      },
+      "initial": {
+        "opened": false,
+        "omitted": [
+          {
+            "value": 0,
+            "kind": "rendered",
+            "key": false,
+            "text": "Old|header|Alphabet",
+            "rendered": [
+              {
+                "value": "0",
+                "payload": "0",
+                "context": "header"
+              }
+            ]
+          },
+          {
+            "value": 1,
+            "kind": "rendered",
+            "key": false,
+            "text": "Old|header|Beta",
+            "rendered": [
+              {
+                "value": "1",
+                "payload": "1",
+                "context": "header"
+              }
+            ]
+          }
+        ],
+        "history": [],
+        "events": []
+      },
+      "steps": [
+        {
+          "action": {
+            "kind": "open"
+          },
+          "view": {
+            "opened": true,
+            "omitted": [
+              {
+                "value": 0,
+                "kind": "rendered",
+                "key": false,
+                "text": "Old|header|Alphabet",
+                "rendered": [
+                  {
+                    "value": "0",
+                    "payload": "0",
+                    "context": "header"
+                  }
+                ]
+              },
+              {
+                "value": 1,
+                "kind": "rendered",
+                "key": false,
+                "text": "Old|header|Beta",
+                "rendered": [
+                  {
+                    "value": "1",
+                    "payload": "1",
+                    "context": "header"
+                  }
+                ]
+              }
+            ],
+            "history": [],
+            "events": [
+              {
+                "kind": "open",
+                "open": true
+              }
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "choose",
+            "value": "tail"
+          },
+          "view": {
+            "opened": true,
+            "omitted": [
+              {
+                "value": 0,
+                "kind": "rendered",
+                "key": false,
+                "text": "Old|header|Alphabet",
+                "rendered": [
+                  {
+                    "value": "0",
+                    "payload": "0",
+                    "context": "header"
+                  }
+                ]
+              },
+              {
+                "value": 1,
+                "kind": "rendered",
+                "key": false,
+                "text": "Old|header|Beta",
+                "rendered": [
+                  {
+                    "value": "1",
+                    "payload": "1",
+                    "context": "header"
+                  }
+                ]
+              },
+              {
+                "value": "tail",
+                "kind": "rendered",
+                "key": false,
+                "text": "Old|header|Tail",
+                "rendered": [
+                  {
+                    "value": "tail",
+                    "payload": "tail",
+                    "context": "header"
+                  }
+                ]
+              }
+            ],
+            "history": [
+              [
+                {
+                  "value": 0,
+                  "kind": "rendered",
+                  "key": false,
+                  "text": "Old|callback|Alphabet",
+                  "rendered": [
+                    {
+                      "value": "0",
+                      "payload": "0",
+                      "context": "callback"
+                    }
+                  ]
+                },
+                {
+                  "value": 1,
+                  "kind": "rendered",
+                  "key": false,
+                  "text": "Old|callback|Beta",
+                  "rendered": [
+                    {
+                      "value": "1",
+                      "payload": "1",
+                      "context": "callback"
+                    }
+                  ]
+                },
+                {
+                  "value": "tail",
+                  "kind": "rendered",
+                  "key": false,
+                  "text": "Old|callback|Tail",
+                  "rendered": [
+                    {
+                      "value": "tail",
+                      "payload": "tail",
+                      "context": "callback"
+                    }
+                  ]
+                }
+              ]
+            ],
+            "events": [
+              {
+                "kind": "open",
+                "open": true
+              },
+              {
+                "kind": "change",
+                "value": [
+                  {
+                    "label": "[rendered]",
+                    "value": 0
+                  },
+                  {
+                    "label": "[rendered]",
+                    "value": 1
+                  },
+                  {
+                    "label": "[rendered]",
+                    "value": "tail"
+                  }
+                ],
+                "labels": null,
+                "triggerValue": "tail"
+              },
+              {
+                "kind": "select",
+                "value": "tail",
+                "node": {
+                  "value": "tail",
+                  "label": "Tail",
+                  "payload": {
+                    "id": "tail"
+                  },
+                  "payloadRef": true
+                }
+              }
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "remove-data"
+          },
+          "view": {
+            "opened": true,
+            "omitted": [
+              {
+                "value": 0,
+                "kind": "rendered",
+                "key": false,
+                "text": "Old|header|Alphabet",
+                "rendered": [
+                  {
+                    "value": "0",
+                    "payload": "0",
+                    "context": "header"
+                  }
+                ]
+              },
+              {
+                "value": 1,
+                "kind": "rendered",
+                "key": false,
+                "text": "Old|header|Beta",
+                "rendered": [
+                  {
+                    "value": "1",
+                    "payload": "1",
+                    "context": "header"
+                  }
+                ]
+              },
+              {
+                "value": "tail",
+                "kind": "rendered",
+                "key": false,
+                "text": "Old|header|Tail",
+                "rendered": [
+                  {
+                    "value": "tail",
+                    "payload": "tail",
+                    "context": "header"
+                  }
+                ]
+              }
+            ],
+            "history": [
+              [
+                {
+                  "value": 0,
+                  "kind": "rendered",
+                  "key": false,
+                  "text": "Old|callback|Alphabet",
+                  "rendered": [
+                    {
+                      "value": "0",
+                      "payload": "0",
+                      "context": "callback"
+                    }
+                  ]
+                },
+                {
+                  "value": 1,
+                  "kind": "rendered",
+                  "key": false,
+                  "text": "Old|callback|Beta",
+                  "rendered": [
+                    {
+                      "value": "1",
+                      "payload": "1",
+                      "context": "callback"
+                    }
+                  ]
+                },
+                {
+                  "value": "tail",
+                  "kind": "rendered",
+                  "key": false,
+                  "text": "Old|callback|Tail",
+                  "rendered": [
+                    {
+                      "value": "tail",
+                      "payload": "tail",
+                      "context": "callback"
+                    }
+                  ]
+                }
+              ]
+            ],
+            "events": [
+              {
+                "kind": "open",
+                "open": true
+              },
+              {
+                "kind": "change",
+                "value": [
+                  {
+                    "label": "[rendered]",
+                    "value": 0
+                  },
+                  {
+                    "label": "[rendered]",
+                    "value": 1
+                  },
+                  {
+                    "label": "[rendered]",
+                    "value": "tail"
+                  }
+                ],
+                "labels": null,
+                "triggerValue": "tail"
+              },
+              {
+                "kind": "select",
+                "value": "tail",
+                "node": {
+                  "value": "tail",
+                  "label": "Tail",
+                  "payload": {
+                    "id": "tail"
+                  },
+                  "payloadRef": true
+                }
+              }
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "choose",
+            "value": 1
+          },
+          "view": {
+            "opened": true,
+            "omitted": [
+              {
+                "value": 0,
+                "kind": "rendered",
+                "key": false,
+                "text": "Old|header|Alphabet",
+                "rendered": [
+                  {
+                    "value": "0",
+                    "payload": "0",
+                    "context": "header"
+                  }
+                ]
+              },
+              {
+                "value": "tail",
+                "kind": "rendered",
+                "key": false,
+                "text": "Old|header|Tail",
+                "rendered": [
+                  {
+                    "value": "tail",
+                    "payload": "tail",
+                    "context": "header"
+                  }
+                ]
+              }
+            ],
+            "history": [
+              [
+                {
+                  "value": 0,
+                  "kind": "rendered",
+                  "key": false,
+                  "text": "Old|callback|Alphabet",
+                  "rendered": [
+                    {
+                      "value": "0",
+                      "payload": "0",
+                      "context": "callback"
+                    }
+                  ]
+                },
+                {
+                  "value": 1,
+                  "kind": "rendered",
+                  "key": false,
+                  "text": "Old|callback|Beta",
+                  "rendered": [
+                    {
+                      "value": "1",
+                      "payload": "1",
+                      "context": "callback"
+                    }
+                  ]
+                },
+                {
+                  "value": "tail",
+                  "kind": "rendered",
+                  "key": false,
+                  "text": "Old|callback|Tail",
+                  "rendered": [
+                    {
+                      "value": "tail",
+                      "payload": "tail",
+                      "context": "callback"
+                    }
+                  ]
+                }
+              ],
+              [
+                {
+                  "value": 0,
+                  "kind": "rendered",
+                  "key": false,
+                  "text": "Old|callback|Alphabet",
+                  "rendered": [
+                    {
+                      "value": "0",
+                      "payload": "0",
+                      "context": "callback"
+                    }
+                  ]
+                },
+                {
+                  "value": "tail",
+                  "kind": "rendered",
+                  "key": false,
+                  "text": "Old|callback|Tail",
+                  "rendered": [
+                    {
+                      "value": "tail",
+                      "payload": "tail",
+                      "context": "callback"
+                    }
+                  ]
+                }
+              ]
+            ],
+            "events": [
+              {
+                "kind": "open",
+                "open": true
+              },
+              {
+                "kind": "change",
+                "value": [
+                  {
+                    "label": "[rendered]",
+                    "value": 0
+                  },
+                  {
+                    "label": "[rendered]",
+                    "value": 1
+                  },
+                  {
+                    "label": "[rendered]",
+                    "value": "tail"
+                  }
+                ],
+                "labels": null,
+                "triggerValue": "tail"
+              },
+              {
+                "kind": "select",
+                "value": "tail",
+                "node": {
+                  "value": "tail",
+                  "label": "Tail",
+                  "payload": {
+                    "id": "tail"
+                  },
+                  "payloadRef": true
+                }
+              },
+              {
+                "kind": "change",
+                "value": [
+                  {
+                    "label": "[rendered]",
+                    "value": 0
+                  },
+                  {
+                    "label": "[rendered]",
+                    "value": "tail"
+                  }
+                ],
+                "labels": null,
+                "triggerValue": 1
+              },
+              {
+                "kind": "deselect",
+                "value": 1,
+                "node": {
+                  "value": 1,
+                  "label": "Beta",
+                  "payload": {
+                    "id": 1
+                  },
+                  "payloadRef": true
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "renderer-and-data",
+        "actions": [
+          {
+            "kind": "update-both"
+          },
+          {
+            "kind": "open"
+          },
+          {
+            "kind": "choose",
+            "value": "tail"
+          }
+        ]
+      },
+      "initial": {
+        "opened": false,
+        "omitted": [
+          {
+            "value": 0,
+            "kind": "rendered",
+            "key": false,
+            "text": "Old|header|Alphabet",
+            "rendered": [
+              {
+                "value": "0",
+                "payload": "0",
+                "context": "header"
+              }
+            ]
+          },
+          {
+            "value": 1,
+            "kind": "rendered",
+            "key": false,
+            "text": "Old|header|Beta",
+            "rendered": [
+              {
+                "value": "1",
+                "payload": "1",
+                "context": "header"
+              }
+            ]
+          }
+        ],
+        "history": [],
+        "events": []
+      },
+      "steps": [
+        {
+          "action": {
+            "kind": "update-both"
+          },
+          "view": {
+            "opened": false,
+            "omitted": [
+              {
+                "value": 0,
+                "kind": "rendered",
+                "key": false,
+                "text": "New|header|Alphabet updated",
+                "rendered": [
+                  {
+                    "value": "0",
+                    "payload": "0",
+                    "context": "header"
+                  }
+                ]
+              },
+              {
+                "value": 1,
+                "kind": "rendered",
+                "key": false,
+                "text": "New|header|Beta updated",
+                "rendered": [
+                  {
+                    "value": "1",
+                    "payload": "1",
+                    "context": "header"
+                  }
+                ]
+              }
+            ],
+            "history": [],
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "open"
+          },
+          "view": {
+            "opened": true,
+            "omitted": [
+              {
+                "value": 0,
+                "kind": "rendered",
+                "key": false,
+                "text": "New|header|Alphabet updated",
+                "rendered": [
+                  {
+                    "value": "0",
+                    "payload": "0",
+                    "context": "header"
+                  }
+                ]
+              },
+              {
+                "value": 1,
+                "kind": "rendered",
+                "key": false,
+                "text": "New|header|Beta updated",
+                "rendered": [
+                  {
+                    "value": "1",
+                    "payload": "1",
+                    "context": "header"
+                  }
+                ]
+              }
+            ],
+            "history": [],
+            "events": [
+              {
+                "kind": "open",
+                "open": true
+              }
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "choose",
+            "value": "tail"
+          },
+          "view": {
+            "opened": true,
+            "omitted": [
+              {
+                "value": 0,
+                "kind": "rendered",
+                "key": false,
+                "text": "New|header|Alphabet updated",
+                "rendered": [
+                  {
+                    "value": "0",
+                    "payload": "0",
+                    "context": "header"
+                  }
+                ]
+              },
+              {
+                "value": 1,
+                "kind": "rendered",
+                "key": false,
+                "text": "New|header|Beta updated",
+                "rendered": [
+                  {
+                    "value": "1",
+                    "payload": "1",
+                    "context": "header"
+                  }
+                ]
+              },
+              {
+                "value": "tail",
+                "kind": "rendered",
+                "key": false,
+                "text": "New|header|Tail updated",
+                "rendered": [
+                  {
+                    "value": "tail",
+                    "payload": "tail",
+                    "context": "header"
+                  }
+                ]
+              }
+            ],
+            "history": [
+              [
+                {
+                  "value": 0,
+                  "kind": "rendered",
+                  "key": false,
+                  "text": "New|callback|Alphabet updated",
+                  "rendered": [
+                    {
+                      "value": "0",
+                      "payload": "0",
+                      "context": "callback"
+                    }
+                  ]
+                },
+                {
+                  "value": 1,
+                  "kind": "rendered",
+                  "key": false,
+                  "text": "New|callback|Beta updated",
+                  "rendered": [
+                    {
+                      "value": "1",
+                      "payload": "1",
+                      "context": "callback"
+                    }
+                  ]
+                },
+                {
+                  "value": "tail",
+                  "kind": "rendered",
+                  "key": false,
+                  "text": "New|callback|Tail updated",
+                  "rendered": [
+                    {
+                      "value": "tail",
+                      "payload": "tail",
+                      "context": "callback"
+                    }
+                  ]
+                }
+              ]
+            ],
+            "events": [
+              {
+                "kind": "open",
+                "open": true
+              },
+              {
+                "kind": "change",
+                "value": [
+                  0,
+                  1,
+                  "tail"
+                ],
+                "labels": [
+                  "[rendered]",
+                  "[rendered]",
+                  "[rendered]"
+                ],
+                "triggerValue": "tail"
+              },
+              {
+                "kind": "select",
+                "value": "tail",
+                "node": {
+                  "value": "tail",
+                  "label": "Tail updated",
+                  "payload": {
+                    "id": "tail"
+                  },
+                  "payloadRef": true
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "plain-counterpart",
+        "renderer": false,
+        "actions": [
+          {
+            "kind": "open"
+          },
+          {
+            "kind": "choose",
+            "value": "tail"
+          }
+        ]
+      },
+      "initial": {
+        "opened": false,
+        "omitted": [
+          {
+            "value": 0,
+            "kind": "string",
+            "key": false,
+            "text": "Alphabet",
+            "rendered": []
+          },
+          {
+            "value": 1,
+            "kind": "string",
+            "key": false,
+            "text": "Beta",
+            "rendered": []
+          }
+        ],
+        "history": [],
+        "events": []
+      },
+      "steps": [
+        {
+          "action": {
+            "kind": "open"
+          },
+          "view": {
+            "opened": true,
+            "omitted": [
+              {
+                "value": 0,
+                "kind": "string",
+                "key": false,
+                "text": "Alphabet",
+                "rendered": []
+              },
+              {
+                "value": 1,
+                "kind": "string",
+                "key": false,
+                "text": "Beta",
+                "rendered": []
+              }
+            ],
+            "history": [],
+            "events": [
+              {
+                "kind": "open",
+                "open": true
+              }
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "choose",
+            "value": "tail"
+          },
+          "view": {
+            "opened": true,
+            "omitted": [
+              {
+                "value": 0,
+                "kind": "string",
+                "key": false,
+                "text": "Alphabet",
+                "rendered": []
+              },
+              {
+                "value": 1,
+                "kind": "string",
+                "key": false,
+                "text": "Beta",
+                "rendered": []
+              },
+              {
+                "value": "tail",
+                "kind": "string",
+                "key": false,
+                "text": "Tail",
+                "rendered": []
+              }
+            ],
+            "history": [
+              [
+                {
+                  "value": 0,
+                  "kind": "string",
+                  "key": false,
+                  "text": "Alphabet",
+                  "rendered": []
+                },
+                {
+                  "value": 1,
+                  "kind": "string",
+                  "key": false,
+                  "text": "Beta",
+                  "rendered": []
+                },
+                {
+                  "value": "tail",
+                  "kind": "string",
+                  "key": false,
+                  "text": "Tail",
+                  "rendered": []
+                }
+              ]
+            ],
+            "events": [
+              {
+                "kind": "open",
+                "open": true
+              },
+              {
+                "kind": "change",
+                "value": [
+                  0,
+                  1,
+                  "tail"
+                ],
+                "labels": [
+                  "Alphabet",
+                  "Beta",
+                  "Tail"
+                ],
+                "triggerValue": "tail"
+              },
+              {
+                "kind": "select",
+                "value": "tail",
+                "node": {
+                  "value": "tail",
+                  "label": "Tail",
+                  "payload": {
+                    "id": "tail"
+                  },
+                  "payloadRef": true
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "fresh-renderer-counterpart",
+        "version": "New",
+        "actions": [
+          {
+            "kind": "open"
+          },
+          {
+            "kind": "choose",
+            "value": "tail"
+          }
+        ]
+      },
+      "initial": {
+        "opened": false,
+        "omitted": [
+          {
+            "value": 0,
+            "kind": "rendered",
+            "key": false,
+            "text": "New|header|Alphabet",
+            "rendered": [
+              {
+                "value": "0",
+                "payload": "0",
+                "context": "header"
+              }
+            ]
+          },
+          {
+            "value": 1,
+            "kind": "rendered",
+            "key": false,
+            "text": "New|header|Beta",
+            "rendered": [
+              {
+                "value": "1",
+                "payload": "1",
+                "context": "header"
+              }
+            ]
+          }
+        ],
+        "history": [],
+        "events": []
+      },
+      "steps": [
+        {
+          "action": {
+            "kind": "open"
+          },
+          "view": {
+            "opened": true,
+            "omitted": [
+              {
+                "value": 0,
+                "kind": "rendered",
+                "key": false,
+                "text": "New|header|Alphabet",
+                "rendered": [
+                  {
+                    "value": "0",
+                    "payload": "0",
+                    "context": "header"
+                  }
+                ]
+              },
+              {
+                "value": 1,
+                "kind": "rendered",
+                "key": false,
+                "text": "New|header|Beta",
+                "rendered": [
+                  {
+                    "value": "1",
+                    "payload": "1",
+                    "context": "header"
+                  }
+                ]
+              }
+            ],
+            "history": [],
+            "events": [
+              {
+                "kind": "open",
+                "open": true
+              }
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "choose",
+            "value": "tail"
+          },
+          "view": {
+            "opened": true,
+            "omitted": [
+              {
+                "value": 0,
+                "kind": "rendered",
+                "key": false,
+                "text": "New|header|Alphabet",
+                "rendered": [
+                  {
+                    "value": "0",
+                    "payload": "0",
+                    "context": "header"
+                  }
+                ]
+              },
+              {
+                "value": 1,
+                "kind": "rendered",
+                "key": false,
+                "text": "New|header|Beta",
+                "rendered": [
+                  {
+                    "value": "1",
+                    "payload": "1",
+                    "context": "header"
+                  }
+                ]
+              },
+              {
+                "value": "tail",
+                "kind": "rendered",
+                "key": false,
+                "text": "New|header|Tail",
+                "rendered": [
+                  {
+                    "value": "tail",
+                    "payload": "tail",
+                    "context": "header"
+                  }
+                ]
+              }
+            ],
+            "history": [
+              [
+                {
+                  "value": 0,
+                  "kind": "rendered",
+                  "key": false,
+                  "text": "New|callback|Alphabet",
+                  "rendered": [
+                    {
+                      "value": "0",
+                      "payload": "0",
+                      "context": "callback"
+                    }
+                  ]
+                },
+                {
+                  "value": 1,
+                  "kind": "rendered",
+                  "key": false,
+                  "text": "New|callback|Beta",
+                  "rendered": [
+                    {
+                      "value": "1",
+                      "payload": "1",
+                      "context": "callback"
+                    }
+                  ]
+                },
+                {
+                  "value": "tail",
+                  "kind": "rendered",
+                  "key": false,
+                  "text": "New|callback|Tail",
+                  "rendered": [
+                    {
+                      "value": "tail",
+                      "payload": "tail",
+                      "context": "callback"
+                    }
+                  ]
+                }
+              ]
+            ],
+            "events": [
+              {
+                "kind": "open",
+                "open": true
+              },
+              {
+                "kind": "change",
+                "value": [
+                  0,
+                  1,
+                  "tail"
+                ],
+                "labels": [
+                  "[rendered]",
+                  "[rendered]",
+                  "[rendered]"
+                ],
+                "triggerValue": "tail"
+              },
+              {
+                "kind": "select",
+                "value": "tail",
+                "node": {
+                  "value": "tail",
+                  "label": "Tail",
+                  "payload": {
+                    "id": "tail"
+                  },
+                  "payloadRef": true
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "clear",
+        "actions": [
+          {
+            "kind": "clear"
+          }
+        ]
+      },
+      "initial": {
+        "opened": false,
+        "omitted": [
+          {
+            "value": 0,
+            "kind": "rendered",
+            "key": false,
+            "text": "Old|header|Alphabet",
+            "rendered": [
+              {
+                "value": "0",
+                "payload": "0",
+                "context": "header"
+              }
+            ]
+          },
+          {
+            "value": 1,
+            "kind": "rendered",
+            "key": false,
+            "text": "Old|header|Beta",
+            "rendered": [
+              {
+                "value": "1",
+                "payload": "1",
+                "context": "header"
+              }
+            ]
+          }
+        ],
+        "history": [],
+        "events": []
+      },
+      "steps": [
+        {
+          "action": {
+            "kind": "clear"
+          },
+          "view": {
+            "opened": false,
+            "omitted": [],
+            "history": [
+              []
+            ],
+            "events": [
+              {
+                "kind": "clear"
+              },
+              {
+                "kind": "change",
+                "value": [],
+                "labels": []
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "observations": [
+    {
+      "sample": {
+        "id": "stale-renderer",
+        "actions": [
+          {
+            "kind": "update-renderer"
+          },
+          {
+            "kind": "open"
+          },
+          {
+            "kind": "choose",
+            "value": "tail"
+          }
+        ]
+      },
+      "initial": {
+        "opened": false,
+        "omitted": [
+          {
+            "value": 0,
+            "kind": "rendered",
+            "key": false,
+            "text": "Old|header|Alphabet",
+            "rendered": [
+              {
+                "value": "0",
+                "payload": "0",
+                "context": "header"
+              }
+            ]
+          },
+          {
+            "value": 1,
+            "kind": "rendered",
+            "key": false,
+            "text": "Old|header|Beta",
+            "rendered": [
+              {
+                "value": "1",
+                "payload": "1",
+                "context": "header"
+              }
+            ]
+          }
+        ],
+        "history": [],
+        "events": []
+      },
+      "steps": [
+        {
+          "action": {
+            "kind": "update-renderer"
+          },
+          "view": {
+            "opened": false,
+            "omitted": [
+              {
+                "value": 0,
+                "kind": "rendered",
+                "key": false,
+                "text": "Old|header|Alphabet",
+                "rendered": [
+                  {
+                    "value": "0",
+                    "payload": "0",
+                    "context": "header"
+                  }
+                ]
+              },
+              {
+                "value": 1,
+                "kind": "rendered",
+                "key": false,
+                "text": "Old|header|Beta",
+                "rendered": [
+                  {
+                    "value": "1",
+                    "payload": "1",
+                    "context": "header"
+                  }
+                ]
+              }
+            ],
+            "history": [],
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "open"
+          },
+          "view": {
+            "opened": true,
+            "omitted": [
+              {
+                "value": 0,
+                "kind": "rendered",
+                "key": false,
+                "text": "Old|header|Alphabet",
+                "rendered": [
+                  {
+                    "value": "0",
+                    "payload": "0",
+                    "context": "header"
+                  }
+                ]
+              },
+              {
+                "value": 1,
+                "kind": "rendered",
+                "key": false,
+                "text": "Old|header|Beta",
+                "rendered": [
+                  {
+                    "value": "1",
+                    "payload": "1",
+                    "context": "header"
+                  }
+                ]
+              }
+            ],
+            "history": [],
+            "events": [
+              {
+                "kind": "open",
+                "open": true
+              }
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "choose",
+            "value": "tail"
+          },
+          "view": {
+            "opened": true,
+            "omitted": [
+              {
+                "value": 0,
+                "kind": "rendered",
+                "key": false,
+                "text": "New|header|Alphabet",
+                "rendered": [
+                  {
+                    "value": "0",
+                    "payload": "0",
+                    "context": "header"
+                  }
+                ]
+              },
+              {
+                "value": 1,
+                "kind": "rendered",
+                "key": false,
+                "text": "New|header|Beta",
+                "rendered": [
+                  {
+                    "value": "1",
+                    "payload": "1",
+                    "context": "header"
+                  }
+                ]
+              },
+              {
+                "value": "tail",
+                "kind": "rendered",
+                "key": false,
+                "text": "New|header|Tail",
+                "rendered": [
+                  {
+                    "value": "tail",
+                    "payload": "tail",
+                    "context": "header"
+                  }
+                ]
+              }
+            ],
+            "history": [
+              [
+                {
+                  "value": 0,
+                  "kind": "rendered",
+                  "key": false,
+                  "text": "Old|callback|Alphabet",
+                  "rendered": [
+                    {
+                      "value": "0",
+                      "payload": "0",
+                      "context": "callback"
+                    }
+                  ]
+                },
+                {
+                  "value": 1,
+                  "kind": "rendered",
+                  "key": false,
+                  "text": "Old|callback|Beta",
+                  "rendered": [
+                    {
+                      "value": "1",
+                      "payload": "1",
+                      "context": "callback"
+                    }
+                  ]
+                },
+                {
+                  "value": "tail",
+                  "kind": "rendered",
+                  "key": false,
+                  "text": "Old|callback|Tail",
+                  "rendered": [
+                    {
+                      "value": "tail",
+                      "payload": "tail",
+                      "context": "callback"
+                    }
+                  ]
+                }
+              ]
+            ],
+            "events": [
+              {
+                "kind": "open",
+                "open": true
+              },
+              {
+                "kind": "change",
+                "value": [
+                  0,
+                  1,
+                  "tail"
+                ],
+                "labels": [
+                  "[rendered]",
+                  "[rendered]",
+                  "[rendered]"
+                ],
+                "triggerValue": "tail"
+              },
+              {
+                "kind": "select",
+                "value": "tail",
+                "node": {
+                  "value": "tail",
+                  "label": "Tail",
+                  "payload": {
+                    "id": "tail"
+                  },
+                  "payloadRef": true
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "removed-renderer",
+        "actions": [
+          {
+            "kind": "remove-renderer"
+          },
+          {
+            "kind": "open"
+          },
+          {
+            "kind": "choose",
+            "value": "tail"
+          }
+        ]
+      },
+      "initial": {
+        "opened": false,
+        "omitted": [
+          {
+            "value": 0,
+            "kind": "rendered",
+            "key": false,
+            "text": "Old|header|Alphabet",
+            "rendered": [
+              {
+                "value": "0",
+                "payload": "0",
+                "context": "header"
+              }
+            ]
+          },
+          {
+            "value": 1,
+            "kind": "rendered",
+            "key": false,
+            "text": "Old|header|Beta",
+            "rendered": [
+              {
+                "value": "1",
+                "payload": "1",
+                "context": "header"
+              }
+            ]
+          }
+        ],
+        "history": [],
+        "events": []
+      },
+      "steps": [
+        {
+          "action": {
+            "kind": "remove-renderer"
+          },
+          "view": {
+            "opened": false,
+            "omitted": [
+              {
+                "value": 0,
+                "kind": "rendered",
+                "key": false,
+                "text": "Old|header|Alphabet",
+                "rendered": [
+                  {
+                    "value": "0",
+                    "payload": "0",
+                    "context": "header"
+                  }
+                ]
+              },
+              {
+                "value": 1,
+                "kind": "rendered",
+                "key": false,
+                "text": "Old|header|Beta",
+                "rendered": [
+                  {
+                    "value": "1",
+                    "payload": "1",
+                    "context": "header"
+                  }
+                ]
+              }
+            ],
+            "history": [],
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "open"
+          },
+          "view": {
+            "opened": true,
+            "omitted": [
+              {
+                "value": 0,
+                "kind": "rendered",
+                "key": false,
+                "text": "Old|header|Alphabet",
+                "rendered": [
+                  {
+                    "value": "0",
+                    "payload": "0",
+                    "context": "header"
+                  }
+                ]
+              },
+              {
+                "value": 1,
+                "kind": "rendered",
+                "key": false,
+                "text": "Old|header|Beta",
+                "rendered": [
+                  {
+                    "value": "1",
+                    "payload": "1",
+                    "context": "header"
+                  }
+                ]
+              }
+            ],
+            "history": [],
+            "events": [
+              {
+                "kind": "open",
+                "open": true
+              }
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "choose",
+            "value": "tail"
+          },
+          "view": {
+            "opened": true,
+            "omitted": [
+              {
+                "value": 0,
+                "kind": "string",
+                "key": false,
+                "text": "Alphabet",
+                "rendered": []
+              },
+              {
+                "value": 1,
+                "kind": "string",
+                "key": false,
+                "text": "Beta",
+                "rendered": []
+              },
+              {
+                "value": "tail",
+                "kind": "string",
+                "key": false,
+                "text": "Tail",
+                "rendered": []
+              }
+            ],
+            "history": [
+              [
+                {
+                  "value": 0,
+                  "kind": "rendered",
+                  "key": false,
+                  "text": "Old|callback|Alphabet",
+                  "rendered": [
+                    {
+                      "value": "0",
+                      "payload": "0",
+                      "context": "callback"
+                    }
+                  ]
+                },
+                {
+                  "value": 1,
+                  "kind": "rendered",
+                  "key": false,
+                  "text": "Old|callback|Beta",
+                  "rendered": [
+                    {
+                      "value": "1",
+                      "payload": "1",
+                      "context": "callback"
+                    }
+                  ]
+                },
+                {
+                  "value": "tail",
+                  "kind": "rendered",
+                  "key": false,
+                  "text": "Old|callback|Tail",
+                  "rendered": [
+                    {
+                      "value": "tail",
+                      "payload": "tail",
+                      "context": "callback"
+                    }
+                  ]
+                }
+              ]
+            ],
+            "events": [
+              {
+                "kind": "open",
+                "open": true
+              },
+              {
+                "kind": "change",
+                "value": [
+                  0,
+                  1,
+                  "tail"
+                ],
+                "labels": [
+                  "[rendered]",
+                  "[rendered]",
+                  "[rendered]"
+                ],
+                "triggerValue": "tail"
+              },
+              {
+                "kind": "select",
+                "value": "tail",
+                "node": {
+                  "value": "tail",
+                  "label": "Tail",
+                  "payload": {
+                    "id": "tail"
+                  },
+                  "payloadRef": true
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

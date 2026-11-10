@@ -54,6 +54,13 @@ for (const [id, titles] of [['opaque-array-title', ['Array0 label']], ['title-re
     await expect.poll(() => read(page)).toEqual({
       ...source.initial, view: { ...source.initial.view, tags }
     });
+    if (id === 'title-renderer') {
+      await input(page).press('Backspace');
+      await expect(page.locator('.ant-select-selection-item')).toHaveAttribute('title', 'Alphabet');
+      await expect(page.getByRole('button', { name: 'Удалить Alphabet', exact: true })).toBeVisible();
+      expect((await read(page)).events[0]).toMatchObject({ kind: 'change',
+        value: [{ value: 0, label: '[opaque]' }], labels: null });
+    }
   });
 }
 

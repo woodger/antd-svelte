@@ -9,12 +9,16 @@
 
 ### Added
 
+- TreeSelect возвращает связанные с `treeTitleRender` snippets в onChange и
+  maxTagPlaceholder. Сохранённые labels можно вывести после unmount; они берут
+  контекст места рендера. Новые labels учитывают смену renderer сразу, сохраняя
+  данные callbacks, native tooltips и accessible remove names.
+
 - TreeSelect поддерживает maxTagTextLength, numeric/responsive maxTagCount,
   maxTagPlaceholder и tagRender snippets с исходными metadata и close ordering.
   Сохранены полные значения, labels/FormData, refs/focus и shared Select Unicode/
   NaN/overflow fixes. SSR/hydration не создают measurement resources на сервере;
-  pending custom close отменяется при новом open и unmount. Renderer-derived
-  labels в callbacks/omitted records остаются отдельным этапом.
+  pending custom close отменяется при новом open и unmount.
 
 - TreeSelect поддерживает maxCount с исходными wrapper/strategy/strict правилами,
   checked/missing values и callback order. UI-ограничения сохраняют raw data,

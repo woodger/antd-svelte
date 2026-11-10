@@ -11033,7 +11033,7 @@
       "name": "TreeSelect",
       "category": "data-entry",
       "scope": "target",
-      "scopeReason": "TreeSelect по Ant Design 6.6.8 и rc-tree-select 1.16.1: значения, check/стратегии, поиск, loadData, fieldNames/simple mode, generic data, title expansion, maxCount и tag display API; оставшийся API, virtual и motion переносятся отдельно.",
+      "scopeReason": "TreeSelect по Ant Design 6.6.8 и rc-tree-select 1.16.1: значения, check/стратегии, поиск, loadData, fieldNames/simple mode, generic data, title expansion, maxCount, tag display и renderer label API; оставшийся API, virtual и motion переносятся отдельно.",
       "upstreamPath": "components/tree-select",
       "reviewedRevision": "984592267de88fbf9cdaecc96a56629e721c709d",
       "exports": [
@@ -11160,7 +11160,22 @@
         "tests/browser/fixtures/tree-select-tags-hydration.client.ts",
         "tests/browser/fixtures/tree-select-tags-hydration.server.ts",
         "tests/browser/fixtures/tree-select-tags-hydration.html",
-        "tests/package/tree-select-tags.ssr.test.ts"
+        "tests/package/tree-select-tags.ssr.test.ts",
+        "src/lib/TreeSelectLabelBinding.svelte",
+        "src/lib/tree-select-labels.ts",
+        "tests/browser/fixtures/TreeSelectLabelsFixtures.svelte",
+        "tests/browser/fixtures/TreeSelectLabelsScope.svelte",
+        "tests/browser/fixtures/TreeSelectRichLabel.svelte",
+        "tests/browser/fixtures/tree-select-label-cases.ts",
+        "tests/browser/fixtures/ant-design-tree-select-labels-reference.json",
+        "tests/browser/fixtures/ant-design-tree-select-labels-ssr-reference.json",
+        "tests/browser/tree-select-label-metrics.ts",
+        "tests/browser/tree-select-labels.spec.ts",
+        "tests/browser/tree-select-labels-hydration.spec.ts",
+        "tests/browser/fixtures/tree-select-labels-hydration.client.ts",
+        "tests/browser/fixtures/tree-select-labels-hydration.server.ts",
+        "tests/browser/fixtures/tree-select-labels-hydration.html",
+        "tests/package/tree-select-labels.ssr.test.ts"
       ],
       "features": [
         {
@@ -11224,7 +11239,7 @@
         },
         {
           "id": "extended-api",
-          "title": "Renderer label metadata, popup hooks и остальные semantic/config/ref API",
+          "title": "Popup hooks и остальные semantic/config/ref API",
           "state": "partial",
           "requiredForV1": false,
           "evidence": [
@@ -11244,7 +11259,7 @@
             "tests/package/tree-select-data.ssr.test.ts",
             "readme.md"
           ],
-          "note": "FieldNames, treeDataSimpleMode, generic raw data, treeExpandAction, maxCount и tag text/count/placeholder/render API перенесены. Остаются TreeNode children, popupRender/prefix/suffix customization, component config и полный semantic/ref API. TreeTitleRender оформляет выбранные значения, но onChange и maxTagPlaceholder omitted records пока возвращают подписи данных вместо bound renderer snippets. Deprecated extra.triggerNode/allCheckedNodes и node.props React wrappers исключены; собственное поле props данных сохраняется."
+          "note": "FieldNames, treeDataSimpleMode, generic raw data, treeExpandAction, maxCount, tag text/count/placeholder/render API и renderer labels в callbacks/omitted records перенесены. Остаются TreeNode children, popupRender/prefix/suffix customization, component config и полный semantic/ref API. Deprecated extra.triggerNode/allCheckedNodes и node.props React wrappers исключены; собственное поле props данных сохраняется."
         },
         {
           "id": "virtual-motion",
@@ -11471,7 +11486,7 @@
         {
           "id": "tag-display",
           "title": "Tag text/count/placeholder/render и responsive measurement",
-          "state": "partial",
+          "state": "supported",
           "requiredForV1": false,
           "evidence": [
             "src/lib/tree-select-tags.engine.ts",
@@ -11493,9 +11508,10 @@
             "tests/browser/fixtures/tree-select-tags-hydration.server.ts",
             "tests/browser/fixtures/tree-select-tags-hydration.html",
             "tests/package/tree-select-tags.ssr.test.ts",
-            "readme.md"
+            "readme.md",
+            "tests/browser/tree-select-labels.spec.ts"
           ],
-          "note": "MaxTagTextLength маскирует только scalar string/number UI; numeric slice и responsive maxTagCount сохраняют все значения и полные labels/FormData. Omitted records сохраняют value/label/half/disabled без synthetic key; literal/array/Snippet placeholder и typed tagRender используют bound label snippet, raw value/index/disabled, closable/onClose и isMaxTag summary без value/index/onClose. Ant wrapper gating multiple/treeCheckable сохранён. False custom-toggle следует rc-select useOpen MessageChannel после close/change; latest open и unmount закрывают ports и подавляют stale callbacks. Shared Select measurement учитывает input/rest/custom widths, resize и hidden focus handoff; responsive SSR скрывает tags до измерения. 49 unmodified UMD cases и55 DOM-free server renders, Native lifecycle и3 hydration cases защищают callbacks, aliases/simple/check/strict/missing, RTL/prefix и updates. Закрытый multiple сбрасывает unhandled pre-hydration query, как Source; DOM/input/focus и outside draft сохраняются. Partial: renderer-derived onChange/omitted label metadata ещё требует bound renderer API; старые Native rich tooltips сохранены."
+          "note": "MaxTagTextLength маскирует только scalar string/number UI; numeric slice и responsive maxTagCount сохраняют все значения и полные labels/FormData. Omitted records сохраняют value/label/half/disabled без synthetic key; literal/array/Snippet placeholder и typed tagRender используют bound label snippet, raw value/index/disabled, closable/onClose и isMaxTag summary без value/index/onClose. Ant wrapper gating multiple/treeCheckable сохранён. False custom-toggle следует rc-select useOpen MessageChannel после close/change; latest open и unmount закрывают ports и подавляют stale callbacks. Shared Select measurement учитывает input/rest/custom widths, resize и hidden focus handoff; responsive SSR скрывает tags до измерения. 49 unmodified UMD cases и55 DOM-free server renders, Native lifecycle и3 hydration cases защищают callbacks, aliases/simple/check/strict/missing, RTL/prefix и updates. Закрытый multiple сбрасывает unhandled pre-hydration query, как Source; DOM/input/focus и outside draft сохраняются. Renderer-derived omitted labels связаны с исходным Data, отдельная feature renderer-labels. Старые Native rich tooltips сохранены."
         },
         {
           "id": "source-tag-text-unicode",
@@ -11537,7 +11553,7 @@
         },
         {
           "id": "native-rich-tag-tooltip",
-          "title": "Прежний Native tooltip rich labels и pending renderer metadata",
+          "title": "Прежние Native tooltip и accessible remove names для rich labels",
           "state": "partial",
           "requiredForV1": false,
           "evidence": [
@@ -11546,7 +11562,49 @@
             "tests/package/tree-select-tags.ssr.test.ts",
             "readme.md"
           ],
-          "note": "Raw opaque-array-title/title-renderer: React getTitle не выводит title для ReactNode, Native сохраняет существующий composite/raw-data tooltip. Tag display API не меняет эту старую границу; одинаковый rich DOM не заявлен. TreeTitleRender label в onChange/omitted records пока остаётся raw data label и требует отдельного bound snippet переноса."
+          "note": "Raw opaque-array-title/title-renderer: React getTitle не выводит title для ReactNode, Native сохраняет существующий composite/raw-data tooltip и полное accessible имя remove. После выбора label в callbacks становится связанным snippet, а tooltip/имя сохраняют прежнюю подпись. Одинаковый rich DOM не заявлен."
+        },
+        {
+          "id": "renderer-labels",
+          "title": "TreeTitleRender labels в onChange и maxTagPlaceholder",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/TreeSelect.svelte",
+            "src/lib/tree-select.engine.ts",
+            "src/lib/tree-select.engine.test.ts",
+            "src/lib/tree-select.types.ts",
+            "src/lib/TreeSelectLabelBinding.svelte",
+            "src/lib/tree-select-labels.ts",
+            "tests/browser/fixtures/TreeSelectLabelsFixtures.svelte",
+            "tests/browser/fixtures/TreeSelectLabelsScope.svelte",
+            "tests/browser/fixtures/TreeSelectRichLabel.svelte",
+            "tests/browser/fixtures/tree-select-label-cases.ts",
+            "tests/browser/fixtures/ant-design-tree-select-labels-reference.json",
+            "tests/browser/fixtures/ant-design-tree-select-labels-ssr-reference.json",
+            "tests/browser/tree-select-label-metrics.ts",
+            "tests/browser/tree-select-labels.spec.ts",
+            "tests/browser/tree-select-labels-hydration.spec.ts",
+            "tests/browser/fixtures/tree-select-labels-hydration.client.ts",
+            "tests/browser/fixtures/tree-select-labels-hydration.server.ts",
+            "tests/browser/fixtures/tree-select-labels-hydration.html",
+            "tests/package/tree-select-labels.ssr.test.ts",
+            "tests/browser/tree-select-tags-native.spec.ts",
+            "readme.md"
+          ],
+          "note": "Для известного узла treeTitleRender заменяет label в plain callback labels, labelInValue/strict records и omitted records. Возвращаемый Snippet связывает renderer и исходный Data; missing values сохраняют входную/кешированную подпись. Value, halfChecked, disabled, callback order, payload refs, native tooltip/remove name и FormData сохранены. Summary связывает labels декларативно до consumer render, callback может создать недостающий snippet через пустой detached component с немедленным unmount. Без private Svelte API, runtime server import и DOM wrapper. Snippets можно рендерить после unmount под контекстом получателя. 28 unmodified UMD cases, 30 DOM-free renders, lifecycle и strict hydration с head/IDs/drafts/intro guard."
+        },
+        {
+          "id": "source-stale-title-renderer",
+          "title": "Source использует прежний treeTitleRender после смены prop",
+          "state": "partial",
+          "requiredForV1": false,
+          "evidence": [
+            "tests/browser/fixtures/ant-design-tree-select-labels-reference.json",
+            "tests/browser/tree-select-labels.spec.ts",
+            "readme.md"
+          ],
+          "note": "Ant Design6.6.8 / 984592267de88fbf9cdaecc96a56629e721c709d, rc-tree-select1.16.1, unmodified official UMD/React18.3.1. Raw stale-renderer и removed-renderer: convert2LabelValues не зависит от treeTitleRender. После замены/снятия prop при неизменных data/value summary остаётся прежним, а первый следующий onChange отдаёт старые ReactNode labels. Public fresh-renderer-counterpart/plain-counterpart с теми же финальными props дают актуальные labels. Native обновляет summary и callback labels сразу; ранее выданные snippets остаются привязаны к своей записи и renderer, input и focus сохраняются."
         }
       ]
     },

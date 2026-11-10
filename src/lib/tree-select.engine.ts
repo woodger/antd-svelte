@@ -5,6 +5,7 @@ import type {
   TreeSelectNode,
   TreeSelectRawValue,
   TreeSelectValue,
+  TreeSelectLabel,
   TreeSelectLabeledValue,
   TreeSelectStrategy,
   TreeSelectSearchConfig,
@@ -88,15 +89,15 @@ export function treeSelectLabels<Data extends object>(
   items: readonly TreeSelectLabeledValue[],
   index: TreeSelectIndex<Data>,
   labelProp?: string,
-  previous: readonly TreeSelectLabeledValue[] = items
+  previous: readonly TreeSelectLabeledValue[] = items,
+  renderLabel?: (node: Data, fallback: TreeSelectLabel) => TreeSelectLabel
 ): TreeSelectLabeledValue[] {
   return items.map(item => {
     const node = index.values.get(item.value);
+    const label = item.label ?? (node ? treeSelectNodeLabel(node, index.fields, labelProp)
+      : previous.find(old => old.value === item.value)?.label);
     return {
-      label: item.label
-        ?? (node
-          ? treeSelectNodeLabel(node, index.fields, labelProp)
-          : previous.find(old => old.value === item.value)?.label),
+      label: node && renderLabel ? renderLabel(node, label) : label,
       value: item.value,
       halfChecked: item.halfChecked,
       disabled: node ? Reflect.get(node, 'disabled') as boolean | undefined : undefined

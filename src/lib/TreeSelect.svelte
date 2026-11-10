@@ -22,6 +22,8 @@
   import { expandTreeParents, treeCheckDisabled } from './tree.engine';
   import { treeSelectChildren, treeSelectData, treeSelectNodeValue } from './tree-select-data.engine';
   import { treeSelectLimit } from './tree-select-limit.engine';
+  import { createTreeSelectLabelCache } from './tree-select-labels';
+  import TreeSelectLabelBinding from './TreeSelectLabelBinding.svelte';
   import { treeSelectTagText, treeSelectTagOverflow } from './tree-select-tags.engine';
   import { connectSelectTagOverflow, measureSelectInput } from './select-tag-overflow.dom';
   import { useConfig } from './config-context';
@@ -170,6 +172,11 @@
   let responsiveTags = $derived(isMultiple && maxTagCount === 'responsive');
   let tagOverflow = $derived(treeSelectTagOverflow(display,
     responsiveTags ? responsiveCount : typeof maxTagCount === 'number' ? maxTagCount : undefined));
+  const labelCache = createTreeSelectLabelCache<Data>();
+  // Summary связывает labels в текущем render, до вызова consumer snippet.
+  let omittedTags = $derived(treeTitleRender && typeof maxTagPlaceholder === 'function'
+    ? labelCache.forSummary(treeTitleRender, tagOverflow.omitted, index.values)
+    : { records: tagOverflow.omitted, pending: [] });
   let renderedTags = $derived(responsiveTags ? display : tagOverflow.visible);
   let visibleTagKeys = $derived(new Set(tagOverflow.visible.map(item => item.value)));
   // Ant wrapper передаёт tagRender по multiple/treeCheckable, независимо от strict-only rc mode.
@@ -383,6 +390,12 @@
     return Array.isArray(label) ? label.map(text).join('')
       : typeof label === 'function' || typeof label === 'boolean' || label == null ? '' : String(label);
   }
+  function renderedLabel(node: Data, fallback: TreeSelectLabel): TreeSelectLabel {
+    return treeTitleRender ? labelCache.forChange(treeTitleRender, node, fallback) : fallback;
+  }
+  function tagText(item: TreeSelectLabeledValue): string {
+    return text(labelCache.original(item.label) ?? item.value);
+  }
   function requestOpen(next: boolean) {
     cancelTagClose();
     if (next && blocked || next === visible) return;
@@ -417,11 +430,13 @@
       raw.map(value => ({ value })),
       index,
       treeNodeLabelProp,
-      before
+      before,
+      renderedLabel
     );
     internalValue = nextItems;
     if (autoClear)
       internalSearch = '';
+    if (!onChange) return;
     const values = conduction ? formatted : raw;
     const returnItems = treeSelectLabels(
       [
@@ -432,10 +447,11 @@
       ],
       index,
       treeNodeLabelProp,
-      before
+      before,
+      renderedLabel
     );
     const returnValue = labeled ? returnItems : returnItems.map(item => item.value);
-    onChange?.(
+    onChange(
       (isMultiple ? returnValue : returnValue[0]) as ValueType,
       labeled ? null : returnItems.map(item => item.label!),
       { triggerValue }
@@ -688,7 +704,7 @@
         data-tree-choice-custom-tag={renderTag ? '' : undefined}
         class={[renderTag ? 'custom-tag' : `${prefix}-selection-item`, hidden && 'measure-tag',
           !renderTag && (blocked || item.disabled) && `${prefix}-selection-item-disabled`]}
-        title={renderTag ? undefined : text(item.label)} role="presentation"
+        title={renderTag ? undefined : tagText(item)} role="presentation"
         onmousedown={renderTag ? customTagMouseDown : undefined} aria-hidden={hidden || undefined} inert={hidden}
         {@attach node => connectTagElement(node, item.value)}>
         {#if renderTag}{@render renderTag({
@@ -699,13 +715,14 @@
             choose(item.value, 'selection', false);
           }
         })}{:else}
-          <span class={`${prefix}-selection-item-content`}>{@render tagLabel()}</span>{#if !blocked&&!item.disabled}<button type="button" data-ant-tree-choice-selection-item-remove class={`${prefix}-selection-item-remove`} aria-label={`${config.locale.removeText ?? 'Remove'} ${text(item.label)}`} onpointerdown={event => event.preventDefault()} onclick={() => choose(item.value, 'selection')}><Icon name="close" /></button>{/if}
+          <span class={`${prefix}-selection-item-content`}>{@render tagLabel()}</span>{#if !blocked&&!item.disabled}<button type="button" data-ant-tree-choice-selection-item-remove class={`${prefix}-selection-item-remove`} aria-label={`${config.locale.removeText ?? 'Remove'} ${tagText(item)}`} onpointerdown={event => event.preventDefault()} onclick={() => choose(item.value, 'selection')}><Icon name="close" /></button>{/if}
         {/if}
       </span>
     {/each}
     {#if tagOverflow.omitted.length || responsiveTags && display.length}
       {#snippet restLabel()}
-        {#if typeof maxTagPlaceholder === 'function'}{@render maxTagPlaceholder(tagOverflow.omitted)}
+        {#if typeof maxTagPlaceholder === 'function'}{#each omittedTags.pending as binding (binding)}
+          <TreeSelectLabelBinding {...binding} />{/each}{@render maxTagPlaceholder(omittedTags.records)}
         {:else if maxTagPlaceholder == null}+ {tagOverflow.omitted.length} ...
         {:else}<TreeTitle value={maxTagPlaceholder} node={{}} />{/if}
       {/snippet}

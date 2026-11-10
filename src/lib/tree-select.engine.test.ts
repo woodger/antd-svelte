@@ -118,6 +118,24 @@ describe('TreeSelect value and search engines', () => {
       expect(treeSelectLabels([{ value: 'a', label: 'Custom' }], i)[0].label).toBe('Custom');
     }
   );
+  it('renders labels from known raw nodes and retains missing label snapshots', () => {
+    const index = treeSelectIndex(nodes);
+    const observed: TreeSelectNode[] = [];
+    const records = treeSelectLabels(
+      [{ value: 'disabled', label: 'Custom', halfChecked: true }, { value: 'outside' }],
+      index, undefined, [{ value: 'outside', label: 'Cached' }], node => {
+        observed.push(node);
+        return `Rendered ${node.title}`;
+      }
+    );
+
+    expect(observed).toHaveLength(1);
+    expect(observed[0]).toBe(nodes[0].children![2]);
+    expect(records).toMatchObject([
+      { value: 'disabled', label: 'Rendered Locked', halfChecked: true, disabled: true },
+      { value: 'outside', label: 'Cached' }
+    ]);
+  });
 });
 
 it(

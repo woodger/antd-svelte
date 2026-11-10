@@ -136,6 +136,7 @@ export interface TreeSelectProps<
   /** @defaultValue false */
   treeIcon?: boolean;
   switcherIcon?: Snippet<[TreeEventNode]>;
+  /** Для известного узла label в onChange и omitted records — snippet с этим узлом. */
   treeTitleRender?: Snippet<[Data]>;
   /** @defaultValue 256 */
   listHeight?: number;
