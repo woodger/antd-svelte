@@ -5,7 +5,9 @@
   import { useConfig } from './config-context';
   import { buildTreeEntities, expandTreeParents, treeLeaf } from './tree.engine';
   import { getDirectoryRangeKeys, getDirectorySelectedNodes } from './directory-tree.engine';
-  import type { DirectoryTreeProps, TreeDataNode, TreeEventNode, TreeKey } from './tree.types';
+  import type {
+    DirectoryTreeProps, TreeDataNode, TreeEventNode, TreeKey, TreeRef, TreeScrollConfig
+  } from './tree.types';
 
   let {
     treeData = [],
@@ -30,7 +32,7 @@
   }: DirectoryTreeProps<Data> = $props();
   const config = useConfig();
   let prefix = $derived(config.getPrefixCls('tree', customizePrefixCls));
-  let tree = $state<{ focus(options?: FocusOptions): void; blur(): void; }>();
+  let tree = $state<TreeRef>();
   let internalSelected = $state.raw<TreeKey[]>(untrack(() =>
     [...(selectedKeys ?? defaultSelectedKeys)]
   ));
@@ -92,6 +94,9 @@
 
   export function blur() {
     tree?.blur();
+  }
+  export function scrollTo(settings?: TreeScrollConfig | null) {
+    tree?.scrollTo(settings);
   }
 </script>
 

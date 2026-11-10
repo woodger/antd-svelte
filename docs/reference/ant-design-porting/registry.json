@@ -14551,7 +14551,10 @@
         "tests/browser/fixtures/ant-design-listy-prefix-reference.json",
         "tests/browser/listy-prefix-metrics.ts",
         "tests/browser/listy-prefix.spec.ts",
-        "tests/package/listy-prefix.ssr.test.ts"
+        "tests/package/listy-prefix.ssr.test.ts",
+        "src/lib/virtual-list.engine.ts",
+        "src/lib/virtual-list.engine.test.ts",
+        "src/lib/virtual-list.dom.ts"
       ],
       "features": [
         {
@@ -14586,7 +14589,10 @@
           "evidence": [
             "src/lib/listy.engine.test.ts",
             "tests/package/listy.ssr.test.ts",
-            "tests/browser/listy.spec.ts"
+            "tests/browser/listy.spec.ts",
+            "src/lib/virtual-list.engine.ts",
+            "src/lib/virtual-list.engine.test.ts",
+            "src/lib/virtual-list.dom.ts"
           ],
           "note": "Оценка fontHeight+padding, offsetHeight+margins, retained cache, source range boundaries/overscan и anchor correction. Без height/при height=0 выводятся все строки; fitting dataset без scrollbar. ScrollTo до 10 выравниваний после измерений, latest request, missing key retries по virtual-list1.5.1 без смены позиции; late data/shrink/reorder/resize. 1.5.1 удовлетворяет ^1.4.0 Listy, выбрана по devDependency Antd и коду npm browser bundle."
         },
@@ -17689,7 +17695,7 @@
       "name": "Tree",
       "category": "data-display",
       "scope": "target",
-      "scopeReason": "Tree и DirectoryTree по Ant Design 6.6.8 / rc-tree 1.4.0: treeData, состояния, conduction, async loading, клавиатура и выбор диапазона; virtual/drag и расширенный API отдельно.",
+      "scopeReason": "Tree и DirectoryTree по Ant Design 6.6.8 / rc-tree 1.4.0: treeData, состояния, conduction, async loading, клавиатура, выбор диапазона, virtual list и scrollTo; drag/drop и motion отдельно.",
       "upstreamPath": "components/tree",
       "reviewedRevision": "984592267de88fbf9cdaecc96a56629e721c709d",
       "exports": [
@@ -17731,6 +17737,11 @@
           "name": "@rc-component/util",
           "range": "^1.14.0",
           "referenceVersion": "1.14.0"
+        },
+        {
+          "name": "@rc-component/virtual-list",
+          "range": "^1.2.0",
+          "referenceVersion": "1.5.1"
         }
       ],
       "priority": "p1",
@@ -17799,7 +17810,24 @@
         "tests/browser/fixtures/ant-design-tree-semantic-reference.json",
         "tests/browser/tree-semantic-metrics.ts",
         "tests/browser/tree-semantic.spec.ts",
-        "tests/package/tree-semantic.ssr.test.ts"
+        "tests/package/tree-semantic.ssr.test.ts",
+        "src/lib/tree-virtual.engine.ts",
+        "src/lib/virtual-list.engine.ts",
+        "src/lib/virtual-list.engine.test.ts",
+        "src/lib/virtual-list.model.svelte.ts",
+        "src/lib/virtual-list.dom.ts",
+        "src/lib/virtual-list.types.ts",
+        "src/lib/listy.engine.ts",
+        "src/lib/listy.dom.ts",
+        "src/lib/listy-gestures.dom.ts",
+        "src/lib/ListyScrollbar.svelte",
+        "tests/browser/fixtures/TreeVirtualScope.svelte",
+        "tests/browser/fixtures/TreeVirtualFixtures.svelte",
+        "tests/browser/fixtures/ant-design-tree-virtual-reference.json",
+        "tests/browser/tree-virtual-metrics.ts",
+        "tests/browser/tree-virtual.spec.ts",
+        "tests/browser/tree-virtual-native.spec.ts",
+        "tests/package/tree-virtual.ssr.test.ts"
       ],
       "features": [
         {
@@ -17839,19 +17867,19 @@
         },
         {
           "id": "virtual-drag-directory",
-          "title": "Virtual scroll и drag/drop",
+          "title": "Drag/drop",
           "state": "missing",
           "requiredForV1": false,
           "evidence": [],
-          "note": "Сейчас рендерятся все видимые строки, height задаёт native scroll viewport; virtual list/scrollTo и drag/drop не перенесены. DirectoryTree и expandAction учитываются отдельными features."
+          "note": "Draggable, drop indicator, allowDrop и drag callbacks ещё не перенесены. Виртуальные окна, scrollTo, DirectoryTree и expandAction учтены отдельными features."
         },
         {
           "id": "extended-api",
-          "title": "Полный ref API и motion",
+          "title": "Collapse/appear motion",
           "state": "missing",
           "requiredForV1": false,
           "evidence": [],
-          "note": "Ref предоставляет focus/blur и bind:nativeElement; scrollTo/virtual, drag/drop и collapse/appear motion остаются отдельным объёмом. Полный motion object в semantic callback props не эмулируется до переноса motion API. Пять semantic slots и ConfigProvider.tree перенесены отдельно. Deprecated Tree.children/TreeNode JSX composition исключена по es/Tree.js @rc-component/tree1.4.0; TreeDataNode.children остаётся актуальным data API."
+          "note": "Collapse/appear и полный motion object в semantic callback props ещё не перенесены. ScrollTo и TreeRef перенесены отдельно. Deprecated Tree.children/TreeNode JSX composition исключена по es/Tree.js @rc-component/tree1.4.0; TreeDataNode.children остаётся актуальным data API."
         },
         {
           "id": "component-theme",
@@ -18071,7 +18099,7 @@
             "tests/package/tree-fields.ssr.test.ts",
             "readme.md"
           ],
-          "note": "TreeProps/Data, DirectoryTreeProps/Data, TreeEventNode/Data и TreeCheckInfo/Data сохраняют пользовательский payload; TreeFieldDataNode помогает описать рекурсивное поле children. Aliases key/title/children и пустые имена работают в index/leaf/expand/check/load, Directory ranges, title/icon/switcher/filter callbacks. Event key и state перекрывают canonical raw fields; selectedNodes/checkedNodes/positions сохраняют исходные объекты. Node title snippet имеет приоритет над titleRender; literal arrays/zero/empty и object payload с titleRender поддержаны. 27 raw UMD6.6.8 конфигураций сохраняют labels/ARIA, иконки и события: aliases/частичная схема/canonical shadows, strict/conduction, lazy/preloaded, hold/accept, Directory ranges/all, RTL/prefix и data/schema transitions. Native generic fixture проверяет вывод типов без index signature, discriminated unions, исходные literal key/state, snippets и recursive helper. SSR не загружает детей и не создаёт timers; обновление schema сохраняет DOM/ref/active IDs, selection, keyboard и внешний draft. Virtual/drag/ref/motion остаются отдельными пробелами."
+          "note": "TreeProps/Data, DirectoryTreeProps/Data, TreeEventNode/Data и TreeCheckInfo/Data сохраняют пользовательский payload; TreeFieldDataNode помогает описать рекурсивное поле children. Aliases key/title/children и пустые имена работают в index/leaf/expand/check/load, Directory ranges, title/icon/switcher/filter callbacks. Event key и state перекрывают canonical raw fields; selectedNodes/checkedNodes/positions сохраняют исходные объекты. Node title snippet имеет приоритет над titleRender; literal arrays/zero/empty и object payload с titleRender поддержаны. 27 raw UMD6.6.8 конфигураций сохраняют labels/ARIA, иконки и события: aliases/частичная схема/canonical shadows, strict/conduction, lazy/preloaded, hold/accept, Directory ranges/all, RTL/prefix и data/schema transitions. Native generic fixture проверяет вывод типов без index signature, discriminated unions, исходные literal key/state, snippets и recursive helper. SSR не загружает детей и не создаёт timers; обновление schema сохраняет DOM/ref/active IDs, selection, keyboard и внешний draft. Drag/drop и motion остаются отдельными пробелами; virtual/scrollTo учтены отдельно."
         },
         {
           "id": "native-field-names-refresh",
@@ -18127,6 +18155,134 @@
             "readme.md"
           ],
           "note": "Ошибка Source Ant Design6.6.8 / 984592267de88fbf9cdaecc96a56629e721c709d / rc-tree1.4.0: iconNode memo зависит от prefixCls/nodeState/loading, но не styles/classNames. Semantic-only update оставляет прежние itemIcon classes/color, хотя title уже обновился. Raw observation повторён без изменений; public custom icon counterpart обновляет те же wrappers/CSS. Native не кэширует старые slots, сохраняет default icon, DOM и pending load. Source bug не копируется."
+        },
+        {
+          "id": "virtual-window",
+          "title": "Измеряемые virtual окна Tree/DirectoryTree и обе оси прокрутки",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/tree-virtual.engine.ts",
+            "src/lib/virtual-list.engine.ts",
+            "src/lib/virtual-list.engine.test.ts",
+            "src/lib/virtual-list.model.svelte.ts",
+            "src/lib/virtual-list.dom.ts",
+            "src/lib/virtual-list.types.ts",
+            "src/lib/listy.engine.ts",
+            "src/lib/listy.dom.ts",
+            "src/lib/listy-gestures.dom.ts",
+            "src/lib/ListyScrollbar.svelte",
+            "tests/browser/fixtures/TreeVirtualScope.svelte",
+            "tests/browser/fixtures/TreeVirtualFixtures.svelte",
+            "tests/browser/fixtures/ant-design-tree-virtual-reference.json",
+            "tests/browser/tree-virtual-metrics.ts",
+            "tests/browser/tree-virtual.spec.ts",
+            "tests/browser/tree-virtual-native.spec.ts",
+            "tests/package/tree-virtual.ssr.test.ts",
+            "src/lib/Tree.svelte",
+            "src/lib/DirectoryTree.svelte",
+            "src/lib/tree.types.ts",
+            "src/lib/ConfigProvider.svelte",
+            "readme.md"
+          ],
+          "note": "Height/virtual/itemHeight/scrollWidth, ConfigProvider.virtual, token estimate, offsetHeight+margins и retained cache по ключам. Без height/при0 или virtual=false выводятся все раскрытые строки; itemHeight=0 отключает virtual. Source boundaries/overscan и fitting horizontal list, theme/compact/prefix/aliases/Directory, data/reverse/shrink, height/width/active updates. 28 неизменённых UMD6.6.8 случаев и12 Source SSR snapshots; motion явно выключен, шесть raw наблюдений отделены. Wheel/Shift+wheel, touch/inertia, custom scrollbar drag/track и cleanup подключены без runtime зависимости. Listy разделяет чистые расчёты и измерения; его defaults/sticky/API сохранены. Loading изначально раскрытых узлов начинается только в mounted window. SSR использует начальный estimate без DOM/load/timers. Динамический itemHeight обновляет окно вместо Source stale memo."
+        },
+        {
+          "id": "scroll-ref",
+          "title": "TreeRef/DirectoryTree: scrollTo по позиции, key/index и function offset",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/tree-virtual.engine.ts",
+            "src/lib/virtual-list.engine.ts",
+            "src/lib/virtual-list.engine.test.ts",
+            "src/lib/virtual-list.model.svelte.ts",
+            "src/lib/virtual-list.dom.ts",
+            "src/lib/virtual-list.types.ts",
+            "src/lib/listy.engine.ts",
+            "src/lib/listy.dom.ts",
+            "src/lib/listy-gestures.dom.ts",
+            "src/lib/ListyScrollbar.svelte",
+            "tests/browser/fixtures/TreeVirtualScope.svelte",
+            "tests/browser/fixtures/TreeVirtualFixtures.svelte",
+            "tests/browser/fixtures/ant-design-tree-virtual-reference.json",
+            "tests/browser/tree-virtual-metrics.ts",
+            "tests/browser/tree-virtual.spec.ts",
+            "tests/browser/tree-virtual-native.spec.ts",
+            "tests/package/tree-virtual.ssr.test.ts",
+            "src/lib/Tree.svelte",
+            "src/lib/DirectoryTree.svelte",
+            "src/lib/tree.types.ts",
+            "src/lib/ConfigProvider.svelte",
+            "readme.md"
+          ],
+          "note": "Bind:this предоставляет focus/blur/scrollTo, nativeElement остаётся отдельной bindable prop. Число, {top,left}, key/index с top/bottom/auto, numeric/function offset и getSize(startKey,endKey?) соответствуют virtual-list1.5.1; неизвестный endKey даёт bottom=undefined, nonfinite offset заменяется0. До10 проходов измерения; latest request отменяет прежний, missing key сохраняет позицию, null/undefined показывают scrollbar. Key autoExpand добавляет только target в uncontrolled expandedKeys без ancestors/onExpand. ItemScrollOffset используется клавиатурой/controlled activeKey. OnScroll/native onscroll получает holder; после unmount callbacks и сохранённый ref не выполняют работу."
+        },
+        {
+          "id": "native-virtual-estimate-refresh",
+          "title": "Оценка virtual окна обновляется без клонирования data",
+          "state": "partial",
+          "requiredForV1": false,
+          "evidence": [
+            "tests/browser/fixtures/ant-design-tree-virtual-reference.json",
+            "tests/browser/tree-virtual-native.spec.ts",
+            "tests/package/tree-virtual.ssr.test.ts",
+            "readme.md"
+          ],
+          "note": "Ошибка Source virtual-list1.5.1: window useMemo пропускает itemHeight. Изменение Tree titleHeight при неизменных фактических строках оставляет старый scrollHeight. Raw stale-height-observation сохранён; public Source counterpart меняет также ссылку data. Native derived обновляет estimate с тем же массивом и retained measurements, сохраняя DOM/ref/selection/draft."
+        },
+        {
+          "id": "native-virtual-rtl",
+          "title": "Virtual list и scrollbar получают направление Tree",
+          "state": "partial",
+          "requiredForV1": false,
+          "evidence": [
+            "tests/browser/fixtures/ant-design-tree-virtual-reference.json",
+            "tests/browser/tree-virtual-native.spec.ts",
+            "tests/package/tree-virtual.ssr.test.ts",
+            "readme.md"
+          ],
+          "note": "Ошибка Source rc-tree1.4.0: Tree.render передаёт direction в context, но не в NodeList/VirtualList. Horizontal thumb, filler margin и жесты остаются LTR внутри RTL дерева. Raw horizontal-rtl-observation сохранён без исправления. Native передаёт направление обеим осям, отражает scrollbar и жесты; RTL touch проверяет logical boundary."
+        },
+        {
+          "id": "native-virtual-active",
+          "title": "Active key=0 и валидный aria-activedescendant виртуального дерева",
+          "state": "partial",
+          "requiredForV1": false,
+          "evidence": [
+            "tests/browser/fixtures/ant-design-tree-virtual-reference.json",
+            "tests/browser/tree-virtual-native.spec.ts",
+            "tests/package/tree-virtual.ssr.test.ts",
+            "readme.md"
+          ],
+          "note": "Ошибки Source rc-tree1.4.0: focus использует first.key||null и теряет0; внешняя прокрутка удаляет active DOM, сохраняя ссылку aria-activedescendant. Raw zero-focus/active-missing observations сохранены. Native принимает0 и публикует ARIA ID только для mounted row; логический active key сохраняется и следующая клавиша возвращает строку в окно."
+        },
+        {
+          "id": "native-virtual-inheritance",
+          "title": "Undefined local virtual наследует общий provider",
+          "state": "partial",
+          "requiredForV1": false,
+          "evidence": [
+            "tests/browser/fixtures/ant-design-tree-virtual-reference.json",
+            "tests/browser/tree-virtual-native.spec.ts",
+            "tests/package/tree-virtual.ssr.test.ts",
+            "readme.md"
+          ],
+          "note": "Ошибка Source wrapper: local virtual=undefined из spread props перекрывает ConfigProvider.virtual=false. Raw global-undefined-observation отделён от Source counterpart с отсутствующим prop. Native undefined наследует provider; явные true/false перекрывают общий default."
+        },
+        {
+          "id": "native-virtual-horizontal-range",
+          "title": "Horizontal offset остаётся нулём при содержимом уже viewport",
+          "state": "partial",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/virtual-list.model.svelte.ts",
+            "tests/browser/fixtures/ant-design-tree-virtual-reference.json",
+            "tests/browser/tree-virtual-native.spec.ts",
+            "tests/package/tree-virtual.ssr.test.ts",
+            "readme.md"
+          ],
+          "note": "Ошибка Source virtual-list1.5.1: keepInHorizontalRange сначала ограничивает offset снизу0, затем отрицательным scrollWidth-size.width. При width200 и viewport280 получается offset=-80 и marginLeft=80px. Raw undersized-width-observation сохранён; Native ограничивает максимум снизу0, сохраняет margin=0 и не создаёт лишний горизонтальный scrollbar."
         }
       ]
     },
@@ -21345,7 +21501,12 @@
         "tests/browser/tree-semantic.spec.ts",
         "tests/package/tree-semantic.ssr.test.ts",
         "tests/browser/fixtures/TreeGenericFields.svelte",
-        "tests/browser/tree-fields.spec.ts"
+        "tests/browser/tree-fields.spec.ts",
+        "src/lib/Listy.svelte",
+        "tests/browser/tree-virtual.spec.ts",
+        "tests/browser/tree-virtual-native.spec.ts",
+        "tests/package/tree-virtual.ssr.test.ts",
+        "tests/browser/listy.spec.ts"
       ],
       "features": [
         {
@@ -22624,6 +22785,24 @@
             "readme.md"
           ],
           "note": "Class/style и object/function classNames/styles для root,item,itemIcon,itemTitle,itemSwitcher. Config record наследуется при undefined и заменяется целиком любым объектом, включая {}; sibling scope изолирован. Callback получает исходные Native props с wrapper defaults showIcon/blockNode/checkable/selectable/disabled; rc-tree defaults не подставляются, generic data и identity сохраняются. Provider callbacks универсальны для data любой схемы, local callbacks выводят Data. Classes накапливаются; root сохраняет Native слои context semantic/plain и local semantic/plain после theme variables. Semantic item style перекрывает data node.style; leaf switcher и pending icon при showIcon=false получают slots. TreeSelect явно использует свою компонентную конфигурацию. 18 неизменённых UMD6.6.8 случаев и3 observations фиксируют CSS/classes, callback input markers, local/context/whole-record replacement, Directory overrides, prefix/RTL, style priorities, pending и live default icon/context updates. Raw plain-style placement отделён от public root-style counterpart существующего Native contract; raw stale icon memo отделён от public custom-icon refresh counterpart. Motion props остаются отдельным API. SSR не загружает детей и не создаёт timers; updates сохраняют DOM/ref/active IDs/selection/focus, один pending load и внешний draft."
+        },
+        {
+          "id": "virtual-list-default",
+          "title": "ConfigProvider.virtual для Tree/DirectoryTree и Listy",
+          "state": "partial",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/ConfigProvider.svelte",
+            "src/lib/config-context.ts",
+            "src/lib/Tree.svelte",
+            "src/lib/Listy.svelte",
+            "tests/browser/tree-virtual.spec.ts",
+            "tests/browser/tree-virtual-native.spec.ts",
+            "tests/package/tree-virtual.ssr.test.ts",
+            "tests/browser/listy.spec.ts",
+            "readme.md"
+          ],
+          "note": "Общий virtual наследуется во вложенном provider; local prop компонента имеет приоритет. Tree по умолчанию включает virtual при height/itemHeight, Listy сохраняет default=false. Explicit undefined наследует общий default вместо Source spread omission. Другие source consumers (Select/AutoComplete/TreeSelect/Table и их virtual API) пока требуют отдельного переноса."
         }
       ]
     },

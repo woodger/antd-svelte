@@ -1,5 +1,6 @@
 import type { ListyGroup, ListyKey, ListyProps, ListyScrollAlign } from './listy.types';
 import type { GlobalToken } from './theme-component-token.types';
+import { virtualListScrollStep, virtualListSizes, virtualListWindow } from './virtual-list.engine';
 
 /** Source estimate не включает границу; фактические высоты уточняются измерением строк. */
 export function listyItemHeight(token: GlobalToken): number {
@@ -91,51 +92,9 @@ export function listyWindow(
   scrollTop: number,
   innerHeight: number
 ) {
-  const useVirtual = Boolean(height && estimate);
-  // rc-virtual-list сохраняет измерения удалённых ключей до unmount списка.
-  const cachedHeight = [...heights.values()].reduce((sum, value) => sum + value, 0);
-  const virtual = useVirtual && Math.max(estimate * rows.length, cachedHeight) > (height ?? 0);
-
-  if (!useVirtual || !virtual) {
-    return {
-      useVirtual,
-      virtual,
-      start: 0,
-      end: rows.length - 1,
-      offset: undefined,
-      scrollHeight: useVirtual ? innerHeight : undefined
-    };
-  }
-
-  let total = 0;
-  let start: number | undefined;
-  let end: number | undefined;
-  let offset: number | undefined;
-  rows.forEach((row, index) => {
-    const next = total + (heights.get(row.taggedKey) ?? estimate);
-    if (next >= scrollTop && start === undefined) {
-      start = index;
-      offset = total;
-    }
-    if (next > scrollTop + (height ?? 0) && end === undefined) end = index;
-    total = next;
-  });
-
-  if (start === undefined) {
-    start = 0;
-    offset = 0;
-    end = Math.ceil((height ?? 0) / estimate);
-  }
-  if (end === undefined) end = rows.length - 1;
-
-  return {
-    useVirtual,
-    virtual,
-    start,
-    end: Math.min(end + 1, rows.length - 1),
-    offset,
-    scrollHeight: total
-  };
+  return virtualListWindow(
+    rows, row => row.taggedKey, heights, estimate, height, scrollTop, innerHeight
+  );
 }
 
 export function listySizes(
@@ -143,14 +102,7 @@ export function listySizes(
   heights: ListyHeights,
   estimate: number
 ) {
-  const sizes = new Map<string, { top: number; bottom: number; }>();
-  let top = 0;
-  for (const row of rows) {
-    const bottom = top + (heights.get(row.taggedKey) ?? estimate);
-    sizes.set(row.taggedKey, { top, bottom });
-    top = bottom;
-  }
-  return sizes;
+  return virtualListSizes(rows, row => row.taggedKey, heights, estimate);
 }
 
 export function listySticky<T, K extends ListyKey>(
@@ -190,29 +142,9 @@ export function listyScrollStep(
   scrollTop: number,
   height: number
 ) {
-  if (index < 0) return { unknown: true, align };
-  const target = Math.min(rows.length - 1, index);
-  let itemTop = 0;
-  let itemBottom = 0;
-  for (let cursor = 0; cursor <= target; cursor++) {
-    itemTop = itemBottom;
-    itemBottom += heights.get(rows[cursor].taggedKey) ?? estimate;
-  }
-
-  let remaining = align === 'top' ? offset : height - offset;
-  let unknown = false;
-  for (let cursor = target; cursor >= 0; cursor--) {
-    const measured = heights.get(rows[cursor].taggedKey);
-    if (measured === undefined) { unknown = true; break; }
-    remaining -= measured;
-    if (remaining <= 0) break;
-  }
-
-  if (align === 'top') return { top: itemTop - offset, unknown, align };
-  if (align === 'bottom') return { top: itemBottom - height + offset, unknown, align };
-  if (itemTop < scrollTop) return { unknown, align: 'top' as const };
-  if (itemBottom > scrollTop + height) return { unknown, align: 'bottom' as const };
-  return { unknown, align };
+  return virtualListScrollStep(
+    rows, row => row.taggedKey, heights, estimate, index, align, offset, scrollTop, height
+  );
 }
 
 export function listyScrollbar(size: number, range: number, offset: number) {

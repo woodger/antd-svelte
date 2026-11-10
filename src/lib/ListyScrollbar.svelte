@@ -4,6 +4,7 @@
 
   let {
     prefixCls,
+    horizontal = false,
     rtl,
     offset,
     range,
@@ -13,6 +14,7 @@
     onMoving
   }: {
     prefixCls: string;
+    horizontal?: boolean;
     rtl: boolean;
     offset: number;
     range: number;
@@ -57,7 +59,8 @@
     let frame = 0;
 
     function position(event: MouseEvent | TouchEvent) {
-      return ('touches' in event ? event.touches[0].pageY : event.pageY) - view!.scrollY;
+      const point = 'touches' in event ? event.touches[0] : event;
+      return horizontal ? point.pageX - view!.scrollX : point.pageY - view!.scrollY;
     }
 
     function stop() {
@@ -73,8 +76,10 @@
 
     function move(event: MouseEvent | TouchEvent) {
       view!.cancelAnimationFrame(frame);
-      const scale = size / track.getBoundingClientRect().height;
-      const next = startTop + (position(event) - startY) * scale;
+      const rect = track.getBoundingClientRect();
+      const scale = size / (horizontal ? rect.width : rect.height);
+      const delta = (position(event) - startY) * (horizontal && rtl ? -1 : 1);
+      const next = startTop + delta * scale;
       const top = listyScrollbarOffset(next, geometry.thumb, size, range);
       frame = view!.requestAnimationFrame(() => onScroll(top));
     }
@@ -98,9 +103,11 @@
       event.preventDefault();
       if (event.button !== 0 || handle.contains(event.target as Node)) return;
       const y = position(event);
-      const top = track.getBoundingClientRect().top;
-      if (!Number.isFinite(y) || !Number.isFinite(top)) return;
-      onScroll(listyScrollbarOffset(y - top - geometry.thumb / 2, geometry.thumb, size, range));
+      const rect = track.getBoundingClientRect();
+      const start = horizontal ? rtl ? rect.right : rect.left : rect.top;
+      if (!Number.isFinite(y) || !Number.isFinite(start)) return;
+      const distance = (y - start) * (horizontal && rtl ? -1 : 1);
+      onScroll(listyScrollbarOffset(distance - geometry.thumb / 2, geometry.thumb, size, range));
     }
 
     function preventTouch(event: TouchEvent) { event.preventDefault(); }
@@ -123,10 +130,13 @@
 </script>
 
 <div bind:this={bar} aria-hidden="true"
-  class={[`${prefixCls}-scrollbar`, `${prefixCls}-scrollbar-vertical`,
+  class={[`${prefixCls}-scrollbar`, `${prefixCls}-scrollbar-${horizontal ? 'horizontal' : 'vertical'}`,
     visible && `${prefixCls}-scrollbar-visible`]}
-  style={`position:absolute;${visible ? '' : 'visibility:hidden;'}width:8px;top:0;bottom:0;${rtl ? 'left' : 'right'}:0`}>
+  style={`position:absolute;${visible ? '' : 'visibility:hidden;'}${horizontal
+    ? 'height:8px;left:0;right:0;bottom:0' : `width:8px;top:0;bottom:0;${rtl ? 'left' : 'right'}:0`}`}>
   <div bind:this={thumb}
     class={[`${prefixCls}-scrollbar-thumb`, moving && `${prefixCls}-scrollbar-thumb-moving`]}
-    style={`position:absolute;border-radius:99px;background:var(--rc-virtual-list-scrollbar-bg,rgba(0,0,0,0.5));cursor:pointer;user-select:none;width:100%;height:${geometry.thumb}px;top:${geometry.top}px`}></div>
+    style={`position:absolute;border-radius:99px;background:var(--rc-virtual-list-scrollbar-bg,rgba(0,0,0,0.5));cursor:pointer;user-select:none;${horizontal
+      ? `height:100%;width:${geometry.thumb}px;top:0;${rtl ? 'right' : 'left'}:${geometry.top}px`
+      : `width:100%;height:${geometry.thumb}px;top:${geometry.top}px`}`}></div>
 </div>

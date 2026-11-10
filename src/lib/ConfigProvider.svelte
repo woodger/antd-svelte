@@ -150,7 +150,7 @@
     checkbox?: CheckboxConfig;
     switch?: SwitchConfig;
     wave?: WaveConfig;
-    /** Наследуемый virtual; пока используется Listy. Без него Listy рендерит raw mode. */
+    /** Наследуемый virtual для Tree и Listy; собственные defaults компонентов различаются. */
     virtual?: boolean;
     /** Producer callback пустых состояний контролов и Table. Наследуется от родителя. */
     renderEmpty?: RenderEmptyHandler;

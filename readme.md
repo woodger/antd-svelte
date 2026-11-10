@@ -6523,7 +6523,7 @@ onExpand предшествует onClick и последующему onSelect/o
 оставив только первый onExpand(expanded=true): предварительное обновление keys
 обходит guard listChanging. Raw observation сохранён в случае click-double.
 Native сообщает каждый фактический переход, как Source при двух завершённых
-кликах. Полный virtual/list motion остаётся отдельным неперенесённым объёмом.
+кликах. Полный list motion остаётся отдельным неперенесённым объёмом.
 
 LoadData(node) возвращает PromiseLike. Дети добавляются потребителем в treeData;
 компонент их не выдумывает. Loading дедуплицируется по ключу; pointer switcher ждёт завершения загрузки,
@@ -6547,15 +6547,61 @@ loadData потребителя. Результаты после unmount не м
 но switcher допускает раскрытие мышью, как upstream; global disabled отключает
 клавиатурную обработку. Native buttons имеют tabindex=-1; роли treeitem/checkbox
 и level/posinset/setsize отражают логическое дерево. Bind:nativeElement даёт root;
-bind:this предоставляет focus(options)/blur().
+bind:this предоставляет focus(options)/blur()/scrollTo(config).
 
 BlockNode, showLine и showLine={{showLeafIcon:true}}, showIcon, icon,
 switcherIcon/switcherLoadingIcon, titleRender и filterTreeNode поддержаны.
 Иконки и заголовки задаются snippets с node-аргументом; filterTreeNode подсвечивает
 узел и не удаляет его из дерева. RU/EN подписи switcher берутся из Locale.tree;
 темы, compact, RTL, ConfigProvider/Form disabled наследуют существующие контексты.
-Height ограничивает native scroll viewport; виртуализация пока не применяется.
-SSR рендерит видимые строки без загрузки и browser APIs.
+Height ограничивает viewport и включает виртуальное окно. Без height либо при
+height=0 выводятся все раскрытые строки без ограничения высоты, как в Source.
+Virtual=false оставляет native scroll со всеми строками. Undefined наследует
+ConfigProvider.virtual; по умолчанию Tree включает виртуализацию, Listy — выключает.
+SSR использует начальную оценку окна без DOM-измерений, загрузки и timers.
+
+Оценка строки следует Tree tokens: paddingXS/2 + (titleHeight || controlHeightSM).
+ItemHeight переопределяет её; itemHeight=0 отключает виртуальное окно. После mount
+измеряются реальные строки с margins, cache сохраняется по ключам до unmount.
+Границы окна и overscan следуют virtual-list 1.5.1. ScrollWidth включает
+горизонтальную прокрутку, включая fitting dataset; колесо, Shift+wheel, touch,
+перетаскивание и клики scrollbar поддерживают обе оси и RTL.
+
+```svelte
+<script lang="ts">
+  import { Tree, type TreeRef } from 'antd-svelte';
+
+  const nodes = Array.from({ length: 100 }, (_, key) => ({ key, title: `Node ${key}` }));
+  let tree = $state<TreeRef>();
+</script>
+
+<Tree treeData={nodes} height={240} bind:this={tree} aria-label="Nodes" />
+<button onclick={() => tree?.scrollTo({ key: 80, align: 'top', offset: 8 })}>Show node</button>
+```
+
+ScrollTo принимает число, {top,left}, key либо index с align='top'/'bottom'/'auto'.
+Left — неотрицательная логическая позиция и в RTL. Offset бывает числом или
+функцией ({getSize,align}) => number; getSize(startKey,endKey?) читает измеренные
+либо оценённые top/bottom, неизвестный endKey даёт bottom=undefined. NaN/Infinity
+offset заменяются нулём. Измерение и выравнивание повторяются до десяти проходов;
+более поздний запрос отменяет предыдущий. Неизвестный key сохраняет позицию.
+Null/undefined показывают scrollbar. AutoExpand у key-запроса добавляет только
+целевой ключ в uncontrolled expandedKeys, без раскрытия предков или onExpand.
+ItemScrollOffset задаёт отступ автоматической прокрутки активного узла.
+OnScroll (либо native onscroll) получает событие holder; root ref остаётся прежним.
+DirectoryTree предоставляет те же методы. Загрузка изначально раскрытых узлов
+начинается при их попадании в смонтированное окно; результаты после unmount игнорируются.
+
+Шесть ошибок Source сохранены как raw observations и не переносятся: stale estimate
+при смене itemHeight/theme, потеря active key=0, ссылка aria-activedescendant на
+отсутствующий DOM, local virtual=undefined поверх global false и пропущенный
+direction в rc-tree NodeList, отрицательный offset при scrollWidth меньше viewport.
+Native ограничивает offset снизу нулём, обновляет оценку без клонирования data,
+сохраняет key=0, валидный ARIA target, наследование и направление обеих осей.
+[28 исходных browser случаев, 12 SSR и шесть наблюдений](./tests/browser/fixtures/ant-design-tree-virtual-reference.json),
+[Source browser](./tests/browser/tree-virtual.spec.ts),
+[Native browser](./tests/browser/tree-virtual-native.spec.ts) и
+[SSR](./tests/package/tree-virtual.ssr.test.ts) проверяют эти границы.
 
 Tree и DirectoryTree выводят тип пользовательской записи из `treeData`.
 `fieldNames={{ key: 'id', title: 'caption', children: 'items' }}` задаёт имена полей;
@@ -6689,8 +6735,7 @@ Svelte-содержимым; CSS относится к существующим 
 nested/reset/replaced/sibling scopes, DirectoryTree, prefix/RTL, style priorities
 и обновления, включая pending loading и независимый TreeSelect.
 
-Drag/drop, virtual/scrollTo, полный ref API
-и collapse/appear анимации ещё не перенесены. Реестр
+Drag/drop и collapse/appear анимации ещё не перенесены. Реестр
 отделяет этот объём от полного React API Tree.
 Deprecated `TreeNode` children не входят в перенос: rc-tree 1.4.0 прямо помечает
 `Tree.children` как deprecated и предлагает `treeData`.
@@ -6773,7 +6818,7 @@ disabled/nonselectable узлы. Первый Shift без такого выбо
 Controlled/default keys и `defaultExpandParent` сохраняют Tree-контракты.
 В отличие от обычного Tree, DirectoryTree при `defaultExpandAll` включает
 в начальный набор также ключи листьев, как upstream. Lazy load, checkbox,
-клавиатура, темы Tree, RTL, prefix, focus/blur и `bind:nativeElement` используют
+клавиатура, темы Tree, RTL, prefix, focus/blur/scrollTo и `bind:nativeElement` используют
 существующий компонент. Расширенные неперенесённые Tree API перечислены выше.
 
 [Пятнадцать исходных сценариев](./tests/browser/fixtures/ant-design-directory-tree-reference.json)

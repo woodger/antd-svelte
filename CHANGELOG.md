@@ -9,6 +9,11 @@
 
 ### Added
 
+- Tree/DirectoryTree поддерживают измеряемые виртуальные окна, scrollTo по key/index,
+  обе оси прокрутки, function offsets и ConfigProvider.virtual. Общие расчёты
+  используются также Listy. Ошибки Source с RTL, stale estimate и active ARIA
+  записаны отдельно; Native сохраняет корректное направление и доступность.
+
 - Tree/DirectoryTree поддерживают пять semantic slots и ConfigProvider.tree
   с object/function defaults и заменой вложенных records. Сохранены Native root
   style, generic props, DOM/focus/refs и независимый TreeSelect. Ошибка cache

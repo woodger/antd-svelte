@@ -8,7 +8,8 @@
     TreeDataNode,
     TreeKey,
     TreeEventNode,
-    TreeCheckedKeys
+    TreeCheckedKeys,
+    TreeScrollConfig
   } from './tree.types';
   import {
     buildTreeEntities,
@@ -25,6 +26,11 @@
   } from './tree.engine';
   import { createTreeLoader } from './tree-load.engine';
   import { treeSemantics } from './tree-semantic.engine';
+  import { treeItemHeight } from './tree-virtual.engine';
+  import { createVirtualList } from './virtual-list.model.svelte';
+  import { connectListyGestures } from './listy-gestures.dom';
+  import VirtualScrollbar from './ListyScrollbar.svelte';
+  import { useDesignTokenContext } from './theme-context.svelte';
   import { useConfig } from './config-context';
   import { useComponentTheme } from './theme-component.svelte';
   import { useForm } from './form-context';
@@ -79,6 +85,12 @@
     filterTreeNode,
     focusable = true,
     height,
+    itemHeight,
+    virtual,
+    scrollWidth,
+    itemScrollOffset = 0,
+    onScroll,
+    onscroll,
     class: className = '',
     rootClassName = '',
     classNames,
@@ -95,6 +107,7 @@
   let rootPrefix = $derived(config.getPrefixCls());
   let prefixCss = $derived(getTreePrefixCss(componentPrefix, rootPrefix));
   const componentTheme = useComponentTheme('Tree');
+  const tokens = useDesignTokenContext();
   let themeStyle = $derived(_themeStyle ?? componentTheme.style);
   const form = useForm();
   const generated = $props.id();
@@ -149,6 +162,48 @@
       : { checked: [], halfChecked: [] }
   );
   let visible = $derived(flattenTree(index, expanded));
+  let holder = $state<HTMLDivElement>();
+  let inner = $state<HTMLDivElement>();
+  const viewport = createVirtualList<Entry, TreeKey>({
+    rows: () => visible,
+    getKey: entry => entry.key,
+    height: () => height,
+    estimate: () => itemHeight ?? treeItemHeight(tokens.state.token),
+    enabled: () => virtual ?? config.virtual ?? true,
+    width: () => scrollWidth
+  });
+  let range = $derived(viewport.range);
+  let rendered = $derived(visible.slice(range.start, range.end + 1));
+  $effect(() => {
+    const element = holder;
+    const content = inner;
+    if (!element || !content) return;
+    return untrack(() => viewport.connect(element, content));
+  });
+  $effect(() => {
+    const element = holder;
+    const useVirtual = range.useVirtual;
+    const inVirtual = range.virtual;
+    const width = scrollWidth;
+    const rtl = config.direction === 'rtl';
+    if (!element) return;
+    return untrack(() => connectListyGestures(element, {
+      useVirtual,
+      virtual: inVirtual,
+      top: () => viewport.top,
+      maximum: () => (viewport.range.scrollHeight ?? NaN) - (height ?? NaN),
+      scrollBy: viewport.scrollBy,
+      horizontal: Boolean(width),
+      rtl,
+      left: () => viewport.left,
+      maximumX: () => Math.max(0, (width ?? 0) - viewport.holderWidth),
+      scrollByX: delta => viewport.scrollByX(rtl ? -delta : delta)
+    }));
+  });
+  $effect(() => {
+    void scrollWidth;
+    untrack(() => viewport.syncLeft(viewport.left));
+  });
   let current = $state<TreeKey | null>(null);
   let active = $derived(activeKey === undefined ? current : activeKey);
   let focused = $state(false);
@@ -204,7 +259,7 @@
   });
   $effect(() => {
     if (!loadData) return;
-    const pending = visible.filter(
+    const pending = rendered.filter(
       entry => expanded.includes(entry.key)
         && !treeLeaf(
           entry.node,
@@ -254,12 +309,22 @@
     if (activeKey === undefined)
       current = key;
     onActiveChange?.(key);
+    if (key !== null && height) viewport.scrollTo({ key, offset: itemScrollOffset });
     void tick().then(() => {
-      if (key !== null)
+      if (key !== null && !height)
         focusElement?.ownerDocument.getElementById(nodeId(key))?.scrollIntoView(
           { block: 'nearest', inline: 'nearest' }
         );
     });
+  }
+  $effect(() => {
+    const key = activeKey;
+    if (key != null && height) untrack(() => viewport.scrollTo({ key, offset: itemScrollOffset }));
+  });
+  function handleScroll(event: UIEvent & { currentTarget: EventTarget & HTMLDivElement; }) {
+    if (disposed) return;
+    if (event.currentTarget.scrollTop !== viewport.top) viewport.sync(event.currentTarget.scrollTop);
+    (onScroll ?? onscroll)?.(event);
   }
   function expand(
     entry: Entry,
@@ -430,6 +495,14 @@
   export function blur() {
     focusElement?.blur();
   }
+  export function scrollTo(settings?: TreeScrollConfig | null) {
+    if (disposed) return;
+    if (settings && typeof settings === 'object' && 'key' in settings
+      && settings.autoExpand && expandedKeys === undefined && !expanded.includes(settings.key)) {
+      expanded = [...expanded, settings.key];
+    }
+    viewport.scrollTo(settings);
+  }
 </script>
 <style>
   button[data-ant-tree-switcher], button[data-ant-tree-content] { padding:0;border:0;background:transparent;color:inherit;font:inherit; }
@@ -456,15 +529,21 @@
     classes.root,
     rootClassName
   ]} style={themeStyle ? [themeStyle, slots.root].filter(Boolean).join(';') : slots.root} dir={config.direction}>
-  <div {...attributes} bind:this={focusElement} class={`${componentPrefix}-list`} role="tree" tabindex={!blocked && focusable ? tabindex : undefined} aria-multiselectable={multiple || undefined} aria-disabled={blocked || undefined} aria-activedescendant={visible.some(entry => entry.key === active)
+  <div {...attributes} bind:this={focusElement} class={`${componentPrefix}-list`} style="position:relative" role="tree" tabindex={!blocked && focusable ? tabindex : undefined} aria-multiselectable={multiple || undefined} aria-disabled={blocked || undefined} aria-activedescendant={rendered.some(entry => entry.key === active)
       ? nodeId(active!)
       : undefined} onkeydown={keyboard} onfocus={focusIn} onblur={event => {
           focused = false;
           onblur?.(event);
         }}>
-    <div class={`${componentPrefix}-list-holder`} style:max-height={height === undefined ? undefined : `${height}px`} style:overflow={height === undefined ? undefined : 'auto'}>
-    <div data-ant-tree-list-inner class={`${componentPrefix}-list-holder-inner`}>
-      {#each visible as entry (entry.key)}
+    <div bind:this={holder} class={`${componentPrefix}-list-holder`} role="presentation" onscroll={handleScroll}
+      onmouseenter={viewport.flashScrollbar}
+      style={height ? `max-height:${height}px;overflow-y:${range.useVirtual ? 'hidden' : 'auto'};overflow-anchor:none;${range.useVirtual && scrollWidth ? 'overflow-x:hidden;' : ''}${viewport.moving ? 'pointer-events:none' : ''}` : undefined}>
+    <div style={range.offset !== undefined
+      ? `height:${range.scrollHeight}px;position:relative;overflow:hidden` : undefined}>
+    <div bind:this={inner} data-ant-tree-list-inner class={`${componentPrefix}-list-holder-inner`}
+      style={`display:flex;flex-direction:column;${range.offset !== undefined
+        ? `position:absolute;left:0;right:0;top:0;transform:translateY(${range.offset}px);${config.direction === 'rtl' ? 'margin-right' : 'margin-left'}:${-viewport.left}px` : ''}`}>
+      {#each rendered as entry (entry.key)}
         {@const node = eventNode(entry)}
         {@const title = getTreeNodeTitle<Data>(entry.node, fieldNames, titleRender)}
         {@const isLeaf = leaf(entry)}
@@ -475,7 +554,7 @@
             : undefined} aria-checked={hasCheck && !unavailable
                 ? node.halfChecked ? 'mixed' : node.checked
                 : undefined} aria-disabled={unavailable} aria-busy={node.loading || undefined}
-          class={[
+          {@attach element => viewport.attach(element, entry.key)} class={[
               `${componentPrefix}-treenode`,
               `${componentPrefix}-treenode-switcher-${node.expanded ? 'open' : 'close'}`,
               unavailable && `${componentPrefix}-treenode-disabled`,
@@ -541,5 +620,18 @@
       {/each}
     </div>
     </div>
+    </div>
+    {#if range.virtual && (range.scrollHeight ?? 0) > (height ?? 0)}
+      <VirtualScrollbar prefixCls={`${componentPrefix}-list`} rtl={config.direction === 'rtl'}
+        offset={viewport.top} range={range.scrollHeight ?? 0} size={viewport.holderHeight}
+        flash={viewport.flash} onScroll={viewport.sync}
+        onMoving={value => { viewport.moving = value; }} />
+    {/if}
+    {#if range.virtual && (scrollWidth ?? 0) > viewport.holderWidth}
+      <VirtualScrollbar prefixCls={`${componentPrefix}-list`} rtl={config.direction === 'rtl'} horizontal
+        offset={viewport.left} range={scrollWidth ?? 0} size={viewport.holderWidth}
+        flash={viewport.flash} onScroll={viewport.syncLeft}
+        onMoving={value => { viewport.moving = value; }} />
+    {/if}
   </div>
 </div>

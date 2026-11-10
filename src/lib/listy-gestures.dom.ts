@@ -12,6 +12,11 @@ interface ListyGestureOptions {
   top: () => number;
   maximum: () => number;
   scrollBy: (delta: number) => void;
+  horizontal?: boolean;
+  rtl?: boolean;
+  left?: () => number;
+  maximumX?: () => number;
+  scrollByX?: (delta: number) => void;
 }
 
 /** Native wheel/touch нужны для passive:false и передачи жеста внешнему scroll container. */
@@ -27,8 +32,12 @@ export function connectListyGestures(holder: HTMLDivElement, options: ListyGestu
     let timer: number | undefined;
     cleanups.push(() => view!.clearTimeout(timer));
     return (horizontal: boolean, delta: number, smooth = false) => {
+      const horizontalDelta = options.rtl ? -delta : delta;
       const boundary = horizontal
-        ? delta !== 0
+        ? options.horizontal
+          ? horizontalDelta < 0 && (options.left?.() ?? 0) <= 0
+            || horizontalDelta > 0 && (options.left?.() ?? 0) >= (options.maximumX?.() ?? 0)
+          : delta !== 0
         : delta < 0 && options.top() <= 0 || delta > 0 && options.top() >= options.maximum();
       if (smooth && boundary) {
         view!.clearTimeout(timer);
@@ -47,7 +56,7 @@ export function connectListyGestures(holder: HTMLDivElement, options: ListyGestu
   let offset = 0;
   let frame = 0;
   let directionFrame = 0;
-  let direction: 'y' | 'sx' | undefined;
+  let direction: 'y' | 'x' | 'sx' | undefined;
   let lastWheel: number | undefined;
   let mouseScroll = false;
 
@@ -60,9 +69,9 @@ export function connectListyGestures(holder: HTMLDivElement, options: ListyGestu
     const horizontal = direction === 'sx'
       || !direction && event.shiftKey && event.deltaY && !event.deltaX;
     if (horizontal) direction = 'sx';
-    direction ??= 'y';
-    if (direction === 'sx') {
-      // Listy не передаёт scrollWidth: горизонтальная позиция остаётся нулевой.
+    direction ??= options.horizontal && Math.abs(event.deltaX) > Math.abs(event.deltaY) ? 'x' : 'y';
+    if (direction !== 'y') {
+      options.scrollByX?.(direction === 'sx' ? event.deltaY : event.deltaX);
       if (!firefox) event.preventDefault();
       return;
     }

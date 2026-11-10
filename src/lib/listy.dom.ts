@@ -1,5 +1,6 @@
 import { listyTag } from './listy.engine';
 import type { ListyScrollToConfig } from './listy.types';
+export { measureVirtualListRow as measureListyRow } from './virtual-list.dom';
 
 export function scrollRawListy(
   holder: HTMLDivElement,
@@ -53,14 +54,6 @@ export function scrollRawListy(
 
   if (config.left !== undefined) holder.scrollLeft = config.left;
   if (config.top !== undefined) holder.scrollTop = config.top;
-}
-
-export function measureListyRow(element: HTMLElement) {
-  if (!element.offsetParent) return undefined;
-  const style = element.ownerDocument.defaultView?.getComputedStyle(element);
-  const top = Number.parseFloat(style?.marginTop ?? '') || 0;
-  const bottom = Number.parseFloat(style?.marginBottom ?? '') || 0;
-  return element.offsetHeight + top + bottom;
 }
 
 /** Перемещение keyed DOM может сбросить native focus; React восстанавливает его при commit. */

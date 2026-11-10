@@ -1,7 +1,25 @@
 import type { Snippet } from 'svelte';
 import type { HTMLAttributes } from 'svelte/elements';
+import type { VirtualScrollAlign } from './virtual-list.engine';
+import type { VirtualScrollOffset, VirtualScrollOffsetInfo } from './virtual-list.types';
 export type TreeKey = string | number | bigint;
 export type TreeExpandAction = false | 'click' | 'doubleClick';
+export type TreeScrollAlign = VirtualScrollAlign;
+export type TreeScrollOffsetInfo = VirtualScrollOffsetInfo<TreeKey>;
+/** Функция получает измеренные/оценённые размеры; NaN/Infinity заменяются нулём. */
+export type TreeScrollOffset = VirtualScrollOffset<TreeKey>;
+/** Позиция либо key/index с выравниванием; autoExpand добавляет только целевой key. */
+export type TreeScrollConfig = number | { top?: number; left?: number; autoExpand?: never; }
+  | ({ align?: TreeScrollAlign; offset?: TreeScrollOffset; } & (
+    { key: TreeKey; autoExpand?: boolean; } | { index: number; autoExpand?: never; }
+  ));
+/** Методы bind:this; nativeElement предоставляется отдельной bindable prop. */
+export interface TreeRef {
+  focus: (options?: FocusOptions) => void;
+  blur: () => void;
+  /** Null/undefined показывают scrollbar; отсутствующий key не меняет позицию. */
+  scrollTo: (config?: TreeScrollConfig | null) => void;
+}
 /** Имена полей data; пустая строка использует стандартные key/title/children. */
 export interface TreeFieldNames {
   key?: string;
@@ -26,7 +44,7 @@ export interface TreeDataEntity<Data extends object = TreeDataNode> {
   children?: TreeDataEntity<Data>[];
 }
 
-/** Data utilities Tree; DOM ref компонента по-прежнему предоставляет focus/blur. */
+/** Data utilities Tree; методы DOM-компонента описаны отдельно в TreeRef. */
 export interface TreeInstance<Data extends object = TreeDataNode> {
   /** Стабильная функция читает текущие data/config; неизвестный ключ возвращает пустой путь. */
   getPath: (key: TreeKey) => TreeDataEntity<Data>[];
@@ -203,7 +221,17 @@ export interface TreeProps<Data extends object = TreeDataNode> extends Omit<
   filterTreeNode?: (node: TreeEventNode<Data>) => boolean;
   /** @defaultValue true */
   focusable?: boolean;
+  /** Ограничение viewport; undefined/0 рендерят все раскрытые строки без ограничения высоты. */
   height?: number;
+  /** Новое значение переопределяет оценку Tree tokens; фактические строки измеряются отдельно. */
+  itemHeight?: number;
+  /** Undefined наследует ConfigProvider.virtual; по умолчанию виртуализация включена. */
+  virtual?: boolean;
+  /** Ширина содержимого для горизонтальной прокрутки. */
+  scrollWidth?: number;
+  /** Отступ автоматической прокрутки активного узла. @defaultValue 0 */
+  itemScrollOffset?: number;
+  onScroll?: HTMLAttributes<HTMLDivElement>['onscroll'];
   rootClassName?: string;
   /** Нативный ref доступен после mount и очищается при unmount. */
   nativeElement?: HTMLDivElement;
