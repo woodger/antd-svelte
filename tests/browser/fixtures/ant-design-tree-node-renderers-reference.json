@@ -1,0 +1,2074 @@
+{
+  "reference": {
+    "version": "6.6.8",
+    "revision": "984592267de88fbf9cdaecc96a56629e721c709d",
+    "archiveSha256": "8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa",
+    "files": [
+      "components/tree/Tree.tsx",
+      "components/tree/utils/iconUtil.tsx"
+    ],
+    "delegate": "@rc-component/tree 1.4.0",
+    "delegatedFiles": [
+      "es/TreeNode.js",
+      "es/Tree.js"
+    ]
+  },
+  "cases": [
+    {
+      "sample": {
+        "id": "default-lines",
+        "line": true
+      },
+      "initial": {
+        "nodes": [
+          {
+            "title": "Root",
+            "expanded": "true",
+            "switcher": {
+              "text": "",
+              "textAlign": "center",
+              "renderers": [],
+              "loading": false,
+              "leafLine": false
+            }
+          },
+          {
+            "title": "Leaf",
+            "expanded": null,
+            "switcher": {
+              "text": "",
+              "textAlign": "center",
+              "renderers": [],
+              "loading": false,
+              "leafLine": true
+            }
+          }
+        ],
+        "events": []
+      },
+      "steps": [
+        {
+          "action": "hover",
+          "result": {
+            "nodes": [
+              {
+                "title": "Root",
+                "expanded": "true",
+                "switcher": {
+                  "text": "",
+                  "textAlign": "center",
+                  "renderers": [],
+                  "loading": false,
+                  "leafLine": false
+                }
+              },
+              {
+                "title": "Leaf",
+                "expanded": null,
+                "switcher": {
+                  "text": "",
+                  "textAlign": "center",
+                  "renderers": [],
+                  "loading": false,
+                  "leafLine": true
+                }
+              }
+            ],
+            "events": [
+              {
+                "kind": "enter",
+                "type": "mouseenter",
+                "node": {
+                  "key": "root",
+                  "expanded": true,
+                  "selected": false,
+                  "checked": false,
+                  "loading": false
+                }
+              }
+            ]
+          }
+        },
+        {
+          "action": "leave",
+          "result": {
+            "nodes": [
+              {
+                "title": "Root",
+                "expanded": "true",
+                "switcher": {
+                  "text": "",
+                  "textAlign": "center",
+                  "renderers": [],
+                  "loading": false,
+                  "leafLine": false
+                }
+              },
+              {
+                "title": "Leaf",
+                "expanded": null,
+                "switcher": {
+                  "text": "",
+                  "textAlign": "center",
+                  "renderers": [],
+                  "loading": false,
+                  "leafLine": true
+                }
+              }
+            ],
+            "events": [
+              {
+                "kind": "enter",
+                "type": "mouseenter",
+                "node": {
+                  "key": "root",
+                  "expanded": true,
+                  "selected": false,
+                  "checked": false,
+                  "loading": false
+                }
+              },
+              {
+                "kind": "leave",
+                "type": "mouseleave",
+                "node": {
+                  "key": "root",
+                  "expanded": true,
+                  "selected": false,
+                  "checked": false,
+                  "loading": false
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "global-text",
+        "global": "text"
+      },
+      "initial": {
+        "nodes": [
+          {
+            "title": "Root",
+            "expanded": "true",
+            "switcher": {
+              "text": "G",
+              "textAlign": "center",
+              "renderers": [],
+              "loading": false,
+              "leafLine": false
+            }
+          },
+          {
+            "title": "Leaf",
+            "expanded": null,
+            "switcher": {
+              "text": "",
+              "textAlign": "center",
+              "renderers": [],
+              "loading": false,
+              "leafLine": false
+            }
+          }
+        ],
+        "events": []
+      },
+      "steps": [
+        {
+          "action": "hover",
+          "result": {
+            "nodes": [
+              {
+                "title": "Root",
+                "expanded": "true",
+                "switcher": {
+                  "text": "G",
+                  "textAlign": "center",
+                  "renderers": [],
+                  "loading": false,
+                  "leafLine": false
+                }
+              },
+              {
+                "title": "Leaf",
+                "expanded": null,
+                "switcher": {
+                  "text": "",
+                  "textAlign": "center",
+                  "renderers": [],
+                  "loading": false,
+                  "leafLine": false
+                }
+              }
+            ],
+            "events": [
+              {
+                "kind": "enter",
+                "type": "mouseenter",
+                "node": {
+                  "key": "root",
+                  "expanded": true,
+                  "selected": false,
+                  "checked": false,
+                  "loading": false
+                }
+              }
+            ]
+          }
+        },
+        {
+          "action": "leave",
+          "result": {
+            "nodes": [
+              {
+                "title": "Root",
+                "expanded": "true",
+                "switcher": {
+                  "text": "G",
+                  "textAlign": "center",
+                  "renderers": [],
+                  "loading": false,
+                  "leafLine": false
+                }
+              },
+              {
+                "title": "Leaf",
+                "expanded": null,
+                "switcher": {
+                  "text": "",
+                  "textAlign": "center",
+                  "renderers": [],
+                  "loading": false,
+                  "leafLine": false
+                }
+              }
+            ],
+            "events": [
+              {
+                "kind": "enter",
+                "type": "mouseenter",
+                "node": {
+                  "key": "root",
+                  "expanded": true,
+                  "selected": false,
+                  "checked": false,
+                  "loading": false
+                }
+              },
+              {
+                "kind": "leave",
+                "type": "mouseleave",
+                "node": {
+                  "key": "root",
+                  "expanded": true,
+                  "selected": false,
+                  "checked": false,
+                  "loading": false
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "global-empty",
+        "global": "empty"
+      },
+      "initial": {
+        "nodes": [
+          {
+            "title": "Root",
+            "expanded": "true",
+            "switcher": {
+              "text": "",
+              "textAlign": "center",
+              "renderers": [],
+              "loading": false,
+              "leafLine": false
+            }
+          },
+          {
+            "title": "Leaf",
+            "expanded": null,
+            "switcher": {
+              "text": "",
+              "textAlign": "center",
+              "renderers": [],
+              "loading": false,
+              "leafLine": false
+            }
+          }
+        ],
+        "events": []
+      },
+      "steps": [
+        {
+          "action": "hover",
+          "result": {
+            "nodes": [
+              {
+                "title": "Root",
+                "expanded": "true",
+                "switcher": {
+                  "text": "",
+                  "textAlign": "center",
+                  "renderers": [],
+                  "loading": false,
+                  "leafLine": false
+                }
+              },
+              {
+                "title": "Leaf",
+                "expanded": null,
+                "switcher": {
+                  "text": "",
+                  "textAlign": "center",
+                  "renderers": [],
+                  "loading": false,
+                  "leafLine": false
+                }
+              }
+            ],
+            "events": [
+              {
+                "kind": "enter",
+                "type": "mouseenter",
+                "node": {
+                  "key": "root",
+                  "expanded": true,
+                  "selected": false,
+                  "checked": false,
+                  "loading": false
+                }
+              }
+            ]
+          }
+        },
+        {
+          "action": "leave",
+          "result": {
+            "nodes": [
+              {
+                "title": "Root",
+                "expanded": "true",
+                "switcher": {
+                  "text": "",
+                  "textAlign": "center",
+                  "renderers": [],
+                  "loading": false,
+                  "leafLine": false
+                }
+              },
+              {
+                "title": "Leaf",
+                "expanded": null,
+                "switcher": {
+                  "text": "",
+                  "textAlign": "center",
+                  "renderers": [],
+                  "loading": false,
+                  "leafLine": false
+                }
+              }
+            ],
+            "events": [
+              {
+                "kind": "enter",
+                "type": "mouseenter",
+                "node": {
+                  "key": "root",
+                  "expanded": true,
+                  "selected": false,
+                  "checked": false,
+                  "loading": false
+                }
+              },
+              {
+                "kind": "leave",
+                "type": "mouseleave",
+                "node": {
+                  "key": "root",
+                  "expanded": true,
+                  "selected": false,
+                  "checked": false,
+                  "loading": false
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "leaf-text",
+        "leaf": "text"
+      },
+      "initial": {
+        "nodes": [
+          {
+            "title": "Root",
+            "expanded": "true",
+            "switcher": {
+              "text": "",
+              "textAlign": "center",
+              "renderers": [],
+              "loading": false,
+              "leafLine": false
+            }
+          },
+          {
+            "title": "Leaf",
+            "expanded": null,
+            "switcher": {
+              "text": "L",
+              "textAlign": "center",
+              "renderers": [],
+              "loading": false,
+              "leafLine": false
+            }
+          }
+        ],
+        "events": []
+      },
+      "steps": [
+        {
+          "action": "hover",
+          "result": {
+            "nodes": [
+              {
+                "title": "Root",
+                "expanded": "true",
+                "switcher": {
+                  "text": "",
+                  "textAlign": "center",
+                  "renderers": [],
+                  "loading": false,
+                  "leafLine": false
+                }
+              },
+              {
+                "title": "Leaf",
+                "expanded": null,
+                "switcher": {
+                  "text": "L",
+                  "textAlign": "center",
+                  "renderers": [],
+                  "loading": false,
+                  "leafLine": false
+                }
+              }
+            ],
+            "events": [
+              {
+                "kind": "enter",
+                "type": "mouseenter",
+                "node": {
+                  "key": "root",
+                  "expanded": true,
+                  "selected": false,
+                  "checked": false,
+                  "loading": false
+                }
+              }
+            ]
+          }
+        },
+        {
+          "action": "leave",
+          "result": {
+            "nodes": [
+              {
+                "title": "Root",
+                "expanded": "true",
+                "switcher": {
+                  "text": "",
+                  "textAlign": "center",
+                  "renderers": [],
+                  "loading": false,
+                  "leafLine": false
+                }
+              },
+              {
+                "title": "Leaf",
+                "expanded": null,
+                "switcher": {
+                  "text": "L",
+                  "textAlign": "center",
+                  "renderers": [],
+                  "loading": false,
+                  "leafLine": false
+                }
+              }
+            ],
+            "events": [
+              {
+                "kind": "enter",
+                "type": "mouseenter",
+                "node": {
+                  "key": "root",
+                  "expanded": true,
+                  "selected": false,
+                  "checked": false,
+                  "loading": false
+                }
+              },
+              {
+                "kind": "leave",
+                "type": "mouseleave",
+                "node": {
+                  "key": "root",
+                  "expanded": true,
+                  "selected": false,
+                  "checked": false,
+                  "loading": false
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "leaf-empty",
+        "leaf": "empty"
+      },
+      "initial": {
+        "nodes": [
+          {
+            "title": "Root",
+            "expanded": "true",
+            "switcher": {
+              "text": "",
+              "textAlign": "center",
+              "renderers": [],
+              "loading": false,
+              "leafLine": false
+            }
+          },
+          {
+            "title": "Leaf",
+            "expanded": null,
+            "switcher": {
+              "text": "",
+              "textAlign": "center",
+              "renderers": [],
+              "loading": false,
+              "leafLine": false
+            }
+          }
+        ],
+        "events": []
+      },
+      "steps": [
+        {
+          "action": "hover",
+          "result": {
+            "nodes": [
+              {
+                "title": "Root",
+                "expanded": "true",
+                "switcher": {
+                  "text": "",
+                  "textAlign": "center",
+                  "renderers": [],
+                  "loading": false,
+                  "leafLine": false
+                }
+              },
+              {
+                "title": "Leaf",
+                "expanded": null,
+                "switcher": {
+                  "text": "",
+                  "textAlign": "center",
+                  "renderers": [],
+                  "loading": false,
+                  "leafLine": false
+                }
+              }
+            ],
+            "events": [
+              {
+                "kind": "enter",
+                "type": "mouseenter",
+                "node": {
+                  "key": "root",
+                  "expanded": true,
+                  "selected": false,
+                  "checked": false,
+                  "loading": false
+                }
+              }
+            ]
+          }
+        },
+        {
+          "action": "leave",
+          "result": {
+            "nodes": [
+              {
+                "title": "Root",
+                "expanded": "true",
+                "switcher": {
+                  "text": "",
+                  "textAlign": "center",
+                  "renderers": [],
+                  "loading": false,
+                  "leafLine": false
+                }
+              },
+              {
+                "title": "Leaf",
+                "expanded": null,
+                "switcher": {
+                  "text": "",
+                  "textAlign": "center",
+                  "renderers": [],
+                  "loading": false,
+                  "leafLine": false
+                }
+              }
+            ],
+            "events": [
+              {
+                "kind": "enter",
+                "type": "mouseenter",
+                "node": {
+                  "key": "root",
+                  "expanded": true,
+                  "selected": false,
+                  "checked": false,
+                  "loading": false
+                }
+              },
+              {
+                "kind": "leave",
+                "type": "mouseleave",
+                "node": {
+                  "key": "root",
+                  "expanded": true,
+                  "selected": false,
+                  "checked": false,
+                  "loading": false
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "node-over-global",
+        "node": "text",
+        "global": "text"
+      },
+      "initial": {
+        "nodes": [
+          {
+            "title": "Root",
+            "expanded": "true",
+            "switcher": {
+              "text": "N",
+              "textAlign": "center",
+              "renderers": [],
+              "loading": false,
+              "leafLine": false
+            }
+          },
+          {
+            "title": "Leaf",
+            "expanded": null,
+            "switcher": {
+              "text": "N",
+              "textAlign": "center",
+              "renderers": [],
+              "loading": false,
+              "leafLine": false
+            }
+          }
+        ],
+        "events": []
+      },
+      "steps": [
+        {
+          "action": "hover",
+          "result": {
+            "nodes": [
+              {
+                "title": "Root",
+                "expanded": "true",
+                "switcher": {
+                  "text": "N",
+                  "textAlign": "center",
+                  "renderers": [],
+                  "loading": false,
+                  "leafLine": false
+                }
+              },
+              {
+                "title": "Leaf",
+                "expanded": null,
+                "switcher": {
+                  "text": "N",
+                  "textAlign": "center",
+                  "renderers": [],
+                  "loading": false,
+                  "leafLine": false
+                }
+              }
+            ],
+            "events": [
+              {
+                "kind": "enter",
+                "type": "mouseenter",
+                "node": {
+                  "key": "root",
+                  "expanded": true,
+                  "selected": false,
+                  "checked": false,
+                  "loading": false
+                }
+              }
+            ]
+          }
+        },
+        {
+          "action": "leave",
+          "result": {
+            "nodes": [
+              {
+                "title": "Root",
+                "expanded": "true",
+                "switcher": {
+                  "text": "N",
+                  "textAlign": "center",
+                  "renderers": [],
+                  "loading": false,
+                  "leafLine": false
+                }
+              },
+              {
+                "title": "Leaf",
+                "expanded": null,
+                "switcher": {
+                  "text": "N",
+                  "textAlign": "center",
+                  "renderers": [],
+                  "loading": false,
+                  "leafLine": false
+                }
+              }
+            ],
+            "events": [
+              {
+                "kind": "enter",
+                "type": "mouseenter",
+                "node": {
+                  "key": "root",
+                  "expanded": true,
+                  "selected": false,
+                  "checked": false,
+                  "loading": false
+                }
+              },
+              {
+                "kind": "leave",
+                "type": "mouseleave",
+                "node": {
+                  "key": "root",
+                  "expanded": true,
+                  "selected": false,
+                  "checked": false,
+                  "loading": false
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "node-empty-over-global",
+        "node": "empty",
+        "global": "text",
+        "line": true
+      },
+      "initial": {
+        "nodes": [
+          {
+            "title": "Root",
+            "expanded": "true",
+            "switcher": {
+              "text": "",
+              "textAlign": "center",
+              "renderers": [],
+              "loading": false,
+              "leafLine": false
+            }
+          },
+          {
+            "title": "Leaf",
+            "expanded": null,
+            "switcher": {
+              "text": "",
+              "textAlign": "center",
+              "renderers": [],
+              "loading": false,
+              "leafLine": false
+            }
+          }
+        ],
+        "events": []
+      },
+      "steps": [
+        {
+          "action": "hover",
+          "result": {
+            "nodes": [
+              {
+                "title": "Root",
+                "expanded": "true",
+                "switcher": {
+                  "text": "",
+                  "textAlign": "center",
+                  "renderers": [],
+                  "loading": false,
+                  "leafLine": false
+                }
+              },
+              {
+                "title": "Leaf",
+                "expanded": null,
+                "switcher": {
+                  "text": "",
+                  "textAlign": "center",
+                  "renderers": [],
+                  "loading": false,
+                  "leafLine": false
+                }
+              }
+            ],
+            "events": [
+              {
+                "kind": "enter",
+                "type": "mouseenter",
+                "node": {
+                  "key": "root",
+                  "expanded": true,
+                  "selected": false,
+                  "checked": false,
+                  "loading": false
+                }
+              }
+            ]
+          }
+        },
+        {
+          "action": "leave",
+          "result": {
+            "nodes": [
+              {
+                "title": "Root",
+                "expanded": "true",
+                "switcher": {
+                  "text": "",
+                  "textAlign": "center",
+                  "renderers": [],
+                  "loading": false,
+                  "leafLine": false
+                }
+              },
+              {
+                "title": "Leaf",
+                "expanded": null,
+                "switcher": {
+                  "text": "",
+                  "textAlign": "center",
+                  "renderers": [],
+                  "loading": false,
+                  "leafLine": false
+                }
+              }
+            ],
+            "events": [
+              {
+                "kind": "enter",
+                "type": "mouseenter",
+                "node": {
+                  "key": "root",
+                  "expanded": true,
+                  "selected": false,
+                  "checked": false,
+                  "loading": false
+                }
+              },
+              {
+                "kind": "leave",
+                "type": "mouseleave",
+                "node": {
+                  "key": "root",
+                  "expanded": true,
+                  "selected": false,
+                  "checked": false,
+                  "loading": false
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "node-elements",
+        "node": "element",
+        "global": "text",
+        "line": true
+      },
+      "initial": {
+        "nodes": [
+          {
+            "title": "Root",
+            "expanded": "true",
+            "switcher": {
+              "text": "N",
+              "textAlign": "center",
+              "renderers": [
+                {
+                  "kind": "node",
+                  "state": "node:root:true:false:false",
+                  "fontSize": "14px"
+                }
+              ],
+              "loading": false,
+              "leafLine": false
+            }
+          },
+          {
+            "title": "Leaf",
+            "expanded": null,
+            "switcher": {
+              "text": "N",
+              "textAlign": "center",
+              "renderers": [
+                {
+                  "kind": "node",
+                  "state": "node:leaf:false:true:false",
+                  "fontSize": "14px"
+                }
+              ],
+              "loading": false,
+              "leafLine": false
+            }
+          }
+        ],
+        "events": []
+      },
+      "steps": [
+        {
+          "action": "hover",
+          "result": {
+            "nodes": [
+              {
+                "title": "Root",
+                "expanded": "true",
+                "switcher": {
+                  "text": "N",
+                  "textAlign": "center",
+                  "renderers": [
+                    {
+                      "kind": "node",
+                      "state": "node:root:true:false:false",
+                      "fontSize": "14px"
+                    }
+                  ],
+                  "loading": false,
+                  "leafLine": false
+                }
+              },
+              {
+                "title": "Leaf",
+                "expanded": null,
+                "switcher": {
+                  "text": "N",
+                  "textAlign": "center",
+                  "renderers": [
+                    {
+                      "kind": "node",
+                      "state": "node:leaf:false:true:false",
+                      "fontSize": "14px"
+                    }
+                  ],
+                  "loading": false,
+                  "leafLine": false
+                }
+              }
+            ],
+            "events": [
+              {
+                "kind": "enter",
+                "type": "mouseenter",
+                "node": {
+                  "key": "root",
+                  "expanded": true,
+                  "selected": false,
+                  "checked": false,
+                  "loading": false
+                }
+              }
+            ]
+          }
+        },
+        {
+          "action": "leave",
+          "result": {
+            "nodes": [
+              {
+                "title": "Root",
+                "expanded": "true",
+                "switcher": {
+                  "text": "N",
+                  "textAlign": "center",
+                  "renderers": [
+                    {
+                      "kind": "node",
+                      "state": "node:root:true:false:false",
+                      "fontSize": "14px"
+                    }
+                  ],
+                  "loading": false,
+                  "leafLine": false
+                }
+              },
+              {
+                "title": "Leaf",
+                "expanded": null,
+                "switcher": {
+                  "text": "N",
+                  "textAlign": "center",
+                  "renderers": [
+                    {
+                      "kind": "node",
+                      "state": "node:leaf:false:true:false",
+                      "fontSize": "14px"
+                    }
+                  ],
+                  "loading": false,
+                  "leafLine": false
+                }
+              }
+            ],
+            "events": [
+              {
+                "kind": "enter",
+                "type": "mouseenter",
+                "node": {
+                  "key": "root",
+                  "expanded": true,
+                  "selected": false,
+                  "checked": false,
+                  "loading": false
+                }
+              },
+              {
+                "kind": "leave",
+                "type": "mouseleave",
+                "node": {
+                  "key": "root",
+                  "expanded": true,
+                  "selected": false,
+                  "checked": false,
+                  "loading": false
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "leaf-element",
+        "leaf": "element"
+      },
+      "initial": {
+        "nodes": [
+          {
+            "title": "Root",
+            "expanded": "true",
+            "switcher": {
+              "text": "",
+              "textAlign": "center",
+              "renderers": [],
+              "loading": false,
+              "leafLine": false
+            }
+          },
+          {
+            "title": "Leaf",
+            "expanded": null,
+            "switcher": {
+              "text": "L",
+              "textAlign": "center",
+              "renderers": [
+                {
+                  "kind": "leaf",
+                  "state": "leaf:leaf:false:true:false",
+                  "fontSize": "14px"
+                }
+              ],
+              "loading": false,
+              "leafLine": false
+            }
+          }
+        ],
+        "events": []
+      },
+      "steps": [
+        {
+          "action": "hover",
+          "result": {
+            "nodes": [
+              {
+                "title": "Root",
+                "expanded": "true",
+                "switcher": {
+                  "text": "",
+                  "textAlign": "center",
+                  "renderers": [],
+                  "loading": false,
+                  "leafLine": false
+                }
+              },
+              {
+                "title": "Leaf",
+                "expanded": null,
+                "switcher": {
+                  "text": "L",
+                  "textAlign": "center",
+                  "renderers": [
+                    {
+                      "kind": "leaf",
+                      "state": "leaf:leaf:false:true:false",
+                      "fontSize": "14px"
+                    }
+                  ],
+                  "loading": false,
+                  "leafLine": false
+                }
+              }
+            ],
+            "events": [
+              {
+                "kind": "enter",
+                "type": "mouseenter",
+                "node": {
+                  "key": "root",
+                  "expanded": true,
+                  "selected": false,
+                  "checked": false,
+                  "loading": false
+                }
+              }
+            ]
+          }
+        },
+        {
+          "action": "leave",
+          "result": {
+            "nodes": [
+              {
+                "title": "Root",
+                "expanded": "true",
+                "switcher": {
+                  "text": "",
+                  "textAlign": "center",
+                  "renderers": [],
+                  "loading": false,
+                  "leafLine": false
+                }
+              },
+              {
+                "title": "Leaf",
+                "expanded": null,
+                "switcher": {
+                  "text": "L",
+                  "textAlign": "center",
+                  "renderers": [
+                    {
+                      "kind": "leaf",
+                      "state": "leaf:leaf:false:true:false",
+                      "fontSize": "14px"
+                    }
+                  ],
+                  "loading": false,
+                  "leafLine": false
+                }
+              }
+            ],
+            "events": [
+              {
+                "kind": "enter",
+                "type": "mouseenter",
+                "node": {
+                  "key": "root",
+                  "expanded": true,
+                  "selected": false,
+                  "checked": false,
+                  "loading": false
+                }
+              },
+              {
+                "kind": "leave",
+                "type": "mouseleave",
+                "node": {
+                  "key": "root",
+                  "expanded": true,
+                  "selected": false,
+                  "checked": false,
+                  "loading": false
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "disabled-hover",
+        "node": "text",
+        "disabled": true
+      },
+      "initial": {
+        "nodes": [
+          {
+            "title": "Root",
+            "expanded": "true",
+            "switcher": {
+              "text": "N",
+              "textAlign": "center",
+              "renderers": [],
+              "loading": false,
+              "leafLine": false
+            }
+          },
+          {
+            "title": "Leaf",
+            "expanded": null,
+            "switcher": {
+              "text": "N",
+              "textAlign": "center",
+              "renderers": [],
+              "loading": false,
+              "leafLine": false
+            }
+          }
+        ],
+        "events": []
+      },
+      "steps": [
+        {
+          "action": "hover",
+          "result": {
+            "nodes": [
+              {
+                "title": "Root",
+                "expanded": "true",
+                "switcher": {
+                  "text": "N",
+                  "textAlign": "center",
+                  "renderers": [],
+                  "loading": false,
+                  "leafLine": false
+                }
+              },
+              {
+                "title": "Leaf",
+                "expanded": null,
+                "switcher": {
+                  "text": "N",
+                  "textAlign": "center",
+                  "renderers": [],
+                  "loading": false,
+                  "leafLine": false
+                }
+              }
+            ],
+            "events": [
+              {
+                "kind": "enter",
+                "type": "mouseenter",
+                "node": {
+                  "key": "root",
+                  "expanded": true,
+                  "selected": false,
+                  "checked": false,
+                  "loading": false
+                }
+              }
+            ]
+          }
+        },
+        {
+          "action": "leave",
+          "result": {
+            "nodes": [
+              {
+                "title": "Root",
+                "expanded": "true",
+                "switcher": {
+                  "text": "N",
+                  "textAlign": "center",
+                  "renderers": [],
+                  "loading": false,
+                  "leafLine": false
+                }
+              },
+              {
+                "title": "Leaf",
+                "expanded": null,
+                "switcher": {
+                  "text": "N",
+                  "textAlign": "center",
+                  "renderers": [],
+                  "loading": false,
+                  "leafLine": false
+                }
+              }
+            ],
+            "events": [
+              {
+                "kind": "enter",
+                "type": "mouseenter",
+                "node": {
+                  "key": "root",
+                  "expanded": true,
+                  "selected": false,
+                  "checked": false,
+                  "loading": false
+                }
+              },
+              {
+                "kind": "leave",
+                "type": "mouseleave",
+                "node": {
+                  "key": "root",
+                  "expanded": true,
+                  "selected": false,
+                  "checked": false,
+                  "loading": false
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "lazy-global",
+        "global": "text",
+        "lazy": true
+      },
+      "initial": {
+        "nodes": [
+          {
+            "title": "Root",
+            "expanded": "false",
+            "switcher": {
+              "text": "G",
+              "textAlign": "center",
+              "renderers": [],
+              "loading": false,
+              "leafLine": false
+            }
+          }
+        ],
+        "events": []
+      },
+      "steps": [
+        {
+          "action": "hover",
+          "result": {
+            "nodes": [
+              {
+                "title": "Root",
+                "expanded": "false",
+                "switcher": {
+                  "text": "G",
+                  "textAlign": "center",
+                  "renderers": [],
+                  "loading": false,
+                  "leafLine": false
+                }
+              }
+            ],
+            "events": [
+              {
+                "kind": "enter",
+                "type": "mouseenter",
+                "node": {
+                  "key": "root",
+                  "expanded": false,
+                  "selected": false,
+                  "checked": false,
+                  "loading": false,
+                  "isLeaf": false
+                }
+              }
+            ]
+          }
+        },
+        {
+          "action": "leave",
+          "result": {
+            "nodes": [
+              {
+                "title": "Root",
+                "expanded": "false",
+                "switcher": {
+                  "text": "G",
+                  "textAlign": "center",
+                  "renderers": [],
+                  "loading": false,
+                  "leafLine": false
+                }
+              }
+            ],
+            "events": [
+              {
+                "kind": "enter",
+                "type": "mouseenter",
+                "node": {
+                  "key": "root",
+                  "expanded": false,
+                  "selected": false,
+                  "checked": false,
+                  "loading": false,
+                  "isLeaf": false
+                }
+              },
+              {
+                "kind": "leave",
+                "type": "mouseleave",
+                "node": {
+                  "key": "root",
+                  "expanded": false,
+                  "selected": false,
+                  "checked": false,
+                  "loading": false,
+                  "isLeaf": false
+                }
+              }
+            ]
+          }
+        },
+        {
+          "action": "expand",
+          "result": {
+            "nodes": [
+              {
+                "title": "Root",
+                "expanded": "true",
+                "switcher": {
+                  "text": "",
+                  "textAlign": "center",
+                  "renderers": [],
+                  "loading": true,
+                  "leafLine": false
+                }
+              }
+            ],
+            "events": [
+              {
+                "kind": "enter",
+                "type": "mouseenter",
+                "node": {
+                  "key": "root",
+                  "expanded": false,
+                  "selected": false,
+                  "checked": false,
+                  "loading": false,
+                  "isLeaf": false
+                }
+              },
+              {
+                "kind": "leave",
+                "type": "mouseleave",
+                "node": {
+                  "key": "root",
+                  "expanded": false,
+                  "selected": false,
+                  "checked": false,
+                  "loading": false,
+                  "isLeaf": false
+                }
+              },
+              {
+                "kind": "expand",
+                "keys": [
+                  "root"
+                ],
+                "expanded": true,
+                "node": {
+                  "key": "root",
+                  "expanded": false,
+                  "selected": false,
+                  "checked": false,
+                  "loading": false,
+                  "isLeaf": false
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "lazy-node-priority",
+        "node": "text",
+        "global": "text",
+        "lazy": true
+      },
+      "initial": {
+        "nodes": [
+          {
+            "title": "Root",
+            "expanded": "false",
+            "switcher": {
+              "text": "N",
+              "textAlign": "center",
+              "renderers": [],
+              "loading": false,
+              "leafLine": false
+            }
+          }
+        ],
+        "events": []
+      },
+      "steps": [
+        {
+          "action": "hover",
+          "result": {
+            "nodes": [
+              {
+                "title": "Root",
+                "expanded": "false",
+                "switcher": {
+                  "text": "N",
+                  "textAlign": "center",
+                  "renderers": [],
+                  "loading": false,
+                  "leafLine": false
+                }
+              }
+            ],
+            "events": [
+              {
+                "kind": "enter",
+                "type": "mouseenter",
+                "node": {
+                  "key": "root",
+                  "expanded": false,
+                  "selected": false,
+                  "checked": false,
+                  "loading": false,
+                  "isLeaf": false
+                }
+              }
+            ]
+          }
+        },
+        {
+          "action": "leave",
+          "result": {
+            "nodes": [
+              {
+                "title": "Root",
+                "expanded": "false",
+                "switcher": {
+                  "text": "N",
+                  "textAlign": "center",
+                  "renderers": [],
+                  "loading": false,
+                  "leafLine": false
+                }
+              }
+            ],
+            "events": [
+              {
+                "kind": "enter",
+                "type": "mouseenter",
+                "node": {
+                  "key": "root",
+                  "expanded": false,
+                  "selected": false,
+                  "checked": false,
+                  "loading": false,
+                  "isLeaf": false
+                }
+              },
+              {
+                "kind": "leave",
+                "type": "mouseleave",
+                "node": {
+                  "key": "root",
+                  "expanded": false,
+                  "selected": false,
+                  "checked": false,
+                  "loading": false,
+                  "isLeaf": false
+                }
+              }
+            ]
+          }
+        },
+        {
+          "action": "expand",
+          "result": {
+            "nodes": [
+              {
+                "title": "Root",
+                "expanded": "true",
+                "switcher": {
+                  "text": "N",
+                  "textAlign": "center",
+                  "renderers": [],
+                  "loading": false,
+                  "leafLine": false
+                }
+              }
+            ],
+            "events": [
+              {
+                "kind": "enter",
+                "type": "mouseenter",
+                "node": {
+                  "key": "root",
+                  "expanded": false,
+                  "selected": false,
+                  "checked": false,
+                  "loading": false,
+                  "isLeaf": false
+                }
+              },
+              {
+                "kind": "leave",
+                "type": "mouseleave",
+                "node": {
+                  "key": "root",
+                  "expanded": false,
+                  "selected": false,
+                  "checked": false,
+                  "loading": false,
+                  "isLeaf": false
+                }
+              },
+              {
+                "kind": "expand",
+                "keys": [
+                  "root"
+                ],
+                "expanded": true,
+                "node": {
+                  "key": "root",
+                  "expanded": false,
+                  "selected": false,
+                  "checked": false,
+                  "loading": false,
+                  "isLeaf": false
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "lazy-node-element",
+        "node": "element",
+        "global": "text",
+        "lazy": true
+      },
+      "initial": {
+        "nodes": [
+          {
+            "title": "Root",
+            "expanded": "false",
+            "switcher": {
+              "text": "N",
+              "textAlign": "center",
+              "renderers": [
+                {
+                  "kind": "node",
+                  "state": "node:root:false:false:false",
+                  "fontSize": "14px"
+                }
+              ],
+              "loading": false,
+              "leafLine": false
+            }
+          }
+        ],
+        "events": []
+      },
+      "steps": [
+        {
+          "action": "hover",
+          "result": {
+            "nodes": [
+              {
+                "title": "Root",
+                "expanded": "false",
+                "switcher": {
+                  "text": "N",
+                  "textAlign": "center",
+                  "renderers": [
+                    {
+                      "kind": "node",
+                      "state": "node:root:false:false:false",
+                      "fontSize": "14px"
+                    }
+                  ],
+                  "loading": false,
+                  "leafLine": false
+                }
+              }
+            ],
+            "events": [
+              {
+                "kind": "enter",
+                "type": "mouseenter",
+                "node": {
+                  "key": "root",
+                  "expanded": false,
+                  "selected": false,
+                  "checked": false,
+                  "loading": false,
+                  "isLeaf": false
+                }
+              }
+            ]
+          }
+        },
+        {
+          "action": "leave",
+          "result": {
+            "nodes": [
+              {
+                "title": "Root",
+                "expanded": "false",
+                "switcher": {
+                  "text": "N",
+                  "textAlign": "center",
+                  "renderers": [
+                    {
+                      "kind": "node",
+                      "state": "node:root:false:false:false",
+                      "fontSize": "14px"
+                    }
+                  ],
+                  "loading": false,
+                  "leafLine": false
+                }
+              }
+            ],
+            "events": [
+              {
+                "kind": "enter",
+                "type": "mouseenter",
+                "node": {
+                  "key": "root",
+                  "expanded": false,
+                  "selected": false,
+                  "checked": false,
+                  "loading": false,
+                  "isLeaf": false
+                }
+              },
+              {
+                "kind": "leave",
+                "type": "mouseleave",
+                "node": {
+                  "key": "root",
+                  "expanded": false,
+                  "selected": false,
+                  "checked": false,
+                  "loading": false,
+                  "isLeaf": false
+                }
+              }
+            ]
+          }
+        },
+        {
+          "action": "expand",
+          "result": {
+            "nodes": [
+              {
+                "title": "Root",
+                "expanded": "true",
+                "switcher": {
+                  "text": "N",
+                  "textAlign": "center",
+                  "renderers": [
+                    {
+                      "kind": "node",
+                      "state": "node:root:true:false:true",
+                      "fontSize": "14px"
+                    }
+                  ],
+                  "loading": false,
+                  "leafLine": false
+                }
+              }
+            ],
+            "events": [
+              {
+                "kind": "enter",
+                "type": "mouseenter",
+                "node": {
+                  "key": "root",
+                  "expanded": false,
+                  "selected": false,
+                  "checked": false,
+                  "loading": false,
+                  "isLeaf": false
+                }
+              },
+              {
+                "kind": "leave",
+                "type": "mouseleave",
+                "node": {
+                  "key": "root",
+                  "expanded": false,
+                  "selected": false,
+                  "checked": false,
+                  "loading": false,
+                  "isLeaf": false
+                }
+              },
+              {
+                "kind": "expand",
+                "keys": [
+                  "root"
+                ],
+                "expanded": true,
+                "node": {
+                  "key": "root",
+                  "expanded": false,
+                  "selected": false,
+                  "checked": false,
+                  "loading": false,
+                  "isLeaf": false
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "directory-node-rtl-prefix",
+        "node": "text",
+        "directory": true,
+        "rtl": true,
+        "prefix": "tenant"
+      },
+      "initial": {
+        "nodes": [
+          {
+            "title": "Root",
+            "expanded": "true",
+            "switcher": {
+              "text": "N",
+              "textAlign": "center",
+              "renderers": [],
+              "loading": false,
+              "leafLine": false
+            }
+          },
+          {
+            "title": "Leaf",
+            "expanded": null,
+            "switcher": {
+              "text": "N",
+              "textAlign": "center",
+              "renderers": [],
+              "loading": false,
+              "leafLine": false
+            }
+          }
+        ],
+        "events": []
+      },
+      "steps": [
+        {
+          "action": "hover",
+          "result": {
+            "nodes": [
+              {
+                "title": "Root",
+                "expanded": "true",
+                "switcher": {
+                  "text": "N",
+                  "textAlign": "center",
+                  "renderers": [],
+                  "loading": false,
+                  "leafLine": false
+                }
+              },
+              {
+                "title": "Leaf",
+                "expanded": null,
+                "switcher": {
+                  "text": "N",
+                  "textAlign": "center",
+                  "renderers": [],
+                  "loading": false,
+                  "leafLine": false
+                }
+              }
+            ],
+            "events": [
+              {
+                "kind": "enter",
+                "type": "mouseenter",
+                "node": {
+                  "key": "root",
+                  "expanded": true,
+                  "selected": false,
+                  "checked": false,
+                  "loading": false
+                }
+              }
+            ]
+          }
+        },
+        {
+          "action": "leave",
+          "result": {
+            "nodes": [
+              {
+                "title": "Root",
+                "expanded": "true",
+                "switcher": {
+                  "text": "N",
+                  "textAlign": "center",
+                  "renderers": [],
+                  "loading": false,
+                  "leafLine": false
+                }
+              },
+              {
+                "title": "Leaf",
+                "expanded": null,
+                "switcher": {
+                  "text": "N",
+                  "textAlign": "center",
+                  "renderers": [],
+                  "loading": false,
+                  "leafLine": false
+                }
+              }
+            ],
+            "events": [
+              {
+                "kind": "enter",
+                "type": "mouseenter",
+                "node": {
+                  "key": "root",
+                  "expanded": true,
+                  "selected": false,
+                  "checked": false,
+                  "loading": false
+                }
+              },
+              {
+                "kind": "leave",
+                "type": "mouseleave",
+                "node": {
+                  "key": "root",
+                  "expanded": true,
+                  "selected": false,
+                  "checked": false,
+                  "loading": false
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "disposal": {
+    "connected": false,
+    "nativeEvents": [
+      "mouseover",
+      "mouseout",
+      "mouseenter",
+      "mouseleave"
+    ],
+    "before": [
+      {
+        "kind": "enter",
+        "type": "mouseenter",
+        "node": {
+          "key": "root",
+          "expanded": true,
+          "selected": false,
+          "checked": false,
+          "loading": false
+        }
+      },
+      {
+        "kind": "leave",
+        "type": "mouseleave",
+        "node": {
+          "key": "root",
+          "expanded": true,
+          "selected": false,
+          "checked": false,
+          "loading": false
+        }
+      }
+    ],
+    "after": [
+      {
+        "kind": "enter",
+        "type": "mouseenter",
+        "node": {
+          "key": "root",
+          "expanded": true,
+          "selected": false,
+          "checked": false,
+          "loading": false
+        }
+      },
+      {
+        "kind": "leave",
+        "type": "mouseleave",
+        "node": {
+          "key": "root",
+          "expanded": true,
+          "selected": false,
+          "checked": false,
+          "loading": false
+        }
+      }
+    ]
+  }
+}

@@ -9,6 +9,10 @@
 
 ### Added
 
+- Tree поддерживает per-node switcherIcon, showLeafIcon snippets и node hover
+  callbacks. Сохранены исходные приоритеты loading/renderer, вычисленный isLeaf
+  для иконок, исходные данные событий, native DOM/focus и refs.
+
 - DirectoryTree переносит иконки папок/файлов, выбор Ctrl/Meta/Shift и defaults
   исходного Tree.DirectoryTree. Сохранены native refs, Tree-темы и controlled keys;
   ошибка upstream при снятии controlled-режима записана отдельно и не перенесена.
@@ -1508,6 +1512,9 @@
   тип результата `createMessage` подготовлен к генерации деклараций.
 
 ### Fixed
+
+- Tree сохраняет исходное центрирование switcher: сброс native button styles
+  больше не перекрывает vendor text-align. Содержимое строки сохраняет наследуемое выравнивание.
 
 - Upload прекращает batch, если первый onChange синхронно размонтировал компонент:
   оставшиеся файлы не меняют статус и не публикуют callbacks после disposal.

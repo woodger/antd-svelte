@@ -17760,7 +17760,13 @@
         "tests/browser/directory-tree-metrics.ts",
         "tests/browser/directory-tree.spec.ts",
         "tests/package/directory-tree.ssr.test.ts",
-        "readme.md"
+        "readme.md",
+        "tests/browser/fixtures/TreeNodeRendererScope.svelte",
+        "tests/browser/fixtures/TreeNodeRendererFixtures.svelte",
+        "tests/browser/fixtures/ant-design-tree-node-renderers-reference.json",
+        "tests/browser/tree-node-renderers-metrics.ts",
+        "tests/browser/tree-node-renderers.spec.ts",
+        "tests/package/tree-node-renderers.ssr.test.ts"
       ],
       "features": [
         {
@@ -17812,7 +17818,7 @@
           "state": "missing",
           "requiredForV1": false,
           "evidence": [],
-          "note": "Нет fieldNames, TreeNode children API, полного generic data API, per-node switcherIcon, showLeafIcon snippet, onMouseEnter/Leave node events, semantic classNames/styles и ConfigProvider.tree. Ref предоставляет focus/blur и bind:nativeElement. Collapse/appear motion и полный rc-tree ref отдельно."
+          "note": "Нет fieldNames, полного generic data API, semantic classNames/styles и ConfigProvider.tree. Ref предоставляет focus/blur и bind:nativeElement. Collapse/appear motion и полный rc-tree ref отдельно. Deprecated Tree.children/TreeNode JSX composition исключена по es/Tree.js @rc-component/tree1.4.0: runtime warning помечает children самого Tree deprecated и предлагает treeData. TreeDataNode.children остаётся актуальным data API."
         },
         {
           "id": "component-theme",
@@ -17953,6 +17959,24 @@
             "readme.md"
           ],
           "note": "Явная ошибка Ant Design6.6.8 / 984592267de88fbf9cdaecc96a56629e721c709d: useControlledState @rc-component/util1.14.0 зеркалит value=undefined во внутреннее состояние DirectoryTree при снятии selectedKeys/expandedKeys. Следующий Shift-клик вызывает Cannot read properties of undefined (reading includes) в calcRangeKeys. Raw hold/accept observations повторены побайтно и сохранены без исправления expected data. Svelte хранит безопасные массивы и сохраняет последние принятые controlled keys; отклонённый callback не заменяет принятые ключи. Ошибка не копируется; полный Tree API остаётся незавершённым."
+        },
+        {
+          "id": "node-renderers-hover",
+          "title": "Switcher отдельных узлов, leaf snippets и hover callbacks",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Tree.svelte",
+            "src/lib/tree.types.ts",
+            "tests/browser/fixtures/TreeNodeRendererScope.svelte",
+            "tests/browser/fixtures/TreeNodeRendererFixtures.svelte",
+            "tests/browser/fixtures/ant-design-tree-node-renderers-reference.json",
+            "tests/browser/tree-node-renderers-metrics.ts",
+            "tests/browser/tree-node-renderers.spec.ts",
+            "tests/package/tree-node-renderers.ssr.test.ts",
+            "readme.md"
+          ],
+          "note": "TreeDataNode.switcherIcon перекрывает общий Ant switcher, loading и leaf line; действует также на листья. Общий renderer уступает loading, showLine.showLeafIcon принимает snippet и не возвращается к fallback при пустом содержимом. Snippet получает вычисленный isLeaf; данные onMouseEnter/onMouseLeave сохраняют исходный флаг и актуальные состояния, disabled не отключает hover, pointer на switcher не вызывает node content callback. 14 исходных UMD6.6.8 / rc-tree1.4.0 конфигураций повторены побайтно: text/element/empty, loading, RTL/local prefix и DirectoryTree; snapshots включают callback order, renderer flags, содержимое, font-size и text-align switcher. Сброс native button styles не перекрывает source центрирование switcher; content сохраняет text-align:inherit. Native controls/ARIA, class/value/refs и DOM/focus сохраняются. Snippets остаются opaque Svelte content без ReactElement cloning; пустой snippet сохраняет native wrapper, React-specific false-return removal не является отдельным Native snippet API. Расширенный generic/fieldNames/semantic/config/virtual/drag/motion API остаётся отдельным объёмом. Исходное retained-node disposal observation подтверждает отсутствие hover после unmount. Native guard не публикует callbacks от удержанного detached DOM."
         }
       ]
     },

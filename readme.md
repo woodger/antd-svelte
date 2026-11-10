@@ -6557,6 +6557,25 @@ switcherIcon/switcherLoadingIcon, titleRender и filterTreeNode поддержа
 Height ограничивает native scroll viewport; виртуализация пока не применяется.
 SSR рендерит видимые строки без загрузки и browser APIs.
 
+`TreeDataNode.switcherIcon` задаёт switcher конкретного узла, включая лист,
+и имеет приоритет над общим renderer, линиями и loading icon. Общий
+`switcherIcon` применяется к веткам после loading; `showLine.showLeafIcon`
+принимает также snippet. Рендереры получают вычисленный `isLeaf`; пустой snippet
+оставляет существующий native switcher без содержимого. Snippets сохраняют своё
+содержимое и классы вместо клонирования React elements.
+`onMouseEnter`/`onMouseLeave` получают `{event,node}` при входе/уходе с содержимого
+строки, включая disabled. Наведение на switcher не является событием содержимого.
+Node в событии сохраняет исходный `isLeaf` и актуальные selected/expanded/loading;
+вычисленный флаг рендерера не подменяет исходные данные.
+После unmount hover callbacks не вызываются, даже если потребитель удерживает
+удалённый DOM-узел и отправляет ему событие.
+[14 raw UMD сценариев](./tests/browser/fixtures/ant-design-tree-node-renderers-reference.json),
+[browser](./tests/browser/tree-node-renderers.spec.ts) и
+[SSR](./tests/package/tree-node-renderers.ssr.test.ts) проверяют приоритеты,
+текст/элементы/пустое содержимое, центрирование switcher, pending load, hover,
+RTL/prefix и DirectoryTree. Сброс native button styles сохраняет исходный
+`text-align: center` у switcher; наследуемое выравнивание остаётся у содержимого строки.
+
 `prefixCls` меняет namespace дерева, nodes, checkbox, switcher и линий; пустая
 строка наследует ConfigProvider.prefixCls. Canonical Tree tokens и generated IDs
 сохранены; общий Row selector независим от local prefix. Шаблон tree-prefix
@@ -6588,10 +6607,11 @@ DOM, фокуса, active descendant, отметок и pending load при об
 браузерные ресурсы. Декларации сверяются с официальным UMD отдельным
 [unit-набором](src/lib/theme-tree-tokens-reference.test.ts).
 
-Drag/drop, virtual/scrollTo, fieldNames, полный generic
-node API, TreeNode children API, per-node switcherIcon, showLeafIcon snippet,
+Drag/drop, virtual/scrollTo, fieldNames, полный generic node API,
 semantic/config API и collapse/appear анимации ещё не перенесены. Реестр
 отделяет этот объём от полного React API Tree.
+Deprecated `TreeNode` children не входят в перенос: rc-tree 1.4.0 прямо помечает
+`Tree.children` как deprecated и предлагает `treeData`.
 
 ### DirectoryTree
 

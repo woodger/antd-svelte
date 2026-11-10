@@ -47,6 +47,8 @@
     onClick,
     onDoubleClick,
     onRightClick,
+    onMouseEnter,
+    onMouseLeave,
     onActiveChange,
     activeKey,
     showIcon = false,
@@ -161,7 +163,11 @@
         expanded = expanded.filter(item => item !== key);
     }
   });
-  onDestroy(loader.dispose);
+  let disposed = false;
+  onDestroy(() => {
+    disposed = true;
+    loader.dispose();
+  });
   $effect(() => {
     if (!loadData) return;
     const pending = visible.filter(
@@ -391,8 +397,8 @@
   }
 </script>
 <style>
-  button[data-ant-tree-switcher], button[data-ant-tree-content] { padding:0;border:0;background:transparent;color:inherit;font:inherit;text-align:inherit; }
-  button[data-ant-tree-content] { padding:0 var(--ant-padding-xs); }
+  button[data-ant-tree-switcher], button[data-ant-tree-content] { padding:0;border:0;background:transparent;color:inherit;font:inherit; }
+  button[data-ant-tree-content] { padding:0 var(--ant-padding-xs);text-align:inherit; }
   [data-ant-tree-list-inner] { display:flex;flex-direction:column; }
   [data-ant-tree-checkbox] { flex-shrink:0;padding:0;cursor:pointer; }
   /* Source TreeSelect использует рамку и фон checkbox из своего vendor scope. */
@@ -450,13 +456,13 @@
               !end && `${componentPrefix}-indent-unit-start`,
               end && `${componentPrefix}-indent-unit-end`
             ]}></span>{/each}</span>
-          {#if isLeaf}<span data-ant-tree-switcher class={`${componentPrefix}-switcher ${componentPrefix}-switcher-noop`} aria-hidden="true">{#if showLine}{#if typeof showLine === 'object' && showLine.showLeafIcon}<TreeIcon name="file" class={`${componentPrefix}-switcher-line-icon`} />{:else}<span class={`${componentPrefix}-switcher-leaf-line`}></span>{/if}{/if}</span>
+          {#if isLeaf}<span data-ant-tree-switcher class={`${componentPrefix}-switcher ${componentPrefix}-switcher-noop`} aria-hidden="true">{#if entry.node.switcherIcon}{@render entry.node.switcherIcon({ ...node, isLeaf })}{:else if showLine}{#if typeof showLine === 'object' && typeof showLine.showLeafIcon === 'function'}{@render showLine.showLeafIcon({ ...node, isLeaf })}{:else if typeof showLine === 'object' && showLine.showLeafIcon}<TreeIcon name="file" class={`${componentPrefix}-switcher-line-icon`} />{:else}<span class={`${componentPrefix}-switcher-leaf-line`}></span>{/if}{/if}</span>
           {:else}<button type="button" data-ant-tree-switcher tabindex="-1" class={[
               `${componentPrefix}-switcher`,
               `${componentPrefix}-switcher_${node.expanded ? 'open' : 'close'}`
             ]} aria-label={node.expanded
                 ? config.locale.tree?.collapse ?? 'Collapse'
-                : config.locale.tree?.expand ?? 'Expand'} aria-expanded={node.expanded} onmousedown={mouseFocus} onclick={event => expand(entry, event)}>{#if node.loading}{#if switcherLoadingIcon}{@render switcherLoadingIcon(node)}{:else}<TreeIcon name="loading" class={`${componentPrefix}-switcher-loading-icon`} />{/if}{:else if switcherIcon}{@render switcherIcon(node)}{:else}<TreeIcon name={showLine ? node.expanded ? 'minus' : 'plus' : 'caret'} class={showLine
+                : config.locale.tree?.expand ?? 'Expand'} aria-expanded={node.expanded} onmousedown={mouseFocus} onclick={event => expand(entry, event)}>{#if entry.node.switcherIcon}{@render entry.node.switcherIcon({ ...node, isLeaf })}{:else if node.loading}{#if switcherLoadingIcon}{@render switcherLoadingIcon(node)}{:else}<TreeIcon name="loading" class={`${componentPrefix}-switcher-loading-icon`} />{/if}{:else if switcherIcon}{@render switcherIcon({ ...node, isLeaf })}{:else}<TreeIcon name={showLine ? node.expanded ? 'minus' : 'plus' : 'caret'} class={showLine
                   ? `${componentPrefix}-switcher-line-icon`
                   : `${componentPrefix}-switcher-icon`} />{/if}</button>{/if}
           {#if hasCheck}<button type="button" data-ant-tree-checkbox role="checkbox" tabindex="-1" aria-checked={node.halfChecked ? 'mixed' : node.checked} aria-labelledby={`${nodeId(entry.key)}-title`} disabled={unavailable || entry.node.disableCheckbox} class={[
@@ -471,7 +477,12 @@
                 ? 'normal'
                 : node.expanded ? 'open' : 'close'}`,
               !unavailable && node.selected && `${componentPrefix}-node-selected`
-            ]} onmousedown={mouseFocus} onclick={event => click(entry, event)} ondblclick={event => doubleClick(entry, event, node)} oncontextmenu={event => {
+            ]} onmousedown={mouseFocus} onclick={event => click(entry, event)} ondblclick={event => doubleClick(entry, event, node)} onmouseenter={event => {
+                // Удержанный DOM-узел может получать события и после unmount.
+                if (!disposed) onMouseEnter?.({ event, node });
+              }} onmouseleave={event => {
+                if (!disposed) onMouseLeave?.({ event, node });
+              }} oncontextmenu={event => {
                 if (onRightClick) {
                   event.preventDefault();
                   onRightClick({ event, node });

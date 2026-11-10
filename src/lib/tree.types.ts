@@ -12,6 +12,8 @@ export interface TreeDataNode {
   selectable?: boolean;
   isLeaf?: boolean;
   icon?: Snippet<[TreeEventNode]>;
+  /** Собственный switcher перекрывает общий renderer и loading; isLeaf вычислен для узла. */
+  switcherIcon?: Snippet<[TreeEventNode]>;
   class?: string;
   style?: string;
 }
@@ -100,15 +102,20 @@ export interface TreeProps extends Omit<HTMLAttributes<HTMLDivElement>, 'childre
   onClick?: (event: MouseEvent, node: TreeEventNode) => void;
   onDoubleClick?: (event: MouseEvent, node: TreeEventNode) => void;
   onRightClick?: (info: { event: MouseEvent; node: TreeEventNode; }) => void;
+  /** Наведение на содержимое строки; disabled не блокирует уведомление. */
+  onMouseEnter?: (info: { event: MouseEvent; node: TreeEventNode; }) => void;
+  /** Уход с содержимого строки; node отражает актуальное состояние. */
+  onMouseLeave?: (info: { event: MouseEvent; node: TreeEventNode; }) => void;
   onActiveChange?: (key: TreeKey | null) => void;
   activeKey?: TreeKey | null;
   /** @defaultValue false */
   showIcon?: boolean;
   /** @defaultValue false */
-  showLine?: boolean | { showLeafIcon: boolean; };
+  showLine?: boolean | { showLeafIcon: boolean | Snippet<[TreeEventNode]>; };
   /** @defaultValue false */
   blockNode?: boolean;
   icon?: Snippet<[TreeEventNode]>;
+  /** Renderer ветки; loading имеет приоритет. Аргумент содержит вычисленный isLeaf. */
   switcherIcon?: Snippet<[TreeEventNode]>;
   switcherLoadingIcon?: Snippet<[TreeEventNode]>;
   titleRender?: Snippet<[TreeDataNode]>;
