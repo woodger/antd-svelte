@@ -17695,7 +17695,7 @@
       "name": "Tree",
       "category": "data-display",
       "scope": "target",
-      "scopeReason": "Tree и DirectoryTree по Ant Design 6.6.8 / rc-tree 1.4.0: treeData, состояния, conduction, async loading, клавиатура, выбор диапазона, drag/drop, virtual list и scrollTo; motion отдельно.",
+      "scopeReason": "Tree и DirectoryTree по Ant Design 6.6.8 / rc-tree 1.4.0: treeData, состояния, conduction, async loading, клавиатура, выбор диапазона, drag/drop, virtual list, scrollTo и collapse/appear motion.",
       "upstreamPath": "components/tree",
       "reviewedRevision": "984592267de88fbf9cdaecc96a56629e721c709d",
       "exports": [
@@ -17742,6 +17742,11 @@
           "name": "@rc-component/virtual-list",
           "range": "^1.2.0",
           "referenceVersion": "1.5.1"
+        },
+        {
+          "name": "@rc-component/motion",
+          "range": "^1.3.3",
+          "referenceVersion": "1.3.3"
         }
       ],
       "priority": "p1",
@@ -17842,7 +17847,25 @@
         "tests/browser/tree-drag-test.ts",
         "tests/browser/tree-drag.spec.ts",
         "tests/browser/tree-drag-native.spec.ts",
-        "tests/package/tree-drag.ssr.test.ts"
+        "tests/package/tree-drag.ssr.test.ts",
+        "src/lib/TreeMotion.svelte",
+        "src/lib/tree-motion.engine.ts",
+        "src/lib/tree-motion.model.svelte.ts",
+        "src/lib/tree-motion.dom.ts",
+        "src/lib/tree-motion.types.ts",
+        "src/lib/tree-motion.engine.test.ts",
+        "src/lib/tree-motion.dom.test.ts",
+        "tests/browser/fixtures/TreeMotionFixtures.svelte",
+        "tests/browser/fixtures/TreeMotionScope.svelte",
+        "tests/browser/fixtures/TreeMotionGeneric.svelte",
+        "tests/browser/fixtures/tree-motion-cases.ts",
+        "tests/browser/fixtures/ant-design-tree-motion-reference.json",
+        "tests/browser/fixtures/ant-design-tree-motion-ssr-reference.json",
+        "tests/browser/tree-motion-metrics.ts",
+        "tests/browser/tree-motion.spec.ts",
+        "tests/browser/tree-motion-native.spec.ts",
+        "tests/package/TreeMotionSsr.svelte",
+        "tests/package/tree-motion.ssr.test.ts"
       ],
       "features": [
         {
@@ -17914,10 +17937,38 @@
         {
           "id": "extended-api",
           "title": "Collapse/appear motion",
-          "state": "missing",
+          "state": "supported",
           "requiredForV1": false,
-          "evidence": [],
-          "note": "Collapse/appear и полный motion object в semantic callback props ещё не перенесены. ScrollTo и TreeRef перенесены отдельно. Deprecated Tree.children/TreeNode JSX composition исключена по es/Tree.js @rc-component/tree1.4.0; TreeDataNode.children остаётся актуальным data API."
+          "evidence": [
+            "src/lib/Tree.svelte",
+            "src/lib/TreeMotion.svelte",
+            "src/lib/tree-motion.engine.ts",
+            "src/lib/tree-motion.model.svelte.ts",
+            "src/lib/tree-motion.dom.ts",
+            "src/lib/tree-motion.types.ts",
+            "src/lib/tree-motion.engine.test.ts",
+            "src/lib/tree-motion.dom.test.ts",
+            "src/lib/tree.types.ts",
+            "src/lib/index.ts",
+            "src/lib/TreeSelect.svelte",
+            "src/lib/tree-prefix.engine.ts",
+            "src/lib/vendor/tree.css",
+            "src/lib/vendor/tree-prefix.css.js",
+            "tools/ant-design-css-recipes.json",
+            "tests/browser/fixtures/TreeMotionFixtures.svelte",
+            "tests/browser/fixtures/TreeMotionScope.svelte",
+            "tests/browser/fixtures/TreeMotionGeneric.svelte",
+            "tests/browser/fixtures/tree-motion-cases.ts",
+            "tests/browser/fixtures/ant-design-tree-motion-reference.json",
+            "tests/browser/fixtures/ant-design-tree-motion-ssr-reference.json",
+            "tests/browser/tree-motion-metrics.ts",
+            "tests/browser/tree-motion.spec.ts",
+            "tests/browser/tree-motion-native.spec.ts",
+            "tests/package/TreeMotionSsr.svelte",
+            "tests/package/tree-motion.ssr.test.ts",
+            "readme.md"
+          ],
+          "note": "Ant collapse object по умолчанию и identity custom config в semantic callbacks; false/empty config, CSS motionName string/object, native start/active CSS strings, async prepare и end=false/deadline. Начальный список и SSR без appear; одиночный expanded key создаёт группу appear/leave, несколько keys обновляются сразу. Tree перезаписывает motionAppear по направлению, удерживает onVisibleChanged; React children/internalRef не добавлены. CSS 99 rules/1 drag keyframe сохраняет shared root motion namespace независимо от Tree prefix. Virtual range ограничен ceil(height/itemHeight)+1, placeholder сохраняет Source itemHeight estimate; virtual=false/без height удерживает весь диапазон. Данные обновляет владелец; новые expand действия ждут окончания, selection/check доступны. 23 raw UMD сценария и 12 DOM-free SSR вариантов фиксируют defaults, phases/hooks/Promise, измерения, controlled keys, prefix/RTL/темы, virtual и semantic props. Native сохраняет соседние DOM/ref/draft, generic aliases/zero/bigint, lazy loading, отменяет stale work после reset/config/dragend/unmount и учитывает reduced motion. TreeSelect сохраняет прежнее мгновенное раскрытие. ScrollTo/TreeRef учтены отдельно; deprecated Tree.children/TreeNode composition исключена."
         },
         {
           "id": "component-theme",
@@ -18137,7 +18188,7 @@
             "tests/package/tree-fields.ssr.test.ts",
             "readme.md"
           ],
-          "note": "TreeProps/Data, DirectoryTreeProps/Data, TreeEventNode/Data и TreeCheckInfo/Data сохраняют пользовательский payload; TreeFieldDataNode помогает описать рекурсивное поле children. Aliases key/title/children и пустые имена работают в index/leaf/expand/check/load, Directory ranges, title/icon/switcher/filter callbacks. Event key и state перекрывают canonical raw fields; selectedNodes/checkedNodes/positions сохраняют исходные объекты. Node title snippet имеет приоритет над titleRender; literal arrays/zero/empty и object payload с titleRender поддержаны. 27 raw UMD6.6.8 конфигураций сохраняют labels/ARIA, иконки и события: aliases/частичная схема/canonical shadows, strict/conduction, lazy/preloaded, hold/accept, Directory ranges/all, RTL/prefix и data/schema transitions. Native generic fixture проверяет вывод типов без index signature, discriminated unions, исходные literal key/state, snippets и recursive helper. SSR не загружает детей и не создаёт timers; обновление schema сохраняет DOM/ref/active IDs, selection, keyboard и внешний draft. Motion остаётся отдельным пробелом; drag/drop и virtual/scrollTo учтены отдельно."
+          "note": "TreeProps/Data, DirectoryTreeProps/Data, TreeEventNode/Data и TreeCheckInfo/Data сохраняют пользовательский payload; TreeFieldDataNode помогает описать рекурсивное поле children. Aliases key/title/children и пустые имена работают в index/leaf/expand/check/load, Directory ranges, title/icon/switcher/filter callbacks. Event key и state перекрывают canonical raw fields; selectedNodes/checkedNodes/positions сохраняют исходные объекты. Node title snippet имеет приоритет над titleRender; literal arrays/zero/empty и object payload с titleRender поддержаны. 27 raw UMD6.6.8 конфигураций сохраняют labels/ARIA, иконки и события: aliases/частичная схема/canonical shadows, strict/conduction, lazy/preloaded, hold/accept, Directory ranges/all, RTL/prefix и data/schema transitions. Native generic fixture проверяет вывод типов без index signature, discriminated unions, исходные literal key/state, snippets и recursive helper. SSR не загружает детей и не создаёт timers; обновление schema сохраняет DOM/ref/active IDs, selection, keyboard и внешний draft. Motion, drag/drop и virtual/scrollTo учтены отдельно."
         },
         {
           "id": "native-field-names-refresh",
@@ -18405,6 +18456,19 @@
             "readme.md"
           ],
           "note": "Ошибка Source rc-tree1.4.0: dragHandlerNode memo зависит от draggable, но пропускает prefixCls. Стабильный draggable=true сохраняет старые handle classes после смены prefix. Raw prefix-cache-observation сохранён. Native обновляет namespace и оформление, сохраняя root/node DOM, refs и текущий drag; custom controls остаются opaque."
+        },
+        {
+          "id": "native-motion-hidden-key",
+          "title": "Скрытый expanded key не блокирует видимые ветки",
+          "state": "partial",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/tree-motion.model.svelte.ts",
+            "tests/browser/fixtures/ant-design-tree-motion-reference.json",
+            "tests/browser/tree-motion-native.spec.ts",
+            "readme.md"
+          ],
+          "note": "Ошибка Source rc-tree1.4.0: скрытый expanded key при defaultExpandParent=false создаёт пустую motion group перед корнем и блокирует onNodeExpand видимой ветки до deadline500 ms. Raw hidden-key-observation сохранён. Native не создаёт группу для невидимого ключа или пустого диапазона; ветка раскрывается сразу и сохраняет pending lazy contract."
         }
       ]
     },

@@ -9,8 +9,9 @@ export function getTreePrefixCss(prefix: string, rootPrefix: string) {
   const roots = new Set(['', '-rtl', '-show-line', '-directory']);
 
   return template.replace(
-    /\.ant-tree([-\w]*)|\.ant-row([-\w]*)|"ant-tree"|" ant-tree"/g,
-    (match, suffix: string | undefined, row: string | undefined) => {
+    /\.ant-tree([-\w]*)|\.ant-row([-\w]*)|(\.ant-motion-collapse)|"ant-tree"|" ant-tree"/g,
+    (match, suffix: string | undefined, row: string | undefined, motion: string | undefined) => {
+      if (motion) return `.${rootPrefix}-motion-collapse`;
       if (row !== undefined) return `.${rootPrefix}-row${row}`;
       if (suffix === '-css-var') return `.ant-tree-css-var${scope}`;
       if (suffix !== undefined) return `.${prefix}${suffix}${roots.has(suffix) ? scope : ''}`;

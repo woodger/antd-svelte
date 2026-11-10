@@ -6459,8 +6459,8 @@ tag/popup render hooks, treeExpandAction, остальные semantic slots/conf
 Tree переносит Ant Design 6.6.8 и @rc-component/tree 1.4.0. Чистые engines отвечают
 за flatten/родителей, исходную checkbox conduction и async load lifecycle.
 React/rc-tree runtime не устанавливаются; лицензия сохранена в vendor/LICENSE.rc-tree.
-CSS-рецепт извлекает 98 правил и keyframe drag feedback из закреплённого antd.css,
-исключая TreeSelect и collapse motion. Иконки соответствуют @ant-design/icons-svg 4.6.0.
+CSS-рецепт извлекает 99 правил, включая collapse motion, и keyframe drag feedback
+из закреплённого antd.css, исключая TreeSelect. Иконки соответствуют @ant-design/icons-svg 4.6.0.
 
 ```svelte
 <script lang="ts">
@@ -6735,10 +6735,55 @@ Svelte-содержимым; CSS относится к существующим 
 nested/reset/replaced/sibling scopes, DirectoryTree, prefix/RTL, style priorities
 и обновления, включая pending loading и независимый TreeSelect.
 
-Collapse/appear анимации ещё не перенесены. Реестр
-отделяет этот объём от полного React API Tree.
 Deprecated `TreeNode` children не входят в перенос: rc-tree 1.4.0 прямо помечает
 `Tree.children` как deprecated и предлагает `treeData`.
+
+### Collapse motion
+
+`motion` принимает Native CSSMotion config или `false`. Undefined/null выбирают
+исходный Ant collapse object: `${rootPrefixCls}-motion-collapse`, измеряемые
+height/opacity и deadline 500 ms. Пустой объект отключает CSS phases, сохраняя
+самостоятельный custom config. Semantic callbacks получают этот итоговый object;
+пользовательский config сохраняет identity.
+
+Начальные defaultExpandedKeys/expandedKeys и SSR не анимируются. При изменении
+одного expanded key его видимые потомки временно переходят в motion group:
+раскрытие использует `appear`, сворачивание — `leave`. Tree перезаписывает
+motionAppear по направлению перехода; custom `motionAppear: false` не отключает
+раскрытие. При нескольких изменённых keys список обновляется сразу.
+
+`motionName` поддерживает строку и object с именами фаз. Prepare hooks могут
+возвращать Promise; start/active hooks получают DOM группы и event=null и
+возвращают CSS-строку. End hooks получают нативный transition/animation event
+или `{deadline:true}`; false оставляет группу активной. Default collapse игнорирует
+opacity end и завершается по height либо deadline. События потомков не завершают
+группу. Ant Tree удерживает собственный onVisibleChanged; этот унаследованный
+callback, React children/internalRef не добавлены в Svelte API.
+
+`theme.token.motion=false` отключает CSS phases, но сохраняет prepare. Native
+также учитывает prefers-reduced-motion и его изменение во время перехода.
+Другие expand действия ждут окончания motion; selection/check остаются доступны.
+Смена данных, motion=false, завершение drag и unmount очищают удержанную группу
+и отменяют старые RAF, prepare completions, deadlines и DOM listeners.
+
+При virtual list группа содержит первые ceil(height/itemHeight)+1 потомков;
+сам virtual placeholder сохраняет исходную оценку itemHeight. Virtual=false или
+отсутствие height сохраняют весь диапазон. Соседние keyed строки, tree-root,
+refs и opaque controls вне диапазона сохраняют DOM. Узлы самого диапазона
+монтируются в группе и затем возвращаются в плоский список, как Source.
+TreeSelect сохраняет прежнее самостоятельное управление раскрытием.
+
+[23 Source сценария и raw наблюдение](./tests/browser/fixtures/ant-design-tree-motion-reference.json),
+[12 SSR вариантов](./tests/browser/fixtures/ant-design-tree-motion-ssr-reference.json),
+[engine](./src/lib/tree-motion.engine.test.ts),
+[lifecycle](./src/lib/tree-motion.dom.test.ts),
+[browser](./tests/browser/tree-motion.spec.ts),
+[Native browser](./tests/browser/tree-motion-native.spec.ts) и
+[SSR](./tests/package/tree-motion.ssr.test.ts) проверяют фазы, callbacks,
+измерения, virtual, generic aliases/zero/bigint, prefix/RTL, темы и cleanup.
+Ошибка rc-tree1.4.0 со скрытым expanded key сохранена в raw reference: пустой
+motion range блокирует видимые ветки до deadline. Native пропускает пустые
+и невидимые диапазоны, сохраняя доступное раскрытие.
 
 ### Drag/drop
 

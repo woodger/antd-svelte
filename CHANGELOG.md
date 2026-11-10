@@ -9,6 +9,11 @@
 
 ### Added
 
+- Tree/DirectoryTree поддерживают collapse/appear motion по rc-tree1.4.0 и
+  rc-motion1.3.3: custom phase names/hooks, async prepare, измерение группы,
+  deadline, virtual ranges и semantic config. Native сохраняет соседние controls,
+  учитывает reduced motion и отменяет stale callbacks после смены данных/unmount.
+
 - Tree/DirectoryTree поддерживают HTML5 drag/drop: draggable predicates и handle snippets,
   allowDrop, cross-level/RTL indicator, callbacks, delayed expansion и виртуальные окна.
   Сохранены generic raw data, canonical state, native focus/refs и controlled keys.

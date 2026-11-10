@@ -123,6 +123,7 @@ export type {
   TreeCheckedKeys,
   TreeCheckInfo
 } from './tree.types';
+export type { TreeMotionConfig, TreeMotionName, TreeMotionEvent } from './tree-motion.types';
 export { default as Upload } from './Upload.svelte';
 export { default as UploadDragger } from './UploadDragger.svelte';
 export { UPLOAD_LIST_IGNORE } from './upload.engine';

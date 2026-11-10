@@ -28,6 +28,10 @@
   import { treeSemantics } from './tree-semantic.engine';
   import { treeItemHeight } from './tree-virtual.engine';
   import { createTreeDrag } from './tree-drag.model.svelte';
+  import { createTreeMotion } from './tree-motion.model.svelte';
+  import type { TreeMotionRow } from './tree-motion.model.svelte';
+  import { getTreeMotionConfig } from './tree-motion.engine';
+  import TreeMotion from './TreeMotion.svelte';
   import { createVirtualList } from './virtual-list.model.svelte';
   import { connectListyGestures } from './listy-gestures.dom';
   import VirtualScrollbar from './ListyScrollbar.svelte';
@@ -63,6 +67,7 @@
     checkedKeys,
     defaultCheckedKeys = [],
     disabled,
+    motion: customMotion,
     draggable,
     allowDrop,
     onDragStart,
@@ -118,6 +123,7 @@
   const componentTheme = useComponentTheme('Tree');
   const tokens = useDesignTokenContext();
   let themeStyle = $derived(_themeStyle ?? componentTheme.style);
+  let motion = $derived(getTreeMotionConfig(customMotion, rootPrefix));
   const form = useForm();
   const generated = $props.id();
   let index = $derived(buildTreeEntities(treeData, fieldNames));
@@ -130,7 +136,8 @@
     blockNode,
     checkable,
     selectable,
-    disabled: blocked
+    disabled: blocked,
+    motion
   });
   let semantic = $derived(treeSemantics(context, semanticProps));
   let classes = $derived(semantic.classes);
@@ -174,14 +181,6 @@
   let holder = $state<HTMLDivElement>();
   let inner = $state<HTMLDivElement>();
   let indentMeasurer = $state<HTMLSpanElement>();
-  const viewport = createVirtualList<Entry, TreeKey>({
-    rows: () => visible,
-    getKey: entry => entry.key,
-    height: () => height,
-    estimate: () => itemHeight ?? treeItemHeight(tokens.state.token),
-    enabled: () => virtual ?? config.virtual ?? true,
-    width: () => scrollWidth
-  });
   const drag = createTreeDrag<Data>({
     props: () => ({
       draggable, allowDrop, onDragStart, onDragEnter, onDragOver, onDragLeave, onDragEnd,
@@ -198,8 +197,31 @@
     indent: () => indentMeasurer?.offsetWidth ?? 0,
     rtl: () => config.direction === 'rtl'
   });
+  const transition = createTreeMotion<Data & TreeBasicDataNode<Data>>({
+    rows: () => visible,
+    expanded: () => expanded,
+    motion: () => motion,
+    virtual: () => virtual ?? config.virtual,
+    height: () => height,
+    itemHeight: () => itemHeight ?? treeItemHeight(tokens.state.token),
+    dragging: () => drag.draggingKey !== null
+  });
+  // Source передаёт motion instance вместо строки: virtual sentinel сохраняет itemHeight estimate.
+  const viewport = createVirtualList<TreeMotionRow<Data & TreeBasicDataNode<Data>>, TreeKey | symbol>({
+    rows: () => transition.rows,
+    getKey: entry => entry.key,
+    height: () => height,
+    estimate: () => itemHeight ?? treeItemHeight(tokens.state.token),
+    enabled: () => virtual ?? config.virtual ?? true,
+    width: () => scrollWidth
+  });
   let range = $derived(viewport.range);
-  let rendered = $derived(visible.slice(range.start, range.end + 1));
+  let rendered = $derived(transition.rows.slice(range.start, range.end + 1));
+  let renderedNodes = $derived(rendered.flatMap(entry => 'motionNodes' in entry ? entry.motionNodes : [entry]));
+  $effect(() => {
+    const group = transition.group;
+    if (group && !rendered.includes(group)) untrack(() => transition.finish(group.id));
+  });
   $effect(() => {
     const element = holder;
     const content = inner;
@@ -283,10 +305,11 @@
     disposed = true;
     loader.dispose();
     drag.dispose();
+    transition.dispose();
   });
   $effect(() => {
     if (!loadData) return;
-    const pending = rendered.filter(
+    const pending = renderedNodes.filter(
       entry => expanded.includes(entry.key)
         && !treeLeaf(
           entry.node,
@@ -358,7 +381,7 @@
     fromTitle = false
   ) {
     // Selector rc-tree допускает collapse pending-ветки; switcher по-прежнему ждёт загрузку.
-    if (leaf(entry) || event && !fromTitle && loading.includes(entry.key)) return;
+    if (transition.group || leaf(entry) || event && !fromTitle && loading.includes(entry.key)) return;
     const node = snapshot ?? eventNode(entry);
     const next = node.expanded
       ? expanded.filter(key => key !== entry.key)
@@ -550,6 +573,116 @@
   [data-ant-tree-checkbox]:focus-visible { outline:2px solid var(--ant-color-primary); }
   [data-ant-tree-switcher]:focus-visible { outline:2px solid var(--ant-color-primary); }
 </style>
+{#snippet row(entry: Entry, nested = false)}
+  {@const node = eventNode(entry)}
+  {@const title = getTreeNodeTitle<Data>(entry.node, fieldNames, titleRender)}
+  {@const isLeaf = leaf(entry)}
+  {@const unavailable = blocked || Boolean(entry.node.disabled)}
+  {@const hasCheck = checkable && entry.node.checkable !== false}
+  {@const nodeDraggable = drag.draggable(entry)}
+  <div id={nodeId(entry.key)} role="treeitem" tabindex={nodeDraggable && !unavailable ? -1 : undefined} aria-labelledby={`${nodeId(entry.key)}-title`} aria-level={entry.level + 1} aria-posinset={entry.index + 1} aria-setsize={entry.siblings} aria-expanded={isLeaf ? undefined : node.expanded} aria-selected={(entry.node.selectable ?? selectable) && !unavailable
+      ? node.selected
+      : undefined} aria-checked={hasCheck && !unavailable
+          ? node.halfChecked ? 'mixed' : node.checked
+          : undefined} aria-disabled={unavailable} aria-busy={node.loading || undefined}
+    {@attach element => nested ? undefined : viewport.attach(element, entry.key)} class={[
+        `${componentPrefix}-treenode`,
+        `${componentPrefix}-treenode-switcher-${node.expanded ? 'open' : 'close'}`,
+        unavailable && `${componentPrefix}-treenode-disabled`,
+        node.selected && `${componentPrefix}-treenode-selected`,
+        node.checked && `${componentPrefix}-treenode-checkbox-checked`,
+        node.halfChecked && `${componentPrefix}-treenode-checkbox-indeterminate`,
+        node.loading && `${componentPrefix}-treenode-loading`,
+        active === entry.key && `${componentPrefix}-treenode-active`,
+        nodeDraggable && `${componentPrefix}-treenode-draggable`,
+        drag.draggingKey === entry.key && 'dragging',
+        drag.target?.dropTargetKey === entry.key && 'drop-target',
+        drag.target?.dropContainerKey === entry.key && 'drop-container',
+        !unavailable && node.dragOver && 'drag-over',
+        !unavailable && node.dragOverGapTop && 'drag-over-gap-top',
+        !unavailable && node.dragOverGapBottom && 'drag-over-gap-bottom',
+        isLeaf && `${componentPrefix}-treenode-leaf`,
+        entry.ends.at(-1) && `${componentPrefix}-treenode-leaf-last`,
+        filterTreeNode?.(node) && 'filter-node',
+        entry.node.class,
+        classes.item
+      ]} style={[entry.node.style, slots.item].filter(Boolean).join(';') || undefined}
+    draggable={draggable ? nodeDraggable && !unavailable : undefined}
+    ondragstart={nodeDraggable && !unavailable ? event => {
+      mouseFocus(event, true);
+      drag.start(event, entry);
+    } : undefined}
+    ondragenter={nodeDraggable ? event => drag.enter(event, entry) : undefined}
+    ondragover={nodeDraggable ? event => drag.over(event, entry) : undefined}
+    ondragleave={nodeDraggable ? event => drag.leave(event, entry) : undefined}
+    ondragend={nodeDraggable ? event => drag.end(event, entry) : undefined}
+    ondrop={nodeDraggable ? event => drag.drop(event, entry) : undefined}
+    onclick={nodeDraggable ? handleDragClick : undefined}
+    onkeydown={nodeDraggable ? event => {
+      if (event.target !== event.currentTarget) return;
+      mouseFocus(event, true);
+      if (activeKey === undefined) setActive(entry.key);
+    } : undefined}>
+    <span class={`${componentPrefix}-indent`} aria-hidden="true">{#each entry.ends.slice(0, -1) as end}<span class={[
+        `${componentPrefix}-indent-unit`,
+        !end && `${componentPrefix}-indent-unit-start`,
+        end && `${componentPrefix}-indent-unit-end`
+      ]}></span>{/each}</span>
+    {#if draggable && !(typeof draggable === 'object' && draggable.icon === false)}
+      <span data-ant-tree-drag-handle class={`${componentPrefix}-draggable-icon`}>
+        {#if typeof draggable === 'object' && draggable.icon}{@render draggable.icon()}
+        {:else}<TreeIcon name="holder" class="anticon-holder" />{/if}
+      </span>
+    {/if}
+    {#if isLeaf}<span data-ant-tree-switcher class={[`${componentPrefix}-switcher ${componentPrefix}-switcher-noop`, classes.itemSwitcher]} style={slots.itemSwitcher} aria-hidden="true">{#if entry.node.switcherIcon}{@render entry.node.switcherIcon({ ...node, isLeaf })}{:else if showLine}{#if typeof showLine === 'object' && typeof showLine.showLeafIcon === 'function'}{@render showLine.showLeafIcon({ ...node, isLeaf })}{:else if typeof showLine === 'object' && showLine.showLeafIcon}<TreeIcon name="file" class={`${componentPrefix}-switcher-line-icon`} />{:else}<span class={`${componentPrefix}-switcher-leaf-line`}></span>{/if}{/if}</span>
+    {:else}<button type="button" data-ant-tree-switcher tabindex="-1" class={[
+        `${componentPrefix}-switcher`,
+        `${componentPrefix}-switcher_${node.expanded ? 'open' : 'close'}`,
+        classes.itemSwitcher
+      ]} style={slots.itemSwitcher} aria-label={node.expanded
+          ? config.locale.tree?.collapse ?? 'Collapse'
+          : config.locale.tree?.expand ?? 'Expand'} aria-expanded={node.expanded} onmousedown={mouseFocus} onclick={event => expand(entry, event)}>{#if entry.node.switcherIcon}{@render entry.node.switcherIcon({ ...node, isLeaf })}{:else if node.loading}{#if switcherLoadingIcon}{@render switcherLoadingIcon(node)}{:else}<TreeIcon name="loading" class={`${componentPrefix}-switcher-loading-icon`} />{/if}{:else if switcherIcon}{@render switcherIcon({ ...node, isLeaf })}{:else}<TreeIcon name={showLine ? node.expanded ? 'minus' : 'plus' : 'caret'} class={showLine
+            ? `${componentPrefix}-switcher-line-icon`
+            : `${componentPrefix}-switcher-icon`} />{/if}</button>{/if}
+    {#if hasCheck}<button type="button" data-ant-tree-checkbox role="checkbox" tabindex="-1" aria-checked={node.halfChecked ? 'mixed' : node.checked} aria-labelledby={`${nodeId(entry.key)}-title`} disabled={unavailable || entry.node.disableCheckbox} class={[
+        `${componentPrefix}-checkbox`,
+        node.checked && `${componentPrefix}-checkbox-checked`,
+        node.halfChecked && `${componentPrefix}-checkbox-indeterminate`,
+        (unavailable || entry.node.disableCheckbox) && `${componentPrefix}-checkbox-disabled`
+      ]} onmousedown={mouseFocus} onclick={event => check(entry, event)}><span class={`${componentPrefix}-checkbox-inner`}></span></button>{/if}
+    <button type="button" data-ant-tree-content tabindex="-1" class={[
+        `${componentPrefix}-node-content-wrapper`,
+        `${componentPrefix}-node-content-wrapper-${isLeaf
+          ? 'normal'
+          : node.expanded ? 'open' : 'close'}`,
+        !unavailable && (node.selected || drag.highlightedKey === entry.key)
+          && `${componentPrefix}-node-selected`
+      ]} onmousedown={event => mouseFocus(event, nodeDraggable && !unavailable)} onclick={event => click(entry, event)} ondblclick={event => doubleClick(entry, event, node)} onmouseenter={event => {
+          // Удержанный DOM-узел может получать события и после unmount.
+          if (!disposed) onMouseEnter?.({ event, node });
+        }} onmouseleave={event => {
+          if (!disposed) onMouseLeave?.({ event, node });
+        }} oncontextmenu={event => {
+          if (onRightClick) {
+            event.preventDefault();
+            onRightClick({ event, node });
+          }
+        }}>
+      {#if showIcon || loadData && node.loading}<span class={[
+          `${componentPrefix}-iconEle`,
+          `${componentPrefix}-icon__${isLeaf ? 'docu' : node.expanded ? 'open' : 'close'}`,
+          node.loading && !(showIcon && (entry.node.icon || icon))
+            && `${componentPrefix}-icon_loading`,
+          classes.itemIcon
+        ]} style={slots.itemIcon}>{#if showIcon && entry.node.icon}{@render entry.node.icon(node)}{:else if showIcon && icon}{@render icon(node)}{/if}</span>{/if}
+      <span id={`${nodeId(entry.key)}-title`} class={[`${componentPrefix}-title`, classes.itemTitle]} style={slots.itemTitle}>{#if typeof title === 'function'}{@render title(entry.node)}{:else}<TreeTitle value={title} node={entry.node} />{/if}</span>
+      {#if draggable && !entry.node.disabled && drag.target?.dragOverNodeKey === entry.key}
+        <span class={`${componentPrefix}-drop-indicator`} style={drag.indicatorStyle}
+          aria-hidden="true"></span>
+      {/if}
+    </button>
+  </div>
+{/snippet}
 {#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`tree-prefix:${componentPrefix}:${rootPrefix}`} />{/if}<div data-ant-tree-root data-ant-tree-prefix={componentPrefix} data-ant-tree-root-prefix={rootPrefix} bind:this={nativeElement} class={[
     `${componentPrefix} ant-tree-css-var`,
     componentTheme.className,
@@ -565,7 +698,7 @@
     classes.root,
     rootClassName
   ]} style={themeStyle ? [themeStyle, slots.root].filter(Boolean).join(';') : slots.root} dir={config.direction}>
-  <div {...attributes} bind:this={focusElement} class={`${componentPrefix}-list`} style="position:relative" role="tree" tabindex={!blocked && focusable ? tabindex : undefined} aria-multiselectable={multiple || undefined} aria-disabled={blocked || undefined} aria-activedescendant={rendered.some(entry => entry.key === active)
+  <div {...attributes} bind:this={focusElement} class={`${componentPrefix}-list`} style="position:relative" role="tree" tabindex={!blocked && focusable ? tabindex : undefined} aria-multiselectable={multiple || undefined} aria-disabled={blocked || undefined} aria-activedescendant={renderedNodes.some(entry => entry.key === active)
       ? nodeId(active!)
       : undefined} onkeydown={keyboard} onfocus={focusIn} onblur={event => {
           focused = false;
@@ -582,114 +715,13 @@
       style={`display:flex;flex-direction:column;${range.offset !== undefined
         ? `position:absolute;left:0;right:0;top:0;transform:translateY(${range.offset}px);${config.direction === 'rtl' ? 'margin-right' : 'margin-left'}:${-viewport.left}px` : ''}`}>
       {#each rendered as entry (entry.key)}
-        {@const node = eventNode(entry)}
-        {@const title = getTreeNodeTitle<Data>(entry.node, fieldNames, titleRender)}
-        {@const isLeaf = leaf(entry)}
-        {@const unavailable = blocked || Boolean(entry.node.disabled)}
-        {@const hasCheck = checkable && entry.node.checkable !== false}
-        {@const nodeDraggable = drag.draggable(entry)}
-        <div id={nodeId(entry.key)} role="treeitem" tabindex={nodeDraggable && !unavailable ? -1 : undefined} aria-labelledby={`${nodeId(entry.key)}-title`} aria-level={entry.level + 1} aria-posinset={entry.index + 1} aria-setsize={entry.siblings} aria-expanded={isLeaf ? undefined : node.expanded} aria-selected={(entry.node.selectable ?? selectable) && !unavailable
-            ? node.selected
-            : undefined} aria-checked={hasCheck && !unavailable
-                ? node.halfChecked ? 'mixed' : node.checked
-                : undefined} aria-disabled={unavailable} aria-busy={node.loading || undefined}
-          {@attach element => viewport.attach(element, entry.key)} class={[
-              `${componentPrefix}-treenode`,
-              `${componentPrefix}-treenode-switcher-${node.expanded ? 'open' : 'close'}`,
-              unavailable && `${componentPrefix}-treenode-disabled`,
-              node.selected && `${componentPrefix}-treenode-selected`,
-              node.checked && `${componentPrefix}-treenode-checkbox-checked`,
-              node.halfChecked && `${componentPrefix}-treenode-checkbox-indeterminate`,
-              node.loading && `${componentPrefix}-treenode-loading`,
-              active === entry.key && `${componentPrefix}-treenode-active`,
-              nodeDraggable && `${componentPrefix}-treenode-draggable`,
-              drag.draggingKey === entry.key && 'dragging',
-              drag.target?.dropTargetKey === entry.key && 'drop-target',
-              drag.target?.dropContainerKey === entry.key && 'drop-container',
-              !unavailable && node.dragOver && 'drag-over',
-              !unavailable && node.dragOverGapTop && 'drag-over-gap-top',
-              !unavailable && node.dragOverGapBottom && 'drag-over-gap-bottom',
-              isLeaf && `${componentPrefix}-treenode-leaf`,
-              entry.ends.at(-1) && `${componentPrefix}-treenode-leaf-last`,
-              filterTreeNode?.(node) && 'filter-node',
-              entry.node.class,
-              classes.item
-            ]} style={[entry.node.style, slots.item].filter(Boolean).join(';') || undefined}
-          draggable={draggable ? nodeDraggable && !unavailable : undefined}
-          ondragstart={nodeDraggable && !unavailable ? event => {
-            mouseFocus(event, true);
-            drag.start(event, entry);
-          } : undefined}
-          ondragenter={nodeDraggable ? event => drag.enter(event, entry) : undefined}
-          ondragover={nodeDraggable ? event => drag.over(event, entry) : undefined}
-          ondragleave={nodeDraggable ? event => drag.leave(event, entry) : undefined}
-          ondragend={nodeDraggable ? event => drag.end(event, entry) : undefined}
-          ondrop={nodeDraggable ? event => drag.drop(event, entry) : undefined}
-          onclick={nodeDraggable ? handleDragClick : undefined}
-          onkeydown={nodeDraggable ? event => {
-            if (event.target !== event.currentTarget) return;
-            mouseFocus(event, true);
-            if (activeKey === undefined) setActive(entry.key);
-          } : undefined}>
-          <span class={`${componentPrefix}-indent`} aria-hidden="true">{#each entry.ends.slice(0, -1) as end}<span class={[
-              `${componentPrefix}-indent-unit`,
-              !end && `${componentPrefix}-indent-unit-start`,
-              end && `${componentPrefix}-indent-unit-end`
-            ]}></span>{/each}</span>
-          {#if draggable && !(typeof draggable === 'object' && draggable.icon === false)}
-            <span data-ant-tree-drag-handle class={`${componentPrefix}-draggable-icon`}>
-              {#if typeof draggable === 'object' && draggable.icon}{@render draggable.icon()}
-              {:else}<TreeIcon name="holder" class="anticon-holder" />{/if}
-            </span>
-          {/if}
-          {#if isLeaf}<span data-ant-tree-switcher class={[`${componentPrefix}-switcher ${componentPrefix}-switcher-noop`, classes.itemSwitcher]} style={slots.itemSwitcher} aria-hidden="true">{#if entry.node.switcherIcon}{@render entry.node.switcherIcon({ ...node, isLeaf })}{:else if showLine}{#if typeof showLine === 'object' && typeof showLine.showLeafIcon === 'function'}{@render showLine.showLeafIcon({ ...node, isLeaf })}{:else if typeof showLine === 'object' && showLine.showLeafIcon}<TreeIcon name="file" class={`${componentPrefix}-switcher-line-icon`} />{:else}<span class={`${componentPrefix}-switcher-leaf-line`}></span>{/if}{/if}</span>
-          {:else}<button type="button" data-ant-tree-switcher tabindex="-1" class={[
-              `${componentPrefix}-switcher`,
-              `${componentPrefix}-switcher_${node.expanded ? 'open' : 'close'}`,
-              classes.itemSwitcher
-            ]} style={slots.itemSwitcher} aria-label={node.expanded
-                ? config.locale.tree?.collapse ?? 'Collapse'
-                : config.locale.tree?.expand ?? 'Expand'} aria-expanded={node.expanded} onmousedown={mouseFocus} onclick={event => expand(entry, event)}>{#if entry.node.switcherIcon}{@render entry.node.switcherIcon({ ...node, isLeaf })}{:else if node.loading}{#if switcherLoadingIcon}{@render switcherLoadingIcon(node)}{:else}<TreeIcon name="loading" class={`${componentPrefix}-switcher-loading-icon`} />{/if}{:else if switcherIcon}{@render switcherIcon({ ...node, isLeaf })}{:else}<TreeIcon name={showLine ? node.expanded ? 'minus' : 'plus' : 'caret'} class={showLine
-                  ? `${componentPrefix}-switcher-line-icon`
-                  : `${componentPrefix}-switcher-icon`} />{/if}</button>{/if}
-          {#if hasCheck}<button type="button" data-ant-tree-checkbox role="checkbox" tabindex="-1" aria-checked={node.halfChecked ? 'mixed' : node.checked} aria-labelledby={`${nodeId(entry.key)}-title`} disabled={unavailable || entry.node.disableCheckbox} class={[
-              `${componentPrefix}-checkbox`,
-              node.checked && `${componentPrefix}-checkbox-checked`,
-              node.halfChecked && `${componentPrefix}-checkbox-indeterminate`,
-              (unavailable || entry.node.disableCheckbox) && `${componentPrefix}-checkbox-disabled`
-            ]} onmousedown={mouseFocus} onclick={event => check(entry, event)}><span class={`${componentPrefix}-checkbox-inner`}></span></button>{/if}
-          <button type="button" data-ant-tree-content tabindex="-1" class={[
-              `${componentPrefix}-node-content-wrapper`,
-              `${componentPrefix}-node-content-wrapper-${isLeaf
-                ? 'normal'
-                : node.expanded ? 'open' : 'close'}`,
-              !unavailable && (node.selected || drag.highlightedKey === entry.key)
-                && `${componentPrefix}-node-selected`
-            ]} onmousedown={event => mouseFocus(event, nodeDraggable && !unavailable)} onclick={event => click(entry, event)} ondblclick={event => doubleClick(entry, event, node)} onmouseenter={event => {
-                // Удержанный DOM-узел может получать события и после unmount.
-                if (!disposed) onMouseEnter?.({ event, node });
-              }} onmouseleave={event => {
-                if (!disposed) onMouseLeave?.({ event, node });
-              }} oncontextmenu={event => {
-                if (onRightClick) {
-                  event.preventDefault();
-                  onRightClick({ event, node });
-                }
-              }}>
-            {#if showIcon || loadData && node.loading}<span class={[
-                `${componentPrefix}-iconEle`,
-                `${componentPrefix}-icon__${isLeaf ? 'docu' : node.expanded ? 'open' : 'close'}`,
-                node.loading && !(showIcon && (entry.node.icon || icon))
-                  && `${componentPrefix}-icon_loading`,
-                classes.itemIcon
-              ]} style={slots.itemIcon}>{#if showIcon && entry.node.icon}{@render entry.node.icon(node)}{:else if showIcon && icon}{@render icon(node)}{/if}</span>{/if}
-            <span id={`${nodeId(entry.key)}-title`} class={[`${componentPrefix}-title`, classes.itemTitle]} style={slots.itemTitle}>{#if typeof title === 'function'}{@render title(entry.node)}{:else}<TreeTitle value={title} node={entry.node} />{/if}</span>
-            {#if draggable && !entry.node.disabled && drag.target?.dragOverNodeKey === entry.key}
-              <span class={`${componentPrefix}-drop-indicator`} style={drag.indicatorStyle}
-                aria-hidden="true"></span>
-            {/if}
-          </button>
-        </div>
+        {#if 'motionNodes' in entry}
+          {#if motion}<TreeMotion prefixCls={componentPrefix} show={entry.show} {motion}
+            enabled={tokens.state.token.motion !== false}
+            onEnd={() => transition.finish(entry.id)}>
+            {#each entry.motionNodes as child (child.key)}{@render row(child, true)}{/each}
+          </TreeMotion>{/if}
+        {:else}{@render row(entry)}{/if}
       {/each}
     </div>
     </div>

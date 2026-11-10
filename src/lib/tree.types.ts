@@ -2,6 +2,7 @@ import type { Snippet } from 'svelte';
 import type { HTMLAttributes } from 'svelte/elements';
 import type { VirtualScrollAlign } from './virtual-list.engine';
 import type { VirtualScrollOffset, VirtualScrollOffsetInfo } from './virtual-list.types';
+import type { TreeMotionConfig } from './tree-motion.types';
 export type TreeKey = string | number | bigint;
 export type TreeExpandAction = false | 'click' | 'doubleClick';
 export type TreeDropPosition = -1 | 0 | 1;
@@ -218,6 +219,8 @@ export interface TreeProps<Data extends object = TreeDataNode> extends Omit<
   disabled?: boolean;
   /** HTML5 drag/drop; данные переставляет потребитель в onDrop. @defaultValue false */
   draggable?: TreeDraggable<Data>;
+  /** Collapse motion группы изменившейся ветки; false отключает её. */
+  motion?: TreeMotionConfig | false | null;
   /** Проверяется для кандидатов и повторно перед drop; по умолчанию разрешены все позиции. */
   allowDrop?: TreeAllowDrop<Data>;
   onDragStart?: (info: TreeDragInfo<Data>) => void;

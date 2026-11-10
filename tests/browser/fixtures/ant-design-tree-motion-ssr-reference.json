@@ -1,0 +1,412 @@
+{
+  "reference": {
+    "version": "6.6.8",
+    "react": "18.3.1",
+    "domAvailable": false,
+    "delegate": "@rc-component/tree1.4.0 / @rc-component/motion1.3.3"
+  },
+  "cases": [
+    {
+      "sample": {
+        "id": "default"
+      },
+      "result": {
+        "keys": [
+          "a",
+          "b",
+          "c"
+        ],
+        "groups": 0,
+        "semanticMotion": {
+          "name": "ant-motion-collapse",
+          "appear": false,
+          "deadline": 500,
+          "hooks": [
+            "onAppearActive",
+            "onAppearEnd",
+            "onAppearStart",
+            "onEnterActive",
+            "onEnterEnd",
+            "onEnterStart",
+            "onLeaveActive",
+            "onLeaveEnd",
+            "onLeaveStart"
+          ],
+          "identity": null
+        },
+        "callbacks": [],
+        "timerCalls": 0
+      }
+    },
+    {
+      "sample": {
+        "id": "initial-expanded",
+        "initial": [
+          "a"
+        ],
+        "actions": [
+          {
+            "kind": "toggle",
+            "key": "a"
+          },
+          {
+            "kind": "frame"
+          },
+          {
+            "kind": "end",
+            "property": "height"
+          }
+        ]
+      },
+      "result": {
+        "keys": [
+          "a",
+          "a1",
+          "a2",
+          "b",
+          "c"
+        ],
+        "groups": 0,
+        "semanticMotion": {
+          "name": "ant-motion-collapse",
+          "appear": false,
+          "deadline": 500,
+          "hooks": [
+            "onAppearActive",
+            "onAppearEnd",
+            "onAppearStart",
+            "onEnterActive",
+            "onEnterEnd",
+            "onEnterStart",
+            "onLeaveActive",
+            "onLeaveEnd",
+            "onLeaveStart"
+          ],
+          "identity": null
+        },
+        "callbacks": [],
+        "timerCalls": 0
+      }
+    },
+    {
+      "sample": {
+        "id": "disabled",
+        "motion": "off"
+      },
+      "result": {
+        "keys": [
+          "a",
+          "b",
+          "c"
+        ],
+        "groups": 0,
+        "semanticMotion": false,
+        "callbacks": [],
+        "timerCalls": 0
+      }
+    },
+    {
+      "sample": {
+        "id": "empty-config",
+        "motion": "empty"
+      },
+      "result": {
+        "keys": [
+          "a",
+          "b",
+          "c"
+        ],
+        "groups": 0,
+        "semanticMotion": {
+          "name": null,
+          "appear": null,
+          "deadline": null,
+          "hooks": [],
+          "identity": true
+        },
+        "callbacks": [],
+        "timerCalls": 0
+      }
+    },
+    {
+      "sample": {
+        "id": "theme-motion-off",
+        "globalMotion": false
+      },
+      "result": {
+        "keys": [
+          "a",
+          "b",
+          "c"
+        ],
+        "groups": 0,
+        "semanticMotion": {
+          "name": "ant-motion-collapse",
+          "appear": false,
+          "deadline": 500,
+          "hooks": [
+            "onAppearActive",
+            "onAppearEnd",
+            "onAppearStart",
+            "onEnterActive",
+            "onEnterEnd",
+            "onEnterStart",
+            "onLeaveActive",
+            "onLeaveEnd",
+            "onLeaveStart"
+          ],
+          "identity": null
+        },
+        "callbacks": [],
+        "timerCalls": 0
+      }
+    },
+    {
+      "sample": {
+        "id": "directory",
+        "directory": true
+      },
+      "result": {
+        "keys": [
+          "a",
+          "b",
+          "c"
+        ],
+        "groups": 0,
+        "semanticMotion": {
+          "name": "ant-motion-collapse",
+          "appear": false,
+          "deadline": 500,
+          "hooks": [
+            "onAppearActive",
+            "onAppearEnd",
+            "onAppearStart",
+            "onEnterActive",
+            "onEnterEnd",
+            "onEnterStart",
+            "onLeaveActive",
+            "onLeaveEnd",
+            "onLeaveStart"
+          ],
+          "identity": null
+        },
+        "callbacks": [],
+        "timerCalls": 0
+      }
+    },
+    {
+      "sample": {
+        "id": "custom-name",
+        "motion": "custom"
+      },
+      "result": {
+        "keys": [
+          "a",
+          "b",
+          "c"
+        ],
+        "groups": 0,
+        "semanticMotion": {
+          "name": "custom-motion",
+          "appear": null,
+          "deadline": 500,
+          "hooks": [
+            "onAppearPrepare"
+          ],
+          "identity": true
+        },
+        "callbacks": [],
+        "timerCalls": 0
+      }
+    },
+    {
+      "sample": {
+        "id": "object-name",
+        "motion": "object"
+      },
+      "result": {
+        "keys": [
+          "a",
+          "b",
+          "c"
+        ],
+        "groups": 0,
+        "semanticMotion": {
+          "name": {
+            "appear": "open"
+          },
+          "appear": null,
+          "deadline": 500,
+          "hooks": [
+            "onAppearPrepare"
+          ],
+          "identity": true
+        },
+        "callbacks": [],
+        "timerCalls": 0
+      }
+    },
+    {
+      "sample": {
+        "id": "prepare",
+        "motion": "prepare",
+        "actions": [
+          {
+            "kind": "toggle",
+            "key": "a"
+          },
+          {
+            "kind": "frame"
+          },
+          {
+            "kind": "resolve"
+          },
+          {
+            "kind": "frame"
+          },
+          {
+            "kind": "end",
+            "property": "height"
+          },
+          {
+            "kind": "toggle",
+            "key": "a"
+          },
+          {
+            "kind": "frame"
+          },
+          {
+            "kind": "resolve"
+          },
+          {
+            "kind": "frame"
+          },
+          {
+            "kind": "end",
+            "property": "height"
+          }
+        ]
+      },
+      "result": {
+        "keys": [
+          "a",
+          "b",
+          "c"
+        ],
+        "groups": 0,
+        "semanticMotion": {
+          "name": "custom-motion",
+          "appear": null,
+          "deadline": 500,
+          "hooks": [
+            "onAppearPrepare"
+          ],
+          "identity": true
+        },
+        "callbacks": [],
+        "timerCalls": 0
+      }
+    },
+    {
+      "sample": {
+        "id": "global-prefix",
+        "prefix": "design"
+      },
+      "result": {
+        "keys": [
+          "a",
+          "b",
+          "c"
+        ],
+        "groups": 0,
+        "semanticMotion": {
+          "name": "design-motion-collapse",
+          "appear": false,
+          "deadline": 500,
+          "hooks": [
+            "onAppearActive",
+            "onAppearEnd",
+            "onAppearStart",
+            "onEnterActive",
+            "onEnterEnd",
+            "onEnterStart",
+            "onLeaveActive",
+            "onLeaveEnd",
+            "onLeaveStart"
+          ],
+          "identity": null
+        },
+        "callbacks": [],
+        "timerCalls": 0
+      }
+    },
+    {
+      "sample": {
+        "id": "local-prefix",
+        "prefix": "design",
+        "localPrefix": "local-tree"
+      },
+      "result": {
+        "keys": [
+          "a",
+          "b",
+          "c"
+        ],
+        "groups": 0,
+        "semanticMotion": {
+          "name": "design-motion-collapse",
+          "appear": false,
+          "deadline": 500,
+          "hooks": [
+            "onAppearActive",
+            "onAppearEnd",
+            "onAppearStart",
+            "onEnterActive",
+            "onEnterEnd",
+            "onEnterStart",
+            "onLeaveActive",
+            "onLeaveEnd",
+            "onLeaveStart"
+          ],
+          "identity": null
+        },
+        "callbacks": [],
+        "timerCalls": 0
+      }
+    },
+    {
+      "sample": {
+        "id": "virtual",
+        "height": 84,
+        "children": 40
+      },
+      "result": {
+        "keys": [
+          "a",
+          "b",
+          "c"
+        ],
+        "groups": 0,
+        "semanticMotion": {
+          "name": "ant-motion-collapse",
+          "appear": false,
+          "deadline": 500,
+          "hooks": [
+            "onAppearActive",
+            "onAppearEnd",
+            "onAppearStart",
+            "onEnterActive",
+            "onEnterEnd",
+            "onEnterStart",
+            "onLeaveActive",
+            "onLeaveEnd",
+            "onLeaveStart"
+          ],
+          "identity": null
+        },
+        "callbacks": [],
+        "timerCalls": 0
+      }
+    }
+  ]
+}
