@@ -1,0 +1,3628 @@
+{
+  "reference": {
+    "version": "6.6.8",
+    "revision": "984592267de88fbf9cdaecc96a56629e721c709d",
+    "delegate": "@rc-component/tree-select1.16.1",
+    "react": "18.3.1",
+    "archiveSha256": "8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa",
+    "method": "unmodified official UMD; Chromium DOM, pointer/keyboard and callbacks",
+    "errors": [],
+    "warnings": []
+  },
+  "cases": [
+    {
+      "sample": {
+        "id": "default",
+        "action": "click"
+      },
+      "initial": {
+        "view": {
+          "opened": false,
+          "selected": "",
+          "tags": [],
+          "nodes": []
+        },
+        "events": []
+      },
+      "steps": [
+        {
+          "action": "open",
+          "view": {
+            "opened": true,
+            "selected": null,
+            "tags": [],
+            "nodes": [
+              {
+                "value": "0",
+                "title": "Root",
+                "expanded": false,
+                "selected": false,
+                "checked": false,
+                "halfChecked": false,
+                "disabled": false,
+                "filtered": false
+              },
+              {
+                "value": "2",
+                "title": "Leaf",
+                "expanded": false,
+                "selected": false,
+                "checked": false,
+                "halfChecked": false,
+                "disabled": false,
+                "filtered": false
+              }
+            ]
+          },
+          "events": [
+            {
+              "kind": "open",
+              "open": true
+            }
+          ]
+        },
+        {
+          "action": "action",
+          "view": {
+            "opened": true,
+            "selected": null,
+            "tags": [
+              "Root"
+            ],
+            "nodes": [
+              {
+                "value": "0",
+                "title": "Root",
+                "expanded": false,
+                "selected": true,
+                "checked": false,
+                "halfChecked": false,
+                "disabled": false,
+                "filtered": false
+              },
+              {
+                "value": "2",
+                "title": "Leaf",
+                "expanded": false,
+                "selected": false,
+                "checked": false,
+                "halfChecked": false,
+                "disabled": false,
+                "filtered": false
+              }
+            ]
+          },
+          "events": [
+            {
+              "kind": "open",
+              "open": true
+            },
+            {
+              "kind": "change",
+              "value": [
+                0
+              ],
+              "labels": [
+                "Root"
+              ],
+              "triggerValue": 0
+            },
+            {
+              "kind": "select",
+              "value": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "false",
+        "expandAction": false,
+        "action": "dblclick"
+      },
+      "initial": {
+        "view": {
+          "opened": false,
+          "selected": "",
+          "tags": [],
+          "nodes": []
+        },
+        "events": []
+      },
+      "steps": [
+        {
+          "action": "open",
+          "view": {
+            "opened": true,
+            "selected": null,
+            "tags": [],
+            "nodes": [
+              {
+                "value": "0",
+                "title": "Root",
+                "expanded": false,
+                "selected": false,
+                "checked": false,
+                "halfChecked": false,
+                "disabled": false,
+                "filtered": false
+              },
+              {
+                "value": "2",
+                "title": "Leaf",
+                "expanded": false,
+                "selected": false,
+                "checked": false,
+                "halfChecked": false,
+                "disabled": false,
+                "filtered": false
+              }
+            ]
+          },
+          "events": [
+            {
+              "kind": "open",
+              "open": true
+            }
+          ]
+        },
+        {
+          "action": "action",
+          "view": {
+            "opened": true,
+            "selected": null,
+            "tags": [],
+            "nodes": [
+              {
+                "value": "0",
+                "title": "Root",
+                "expanded": false,
+                "selected": false,
+                "checked": false,
+                "halfChecked": false,
+                "disabled": false,
+                "filtered": false
+              },
+              {
+                "value": "2",
+                "title": "Leaf",
+                "expanded": false,
+                "selected": false,
+                "checked": false,
+                "halfChecked": false,
+                "disabled": false,
+                "filtered": false
+              }
+            ]
+          },
+          "events": [
+            {
+              "kind": "open",
+              "open": true
+            },
+            {
+              "kind": "change",
+              "value": [
+                0
+              ],
+              "labels": [
+                "Root"
+              ],
+              "triggerValue": 0
+            },
+            {
+              "kind": "select",
+              "value": 0
+            },
+            {
+              "kind": "change",
+              "value": [],
+              "labels": [],
+              "triggerValue": 0
+            },
+            {
+              "kind": "deselect",
+              "value": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "click-multiple",
+        "expandAction": "click",
+        "action": "click"
+      },
+      "initial": {
+        "view": {
+          "opened": false,
+          "selected": "",
+          "tags": [],
+          "nodes": []
+        },
+        "events": []
+      },
+      "steps": [
+        {
+          "action": "open",
+          "view": {
+            "opened": true,
+            "selected": null,
+            "tags": [],
+            "nodes": [
+              {
+                "value": "0",
+                "title": "Root",
+                "expanded": false,
+                "selected": false,
+                "checked": false,
+                "halfChecked": false,
+                "disabled": false,
+                "filtered": false
+              },
+              {
+                "value": "2",
+                "title": "Leaf",
+                "expanded": false,
+                "selected": false,
+                "checked": false,
+                "halfChecked": false,
+                "disabled": false,
+                "filtered": false
+              }
+            ]
+          },
+          "events": [
+            {
+              "kind": "open",
+              "open": true
+            }
+          ]
+        },
+        {
+          "action": "action",
+          "view": {
+            "opened": true,
+            "selected": null,
+            "tags": [
+              "Root"
+            ],
+            "nodes": [
+              {
+                "value": "0",
+                "title": "Root",
+                "expanded": true,
+                "selected": true,
+                "checked": false,
+                "halfChecked": false,
+                "disabled": false,
+                "filtered": false
+              },
+              {
+                "value": "1",
+                "title": "Child",
+                "expanded": false,
+                "selected": false,
+                "checked": false,
+                "halfChecked": false,
+                "disabled": false,
+                "filtered": false
+              },
+              {
+                "value": "2",
+                "title": "Leaf",
+                "expanded": false,
+                "selected": false,
+                "checked": false,
+                "halfChecked": false,
+                "disabled": false,
+                "filtered": false
+              }
+            ]
+          },
+          "events": [
+            {
+              "kind": "open",
+              "open": true
+            },
+            {
+              "kind": "expand",
+              "keys": [
+                0
+              ]
+            },
+            {
+              "kind": "change",
+              "value": [
+                0
+              ],
+              "labels": [
+                "Root"
+              ],
+              "triggerValue": 0
+            },
+            {
+              "kind": "select",
+              "value": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "double-multiple",
+        "expandAction": "doubleClick",
+        "action": "dblclick"
+      },
+      "initial": {
+        "view": {
+          "opened": false,
+          "selected": "",
+          "tags": [],
+          "nodes": []
+        },
+        "events": []
+      },
+      "steps": [
+        {
+          "action": "open",
+          "view": {
+            "opened": true,
+            "selected": null,
+            "tags": [],
+            "nodes": [
+              {
+                "value": "0",
+                "title": "Root",
+                "expanded": false,
+                "selected": false,
+                "checked": false,
+                "halfChecked": false,
+                "disabled": false,
+                "filtered": false
+              },
+              {
+                "value": "2",
+                "title": "Leaf",
+                "expanded": false,
+                "selected": false,
+                "checked": false,
+                "halfChecked": false,
+                "disabled": false,
+                "filtered": false
+              }
+            ]
+          },
+          "events": [
+            {
+              "kind": "open",
+              "open": true
+            }
+          ]
+        },
+        {
+          "action": "action",
+          "view": {
+            "opened": true,
+            "selected": null,
+            "tags": [],
+            "nodes": [
+              {
+                "value": "0",
+                "title": "Root",
+                "expanded": true,
+                "selected": false,
+                "checked": false,
+                "halfChecked": false,
+                "disabled": false,
+                "filtered": false
+              },
+              {
+                "value": "1",
+                "title": "Child",
+                "expanded": false,
+                "selected": false,
+                "checked": false,
+                "halfChecked": false,
+                "disabled": false,
+                "filtered": false
+              },
+              {
+                "value": "2",
+                "title": "Leaf",
+                "expanded": false,
+                "selected": false,
+                "checked": false,
+                "halfChecked": false,
+                "disabled": false,
+                "filtered": false
+              }
+            ]
+          },
+          "events": [
+            {
+              "kind": "open",
+              "open": true
+            },
+            {
+              "kind": "change",
+              "value": [
+                0
+              ],
+              "labels": [
+                "Root"
+              ],
+              "triggerValue": 0
+            },
+            {
+              "kind": "select",
+              "value": 0
+            },
+            {
+              "kind": "change",
+              "value": [],
+              "labels": [],
+              "triggerValue": 0
+            },
+            {
+              "kind": "deselect",
+              "value": 0
+            },
+            {
+              "kind": "expand",
+              "keys": [
+                0
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "double-event",
+        "expandAction": "doubleClick",
+        "action": "double-event"
+      },
+      "initial": {
+        "view": {
+          "opened": false,
+          "selected": "",
+          "tags": [],
+          "nodes": []
+        },
+        "events": []
+      },
+      "steps": [
+        {
+          "action": "open",
+          "view": {
+            "opened": true,
+            "selected": null,
+            "tags": [],
+            "nodes": [
+              {
+                "value": "0",
+                "title": "Root",
+                "expanded": false,
+                "selected": false,
+                "checked": false,
+                "halfChecked": false,
+                "disabled": false,
+                "filtered": false
+              },
+              {
+                "value": "2",
+                "title": "Leaf",
+                "expanded": false,
+                "selected": false,
+                "checked": false,
+                "halfChecked": false,
+                "disabled": false,
+                "filtered": false
+              }
+            ]
+          },
+          "events": [
+            {
+              "kind": "open",
+              "open": true
+            }
+          ]
+        },
+        {
+          "action": "action",
+          "view": {
+            "opened": true,
+            "selected": null,
+            "tags": [],
+            "nodes": [
+              {
+                "value": "0",
+                "title": "Root",
+                "expanded": true,
+                "selected": false,
+                "checked": false,
+                "halfChecked": false,
+                "disabled": false,
+                "filtered": false
+              },
+              {
+                "value": "1",
+                "title": "Child",
+                "expanded": false,
+                "selected": false,
+                "checked": false,
+                "halfChecked": false,
+                "disabled": false,
+                "filtered": false
+              },
+              {
+                "value": "2",
+                "title": "Leaf",
+                "expanded": false,
+                "selected": false,
+                "checked": false,
+                "halfChecked": false,
+                "disabled": false,
+                "filtered": false
+              }
+            ]
+          },
+          "events": [
+            {
+              "kind": "open",
+              "open": true
+            },
+            {
+              "kind": "expand",
+              "keys": [
+                0
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "click-single",
+        "expandAction": "click",
+        "action": "click",
+        "multiple": false
+      },
+      "initial": {
+        "view": {
+          "opened": false,
+          "selected": "",
+          "tags": [],
+          "nodes": []
+        },
+        "events": []
+      },
+      "steps": [
+        {
+          "action": "open",
+          "view": {
+            "opened": true,
+            "selected": null,
+            "tags": [],
+            "nodes": [
+              {
+                "value": "0",
+                "title": "Root",
+                "expanded": false,
+                "selected": false,
+                "checked": false,
+                "halfChecked": false,
+                "disabled": false,
+                "filtered": false
+              },
+              {
+                "value": "2",
+                "title": "Leaf",
+                "expanded": false,
+                "selected": false,
+                "checked": false,
+                "halfChecked": false,
+                "disabled": false,
+                "filtered": false
+              }
+            ]
+          },
+          "events": [
+            {
+              "kind": "open",
+              "open": true
+            }
+          ]
+        },
+        {
+          "action": "action",
+          "view": {
+            "opened": false,
+            "selected": "Root",
+            "tags": [],
+            "nodes": []
+          },
+          "events": [
+            {
+              "kind": "open",
+              "open": true
+            },
+            {
+              "kind": "expand",
+              "keys": [
+                0
+              ]
+            },
+            {
+              "kind": "change",
+              "value": 0,
+              "labels": [
+                "Root"
+              ],
+              "triggerValue": 0
+            },
+            {
+              "kind": "select",
+              "value": 0
+            },
+            {
+              "kind": "open",
+              "open": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "click-checkable",
+        "expandAction": "click",
+        "action": "click",
+        "checkable": true
+      },
+      "initial": {
+        "view": {
+          "opened": false,
+          "selected": "",
+          "tags": [],
+          "nodes": []
+        },
+        "events": []
+      },
+      "steps": [
+        {
+          "action": "open",
+          "view": {
+            "opened": true,
+            "selected": null,
+            "tags": [],
+            "nodes": [
+              {
+                "value": "0",
+                "title": "Root",
+                "expanded": false,
+                "selected": false,
+                "checked": false,
+                "halfChecked": false,
+                "disabled": false,
+                "filtered": false
+              },
+              {
+                "value": "2",
+                "title": "Leaf",
+                "expanded": false,
+                "selected": false,
+                "checked": false,
+                "halfChecked": false,
+                "disabled": false,
+                "filtered": false
+              }
+            ]
+          },
+          "events": [
+            {
+              "kind": "open",
+              "open": true
+            }
+          ]
+        },
+        {
+          "action": "action",
+          "view": {
+            "opened": true,
+            "selected": null,
+            "tags": [
+              "Child"
+            ],
+            "nodes": [
+              {
+                "value": "0",
+                "title": "Root",
+                "expanded": true,
+                "selected": false,
+                "checked": true,
+                "halfChecked": false,
+                "disabled": false,
+                "filtered": false
+              },
+              {
+                "value": "1",
+                "title": "Child",
+                "expanded": false,
+                "selected": false,
+                "checked": true,
+                "halfChecked": false,
+                "disabled": false,
+                "filtered": false
+              },
+              {
+                "value": "2",
+                "title": "Leaf",
+                "expanded": false,
+                "selected": false,
+                "checked": false,
+                "halfChecked": false,
+                "disabled": false,
+                "filtered": false
+              }
+            ]
+          },
+          "events": [
+            {
+              "kind": "open",
+              "open": true
+            },
+            {
+              "kind": "expand",
+              "keys": [
+                0
+              ]
+            },
+            {
+              "kind": "change",
+              "value": [
+                1
+              ],
+              "labels": [
+                "Child"
+              ],
+              "triggerValue": 0
+            },
+            {
+              "kind": "select",
+              "value": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "double-checkable",
+        "expandAction": "doubleClick",
+        "action": "dblclick",
+        "checkable": true
+      },
+      "initial": {
+        "view": {
+          "opened": false,
+          "selected": "",
+          "tags": [],
+          "nodes": []
+        },
+        "events": []
+      },
+      "steps": [
+        {
+          "action": "open",
+          "view": {
+            "opened": true,
+            "selected": null,
+            "tags": [],
+            "nodes": [
+              {
+                "value": "0",
+                "title": "Root",
+                "expanded": false,
+                "selected": false,
+                "checked": false,
+                "halfChecked": false,
+                "disabled": false,
+                "filtered": false
+              },
+              {
+                "value": "2",
+                "title": "Leaf",
+                "expanded": false,
+                "selected": false,
+                "checked": false,
+                "halfChecked": false,
+                "disabled": false,
+                "filtered": false
+              }
+            ]
+          },
+          "events": [
+            {
+              "kind": "open",
+              "open": true
+            }
+          ]
+        },
+        {
+          "action": "action",
+          "view": {
+            "opened": true,
+            "selected": null,
+            "tags": [],
+            "nodes": [
+              {
+                "value": "0",
+                "title": "Root",
+                "expanded": true,
+                "selected": false,
+                "checked": false,
+                "halfChecked": false,
+                "disabled": false,
+                "filtered": false
+              },
+              {
+                "value": "1",
+                "title": "Child",
+                "expanded": false,
+                "selected": false,
+                "checked": false,
+                "halfChecked": false,
+                "disabled": false,
+                "filtered": false
+              },
+              {
+                "value": "2",
+                "title": "Leaf",
+                "expanded": false,
+                "selected": false,
+                "checked": false,
+                "halfChecked": false,
+                "disabled": false,
+                "filtered": false
+              }
+            ]
+          },
+          "events": [
+            {
+              "kind": "open",
+              "open": true
+            },
+            {
+              "kind": "change",
+              "value": [
+                1
+              ],
+              "labels": [
+                "Child"
+              ],
+              "triggerValue": 0
+            },
+            {
+              "kind": "select",
+              "value": 0
+            },
+            {
+              "kind": "change",
+              "value": [],
+              "labels": [],
+              "triggerValue": 0
+            },
+            {
+              "kind": "deselect",
+              "value": 0
+            },
+            {
+              "kind": "expand",
+              "keys": [
+                0
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "click-strict",
+        "expandAction": "click",
+        "action": "click",
+        "strict": true
+      },
+      "initial": {
+        "view": {
+          "opened": false,
+          "selected": "",
+          "tags": [],
+          "nodes": []
+        },
+        "events": []
+      },
+      "steps": [
+        {
+          "action": "open",
+          "view": {
+            "opened": true,
+            "selected": null,
+            "tags": [],
+            "nodes": [
+              {
+                "value": "0",
+                "title": "Root",
+                "expanded": false,
+                "selected": false,
+                "checked": false,
+                "halfChecked": false,
+                "disabled": false,
+                "filtered": false
+              },
+              {
+                "value": "2",
+                "title": "Leaf",
+                "expanded": false,
+                "selected": false,
+                "checked": false,
+                "halfChecked": false,
+                "disabled": false,
+                "filtered": false
+              }
+            ]
+          },
+          "events": [
+            {
+              "kind": "open",
+              "open": true
+            }
+          ]
+        },
+        {
+          "action": "action",
+          "view": {
+            "opened": true,
+            "selected": null,
+            "tags": [
+              "Root"
+            ],
+            "nodes": [
+              {
+                "value": "0",
+                "title": "Root",
+                "expanded": true,
+                "selected": false,
+                "checked": true,
+                "halfChecked": false,
+                "disabled": false,
+                "filtered": false
+              },
+              {
+                "value": "1",
+                "title": "Child",
+                "expanded": false,
+                "selected": false,
+                "checked": false,
+                "halfChecked": false,
+                "disabled": false,
+                "filtered": false
+              },
+              {
+                "value": "2",
+                "title": "Leaf",
+                "expanded": false,
+                "selected": false,
+                "checked": false,
+                "halfChecked": false,
+                "disabled": false,
+                "filtered": false
+              }
+            ]
+          },
+          "events": [
+            {
+              "kind": "open",
+              "open": true
+            },
+            {
+              "kind": "expand",
+              "keys": [
+                0
+              ]
+            },
+            {
+              "kind": "change",
+              "value": [
+                {
+                  "label": "Root",
+                  "value": 0
+                }
+              ],
+              "labels": null,
+              "triggerValue": 0
+            },
+            {
+              "kind": "select",
+              "value": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "click-nonselectable",
+        "expandAction": "click",
+        "action": "click",
+        "selectable": false
+      },
+      "initial": {
+        "view": {
+          "opened": false,
+          "selected": "",
+          "tags": [],
+          "nodes": []
+        },
+        "events": []
+      },
+      "steps": [
+        {
+          "action": "open",
+          "view": {
+            "opened": true,
+            "selected": null,
+            "tags": [],
+            "nodes": [
+              {
+                "value": "0",
+                "title": "Root",
+                "expanded": false,
+                "selected": false,
+                "checked": false,
+                "halfChecked": false,
+                "disabled": false,
+                "filtered": false
+              },
+              {
+                "value": "2",
+                "title": "Leaf",
+                "expanded": false,
+                "selected": false,
+                "checked": false,
+                "halfChecked": false,
+                "disabled": false,
+                "filtered": false
+              }
+            ]
+          },
+          "events": [
+            {
+              "kind": "open",
+              "open": true
+            }
+          ]
+        },
+        {
+          "action": "action",
+          "view": {
+            "opened": true,
+            "selected": null,
+            "tags": [],
+            "nodes": [
+              {
+                "value": "0",
+                "title": "Root",
+                "expanded": true,
+                "selected": false,
+                "checked": false,
+                "halfChecked": false,
+                "disabled": false,
+                "filtered": false
+              },
+              {
+                "value": "1",
+                "title": "Child",
+                "expanded": false,
+                "selected": false,
+                "checked": false,
+                "halfChecked": false,
+                "disabled": false,
+                "filtered": false
+              },
+              {
+                "value": "2",
+                "title": "Leaf",
+                "expanded": false,
+                "selected": false,
+                "checked": false,
+                "halfChecked": false,
+                "disabled": false,
+                "filtered": false
+              }
+            ]
+          },
+          "events": [
+            {
+              "kind": "open",
+              "open": true
+            },
+            {
+              "kind": "expand",
+              "keys": [
+                0
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "double-nonselectable",
+        "expandAction": "doubleClick",
+        "action": "dblclick",
+        "selectable": false
+      },
+      "initial": {
+        "view": {
+          "opened": false,
+          "selected": "",
+          "tags": [],
+          "nodes": []
+        },
+        "events": []
+      },
+      "steps": [
+        {
+          "action": "open",
+          "view": {
+            "opened": true,
+            "selected": null,
+            "tags": [],
+            "nodes": [
+              {
+                "value": "0",
+                "title": "Root",
+                "expanded": false,
+                "selected": false,
+                "checked": false,
+                "halfChecked": false,
+                "disabled": false,
+                "filtered": false
+              },
+              {
+                "value": "2",
+                "title": "Leaf",
+                "expanded": false,
+                "selected": false,
+                "checked": false,
+                "halfChecked": false,
+                "disabled": false,
+                "filtered": false
+              }
+            ]
+          },
+          "events": [
+            {
+              "kind": "open",
+              "open": true
+            }
+          ]
+        },
+        {
+          "action": "action",
+          "view": {
+            "opened": true,
+            "selected": null,
+            "tags": [],
+            "nodes": [
+              {
+                "value": "0",
+                "title": "Root",
+                "expanded": true,
+                "selected": false,
+                "checked": false,
+                "halfChecked": false,
+                "disabled": false,
+                "filtered": false
+              },
+              {
+                "value": "1",
+                "title": "Child",
+                "expanded": false,
+                "selected": false,
+                "checked": false,
+                "halfChecked": false,
+                "disabled": false,
+                "filtered": false
+              },
+              {
+                "value": "2",
+                "title": "Leaf",
+                "expanded": false,
+                "selected": false,
+                "checked": false,
+                "halfChecked": false,
+                "disabled": false,
+                "filtered": false
+              }
+            ]
+          },
+          "events": [
+            {
+              "kind": "open",
+              "open": true
+            },
+            {
+              "kind": "expand",
+              "keys": [
+                0
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "click-disabled-node",
+        "expandAction": "click",
+        "action": "click",
+        "disabledNode": true
+      },
+      "initial": {
+        "view": {
+          "opened": false,
+          "selected": "",
+          "tags": [],
+          "nodes": []
+        },
+        "events": []
+      },
+      "steps": [
+        {
+          "action": "open",
+          "view": {
+            "opened": true,
+            "selected": null,
+            "tags": [],
+            "nodes": [
+              {
+                "value": "0",
+                "title": "Root",
+                "expanded": false,
+                "selected": false,
+                "checked": false,
+                "halfChecked": false,
+                "disabled": true,
+                "filtered": false
+              },
+              {
+                "value": "2",
+                "title": "Leaf",
+                "expanded": false,
+                "selected": false,
+                "checked": false,
+                "halfChecked": false,
+                "disabled": false,
+                "filtered": false
+              }
+            ]
+          },
+          "events": [
+            {
+              "kind": "open",
+              "open": true
+            }
+          ]
+        },
+        {
+          "action": "action",
+          "view": {
+            "opened": true,
+            "selected": null,
+            "tags": [],
+            "nodes": [
+              {
+                "value": "0",
+                "title": "Root",
+                "expanded": true,
+                "selected": false,
+                "checked": false,
+                "halfChecked": false,
+                "disabled": true,
+                "filtered": false
+              },
+              {
+                "value": "1",
+                "title": "Child",
+                "expanded": false,
+                "selected": false,
+                "checked": false,
+                "halfChecked": false,
+                "disabled": false,
+                "filtered": false
+              },
+              {
+                "value": "2",
+                "title": "Leaf",
+                "expanded": false,
+                "selected": false,
+                "checked": false,
+                "halfChecked": false,
+                "disabled": false,
+                "filtered": false
+              }
+            ]
+          },
+          "events": [
+            {
+              "kind": "open",
+              "open": true
+            },
+            {
+              "kind": "expand",
+              "keys": [
+                0
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "click-leaf",
+        "expandAction": "click",
+        "action": "click",
+        "leaf": true
+      },
+      "initial": {
+        "view": {
+          "opened": false,
+          "selected": "",
+          "tags": [],
+          "nodes": []
+        },
+        "events": []
+      },
+      "steps": [
+        {
+          "action": "open",
+          "view": {
+            "opened": true,
+            "selected": null,
+            "tags": [],
+            "nodes": [
+              {
+                "value": "0",
+                "title": "Root",
+                "expanded": false,
+                "selected": false,
+                "checked": false,
+                "halfChecked": false,
+                "disabled": false,
+                "filtered": false
+              },
+              {
+                "value": "2",
+                "title": "Leaf",
+                "expanded": false,
+                "selected": false,
+                "checked": false,
+                "halfChecked": false,
+                "disabled": false,
+                "filtered": false
+              }
+            ]
+          },
+          "events": [
+            {
+              "kind": "open",
+              "open": true
+            }
+          ]
+        },
+        {
+          "action": "action",
+          "view": {
+            "opened": true,
+            "selected": null,
+            "tags": [
+              "Root"
+            ],
+            "nodes": [
+              {
+                "value": "0",
+                "title": "Root",
+                "expanded": false,
+                "selected": true,
+                "checked": false,
+                "halfChecked": false,
+                "disabled": false,
+                "filtered": false
+              },
+              {
+                "value": "2",
+                "title": "Leaf",
+                "expanded": false,
+                "selected": false,
+                "checked": false,
+                "halfChecked": false,
+                "disabled": false,
+                "filtered": false
+              }
+            ]
+          },
+          "events": [
+            {
+              "kind": "open",
+              "open": true
+            },
+            {
+              "kind": "change",
+              "value": [
+                0
+              ],
+              "labels": [
+                "Root"
+              ],
+              "triggerValue": 0
+            },
+            {
+              "kind": "select",
+              "value": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "click-control",
+        "expandAction": "click",
+        "action": "click",
+        "modifier": "Control"
+      },
+      "initial": {
+        "view": {
+          "opened": false,
+          "selected": "",
+          "tags": [],
+          "nodes": []
+        },
+        "events": []
+      },
+      "steps": [
+        {
+          "action": "open",
+          "view": {
+            "opened": true,
+            "selected": null,
+            "tags": [],
+            "nodes": [
+              {
+                "value": "0",
+                "title": "Root",
+                "expanded": false,
+                "selected": false,
+                "checked": false,
+                "halfChecked": false,
+                "disabled": false,
+                "filtered": false
+              },
+              {
+                "value": "2",
+                "title": "Leaf",
+                "expanded": false,
+                "selected": false,
+                "checked": false,
+                "halfChecked": false,
+                "disabled": false,
+                "filtered": false
+              }
+            ]
+          },
+          "events": [
+            {
+              "kind": "open",
+              "open": true
+            }
+          ]
+        },
+        {
+          "action": "action",
+          "view": {
+            "opened": true,
+            "selected": null,
+            "tags": [
+              "Root"
+            ],
+            "nodes": [
+              {
+                "value": "0",
+                "title": "Root",
+                "expanded": false,
+                "selected": true,
+                "checked": false,
+                "halfChecked": false,
+                "disabled": false,
+                "filtered": false
+              },
+              {
+                "value": "2",
+                "title": "Leaf",
+                "expanded": false,
+                "selected": false,
+                "checked": false,
+                "halfChecked": false,
+                "disabled": false,
+                "filtered": false
+              }
+            ]
+          },
+          "events": [
+            {
+              "kind": "open",
+              "open": true
+            },
+            {
+              "kind": "change",
+              "value": [
+                0
+              ],
+              "labels": [
+                "Root"
+              ],
+              "triggerValue": 0
+            },
+            {
+              "kind": "select",
+              "value": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "click-meta",
+        "expandAction": "click",
+        "action": "click",
+        "modifier": "Meta"
+      },
+      "initial": {
+        "view": {
+          "opened": false,
+          "selected": "",
+          "tags": [],
+          "nodes": []
+        },
+        "events": []
+      },
+      "steps": [
+        {
+          "action": "open",
+          "view": {
+            "opened": true,
+            "selected": null,
+            "tags": [],
+            "nodes": [
+              {
+                "value": "0",
+                "title": "Root",
+                "expanded": false,
+                "selected": false,
+                "checked": false,
+                "halfChecked": false,
+                "disabled": false,
+                "filtered": false
+              },
+              {
+                "value": "2",
+                "title": "Leaf",
+                "expanded": false,
+                "selected": false,
+                "checked": false,
+                "halfChecked": false,
+                "disabled": false,
+                "filtered": false
+              }
+            ]
+          },
+          "events": [
+            {
+              "kind": "open",
+              "open": true
+            }
+          ]
+        },
+        {
+          "action": "action",
+          "view": {
+            "opened": true,
+            "selected": null,
+            "tags": [
+              "Root"
+            ],
+            "nodes": [
+              {
+                "value": "0",
+                "title": "Root",
+                "expanded": false,
+                "selected": true,
+                "checked": false,
+                "halfChecked": false,
+                "disabled": false,
+                "filtered": false
+              },
+              {
+                "value": "2",
+                "title": "Leaf",
+                "expanded": false,
+                "selected": false,
+                "checked": false,
+                "halfChecked": false,
+                "disabled": false,
+                "filtered": false
+              }
+            ]
+          },
+          "events": [
+            {
+              "kind": "open",
+              "open": true
+            },
+            {
+              "kind": "change",
+              "value": [
+                0
+              ],
+              "labels": [
+                "Root"
+              ],
+              "triggerValue": 0
+            },
+            {
+              "kind": "select",
+              "value": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "click-shift",
+        "expandAction": "click",
+        "action": "click",
+        "modifier": "Shift"
+      },
+      "initial": {
+        "view": {
+          "opened": false,
+          "selected": "",
+          "tags": [],
+          "nodes": []
+        },
+        "events": []
+      },
+      "steps": [
+        {
+          "action": "open",
+          "view": {
+            "opened": true,
+            "selected": null,
+            "tags": [],
+            "nodes": [
+              {
+                "value": "0",
+                "title": "Root",
+                "expanded": false,
+                "selected": false,
+                "checked": false,
+                "halfChecked": false,
+                "disabled": false,
+                "filtered": false
+              },
+              {
+                "value": "2",
+                "title": "Leaf",
+                "expanded": false,
+                "selected": false,
+                "checked": false,
+                "halfChecked": false,
+                "disabled": false,
+                "filtered": false
+              }
+            ]
+          },
+          "events": [
+            {
+              "kind": "open",
+              "open": true
+            }
+          ]
+        },
+        {
+          "action": "action",
+          "view": {
+            "opened": true,
+            "selected": null,
+            "tags": [
+              "Root"
+            ],
+            "nodes": [
+              {
+                "value": "0",
+                "title": "Root",
+                "expanded": false,
+                "selected": true,
+                "checked": false,
+                "halfChecked": false,
+                "disabled": false,
+                "filtered": false
+              },
+              {
+                "value": "2",
+                "title": "Leaf",
+                "expanded": false,
+                "selected": false,
+                "checked": false,
+                "halfChecked": false,
+                "disabled": false,
+                "filtered": false
+              }
+            ]
+          },
+          "events": [
+            {
+              "kind": "open",
+              "open": true
+            },
+            {
+              "kind": "change",
+              "value": [
+                0
+              ],
+              "labels": [
+                "Root"
+              ],
+              "triggerValue": 0
+            },
+            {
+              "kind": "select",
+              "value": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "double-control",
+        "expandAction": "doubleClick",
+        "action": "double-event",
+        "modifier": "Control"
+      },
+      "initial": {
+        "view": {
+          "opened": false,
+          "selected": "",
+          "tags": [],
+          "nodes": []
+        },
+        "events": []
+      },
+      "steps": [
+        {
+          "action": "open",
+          "view": {
+            "opened": true,
+            "selected": null,
+            "tags": [],
+            "nodes": [
+              {
+                "value": "0",
+                "title": "Root",
+                "expanded": false,
+                "selected": false,
+                "checked": false,
+                "halfChecked": false,
+                "disabled": false,
+                "filtered": false
+              },
+              {
+                "value": "2",
+                "title": "Leaf",
+                "expanded": false,
+                "selected": false,
+                "checked": false,
+                "halfChecked": false,
+                "disabled": false,
+                "filtered": false
+              }
+            ]
+          },
+          "events": [
+            {
+              "kind": "open",
+              "open": true
+            }
+          ]
+        },
+        {
+          "action": "action",
+          "view": {
+            "opened": true,
+            "selected": null,
+            "tags": [],
+            "nodes": [
+              {
+                "value": "0",
+                "title": "Root",
+                "expanded": false,
+                "selected": false,
+                "checked": false,
+                "halfChecked": false,
+                "disabled": false,
+                "filtered": false
+              },
+              {
+                "value": "2",
+                "title": "Leaf",
+                "expanded": false,
+                "selected": false,
+                "checked": false,
+                "halfChecked": false,
+                "disabled": false,
+                "filtered": false
+              }
+            ]
+          },
+          "events": [
+            {
+              "kind": "open",
+              "open": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "controlled-hold",
+        "expandAction": "click",
+        "action": "click",
+        "controlled": "hold",
+        "repeat": true
+      },
+      "initial": {
+        "view": {
+          "opened": false,
+          "selected": "",
+          "tags": [],
+          "nodes": []
+        },
+        "events": []
+      },
+      "steps": [
+        {
+          "action": "open",
+          "view": {
+            "opened": true,
+            "selected": null,
+            "tags": [],
+            "nodes": [
+              {
+                "value": "0",
+                "title": "Root",
+                "expanded": false,
+                "selected": false,
+                "checked": false,
+                "halfChecked": false,
+                "disabled": false,
+                "filtered": false
+              },
+              {
+                "value": "2",
+                "title": "Leaf",
+                "expanded": false,
+                "selected": false,
+                "checked": false,
+                "halfChecked": false,
+                "disabled": false,
+                "filtered": false
+              }
+            ]
+          },
+          "events": [
+            {
+              "kind": "open",
+              "open": true
+            }
+          ]
+        },
+        {
+          "action": "action",
+          "view": {
+            "opened": true,
+            "selected": null,
+            "tags": [
+              "Root"
+            ],
+            "nodes": [
+              {
+                "value": "0",
+                "title": "Root",
+                "expanded": false,
+                "selected": true,
+                "checked": false,
+                "halfChecked": false,
+                "disabled": false,
+                "filtered": false
+              },
+              {
+                "value": "2",
+                "title": "Leaf",
+                "expanded": false,
+                "selected": false,
+                "checked": false,
+                "halfChecked": false,
+                "disabled": false,
+                "filtered": false
+              }
+            ]
+          },
+          "events": [
+            {
+              "kind": "open",
+              "open": true
+            },
+            {
+              "kind": "expand",
+              "keys": [
+                0
+              ]
+            },
+            {
+              "kind": "change",
+              "value": [
+                0
+              ],
+              "labels": [
+                "Root"
+              ],
+              "triggerValue": 0
+            },
+            {
+              "kind": "select",
+              "value": 0
+            }
+          ]
+        },
+        {
+          "action": "repeat",
+          "view": {
+            "opened": true,
+            "selected": null,
+            "tags": [],
+            "nodes": [
+              {
+                "value": "0",
+                "title": "Root",
+                "expanded": false,
+                "selected": false,
+                "checked": false,
+                "halfChecked": false,
+                "disabled": false,
+                "filtered": false
+              },
+              {
+                "value": "2",
+                "title": "Leaf",
+                "expanded": false,
+                "selected": false,
+                "checked": false,
+                "halfChecked": false,
+                "disabled": false,
+                "filtered": false
+              }
+            ]
+          },
+          "events": [
+            {
+              "kind": "open",
+              "open": true
+            },
+            {
+              "kind": "expand",
+              "keys": [
+                0
+              ]
+            },
+            {
+              "kind": "change",
+              "value": [
+                0
+              ],
+              "labels": [
+                "Root"
+              ],
+              "triggerValue": 0
+            },
+            {
+              "kind": "select",
+              "value": 0
+            },
+            {
+              "kind": "expand",
+              "keys": [
+                0
+              ]
+            },
+            {
+              "kind": "change",
+              "value": [],
+              "labels": [],
+              "triggerValue": 0
+            },
+            {
+              "kind": "deselect",
+              "value": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "controlled-accept",
+        "expandAction": "click",
+        "action": "click",
+        "controlled": "accept",
+        "repeat": true
+      },
+      "initial": {
+        "view": {
+          "opened": false,
+          "selected": "",
+          "tags": [],
+          "nodes": []
+        },
+        "events": []
+      },
+      "steps": [
+        {
+          "action": "open",
+          "view": {
+            "opened": true,
+            "selected": null,
+            "tags": [],
+            "nodes": [
+              {
+                "value": "0",
+                "title": "Root",
+                "expanded": false,
+                "selected": false,
+                "checked": false,
+                "halfChecked": false,
+                "disabled": false,
+                "filtered": false
+              },
+              {
+                "value": "2",
+                "title": "Leaf",
+                "expanded": false,
+                "selected": false,
+                "checked": false,
+                "halfChecked": false,
+                "disabled": false,
+                "filtered": false
+              }
+            ]
+          },
+          "events": [
+            {
+              "kind": "open",
+              "open": true
+            }
+          ]
+        },
+        {
+          "action": "action",
+          "view": {
+            "opened": true,
+            "selected": null,
+            "tags": [
+              "Root"
+            ],
+            "nodes": [
+              {
+                "value": "0",
+                "title": "Root",
+                "expanded": true,
+                "selected": true,
+                "checked": false,
+                "halfChecked": false,
+                "disabled": false,
+                "filtered": false
+              },
+              {
+                "value": "1",
+                "title": "Child",
+                "expanded": false,
+                "selected": false,
+                "checked": false,
+                "halfChecked": false,
+                "disabled": false,
+                "filtered": false
+              },
+              {
+                "value": "2",
+                "title": "Leaf",
+                "expanded": false,
+                "selected": false,
+                "checked": false,
+                "halfChecked": false,
+                "disabled": false,
+                "filtered": false
+              }
+            ]
+          },
+          "events": [
+            {
+              "kind": "open",
+              "open": true
+            },
+            {
+              "kind": "expand",
+              "keys": [
+                0
+              ]
+            },
+            {
+              "kind": "change",
+              "value": [
+                0
+              ],
+              "labels": [
+                "Root"
+              ],
+              "triggerValue": 0
+            },
+            {
+              "kind": "select",
+              "value": 0
+            }
+          ]
+        },
+        {
+          "action": "repeat",
+          "view": {
+            "opened": true,
+            "selected": null,
+            "tags": [],
+            "nodes": [
+              {
+                "value": "0",
+                "title": "Root",
+                "expanded": false,
+                "selected": false,
+                "checked": false,
+                "halfChecked": false,
+                "disabled": false,
+                "filtered": false
+              },
+              {
+                "value": "2",
+                "title": "Leaf",
+                "expanded": false,
+                "selected": false,
+                "checked": false,
+                "halfChecked": false,
+                "disabled": false,
+                "filtered": false
+              }
+            ]
+          },
+          "events": [
+            {
+              "kind": "open",
+              "open": true
+            },
+            {
+              "kind": "expand",
+              "keys": [
+                0
+              ]
+            },
+            {
+              "kind": "change",
+              "value": [
+                0
+              ],
+              "labels": [
+                "Root"
+              ],
+              "triggerValue": 0
+            },
+            {
+              "kind": "select",
+              "value": 0
+            },
+            {
+              "kind": "expand",
+              "keys": []
+            },
+            {
+              "kind": "change",
+              "value": [],
+              "labels": [],
+              "triggerValue": 0
+            },
+            {
+              "kind": "deselect",
+              "value": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "click-collapse",
+        "expandAction": "click",
+        "action": "click",
+        "expanded": true
+      },
+      "initial": {
+        "view": {
+          "opened": false,
+          "selected": "",
+          "tags": [],
+          "nodes": []
+        },
+        "events": []
+      },
+      "steps": [
+        {
+          "action": "open",
+          "view": {
+            "opened": true,
+            "selected": null,
+            "tags": [],
+            "nodes": [
+              {
+                "value": "0",
+                "title": "Root",
+                "expanded": true,
+                "selected": false,
+                "checked": false,
+                "halfChecked": false,
+                "disabled": false,
+                "filtered": false
+              },
+              {
+                "value": "1",
+                "title": "Child",
+                "expanded": false,
+                "selected": false,
+                "checked": false,
+                "halfChecked": false,
+                "disabled": false,
+                "filtered": false
+              },
+              {
+                "value": "2",
+                "title": "Leaf",
+                "expanded": false,
+                "selected": false,
+                "checked": false,
+                "halfChecked": false,
+                "disabled": false,
+                "filtered": false
+              }
+            ]
+          },
+          "events": [
+            {
+              "kind": "open",
+              "open": true
+            }
+          ]
+        },
+        {
+          "action": "action",
+          "view": {
+            "opened": true,
+            "selected": null,
+            "tags": [
+              "Root"
+            ],
+            "nodes": [
+              {
+                "value": "0",
+                "title": "Root",
+                "expanded": false,
+                "selected": true,
+                "checked": false,
+                "halfChecked": false,
+                "disabled": false,
+                "filtered": false
+              },
+              {
+                "value": "2",
+                "title": "Leaf",
+                "expanded": false,
+                "selected": false,
+                "checked": false,
+                "halfChecked": false,
+                "disabled": false,
+                "filtered": false
+              }
+            ]
+          },
+          "events": [
+            {
+              "kind": "open",
+              "open": true
+            },
+            {
+              "kind": "expand",
+              "keys": []
+            },
+            {
+              "kind": "change",
+              "value": [
+                0
+              ],
+              "labels": [
+                "Root"
+              ],
+              "triggerValue": 0
+            },
+            {
+              "kind": "select",
+              "value": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "click-rtl-alias",
+        "expandAction": "click",
+        "action": "click",
+        "rtl": true,
+        "aliases": true
+      },
+      "initial": {
+        "view": {
+          "opened": false,
+          "selected": "",
+          "tags": [],
+          "nodes": []
+        },
+        "events": []
+      },
+      "steps": [
+        {
+          "action": "open",
+          "view": {
+            "opened": true,
+            "selected": null,
+            "tags": [],
+            "nodes": [
+              {
+                "value": "0",
+                "title": "Root",
+                "expanded": false,
+                "selected": false,
+                "checked": false,
+                "halfChecked": false,
+                "disabled": false,
+                "filtered": false
+              },
+              {
+                "value": "2",
+                "title": "Leaf",
+                "expanded": false,
+                "selected": false,
+                "checked": false,
+                "halfChecked": false,
+                "disabled": false,
+                "filtered": false
+              }
+            ]
+          },
+          "events": [
+            {
+              "kind": "open",
+              "open": true
+            }
+          ]
+        },
+        {
+          "action": "action",
+          "view": {
+            "opened": true,
+            "selected": null,
+            "tags": [
+              "Root"
+            ],
+            "nodes": [
+              {
+                "value": "0",
+                "title": "Root",
+                "expanded": true,
+                "selected": true,
+                "checked": false,
+                "halfChecked": false,
+                "disabled": false,
+                "filtered": false
+              },
+              {
+                "value": "1",
+                "title": "Child",
+                "expanded": false,
+                "selected": false,
+                "checked": false,
+                "halfChecked": false,
+                "disabled": false,
+                "filtered": false
+              },
+              {
+                "value": "2",
+                "title": "Leaf",
+                "expanded": false,
+                "selected": false,
+                "checked": false,
+                "halfChecked": false,
+                "disabled": false,
+                "filtered": false
+              }
+            ]
+          },
+          "events": [
+            {
+              "kind": "open",
+              "open": true
+            },
+            {
+              "kind": "expand",
+              "keys": [
+                0
+              ]
+            },
+            {
+              "kind": "change",
+              "value": [
+                0
+              ],
+              "labels": [
+                "Root"
+              ],
+              "triggerValue": 0
+            },
+            {
+              "kind": "select",
+              "value": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "switcher",
+        "expandAction": "click",
+        "action": "switcher"
+      },
+      "initial": {
+        "view": {
+          "opened": false,
+          "selected": "",
+          "tags": [],
+          "nodes": []
+        },
+        "events": []
+      },
+      "steps": [
+        {
+          "action": "open",
+          "view": {
+            "opened": true,
+            "selected": null,
+            "tags": [],
+            "nodes": [
+              {
+                "value": "0",
+                "title": "Root",
+                "expanded": false,
+                "selected": false,
+                "checked": false,
+                "halfChecked": false,
+                "disabled": false,
+                "filtered": false
+              },
+              {
+                "value": "2",
+                "title": "Leaf",
+                "expanded": false,
+                "selected": false,
+                "checked": false,
+                "halfChecked": false,
+                "disabled": false,
+                "filtered": false
+              }
+            ]
+          },
+          "events": [
+            {
+              "kind": "open",
+              "open": true
+            }
+          ]
+        },
+        {
+          "action": "action",
+          "view": {
+            "opened": true,
+            "selected": null,
+            "tags": [],
+            "nodes": [
+              {
+                "value": "0",
+                "title": "Root",
+                "expanded": true,
+                "selected": false,
+                "checked": false,
+                "halfChecked": false,
+                "disabled": false,
+                "filtered": false
+              },
+              {
+                "value": "1",
+                "title": "Child",
+                "expanded": false,
+                "selected": false,
+                "checked": false,
+                "halfChecked": false,
+                "disabled": false,
+                "filtered": false
+              },
+              {
+                "value": "2",
+                "title": "Leaf",
+                "expanded": false,
+                "selected": false,
+                "checked": false,
+                "halfChecked": false,
+                "disabled": false,
+                "filtered": false
+              }
+            ]
+          },
+          "events": [
+            {
+              "kind": "open",
+              "open": true
+            },
+            {
+              "kind": "expand",
+              "keys": [
+                0
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "checkbox",
+        "expandAction": "click",
+        "action": "checkbox",
+        "checkable": true
+      },
+      "initial": {
+        "view": {
+          "opened": false,
+          "selected": "",
+          "tags": [],
+          "nodes": []
+        },
+        "events": []
+      },
+      "steps": [
+        {
+          "action": "open",
+          "view": {
+            "opened": true,
+            "selected": null,
+            "tags": [],
+            "nodes": [
+              {
+                "value": "0",
+                "title": "Root",
+                "expanded": false,
+                "selected": false,
+                "checked": false,
+                "halfChecked": false,
+                "disabled": false,
+                "filtered": false
+              },
+              {
+                "value": "2",
+                "title": "Leaf",
+                "expanded": false,
+                "selected": false,
+                "checked": false,
+                "halfChecked": false,
+                "disabled": false,
+                "filtered": false
+              }
+            ]
+          },
+          "events": [
+            {
+              "kind": "open",
+              "open": true
+            }
+          ]
+        },
+        {
+          "action": "action",
+          "view": {
+            "opened": true,
+            "selected": null,
+            "tags": [
+              "Child"
+            ],
+            "nodes": [
+              {
+                "value": "0",
+                "title": "Root",
+                "expanded": false,
+                "selected": false,
+                "checked": true,
+                "halfChecked": false,
+                "disabled": false,
+                "filtered": false
+              },
+              {
+                "value": "2",
+                "title": "Leaf",
+                "expanded": false,
+                "selected": false,
+                "checked": false,
+                "halfChecked": false,
+                "disabled": false,
+                "filtered": false
+              }
+            ]
+          },
+          "events": [
+            {
+              "kind": "open",
+              "open": true
+            },
+            {
+              "kind": "change",
+              "value": [
+                1
+              ],
+              "labels": [
+                "Child"
+              ],
+              "triggerValue": 0
+            },
+            {
+              "kind": "select",
+              "value": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "keyboard-enter",
+        "expandAction": "click",
+        "action": "Enter"
+      },
+      "initial": {
+        "view": {
+          "opened": false,
+          "selected": "",
+          "tags": [],
+          "nodes": []
+        },
+        "events": []
+      },
+      "steps": [
+        {
+          "action": "open",
+          "view": {
+            "opened": true,
+            "selected": null,
+            "tags": [],
+            "nodes": [
+              {
+                "value": "0",
+                "title": "Root",
+                "expanded": false,
+                "selected": false,
+                "checked": false,
+                "halfChecked": false,
+                "disabled": false,
+                "filtered": false
+              },
+              {
+                "value": "2",
+                "title": "Leaf",
+                "expanded": false,
+                "selected": false,
+                "checked": false,
+                "halfChecked": false,
+                "disabled": false,
+                "filtered": false
+              }
+            ]
+          },
+          "events": [
+            {
+              "kind": "open",
+              "open": true
+            }
+          ]
+        },
+        {
+          "action": "action",
+          "view": {
+            "opened": true,
+            "selected": null,
+            "tags": [
+              "Root"
+            ],
+            "nodes": [
+              {
+                "value": "0",
+                "title": "Root",
+                "expanded": false,
+                "selected": true,
+                "checked": false,
+                "halfChecked": false,
+                "disabled": false,
+                "filtered": false
+              },
+              {
+                "value": "2",
+                "title": "Leaf",
+                "expanded": false,
+                "selected": false,
+                "checked": false,
+                "halfChecked": false,
+                "disabled": false,
+                "filtered": false
+              }
+            ]
+          },
+          "events": [
+            {
+              "kind": "open",
+              "open": true
+            },
+            {
+              "kind": "change",
+              "value": [
+                0
+              ],
+              "labels": [
+                "Root"
+              ],
+              "triggerValue": 0
+            },
+            {
+              "kind": "select",
+              "value": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "keyboard-right",
+        "expandAction": "doubleClick",
+        "action": "ArrowRight"
+      },
+      "initial": {
+        "view": {
+          "opened": false,
+          "selected": "",
+          "tags": [],
+          "nodes": []
+        },
+        "events": []
+      },
+      "steps": [
+        {
+          "action": "open",
+          "view": {
+            "opened": true,
+            "selected": null,
+            "tags": [],
+            "nodes": [
+              {
+                "value": "0",
+                "title": "Root",
+                "expanded": false,
+                "selected": false,
+                "checked": false,
+                "halfChecked": false,
+                "disabled": false,
+                "filtered": false
+              },
+              {
+                "value": "2",
+                "title": "Leaf",
+                "expanded": false,
+                "selected": false,
+                "checked": false,
+                "halfChecked": false,
+                "disabled": false,
+                "filtered": false
+              }
+            ]
+          },
+          "events": [
+            {
+              "kind": "open",
+              "open": true
+            }
+          ]
+        },
+        {
+          "action": "action",
+          "view": {
+            "opened": true,
+            "selected": null,
+            "tags": [],
+            "nodes": [
+              {
+                "value": "0",
+                "title": "Root",
+                "expanded": true,
+                "selected": false,
+                "checked": false,
+                "halfChecked": false,
+                "disabled": false,
+                "filtered": false
+              },
+              {
+                "value": "1",
+                "title": "Child",
+                "expanded": false,
+                "selected": false,
+                "checked": false,
+                "halfChecked": false,
+                "disabled": false,
+                "filtered": false
+              },
+              {
+                "value": "2",
+                "title": "Leaf",
+                "expanded": false,
+                "selected": false,
+                "checked": false,
+                "halfChecked": false,
+                "disabled": false,
+                "filtered": false
+              }
+            ]
+          },
+          "events": [
+            {
+              "kind": "open",
+              "open": true
+            },
+            {
+              "kind": "expand",
+              "keys": [
+                0
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "live-action",
+        "expandAction": false,
+        "action": "click",
+        "update": true,
+        "selectable": false
+      },
+      "initial": {
+        "view": {
+          "opened": false,
+          "selected": "",
+          "tags": [],
+          "nodes": []
+        },
+        "events": []
+      },
+      "steps": [
+        {
+          "action": "open",
+          "view": {
+            "opened": true,
+            "selected": null,
+            "tags": [],
+            "nodes": [
+              {
+                "value": "0",
+                "title": "Root",
+                "expanded": false,
+                "selected": false,
+                "checked": false,
+                "halfChecked": false,
+                "disabled": false,
+                "filtered": false
+              },
+              {
+                "value": "2",
+                "title": "Leaf",
+                "expanded": false,
+                "selected": false,
+                "checked": false,
+                "halfChecked": false,
+                "disabled": false,
+                "filtered": false
+              }
+            ]
+          },
+          "events": [
+            {
+              "kind": "open",
+              "open": true
+            }
+          ]
+        },
+        {
+          "action": "action",
+          "view": {
+            "opened": true,
+            "selected": null,
+            "tags": [],
+            "nodes": [
+              {
+                "value": "0",
+                "title": "Root",
+                "expanded": false,
+                "selected": false,
+                "checked": false,
+                "halfChecked": false,
+                "disabled": false,
+                "filtered": false
+              },
+              {
+                "value": "2",
+                "title": "Leaf",
+                "expanded": false,
+                "selected": false,
+                "checked": false,
+                "halfChecked": false,
+                "disabled": false,
+                "filtered": false
+              }
+            ]
+          },
+          "events": [
+            {
+              "kind": "open",
+              "open": true
+            }
+          ]
+        },
+        {
+          "action": "update",
+          "view": {
+            "opened": true,
+            "selected": null,
+            "tags": [],
+            "nodes": [
+              {
+                "value": "0",
+                "title": "Root",
+                "expanded": false,
+                "selected": false,
+                "checked": false,
+                "halfChecked": false,
+                "disabled": false,
+                "filtered": false
+              },
+              {
+                "value": "2",
+                "title": "Leaf",
+                "expanded": false,
+                "selected": false,
+                "checked": false,
+                "halfChecked": false,
+                "disabled": false,
+                "filtered": false
+              }
+            ]
+          },
+          "events": [
+            {
+              "kind": "open",
+              "open": true
+            }
+          ]
+        },
+        {
+          "action": "repeat",
+          "view": {
+            "opened": true,
+            "selected": null,
+            "tags": [],
+            "nodes": [
+              {
+                "value": "0",
+                "title": "Root",
+                "expanded": true,
+                "selected": false,
+                "checked": false,
+                "halfChecked": false,
+                "disabled": false,
+                "filtered": false
+              },
+              {
+                "value": "1",
+                "title": "Child",
+                "expanded": false,
+                "selected": false,
+                "checked": false,
+                "halfChecked": false,
+                "disabled": false,
+                "filtered": false
+              },
+              {
+                "value": "2",
+                "title": "Leaf",
+                "expanded": false,
+                "selected": false,
+                "checked": false,
+                "halfChecked": false,
+                "disabled": false,
+                "filtered": false
+              }
+            ]
+          },
+          "events": [
+            {
+              "kind": "open",
+              "open": true
+            },
+            {
+              "kind": "expand",
+              "keys": [
+                0
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "search-click",
+        "expandAction": "click",
+        "action": "click",
+        "search": "Root",
+        "lazy": true
+      },
+      "initial": {
+        "view": {
+          "opened": false,
+          "selected": "",
+          "tags": [],
+          "nodes": []
+        },
+        "events": []
+      },
+      "steps": [
+        {
+          "action": "open",
+          "view": {
+            "opened": true,
+            "selected": null,
+            "tags": [],
+            "nodes": [
+              {
+                "value": "0",
+                "title": "Root",
+                "expanded": false,
+                "selected": false,
+                "checked": false,
+                "halfChecked": false,
+                "disabled": false,
+                "filtered": false
+              },
+              {
+                "value": "2",
+                "title": "Leaf",
+                "expanded": false,
+                "selected": false,
+                "checked": false,
+                "halfChecked": false,
+                "disabled": false,
+                "filtered": false
+              }
+            ]
+          },
+          "events": [
+            {
+              "kind": "open",
+              "open": true
+            }
+          ]
+        },
+        {
+          "action": "search",
+          "view": {
+            "opened": true,
+            "selected": null,
+            "tags": [],
+            "nodes": [
+              {
+                "value": "0",
+                "title": "Root",
+                "expanded": false,
+                "selected": false,
+                "checked": false,
+                "halfChecked": false,
+                "disabled": false,
+                "filtered": true
+              }
+            ]
+          },
+          "events": [
+            {
+              "kind": "open",
+              "open": true
+            }
+          ]
+        },
+        {
+          "action": "action",
+          "view": {
+            "opened": true,
+            "selected": null,
+            "tags": [
+              "Root"
+            ],
+            "nodes": [
+              {
+                "value": "0",
+                "title": "Root",
+                "expanded": false,
+                "selected": true,
+                "checked": false,
+                "halfChecked": false,
+                "disabled": false,
+                "filtered": false
+              },
+              {
+                "value": "2",
+                "title": "Leaf",
+                "expanded": false,
+                "selected": false,
+                "checked": false,
+                "halfChecked": false,
+                "disabled": false,
+                "filtered": false
+              }
+            ]
+          },
+          "events": [
+            {
+              "kind": "open",
+              "open": true
+            },
+            {
+              "kind": "expand",
+              "keys": []
+            },
+            {
+              "kind": "change",
+              "value": [
+                0
+              ],
+              "labels": [
+                "Root"
+              ],
+              "triggerValue": 0
+            },
+            {
+              "kind": "select",
+              "value": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "implicit-leaf",
+        "expandAction": "click",
+        "action": "click",
+        "empty": true
+      },
+      "initial": {
+        "view": {
+          "opened": false,
+          "selected": "",
+          "tags": [],
+          "nodes": []
+        },
+        "events": []
+      },
+      "steps": [
+        {
+          "action": "open",
+          "view": {
+            "opened": true,
+            "selected": null,
+            "tags": [],
+            "nodes": [
+              {
+                "value": "0",
+                "title": "Root",
+                "expanded": false,
+                "selected": false,
+                "checked": false,
+                "halfChecked": false,
+                "disabled": false,
+                "filtered": false
+              },
+              {
+                "value": "2",
+                "title": "Leaf",
+                "expanded": false,
+                "selected": false,
+                "checked": false,
+                "halfChecked": false,
+                "disabled": false,
+                "filtered": false
+              }
+            ]
+          },
+          "events": [
+            {
+              "kind": "open",
+              "open": true
+            }
+          ]
+        },
+        {
+          "action": "action",
+          "view": {
+            "opened": true,
+            "selected": null,
+            "tags": [
+              "Root"
+            ],
+            "nodes": [
+              {
+                "value": "0",
+                "title": "Root",
+                "expanded": false,
+                "selected": true,
+                "checked": false,
+                "halfChecked": false,
+                "disabled": false,
+                "filtered": false
+              },
+              {
+                "value": "2",
+                "title": "Leaf",
+                "expanded": false,
+                "selected": false,
+                "checked": false,
+                "halfChecked": false,
+                "disabled": false,
+                "filtered": false
+              }
+            ]
+          },
+          "events": [
+            {
+              "kind": "open",
+              "open": true
+            },
+            {
+              "kind": "expand",
+              "keys": [
+                0
+              ]
+            },
+            {
+              "kind": "change",
+              "value": [
+                0
+              ],
+              "labels": [
+                "Root"
+              ],
+              "triggerValue": 0
+            },
+            {
+              "kind": "select",
+              "value": 0
+            }
+          ]
+        },
+        {
+          "action": "reveal",
+          "view": {
+            "opened": true,
+            "selected": null,
+            "tags": [
+              "Root"
+            ],
+            "nodes": [
+              {
+                "value": "0",
+                "title": "Root",
+                "expanded": true,
+                "selected": true,
+                "checked": false,
+                "halfChecked": false,
+                "disabled": false,
+                "filtered": false
+              },
+              {
+                "value": "1",
+                "title": "Child",
+                "expanded": false,
+                "selected": false,
+                "checked": false,
+                "halfChecked": false,
+                "disabled": false,
+                "filtered": false
+              },
+              {
+                "value": "2",
+                "title": "Leaf",
+                "expanded": false,
+                "selected": false,
+                "checked": false,
+                "halfChecked": false,
+                "disabled": false,
+                "filtered": false
+              }
+            ]
+          },
+          "events": [
+            {
+              "kind": "open",
+              "open": true
+            },
+            {
+              "kind": "expand",
+              "keys": [
+                0
+              ]
+            },
+            {
+              "kind": "change",
+              "value": [
+                0
+              ],
+              "labels": [
+                "Root"
+              ],
+              "triggerValue": 0
+            },
+            {
+              "kind": "select",
+              "value": 0
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "observations": [
+    {
+      "sample": {
+        "id": "lazy-click",
+        "expandAction": "click",
+        "action": "click",
+        "lazy": true,
+        "selectable": false
+      },
+      "initial": {
+        "view": {
+          "opened": false,
+          "selected": "",
+          "tags": [],
+          "nodes": []
+        },
+        "events": []
+      },
+      "steps": [
+        {
+          "action": "open",
+          "view": {
+            "opened": true,
+            "selected": null,
+            "tags": [],
+            "nodes": [
+              {
+                "value": "0",
+                "title": "Root",
+                "expanded": false,
+                "selected": false,
+                "checked": false,
+                "halfChecked": false,
+                "disabled": false,
+                "filtered": false
+              },
+              {
+                "value": "2",
+                "title": "Leaf",
+                "expanded": false,
+                "selected": false,
+                "checked": false,
+                "halfChecked": false,
+                "disabled": false,
+                "filtered": false
+              }
+            ]
+          },
+          "events": [
+            {
+              "kind": "open",
+              "open": true
+            }
+          ]
+        },
+        {
+          "action": "action",
+          "view": {
+            "opened": true,
+            "selected": null,
+            "tags": [],
+            "nodes": [
+              {
+                "value": "0",
+                "title": "Root",
+                "expanded": true,
+                "selected": false,
+                "checked": false,
+                "halfChecked": false,
+                "disabled": false,
+                "filtered": false
+              },
+              {
+                "value": "2",
+                "title": "Leaf",
+                "expanded": false,
+                "selected": false,
+                "checked": false,
+                "halfChecked": false,
+                "disabled": false,
+                "filtered": false
+              }
+            ]
+          },
+          "events": [
+            {
+              "kind": "open",
+              "open": true
+            },
+            {
+              "kind": "expand",
+              "keys": [
+                0
+              ]
+            },
+            {
+              "kind": "load",
+              "key": 0,
+              "expanded": false
+            },
+            {
+              "kind": "load",
+              "key": 0,
+              "expanded": false
+            }
+          ]
+        },
+        {
+          "action": "resolve",
+          "view": {
+            "opened": true,
+            "selected": null,
+            "tags": [],
+            "nodes": [
+              {
+                "value": "0",
+                "title": "Root",
+                "expanded": true,
+                "selected": false,
+                "checked": false,
+                "halfChecked": false,
+                "disabled": false,
+                "filtered": false
+              },
+              {
+                "value": "1",
+                "title": "Child",
+                "expanded": false,
+                "selected": false,
+                "checked": false,
+                "halfChecked": false,
+                "disabled": false,
+                "filtered": false
+              },
+              {
+                "value": "2",
+                "title": "Leaf",
+                "expanded": false,
+                "selected": false,
+                "checked": false,
+                "halfChecked": false,
+                "disabled": false,
+                "filtered": false
+              }
+            ]
+          },
+          "events": [
+            {
+              "kind": "open",
+              "open": true
+            },
+            {
+              "kind": "expand",
+              "keys": [
+                0
+              ]
+            },
+            {
+              "kind": "load",
+              "key": 0,
+              "expanded": false
+            },
+            {
+              "kind": "load",
+              "key": 0,
+              "expanded": false
+            },
+            {
+              "kind": "loaded",
+              "keys": [
+                0
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

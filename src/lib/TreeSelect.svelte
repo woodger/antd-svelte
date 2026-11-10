@@ -65,6 +65,7 @@
     treeExpandedKeys,
     treeDefaultExpandedKeys = [],
     treeDefaultExpandAll = false,
+    treeExpandAction = false,
     onTreeExpand,
     treeLoadedKeys,
     onTreeLoad,
@@ -606,7 +607,7 @@
       ? `${popupMatchSelectWidth}px`
       : undefined} onfocusout={blurWithin}>
   <div class="popup-body" style:max-height={`${listHeight}px`} onscroll={onPopupScroll}>
-    {#if filtered.length}<Tree prefixCls="ant-tree" motion={false} _themeStyle={componentStyle} _componentConfig={false} bind:nativeElement={treeElement} treeData={filteredIndex.data} id={`${controlId}-list`} class={treeSelectTheme.className && 'ant-tree-select-source-tree'} aria-label={attributes['aria-label'] ?? placeholder ?? config.locale.searchText} focusable={false} multiple={isMultiple} checkable={checkable} checkStrictly checkedKeys={{ checked: checks.checked, halfChecked: checks.halfChecked }} selectedKeys={checkable ? [] : checks.checked} expandedKeys={panelExpanded} activeKey={active} onActiveChange={key => {
+    {#if filtered.length}<Tree prefixCls="ant-tree" motion={false} _themeStyle={componentStyle} _componentConfig={false} bind:nativeElement={treeElement} treeData={filteredIndex.data} id={`${controlId}-list`} class={treeSelectTheme.className && 'ant-tree-select-source-tree'} aria-label={attributes['aria-label'] ?? placeholder ?? config.locale.searchText} focusable={false} multiple={isMultiple} checkable={checkable} checkStrictly checkedKeys={{ checked: checks.checked, halfChecked: checks.halfChecked }} selectedKeys={checkable ? [] : checks.checked} expandedKeys={panelExpanded} expandAction={treeExpandAction} activeKey={active} onActiveChange={key => {
         active = key;
       }} onSelect={(_keys, info) => panelSelect(info.node)} onCheck={(_keys, info) => panelSelect(info.node)} onExpand={expandPanel} loadedKeys={treeLoadedKeys ?? loaded} onLoad={(keys) => {
           onTreeLoad?.(keys);

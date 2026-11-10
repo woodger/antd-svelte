@@ -11033,7 +11033,7 @@
       "name": "TreeSelect",
       "category": "data-entry",
       "scope": "target",
-      "scopeReason": "TreeSelect по Ant Design 6.6.8 и rc-tree-select 1.16.1: значения, check/стратегии, поиск, loadData, fieldNames/simple mode и generic data; оставшийся API, virtual и motion переносятся отдельно.",
+      "scopeReason": "TreeSelect по Ant Design 6.6.8 и rc-tree-select 1.16.1: значения, check/стратегии, поиск, loadData, fieldNames/simple mode, generic data и title expansion; оставшийся API, virtual и motion переносятся отдельно.",
       "upstreamPath": "components/tree-select",
       "reviewedRevision": "984592267de88fbf9cdaecc96a56629e721c709d",
       "exports": [
@@ -11128,7 +11128,12 @@
         "tests/browser/tree-select-data.spec.ts",
         "tests/browser/tree-select-data-native.spec.ts",
         "tests/package/tree-select-data.ssr.test.ts",
-        "readme.md"
+        "readme.md",
+        "tests/browser/fixtures/TreeSelectExpandActionScope.svelte",
+        "tests/browser/fixtures/TreeSelectExpandActionFixtures.svelte",
+        "tests/browser/fixtures/ant-design-tree-select-expand-action-reference.json",
+        "tests/browser/tree-select-expand-action.spec.ts",
+        "tests/package/tree-select-expand-action.ssr.test.ts"
       ],
       "features": [
         {
@@ -11212,7 +11217,7 @@
             "tests/package/tree-select-data.ssr.test.ts",
             "readme.md"
           ],
-          "note": "FieldNames, treeDataSimpleMode и generic raw data перенесены. Остаются TreeNode children, maxCount/maxTagCount/tagRender, popupRender/prefix/suffix customization, treeExpandAction, component config и полный semantic/ref API. TreeTitleRender оформляет выбранные значения, но onChange пока возвращает подписи данных вместо bound renderer snippets. Deprecated extra.triggerNode/allCheckedNodes и node.props React wrappers исключены; собственное поле props данных сохраняется."
+          "note": "FieldNames, treeDataSimpleMode, generic raw data и treeExpandAction перенесены. Остаются TreeNode children, maxCount/maxTagCount/tagRender, popupRender/prefix/suffix customization, component config и полный semantic/ref API. TreeTitleRender оформляет выбранные значения, но onChange пока возвращает подписи данных вместо bound renderer snippets. Deprecated extra.triggerNode/allCheckedNodes и node.props React wrappers исключены; собственное поле props данных сохраняется."
         },
         {
           "id": "virtual-motion",
@@ -11354,6 +11359,37 @@
             "readme.md"
           ],
           "note": "Ant Design 6.6.8 / 984592267de88fbf9cdaecc96a56629e721c709d, rc-tree-select1.16.1, unmodified official UMD/React18.3.1. Raw observation raw-renderer-data: custom fieldNames, raw selected value и renderer читающий payload. В displayValues Source сначала вызывает renderer с labeled value без payload; прямое чтение payload.ordinal выбрасывает ошибку. Defensive probe записывает недостающие data, затем обычный render получает полный node. Native всегда передаёт renderer исходный data node, обновляет label при новой data reference и сохраняет payload refs."
+        },
+        {
+          "id": "title-expand-action",
+          "title": "TreeExpandAction с исходным порядком раскрытия и выбора",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/TreeSelect.svelte",
+            "src/lib/tree-select.types.ts",
+            "src/lib/Tree.svelte",
+            "tests/browser/fixtures/TreeSelectExpandActionScope.svelte",
+            "tests/browser/fixtures/TreeSelectExpandActionFixtures.svelte",
+            "tests/browser/fixtures/ant-design-tree-select-expand-action-reference.json",
+            "tests/browser/tree-select-expand-action.spec.ts",
+            "tests/browser/tree-select-data-metrics.ts",
+            "tests/package/tree-select-expand-action.ssr.test.ts",
+            "readme.md"
+          ],
+          "note": "False/click/doubleClick используют общий Tree. Click вызывает onTreeExpand перед onChange/onSelect, настоящий double click сначала выполняет два выбора; Ctrl/Meta/Shift подавляют только раскрытие заголовком. Явный isLeaf=true блокирует title action; отсутствие детей само по себе не блокирует callback/expanded keys, что сохраняет раскрытие после поступления данных и при поиске. Disabled узел раскрывается, но не выбирается. Switcher/checkbox/keyboard, check strategies, controlled hold/accept, RTL/aliases и live action updates сверены по 28 неизменённым UMD случаям. Native сохраняет DOM/ref/focus/active IDs, outside draft, один pending Promise на узел и отсутствие callbacks после unmount. SSR потребляет prop без DOM/timers/load, включая исходно открытый native shell."
+        },
+        {
+          "id": "source-title-load-repeat",
+          "title": "Source title expansion запускает один lazy узел дважды",
+          "state": "partial",
+          "requiredForV1": false,
+          "evidence": [
+            "tests/browser/fixtures/ant-design-tree-select-expand-action-reference.json",
+            "tests/browser/tree-select-expand-action.spec.ts",
+            "readme.md"
+          ],
+          "note": "Ant Design 6.6.8 / 984592267de88fbf9cdaecc96a56629e721c709d, rc-tree-select1.16.1 и rc-tree1.4.0; unmodified official UMD/React18.3.1. Raw observation lazy-click: multiple TreeSelect, selectable=false root, treeExpandAction=click и deferred loadData. Один title click создаёт onTreeExpand([0]) и два loadData({key:0,expanded:false}) до завершения. Native использует прежнюю Tree дедупликацию: один Promise на узел, то же дерево после resolve, один onTreeLoad и тишина после unmount. Ошибка Source не переносится."
         }
       ]
     },
@@ -17946,7 +17982,9 @@
         "tests/browser/tree-motion.spec.ts",
         "tests/browser/tree-motion-native.spec.ts",
         "tests/package/TreeMotionSsr.svelte",
-        "tests/package/tree-motion.ssr.test.ts"
+        "tests/package/tree-motion.ssr.test.ts",
+        "tests/browser/fixtures/ant-design-tree-select-expand-action-reference.json",
+        "tests/browser/tree-select-expand-action.spec.ts"
       ],
       "features": [
         {
@@ -18136,9 +18174,11 @@
             "tests/browser/fixtures/ant-design-tree-expand-action-reference.json",
             "tests/browser/fixtures/ant-design-tree-expand-action-settled-reference.json",
             "tests/package/tree-expand-action.ssr.test.ts",
-            "readme.md"
+            "readme.md",
+            "tests/browser/fixtures/ant-design-tree-select-expand-action-reference.json",
+            "tests/browser/tree-select-expand-action.spec.ts"
           ],
-          "note": "Текущий TreeProps наследует expandAction из rc-tree1.4.0: false по умолчанию, click/doubleClick. Ctrl/Meta/Shift блокируют только title expansion. Snapshot node сохраняется до onExpand/onClick/onSelect/onCheck, включая synchronous controlled selection update в onClick; keys не дублируются. Заголовок может свернуть pending lazy ветку, прежний pointer switcher loading guard сохраняется. 22 raw UMD cases плюс settled-double counterpart задают события, keys, selected/expanded flags, disabled, leaf, zero key, RTL/prefix, controlled hold/accept, checkable и load order. Native сохраняет прежние native controls/ARIA и default без title expansion; disabled pointer probes воспроизводят физический клик через существующий ARIA disabled. Prop updates сохраняют nodes, selection и внешний draft/focus/selection. SSR не запускает load или browser resources. Полный list motion/virtual остаётся отдельно; DirectoryTree учитывается своей feature."
+          "note": "Текущий TreeProps наследует expandAction из rc-tree1.4.0: false по умолчанию, click/doubleClick. Ctrl/Meta/Shift блокируют только title expansion. Snapshot node сохраняется до onExpand/onClick/onSelect/onCheck, включая synchronous controlled selection update в onClick; keys не дублируются. Заголовок может свернуть pending lazy ветку, прежний pointer switcher loading guard сохраняется. 22 raw UMD cases плюс settled-double counterpart задают события, keys, selected/expanded flags, disabled, leaf, zero key, RTL/prefix, controlled hold/accept, checkable и load order. Native сохраняет прежние native controls/ARIA и default без title expansion; disabled pointer probes воспроизводят физический клик через существующий ARIA disabled. Prop updates сохраняют nodes, selection и внешний draft/focus/selection. SSR не запускает load или browser resources. Полный list motion/virtual остаётся отдельно; DirectoryTree учитывается своей feature. Title guard использует исходный isLeaf, как rc-tree: отсутствие детей само по себе не блокирует expanded keys. TreeSelect Source search/implicit-leaf scenarios отдельно защищают обновление данных и callbacks."
         },
         {
           "id": "native-rapid-expand-callbacks",

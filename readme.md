@@ -6418,6 +6418,22 @@ LoadData(node), treeLoadedKeys/onTreeLoad и treeExpandedKeys/onTreeExpand
 popup не начинает новых загрузок; уже начатый Promise может завершиться и вызвать
 onTreeLoad. После unmount результаты игнорируются.
 
+`treeExpandAction=false | 'click' | 'doubleClick'` включает раскрытие заголовком
+через существующий Tree; default=false. В click-режиме onTreeExpand вызывается
+перед onChange/onSelect. В multiple настоящий double click сначала выполняет два
+обычных выбора, затем dblclick раскрывает ветку. Ctrl/Meta/Shift подавляют раскрытие
+заголовком; выбор остаётся самостоятельным действием. Узел с явным isLeaf=true не раскрывается,
+disabled узел может раскрываться заголовком, но не выбирается, как в Source.
+Switcher, checkbox и keyboard сохраняют свои действия. Controlled expanded keys
+принимает владелец; смена action сохраняет DOM, refs, input focus и active IDs.
+[28 UMD-сценариев](tests/browser/fixtures/ant-design-tree-select-expand-action-reference.json)
+сверяют видимое дерево и порядок callbacks в
+[browser](tests/browser/tree-select-expand-action.spec.ts).
+Отдельное raw наблюдение фиксирует два вызова loadData для одного pending узла
+в React. Native сохраняет существующую защиту Tree: один Promise на узел и
+отсутствие callbacks после unmount. [SSR](tests/package/tree-select-expand-action.ssr.test.ts)
+не вызывает загрузку и не создаёт timers, включая первоначально открытый shell.
+
 Native combobox удерживает фокус при действиях в панели. Arrows перемещаются/
 раскрывают дерево через его keyboard engine; Enter выбирает активный узел, а не
 переключает раскрытие. Escape/Tab закрывают popup; Backspace удаляет последний
@@ -6450,7 +6466,7 @@ TreeSelect/Cascader с 40 сценариями официального UMD —
 [choice-container](./tests/browser/choice-container.spec.ts), `?fixture=choice-container`.
 
 Virtual/scrollTo, TreeNode children, maxCount/maxTagCount,
-tag/popup render hooks, treeExpandAction, остальные semantic slots/config/ref API
+tag/popup render hooks, остальные semantic slots/config/ref API
 и исходные motion API ещё не перенесены. TreeTitleRender оформляет выбранные
 значения, но onChange пока возвращает подписи данных, а не bound renderer snippets.
 Deprecated React extras исключены.
@@ -6545,6 +6561,8 @@ expanded/selected/checked/halfChecked/loaded/loading/active. Mouse callback со
 onExpand предшествует onClick и последующему onSelect/onCheck; флаги node остаются
 снимком до действия, даже если callback синхронно обновил controlled selection.
 Заголовок может свернуть pending-ветку; прежний pointer switcher ждёт загрузку.
+Title action проверяет исходный isLeaf: узел без детей сохраняет expanded keys,
+чтобы показать детей после обновления данных, и обрабатывает действие при поиске.
 Смена expandAction сохраняет DOM, выбранные ключи и внешний draft/focus/selection.
 [22 исходных случая](tests/browser/fixtures/ant-design-tree-expand-action-reference.json),
 [counterpart с завершёнными переходами](tests/browser/fixtures/ant-design-tree-expand-action-settled-reference.json),

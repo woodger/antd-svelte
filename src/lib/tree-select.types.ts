@@ -1,7 +1,7 @@
 import type { Snippet } from 'svelte';
 import type { HTMLInputAttributes, HTMLAttributes } from 'svelte/elements';
 import type { ComponentSize } from './types';
-import type { TreeEventNode, TreeKey } from './tree.types';
+import type { TreeEventNode, TreeExpandAction, TreeKey } from './tree.types';
 export type TreeSelectRawValue = string | number;
 export type TreeSelectLabel = string | number | boolean | null | undefined | Snippet
   | readonly TreeSelectLabel[];
@@ -110,6 +110,8 @@ export interface TreeSelectProps<
   treeDefaultExpandedKeys?: readonly TreeKey[];
   /** @defaultValue false */
   treeDefaultExpandAll?: boolean;
+  /** Раскрытие заголовком; Ctrl/Meta/Shift сохраняют только выбор. @defaultValue false */
+  treeExpandAction?: TreeExpandAction;
   onTreeExpand?: (keys: TreeKey[]) => void;
   treeLoadedKeys?: readonly TreeKey[];
   onTreeLoad?: (keys: TreeKey[]) => void;

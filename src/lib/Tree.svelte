@@ -381,7 +381,9 @@
     fromTitle = false
   ) {
     // Selector rc-tree допускает collapse pending-ветки; switcher по-прежнему ждёт загрузку.
-    if (transition.group || leaf(entry) || event && !fromTitle && loading.includes(entry.key)) return;
+    // Title action сохраняет expanded keys узла без детей до обновления данных.
+    if (transition.group || (fromTitle ? entry.node.isLeaf : leaf(entry))
+      || event && !fromTitle && loading.includes(entry.key)) return;
     const node = snapshot ?? eventNode(entry);
     const next = node.expanded
       ? expanded.filter(key => key !== entry.key)

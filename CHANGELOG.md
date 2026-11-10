@@ -9,6 +9,12 @@
 
 ### Added
 
+- TreeSelect поддерживает treeExpandAction=false/'click'/'doubleClick' через
+  существующий Tree, с исходным порядком раскрытия/выбора и modifier guards.
+  Title action сохраняет expanded keys до появления детей и работает при поиске.
+  Сохранены refs/focus/active IDs и один pending load; повторная загрузка одного
+  узла в Source записана отдельно. SSR не запускает загрузку или timers.
+
 - TreeSelect поддерживает fieldNames и treeDataSimpleMode, generic data без index
   signature, literal label arrays/null и обновления схемы. Selection/filter/render
   callbacks сохраняют raw payload, loadData получает canonical state. 32 UMD/SSR
