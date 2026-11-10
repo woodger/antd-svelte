@@ -11033,7 +11033,7 @@
       "name": "TreeSelect",
       "category": "data-entry",
       "scope": "target",
-      "scopeReason": "TreeSelect по Ant Design 6.6.8 и rc-tree-select 1.16.1: значения, check/стратегии, поиск, loadData, fieldNames/simple mode, generic data, title expansion и maxCount; оставшийся API, virtual и motion переносятся отдельно.",
+      "scopeReason": "TreeSelect по Ant Design 6.6.8 и rc-tree-select 1.16.1: значения, check/стратегии, поиск, loadData, fieldNames/simple mode, generic data, title expansion, maxCount и tag display API; оставшийся API, virtual и motion переносятся отдельно.",
       "upstreamPath": "components/tree-select",
       "reviewedRevision": "984592267de88fbf9cdaecc96a56629e721c709d",
       "exports": [
@@ -11064,7 +11064,7 @@
         },
         {
           "name": "@rc-component/select",
-          "range": "~1.10.0",
+          "range": "~1.10.1",
           "referenceVersion": "1.10.1"
         }
       ],
@@ -11143,7 +11143,24 @@
         "tests/browser/fixtures/ant-design-tree-select-max-count-reference.json",
         "tests/browser/fixtures/ant-design-tree-select-max-count-ssr-reference.json",
         "tests/browser/tree-select-max-count.spec.ts",
-        "tests/package/tree-select-max-count.ssr.test.ts"
+        "tests/package/tree-select-max-count.ssr.test.ts",
+        "src/lib/tree-select-tags.engine.ts",
+        "src/lib/tree-select-tags.engine.test.ts",
+        "src/lib/select-tag-text.engine.ts",
+        "src/lib/select-tag-overflow.dom.ts",
+        "tests/browser/fixtures/tree-select-tag-cases.ts",
+        "tests/browser/fixtures/TreeSelectTagsFixtures.svelte",
+        "tests/browser/fixtures/TreeSelectTagsScope.svelte",
+        "tests/browser/fixtures/ant-design-tree-select-tags-reference.json",
+        "tests/browser/fixtures/ant-design-tree-select-tags-ssr-reference.json",
+        "tests/browser/tree-select-tag-metrics.ts",
+        "tests/browser/tree-select-tags.spec.ts",
+        "tests/browser/tree-select-tags-native.spec.ts",
+        "tests/browser/tree-select-tags-hydration.spec.ts",
+        "tests/browser/fixtures/tree-select-tags-hydration.client.ts",
+        "tests/browser/fixtures/tree-select-tags-hydration.server.ts",
+        "tests/browser/fixtures/tree-select-tags-hydration.html",
+        "tests/package/tree-select-tags.ssr.test.ts"
       ],
       "features": [
         {
@@ -11207,7 +11224,7 @@
         },
         {
           "id": "extended-api",
-          "title": "MaxTagCount/tag render, popup hooks и остальные semantic/config/ref API",
+          "title": "Renderer label metadata, popup hooks и остальные semantic/config/ref API",
           "state": "partial",
           "requiredForV1": false,
           "evidence": [
@@ -11227,7 +11244,7 @@
             "tests/package/tree-select-data.ssr.test.ts",
             "readme.md"
           ],
-          "note": "FieldNames, treeDataSimpleMode, generic raw data, treeExpandAction и maxCount перенесены. Остаются TreeNode children, maxTagCount/maxTagTextLength/maxTagPlaceholder/tagRender, popupRender/prefix/suffix customization, component config и полный semantic/ref API. TreeTitleRender оформляет выбранные значения, но onChange пока возвращает подписи данных вместо bound renderer snippets. Deprecated extra.triggerNode/allCheckedNodes и node.props React wrappers исключены; собственное поле props данных сохраняется."
+          "note": "FieldNames, treeDataSimpleMode, generic raw data, treeExpandAction, maxCount и tag text/count/placeholder/render API перенесены. Остаются TreeNode children, popupRender/prefix/suffix customization, component config и полный semantic/ref API. TreeTitleRender оформляет выбранные значения, но onChange и maxTagPlaceholder omitted records пока возвращают подписи данных вместо bound renderer snippets. Deprecated extra.triggerNode/allCheckedNodes и node.props React wrappers исключены; собственное поле props данных сохраняется."
         },
         {
           "id": "virtual-motion",
@@ -11450,6 +11467,86 @@
             "readme.md"
           ],
           "note": "Ant Design6.6.8 / 984592267de88fbf9cdaecc96a56629e721c709d, rc-tree-select1.16.1, unmodified official UMD/React18.3.1. Raw observation grow: SHOW_CHILD, maxCount=2, выбран Tail, родитель имеет одного доступного ребёнка. После добавления второго remaining count остаётся1, disabledCache по value не очищается и родитель остаётся доступным; клик публикует onSelect без onChange. Fresh public counterpart fresh-wide с теми же финальными data/value/limit правильно запрещает родителя. Native пересчитывает predicate по текущим полным данным, сохраняет DOM/input/focus и payload refs и блокирует невозможный выбор."
+        },
+        {
+          "id": "tag-display",
+          "title": "Tag text/count/placeholder/render и responsive measurement",
+          "state": "partial",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/tree-select-tags.engine.ts",
+            "src/lib/tree-select-tags.engine.test.ts",
+            "src/lib/tree-select.types.ts",
+            "src/lib/TreeSelect.svelte",
+            "src/lib/select-tag-text.engine.ts",
+            "src/lib/select-tag-overflow.dom.ts",
+            "tests/browser/fixtures/tree-select-tag-cases.ts",
+            "tests/browser/fixtures/TreeSelectTagsFixtures.svelte",
+            "tests/browser/fixtures/TreeSelectTagsScope.svelte",
+            "tests/browser/fixtures/ant-design-tree-select-tags-reference.json",
+            "tests/browser/fixtures/ant-design-tree-select-tags-ssr-reference.json",
+            "tests/browser/tree-select-tag-metrics.ts",
+            "tests/browser/tree-select-tags.spec.ts",
+            "tests/browser/tree-select-tags-native.spec.ts",
+            "tests/browser/tree-select-tags-hydration.spec.ts",
+            "tests/browser/fixtures/tree-select-tags-hydration.client.ts",
+            "tests/browser/fixtures/tree-select-tags-hydration.server.ts",
+            "tests/browser/fixtures/tree-select-tags-hydration.html",
+            "tests/package/tree-select-tags.ssr.test.ts",
+            "readme.md"
+          ],
+          "note": "MaxTagTextLength маскирует только scalar string/number UI; numeric slice и responsive maxTagCount сохраняют все значения и полные labels/FormData. Omitted records сохраняют value/label/half/disabled без synthetic key; literal/array/Snippet placeholder и typed tagRender используют bound label snippet, raw value/index/disabled, closable/onClose и isMaxTag summary без value/index/onClose. Ant wrapper gating multiple/treeCheckable сохранён. False custom-toggle следует rc-select useOpen MessageChannel после close/change; latest open и unmount закрывают ports и подавляют stale callbacks. Shared Select measurement учитывает input/rest/custom widths, resize и hidden focus handoff; responsive SSR скрывает tags до измерения. 49 unmodified UMD cases и55 DOM-free server renders, Native lifecycle и3 hydration cases защищают callbacks, aliases/simple/check/strict/missing, RTL/prefix и updates. Закрытый multiple сбрасывает unhandled pre-hydration query, как Source; DOM/input/focus и outside draft сохраняются. Partial: renderer-derived onChange/omitted label metadata ещё требует bound renderer API; старые Native rich tooltips сохранены."
+        },
+        {
+          "id": "source-tag-text-unicode",
+          "title": "Source tag text разрывает UTF-16 surrogate pair",
+          "state": "partial",
+          "requiredForV1": false,
+          "evidence": [
+            "tests/browser/fixtures/ant-design-tree-select-tags-reference.json",
+            "src/lib/tree-select-tags.engine.test.ts",
+            "tests/browser/tree-select-tags-native.spec.ts",
+            "readme.md"
+          ],
+          "note": "Ant Design6.6.8 / 984592267de88fbf9cdaecc96a56629e721c709d, rc-select1.10.1, official unmodified UMD/React18.3.1. Raw emoji-split/middle-emoji-split: slice отсекает low surrogate и выводит invalid text. Native использует существующий Select helper и сохраняет целую пару; полные label/title/callback values не меняются."
+        },
+        {
+          "id": "source-tag-count-nan",
+          "title": "Source NaN tag count скрывает весь выбранный список",
+          "state": "partial",
+          "requiredForV1": false,
+          "evidence": [
+            "tests/browser/fixtures/ant-design-tree-select-tags-reference.json",
+            "tests/browser/tree-select-tags-native.spec.ts",
+            "tests/package/tree-select-tags.ssr.test.ts",
+            "readme.md"
+          ],
+          "note": "Ant Design6.6.8 / 984592267de88fbf9cdaecc96a56629e721c709d, rc-select1.10.1, official unmodified UMD/React18.3.1. Raw count-nan: выбранные значения остаются, tags/rest исчезают. Native сохраняет established Select NaN guard и весь список; default public Source configuration задаёт нормальный counterpart."
+        },
+        {
+          "id": "source-responsive-rest-reservation",
+          "title": "Source oversized summary скрывает помещающиеся теги",
+          "state": "partial",
+          "requiredForV1": false,
+          "evidence": [
+            "tests/browser/fixtures/ant-design-tree-select-tags-reference.json",
+            "tests/browser/tree-select-tags-native.spec.ts",
+            "readme.md"
+          ],
+          "note": "Ant Design6.6.8 / 984592267de88fbf9cdaecc96a56629e721c709d, rc-select1.10.1, official unmodified UMD/React18.3.1. Raw responsive-long-rest: при width320px большой placeholder оставляет только summary, хотя четыре тега помещаются без него. Public responsive-fit-320 меняет только неиспользуемый placeholder, остальные data/props/width те же, и показывает четыре тега. Native сохраняет shared Select измерение: сначала проверяет полный набор, затем резервирует rest при фактическом overflow."
+        },
+        {
+          "id": "native-rich-tag-tooltip",
+          "title": "Прежний Native tooltip rich labels и pending renderer metadata",
+          "state": "partial",
+          "requiredForV1": false,
+          "evidence": [
+            "tests/browser/fixtures/ant-design-tree-select-tags-reference.json",
+            "tests/browser/tree-select-tags-native.spec.ts",
+            "tests/package/tree-select-tags.ssr.test.ts",
+            "readme.md"
+          ],
+          "note": "Raw opaque-array-title/title-renderer: React getTitle не выводит title для ReactNode, Native сохраняет существующий composite/raw-data tooltip. Tag display API не меняет эту старую границу; одинаковый rich DOM не заявлен. TreeTitleRender label в onChange/omitted records пока остаётся raw data label и требует отдельного bound snippet переноса."
         }
       ]
     },

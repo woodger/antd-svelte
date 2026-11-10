@@ -80,6 +80,8 @@ export type {
   TreeSelectLabel,
   TreeSelectValue,
   TreeSelectLabeledValue,
+  TreeSelectTagInfo,
+  TreeSelectTagPlaceholder,
   TreeSelectStrategy,
   TreeSelectSearchConfig,
   TreeSelectChangeInfo,

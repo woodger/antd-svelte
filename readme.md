@@ -6422,6 +6422,41 @@ callbacks, timers и обрезания начальных значений. Д�
 single и пересчитывает ограничения при смене данных; public counterparts — single
 без limit и свежее дерево с теми же финальными props.
 
+`maxTagTextLength` сокращает только string/number labels multiple-тегов; полный
+label остаётся в tooltip, callbacks и данных. Arrays/snippets остаются opaque.
+`maxTagCount` ограничивает видимые теги, сохраняя все display values в FormData,
+Backspace, clear и check strategies. Число использует исходный slice; NaN сохраняет
+все теги, как Native Select. `maxTagCount="responsive"` использует общий измеритель
+Select и учитывает input/rest/custom tags. Summary не резервирует место, когда
+все теги помещаются. Скрытие focused remove передаёт focus input, сохраняя явный
+внешний focus. SSR responsive-теги скрыты до измерения; hydration сохраняет DOM,
+фокус и поля формы. Закрытый multiple очищает необработанный pre-hydration query,
+как React-эталон; независимый внешний draft сохраняется.
+
+`maxTagPlaceholder` принимает literal/array или snippet с omitted records
+`{value,label,halfChecked?,disabled?}`. Labels не усечены, synthetic key не добавляется;
+null/undefined выбирают `+ N ...`. `tagRender` принимает snippet с
+`TreeSelectTagInfo`: label — bound snippet, value/index/disabled — данные тега,
+closable и onClose(event?) — закрытие. Summary имеет isMaxTag=true и не имеет
+value/index/onClose. Ant wrapper включает renderer через multiple/treeCheckable;
+strict-only без этих flags сохраняет обычные теги. Custom mousedown переключает
+popup, false откладывается MessageChannel до close/change callbacks; новый open
+и unmount отменяют pending close. Пользовательский child может остановить mousedown.
+
+[49 UMD-сценариев](tests/browser/fixtures/ant-design-tree-select-tags-reference.json),
+[55 DOM-free SSR renders](tests/browser/fixtures/ant-design-tree-select-tags-ssr-reference.json),
+[browser](tests/browser/tree-select-tags.spec.ts),
+[native lifecycle](tests/browser/tree-select-tags-native.spec.ts),
+[SSR](tests/package/tree-select-tags.ssr.test.ts) и
+[hydration](tests/browser/tree-select-tags-hydration.spec.ts) проверяют tag API.
+Source разрывает Unicode pair, скрывает весь список при NaN и резервирует oversized
+summary даже для помещающихся тегов. Native сохраняет принятые Select исправления;
+для последнего случая public counterpart меняет только неиспользуемый placeholder
+при той же ширине 320px. Прежние Native tooltip для literal arrays и treeTitleRender
+сохранены; одинаковый rich-label DOM не заявлен. Renderer-derived labels в
+onChange и omitted records пока требуют отдельного переноса; tagRender.label
+уже передаётся как bound snippet.
+
 ShowSearch по умолчанию false для single и true для multiple. Объект showSearch
 поддерживает searchValue/onSearch, autoClearSearchValue, filterTreeNode и
 treeNodeFilterProp. Одноимённые deprecated top-level props удалены.
@@ -6488,8 +6523,7 @@ DOM панели, фокус и выделение; ShadowRoot требует с
 TreeSelect/Cascader с 40 сценариями официального UMD —
 [choice-container](./tests/browser/choice-container.spec.ts), `?fixture=choice-container`.
 
-Virtual/scrollTo, TreeNode children, maxTagCount,
-tag/popup render hooks, остальные semantic slots/config/ref API
+Virtual/scrollTo, TreeNode children, popup render hooks, остальные semantic slots/config/ref API
 и исходные motion API ещё не перенесены. TreeTitleRender оформляет выбранные
 значения, но onChange пока возвращает подписи данных, а не bound renderer snippets.
 Deprecated React extras исключены.

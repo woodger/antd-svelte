@@ -1,0 +1,3324 @@
+{
+  "reference": {
+    "version": "6.6.8",
+    "revision": "984592267de88fbf9cdaecc96a56629e721c709d",
+    "select": "@rc-component/select1.10.1",
+    "treeSelect": "@rc-component/tree-select1.16.1",
+    "react": "18.3.1",
+    "archiveSha256": "8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa",
+    "method": "unmodified official UMD; public Chromium DOM and callbacks; hidden measurement nodes excluded",
+    "errors": [],
+    "warnings": []
+  },
+  "cases": [
+    {
+      "sample": {
+        "id": "default"
+      },
+      "initial": {
+        "view": {
+          "opened": false,
+          "selected": "",
+          "tags": [
+            {
+              "text": "Alphabet",
+              "title": "Alphabet",
+              "disabled": false,
+              "removable": true,
+              "custom": null
+            },
+            {
+              "text": "Beta",
+              "title": "Beta",
+              "disabled": false,
+              "removable": true,
+              "custom": null
+            },
+            {
+              "text": "Locked",
+              "title": "Locked",
+              "disabled": true,
+              "removable": false,
+              "custom": null
+            },
+            {
+              "text": "Tail",
+              "title": "Tail",
+              "disabled": false,
+              "removable": true,
+              "custom": null
+            }
+          ],
+          "omitted": null
+        },
+        "events": []
+      },
+      "steps": []
+    },
+    {
+      "sample": {
+        "id": "text-three",
+        "length": 3,
+        "actions": [
+          {
+            "kind": "remove",
+            "value": "tail"
+          }
+        ]
+      },
+      "initial": {
+        "view": {
+          "opened": false,
+          "selected": "",
+          "tags": [
+            {
+              "text": "Alp...",
+              "title": "Alphabet",
+              "disabled": false,
+              "removable": true,
+              "custom": null
+            },
+            {
+              "text": "Bet...",
+              "title": "Beta",
+              "disabled": false,
+              "removable": true,
+              "custom": null
+            },
+            {
+              "text": "Loc...",
+              "title": "Locked",
+              "disabled": true,
+              "removable": false,
+              "custom": null
+            },
+            {
+              "text": "Tai...",
+              "title": "Tail",
+              "disabled": false,
+              "removable": true,
+              "custom": null
+            }
+          ],
+          "omitted": null
+        },
+        "events": []
+      },
+      "steps": [
+        {
+          "action": {
+            "kind": "remove",
+            "value": "tail"
+          },
+          "view": {
+            "opened": false,
+            "selected": "",
+            "tags": [
+              {
+                "text": "Alp...",
+                "title": "Alphabet",
+                "disabled": false,
+                "removable": true,
+                "custom": null
+              },
+              {
+                "text": "Bet...",
+                "title": "Beta",
+                "disabled": false,
+                "removable": true,
+                "custom": null
+              },
+              {
+                "text": "Loc...",
+                "title": "Locked",
+                "disabled": true,
+                "removable": false,
+                "custom": null
+              }
+            ],
+            "omitted": null
+          },
+          "events": [
+            {
+              "kind": "change",
+              "value": [
+                0,
+                1,
+                "locked"
+              ],
+              "labels": [
+                "Alphabet",
+                "Beta",
+                "Locked"
+              ],
+              "triggerValue": "tail"
+            },
+            {
+              "kind": "deselect",
+              "value": "tail",
+              "node": {
+                "value": "tail",
+                "label": "Tail",
+                "payload": {
+                  "id": "tail"
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "text-zero",
+        "length": 0
+      },
+      "initial": {
+        "view": {
+          "opened": false,
+          "selected": "",
+          "tags": [
+            {
+              "text": "...",
+              "title": "Alphabet",
+              "disabled": false,
+              "removable": true,
+              "custom": null
+            },
+            {
+              "text": "...",
+              "title": "Beta",
+              "disabled": false,
+              "removable": true,
+              "custom": null
+            },
+            {
+              "text": "...",
+              "title": "Locked",
+              "disabled": true,
+              "removable": false,
+              "custom": null
+            },
+            {
+              "text": "...",
+              "title": "Tail",
+              "disabled": false,
+              "removable": true,
+              "custom": null
+            }
+          ],
+          "omitted": null
+        },
+        "events": []
+      },
+      "steps": []
+    },
+    {
+      "sample": {
+        "id": "text-negative",
+        "length": -1
+      },
+      "initial": {
+        "view": {
+          "opened": false,
+          "selected": "",
+          "tags": [
+            {
+              "text": "Alphabe...",
+              "title": "Alphabet",
+              "disabled": false,
+              "removable": true,
+              "custom": null
+            },
+            {
+              "text": "Bet...",
+              "title": "Beta",
+              "disabled": false,
+              "removable": true,
+              "custom": null
+            },
+            {
+              "text": "Locke...",
+              "title": "Locked",
+              "disabled": true,
+              "removable": false,
+              "custom": null
+            },
+            {
+              "text": "Tai...",
+              "title": "Tail",
+              "disabled": false,
+              "removable": true,
+              "custom": null
+            }
+          ],
+          "omitted": null
+        },
+        "events": []
+      },
+      "steps": []
+    },
+    {
+      "sample": {
+        "id": "text-fraction",
+        "length": 1.5
+      },
+      "initial": {
+        "view": {
+          "opened": false,
+          "selected": "",
+          "tags": [
+            {
+              "text": "A...",
+              "title": "Alphabet",
+              "disabled": false,
+              "removable": true,
+              "custom": null
+            },
+            {
+              "text": "B...",
+              "title": "Beta",
+              "disabled": false,
+              "removable": true,
+              "custom": null
+            },
+            {
+              "text": "L...",
+              "title": "Locked",
+              "disabled": true,
+              "removable": false,
+              "custom": null
+            },
+            {
+              "text": "T...",
+              "title": "Tail",
+              "disabled": false,
+              "removable": true,
+              "custom": null
+            }
+          ],
+          "omitted": null
+        },
+        "events": []
+      },
+      "steps": []
+    },
+    {
+      "sample": {
+        "id": "text-nan",
+        "length": "nan"
+      },
+      "initial": {
+        "view": {
+          "opened": false,
+          "selected": "",
+          "tags": [
+            {
+              "text": "Alphabet",
+              "title": "Alphabet",
+              "disabled": false,
+              "removable": true,
+              "custom": null
+            },
+            {
+              "text": "Beta",
+              "title": "Beta",
+              "disabled": false,
+              "removable": true,
+              "custom": null
+            },
+            {
+              "text": "Locked",
+              "title": "Locked",
+              "disabled": true,
+              "removable": false,
+              "custom": null
+            },
+            {
+              "text": "Tail",
+              "title": "Tail",
+              "disabled": false,
+              "removable": true,
+              "custom": null
+            }
+          ],
+          "omitted": null
+        },
+        "events": []
+      },
+      "steps": []
+    },
+    {
+      "sample": {
+        "id": "text-infinity",
+        "length": "infinity"
+      },
+      "initial": {
+        "view": {
+          "opened": false,
+          "selected": "",
+          "tags": [
+            {
+              "text": "Alphabet",
+              "title": "Alphabet",
+              "disabled": false,
+              "removable": true,
+              "custom": null
+            },
+            {
+              "text": "Beta",
+              "title": "Beta",
+              "disabled": false,
+              "removable": true,
+              "custom": null
+            },
+            {
+              "text": "Locked",
+              "title": "Locked",
+              "disabled": true,
+              "removable": false,
+              "custom": null
+            },
+            {
+              "text": "Tail",
+              "title": "Tail",
+              "disabled": false,
+              "removable": true,
+              "custom": null
+            }
+          ],
+          "omitted": null
+        },
+        "events": []
+      },
+      "steps": []
+    },
+    {
+      "sample": {
+        "id": "number",
+        "kind": "number",
+        "length": 3
+      },
+      "initial": {
+        "view": {
+          "opened": false,
+          "selected": "",
+          "tags": [
+            {
+              "text": "123...",
+              "title": "123456",
+              "disabled": false,
+              "removable": true,
+              "custom": null
+            },
+            {
+              "text": "Bet...",
+              "title": "Beta",
+              "disabled": false,
+              "removable": true,
+              "custom": null
+            },
+            {
+              "text": "Loc...",
+              "title": "Locked",
+              "disabled": true,
+              "removable": false,
+              "custom": null
+            },
+            {
+              "text": "Tai...",
+              "title": "Tail",
+              "disabled": false,
+              "removable": true,
+              "custom": null
+            }
+          ],
+          "omitted": null
+        },
+        "events": []
+      },
+      "steps": []
+    },
+    {
+      "sample": {
+        "id": "numeric-zero",
+        "kind": "zero",
+        "length": 0
+      },
+      "initial": {
+        "view": {
+          "opened": false,
+          "selected": "",
+          "tags": [
+            {
+              "text": "...",
+              "title": "0",
+              "disabled": false,
+              "removable": true,
+              "custom": null
+            },
+            {
+              "text": "...",
+              "title": "Beta",
+              "disabled": false,
+              "removable": true,
+              "custom": null
+            },
+            {
+              "text": "...",
+              "title": "Locked",
+              "disabled": true,
+              "removable": false,
+              "custom": null
+            },
+            {
+              "text": "...",
+              "title": "Tail",
+              "disabled": false,
+              "removable": true,
+              "custom": null
+            }
+          ],
+          "omitted": null
+        },
+        "events": []
+      },
+      "steps": []
+    },
+    {
+      "sample": {
+        "id": "boolean",
+        "kind": "boolean",
+        "length": 1
+      },
+      "initial": {
+        "view": {
+          "opened": false,
+          "selected": "",
+          "tags": [
+            {
+              "text": "",
+              "title": null,
+              "disabled": false,
+              "removable": true,
+              "custom": null
+            },
+            {
+              "text": "B...",
+              "title": "Beta",
+              "disabled": false,
+              "removable": true,
+              "custom": null
+            },
+            {
+              "text": "L...",
+              "title": "Locked",
+              "disabled": true,
+              "removable": false,
+              "custom": null
+            },
+            {
+              "text": "T...",
+              "title": "Tail",
+              "disabled": false,
+              "removable": true,
+              "custom": null
+            }
+          ],
+          "omitted": null
+        },
+        "events": []
+      },
+      "steps": []
+    },
+    {
+      "sample": {
+        "id": "null-label",
+        "kind": "null",
+        "length": 0
+      },
+      "initial": {
+        "view": {
+          "opened": false,
+          "selected": "",
+          "tags": [
+            {
+              "text": "...",
+              "title": "0",
+              "disabled": false,
+              "removable": true,
+              "custom": null
+            },
+            {
+              "text": "...",
+              "title": "Beta",
+              "disabled": false,
+              "removable": true,
+              "custom": null
+            },
+            {
+              "text": "...",
+              "title": "Locked",
+              "disabled": true,
+              "removable": false,
+              "custom": null
+            },
+            {
+              "text": "...",
+              "title": "Tail",
+              "disabled": false,
+              "removable": true,
+              "custom": null
+            }
+          ],
+          "omitted": null
+        },
+        "events": []
+      },
+      "steps": []
+    },
+    {
+      "sample": {
+        "id": "element",
+        "kind": "element",
+        "length": 1
+      },
+      "initial": {
+        "view": {
+          "opened": false,
+          "selected": "",
+          "tags": [
+            {
+              "text": "Opaque label",
+              "title": null,
+              "disabled": false,
+              "removable": true,
+              "custom": null
+            },
+            {
+              "text": "B...",
+              "title": "Beta",
+              "disabled": false,
+              "removable": true,
+              "custom": null
+            },
+            {
+              "text": "L...",
+              "title": "Locked",
+              "disabled": true,
+              "removable": false,
+              "custom": null
+            },
+            {
+              "text": "T...",
+              "title": "Tail",
+              "disabled": false,
+              "removable": true,
+              "custom": null
+            }
+          ],
+          "omitted": null
+        },
+        "events": []
+      },
+      "steps": []
+    },
+    {
+      "sample": {
+        "id": "count-zero",
+        "count": 0
+      },
+      "initial": {
+        "view": {
+          "opened": false,
+          "selected": "",
+          "tags": [
+            {
+              "text": "+ 4 ...",
+              "title": "+ 4 ...",
+              "disabled": false,
+              "removable": false,
+              "custom": null
+            }
+          ],
+          "omitted": null
+        },
+        "events": []
+      },
+      "steps": []
+    },
+    {
+      "sample": {
+        "id": "count-one",
+        "count": 1,
+        "actions": [
+          {
+            "kind": "key",
+            "value": "Backspace"
+          }
+        ]
+      },
+      "initial": {
+        "view": {
+          "opened": false,
+          "selected": "",
+          "tags": [
+            {
+              "text": "Alphabet",
+              "title": "Alphabet",
+              "disabled": false,
+              "removable": true,
+              "custom": null
+            },
+            {
+              "text": "+ 3 ...",
+              "title": "+ 3 ...",
+              "disabled": false,
+              "removable": false,
+              "custom": null
+            }
+          ],
+          "omitted": null
+        },
+        "events": []
+      },
+      "steps": [
+        {
+          "action": {
+            "kind": "key",
+            "value": "Backspace"
+          },
+          "view": {
+            "opened": false,
+            "selected": "",
+            "tags": [
+              {
+                "text": "Alphabet",
+                "title": "Alphabet",
+                "disabled": false,
+                "removable": true,
+                "custom": null
+              },
+              {
+                "text": "+ 2 ...",
+                "title": "+ 2 ...",
+                "disabled": false,
+                "removable": false,
+                "custom": null
+              }
+            ],
+            "omitted": null
+          },
+          "events": [
+            {
+              "kind": "change",
+              "value": [
+                0,
+                1,
+                "locked"
+              ],
+              "labels": [
+                "Alphabet",
+                "Beta",
+                "Locked"
+              ],
+              "triggerValue": "tail"
+            },
+            {
+              "kind": "deselect",
+              "value": "tail",
+              "node": {
+                "value": "tail",
+                "label": "Tail",
+                "payload": {
+                  "id": "tail"
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "count-two",
+        "count": 2,
+        "length": 3
+      },
+      "initial": {
+        "view": {
+          "opened": false,
+          "selected": "",
+          "tags": [
+            {
+              "text": "Alp...",
+              "title": "Alphabet",
+              "disabled": false,
+              "removable": true,
+              "custom": null
+            },
+            {
+              "text": "Bet...",
+              "title": "Beta",
+              "disabled": false,
+              "removable": true,
+              "custom": null
+            },
+            {
+              "text": "+ 2 ...",
+              "title": "+ 2 ...",
+              "disabled": false,
+              "removable": false,
+              "custom": null
+            }
+          ],
+          "omitted": null
+        },
+        "events": []
+      },
+      "steps": []
+    },
+    {
+      "sample": {
+        "id": "count-negative",
+        "count": -1
+      },
+      "initial": {
+        "view": {
+          "opened": false,
+          "selected": "",
+          "tags": [
+            {
+              "text": "Alphabet",
+              "title": "Alphabet",
+              "disabled": false,
+              "removable": true,
+              "custom": null
+            },
+            {
+              "text": "Beta",
+              "title": "Beta",
+              "disabled": false,
+              "removable": true,
+              "custom": null
+            },
+            {
+              "text": "Locked",
+              "title": "Locked",
+              "disabled": true,
+              "removable": false,
+              "custom": null
+            },
+            {
+              "text": "+ 1 ...",
+              "title": "+ 1 ...",
+              "disabled": false,
+              "removable": false,
+              "custom": null
+            }
+          ],
+          "omitted": null
+        },
+        "events": []
+      },
+      "steps": []
+    },
+    {
+      "sample": {
+        "id": "count-fraction",
+        "count": 1.5
+      },
+      "initial": {
+        "view": {
+          "opened": false,
+          "selected": "",
+          "tags": [
+            {
+              "text": "Alphabet",
+              "title": "Alphabet",
+              "disabled": false,
+              "removable": true,
+              "custom": null
+            },
+            {
+              "text": "+ 3 ...",
+              "title": "+ 3 ...",
+              "disabled": false,
+              "removable": false,
+              "custom": null
+            }
+          ],
+          "omitted": null
+        },
+        "events": []
+      },
+      "steps": []
+    },
+    {
+      "sample": {
+        "id": "count-infinity",
+        "count": "infinity"
+      },
+      "initial": {
+        "view": {
+          "opened": false,
+          "selected": "",
+          "tags": [
+            {
+              "text": "Alphabet",
+              "title": "Alphabet",
+              "disabled": false,
+              "removable": true,
+              "custom": null
+            },
+            {
+              "text": "Beta",
+              "title": "Beta",
+              "disabled": false,
+              "removable": true,
+              "custom": null
+            },
+            {
+              "text": "Locked",
+              "title": "Locked",
+              "disabled": true,
+              "removable": false,
+              "custom": null
+            },
+            {
+              "text": "Tail",
+              "title": "Tail",
+              "disabled": false,
+              "removable": true,
+              "custom": null
+            }
+          ],
+          "omitted": null
+        },
+        "events": []
+      },
+      "steps": []
+    },
+    {
+      "sample": {
+        "id": "placeholder-text",
+        "count": 1,
+        "placeholder": "More values"
+      },
+      "initial": {
+        "view": {
+          "opened": false,
+          "selected": "",
+          "tags": [
+            {
+              "text": "Alphabet",
+              "title": "Alphabet",
+              "disabled": false,
+              "removable": true,
+              "custom": null
+            },
+            {
+              "text": "More values",
+              "title": "More values",
+              "disabled": false,
+              "removable": false,
+              "custom": null
+            }
+          ],
+          "omitted": null
+        },
+        "events": []
+      },
+      "steps": []
+    },
+    {
+      "sample": {
+        "id": "placeholder-zero",
+        "count": 1,
+        "placeholder": 0
+      },
+      "initial": {
+        "view": {
+          "opened": false,
+          "selected": "",
+          "tags": [
+            {
+              "text": "Alphabet",
+              "title": "Alphabet",
+              "disabled": false,
+              "removable": true,
+              "custom": null
+            },
+            {
+              "text": "0",
+              "title": "0",
+              "disabled": false,
+              "removable": false,
+              "custom": null
+            }
+          ],
+          "omitted": null
+        },
+        "events": []
+      },
+      "steps": []
+    },
+    {
+      "sample": {
+        "id": "placeholder-false",
+        "count": 1,
+        "placeholder": false
+      },
+      "initial": {
+        "view": {
+          "opened": false,
+          "selected": "",
+          "tags": [
+            {
+              "text": "Alphabet",
+              "title": "Alphabet",
+              "disabled": false,
+              "removable": true,
+              "custom": null
+            },
+            {
+              "text": "",
+              "title": null,
+              "disabled": false,
+              "removable": false,
+              "custom": null
+            }
+          ],
+          "omitted": null
+        },
+        "events": []
+      },
+      "steps": []
+    },
+    {
+      "sample": {
+        "id": "placeholder-null",
+        "count": 1,
+        "placeholder": null
+      },
+      "initial": {
+        "view": {
+          "opened": false,
+          "selected": "",
+          "tags": [
+            {
+              "text": "Alphabet",
+              "title": "Alphabet",
+              "disabled": false,
+              "removable": true,
+              "custom": null
+            },
+            {
+              "text": "+ 3 ...",
+              "title": "+ 3 ...",
+              "disabled": false,
+              "removable": false,
+              "custom": null
+            }
+          ],
+          "omitted": null
+        },
+        "events": []
+      },
+      "steps": []
+    },
+    {
+      "sample": {
+        "id": "placeholder-snippet",
+        "count": 1,
+        "length": 2,
+        "placeholderKind": "snippet"
+      },
+      "initial": {
+        "view": {
+          "opened": false,
+          "selected": "",
+          "tags": [
+            {
+              "text": "Al...",
+              "title": "Alphabet",
+              "disabled": false,
+              "removable": true,
+              "custom": null
+            },
+            {
+              "text": "number:1=Beta|string:locked=Locked|string:tail=Tail",
+              "title": null,
+              "disabled": false,
+              "removable": false,
+              "custom": null
+            }
+          ],
+          "omitted": [
+            {
+              "label": "Beta",
+              "value": 1
+            },
+            {
+              "label": "Locked",
+              "value": "locked",
+              "disabled": true
+            },
+            {
+              "label": "Tail",
+              "value": "tail"
+            }
+          ]
+        },
+        "events": []
+      },
+      "steps": []
+    },
+    {
+      "sample": {
+        "id": "placeholder-element",
+        "count": 1,
+        "placeholderKind": "element"
+      },
+      "initial": {
+        "view": {
+          "opened": false,
+          "selected": "",
+          "tags": [
+            {
+              "text": "Alphabet",
+              "title": "Alphabet",
+              "disabled": false,
+              "removable": true,
+              "custom": null
+            },
+            {
+              "text": "Other values",
+              "title": null,
+              "disabled": false,
+              "removable": false,
+              "custom": null
+            }
+          ],
+          "omitted": null
+        },
+        "events": []
+      },
+      "steps": []
+    },
+    {
+      "sample": {
+        "id": "child-strategy",
+        "count": 1,
+        "checkable": true,
+        "value": [
+          "p"
+        ],
+        "placeholderKind": "snippet"
+      },
+      "initial": {
+        "view": {
+          "opened": false,
+          "selected": "",
+          "tags": [
+            {
+              "text": "Alphabet",
+              "title": "Alphabet",
+              "disabled": false,
+              "removable": true,
+              "custom": null
+            },
+            {
+              "text": "number:1=Beta",
+              "title": null,
+              "disabled": false,
+              "removable": false,
+              "custom": null
+            }
+          ],
+          "omitted": [
+            {
+              "label": "Beta",
+              "value": 1
+            }
+          ]
+        },
+        "events": []
+      },
+      "steps": []
+    },
+    {
+      "sample": {
+        "id": "all-strategy",
+        "count": 1,
+        "checkable": true,
+        "strategy": "SHOW_ALL",
+        "value": [
+          "p"
+        ]
+      },
+      "initial": {
+        "view": {
+          "opened": false,
+          "selected": "",
+          "tags": [
+            {
+              "text": "Parent",
+              "title": "Parent",
+              "disabled": false,
+              "removable": true,
+              "custom": null
+            },
+            {
+              "text": "+ 2 ...",
+              "title": "+ 2 ...",
+              "disabled": false,
+              "removable": false,
+              "custom": null
+            }
+          ],
+          "omitted": null
+        },
+        "events": []
+      },
+      "steps": []
+    },
+    {
+      "sample": {
+        "id": "parent-strategy",
+        "count": 0,
+        "checkable": true,
+        "strategy": "SHOW_PARENT",
+        "value": [
+          "p"
+        ]
+      },
+      "initial": {
+        "view": {
+          "opened": false,
+          "selected": "",
+          "tags": [
+            {
+              "text": "+ 1 ...",
+              "title": "+ 1 ...",
+              "disabled": false,
+              "removable": false,
+              "custom": null
+            }
+          ],
+          "omitted": null
+        },
+        "events": []
+      },
+      "steps": []
+    },
+    {
+      "sample": {
+        "id": "strict-half",
+        "count": 1,
+        "strict": true,
+        "value": [
+          {
+            "value": 0
+          },
+          {
+            "value": 1
+          },
+          {
+            "value": "p",
+            "halfChecked": true
+          }
+        ],
+        "placeholderKind": "snippet"
+      },
+      "initial": {
+        "view": {
+          "opened": false,
+          "selected": "",
+          "tags": [
+            {
+              "text": "Alphabet",
+              "title": "Alphabet",
+              "disabled": false,
+              "removable": true,
+              "custom": null
+            },
+            {
+              "text": "number:1=Beta",
+              "title": null,
+              "disabled": false,
+              "removable": false,
+              "custom": null
+            }
+          ],
+          "omitted": [
+            {
+              "label": "Beta",
+              "value": 1
+            }
+          ]
+        },
+        "events": []
+      },
+      "steps": []
+    },
+    {
+      "sample": {
+        "id": "missing",
+        "count": 1,
+        "length": 1,
+        "value": [
+          99,
+          "tail"
+        ]
+      },
+      "initial": {
+        "view": {
+          "opened": false,
+          "selected": "",
+          "tags": [
+            {
+              "text": "9...",
+              "title": "99",
+              "disabled": false,
+              "removable": true,
+              "custom": null
+            },
+            {
+              "text": "+ 1 ...",
+              "title": "+ 1 ...",
+              "disabled": false,
+              "removable": false,
+              "custom": null
+            }
+          ],
+          "omitted": null
+        },
+        "events": []
+      },
+      "steps": []
+    },
+    {
+      "sample": {
+        "id": "labeled",
+        "count": 1,
+        "length": 2,
+        "labeled": true,
+        "value": [
+          {
+            "value": 0,
+            "label": "Custom label"
+          },
+          {
+            "value": "tail"
+          }
+        ],
+        "placeholderKind": "snippet"
+      },
+      "initial": {
+        "view": {
+          "opened": false,
+          "selected": "",
+          "tags": [
+            {
+              "text": "Cu...",
+              "title": "Custom label",
+              "disabled": false,
+              "removable": true,
+              "custom": null
+            },
+            {
+              "text": "string:tail=Tail",
+              "title": null,
+              "disabled": false,
+              "removable": false,
+              "custom": null
+            }
+          ],
+          "omitted": [
+            {
+              "label": "Tail",
+              "value": "tail"
+            }
+          ]
+        },
+        "events": []
+      },
+      "steps": []
+    },
+    {
+      "sample": {
+        "id": "aliases",
+        "count": 1,
+        "length": 3,
+        "alias": true,
+        "placeholderKind": "snippet"
+      },
+      "initial": {
+        "view": {
+          "opened": false,
+          "selected": "",
+          "tags": [
+            {
+              "text": "Alp...",
+              "title": "Alphabet",
+              "disabled": false,
+              "removable": true,
+              "custom": null
+            },
+            {
+              "text": "number:1=Beta|string:locked=Locked|string:tail=Tail",
+              "title": null,
+              "disabled": false,
+              "removable": false,
+              "custom": null
+            }
+          ],
+          "omitted": [
+            {
+              "label": "Beta",
+              "value": 1
+            },
+            {
+              "label": "Locked",
+              "value": "locked",
+              "disabled": true
+            },
+            {
+              "label": "Tail",
+              "value": "tail"
+            }
+          ]
+        },
+        "events": []
+      },
+      "steps": []
+    },
+    {
+      "sample": {
+        "id": "simple",
+        "count": 1,
+        "simple": true,
+        "placeholderKind": "snippet"
+      },
+      "initial": {
+        "view": {
+          "opened": false,
+          "selected": "",
+          "tags": [
+            {
+              "text": "Alphabet",
+              "title": "Alphabet",
+              "disabled": false,
+              "removable": true,
+              "custom": null
+            },
+            {
+              "text": "number:1=Beta|string:locked=Locked|string:tail=Tail",
+              "title": null,
+              "disabled": false,
+              "removable": false,
+              "custom": null
+            }
+          ],
+          "omitted": [
+            {
+              "label": "Beta",
+              "value": 1
+            },
+            {
+              "label": "Locked",
+              "value": "locked",
+              "disabled": true
+            },
+            {
+              "label": "Tail",
+              "value": "tail"
+            }
+          ]
+        },
+        "events": []
+      },
+      "steps": []
+    },
+    {
+      "sample": {
+        "id": "single",
+        "count": 0,
+        "length": 1,
+        "single": true,
+        "renderer": true
+      },
+      "initial": {
+        "view": {
+          "opened": false,
+          "selected": "Alphabet",
+          "tags": [],
+          "omitted": null
+        },
+        "events": []
+      },
+      "steps": []
+    },
+    {
+      "sample": {
+        "id": "max-count",
+        "count": 0,
+        "maxCount": 1,
+        "value": [
+          0,
+          1
+        ],
+        "actions": [
+          {
+            "kind": "open"
+          },
+          {
+            "kind": "choose",
+            "value": "tail"
+          },
+          {
+            "kind": "clear"
+          }
+        ]
+      },
+      "initial": {
+        "view": {
+          "opened": false,
+          "selected": "",
+          "tags": [
+            {
+              "text": "+ 2 ...",
+              "title": "+ 2 ...",
+              "disabled": false,
+              "removable": false,
+              "custom": null
+            }
+          ],
+          "omitted": null
+        },
+        "events": []
+      },
+      "steps": [
+        {
+          "action": {
+            "kind": "open"
+          },
+          "view": {
+            "opened": true,
+            "selected": null,
+            "tags": [
+              {
+                "text": "+ 2 ...",
+                "title": "+ 2 ...",
+                "disabled": false,
+                "removable": false,
+                "custom": null
+              }
+            ],
+            "omitted": null
+          },
+          "events": [
+            {
+              "kind": "open",
+              "open": true
+            }
+          ]
+        },
+        {
+          "action": {
+            "kind": "choose",
+            "value": "tail"
+          },
+          "view": {
+            "opened": true,
+            "selected": null,
+            "tags": [
+              {
+                "text": "+ 2 ...",
+                "title": "+ 2 ...",
+                "disabled": false,
+                "removable": false,
+                "custom": null
+              }
+            ],
+            "omitted": null
+          },
+          "events": [
+            {
+              "kind": "open",
+              "open": true
+            }
+          ]
+        },
+        {
+          "action": {
+            "kind": "clear"
+          },
+          "view": {
+            "opened": true,
+            "selected": null,
+            "tags": [],
+            "omitted": null
+          },
+          "events": [
+            {
+              "kind": "open",
+              "open": true
+            },
+            {
+              "kind": "clear"
+            },
+            {
+              "kind": "change",
+              "value": [],
+              "labels": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "renderer",
+        "renderer": true,
+        "length": 3,
+        "actions": [
+          {
+            "kind": "tag",
+            "value": 0
+          },
+          {
+            "kind": "close",
+            "value": 1
+          }
+        ]
+      },
+      "initial": {
+        "view": {
+          "opened": false,
+          "selected": "",
+          "tags": [
+            {
+              "text": "Alp...",
+              "title": null,
+              "disabled": false,
+              "removable": true,
+              "custom": {
+                "value": 0,
+                "index": 0,
+                "closable": true,
+                "isMaxTag": false,
+                "onCloseType": "function"
+              }
+            },
+            {
+              "text": "Bet...",
+              "title": null,
+              "disabled": false,
+              "removable": true,
+              "custom": {
+                "value": 1,
+                "index": 1,
+                "closable": true,
+                "isMaxTag": false,
+                "onCloseType": "function"
+              }
+            },
+            {
+              "text": "Loc...",
+              "title": null,
+              "disabled": false,
+              "removable": false,
+              "custom": {
+                "value": "locked",
+                "index": 2,
+                "disabled": true,
+                "closable": false,
+                "isMaxTag": false,
+                "onCloseType": "function"
+              }
+            },
+            {
+              "text": "Tai...",
+              "title": null,
+              "disabled": false,
+              "removable": true,
+              "custom": {
+                "value": "tail",
+                "index": 3,
+                "closable": true,
+                "isMaxTag": false,
+                "onCloseType": "function"
+              }
+            }
+          ],
+          "omitted": null
+        },
+        "events": []
+      },
+      "steps": [
+        {
+          "action": {
+            "kind": "tag",
+            "value": 0
+          },
+          "view": {
+            "opened": true,
+            "selected": null,
+            "tags": [
+              {
+                "text": "Alp...",
+                "title": null,
+                "disabled": false,
+                "removable": true,
+                "custom": {
+                  "value": 0,
+                  "index": 0,
+                  "closable": true,
+                  "isMaxTag": false,
+                  "onCloseType": "function"
+                }
+              },
+              {
+                "text": "Bet...",
+                "title": null,
+                "disabled": false,
+                "removable": true,
+                "custom": {
+                  "value": 1,
+                  "index": 1,
+                  "closable": true,
+                  "isMaxTag": false,
+                  "onCloseType": "function"
+                }
+              },
+              {
+                "text": "Loc...",
+                "title": null,
+                "disabled": false,
+                "removable": false,
+                "custom": {
+                  "value": "locked",
+                  "index": 2,
+                  "disabled": true,
+                  "closable": false,
+                  "isMaxTag": false,
+                  "onCloseType": "function"
+                }
+              },
+              {
+                "text": "Tai...",
+                "title": null,
+                "disabled": false,
+                "removable": true,
+                "custom": {
+                  "value": "tail",
+                  "index": 3,
+                  "closable": true,
+                  "isMaxTag": false,
+                  "onCloseType": "function"
+                }
+              }
+            ],
+            "omitted": null
+          },
+          "events": [
+            {
+              "kind": "open",
+              "open": true
+            }
+          ]
+        },
+        {
+          "action": {
+            "kind": "close",
+            "value": 1
+          },
+          "view": {
+            "opened": false,
+            "selected": "",
+            "tags": [
+              {
+                "text": "Alp...",
+                "title": null,
+                "disabled": false,
+                "removable": true,
+                "custom": {
+                  "value": 0,
+                  "index": 0,
+                  "closable": true,
+                  "isMaxTag": false,
+                  "onCloseType": "function"
+                }
+              },
+              {
+                "text": "Loc...",
+                "title": null,
+                "disabled": false,
+                "removable": false,
+                "custom": {
+                  "value": "locked",
+                  "index": 1,
+                  "disabled": true,
+                  "closable": false,
+                  "isMaxTag": false,
+                  "onCloseType": "function"
+                }
+              },
+              {
+                "text": "Tai...",
+                "title": null,
+                "disabled": false,
+                "removable": true,
+                "custom": {
+                  "value": "tail",
+                  "index": 2,
+                  "closable": true,
+                  "isMaxTag": false,
+                  "onCloseType": "function"
+                }
+              }
+            ],
+            "omitted": null
+          },
+          "events": [
+            {
+              "kind": "open",
+              "open": true
+            },
+            {
+              "kind": "close",
+              "value": 1
+            },
+            {
+              "kind": "change",
+              "value": [
+                0,
+                "locked",
+                "tail"
+              ],
+              "labels": [
+                "Alphabet",
+                "Locked",
+                "Tail"
+              ],
+              "triggerValue": 1
+            },
+            {
+              "kind": "deselect",
+              "value": 1,
+              "node": {
+                "value": 1,
+                "label": "Beta",
+                "payload": {
+                  "id": 1
+                }
+              }
+            },
+            {
+              "kind": "open",
+              "open": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "renderer-summary",
+        "renderer": true,
+        "count": 1,
+        "placeholderKind": "snippet"
+      },
+      "initial": {
+        "view": {
+          "opened": false,
+          "selected": "",
+          "tags": [
+            {
+              "text": "Alphabet",
+              "title": null,
+              "disabled": false,
+              "removable": true,
+              "custom": {
+                "value": 0,
+                "index": 0,
+                "closable": true,
+                "isMaxTag": false,
+                "onCloseType": "function"
+              }
+            },
+            {
+              "text": "number:1=Beta|string:locked=Locked|string:tail=Tail",
+              "title": null,
+              "disabled": false,
+              "removable": false,
+              "custom": {
+                "disabled": false,
+                "closable": false,
+                "isMaxTag": true,
+                "onCloseType": "undefined"
+              }
+            }
+          ],
+          "omitted": [
+            {
+              "label": "Beta",
+              "value": 1
+            },
+            {
+              "label": "Locked",
+              "value": "locked",
+              "disabled": true
+            },
+            {
+              "label": "Tail",
+              "value": "tail"
+            }
+          ]
+        },
+        "events": []
+      },
+      "steps": []
+    },
+    {
+      "sample": {
+        "id": "renderer-locked",
+        "renderer": true,
+        "value": [
+          "locked",
+          0
+        ]
+      },
+      "initial": {
+        "view": {
+          "opened": false,
+          "selected": "",
+          "tags": [
+            {
+              "text": "Locked",
+              "title": null,
+              "disabled": false,
+              "removable": false,
+              "custom": {
+                "value": "locked",
+                "index": 0,
+                "disabled": true,
+                "closable": false,
+                "isMaxTag": false,
+                "onCloseType": "function"
+              }
+            },
+            {
+              "text": "Alphabet",
+              "title": null,
+              "disabled": false,
+              "removable": true,
+              "custom": {
+                "value": 0,
+                "index": 1,
+                "closable": true,
+                "isMaxTag": false,
+                "onCloseType": "function"
+              }
+            }
+          ],
+          "omitted": null
+        },
+        "events": []
+      },
+      "steps": []
+    },
+    {
+      "sample": {
+        "id": "renderer-disabled",
+        "renderer": true,
+        "disabled": true
+      },
+      "initial": {
+        "view": {
+          "opened": false,
+          "selected": "",
+          "tags": [
+            {
+              "text": "Alphabet",
+              "title": null,
+              "disabled": false,
+              "removable": false,
+              "custom": {
+                "value": 0,
+                "index": 0,
+                "closable": false,
+                "isMaxTag": false,
+                "onCloseType": "function"
+              }
+            },
+            {
+              "text": "Beta",
+              "title": null,
+              "disabled": false,
+              "removable": false,
+              "custom": {
+                "value": 1,
+                "index": 1,
+                "closable": false,
+                "isMaxTag": false,
+                "onCloseType": "function"
+              }
+            },
+            {
+              "text": "Locked",
+              "title": null,
+              "disabled": false,
+              "removable": false,
+              "custom": {
+                "value": "locked",
+                "index": 2,
+                "disabled": true,
+                "closable": false,
+                "isMaxTag": false,
+                "onCloseType": "function"
+              }
+            },
+            {
+              "text": "Tail",
+              "title": null,
+              "disabled": false,
+              "removable": false,
+              "custom": {
+                "value": "tail",
+                "index": 3,
+                "closable": false,
+                "isMaxTag": false,
+                "onCloseType": "function"
+              }
+            }
+          ],
+          "omitted": null
+        },
+        "events": []
+      },
+      "steps": []
+    },
+    {
+      "sample": {
+        "id": "renderer-stop-close",
+        "renderer": true,
+        "stopClose": true,
+        "actions": [
+          {
+            "kind": "close",
+            "value": 0
+          }
+        ]
+      },
+      "initial": {
+        "view": {
+          "opened": false,
+          "selected": "",
+          "tags": [
+            {
+              "text": "Alphabet",
+              "title": null,
+              "disabled": false,
+              "removable": true,
+              "custom": {
+                "value": 0,
+                "index": 0,
+                "closable": true,
+                "isMaxTag": false,
+                "onCloseType": "function"
+              }
+            },
+            {
+              "text": "Beta",
+              "title": null,
+              "disabled": false,
+              "removable": true,
+              "custom": {
+                "value": 1,
+                "index": 1,
+                "closable": true,
+                "isMaxTag": false,
+                "onCloseType": "function"
+              }
+            },
+            {
+              "text": "Locked",
+              "title": null,
+              "disabled": false,
+              "removable": false,
+              "custom": {
+                "value": "locked",
+                "index": 2,
+                "disabled": true,
+                "closable": false,
+                "isMaxTag": false,
+                "onCloseType": "function"
+              }
+            },
+            {
+              "text": "Tail",
+              "title": null,
+              "disabled": false,
+              "removable": true,
+              "custom": {
+                "value": "tail",
+                "index": 3,
+                "closable": true,
+                "isMaxTag": false,
+                "onCloseType": "function"
+              }
+            }
+          ],
+          "omitted": null
+        },
+        "events": []
+      },
+      "steps": [
+        {
+          "action": {
+            "kind": "close",
+            "value": 0
+          },
+          "view": {
+            "opened": false,
+            "selected": "",
+            "tags": [
+              {
+                "text": "Beta",
+                "title": null,
+                "disabled": false,
+                "removable": true,
+                "custom": {
+                  "value": 1,
+                  "index": 0,
+                  "closable": true,
+                  "isMaxTag": false,
+                  "onCloseType": "function"
+                }
+              },
+              {
+                "text": "Locked",
+                "title": null,
+                "disabled": false,
+                "removable": false,
+                "custom": {
+                  "value": "locked",
+                  "index": 1,
+                  "disabled": true,
+                  "closable": false,
+                  "isMaxTag": false,
+                  "onCloseType": "function"
+                }
+              },
+              {
+                "text": "Tail",
+                "title": null,
+                "disabled": false,
+                "removable": true,
+                "custom": {
+                  "value": "tail",
+                  "index": 2,
+                  "closable": true,
+                  "isMaxTag": false,
+                  "onCloseType": "function"
+                }
+              }
+            ],
+            "omitted": null
+          },
+          "events": [
+            {
+              "kind": "close",
+              "value": 0
+            },
+            {
+              "kind": "change",
+              "value": [
+                1,
+                "locked",
+                "tail"
+              ],
+              "labels": [
+                "Beta",
+                "Locked",
+                "Tail"
+              ],
+              "triggerValue": 0
+            },
+            {
+              "kind": "deselect",
+              "value": 0,
+              "node": {
+                "value": 0,
+                "label": "Alphabet",
+                "payload": {
+                  "id": 0
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "renderer-held",
+        "renderer": true,
+        "controlled": "hold",
+        "actions": [
+          {
+            "kind": "close",
+            "value": 0
+          }
+        ]
+      },
+      "initial": {
+        "view": {
+          "opened": false,
+          "selected": "",
+          "tags": [
+            {
+              "text": "Alphabet",
+              "title": null,
+              "disabled": false,
+              "removable": true,
+              "custom": {
+                "value": 0,
+                "index": 0,
+                "closable": true,
+                "isMaxTag": false,
+                "onCloseType": "function"
+              }
+            },
+            {
+              "text": "Beta",
+              "title": null,
+              "disabled": false,
+              "removable": true,
+              "custom": {
+                "value": 1,
+                "index": 1,
+                "closable": true,
+                "isMaxTag": false,
+                "onCloseType": "function"
+              }
+            },
+            {
+              "text": "Locked",
+              "title": null,
+              "disabled": false,
+              "removable": false,
+              "custom": {
+                "value": "locked",
+                "index": 2,
+                "disabled": true,
+                "closable": false,
+                "isMaxTag": false,
+                "onCloseType": "function"
+              }
+            },
+            {
+              "text": "Tail",
+              "title": null,
+              "disabled": false,
+              "removable": true,
+              "custom": {
+                "value": "tail",
+                "index": 3,
+                "closable": true,
+                "isMaxTag": false,
+                "onCloseType": "function"
+              }
+            }
+          ],
+          "omitted": null
+        },
+        "events": []
+      },
+      "steps": [
+        {
+          "action": {
+            "kind": "close",
+            "value": 0
+          },
+          "view": {
+            "opened": true,
+            "selected": null,
+            "tags": [
+              {
+                "text": "Alphabet",
+                "title": null,
+                "disabled": false,
+                "removable": true,
+                "custom": {
+                  "value": 0,
+                  "index": 0,
+                  "closable": true,
+                  "isMaxTag": false,
+                  "onCloseType": "function"
+                }
+              },
+              {
+                "text": "Beta",
+                "title": null,
+                "disabled": false,
+                "removable": true,
+                "custom": {
+                  "value": 1,
+                  "index": 1,
+                  "closable": true,
+                  "isMaxTag": false,
+                  "onCloseType": "function"
+                }
+              },
+              {
+                "text": "Locked",
+                "title": null,
+                "disabled": false,
+                "removable": false,
+                "custom": {
+                  "value": "locked",
+                  "index": 2,
+                  "disabled": true,
+                  "closable": false,
+                  "isMaxTag": false,
+                  "onCloseType": "function"
+                }
+              },
+              {
+                "text": "Tail",
+                "title": null,
+                "disabled": false,
+                "removable": true,
+                "custom": {
+                  "value": "tail",
+                  "index": 3,
+                  "closable": true,
+                  "isMaxTag": false,
+                  "onCloseType": "function"
+                }
+              }
+            ],
+            "omitted": null
+          },
+          "events": [
+            {
+              "kind": "open",
+              "open": true
+            },
+            {
+              "kind": "close",
+              "value": 0
+            },
+            {
+              "kind": "change",
+              "value": [
+                1,
+                "locked",
+                "tail"
+              ],
+              "labels": [
+                "Beta",
+                "Locked",
+                "Tail"
+              ],
+              "triggerValue": 0
+            },
+            {
+              "kind": "deselect",
+              "value": 0,
+              "node": {
+                "value": 0,
+                "label": "Alphabet",
+                "payload": {
+                  "id": 0
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "renderer-strict-only",
+        "renderer": true,
+        "strict": true,
+        "strictOnly": true,
+        "value": [
+          {
+            "value": 0
+          },
+          {
+            "value": 1
+          }
+        ]
+      },
+      "initial": {
+        "view": {
+          "opened": false,
+          "selected": "",
+          "tags": [
+            {
+              "text": "Alphabet",
+              "title": "Alphabet",
+              "disabled": false,
+              "removable": true,
+              "custom": null
+            },
+            {
+              "text": "Beta",
+              "title": "Beta",
+              "disabled": false,
+              "removable": true,
+              "custom": null
+            }
+          ],
+          "omitted": null
+        },
+        "events": []
+      },
+      "steps": []
+    },
+    {
+      "sample": {
+        "id": "renderer-strict-checkable",
+        "renderer": true,
+        "strict": true,
+        "checkable": true,
+        "value": [
+          {
+            "value": 0
+          },
+          {
+            "value": 1
+          }
+        ]
+      },
+      "initial": {
+        "view": {
+          "opened": false,
+          "selected": "",
+          "tags": [
+            {
+              "text": "Alphabet",
+              "title": null,
+              "disabled": false,
+              "removable": true,
+              "custom": {
+                "value": 0,
+                "index": 0,
+                "closable": true,
+                "isMaxTag": false,
+                "onCloseType": "function"
+              }
+            },
+            {
+              "text": "Beta",
+              "title": null,
+              "disabled": false,
+              "removable": true,
+              "custom": {
+                "value": 1,
+                "index": 1,
+                "closable": true,
+                "isMaxTag": false,
+                "onCloseType": "function"
+              }
+            }
+          ],
+          "omitted": null
+        },
+        "events": []
+      },
+      "steps": []
+    },
+    {
+      "sample": {
+        "id": "count-update",
+        "nextCount": 1,
+        "actions": [
+          {
+            "kind": "update-count"
+          }
+        ]
+      },
+      "initial": {
+        "view": {
+          "opened": false,
+          "selected": "",
+          "tags": [
+            {
+              "text": "Alphabet",
+              "title": "Alphabet",
+              "disabled": false,
+              "removable": true,
+              "custom": null
+            },
+            {
+              "text": "Beta",
+              "title": "Beta",
+              "disabled": false,
+              "removable": true,
+              "custom": null
+            },
+            {
+              "text": "Locked",
+              "title": "Locked",
+              "disabled": true,
+              "removable": false,
+              "custom": null
+            },
+            {
+              "text": "Tail",
+              "title": "Tail",
+              "disabled": false,
+              "removable": true,
+              "custom": null
+            }
+          ],
+          "omitted": null
+        },
+        "events": []
+      },
+      "steps": [
+        {
+          "action": {
+            "kind": "update-count"
+          },
+          "view": {
+            "opened": false,
+            "selected": "",
+            "tags": [
+              {
+                "text": "Alphabet",
+                "title": "Alphabet",
+                "disabled": false,
+                "removable": true,
+                "custom": null
+              },
+              {
+                "text": "+ 3 ...",
+                "title": "+ 3 ...",
+                "disabled": false,
+                "removable": false,
+                "custom": null
+              }
+            ],
+            "omitted": null
+          },
+          "events": []
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "text-update",
+        "length": 2,
+        "nextLength": 5,
+        "actions": [
+          {
+            "kind": "update-length"
+          }
+        ]
+      },
+      "initial": {
+        "view": {
+          "opened": false,
+          "selected": "",
+          "tags": [
+            {
+              "text": "Al...",
+              "title": "Alphabet",
+              "disabled": false,
+              "removable": true,
+              "custom": null
+            },
+            {
+              "text": "Be...",
+              "title": "Beta",
+              "disabled": false,
+              "removable": true,
+              "custom": null
+            },
+            {
+              "text": "Lo...",
+              "title": "Locked",
+              "disabled": true,
+              "removable": false,
+              "custom": null
+            },
+            {
+              "text": "Ta...",
+              "title": "Tail",
+              "disabled": false,
+              "removable": true,
+              "custom": null
+            }
+          ],
+          "omitted": null
+        },
+        "events": []
+      },
+      "steps": [
+        {
+          "action": {
+            "kind": "update-length"
+          },
+          "view": {
+            "opened": false,
+            "selected": "",
+            "tags": [
+              {
+                "text": "Alpha...",
+                "title": "Alphabet",
+                "disabled": false,
+                "removable": true,
+                "custom": null
+              },
+              {
+                "text": "Beta",
+                "title": "Beta",
+                "disabled": false,
+                "removable": true,
+                "custom": null
+              },
+              {
+                "text": "Locke...",
+                "title": "Locked",
+                "disabled": true,
+                "removable": false,
+                "custom": null
+              },
+              {
+                "text": "Tail",
+                "title": "Tail",
+                "disabled": false,
+                "removable": true,
+                "custom": null
+              }
+            ],
+            "omitted": null
+          },
+          "events": []
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "data-update",
+        "count": 1,
+        "length": 3,
+        "placeholderKind": "snippet",
+        "actions": [
+          {
+            "kind": "update-data"
+          }
+        ]
+      },
+      "initial": {
+        "view": {
+          "opened": false,
+          "selected": "",
+          "tags": [
+            {
+              "text": "Alp...",
+              "title": "Alphabet",
+              "disabled": false,
+              "removable": true,
+              "custom": null
+            },
+            {
+              "text": "number:1=Beta|string:locked=Locked|string:tail=Tail",
+              "title": null,
+              "disabled": false,
+              "removable": false,
+              "custom": null
+            }
+          ],
+          "omitted": [
+            {
+              "label": "Beta",
+              "value": 1
+            },
+            {
+              "label": "Locked",
+              "value": "locked",
+              "disabled": true
+            },
+            {
+              "label": "Tail",
+              "value": "tail"
+            }
+          ]
+        },
+        "events": []
+      },
+      "steps": [
+        {
+          "action": {
+            "kind": "update-data"
+          },
+          "view": {
+            "opened": false,
+            "selected": "",
+            "tags": [
+              {
+                "text": "Alp...",
+                "title": "Alphabet updated",
+                "disabled": false,
+                "removable": true,
+                "custom": null
+              },
+              {
+                "text": "number:1=Beta updated|string:locked=Locked updated|string:tail=Tail updated",
+                "title": null,
+                "disabled": false,
+                "removable": false,
+                "custom": null
+              }
+            ],
+            "omitted": [
+              {
+                "label": "Beta updated",
+                "value": 1
+              },
+              {
+                "label": "Locked updated",
+                "value": "locked",
+                "disabled": true
+              },
+              {
+                "label": "Tail updated",
+                "value": "tail"
+              }
+            ]
+          },
+          "events": []
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "rtl-prefix",
+        "count": 1,
+        "length": 3,
+        "rtl": true,
+        "prefix": "choices"
+      },
+      "initial": {
+        "view": {
+          "opened": false,
+          "selected": "",
+          "tags": [
+            {
+              "text": "Alp...",
+              "title": "Alphabet",
+              "disabled": false,
+              "removable": true,
+              "custom": null
+            },
+            {
+              "text": "+ 3 ...",
+              "title": "+ 3 ...",
+              "disabled": false,
+              "removable": false,
+              "custom": null
+            }
+          ],
+          "omitted": null
+        },
+        "events": []
+      },
+      "steps": []
+    },
+    {
+      "sample": {
+        "id": "responsive-400",
+        "count": "responsive",
+        "width": 400,
+        "actions": [
+          {
+            "kind": "resize",
+            "value": 200
+          },
+          {
+            "kind": "resize",
+            "value": 400
+          }
+        ]
+      },
+      "initial": {
+        "view": {
+          "opened": false,
+          "selected": "",
+          "tags": [
+            {
+              "text": "Alphabet",
+              "title": "Alphabet",
+              "disabled": false,
+              "removable": true,
+              "custom": null
+            },
+            {
+              "text": "Beta",
+              "title": "Beta",
+              "disabled": false,
+              "removable": true,
+              "custom": null
+            },
+            {
+              "text": "Locked",
+              "title": "Locked",
+              "disabled": true,
+              "removable": false,
+              "custom": null
+            },
+            {
+              "text": "Tail",
+              "title": "Tail",
+              "disabled": false,
+              "removable": true,
+              "custom": null
+            }
+          ],
+          "omitted": null
+        },
+        "events": []
+      },
+      "steps": [
+        {
+          "action": {
+            "kind": "resize",
+            "value": 200
+          },
+          "view": {
+            "opened": false,
+            "selected": "",
+            "tags": [
+              {
+                "text": "Alphabet",
+                "title": "Alphabet",
+                "disabled": false,
+                "removable": true,
+                "custom": null
+              },
+              {
+                "text": "+ 3 ...",
+                "title": "+ 3 ...",
+                "disabled": false,
+                "removable": false,
+                "custom": null
+              }
+            ],
+            "omitted": null
+          },
+          "events": []
+        },
+        {
+          "action": {
+            "kind": "resize",
+            "value": 400
+          },
+          "view": {
+            "opened": false,
+            "selected": "",
+            "tags": [
+              {
+                "text": "Alphabet",
+                "title": "Alphabet",
+                "disabled": false,
+                "removable": true,
+                "custom": null
+              },
+              {
+                "text": "Beta",
+                "title": "Beta",
+                "disabled": false,
+                "removable": true,
+                "custom": null
+              },
+              {
+                "text": "Locked",
+                "title": "Locked",
+                "disabled": true,
+                "removable": false,
+                "custom": null
+              },
+              {
+                "text": "Tail",
+                "title": "Tail",
+                "disabled": false,
+                "removable": true,
+                "custom": null
+              }
+            ],
+            "omitted": null
+          },
+          "events": []
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "responsive-fit-320",
+        "count": "responsive",
+        "width": 320
+      },
+      "initial": {
+        "view": {
+          "opened": false,
+          "selected": "",
+          "tags": [
+            {
+              "text": "Alphabet",
+              "title": "Alphabet",
+              "disabled": false,
+              "removable": true,
+              "custom": null
+            },
+            {
+              "text": "Beta",
+              "title": "Beta",
+              "disabled": false,
+              "removable": true,
+              "custom": null
+            },
+            {
+              "text": "Locked",
+              "title": "Locked",
+              "disabled": true,
+              "removable": false,
+              "custom": null
+            },
+            {
+              "text": "Tail",
+              "title": "Tail",
+              "disabled": false,
+              "removable": true,
+              "custom": null
+            }
+          ],
+          "omitted": null
+        },
+        "events": []
+      },
+      "steps": []
+    },
+    {
+      "sample": {
+        "id": "responsive-renderer",
+        "renderer": true,
+        "count": "responsive",
+        "width": 400,
+        "actions": [
+          {
+            "kind": "resize",
+            "value": 200
+          },
+          {
+            "kind": "resize",
+            "value": 400
+          }
+        ]
+      },
+      "initial": {
+        "view": {
+          "opened": false,
+          "selected": "",
+          "tags": [
+            {
+              "text": "Alphabet",
+              "title": null,
+              "disabled": false,
+              "removable": true,
+              "custom": {
+                "value": 0,
+                "index": 0,
+                "closable": true,
+                "isMaxTag": false,
+                "onCloseType": "function"
+              }
+            },
+            {
+              "text": "Beta",
+              "title": null,
+              "disabled": false,
+              "removable": true,
+              "custom": {
+                "value": 1,
+                "index": 1,
+                "closable": true,
+                "isMaxTag": false,
+                "onCloseType": "function"
+              }
+            },
+            {
+              "text": "Locked",
+              "title": null,
+              "disabled": false,
+              "removable": false,
+              "custom": {
+                "value": "locked",
+                "index": 2,
+                "disabled": true,
+                "closable": false,
+                "isMaxTag": false,
+                "onCloseType": "function"
+              }
+            },
+            {
+              "text": "Tail",
+              "title": null,
+              "disabled": false,
+              "removable": true,
+              "custom": {
+                "value": "tail",
+                "index": 3,
+                "closable": true,
+                "isMaxTag": false,
+                "onCloseType": "function"
+              }
+            }
+          ],
+          "omitted": null
+        },
+        "events": []
+      },
+      "steps": [
+        {
+          "action": {
+            "kind": "resize",
+            "value": 200
+          },
+          "view": {
+            "opened": false,
+            "selected": "",
+            "tags": [
+              {
+                "text": "Alphabet",
+                "title": null,
+                "disabled": false,
+                "removable": true,
+                "custom": {
+                  "value": 0,
+                  "index": 0,
+                  "closable": true,
+                  "isMaxTag": false,
+                  "onCloseType": "function"
+                }
+              },
+              {
+                "text": "+ 3 ...",
+                "title": null,
+                "disabled": false,
+                "removable": false,
+                "custom": {
+                  "disabled": false,
+                  "closable": false,
+                  "isMaxTag": true,
+                  "onCloseType": "undefined"
+                }
+              }
+            ],
+            "omitted": null
+          },
+          "events": []
+        },
+        {
+          "action": {
+            "kind": "resize",
+            "value": 400
+          },
+          "view": {
+            "opened": false,
+            "selected": "",
+            "tags": [
+              {
+                "text": "Alphabet",
+                "title": null,
+                "disabled": false,
+                "removable": true,
+                "custom": {
+                  "value": 0,
+                  "index": 0,
+                  "closable": true,
+                  "isMaxTag": false,
+                  "onCloseType": "function"
+                }
+              },
+              {
+                "text": "Beta",
+                "title": null,
+                "disabled": false,
+                "removable": true,
+                "custom": {
+                  "value": 1,
+                  "index": 1,
+                  "closable": true,
+                  "isMaxTag": false,
+                  "onCloseType": "function"
+                }
+              },
+              {
+                "text": "Locked",
+                "title": null,
+                "disabled": false,
+                "removable": false,
+                "custom": {
+                  "value": "locked",
+                  "index": 2,
+                  "disabled": true,
+                  "closable": false,
+                  "isMaxTag": false,
+                  "onCloseType": "function"
+                }
+              },
+              {
+                "text": "Tail",
+                "title": null,
+                "disabled": false,
+                "removable": true,
+                "custom": {
+                  "value": "tail",
+                  "index": 3,
+                  "closable": true,
+                  "isMaxTag": false,
+                  "onCloseType": "function"
+                }
+              }
+            ],
+            "omitted": null
+          },
+          "events": []
+        }
+      ]
+    }
+  ],
+  "observations": [
+    {
+      "sample": {
+        "id": "emoji-split",
+        "kind": "emoji",
+        "length": 1
+      },
+      "initial": {
+        "view": {
+          "opened": false,
+          "selected": "",
+          "tags": [
+            {
+              "text": "\ud83d...",
+              "title": "😀word",
+              "disabled": false,
+              "removable": true,
+              "custom": null
+            },
+            {
+              "text": "B...",
+              "title": "Beta",
+              "disabled": false,
+              "removable": true,
+              "custom": null
+            },
+            {
+              "text": "L...",
+              "title": "Locked",
+              "disabled": true,
+              "removable": false,
+              "custom": null
+            },
+            {
+              "text": "T...",
+              "title": "Tail",
+              "disabled": false,
+              "removable": true,
+              "custom": null
+            }
+          ],
+          "omitted": null
+        },
+        "events": []
+      },
+      "steps": []
+    },
+    {
+      "sample": {
+        "id": "middle-emoji-split",
+        "kind": "middle-emoji",
+        "length": 2
+      },
+      "initial": {
+        "view": {
+          "opened": false,
+          "selected": "",
+          "tags": [
+            {
+              "text": "A\ud83d...",
+              "title": "A😀word",
+              "disabled": false,
+              "removable": true,
+              "custom": null
+            },
+            {
+              "text": "Be...",
+              "title": "Beta",
+              "disabled": false,
+              "removable": true,
+              "custom": null
+            },
+            {
+              "text": "Lo...",
+              "title": "Locked",
+              "disabled": true,
+              "removable": false,
+              "custom": null
+            },
+            {
+              "text": "Ta...",
+              "title": "Tail",
+              "disabled": false,
+              "removable": true,
+              "custom": null
+            }
+          ],
+          "omitted": null
+        },
+        "events": []
+      },
+      "steps": []
+    },
+    {
+      "sample": {
+        "id": "count-nan",
+        "count": "nan"
+      },
+      "initial": {
+        "view": {
+          "opened": false,
+          "selected": "",
+          "tags": [],
+          "omitted": null
+        },
+        "events": []
+      },
+      "steps": []
+    },
+    {
+      "sample": {
+        "id": "opaque-array-title",
+        "kind": "array",
+        "length": 1
+      },
+      "initial": {
+        "view": {
+          "opened": false,
+          "selected": "",
+          "tags": [
+            {
+              "text": "Array0 label",
+              "title": null,
+              "disabled": false,
+              "removable": true,
+              "custom": null
+            },
+            {
+              "text": "B...",
+              "title": "Beta",
+              "disabled": false,
+              "removable": true,
+              "custom": null
+            },
+            {
+              "text": "L...",
+              "title": "Locked",
+              "disabled": true,
+              "removable": false,
+              "custom": null
+            },
+            {
+              "text": "T...",
+              "title": "Tail",
+              "disabled": false,
+              "removable": true,
+              "custom": null
+            }
+          ],
+          "omitted": null
+        },
+        "events": []
+      },
+      "steps": []
+    },
+    {
+      "sample": {
+        "id": "title-renderer",
+        "titleRenderer": true,
+        "labeled": true,
+        "length": 2,
+        "value": [
+          {
+            "value": 0
+          },
+          {
+            "value": 1
+          }
+        ]
+      },
+      "initial": {
+        "view": {
+          "opened": false,
+          "selected": "",
+          "tags": [
+            {
+              "text": "Rich Alphabet",
+              "title": null,
+              "disabled": false,
+              "removable": true,
+              "custom": null
+            },
+            {
+              "text": "Rich Beta",
+              "title": null,
+              "disabled": false,
+              "removable": true,
+              "custom": null
+            }
+          ],
+          "omitted": null
+        },
+        "events": []
+      },
+      "steps": []
+    },
+    {
+      "sample": {
+        "id": "responsive-long-rest",
+        "count": "responsive",
+        "width": 320,
+        "placeholder": "Hidden values remain selected"
+      },
+      "initial": {
+        "view": {
+          "opened": false,
+          "selected": "",
+          "tags": [
+            {
+              "text": "Hidden values remain selected",
+              "title": "Hidden values remain selected",
+              "disabled": false,
+              "removable": false,
+              "custom": null
+            }
+          ],
+          "omitted": null
+        },
+        "events": []
+      },
+      "steps": []
+    }
+  ]
+}

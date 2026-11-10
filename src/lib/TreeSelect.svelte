@@ -1,5 +1,5 @@
 <script lang="ts" generics="ValueType extends TreeSelectValue = TreeSelectValue, Data extends object = TreeSelectNode">
-  import { tick, untrack } from 'svelte';
+  import { onMount, tick, untrack } from 'svelte';
   import type {
     TreeSelectProps,
     TreeSelectSearchConfig,
@@ -22,6 +22,8 @@
   import { expandTreeParents, treeCheckDisabled } from './tree.engine';
   import { treeSelectChildren, treeSelectData, treeSelectNodeValue } from './tree-select-data.engine';
   import { treeSelectLimit } from './tree-select-limit.engine';
+  import { treeSelectTagText, treeSelectTagOverflow } from './tree-select-tags.engine';
+  import { connectSelectTagOverflow, measureSelectInput } from './select-tag-overflow.dom';
   import { useConfig } from './config-context';
   import ThemeScopeStyle from './ThemeScopeStyle.svelte';
   import { getSelectPrefixCss } from './select-prefix.engine';
@@ -51,6 +53,10 @@
     treeCheckStrictly = false,
     labelInValue = false,
     maxCount,
+    maxTagTextLength,
+    maxTagCount,
+    maxTagPlaceholder,
+    tagRender,
     showCheckedStrategy,
     onChange,
     onSelect,
@@ -158,6 +164,22 @@
     { maxCount, multiple, treeCheckable, treeCheckStrictly, showCheckedStrategy },
     index, checks.checked, display.length
   ));
+  let responsiveCount = $state(Number.POSITIVE_INFINITY);
+  let tagsReady = $state(false);
+  onMount(() => { tagsReady = true; });
+  let responsiveTags = $derived(isMultiple && maxTagCount === 'responsive');
+  let tagOverflow = $derived(treeSelectTagOverflow(display,
+    responsiveTags ? responsiveCount : typeof maxTagCount === 'number' ? maxTagCount : undefined));
+  let renderedTags = $derived(responsiveTags ? display : tagOverflow.visible);
+  let visibleTagKeys = $derived(new Set(tagOverflow.visible.map(item => item.value)));
+  // Ant wrapper передаёт tagRender по multiple/treeCheckable, независимо от strict-only rc mode.
+  let renderTag = $derived(multiple || treeCheckable ? tagRender : undefined);
+  let placeholderTitle = $derived(maxTagPlaceholder == null ? `+ ${tagOverflow.omitted.length} ...`
+    : typeof maxTagPlaceholder === 'string' || typeof maxTagPlaceholder === 'number'
+      ? String(maxTagPlaceholder) : undefined);
+  let tagContent = $state<HTMLDivElement>();
+  const tagElements = new Map<TreeSelectRawValue, HTMLElement>();
+  let tagClose: MessageChannel | undefined;
   let internalSearch = $state('');
   let search = $derived(searchConfig.searchValue ?? internalSearch);
   let canSearch = $derived(typeof showSearch === 'object' ? true : showSearch ?? isMultiple);
@@ -213,6 +235,50 @@
   let previousOpen = false;
   let previousSearch = '';
   let previousProps = untrack(() => ({ value, open, search: searchConfig.searchValue }));
+  $effect(() => () => cancelTagClose());
+  $effect.pre(() => {
+    const visible = new Set(tagOverflow.visible.map(item => item.value));
+    const input = editor;
+    const active = input?.ownerDocument.activeElement;
+    if (!input || !active || ![...tagElements].some(([value, node]) =>
+      !visible.has(value) && node.contains(active))) return;
+    void tick().then(() => {
+      if (!input.isConnected || active.isConnected && !active.closest('[inert]')) return;
+      const doc = input.ownerDocument;
+      if (!doc.activeElement || doc.activeElement === active || doc.activeElement === doc.body
+        || doc.activeElement === doc.documentElement) input.focus();
+    });
+  });
+  $effect(() => {
+    if (!editor || !responsiveTags) return;
+    void search;
+    const input = editor;
+    const previous = input.style.width;
+    input.style.width = `${measureSelectInput(input)}px`;
+    return () => { input.style.width = previous; };
+  });
+  $effect(() => {
+    if (!tagContent || !responsiveTags) return;
+    void display;
+    void maxTagTextLength;
+    void maxTagPlaceholder;
+    void renderTag;
+    void search;
+    const host = tagContent;
+    let disposed = false;
+    let disconnect: (() => void) | undefined;
+    void tick().then(() => {
+      if (!disposed) disconnect = connectSelectTagOverflow(host,
+        count => { responsiveCount = count; }, {
+          tag: ':scope > [data-tree-choice-tag]', rest: ':scope > [data-tree-choice-rest]',
+          input: ':scope > input'
+        });
+    });
+    return () => {
+      disposed = true;
+      disconnect?.();
+    };
+  });
   // Внутренние DOM-ссылки сохраняются при обновлении spread props без bind:ref.
   $effect(() => {
     nativeElement = root;
@@ -226,8 +292,10 @@
     const next = { value, open, search: searchConfig.searchValue };
     if (next.value !== previousProps.value)
       internalValue = next.value;
-    if (next.open !== previousProps.open)
+    if (next.open !== previousProps.open) {
+      cancelTagClose();
       internalOpen = Boolean(next.open);
+    }
     if (next.search !== previousProps.search)
       internalSearch = next.search ?? '';
     previousProps = next;
@@ -316,6 +384,7 @@
       : typeof label === 'function' || typeof label === 'boolean' || label == null ? '' : String(label);
   }
   function requestOpen(next: boolean) {
+    cancelTagClose();
     if (next && blocked || next === visible) return;
     if (next) {
       initializePanel();
@@ -372,7 +441,11 @@
       { triggerValue }
     );
   }
-  function choose(raw: TreeSelectRawValue, source: 'option' | 'selection' = 'option') {
+  function choose(
+    raw: TreeSelectRawValue,
+    source: 'option' | 'selection' = 'option',
+    focusInput = true
+  ) {
     const node = index.values.get(raw);
     if (blocked
       || source === 'option'
@@ -383,7 +456,7 @@
         && treeCheckDisabled(
           index.entities.get(String(raw))!.node
         ))) return;
-    const selected = !isMultiple || !checks.checked.includes(raw);
+    const selected = source === 'selection' ? false : !isMultiple || !checks.checked.includes(raw);
     const next = isMultiple
       ? toggleTreeSelect(raw, selected, items, checks, conduction, index)
       : [raw];
@@ -397,7 +470,34 @@
         );
     if (!isMultiple)
       requestOpen(false);
-    editor?.focus();
+    if (focusInput) editor?.focus();
+  }
+  function customTagMouseDown(event: MouseEvent) {
+    event.preventDefault();
+    event.stopPropagation();
+    cancelTagClose();
+    if (!visible) {
+      requestOpen(true);
+      return;
+    }
+    // rc-select useOpen задерживает false через MessageChannel до click/close callbacks.
+    const channel = new MessageChannel();
+    tagClose = channel;
+    channel.port1.onmessage = () => {
+      if (tagClose !== channel) return;
+      cancelTagClose();
+      requestOpen(false);
+    };
+    channel.port2.postMessage(null);
+  }
+  function cancelTagClose() {
+    tagClose?.port1.close();
+    tagClose?.port2.close();
+    tagClose = undefined;
+  }
+  function connectTagElement(node: HTMLElement, value: TreeSelectRawValue) {
+    tagElements.set(value, node);
+    return () => { if (tagElements.get(value) === node) tagElements.delete(value); };
   }
   function clear() {
     if (blocked) return;
@@ -526,6 +626,9 @@
   [data-ant-tree-choice-source-theme] .clear:focus-visible { opacity:1; }
   [data-ant-tree-choice-source-theme]:has(.clear):hover .suffix,[data-ant-tree-choice-source-theme]:has(.clear:focus-visible) .suffix { opacity:0; }
   .single-snippet { position:absolute;pointer-events:none;inset-inline-start:0; }
+  .measure-tag { position:absolute;inset-block-start:0;inset-inline-start:0;visibility:hidden;pointer-events:none; }
+  .custom-tag { display:inline-flex;flex:none;min-width:0;max-width:100%; }
+  [data-ant-tree-choice-responsive] [data-ant-tree-choice-input] { flex:0 0 auto;min-width:4px; }
   .popup { position:fixed;margin:0;border:0;overflow:visible; }
   .popup-body { overflow:auto; }
   [data-ant-tree-choice-selection-item-disabled] { color:var(--ant-select-multiple-item-color-disabled); }
@@ -535,7 +638,7 @@
     [data-ant-tree-choice-source-theme]:has(.clear) .suffix { opacity:0; }
   }
 </style>
-{#snippet labelNode(item:TreeSelectLabeledValue)}{#if treeTitleRender && index.values.has(item.value)}{@render treeTitleRender(index.values.get(item.value)!)}{:else}<TreeTitle value={item.label ?? item.value} node={index.values.get(item.value) ?? {}} />{/if}{/snippet}
+{#snippet labelNode(item:TreeSelectLabeledValue, tag = false)}{#if treeTitleRender && index.values.has(item.value)}{@render treeTitleRender(index.values.get(item.value)!)}{:else}<TreeTitle value={tag ? treeSelectTagText(item.label ?? item.value, maxTagTextLength) : item.label ?? item.value} node={index.values.get(item.value) ?? {}} />{/if}{/snippet}
 {#snippet panelTitle(node:TreeDataNode)}
   {@const original = filteredIndex.values.get(node.key as TreeSelectRawValue)}
   {#if treeTitleRender && original}{@render treeTitleRender(original)}{/if}
@@ -544,9 +647,12 @@
   data-ant-tree-select-prefix={treePrefix} data-ant-tree-select-root-prefix={rootPrefix}
   data-ant-tree-choice-source-theme={Boolean(selectTheme.className) || undefined}
   data-ant-tree-choice-multiple={isMultiple || undefined}
+  data-ant-tree-choice-responsive={responsiveTags || undefined}
   style:--ant-native-tree-choice-height={`var(--${privateNamespace}-select-height)`}
   style:--ant-native-tree-choice-multi-item-height={`var(--${privateNamespace}-select-multi-item-height)`}
   bind:this={root} role="presentation" onpointerdown={event => {
+    if (renderTag && event.target instanceof Element
+      && event.target.closest('[data-tree-choice-custom-tag]')) return;
     if (!blocked && event.target instanceof Element && !event.target.closest('button,input')) {
       event.preventDefault();
       editor?.focus();
@@ -572,12 +678,52 @@
       className,
       rootClassName
     ]}>
-  <div data-ant-tree-choice-content class={`${prefix}-content`}>
-    {#if isMultiple}{#each display as item(item.value)}<span data-ant-tree-choice-selection-item
-      data-ant-tree-choice-selection-item-disabled={blocked || item.disabled || undefined} class={[
-        `${prefix}-selection-item`,
-        (blocked || item.disabled) && `${prefix}-selection-item-disabled`
-      ]} title={text(item.label)}><span class={`${prefix}-selection-item-content`}>{@render labelNode(item)}</span>{#if !blocked&&!item.disabled}<button type="button" data-ant-tree-choice-selection-item-remove class={`${prefix}-selection-item-remove`} aria-label={`${config.locale.removeText ?? 'Remove'} ${text(item.label)}`} onpointerdown={event => event.preventDefault()} onclick={() => choose(item.value, 'selection')}><Icon name="close" /></button>{/if}</span>{/each}
+  <div data-ant-tree-choice-content class={`${prefix}-content`} bind:this={tagContent}>
+    {#if isMultiple}{#each renderedTags as item, index(item.value)}
+      {@const hidden = responsiveTags && (!tagsReady || !visibleTagKeys.has(item.value))}
+      {#snippet tagLabel()}{@render labelNode(item, true)}{/snippet}
+      <span data-ant-tree-choice-selection-item={!renderTag || undefined}
+        data-ant-tree-choice-selection-item-disabled={!renderTag && (blocked || item.disabled) || undefined}
+        data-tree-choice-tag={responsiveTags || undefined}
+        data-tree-choice-custom-tag={renderTag ? '' : undefined}
+        class={[renderTag ? 'custom-tag' : `${prefix}-selection-item`, hidden && 'measure-tag',
+          !renderTag && (blocked || item.disabled) && `${prefix}-selection-item-disabled`]}
+        title={renderTag ? undefined : text(item.label)} role="presentation"
+        onmousedown={renderTag ? customTagMouseDown : undefined} aria-hidden={hidden || undefined} inert={hidden}
+        {@attach node => connectTagElement(node, item.value)}>
+        {#if renderTag}{@render renderTag({
+          label: tagLabel, value: item.value, index, disabled: item.disabled,
+          closable: !blocked && !item.disabled, isMaxTag: false,
+          onClose: event => {
+            event?.stopPropagation();
+            choose(item.value, 'selection', false);
+          }
+        })}{:else}
+          <span class={`${prefix}-selection-item-content`}>{@render tagLabel()}</span>{#if !blocked&&!item.disabled}<button type="button" data-ant-tree-choice-selection-item-remove class={`${prefix}-selection-item-remove`} aria-label={`${config.locale.removeText ?? 'Remove'} ${text(item.label)}`} onpointerdown={event => event.preventDefault()} onclick={() => choose(item.value, 'selection')}><Icon name="close" /></button>{/if}
+        {/if}
+      </span>
+    {/each}
+    {#if tagOverflow.omitted.length || responsiveTags && display.length}
+      {#snippet restLabel()}
+        {#if typeof maxTagPlaceholder === 'function'}{@render maxTagPlaceholder(tagOverflow.omitted)}
+        {:else if maxTagPlaceholder == null}+ {tagOverflow.omitted.length} ...
+        {:else}<TreeTitle value={maxTagPlaceholder} node={{}} />{/if}
+      {/snippet}
+      <span data-ant-tree-choice-selection-item={!renderTag || undefined}
+        data-tree-choice-rest={responsiveTags || undefined}
+        data-tree-choice-custom-tag={renderTag ? '' : undefined}
+        class={[`${prefix}-selection-overflow-item-rest`,
+          renderTag ? 'custom-tag' : `${prefix}-selection-item`,
+          (!tagOverflow.omitted.length || responsiveTags && !tagsReady) && 'measure-tag']}
+        title={renderTag ? undefined : placeholderTitle} role="presentation"
+        onmousedown={renderTag ? customTagMouseDown : undefined}
+        aria-hidden={!tagOverflow.omitted.length || responsiveTags && !tagsReady || undefined}
+        inert={!tagOverflow.omitted.length || responsiveTags && !tagsReady}>
+        {#if renderTag}{@render renderTag({
+          label: restLabel, isMaxTag: true, disabled: false, closable: false
+        })}{:else}<span class={`${prefix}-selection-item-content`}>{@render restLabel()}</span>{/if}
+      </span>
+    {/if}
     {:else if (!visible || !canSearch) && (treeTitleRender || typeof display[0]?.label==='function' || Array.isArray(display[0]?.label)) && display[0]}<span class="single-snippet">{@render labelNode(display[0])}</span>{/if}
     <input {...attributes} bind:this={editor} id={controlId} data-ant-tree-choice-input class={`${prefix}-input`} type="text" role="combobox" aria-haspopup="tree" aria-controls={`${controlId}-list`} aria-expanded={visible} aria-autocomplete={canSearch ? 'list' : 'none'} aria-activedescendant={visible ? activeDescendant : undefined} aria-invalid={field?.invalid || resolvedStatus === 'error'
         || attributes['aria-invalid']

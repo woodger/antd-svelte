@@ -2,6 +2,7 @@ import type { Snippet } from 'svelte';
 import type { HTMLInputAttributes, HTMLAttributes } from 'svelte/elements';
 import type { ComponentSize } from './types';
 import type { TreeEventNode, TreeExpandAction, TreeKey } from './tree.types';
+import type { SelectTagInfo } from './select.types';
 export type TreeSelectRawValue = string | number;
 export type TreeSelectLabel = string | number | boolean | null | undefined | Snippet
   | readonly TreeSelectLabel[];
@@ -25,6 +26,10 @@ export interface TreeSelectLabeledValue {
   halfChecked?: boolean;
   disabled?: boolean;
 }
+export type TreeSelectTagInfo = SelectTagInfo<TreeSelectRawValue>;
+/** Snippet получает полные omitted records без synthetic key; null/undefined выбирают + N ... . */
+export type TreeSelectTagPlaceholder = string | number | boolean | null
+  | readonly TreeSelectLabel[] | Snippet<[TreeSelectLabeledValue[]]>;
 export type TreeSelectValue =
   TreeSelectRawValue
   | TreeSelectLabeledValue
@@ -88,6 +93,13 @@ export interface TreeSelectProps<
   labelInValue?: boolean;
   /** Лимит multiple; SHOW_PARENT и nonstrict SHOW_ALL отключают ненулевой limit. */
   maxCount?: number;
+  /** Усечение только string/number labels тегов; callbacks и title сохраняют полное значение. */
+  maxTagTextLength?: number;
+  /** Видимые теги; остальные значения сохраняются в callbacks и native FormData. */
+  maxTagCount?: number | 'responsive';
+  maxTagPlaceholder?: TreeSelectTagPlaceholder;
+  /** Custom tag получает bound label snippet и Source close/summary metadata. */
+  tagRender?: Snippet<[TreeSelectTagInfo]>;
   showCheckedStrategy?: TreeSelectStrategy;
   onChange?: (
     value: ValueType,
