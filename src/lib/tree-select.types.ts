@@ -86,6 +86,8 @@ export interface TreeSelectProps<
   treeCheckStrictly?: boolean;
   /** @defaultValue false */
   labelInValue?: boolean;
+  /** Лимит multiple; SHOW_PARENT и nonstrict SHOW_ALL отключают ненулевой limit. */
+  maxCount?: number;
   showCheckedStrategy?: TreeSelectStrategy;
   onChange?: (
     value: ValueType,

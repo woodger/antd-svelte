@@ -21,6 +21,7 @@
   } from './tree-select.engine';
   import { expandTreeParents, treeCheckDisabled } from './tree.engine';
   import { treeSelectChildren, treeSelectData, treeSelectNodeValue } from './tree-select-data.engine';
+  import { treeSelectLimit } from './tree-select-limit.engine';
   import { useConfig } from './config-context';
   import ThemeScopeStyle from './ThemeScopeStyle.svelte';
   import { getSelectPrefixCss } from './select-prefix.engine';
@@ -49,6 +50,7 @@
     treeCheckable = false,
     treeCheckStrictly = false,
     labelInValue = false,
+    maxCount,
     showCheckedStrategy,
     onChange,
     onSelect,
@@ -152,6 +154,10 @@
   let searchConfig = $derived<TreeSelectSearchConfig<Data>>(
     { ...(typeof showSearch === 'object' ? showSearch : {}) }
   );
+  let limit = $derived(treeSelectLimit(
+    { maxCount, multiple, treeCheckable, treeCheckStrictly, showCheckedStrategy },
+    index, checks.checked, display.length
+  ));
   let internalSearch = $state('');
   let search = $derived(searchConfig.searchValue ?? internalSearch);
   let canSearch = $derived(typeof showSearch === 'object' ? true : showSearch ?? isMultiple);
@@ -335,6 +341,8 @@
     raw: TreeSelectRawValue[],
     triggerValue?: TreeSelectRawValue
   ) {
+    const formatted = treeSelectStrategy(raw, strategy, index);
+    if (limit.changeMaxCount && formatted.length > limit.changeMaxCount) return;
     const before = items;
     const nextItems = treeSelectLabels(
       raw.map(value => ({ value })),
@@ -345,7 +353,7 @@
     internalValue = nextItems;
     if (autoClear)
       internalSearch = '';
-    const values = conduction ? treeSelectStrategy(raw, strategy, index) : raw;
+    const values = conduction ? formatted : raw;
     const returnItems = treeSelectLabels(
       [
         ...values.map(value => ({ value })),
@@ -370,6 +378,7 @@
       || source === 'option'
       && (!node
         || Reflect.get(node, 'disabled')
+        || limit.disabled.has(raw)
         || checkable
         && treeCheckDisabled(
           index.entities.get(String(raw))!.node
@@ -607,7 +616,7 @@
       ? `${popupMatchSelectWidth}px`
       : undefined} onfocusout={blurWithin}>
   <div class="popup-body" style:max-height={`${listHeight}px`} onscroll={onPopupScroll}>
-    {#if filtered.length}<Tree prefixCls="ant-tree" motion={false} _themeStyle={componentStyle} _componentConfig={false} bind:nativeElement={treeElement} treeData={filteredIndex.data} id={`${controlId}-list`} class={treeSelectTheme.className && 'ant-tree-select-source-tree'} aria-label={attributes['aria-label'] ?? placeholder ?? config.locale.searchText} focusable={false} multiple={isMultiple} checkable={checkable} checkStrictly checkedKeys={{ checked: checks.checked, halfChecked: checks.halfChecked }} selectedKeys={checkable ? [] : checks.checked} expandedKeys={panelExpanded} expandAction={treeExpandAction} activeKey={active} onActiveChange={key => {
+    {#if filtered.length}<Tree prefixCls="ant-tree" motion={false} _themeStyle={componentStyle} _componentConfig={false} _nodeDisabled={node => limit.disabled.has(node.key as TreeSelectRawValue)} bind:nativeElement={treeElement} treeData={filteredIndex.data} id={`${controlId}-list`} class={treeSelectTheme.className && 'ant-tree-select-source-tree'} aria-label={attributes['aria-label'] ?? placeholder ?? config.locale.searchText} focusable={false} multiple={isMultiple} checkable={checkable} checkStrictly checkedKeys={{ checked: checks.checked, halfChecked: checks.halfChecked }} selectedKeys={checkable ? [] : checks.checked} expandedKeys={panelExpanded} expandAction={treeExpandAction} activeKey={active} onActiveChange={key => {
         active = key;
       }} onSelect={(_keys, info) => panelSelect(info.node)} onCheck={(_keys, info) => panelSelect(info.node)} onExpand={expandPanel} loadedKeys={treeLoadedKeys ?? loaded} onLoad={(keys) => {
           onTreeLoad?.(keys);

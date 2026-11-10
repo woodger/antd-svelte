@@ -6399,6 +6399,29 @@ Missing values не удаляются при смене treeData. Подпис�
 value без подписи отображается самим значением. Индивидуальный тег disabled узла
 не удаляется, но clear очищает весь набор, как в upstream.
 
+`maxCount` ограничивает multiple selection, включая checkbox/strict mode и missing
+values. Начальный или controlled набор не обрезается. Ant wrapper отключает
+ненулевой limit при явно заданном SHOW_PARENT и при SHOW_ALL без treeCheckStrictly,
+включая plain multiple; без явной стратегии plain multiple сохраняет limit.
+Нулевой maxCount остаётся активным, как в Source, и запрещает новые значения.
+Ограничения панели вычисляются по полному дереву, отдельно от raw disabled/state
+данных. Для SHOW_CHILD исходная оценка родителя учитывает его прямых доступных
+детей; окончательный guard проверяет число display values после conduction.
+Набор сверх ненулевого limit не публикуется: onSelect/onDeselect может сообщить
+попытку без onChange, как в Source. Clear остаётся доступен для начального набора
+сверх limit. Смена limit/data сохраняет query, caret, refs/focus/active IDs и FormData.
+
+[33 UMD-сценария](tests/browser/fixtures/ant-design-tree-select-max-count-reference.json)
+проверяют правила wrapper/rc-tree-select и порядок callbacks в
+[browser](tests/browser/tree-select-max-count.spec.ts).
+[35 DOM-free SSR renders](tests/browser/fixtures/ant-design-tree-select-max-count-ssr-reference.json)
+проверяются в [package SSR](tests/package/tree-select-max-count.ssr.test.ts), без
+callbacks, timers и обрезания начальных значений. Два дефекта Source записаны
+отдельно: maxCount блокирует смену single value, а disabled cache родителя не
+обновляется при новых детях с тем же remaining count. Native игнорирует limit в
+single и пересчитывает ограничения при смене данных; public counterparts — single
+без limit и свежее дерево с теми же финальными props.
+
 ShowSearch по умолчанию false для single и true для multiple. Объект showSearch
 поддерживает searchValue/onSearch, autoClearSearchValue, filterTreeNode и
 treeNodeFilterProp. Одноимённые deprecated top-level props удалены.
@@ -6465,7 +6488,7 @@ DOM панели, фокус и выделение; ShadowRoot требует с
 TreeSelect/Cascader с 40 сценариями официального UMD —
 [choice-container](./tests/browser/choice-container.spec.ts), `?fixture=choice-container`.
 
-Virtual/scrollTo, TreeNode children, maxCount/maxTagCount,
+Virtual/scrollTo, TreeNode children, maxTagCount,
 tag/popup render hooks, остальные semantic slots/config/ref API
 и исходные motion API ещё не перенесены. TreeTitleRender оформляет выбранные
 значения, но onChange пока возвращает подписи данных, а не bound renderer snippets.

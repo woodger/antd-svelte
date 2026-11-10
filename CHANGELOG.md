@@ -9,6 +9,12 @@
 
 ### Added
 
+- TreeSelect поддерживает maxCount с исходными wrapper/strategy/strict правилами,
+  checked/missing values и callback order. UI-ограничения сохраняют raw data,
+  payload refs и conduction; начальные наборы не обрезаются. Ошибки Source с
+  блокировкой single mode и stale parent disabled cache записаны отдельно;
+  Native сохраняет single selection и обновляет ограничения при новых данных.
+
 - TreeSelect поддерживает treeExpandAction=false/'click'/'doubleClick' через
   существующий Tree, с исходным порядком раскрытия/выбора и modifier guards.
   Title action сохраняет expanded keys до появления детей и работает при поиске.

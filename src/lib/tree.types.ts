@@ -177,6 +177,8 @@ export interface TreeProps<Data extends object = TreeDataNode> extends Omit<
   _themeStyle?: string;
   /** @internal Составной владелец TreeSelect использует собственный component config. */
   _componentConfig?: boolean;
+  /** @internal Ограничения TreeSelect UI без изменения raw data и conduction. */
+  _nodeDisabled?: (node: Data) => boolean;
   /** CSS внешнего корня; прежний native contract сохранён, React style относится к inner list. */
   style?: HTMLAttributes<HTMLDivElement>['style'];
   classNames?: TreeSemanticValue<TreeClassNames, Data>;

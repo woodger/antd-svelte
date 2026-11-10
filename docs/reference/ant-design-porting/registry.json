@@ -11033,7 +11033,7 @@
       "name": "TreeSelect",
       "category": "data-entry",
       "scope": "target",
-      "scopeReason": "TreeSelect по Ant Design 6.6.8 и rc-tree-select 1.16.1: значения, check/стратегии, поиск, loadData, fieldNames/simple mode, generic data и title expansion; оставшийся API, virtual и motion переносятся отдельно.",
+      "scopeReason": "TreeSelect по Ant Design 6.6.8 и rc-tree-select 1.16.1: значения, check/стратегии, поиск, loadData, fieldNames/simple mode, generic data, title expansion и maxCount; оставшийся API, virtual и motion переносятся отдельно.",
       "upstreamPath": "components/tree-select",
       "reviewedRevision": "984592267de88fbf9cdaecc96a56629e721c709d",
       "exports": [
@@ -11133,7 +11133,17 @@
         "tests/browser/fixtures/TreeSelectExpandActionFixtures.svelte",
         "tests/browser/fixtures/ant-design-tree-select-expand-action-reference.json",
         "tests/browser/tree-select-expand-action.spec.ts",
-        "tests/package/tree-select-expand-action.ssr.test.ts"
+        "tests/package/tree-select-expand-action.ssr.test.ts",
+        "src/lib/tree-select-limit.engine.ts",
+        "src/lib/tree-select-limit.engine.test.ts",
+        "src/lib/tree.types.ts",
+        "tests/browser/fixtures/tree-select-max-count-cases.ts",
+        "tests/browser/fixtures/TreeSelectMaxCountFixtures.svelte",
+        "tests/browser/fixtures/TreeSelectMaxCountScope.svelte",
+        "tests/browser/fixtures/ant-design-tree-select-max-count-reference.json",
+        "tests/browser/fixtures/ant-design-tree-select-max-count-ssr-reference.json",
+        "tests/browser/tree-select-max-count.spec.ts",
+        "tests/package/tree-select-max-count.ssr.test.ts"
       ],
       "features": [
         {
@@ -11197,7 +11207,7 @@
         },
         {
           "id": "extended-api",
-          "title": "FieldNames/simple mode, maxCount/tags/render hooks и остальные semantic/config/ref API",
+          "title": "MaxTagCount/tag render, popup hooks и остальные semantic/config/ref API",
           "state": "partial",
           "requiredForV1": false,
           "evidence": [
@@ -11217,7 +11227,7 @@
             "tests/package/tree-select-data.ssr.test.ts",
             "readme.md"
           ],
-          "note": "FieldNames, treeDataSimpleMode, generic raw data и treeExpandAction перенесены. Остаются TreeNode children, maxCount/maxTagCount/tagRender, popupRender/prefix/suffix customization, component config и полный semantic/ref API. TreeTitleRender оформляет выбранные значения, но onChange пока возвращает подписи данных вместо bound renderer snippets. Deprecated extra.triggerNode/allCheckedNodes и node.props React wrappers исключены; собственное поле props данных сохраняется."
+          "note": "FieldNames, treeDataSimpleMode, generic raw data, treeExpandAction и maxCount перенесены. Остаются TreeNode children, maxTagCount/maxTagTextLength/maxTagPlaceholder/tagRender, popupRender/prefix/suffix customization, component config и полный semantic/ref API. TreeTitleRender оформляет выбранные значения, но onChange пока возвращает подписи данных вместо bound renderer snippets. Deprecated extra.triggerNode/allCheckedNodes и node.props React wrappers исключены; собственное поле props данных сохраняется."
         },
         {
           "id": "virtual-motion",
@@ -11390,6 +11400,56 @@
             "readme.md"
           ],
           "note": "Ant Design 6.6.8 / 984592267de88fbf9cdaecc96a56629e721c709d, rc-tree-select1.16.1 и rc-tree1.4.0; unmodified official UMD/React18.3.1. Raw observation lazy-click: multiple TreeSelect, selectable=false root, treeExpandAction=click и deferred loadData. Один title click создаёт onTreeExpand([0]) и два loadData({key:0,expanded:false}) до завершения. Native использует прежнюю Tree дедупликацию: один Promise на узел, то же дерево после resolve, один onTreeLoad и тишина после unmount. Ошибка Source не переносится."
+        },
+        {
+          "id": "selection-limit",
+          "title": "MaxCount с wrapper/strategy правилами и отдельным UI predicate",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/tree-select-limit.engine.ts",
+            "src/lib/tree-select-limit.engine.test.ts",
+            "src/lib/TreeSelect.svelte",
+            "src/lib/tree-select.types.ts",
+            "src/lib/Tree.svelte",
+            "src/lib/tree.types.ts",
+            "tests/browser/fixtures/tree-select-max-count-cases.ts",
+            "tests/browser/fixtures/TreeSelectMaxCountFixtures.svelte",
+            "tests/browser/fixtures/TreeSelectMaxCountScope.svelte",
+            "tests/browser/fixtures/ant-design-tree-select-max-count-reference.json",
+            "tests/browser/fixtures/ant-design-tree-select-max-count-ssr-reference.json",
+            "tests/browser/tree-select-max-count.spec.ts",
+            "tests/browser/tree-select-data-metrics.ts",
+            "tests/package/tree-select-max-count.ssr.test.ts",
+            "readme.md"
+          ],
+          "note": "Лимит multiple включает checked/strict и missing values; начальный/controlled набор не обрезается. Ant wrapper отключает ненулевой maxCount при configured SHOW_PARENT и nonstrict SHOW_ALL, включая plain multiple; нулевой limit сохраняется. Без explicit strategy plain multiple ограничивается. UI использует полные raw checked keys и display count, прямых доступных детей SHOW_CHILD; итоговый formatted guard может отклонить value change, сохранив Source onSelect/onDeselect попытки. Clear/search, aliases/simple mode, controlled hold/accept, live limit/data, RTL/title/keyboard сверены по 33 неизменённым UMD случаям. UI-only Tree predicate сохраняет raw disabled/state, payload refs и conduction. 35 DOM-free Source SSR renders сохраняют начальные значения без callbacks/timers; Native проверяет также открытый shell, DOM/refs/active IDs, query/caret/focus, raw FormData и outside draft. MaxTag API остаётся отдельным этапом."
+        },
+        {
+          "id": "source-single-limit",
+          "title": "Source maxCount блокирует смену single value",
+          "state": "partial",
+          "requiredForV1": false,
+          "evidence": [
+            "tests/browser/fixtures/ant-design-tree-select-max-count-reference.json",
+            "src/lib/tree-select-limit.engine.test.ts",
+            "tests/browser/tree-select-max-count.spec.ts",
+            "readme.md"
+          ],
+          "note": "Ant Design6.6.8 / 984592267de88fbf9cdaecc96a56629e721c709d, rc-tree-select1.16.1, unmodified official UMD/React18.3.1. Raw observation single: multiple=false, maxCount=1, value=1; после открытия все прочие значения получают disabled и выбор2 не выполняется. Документированный limit относится к multiple, rc triggerChange также отключает limit в single, но OptionList получает raw leftMaxCount. Native игнорирует maxCount в single, сохраняя выбор/refs/form; public counterpart single-unlimited отличается только отсутствием неприменимого maxCount и успешно выбирает2."
+        },
+        {
+          "id": "source-stale-limit-cache",
+          "title": "Source disabled cache родителя устаревает при новых детях",
+          "state": "partial",
+          "requiredForV1": false,
+          "evidence": [
+            "tests/browser/fixtures/ant-design-tree-select-max-count-reference.json",
+            "src/lib/tree-select-limit.engine.test.ts",
+            "tests/browser/tree-select-max-count.spec.ts",
+            "readme.md"
+          ],
+          "note": "Ant Design6.6.8 / 984592267de88fbf9cdaecc96a56629e721c709d, rc-tree-select1.16.1, unmodified official UMD/React18.3.1. Raw observation grow: SHOW_CHILD, maxCount=2, выбран Tail, родитель имеет одного доступного ребёнка. После добавления второго remaining count остаётся1, disabledCache по value не очищается и родитель остаётся доступным; клик публикует onSelect без onChange. Fresh public counterpart fresh-wide с теми же финальными data/value/limit правильно запрещает родителя. Native пересчитывает predicate по текущим полным данным, сохраняет DOM/input/focus и payload refs и блокирует невозможный выбор."
         }
       ]
     },

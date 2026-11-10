@@ -46,6 +46,7 @@
     nativeElement = $bindable(),
     _themeStyle,
     _componentConfig = true,
+    _nodeDisabled,
     ...componentProps
   }: TreeProps<Data> = $props();
   let {
@@ -395,7 +396,8 @@
       void loader.load(node);
   }
   function select(entry: Entry, event?: MouseEvent, snapshot?: TreeEventNode<Data>) {
-    if (blocked || entry.node.disabled || !(entry.node.selectable ?? selectable)) return;
+    if (blocked || entry.node.disabled || _nodeDisabled?.(entry.node)
+      || !(entry.node.selectable ?? selectable)) return;
     const node = snapshot ?? eventNode(entry);
     const next = selectTreeKeys(selected, entry.key, multiple, snapshot?.selected);
     if (selectedKeys === undefined)
@@ -417,7 +419,7 @@
     force?: boolean,
     snapshot?: TreeEventNode<Data>
   ) {
-    if (!checkable || blocked || treeCheckDisabled(entry.node)) return;
+    if (!checkable || blocked || treeCheckDisabled(entry.node) || _nodeDisabled?.(entry.node)) return;
     const node = snapshot ?? eventNode(entry);
     const target = force ?? !node.checked;
     const next = checkStrictly
@@ -579,7 +581,7 @@
   {@const node = eventNode(entry)}
   {@const title = getTreeNodeTitle<Data>(entry.node, fieldNames, titleRender)}
   {@const isLeaf = leaf(entry)}
-  {@const unavailable = blocked || Boolean(entry.node.disabled)}
+  {@const unavailable = blocked || Boolean(entry.node.disabled || _nodeDisabled?.(entry.node))}
   {@const hasCheck = checkable && entry.node.checkable !== false}
   {@const nodeDraggable = drag.draggable(entry)}
   <div id={nodeId(entry.key)} role="treeitem" tabindex={nodeDraggable && !unavailable ? -1 : undefined} aria-labelledby={`${nodeId(entry.key)}-title`} aria-level={entry.level + 1} aria-posinset={entry.index + 1} aria-setsize={entry.siblings} aria-expanded={isLeaf ? undefined : node.expanded} aria-selected={(entry.node.selectable ?? selectable) && !unavailable
