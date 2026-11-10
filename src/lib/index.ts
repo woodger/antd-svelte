@@ -85,8 +85,10 @@ export type {
   TreeSelectChangeInfo
 } from './tree-select.types';
 export { default as Tree } from './Tree.svelte';
+export { default as DirectoryTree } from './DirectoryTree.svelte';
 export type {
   TreeProps,
+  DirectoryTreeProps,
   TreeDataNode,
   TreeEventNode,
   TreeKey,

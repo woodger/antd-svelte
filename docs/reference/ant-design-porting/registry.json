@@ -16049,7 +16049,7 @@
       "evidence": [
         "readme.md",
         "tests/browser/table.spec.ts",
-            "tools/fixtures/ant-design-current-table-expansion-observation.json",
+        "tools/fixtures/ant-design-current-table-expansion-observation.json",
         "tests/browser/table-filter.spec.ts",
         "tests/browser/server-table.spec.ts",
         "tests/browser/fixed-table.spec.ts",
@@ -17689,7 +17689,7 @@
       "name": "Tree",
       "category": "data-display",
       "scope": "target",
-      "scopeReason": "Первый этап Tree по Ant Design 6.6.8 и rc-tree 1.4.0: treeData, состояния, conduction, async loading и клавиатура; virtual/drag/DirectoryTree и расширенный API отдельно.",
+      "scopeReason": "Tree и DirectoryTree по Ant Design 6.6.8 / rc-tree 1.4.0: treeData, состояния, conduction, async loading, клавиатура и выбор диапазона; virtual/drag и расширенный API отдельно.",
       "upstreamPath": "components/tree",
       "reviewedRevision": "984592267de88fbf9cdaecc96a56629e721c709d",
       "exports": [
@@ -17697,6 +17697,12 @@
           "upstream": "Tree",
           "local": [
             "Tree"
+          ]
+        },
+        {
+          "upstream": "Tree.DirectoryTree",
+          "local": [
+            "DirectoryTree"
           ]
         }
       ],
@@ -17714,6 +17720,11 @@
           "name": "@ant-design/icons",
           "range": "^6.3.4",
           "referenceVersion": "6.3.4"
+        },
+        {
+          "name": "@rc-component/util",
+          "range": "^1.14.0",
+          "referenceVersion": "1.14.0"
         }
       ],
       "priority": "p1",
@@ -17737,7 +17748,19 @@
         "tests/browser/fixtures/ant-design-tree-prefix-reference.json",
         "tests/browser/tree-prefix-metrics.ts",
         "tests/browser/tree-prefix.spec.ts",
-        "tests/package/tree-prefix.ssr.test.ts"
+        "tests/package/tree-prefix.ssr.test.ts",
+        "src/lib/DirectoryTree.svelte",
+        "src/lib/directory-tree.engine.ts",
+        "src/lib/directory-tree.engine.test.ts",
+        "src/lib/TreeIcon.svelte",
+        "src/lib/index.ts",
+        "tests/browser/fixtures/DirectoryTreeScope.svelte",
+        "tests/browser/fixtures/DirectoryTreeFixtures.svelte",
+        "tests/browser/fixtures/ant-design-directory-tree-reference.json",
+        "tests/browser/directory-tree-metrics.ts",
+        "tests/browser/directory-tree.spec.ts",
+        "tests/package/directory-tree.ssr.test.ts",
+        "readme.md"
       ],
       "features": [
         {
@@ -17777,11 +17800,11 @@
         },
         {
           "id": "virtual-drag-directory",
-          "title": "Virtual scroll, drag/drop и DirectoryTree",
+          "title": "Virtual scroll и drag/drop",
           "state": "missing",
           "requiredForV1": false,
           "evidence": [],
-          "note": "Сейчас рендерятся все видимые строки, height задаёт native scroll viewport; virtual list/scrollTo и drag/drop, expandAction и DirectoryTree не перенесены."
+          "note": "Сейчас рендерятся все видимые строки, height задаёт native scroll viewport; virtual list/scrollTo и drag/drop не перенесены. DirectoryTree и expandAction учитываются отдельными features."
         },
         {
           "id": "extended-api",
@@ -17807,7 +17830,7 @@
             "tests/browser/tree-select-theme.spec.ts",
             "tests/browser/fixtures/ant-design-tree-theme-reference.json"
           ],
-          "note": "Девять source token declarations: titleHeight/switcherSize/indentSize, hover/selected colors и два DirectoryTree-only поля; последние не добавляют DirectoryTree API. Font/color/spacing aliases, global/component algorithms, custom cssVar prefix и local style/variables подключены к общему bridge. 14 официальных UMD-тем / 112 наборов сверяют видимый list, node/checkbox/switcher/indent CSS в normal/RTL/local-priority/nested/reset/sibling scopes, zero/undefined и dark/compact. Отдельный source кадр с activeKey=b проверяет живое обновление активной строки. TreeSelect передаёт Select/TreeSelect variables вместо Tree defaults; отдельный UMD-кадр сверяет конфликтующие Tree/TreeSelect/Select tokens, прежняя source матрица сохраняется. Native DOM/focus/active descendant/selection/check/loading и SSR не меняются."
+          "note": "Девять source token declarations: titleHeight/switcherSize/indentSize, hover/selected colors и два DirectoryTree-only поля; последние используются отдельным DirectoryTree export. Font/color/spacing aliases, global/component algorithms, custom cssVar prefix и local style/variables подключены к общему bridge. 14 официальных UMD-тем / 112 наборов сверяют видимый list, node/checkbox/switcher/indent CSS в normal/RTL/local-priority/nested/reset/sibling scopes, zero/undefined и dark/compact. Отдельный source кадр с activeKey=b проверяет живое обновление активной строки. TreeSelect передаёт Select/TreeSelect variables вместо Tree defaults; отдельный UMD-кадр сверяет конфликтующие Tree/TreeSelect/Select tokens, прежняя source матрица сохраняется. Native DOM/focus/active descendant/selection/check/loading и SSR не меняются."
         },
         {
           "id": "native-style-placement",
@@ -17843,7 +17866,7 @@
             "tests/browser/tree-prefix.spec.ts",
             "tests/package/tree-prefix.ssr.test.ts"
           ],
-          "note": "21 raw UMD конфигурация в normal/nested/reset scopes: expanded/selected/checked/mixed/disabled nodes, lines/leaf icons, block/filter/multiple/strict, aliases/cssVar и style. Local nonempty prefix wins; empty/undefined наследуют ConfigProvider. 98 исходных CSS rules изолированы по local/global scopes; canonical Tree variables, rc-virtual-list variable и независимый Row selector сохранены. Три raw live transitions сохраняют root/title/focus surface. Native roving tree focus, generated IDs/ARIA, refs, selection/check и pending load сохранены; prefix update не перезапускает loadData. TreeSelect явно сохраняет canonical child Tree namespace своего текущего CSS-адаптера до собственного prefix этапа. Raw Tree.style на internal list отделён от public styles.root counterpart для существующего Native outer style contract. Raw selectable=false initial selection отделён от public global selectable=true/per-node selectable=false visual counterpart; native selection semantics не меняются этим этапом. Directory/virtual/drag/semantic/config APIs и motion не добавлены."
+          "note": "21 raw UMD конфигурация в normal/nested/reset scopes: expanded/selected/checked/mixed/disabled nodes, lines/leaf icons, block/filter/multiple/strict, aliases/cssVar и style. Local nonempty prefix wins; empty/undefined наследуют ConfigProvider. 98 исходных CSS rules изолированы по local/global scopes; canonical Tree variables, rc-virtual-list variable и независимый Row selector сохранены. Три raw live transitions сохраняют root/title/focus surface. Native roving tree focus, generated IDs/ARIA, refs, selection/check и pending load сохранены; prefix update не перезапускает loadData. TreeSelect явно сохраняет canonical child Tree namespace своего текущего CSS-адаптера до собственного prefix этапа. Raw Tree.style на internal list отделён от public styles.root counterpart для существующего Native outer style contract. Raw selectable=false initial selection отделён от public global selectable=true/per-node selectable=false visual counterpart; native selection semantics не меняются этим этапом. Virtual/drag/semantic/config APIs и motion остаются отдельно; DirectoryTree использует этот prefix bridge."
         },
         {
           "id": "native-nonselectable-selection",
@@ -17878,7 +17901,7 @@
             "tests/package/tree-expand-action.ssr.test.ts",
             "readme.md"
           ],
-          "note": "Текущий TreeProps наследует expandAction из rc-tree1.4.0: false по умолчанию, click/doubleClick. Ctrl/Meta/Shift блокируют только title expansion. Snapshot node сохраняется до onExpand/onClick/onSelect/onCheck, включая synchronous controlled selection update в onClick; keys не дублируются. Заголовок может свернуть pending lazy ветку, прежний pointer switcher loading guard сохраняется. 22 raw UMD cases плюс settled-double counterpart задают события, keys, selected/expanded flags, disabled, leaf, zero key, RTL/prefix, controlled hold/accept, checkable и load order. Native сохраняет прежние native controls/ARIA и default без title expansion; disabled pointer probes воспроизводят физический клик через существующий ARIA disabled. Prop updates сохраняют nodes, selection и внешний draft/focus/selection. SSR не запускает load или browser resources. Полный list motion/virtual и DirectoryTree остаются отдельно."
+          "note": "Текущий TreeProps наследует expandAction из rc-tree1.4.0: false по умолчанию, click/doubleClick. Ctrl/Meta/Shift блокируют только title expansion. Snapshot node сохраняется до onExpand/onClick/onSelect/onCheck, включая synchronous controlled selection update в onClick; keys не дублируются. Заголовок может свернуть pending lazy ветку, прежний pointer switcher loading guard сохраняется. 22 raw UMD cases плюс settled-double counterpart задают события, keys, selected/expanded flags, disabled, leaf, zero key, RTL/prefix, controlled hold/accept, checkable и load order. Native сохраняет прежние native controls/ARIA и default без title expansion; disabled pointer probes воспроизводят физический клик через существующий ARIA disabled. Prop updates сохраняют nodes, selection и внешний draft/focus/selection. SSR не запускает load или browser resources. Полный list motion/virtual остаётся отдельно; DirectoryTree учитывается своей feature."
         },
         {
           "id": "native-rapid-expand-callbacks",
@@ -17894,6 +17917,42 @@
             "readme.md"
           ],
           "note": "Raw click-double при expandAction=click в rc-tree1.4.0 заканчивается expanded=false, но содержит только первый onExpand(expanded=true). triggerExpandActionExpand предварительно меняет keys до onNodeExpand, который может выйти через listChanging guard. Native immediate expansion сообщает оба фактических перехода и сохраняет согласованность state/callback; эталоном этой пары служит unmodified public Source counterpart с двумя кликами через100ms и последующим dblclick. Исходное ошибочное наблюдение сохранено отдельно и не используется как desired outcome. Полный Native virtual/list motion пока отсутствует."
+        },
+        {
+          "id": "directory-tree",
+          "title": "DirectoryTree: папки, sticky выбор и видимые Ctrl/Meta/Shift диапазоны",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/DirectoryTree.svelte",
+            "src/lib/directory-tree.engine.ts",
+            "src/lib/directory-tree.engine.test.ts",
+            "src/lib/TreeIcon.svelte",
+            "src/lib/tree.types.ts",
+            "src/lib/index.ts",
+            "tests/browser/fixtures/DirectoryTreeScope.svelte",
+            "tests/browser/fixtures/DirectoryTreeFixtures.svelte",
+            "tests/browser/fixtures/ant-design-directory-tree-reference.json",
+            "tests/browser/directory-tree-metrics.ts",
+            "tests/browser/directory-tree.spec.ts",
+            "tests/package/directory-tree.ssr.test.ts",
+            "readme.md"
+          ],
+          "note": "Отдельный Svelte export вместо React Tree.DirectoryTree. Исходные defaults expandAction=click, showIcon/blockNode=true допускают overrides; folder/file paths из icons-svg4.6.0. Обычный клик сохраняет одиночный выбор, Ctrl/Meta переключает ключи и anchor/cache, Shift объединяет cached keys с диапазоном видимых узлов; disabled/nonselectable промежуточные узлы пропускаются. selected=true даже при Ctrl removal, selectedNodes в полном DFS порядке и с исходными data nodes. DefaultExpandAll включает leaf keys, defaultExpandParent учитывает disabled границы; controlled hold/accept, pending lazy collapse, prefix/RTL/Tree directory tokens, native focus/blur/ref и SSR используют существующий Tree. 15 raw UMD6.6.8 cases повторены без изменений; расширенные generic/fieldNames/virtual/drag/semantic/config/motion API остаются пробелами общего Tree."
+        },
+        {
+          "id": "native-directory-control-release",
+          "title": "Безопасный Shift selection после снятия controlled-режима",
+          "state": "partial",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/DirectoryTree.svelte",
+            "tests/browser/directory-tree.spec.ts",
+            "tests/browser/fixtures/ant-design-directory-tree-control-release-observation.json",
+            "tests/package/directory-tree.ssr.test.ts",
+            "readme.md"
+          ],
+          "note": "Явная ошибка Ant Design6.6.8 / 984592267de88fbf9cdaecc96a56629e721c709d: useControlledState @rc-component/util1.14.0 зеркалит value=undefined во внутреннее состояние DirectoryTree при снятии selectedKeys/expandedKeys. Следующий Shift-клик вызывает Cannot read properties of undefined (reading includes) в calcRangeKeys. Raw hold/accept observations повторены побайтно и сохранены без исправления expected data. Svelte хранит безопасные массивы и сохраняет последние принятые controlled keys; отклонённый callback не заменяет принятые ключи. Ошибка не копируется; полный Tree API остаётся незавершённым."
         }
       ]
     },

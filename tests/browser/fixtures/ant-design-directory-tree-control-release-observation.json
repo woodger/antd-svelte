@@ -1,0 +1,143 @@
+{
+  "reference": {
+    "version": "6.6.8",
+    "revision": "984592267de88fbf9cdaecc96a56629e721c709d",
+    "archiveSha256": "8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa",
+    "files": [
+      "components/tree/DirectoryTree.tsx",
+      "components/tree/utils/dictUtil.ts"
+    ],
+    "delegate": "@rc-component/tree 1.4.0",
+    "controlledStateReference": "@rc-component/util 1.14.0"
+  },
+  "cases": [
+    {
+      "sample": {
+        "id": "hold-release",
+        "accept": false
+      },
+      "controlled": {
+        "titles": [
+          "Folder",
+          "A",
+          "B",
+          "Z"
+        ],
+        "selected": [],
+        "events": [
+          {
+            "kind": "select",
+            "keys": [
+              "a"
+            ],
+            "selected": true
+          }
+        ]
+      },
+      "released": {
+        "titles": [
+          "Folder",
+          "A",
+          "B",
+          "Z"
+        ],
+        "selected": [],
+        "events": [
+          {
+            "kind": "select",
+            "keys": [
+              "a"
+            ],
+            "selected": true
+          }
+        ]
+      },
+      "shift": {
+        "titles": [
+          "Folder",
+          "A",
+          "B",
+          "Z"
+        ],
+        "selected": [],
+        "events": [
+          {
+            "kind": "select",
+            "keys": [
+              "a"
+            ],
+            "selected": true
+          }
+        ]
+      },
+      "errors": [
+        "Cannot read properties of undefined (reading 'includes')"
+      ]
+    },
+    {
+      "sample": {
+        "id": "accept-release",
+        "accept": true
+      },
+      "controlled": {
+        "titles": [
+          "Folder",
+          "A",
+          "B",
+          "Z"
+        ],
+        "selected": [
+          "A"
+        ],
+        "events": [
+          {
+            "kind": "select",
+            "keys": [
+              "a"
+            ],
+            "selected": true
+          }
+        ]
+      },
+      "released": {
+        "titles": [
+          "Folder",
+          "A",
+          "B",
+          "Z"
+        ],
+        "selected": [],
+        "events": [
+          {
+            "kind": "select",
+            "keys": [
+              "a"
+            ],
+            "selected": true
+          }
+        ]
+      },
+      "shift": {
+        "titles": [
+          "Folder",
+          "A",
+          "B",
+          "Z"
+        ],
+        "selected": [],
+        "events": [
+          {
+            "kind": "select",
+            "keys": [
+              "a"
+            ],
+            "selected": true
+          }
+        ]
+      },
+      "errors": [
+        "Cannot read properties of undefined (reading 'includes')"
+      ]
+    }
+  ]
+}

@@ -120,3 +120,17 @@ export interface TreeProps extends Omit<HTMLAttributes<HTMLDivElement>, 'childre
   /** Нативный ref доступен после mount и очищается при unmount. */
   nativeElement?: HTMLDivElement;
 }
+
+/**
+ * Дерево папок: повторный клик сохраняет выбор, Ctrl/Meta переключает ключи,
+ * Shift выбирает видимый диапазон. OnSelect всегда сообщает selected=true;
+ * снятие controlled-режима сохраняет последние принятые ключи.
+ */
+export interface DirectoryTreeProps extends TreeProps {
+  /** Раскрытие заголовком. @defaultValue 'click' */
+  expandAction?: TreeExpandAction;
+  /** @defaultValue true */
+  showIcon?: boolean;
+  /** @defaultValue true */
+  blockNode?: boolean;
+}

@@ -6,7 +6,7 @@
 
 Эталон: Ant Design 6.6.8, commit `984592267de88fbf9cdaecc96a56629e721c709d`.
 
-Каталог: **73 семейств**, публичных Svelte-компонентов: **111**.
+Каталог: **73 семейств**, публичных Svelte-компонентов: **112**.
 Есть публичная реализация у **70** семейств; отсутствует у **3**.
 Проверенный объём v1 покрыт у **58**; требуется аудит у **12**; частично покрыт у **0**.
 
@@ -71,7 +71,7 @@ Candidate означает запись каталога, для которой 
 | [Timeline](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/timeline) | data-display | target | Timeline | Согласованный v1 покрыт |  |
 | [Tooltip](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/tooltip) | data-display | target | Tooltip | Требуется аудит v1 | Подробный аудит согласованного API v1 (unreviewed); Fresh cache внутреннего container и Svelte Snippet boundary (partial) |
 | [Tour](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/tour) | data-display | target | Tour | Согласованный v1 покрыт | Общий zIndex context (missing); Исходный приоритет runtime zIndex над CSS token zIndexPopup (partial); Source shared local-class cache и потеря Button margins вложенного provider (partial) |
-| [Tree](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/tree) | data-display | target | Tree | Согласованный v1 покрыт | Virtual scroll, drag/drop и DirectoryTree (missing); FieldNames, полный generic/ref/semantic/config API и motion (missing); Прежний native Tree.style оформляет внешний корень (partial); Заданный initial selection при selectable=false (partial); Каждый быстрый title-переход получает onExpand вместо пропущенного Source callback (partial) |
+| [Tree](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/tree) | data-display | target | Tree, DirectoryTree | Согласованный v1 покрыт | Virtual scroll и drag/drop (missing); FieldNames, полный generic/ref/semantic/config API и motion (missing); Прежний native Tree.style оформляет внешний корень (partial); Заданный initial selection при selectable=false (partial); Каждый быстрый title-переход получает onExpand вместо пропущенного Source callback (partial); Безопасный Shift selection после снятия controlled-режима (partial) |
 | [Alert](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/alert) | feedback | target | Alert | Согласованный v1 покрыт | Сохраняемые native motion, close presentation, ARIA/focus и layout (partial); Общий ConfigProvider prefix и React diagnostics (partial); Framework differences ErrorBoundary (partial) |
 | [Drawer](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/drawer) | feedback | target | Drawer | Требуется аудит v1 | Подробный аудит согласованного API v1 (unreviewed); Немодальные панели, push и resize (missing); Локальный getContainer и ConfigProvider fallback (partial) |
 | [Message](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/message) | feedback | target | MessageHolder, createMessage | Требуется аудит v1 | Подробный аудит согласованного API v1 (unreviewed); Наблюдение upstream: горизонтальное переполнение длинного слова (partial); Status classes уже показанного сообщения при смене prefix (partial) |

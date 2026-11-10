@@ -139,7 +139,7 @@ Day.js должен удовлетворять peer-диапазону ^1.11.11;
 | RangePicker | Пара Dayjs, связанные календари, время и подтверждение границ, allowEmpty/disabled, presets и hover |
 | Calendar | Full/mini date/month panels, controlled value/mode, header, week numbers, snippets и custom date adapter |
 | Upload / UploadDragger | Выбор/drop, controlled list, beforeUpload, XHR/customRequest, статусы и удаление |
-| Tree | TreeData, раскрытие/выбор/отметки, strict/conduction, loadData, клавиатура и showLine |
+| Tree / DirectoryTree | TreeData, раскрытие/выбор/отметки, strict/conduction, loadData, клавиатура и выбор диапазона |
 | TreeSelect | Single/multiple, labelInValue, check strategies, поиск, loadData и native popup |
 | Cascader / CascaderPanel | Полные пути, multiple/check strategies, поиск, lazy children, колонки и standalone Panel |
 | Transfer | Два списка, controlled targetKeys, выделение/Shift, поиск, oneWay, пагинация и custom lists |
@@ -6572,8 +6572,8 @@ Tree сохраняет заданный selection при selectable=false; Reac
 `ConfigProvider.theme.components.Tree` подключён к общему механизму компонентной
 темы: метрики title/switcher/indent, hover/selected colors, alias overrides,
 global/component algorithms и custom cssVar prefix. Локальные CSS variables и
-`style` сохраняют приоритет. Два DirectoryTree-only tokens объявляются как в
-upstream, но отдельный DirectoryTree API ещё не реализован. Внутреннее дерево
+`style` сохраняют приоритет. DirectoryTree использует те же настройки и отдельные
+directoryNodeSelectedBg/directoryNodeSelectedColor. Внутреннее дерево
 TreeSelect использует тему Select/TreeSelect, независимо от `components.Tree`.
 Отдельный UMD-замер проверяет одновременные конфликтующие настройки трёх компонентов.
 
@@ -6588,10 +6588,54 @@ DOM, фокуса, active descendant, отметок и pending load при об
 браузерные ресурсы. Декларации сверяются с официальным UMD отдельным
 [unit-набором](src/lib/theme-tree-tokens-reference.test.ts).
 
-DirectoryTree, drag/drop, virtual/scrollTo, fieldNames, полный generic
+Drag/drop, virtual/scrollTo, fieldNames, полный generic
 node API, TreeNode children API, per-node switcherIcon, showLeafIcon snippet,
 semantic/config API и collapse/appear анимации ещё не перенесены. Реестр
 отделяет этот объём от полного React API Tree.
+
+### DirectoryTree
+
+Отдельный экспорт `DirectoryTree` соответствует React `Tree.DirectoryTree` и
+использует существующий Tree. По умолчанию `expandAction='click'`, `showIcon=true`
+и `blockNode=true`; эти props можно переопределить. Лист получает file icon,
+ветка — закрытую или открытую папку. Snippet `icon` заменяет стандартную иконку.
+
+```svelte
+<script lang="ts">
+  import { DirectoryTree } from 'antd-svelte';
+
+  const nodes = [{ key: 'docs', title: 'Документы', children: [
+    { key: 'intro', title: 'Введение', isLeaf: true },
+    { key: 'api', title: 'API', isLeaf: true }
+  ] }];
+</script>
+
+<DirectoryTree treeData={nodes} multiple defaultExpandAll aria-label="Файлы" />
+```
+
+Обычный клик выбирает только строку и не снимает её выбор повторным кликом.
+При `multiple` Ctrl/Meta переключает отдельный ключ, Shift добавляет диапазон
+между текущей строкой и последним обычным/Ctrl/Meta выбором. Диапазон идёт по
+видимому дереву, не включает скрытых потомков и пропускает промежуточные
+disabled/nonselectable узлы. Первый Shift без такого выбора не создаёт диапазон.
+`onSelect` сообщает `selected=true`, включая снятие ключа через Ctrl/Meta;
+`selectedNodes` содержит исходные узлы в порядке полного дерева.
+
+Controlled/default keys и `defaultExpandParent` сохраняют Tree-контракты.
+В отличие от обычного Tree, DirectoryTree при `defaultExpandAll` включает
+в начальный набор также ключи листьев, как upstream. Lazy load, checkbox,
+клавиатура, темы Tree, RTL, prefix, focus/blur и `bind:nativeElement` используют
+существующий компонент. Расширенные неперенесённые Tree API перечислены выше.
+
+[Пятнадцать исходных сценариев](./tests/browser/fixtures/ant-design-directory-tree-reference.json)
+сверяют выбор/диапазоны, callbacks, раскрытие, иконки и directory tokens.
+[Browser](./tests/browser/directory-tree.spec.ts) и
+[SSR](./tests/package/directory-tree.ssr.test.ts) проверяют Svelte-реализацию.
+При снятии controlled-режима сохраняются последние принятые ключи. Это намеренное
+исправление: Ant Design 6.6.8 / rc-tree 1.4.0 после такого перехода теряет
+безопасные массивы, и следующий Shift-клик падает на `undefined.includes`.
+[Оба исходных наблюдения](./tests/browser/fixtures/ant-design-directory-tree-control-release-observation.json)
+сохранены отдельно; ошибка не переносится в Svelte.
 
 ## Upload / UploadDragger
 

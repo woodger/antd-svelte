@@ -9,6 +9,10 @@
 
 ### Added
 
+- DirectoryTree переносит иконки папок/файлов, выбор Ctrl/Meta/Shift и defaults
+  исходного Tree.DirectoryTree. Сохранены native refs, Tree-темы и controlled keys;
+  ошибка upstream при снятии controlled-режима записана отдельно и не перенесена.
+
 - Tree поддерживает expandAction=false/'click'/'doubleClick', modifier guards и
   раскрытие заголовком с исходным порядком callbacks и снимком node до действия.
 
