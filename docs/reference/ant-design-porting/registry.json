@@ -17704,6 +17704,12 @@
           "local": [
             "DirectoryTree"
           ]
+        },
+        {
+          "upstream": "Tree.useTree",
+          "local": [
+            "createTree"
+          ]
         }
       ],
       "dependencies": [
@@ -17766,7 +17772,15 @@
         "tests/browser/fixtures/ant-design-tree-node-renderers-reference.json",
         "tests/browser/tree-node-renderers-metrics.ts",
         "tests/browser/tree-node-renderers.spec.ts",
-        "tests/package/tree-node-renderers.ssr.test.ts"
+        "tests/package/tree-node-renderers.ssr.test.ts",
+        "src/lib/tree-data-model.ts",
+        "src/lib/tree-data-model.test.ts",
+        "src/lib/tree.engine.ts",
+        "tests/browser/fixtures/ant-design-tree-data-model-reference.json",
+        "tests/browser/fixtures/TreeDataModelScope.svelte",
+        "tests/browser/fixtures/TreeDataModelFixtures.svelte",
+        "tests/browser/tree-data-model.spec.ts",
+        "tests/package/tree-data-model.ssr.test.ts"
       ],
       "features": [
         {
@@ -17977,6 +17991,40 @@
             "readme.md"
           ],
           "note": "TreeDataNode.switcherIcon перекрывает общий Ant switcher, loading и leaf line; действует также на листья. Общий renderer уступает loading, showLine.showLeafIcon принимает snippet и не возвращается к fallback при пустом содержимом. Snippet получает вычисленный isLeaf; данные onMouseEnter/onMouseLeave сохраняют исходный флаг и актуальные состояния, disabled не отключает hover, pointer на switcher не вызывает node content callback. 14 исходных UMD6.6.8 / rc-tree1.4.0 конфигураций повторены побайтно: text/element/empty, loading, RTL/local prefix и DirectoryTree; snapshots включают callback order, renderer flags, содержимое, font-size и text-align switcher. Сброс native button styles не перекрывает source центрирование switcher; content сохраняет text-align:inherit. Native controls/ARIA, class/value/refs и DOM/focus сохраняются. Snippets остаются opaque Svelte content без ReactElement cloning; пустой snippet сохраняет native wrapper, React-specific false-return removal не является отдельным Native snippet API. Расширенный generic/fieldNames/semantic/config/virtual/drag/motion API остаётся отдельным объёмом. Исходное retained-node disposal observation подтверждает отсутствие hover после unmount. Native guard не публикует callbacks от удержанного detached DOM."
+        },
+        {
+          "id": "data-model-get-path",
+          "title": "CreateTree: generic entities/getPath и fieldNames data-модели",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/tree-data-model.ts",
+            "src/lib/tree-data-model.test.ts",
+            "src/lib/tree.engine.ts",
+            "src/lib/tree.types.ts",
+            "src/lib/index.ts",
+            "tests/browser/fixtures/ant-design-tree-data-model-reference.json",
+            "tests/browser/fixtures/TreeDataModelScope.svelte",
+            "tests/browser/fixtures/TreeDataModelFixtures.svelte",
+            "tests/browser/tree-data-model.spec.ts",
+            "tests/package/tree-data-model.ssr.test.ts",
+            "readme.md"
+          ],
+          "note": "Отдельный createTree вместо React Tree.useTree. Статический массив или getter data, getter config.fieldNames; стабильный getPath читает текущие ссылки data/schema. Generic payload, original node/nodes identities, key/pos/level/index/parent/optional children и полный root-to-target path сохраняются. Поддержаны aliases key/title/children, empty-name defaults, positional fallback, zero/bigint и реальные prototype-named keys. Пять raw UMD моделей и data/schema transitions фиксируют поведение useTree @rc-component/tree1.4.0; Svelte $derived отслеживает getter inputs без DOM/effects/timers в factory. FieldNames здесь относится к data-модели: Tree/DirectoryTree UI props, callbacks и renderer generic API остаются отдельным неперенесённым объёмом."
+        },
+        {
+          "id": "native-model-missing-prototype-key",
+          "title": "GetPath неизвестных prototype keys возвращает пустой путь",
+          "state": "partial",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/tree-data-model.ts",
+            "src/lib/tree-data-model.test.ts",
+            "tests/browser/fixtures/ant-design-tree-data-model-reference.json",
+            "tests/browser/tree-data-model.spec.ts",
+            "readme.md"
+          ],
+          "note": "Ошибка Source Ant Design6.6.8 / 984592267de88fbf9cdaecc96a56629e721c709d / rc-tree1.4.0: getEntity читает plain keyEntities[key], поэтому getPath для отсутствующих constructor/__proto__/toString возвращает унаследованные function/Object.prototype вместо DataEntity. Raw observation сохранено отдельно от желаемого поведения. Native Map не берёт значения из prototype и возвращает []; одноимённые реальные data keys сохраняются."
         }
       ]
     },

@@ -2,6 +2,36 @@ import type { Snippet } from 'svelte';
 import type { HTMLAttributes } from 'svelte/elements';
 export type TreeKey = string | number | bigint;
 export type TreeExpandAction = false | 'click' | 'doubleClick';
+/** Имена полей data; пустая строка использует стандартные key/title/children. */
+export interface TreeFieldNames {
+  key?: string;
+  title?: string;
+  children?: string;
+}
+
+/** Настройки data-модели createTree; смена fieldNames задаётся новым объектом. */
+export interface TreeModelConfig {
+  fieldNames?: TreeFieldNames;
+}
+
+/** Entity data-модели: исходный node и путь nodes от корня до него включительно. */
+export interface TreeDataEntity<Data extends object = TreeDataNode> {
+  node: Data;
+  nodes: Data[];
+  index: number;
+  key: TreeKey;
+  pos: string;
+  level: number;
+  parent: TreeDataEntity<Data> | undefined;
+  children?: TreeDataEntity<Data>[];
+}
+
+/** Data utilities Tree; DOM ref компонента по-прежнему предоставляет focus/blur. */
+export interface TreeInstance<Data extends object = TreeDataNode> {
+  /** Стабильная функция читает текущие data/config; неизвестный ключ возвращает пустой путь. */
+  getPath: (key: TreeKey) => TreeDataEntity<Data>[];
+}
+
 export interface TreeDataNode {
   key: TreeKey;
   title?: string | number | Snippet<[TreeDataNode]>;

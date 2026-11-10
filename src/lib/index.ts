@@ -86,10 +86,15 @@ export type {
 } from './tree-select.types';
 export { default as Tree } from './Tree.svelte';
 export { default as DirectoryTree } from './DirectoryTree.svelte';
+export { createTree } from './tree-data-model';
 export type {
   TreeProps,
   DirectoryTreeProps,
   TreeDataNode,
+  TreeFieldNames,
+  TreeModelConfig,
+  TreeDataEntity,
+  TreeInstance,
   TreeEventNode,
   TreeKey,
   TreeExpandAction,

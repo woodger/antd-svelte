@@ -1,0 +1,6823 @@
+{
+  "reference": {
+    "version": "6.6.8",
+    "revision": "984592267de88fbf9cdaecc96a56629e721c709d",
+    "archiveSha256": "8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa",
+    "files": [
+      "components/tree/index.tsx",
+      "components/tree/index.en-US.md"
+    ],
+    "delegate": "@rc-component/tree 1.4.0",
+    "delegatedFiles": [
+      "es/hooks/useTree.js",
+      "es/utils/treeUtil.js",
+      "es/utils/keyUtil.js"
+    ]
+  },
+  "cases": [
+    {
+      "sample": {
+        "id": "canonical",
+        "data": [
+          {
+            "key": "root",
+            "title": "Root",
+            "payload": {
+              "tag": "root"
+            },
+            "children": [
+              {
+                "key": 0,
+                "title": "Zero",
+                "payload": {
+                  "tag": "zero"
+                }
+              },
+              {
+                "key": "branch",
+                "title": "Branch",
+                "payload": {
+                  "tag": "branch"
+                },
+                "children": [
+                  {
+                    "key": "leaf",
+                    "title": "Leaf",
+                    "payload": {
+                      "tag": "leaf"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "result": {
+        "stable": true,
+        "paths": [
+          {
+            "query": {
+              "type": "string",
+              "value": "root"
+            },
+            "path": [
+              {
+                "key": {
+                  "type": "string",
+                  "value": "root"
+                },
+                "pos": "0-0",
+                "level": 0,
+                "index": 0,
+                "nodeKey": {
+                  "type": "string",
+                  "value": "root"
+                },
+                "originalKey": {
+                  "type": "string",
+                  "value": "root"
+                },
+                "title": "Root",
+                "payload": {
+                  "tag": "root"
+                },
+                "originalNode": true,
+                "nodes": [
+                  {
+                    "type": "string",
+                    "value": "root"
+                  }
+                ],
+                "originalPathNodes": true,
+                "parent": null,
+                "hasChildren": true,
+                "children": [
+                  {
+                    "type": "number",
+                    "value": "0"
+                  },
+                  {
+                    "type": "string",
+                    "value": "branch"
+                  }
+                ],
+                "fields": [
+                  "children",
+                  "index",
+                  "key",
+                  "level",
+                  "node",
+                  "nodes",
+                  "parent",
+                  "pos"
+                ]
+              }
+            ]
+          },
+          {
+            "query": {
+              "type": "number",
+              "value": "0"
+            },
+            "path": [
+              {
+                "key": {
+                  "type": "string",
+                  "value": "root"
+                },
+                "pos": "0-0",
+                "level": 0,
+                "index": 0,
+                "nodeKey": {
+                  "type": "string",
+                  "value": "root"
+                },
+                "originalKey": {
+                  "type": "string",
+                  "value": "root"
+                },
+                "title": "Root",
+                "payload": {
+                  "tag": "root"
+                },
+                "originalNode": true,
+                "nodes": [
+                  {
+                    "type": "string",
+                    "value": "root"
+                  }
+                ],
+                "originalPathNodes": true,
+                "parent": null,
+                "hasChildren": true,
+                "children": [
+                  {
+                    "type": "number",
+                    "value": "0"
+                  },
+                  {
+                    "type": "string",
+                    "value": "branch"
+                  }
+                ],
+                "fields": [
+                  "children",
+                  "index",
+                  "key",
+                  "level",
+                  "node",
+                  "nodes",
+                  "parent",
+                  "pos"
+                ]
+              },
+              {
+                "key": {
+                  "type": "number",
+                  "value": "0"
+                },
+                "pos": "0-0-0",
+                "level": 1,
+                "index": 0,
+                "nodeKey": {
+                  "type": "number",
+                  "value": "0"
+                },
+                "originalKey": {
+                  "type": "number",
+                  "value": "0"
+                },
+                "title": "Zero",
+                "payload": {
+                  "tag": "zero"
+                },
+                "originalNode": true,
+                "nodes": [
+                  {
+                    "type": "string",
+                    "value": "root"
+                  },
+                  {
+                    "type": "number",
+                    "value": "0"
+                  }
+                ],
+                "originalPathNodes": true,
+                "parent": {
+                  "type": "string",
+                  "value": "root"
+                },
+                "hasChildren": false,
+                "children": [],
+                "fields": [
+                  "index",
+                  "key",
+                  "level",
+                  "node",
+                  "nodes",
+                  "parent",
+                  "pos"
+                ]
+              }
+            ]
+          },
+          {
+            "query": {
+              "type": "string",
+              "value": "branch"
+            },
+            "path": [
+              {
+                "key": {
+                  "type": "string",
+                  "value": "root"
+                },
+                "pos": "0-0",
+                "level": 0,
+                "index": 0,
+                "nodeKey": {
+                  "type": "string",
+                  "value": "root"
+                },
+                "originalKey": {
+                  "type": "string",
+                  "value": "root"
+                },
+                "title": "Root",
+                "payload": {
+                  "tag": "root"
+                },
+                "originalNode": true,
+                "nodes": [
+                  {
+                    "type": "string",
+                    "value": "root"
+                  }
+                ],
+                "originalPathNodes": true,
+                "parent": null,
+                "hasChildren": true,
+                "children": [
+                  {
+                    "type": "number",
+                    "value": "0"
+                  },
+                  {
+                    "type": "string",
+                    "value": "branch"
+                  }
+                ],
+                "fields": [
+                  "children",
+                  "index",
+                  "key",
+                  "level",
+                  "node",
+                  "nodes",
+                  "parent",
+                  "pos"
+                ]
+              },
+              {
+                "key": {
+                  "type": "string",
+                  "value": "branch"
+                },
+                "pos": "0-0-1",
+                "level": 1,
+                "index": 1,
+                "nodeKey": {
+                  "type": "string",
+                  "value": "branch"
+                },
+                "originalKey": {
+                  "type": "string",
+                  "value": "branch"
+                },
+                "title": "Branch",
+                "payload": {
+                  "tag": "branch"
+                },
+                "originalNode": true,
+                "nodes": [
+                  {
+                    "type": "string",
+                    "value": "root"
+                  },
+                  {
+                    "type": "string",
+                    "value": "branch"
+                  }
+                ],
+                "originalPathNodes": true,
+                "parent": {
+                  "type": "string",
+                  "value": "root"
+                },
+                "hasChildren": true,
+                "children": [
+                  {
+                    "type": "string",
+                    "value": "leaf"
+                  }
+                ],
+                "fields": [
+                  "children",
+                  "index",
+                  "key",
+                  "level",
+                  "node",
+                  "nodes",
+                  "parent",
+                  "pos"
+                ]
+              }
+            ]
+          },
+          {
+            "query": {
+              "type": "string",
+              "value": "leaf"
+            },
+            "path": [
+              {
+                "key": {
+                  "type": "string",
+                  "value": "root"
+                },
+                "pos": "0-0",
+                "level": 0,
+                "index": 0,
+                "nodeKey": {
+                  "type": "string",
+                  "value": "root"
+                },
+                "originalKey": {
+                  "type": "string",
+                  "value": "root"
+                },
+                "title": "Root",
+                "payload": {
+                  "tag": "root"
+                },
+                "originalNode": true,
+                "nodes": [
+                  {
+                    "type": "string",
+                    "value": "root"
+                  }
+                ],
+                "originalPathNodes": true,
+                "parent": null,
+                "hasChildren": true,
+                "children": [
+                  {
+                    "type": "number",
+                    "value": "0"
+                  },
+                  {
+                    "type": "string",
+                    "value": "branch"
+                  }
+                ],
+                "fields": [
+                  "children",
+                  "index",
+                  "key",
+                  "level",
+                  "node",
+                  "nodes",
+                  "parent",
+                  "pos"
+                ]
+              },
+              {
+                "key": {
+                  "type": "string",
+                  "value": "branch"
+                },
+                "pos": "0-0-1",
+                "level": 1,
+                "index": 1,
+                "nodeKey": {
+                  "type": "string",
+                  "value": "branch"
+                },
+                "originalKey": {
+                  "type": "string",
+                  "value": "branch"
+                },
+                "title": "Branch",
+                "payload": {
+                  "tag": "branch"
+                },
+                "originalNode": true,
+                "nodes": [
+                  {
+                    "type": "string",
+                    "value": "root"
+                  },
+                  {
+                    "type": "string",
+                    "value": "branch"
+                  }
+                ],
+                "originalPathNodes": true,
+                "parent": {
+                  "type": "string",
+                  "value": "root"
+                },
+                "hasChildren": true,
+                "children": [
+                  {
+                    "type": "string",
+                    "value": "leaf"
+                  }
+                ],
+                "fields": [
+                  "children",
+                  "index",
+                  "key",
+                  "level",
+                  "node",
+                  "nodes",
+                  "parent",
+                  "pos"
+                ]
+              },
+              {
+                "key": {
+                  "type": "string",
+                  "value": "leaf"
+                },
+                "pos": "0-0-1-0",
+                "level": 2,
+                "index": 0,
+                "nodeKey": {
+                  "type": "string",
+                  "value": "leaf"
+                },
+                "originalKey": {
+                  "type": "string",
+                  "value": "leaf"
+                },
+                "title": "Leaf",
+                "payload": {
+                  "tag": "leaf"
+                },
+                "originalNode": true,
+                "nodes": [
+                  {
+                    "type": "string",
+                    "value": "root"
+                  },
+                  {
+                    "type": "string",
+                    "value": "branch"
+                  },
+                  {
+                    "type": "string",
+                    "value": "leaf"
+                  }
+                ],
+                "originalPathNodes": true,
+                "parent": {
+                  "type": "string",
+                  "value": "branch"
+                },
+                "hasChildren": false,
+                "children": [],
+                "fields": [
+                  "index",
+                  "key",
+                  "level",
+                  "node",
+                  "nodes",
+                  "parent",
+                  "pos"
+                ]
+              }
+            ]
+          },
+          {
+            "query": {
+              "type": "string",
+              "value": "missing"
+            },
+            "path": []
+          }
+        ],
+        "savedPaths": [
+          {
+            "query": {
+              "type": "string",
+              "value": "root"
+            },
+            "path": [
+              {
+                "key": {
+                  "type": "string",
+                  "value": "root"
+                },
+                "pos": "0-0",
+                "level": 0,
+                "index": 0,
+                "nodeKey": {
+                  "type": "string",
+                  "value": "root"
+                },
+                "originalKey": {
+                  "type": "string",
+                  "value": "root"
+                },
+                "title": "Root",
+                "payload": {
+                  "tag": "root"
+                },
+                "originalNode": true,
+                "nodes": [
+                  {
+                    "type": "string",
+                    "value": "root"
+                  }
+                ],
+                "originalPathNodes": true,
+                "parent": null,
+                "hasChildren": true,
+                "children": [
+                  {
+                    "type": "number",
+                    "value": "0"
+                  },
+                  {
+                    "type": "string",
+                    "value": "branch"
+                  }
+                ],
+                "fields": [
+                  "children",
+                  "index",
+                  "key",
+                  "level",
+                  "node",
+                  "nodes",
+                  "parent",
+                  "pos"
+                ]
+              }
+            ]
+          },
+          {
+            "query": {
+              "type": "number",
+              "value": "0"
+            },
+            "path": [
+              {
+                "key": {
+                  "type": "string",
+                  "value": "root"
+                },
+                "pos": "0-0",
+                "level": 0,
+                "index": 0,
+                "nodeKey": {
+                  "type": "string",
+                  "value": "root"
+                },
+                "originalKey": {
+                  "type": "string",
+                  "value": "root"
+                },
+                "title": "Root",
+                "payload": {
+                  "tag": "root"
+                },
+                "originalNode": true,
+                "nodes": [
+                  {
+                    "type": "string",
+                    "value": "root"
+                  }
+                ],
+                "originalPathNodes": true,
+                "parent": null,
+                "hasChildren": true,
+                "children": [
+                  {
+                    "type": "number",
+                    "value": "0"
+                  },
+                  {
+                    "type": "string",
+                    "value": "branch"
+                  }
+                ],
+                "fields": [
+                  "children",
+                  "index",
+                  "key",
+                  "level",
+                  "node",
+                  "nodes",
+                  "parent",
+                  "pos"
+                ]
+              },
+              {
+                "key": {
+                  "type": "number",
+                  "value": "0"
+                },
+                "pos": "0-0-0",
+                "level": 1,
+                "index": 0,
+                "nodeKey": {
+                  "type": "number",
+                  "value": "0"
+                },
+                "originalKey": {
+                  "type": "number",
+                  "value": "0"
+                },
+                "title": "Zero",
+                "payload": {
+                  "tag": "zero"
+                },
+                "originalNode": true,
+                "nodes": [
+                  {
+                    "type": "string",
+                    "value": "root"
+                  },
+                  {
+                    "type": "number",
+                    "value": "0"
+                  }
+                ],
+                "originalPathNodes": true,
+                "parent": {
+                  "type": "string",
+                  "value": "root"
+                },
+                "hasChildren": false,
+                "children": [],
+                "fields": [
+                  "index",
+                  "key",
+                  "level",
+                  "node",
+                  "nodes",
+                  "parent",
+                  "pos"
+                ]
+              }
+            ]
+          },
+          {
+            "query": {
+              "type": "string",
+              "value": "branch"
+            },
+            "path": [
+              {
+                "key": {
+                  "type": "string",
+                  "value": "root"
+                },
+                "pos": "0-0",
+                "level": 0,
+                "index": 0,
+                "nodeKey": {
+                  "type": "string",
+                  "value": "root"
+                },
+                "originalKey": {
+                  "type": "string",
+                  "value": "root"
+                },
+                "title": "Root",
+                "payload": {
+                  "tag": "root"
+                },
+                "originalNode": true,
+                "nodes": [
+                  {
+                    "type": "string",
+                    "value": "root"
+                  }
+                ],
+                "originalPathNodes": true,
+                "parent": null,
+                "hasChildren": true,
+                "children": [
+                  {
+                    "type": "number",
+                    "value": "0"
+                  },
+                  {
+                    "type": "string",
+                    "value": "branch"
+                  }
+                ],
+                "fields": [
+                  "children",
+                  "index",
+                  "key",
+                  "level",
+                  "node",
+                  "nodes",
+                  "parent",
+                  "pos"
+                ]
+              },
+              {
+                "key": {
+                  "type": "string",
+                  "value": "branch"
+                },
+                "pos": "0-0-1",
+                "level": 1,
+                "index": 1,
+                "nodeKey": {
+                  "type": "string",
+                  "value": "branch"
+                },
+                "originalKey": {
+                  "type": "string",
+                  "value": "branch"
+                },
+                "title": "Branch",
+                "payload": {
+                  "tag": "branch"
+                },
+                "originalNode": true,
+                "nodes": [
+                  {
+                    "type": "string",
+                    "value": "root"
+                  },
+                  {
+                    "type": "string",
+                    "value": "branch"
+                  }
+                ],
+                "originalPathNodes": true,
+                "parent": {
+                  "type": "string",
+                  "value": "root"
+                },
+                "hasChildren": true,
+                "children": [
+                  {
+                    "type": "string",
+                    "value": "leaf"
+                  }
+                ],
+                "fields": [
+                  "children",
+                  "index",
+                  "key",
+                  "level",
+                  "node",
+                  "nodes",
+                  "parent",
+                  "pos"
+                ]
+              }
+            ]
+          },
+          {
+            "query": {
+              "type": "string",
+              "value": "leaf"
+            },
+            "path": [
+              {
+                "key": {
+                  "type": "string",
+                  "value": "root"
+                },
+                "pos": "0-0",
+                "level": 0,
+                "index": 0,
+                "nodeKey": {
+                  "type": "string",
+                  "value": "root"
+                },
+                "originalKey": {
+                  "type": "string",
+                  "value": "root"
+                },
+                "title": "Root",
+                "payload": {
+                  "tag": "root"
+                },
+                "originalNode": true,
+                "nodes": [
+                  {
+                    "type": "string",
+                    "value": "root"
+                  }
+                ],
+                "originalPathNodes": true,
+                "parent": null,
+                "hasChildren": true,
+                "children": [
+                  {
+                    "type": "number",
+                    "value": "0"
+                  },
+                  {
+                    "type": "string",
+                    "value": "branch"
+                  }
+                ],
+                "fields": [
+                  "children",
+                  "index",
+                  "key",
+                  "level",
+                  "node",
+                  "nodes",
+                  "parent",
+                  "pos"
+                ]
+              },
+              {
+                "key": {
+                  "type": "string",
+                  "value": "branch"
+                },
+                "pos": "0-0-1",
+                "level": 1,
+                "index": 1,
+                "nodeKey": {
+                  "type": "string",
+                  "value": "branch"
+                },
+                "originalKey": {
+                  "type": "string",
+                  "value": "branch"
+                },
+                "title": "Branch",
+                "payload": {
+                  "tag": "branch"
+                },
+                "originalNode": true,
+                "nodes": [
+                  {
+                    "type": "string",
+                    "value": "root"
+                  },
+                  {
+                    "type": "string",
+                    "value": "branch"
+                  }
+                ],
+                "originalPathNodes": true,
+                "parent": {
+                  "type": "string",
+                  "value": "root"
+                },
+                "hasChildren": true,
+                "children": [
+                  {
+                    "type": "string",
+                    "value": "leaf"
+                  }
+                ],
+                "fields": [
+                  "children",
+                  "index",
+                  "key",
+                  "level",
+                  "node",
+                  "nodes",
+                  "parent",
+                  "pos"
+                ]
+              },
+              {
+                "key": {
+                  "type": "string",
+                  "value": "leaf"
+                },
+                "pos": "0-0-1-0",
+                "level": 2,
+                "index": 0,
+                "nodeKey": {
+                  "type": "string",
+                  "value": "leaf"
+                },
+                "originalKey": {
+                  "type": "string",
+                  "value": "leaf"
+                },
+                "title": "Leaf",
+                "payload": {
+                  "tag": "leaf"
+                },
+                "originalNode": true,
+                "nodes": [
+                  {
+                    "type": "string",
+                    "value": "root"
+                  },
+                  {
+                    "type": "string",
+                    "value": "branch"
+                  },
+                  {
+                    "type": "string",
+                    "value": "leaf"
+                  }
+                ],
+                "originalPathNodes": true,
+                "parent": {
+                  "type": "string",
+                  "value": "branch"
+                },
+                "hasChildren": false,
+                "children": [],
+                "fields": [
+                  "index",
+                  "key",
+                  "level",
+                  "node",
+                  "nodes",
+                  "parent",
+                  "pos"
+                ]
+              }
+            ]
+          },
+          {
+            "query": {
+              "type": "string",
+              "value": "missing"
+            },
+            "path": []
+          }
+        ]
+      }
+    },
+    {
+      "sample": {
+        "id": "aliased",
+        "data": [
+          {
+            "id": "root",
+            "key": "raw-root",
+            "caption": "Root alias",
+            "payload": {
+              "tag": "root"
+            },
+            "items": [
+              {
+                "id": 0,
+                "key": "raw-zero",
+                "caption": "Zero alias",
+                "payload": {
+                  "tag": "zero"
+                }
+              },
+              {
+                "id": "branch",
+                "key": "raw-branch",
+                "caption": "Branch alias",
+                "payload": {
+                  "tag": "branch"
+                },
+                "items": [
+                  {
+                    "id": "leaf",
+                    "key": "raw-leaf",
+                    "caption": "Leaf alias",
+                    "payload": {
+                      "tag": "leaf"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "fields": {
+          "key": "id",
+          "title": "caption",
+          "children": "items"
+        }
+      },
+      "result": {
+        "stable": true,
+        "paths": [
+          {
+            "query": {
+              "type": "string",
+              "value": "root"
+            },
+            "path": [
+              {
+                "key": {
+                  "type": "string",
+                  "value": "root"
+                },
+                "pos": "0-0",
+                "level": 0,
+                "index": 0,
+                "nodeKey": {
+                  "type": "string",
+                  "value": "root"
+                },
+                "originalKey": {
+                  "type": "string",
+                  "value": "raw-root"
+                },
+                "title": "Root alias",
+                "payload": {
+                  "tag": "root"
+                },
+                "originalNode": true,
+                "nodes": [
+                  {
+                    "type": "string",
+                    "value": "root"
+                  }
+                ],
+                "originalPathNodes": true,
+                "parent": null,
+                "hasChildren": true,
+                "children": [
+                  {
+                    "type": "number",
+                    "value": "0"
+                  },
+                  {
+                    "type": "string",
+                    "value": "branch"
+                  }
+                ],
+                "fields": [
+                  "children",
+                  "index",
+                  "key",
+                  "level",
+                  "node",
+                  "nodes",
+                  "parent",
+                  "pos"
+                ]
+              }
+            ]
+          },
+          {
+            "query": {
+              "type": "number",
+              "value": "0"
+            },
+            "path": [
+              {
+                "key": {
+                  "type": "string",
+                  "value": "root"
+                },
+                "pos": "0-0",
+                "level": 0,
+                "index": 0,
+                "nodeKey": {
+                  "type": "string",
+                  "value": "root"
+                },
+                "originalKey": {
+                  "type": "string",
+                  "value": "raw-root"
+                },
+                "title": "Root alias",
+                "payload": {
+                  "tag": "root"
+                },
+                "originalNode": true,
+                "nodes": [
+                  {
+                    "type": "string",
+                    "value": "root"
+                  }
+                ],
+                "originalPathNodes": true,
+                "parent": null,
+                "hasChildren": true,
+                "children": [
+                  {
+                    "type": "number",
+                    "value": "0"
+                  },
+                  {
+                    "type": "string",
+                    "value": "branch"
+                  }
+                ],
+                "fields": [
+                  "children",
+                  "index",
+                  "key",
+                  "level",
+                  "node",
+                  "nodes",
+                  "parent",
+                  "pos"
+                ]
+              },
+              {
+                "key": {
+                  "type": "number",
+                  "value": "0"
+                },
+                "pos": "0-0-0",
+                "level": 1,
+                "index": 0,
+                "nodeKey": {
+                  "type": "number",
+                  "value": "0"
+                },
+                "originalKey": {
+                  "type": "string",
+                  "value": "raw-zero"
+                },
+                "title": "Zero alias",
+                "payload": {
+                  "tag": "zero"
+                },
+                "originalNode": true,
+                "nodes": [
+                  {
+                    "type": "string",
+                    "value": "root"
+                  },
+                  {
+                    "type": "number",
+                    "value": "0"
+                  }
+                ],
+                "originalPathNodes": true,
+                "parent": {
+                  "type": "string",
+                  "value": "root"
+                },
+                "hasChildren": false,
+                "children": [],
+                "fields": [
+                  "index",
+                  "key",
+                  "level",
+                  "node",
+                  "nodes",
+                  "parent",
+                  "pos"
+                ]
+              }
+            ]
+          },
+          {
+            "query": {
+              "type": "string",
+              "value": "branch"
+            },
+            "path": [
+              {
+                "key": {
+                  "type": "string",
+                  "value": "root"
+                },
+                "pos": "0-0",
+                "level": 0,
+                "index": 0,
+                "nodeKey": {
+                  "type": "string",
+                  "value": "root"
+                },
+                "originalKey": {
+                  "type": "string",
+                  "value": "raw-root"
+                },
+                "title": "Root alias",
+                "payload": {
+                  "tag": "root"
+                },
+                "originalNode": true,
+                "nodes": [
+                  {
+                    "type": "string",
+                    "value": "root"
+                  }
+                ],
+                "originalPathNodes": true,
+                "parent": null,
+                "hasChildren": true,
+                "children": [
+                  {
+                    "type": "number",
+                    "value": "0"
+                  },
+                  {
+                    "type": "string",
+                    "value": "branch"
+                  }
+                ],
+                "fields": [
+                  "children",
+                  "index",
+                  "key",
+                  "level",
+                  "node",
+                  "nodes",
+                  "parent",
+                  "pos"
+                ]
+              },
+              {
+                "key": {
+                  "type": "string",
+                  "value": "branch"
+                },
+                "pos": "0-0-1",
+                "level": 1,
+                "index": 1,
+                "nodeKey": {
+                  "type": "string",
+                  "value": "branch"
+                },
+                "originalKey": {
+                  "type": "string",
+                  "value": "raw-branch"
+                },
+                "title": "Branch alias",
+                "payload": {
+                  "tag": "branch"
+                },
+                "originalNode": true,
+                "nodes": [
+                  {
+                    "type": "string",
+                    "value": "root"
+                  },
+                  {
+                    "type": "string",
+                    "value": "branch"
+                  }
+                ],
+                "originalPathNodes": true,
+                "parent": {
+                  "type": "string",
+                  "value": "root"
+                },
+                "hasChildren": true,
+                "children": [
+                  {
+                    "type": "string",
+                    "value": "leaf"
+                  }
+                ],
+                "fields": [
+                  "children",
+                  "index",
+                  "key",
+                  "level",
+                  "node",
+                  "nodes",
+                  "parent",
+                  "pos"
+                ]
+              }
+            ]
+          },
+          {
+            "query": {
+              "type": "string",
+              "value": "leaf"
+            },
+            "path": [
+              {
+                "key": {
+                  "type": "string",
+                  "value": "root"
+                },
+                "pos": "0-0",
+                "level": 0,
+                "index": 0,
+                "nodeKey": {
+                  "type": "string",
+                  "value": "root"
+                },
+                "originalKey": {
+                  "type": "string",
+                  "value": "raw-root"
+                },
+                "title": "Root alias",
+                "payload": {
+                  "tag": "root"
+                },
+                "originalNode": true,
+                "nodes": [
+                  {
+                    "type": "string",
+                    "value": "root"
+                  }
+                ],
+                "originalPathNodes": true,
+                "parent": null,
+                "hasChildren": true,
+                "children": [
+                  {
+                    "type": "number",
+                    "value": "0"
+                  },
+                  {
+                    "type": "string",
+                    "value": "branch"
+                  }
+                ],
+                "fields": [
+                  "children",
+                  "index",
+                  "key",
+                  "level",
+                  "node",
+                  "nodes",
+                  "parent",
+                  "pos"
+                ]
+              },
+              {
+                "key": {
+                  "type": "string",
+                  "value": "branch"
+                },
+                "pos": "0-0-1",
+                "level": 1,
+                "index": 1,
+                "nodeKey": {
+                  "type": "string",
+                  "value": "branch"
+                },
+                "originalKey": {
+                  "type": "string",
+                  "value": "raw-branch"
+                },
+                "title": "Branch alias",
+                "payload": {
+                  "tag": "branch"
+                },
+                "originalNode": true,
+                "nodes": [
+                  {
+                    "type": "string",
+                    "value": "root"
+                  },
+                  {
+                    "type": "string",
+                    "value": "branch"
+                  }
+                ],
+                "originalPathNodes": true,
+                "parent": {
+                  "type": "string",
+                  "value": "root"
+                },
+                "hasChildren": true,
+                "children": [
+                  {
+                    "type": "string",
+                    "value": "leaf"
+                  }
+                ],
+                "fields": [
+                  "children",
+                  "index",
+                  "key",
+                  "level",
+                  "node",
+                  "nodes",
+                  "parent",
+                  "pos"
+                ]
+              },
+              {
+                "key": {
+                  "type": "string",
+                  "value": "leaf"
+                },
+                "pos": "0-0-1-0",
+                "level": 2,
+                "index": 0,
+                "nodeKey": {
+                  "type": "string",
+                  "value": "leaf"
+                },
+                "originalKey": {
+                  "type": "string",
+                  "value": "raw-leaf"
+                },
+                "title": "Leaf alias",
+                "payload": {
+                  "tag": "leaf"
+                },
+                "originalNode": true,
+                "nodes": [
+                  {
+                    "type": "string",
+                    "value": "root"
+                  },
+                  {
+                    "type": "string",
+                    "value": "branch"
+                  },
+                  {
+                    "type": "string",
+                    "value": "leaf"
+                  }
+                ],
+                "originalPathNodes": true,
+                "parent": {
+                  "type": "string",
+                  "value": "branch"
+                },
+                "hasChildren": false,
+                "children": [],
+                "fields": [
+                  "index",
+                  "key",
+                  "level",
+                  "node",
+                  "nodes",
+                  "parent",
+                  "pos"
+                ]
+              }
+            ]
+          },
+          {
+            "query": {
+              "type": "string",
+              "value": "missing"
+            },
+            "path": []
+          }
+        ],
+        "savedPaths": [
+          {
+            "query": {
+              "type": "string",
+              "value": "root"
+            },
+            "path": [
+              {
+                "key": {
+                  "type": "string",
+                  "value": "root"
+                },
+                "pos": "0-0",
+                "level": 0,
+                "index": 0,
+                "nodeKey": {
+                  "type": "string",
+                  "value": "root"
+                },
+                "originalKey": {
+                  "type": "string",
+                  "value": "raw-root"
+                },
+                "title": "Root alias",
+                "payload": {
+                  "tag": "root"
+                },
+                "originalNode": true,
+                "nodes": [
+                  {
+                    "type": "string",
+                    "value": "root"
+                  }
+                ],
+                "originalPathNodes": true,
+                "parent": null,
+                "hasChildren": true,
+                "children": [
+                  {
+                    "type": "number",
+                    "value": "0"
+                  },
+                  {
+                    "type": "string",
+                    "value": "branch"
+                  }
+                ],
+                "fields": [
+                  "children",
+                  "index",
+                  "key",
+                  "level",
+                  "node",
+                  "nodes",
+                  "parent",
+                  "pos"
+                ]
+              }
+            ]
+          },
+          {
+            "query": {
+              "type": "number",
+              "value": "0"
+            },
+            "path": [
+              {
+                "key": {
+                  "type": "string",
+                  "value": "root"
+                },
+                "pos": "0-0",
+                "level": 0,
+                "index": 0,
+                "nodeKey": {
+                  "type": "string",
+                  "value": "root"
+                },
+                "originalKey": {
+                  "type": "string",
+                  "value": "raw-root"
+                },
+                "title": "Root alias",
+                "payload": {
+                  "tag": "root"
+                },
+                "originalNode": true,
+                "nodes": [
+                  {
+                    "type": "string",
+                    "value": "root"
+                  }
+                ],
+                "originalPathNodes": true,
+                "parent": null,
+                "hasChildren": true,
+                "children": [
+                  {
+                    "type": "number",
+                    "value": "0"
+                  },
+                  {
+                    "type": "string",
+                    "value": "branch"
+                  }
+                ],
+                "fields": [
+                  "children",
+                  "index",
+                  "key",
+                  "level",
+                  "node",
+                  "nodes",
+                  "parent",
+                  "pos"
+                ]
+              },
+              {
+                "key": {
+                  "type": "number",
+                  "value": "0"
+                },
+                "pos": "0-0-0",
+                "level": 1,
+                "index": 0,
+                "nodeKey": {
+                  "type": "number",
+                  "value": "0"
+                },
+                "originalKey": {
+                  "type": "string",
+                  "value": "raw-zero"
+                },
+                "title": "Zero alias",
+                "payload": {
+                  "tag": "zero"
+                },
+                "originalNode": true,
+                "nodes": [
+                  {
+                    "type": "string",
+                    "value": "root"
+                  },
+                  {
+                    "type": "number",
+                    "value": "0"
+                  }
+                ],
+                "originalPathNodes": true,
+                "parent": {
+                  "type": "string",
+                  "value": "root"
+                },
+                "hasChildren": false,
+                "children": [],
+                "fields": [
+                  "index",
+                  "key",
+                  "level",
+                  "node",
+                  "nodes",
+                  "parent",
+                  "pos"
+                ]
+              }
+            ]
+          },
+          {
+            "query": {
+              "type": "string",
+              "value": "branch"
+            },
+            "path": [
+              {
+                "key": {
+                  "type": "string",
+                  "value": "root"
+                },
+                "pos": "0-0",
+                "level": 0,
+                "index": 0,
+                "nodeKey": {
+                  "type": "string",
+                  "value": "root"
+                },
+                "originalKey": {
+                  "type": "string",
+                  "value": "raw-root"
+                },
+                "title": "Root alias",
+                "payload": {
+                  "tag": "root"
+                },
+                "originalNode": true,
+                "nodes": [
+                  {
+                    "type": "string",
+                    "value": "root"
+                  }
+                ],
+                "originalPathNodes": true,
+                "parent": null,
+                "hasChildren": true,
+                "children": [
+                  {
+                    "type": "number",
+                    "value": "0"
+                  },
+                  {
+                    "type": "string",
+                    "value": "branch"
+                  }
+                ],
+                "fields": [
+                  "children",
+                  "index",
+                  "key",
+                  "level",
+                  "node",
+                  "nodes",
+                  "parent",
+                  "pos"
+                ]
+              },
+              {
+                "key": {
+                  "type": "string",
+                  "value": "branch"
+                },
+                "pos": "0-0-1",
+                "level": 1,
+                "index": 1,
+                "nodeKey": {
+                  "type": "string",
+                  "value": "branch"
+                },
+                "originalKey": {
+                  "type": "string",
+                  "value": "raw-branch"
+                },
+                "title": "Branch alias",
+                "payload": {
+                  "tag": "branch"
+                },
+                "originalNode": true,
+                "nodes": [
+                  {
+                    "type": "string",
+                    "value": "root"
+                  },
+                  {
+                    "type": "string",
+                    "value": "branch"
+                  }
+                ],
+                "originalPathNodes": true,
+                "parent": {
+                  "type": "string",
+                  "value": "root"
+                },
+                "hasChildren": true,
+                "children": [
+                  {
+                    "type": "string",
+                    "value": "leaf"
+                  }
+                ],
+                "fields": [
+                  "children",
+                  "index",
+                  "key",
+                  "level",
+                  "node",
+                  "nodes",
+                  "parent",
+                  "pos"
+                ]
+              }
+            ]
+          },
+          {
+            "query": {
+              "type": "string",
+              "value": "leaf"
+            },
+            "path": [
+              {
+                "key": {
+                  "type": "string",
+                  "value": "root"
+                },
+                "pos": "0-0",
+                "level": 0,
+                "index": 0,
+                "nodeKey": {
+                  "type": "string",
+                  "value": "root"
+                },
+                "originalKey": {
+                  "type": "string",
+                  "value": "raw-root"
+                },
+                "title": "Root alias",
+                "payload": {
+                  "tag": "root"
+                },
+                "originalNode": true,
+                "nodes": [
+                  {
+                    "type": "string",
+                    "value": "root"
+                  }
+                ],
+                "originalPathNodes": true,
+                "parent": null,
+                "hasChildren": true,
+                "children": [
+                  {
+                    "type": "number",
+                    "value": "0"
+                  },
+                  {
+                    "type": "string",
+                    "value": "branch"
+                  }
+                ],
+                "fields": [
+                  "children",
+                  "index",
+                  "key",
+                  "level",
+                  "node",
+                  "nodes",
+                  "parent",
+                  "pos"
+                ]
+              },
+              {
+                "key": {
+                  "type": "string",
+                  "value": "branch"
+                },
+                "pos": "0-0-1",
+                "level": 1,
+                "index": 1,
+                "nodeKey": {
+                  "type": "string",
+                  "value": "branch"
+                },
+                "originalKey": {
+                  "type": "string",
+                  "value": "raw-branch"
+                },
+                "title": "Branch alias",
+                "payload": {
+                  "tag": "branch"
+                },
+                "originalNode": true,
+                "nodes": [
+                  {
+                    "type": "string",
+                    "value": "root"
+                  },
+                  {
+                    "type": "string",
+                    "value": "branch"
+                  }
+                ],
+                "originalPathNodes": true,
+                "parent": {
+                  "type": "string",
+                  "value": "root"
+                },
+                "hasChildren": true,
+                "children": [
+                  {
+                    "type": "string",
+                    "value": "leaf"
+                  }
+                ],
+                "fields": [
+                  "children",
+                  "index",
+                  "key",
+                  "level",
+                  "node",
+                  "nodes",
+                  "parent",
+                  "pos"
+                ]
+              },
+              {
+                "key": {
+                  "type": "string",
+                  "value": "leaf"
+                },
+                "pos": "0-0-1-0",
+                "level": 2,
+                "index": 0,
+                "nodeKey": {
+                  "type": "string",
+                  "value": "leaf"
+                },
+                "originalKey": {
+                  "type": "string",
+                  "value": "raw-leaf"
+                },
+                "title": "Leaf alias",
+                "payload": {
+                  "tag": "leaf"
+                },
+                "originalNode": true,
+                "nodes": [
+                  {
+                    "type": "string",
+                    "value": "root"
+                  },
+                  {
+                    "type": "string",
+                    "value": "branch"
+                  },
+                  {
+                    "type": "string",
+                    "value": "leaf"
+                  }
+                ],
+                "originalPathNodes": true,
+                "parent": {
+                  "type": "string",
+                  "value": "branch"
+                },
+                "hasChildren": false,
+                "children": [],
+                "fields": [
+                  "index",
+                  "key",
+                  "level",
+                  "node",
+                  "nodes",
+                  "parent",
+                  "pos"
+                ]
+              }
+            ]
+          },
+          {
+            "query": {
+              "type": "string",
+              "value": "missing"
+            },
+            "path": []
+          }
+        ]
+      }
+    },
+    {
+      "sample": {
+        "id": "empty-alias-fallback",
+        "data": [
+          {
+            "key": "root",
+            "title": "Root",
+            "payload": {
+              "tag": "root"
+            },
+            "children": [
+              {
+                "key": 0,
+                "title": "Zero",
+                "payload": {
+                  "tag": "zero"
+                }
+              },
+              {
+                "key": "branch",
+                "title": "Branch",
+                "payload": {
+                  "tag": "branch"
+                },
+                "children": [
+                  {
+                    "key": "leaf",
+                    "title": "Leaf",
+                    "payload": {
+                      "tag": "leaf"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "fields": {
+          "key": "",
+          "title": "",
+          "children": ""
+        }
+      },
+      "result": {
+        "stable": true,
+        "paths": [
+          {
+            "query": {
+              "type": "string",
+              "value": "root"
+            },
+            "path": [
+              {
+                "key": {
+                  "type": "string",
+                  "value": "root"
+                },
+                "pos": "0-0",
+                "level": 0,
+                "index": 0,
+                "nodeKey": {
+                  "type": "string",
+                  "value": "root"
+                },
+                "originalKey": {
+                  "type": "string",
+                  "value": "root"
+                },
+                "title": "Root",
+                "payload": {
+                  "tag": "root"
+                },
+                "originalNode": true,
+                "nodes": [
+                  {
+                    "type": "string",
+                    "value": "root"
+                  }
+                ],
+                "originalPathNodes": true,
+                "parent": null,
+                "hasChildren": true,
+                "children": [
+                  {
+                    "type": "number",
+                    "value": "0"
+                  },
+                  {
+                    "type": "string",
+                    "value": "branch"
+                  }
+                ],
+                "fields": [
+                  "children",
+                  "index",
+                  "key",
+                  "level",
+                  "node",
+                  "nodes",
+                  "parent",
+                  "pos"
+                ]
+              }
+            ]
+          },
+          {
+            "query": {
+              "type": "number",
+              "value": "0"
+            },
+            "path": [
+              {
+                "key": {
+                  "type": "string",
+                  "value": "root"
+                },
+                "pos": "0-0",
+                "level": 0,
+                "index": 0,
+                "nodeKey": {
+                  "type": "string",
+                  "value": "root"
+                },
+                "originalKey": {
+                  "type": "string",
+                  "value": "root"
+                },
+                "title": "Root",
+                "payload": {
+                  "tag": "root"
+                },
+                "originalNode": true,
+                "nodes": [
+                  {
+                    "type": "string",
+                    "value": "root"
+                  }
+                ],
+                "originalPathNodes": true,
+                "parent": null,
+                "hasChildren": true,
+                "children": [
+                  {
+                    "type": "number",
+                    "value": "0"
+                  },
+                  {
+                    "type": "string",
+                    "value": "branch"
+                  }
+                ],
+                "fields": [
+                  "children",
+                  "index",
+                  "key",
+                  "level",
+                  "node",
+                  "nodes",
+                  "parent",
+                  "pos"
+                ]
+              },
+              {
+                "key": {
+                  "type": "number",
+                  "value": "0"
+                },
+                "pos": "0-0-0",
+                "level": 1,
+                "index": 0,
+                "nodeKey": {
+                  "type": "number",
+                  "value": "0"
+                },
+                "originalKey": {
+                  "type": "number",
+                  "value": "0"
+                },
+                "title": "Zero",
+                "payload": {
+                  "tag": "zero"
+                },
+                "originalNode": true,
+                "nodes": [
+                  {
+                    "type": "string",
+                    "value": "root"
+                  },
+                  {
+                    "type": "number",
+                    "value": "0"
+                  }
+                ],
+                "originalPathNodes": true,
+                "parent": {
+                  "type": "string",
+                  "value": "root"
+                },
+                "hasChildren": false,
+                "children": [],
+                "fields": [
+                  "index",
+                  "key",
+                  "level",
+                  "node",
+                  "nodes",
+                  "parent",
+                  "pos"
+                ]
+              }
+            ]
+          },
+          {
+            "query": {
+              "type": "string",
+              "value": "branch"
+            },
+            "path": [
+              {
+                "key": {
+                  "type": "string",
+                  "value": "root"
+                },
+                "pos": "0-0",
+                "level": 0,
+                "index": 0,
+                "nodeKey": {
+                  "type": "string",
+                  "value": "root"
+                },
+                "originalKey": {
+                  "type": "string",
+                  "value": "root"
+                },
+                "title": "Root",
+                "payload": {
+                  "tag": "root"
+                },
+                "originalNode": true,
+                "nodes": [
+                  {
+                    "type": "string",
+                    "value": "root"
+                  }
+                ],
+                "originalPathNodes": true,
+                "parent": null,
+                "hasChildren": true,
+                "children": [
+                  {
+                    "type": "number",
+                    "value": "0"
+                  },
+                  {
+                    "type": "string",
+                    "value": "branch"
+                  }
+                ],
+                "fields": [
+                  "children",
+                  "index",
+                  "key",
+                  "level",
+                  "node",
+                  "nodes",
+                  "parent",
+                  "pos"
+                ]
+              },
+              {
+                "key": {
+                  "type": "string",
+                  "value": "branch"
+                },
+                "pos": "0-0-1",
+                "level": 1,
+                "index": 1,
+                "nodeKey": {
+                  "type": "string",
+                  "value": "branch"
+                },
+                "originalKey": {
+                  "type": "string",
+                  "value": "branch"
+                },
+                "title": "Branch",
+                "payload": {
+                  "tag": "branch"
+                },
+                "originalNode": true,
+                "nodes": [
+                  {
+                    "type": "string",
+                    "value": "root"
+                  },
+                  {
+                    "type": "string",
+                    "value": "branch"
+                  }
+                ],
+                "originalPathNodes": true,
+                "parent": {
+                  "type": "string",
+                  "value": "root"
+                },
+                "hasChildren": true,
+                "children": [
+                  {
+                    "type": "string",
+                    "value": "leaf"
+                  }
+                ],
+                "fields": [
+                  "children",
+                  "index",
+                  "key",
+                  "level",
+                  "node",
+                  "nodes",
+                  "parent",
+                  "pos"
+                ]
+              }
+            ]
+          },
+          {
+            "query": {
+              "type": "string",
+              "value": "leaf"
+            },
+            "path": [
+              {
+                "key": {
+                  "type": "string",
+                  "value": "root"
+                },
+                "pos": "0-0",
+                "level": 0,
+                "index": 0,
+                "nodeKey": {
+                  "type": "string",
+                  "value": "root"
+                },
+                "originalKey": {
+                  "type": "string",
+                  "value": "root"
+                },
+                "title": "Root",
+                "payload": {
+                  "tag": "root"
+                },
+                "originalNode": true,
+                "nodes": [
+                  {
+                    "type": "string",
+                    "value": "root"
+                  }
+                ],
+                "originalPathNodes": true,
+                "parent": null,
+                "hasChildren": true,
+                "children": [
+                  {
+                    "type": "number",
+                    "value": "0"
+                  },
+                  {
+                    "type": "string",
+                    "value": "branch"
+                  }
+                ],
+                "fields": [
+                  "children",
+                  "index",
+                  "key",
+                  "level",
+                  "node",
+                  "nodes",
+                  "parent",
+                  "pos"
+                ]
+              },
+              {
+                "key": {
+                  "type": "string",
+                  "value": "branch"
+                },
+                "pos": "0-0-1",
+                "level": 1,
+                "index": 1,
+                "nodeKey": {
+                  "type": "string",
+                  "value": "branch"
+                },
+                "originalKey": {
+                  "type": "string",
+                  "value": "branch"
+                },
+                "title": "Branch",
+                "payload": {
+                  "tag": "branch"
+                },
+                "originalNode": true,
+                "nodes": [
+                  {
+                    "type": "string",
+                    "value": "root"
+                  },
+                  {
+                    "type": "string",
+                    "value": "branch"
+                  }
+                ],
+                "originalPathNodes": true,
+                "parent": {
+                  "type": "string",
+                  "value": "root"
+                },
+                "hasChildren": true,
+                "children": [
+                  {
+                    "type": "string",
+                    "value": "leaf"
+                  }
+                ],
+                "fields": [
+                  "children",
+                  "index",
+                  "key",
+                  "level",
+                  "node",
+                  "nodes",
+                  "parent",
+                  "pos"
+                ]
+              },
+              {
+                "key": {
+                  "type": "string",
+                  "value": "leaf"
+                },
+                "pos": "0-0-1-0",
+                "level": 2,
+                "index": 0,
+                "nodeKey": {
+                  "type": "string",
+                  "value": "leaf"
+                },
+                "originalKey": {
+                  "type": "string",
+                  "value": "leaf"
+                },
+                "title": "Leaf",
+                "payload": {
+                  "tag": "leaf"
+                },
+                "originalNode": true,
+                "nodes": [
+                  {
+                    "type": "string",
+                    "value": "root"
+                  },
+                  {
+                    "type": "string",
+                    "value": "branch"
+                  },
+                  {
+                    "type": "string",
+                    "value": "leaf"
+                  }
+                ],
+                "originalPathNodes": true,
+                "parent": {
+                  "type": "string",
+                  "value": "branch"
+                },
+                "hasChildren": false,
+                "children": [],
+                "fields": [
+                  "index",
+                  "key",
+                  "level",
+                  "node",
+                  "nodes",
+                  "parent",
+                  "pos"
+                ]
+              }
+            ]
+          },
+          {
+            "query": {
+              "type": "string",
+              "value": "missing"
+            },
+            "path": []
+          }
+        ],
+        "savedPaths": [
+          {
+            "query": {
+              "type": "string",
+              "value": "root"
+            },
+            "path": [
+              {
+                "key": {
+                  "type": "string",
+                  "value": "root"
+                },
+                "pos": "0-0",
+                "level": 0,
+                "index": 0,
+                "nodeKey": {
+                  "type": "string",
+                  "value": "root"
+                },
+                "originalKey": {
+                  "type": "string",
+                  "value": "root"
+                },
+                "title": "Root",
+                "payload": {
+                  "tag": "root"
+                },
+                "originalNode": true,
+                "nodes": [
+                  {
+                    "type": "string",
+                    "value": "root"
+                  }
+                ],
+                "originalPathNodes": true,
+                "parent": null,
+                "hasChildren": true,
+                "children": [
+                  {
+                    "type": "number",
+                    "value": "0"
+                  },
+                  {
+                    "type": "string",
+                    "value": "branch"
+                  }
+                ],
+                "fields": [
+                  "children",
+                  "index",
+                  "key",
+                  "level",
+                  "node",
+                  "nodes",
+                  "parent",
+                  "pos"
+                ]
+              }
+            ]
+          },
+          {
+            "query": {
+              "type": "number",
+              "value": "0"
+            },
+            "path": [
+              {
+                "key": {
+                  "type": "string",
+                  "value": "root"
+                },
+                "pos": "0-0",
+                "level": 0,
+                "index": 0,
+                "nodeKey": {
+                  "type": "string",
+                  "value": "root"
+                },
+                "originalKey": {
+                  "type": "string",
+                  "value": "root"
+                },
+                "title": "Root",
+                "payload": {
+                  "tag": "root"
+                },
+                "originalNode": true,
+                "nodes": [
+                  {
+                    "type": "string",
+                    "value": "root"
+                  }
+                ],
+                "originalPathNodes": true,
+                "parent": null,
+                "hasChildren": true,
+                "children": [
+                  {
+                    "type": "number",
+                    "value": "0"
+                  },
+                  {
+                    "type": "string",
+                    "value": "branch"
+                  }
+                ],
+                "fields": [
+                  "children",
+                  "index",
+                  "key",
+                  "level",
+                  "node",
+                  "nodes",
+                  "parent",
+                  "pos"
+                ]
+              },
+              {
+                "key": {
+                  "type": "number",
+                  "value": "0"
+                },
+                "pos": "0-0-0",
+                "level": 1,
+                "index": 0,
+                "nodeKey": {
+                  "type": "number",
+                  "value": "0"
+                },
+                "originalKey": {
+                  "type": "number",
+                  "value": "0"
+                },
+                "title": "Zero",
+                "payload": {
+                  "tag": "zero"
+                },
+                "originalNode": true,
+                "nodes": [
+                  {
+                    "type": "string",
+                    "value": "root"
+                  },
+                  {
+                    "type": "number",
+                    "value": "0"
+                  }
+                ],
+                "originalPathNodes": true,
+                "parent": {
+                  "type": "string",
+                  "value": "root"
+                },
+                "hasChildren": false,
+                "children": [],
+                "fields": [
+                  "index",
+                  "key",
+                  "level",
+                  "node",
+                  "nodes",
+                  "parent",
+                  "pos"
+                ]
+              }
+            ]
+          },
+          {
+            "query": {
+              "type": "string",
+              "value": "branch"
+            },
+            "path": [
+              {
+                "key": {
+                  "type": "string",
+                  "value": "root"
+                },
+                "pos": "0-0",
+                "level": 0,
+                "index": 0,
+                "nodeKey": {
+                  "type": "string",
+                  "value": "root"
+                },
+                "originalKey": {
+                  "type": "string",
+                  "value": "root"
+                },
+                "title": "Root",
+                "payload": {
+                  "tag": "root"
+                },
+                "originalNode": true,
+                "nodes": [
+                  {
+                    "type": "string",
+                    "value": "root"
+                  }
+                ],
+                "originalPathNodes": true,
+                "parent": null,
+                "hasChildren": true,
+                "children": [
+                  {
+                    "type": "number",
+                    "value": "0"
+                  },
+                  {
+                    "type": "string",
+                    "value": "branch"
+                  }
+                ],
+                "fields": [
+                  "children",
+                  "index",
+                  "key",
+                  "level",
+                  "node",
+                  "nodes",
+                  "parent",
+                  "pos"
+                ]
+              },
+              {
+                "key": {
+                  "type": "string",
+                  "value": "branch"
+                },
+                "pos": "0-0-1",
+                "level": 1,
+                "index": 1,
+                "nodeKey": {
+                  "type": "string",
+                  "value": "branch"
+                },
+                "originalKey": {
+                  "type": "string",
+                  "value": "branch"
+                },
+                "title": "Branch",
+                "payload": {
+                  "tag": "branch"
+                },
+                "originalNode": true,
+                "nodes": [
+                  {
+                    "type": "string",
+                    "value": "root"
+                  },
+                  {
+                    "type": "string",
+                    "value": "branch"
+                  }
+                ],
+                "originalPathNodes": true,
+                "parent": {
+                  "type": "string",
+                  "value": "root"
+                },
+                "hasChildren": true,
+                "children": [
+                  {
+                    "type": "string",
+                    "value": "leaf"
+                  }
+                ],
+                "fields": [
+                  "children",
+                  "index",
+                  "key",
+                  "level",
+                  "node",
+                  "nodes",
+                  "parent",
+                  "pos"
+                ]
+              }
+            ]
+          },
+          {
+            "query": {
+              "type": "string",
+              "value": "leaf"
+            },
+            "path": [
+              {
+                "key": {
+                  "type": "string",
+                  "value": "root"
+                },
+                "pos": "0-0",
+                "level": 0,
+                "index": 0,
+                "nodeKey": {
+                  "type": "string",
+                  "value": "root"
+                },
+                "originalKey": {
+                  "type": "string",
+                  "value": "root"
+                },
+                "title": "Root",
+                "payload": {
+                  "tag": "root"
+                },
+                "originalNode": true,
+                "nodes": [
+                  {
+                    "type": "string",
+                    "value": "root"
+                  }
+                ],
+                "originalPathNodes": true,
+                "parent": null,
+                "hasChildren": true,
+                "children": [
+                  {
+                    "type": "number",
+                    "value": "0"
+                  },
+                  {
+                    "type": "string",
+                    "value": "branch"
+                  }
+                ],
+                "fields": [
+                  "children",
+                  "index",
+                  "key",
+                  "level",
+                  "node",
+                  "nodes",
+                  "parent",
+                  "pos"
+                ]
+              },
+              {
+                "key": {
+                  "type": "string",
+                  "value": "branch"
+                },
+                "pos": "0-0-1",
+                "level": 1,
+                "index": 1,
+                "nodeKey": {
+                  "type": "string",
+                  "value": "branch"
+                },
+                "originalKey": {
+                  "type": "string",
+                  "value": "branch"
+                },
+                "title": "Branch",
+                "payload": {
+                  "tag": "branch"
+                },
+                "originalNode": true,
+                "nodes": [
+                  {
+                    "type": "string",
+                    "value": "root"
+                  },
+                  {
+                    "type": "string",
+                    "value": "branch"
+                  }
+                ],
+                "originalPathNodes": true,
+                "parent": {
+                  "type": "string",
+                  "value": "root"
+                },
+                "hasChildren": true,
+                "children": [
+                  {
+                    "type": "string",
+                    "value": "leaf"
+                  }
+                ],
+                "fields": [
+                  "children",
+                  "index",
+                  "key",
+                  "level",
+                  "node",
+                  "nodes",
+                  "parent",
+                  "pos"
+                ]
+              },
+              {
+                "key": {
+                  "type": "string",
+                  "value": "leaf"
+                },
+                "pos": "0-0-1-0",
+                "level": 2,
+                "index": 0,
+                "nodeKey": {
+                  "type": "string",
+                  "value": "leaf"
+                },
+                "originalKey": {
+                  "type": "string",
+                  "value": "leaf"
+                },
+                "title": "Leaf",
+                "payload": {
+                  "tag": "leaf"
+                },
+                "originalNode": true,
+                "nodes": [
+                  {
+                    "type": "string",
+                    "value": "root"
+                  },
+                  {
+                    "type": "string",
+                    "value": "branch"
+                  },
+                  {
+                    "type": "string",
+                    "value": "leaf"
+                  }
+                ],
+                "originalPathNodes": true,
+                "parent": {
+                  "type": "string",
+                  "value": "branch"
+                },
+                "hasChildren": false,
+                "children": [],
+                "fields": [
+                  "index",
+                  "key",
+                  "level",
+                  "node",
+                  "nodes",
+                  "parent",
+                  "pos"
+                ]
+              }
+            ]
+          },
+          {
+            "query": {
+              "type": "string",
+              "value": "missing"
+            },
+            "path": []
+          }
+        ]
+      }
+    },
+    {
+      "sample": {
+        "id": "positional-data",
+        "data": [
+          {
+            "title": "Root without key",
+            "children": [
+              {
+                "title": "Leaf without key"
+              }
+            ]
+          }
+        ],
+        "queries": [
+          "0-0",
+          "0-0-0",
+          "missing"
+        ]
+      },
+      "result": {
+        "stable": true,
+        "paths": [
+          {
+            "query": {
+              "type": "string",
+              "value": "0-0"
+            },
+            "path": [
+              {
+                "key": {
+                  "type": "string",
+                  "value": "0-0"
+                },
+                "pos": "0-0",
+                "level": 0,
+                "index": 0,
+                "nodeKey": {
+                  "type": "undefined",
+                  "value": null
+                },
+                "originalKey": {
+                  "type": "undefined",
+                  "value": null
+                },
+                "title": "Root without key",
+                "originalNode": true,
+                "nodes": [
+                  {
+                    "type": "undefined",
+                    "value": null
+                  }
+                ],
+                "originalPathNodes": true,
+                "parent": null,
+                "hasChildren": true,
+                "children": [
+                  {
+                    "type": "string",
+                    "value": "0-0-0"
+                  }
+                ],
+                "fields": [
+                  "children",
+                  "index",
+                  "key",
+                  "level",
+                  "node",
+                  "nodes",
+                  "parent",
+                  "pos"
+                ]
+              }
+            ]
+          },
+          {
+            "query": {
+              "type": "string",
+              "value": "0-0-0"
+            },
+            "path": [
+              {
+                "key": {
+                  "type": "string",
+                  "value": "0-0"
+                },
+                "pos": "0-0",
+                "level": 0,
+                "index": 0,
+                "nodeKey": {
+                  "type": "undefined",
+                  "value": null
+                },
+                "originalKey": {
+                  "type": "undefined",
+                  "value": null
+                },
+                "title": "Root without key",
+                "originalNode": true,
+                "nodes": [
+                  {
+                    "type": "undefined",
+                    "value": null
+                  }
+                ],
+                "originalPathNodes": true,
+                "parent": null,
+                "hasChildren": true,
+                "children": [
+                  {
+                    "type": "string",
+                    "value": "0-0-0"
+                  }
+                ],
+                "fields": [
+                  "children",
+                  "index",
+                  "key",
+                  "level",
+                  "node",
+                  "nodes",
+                  "parent",
+                  "pos"
+                ]
+              },
+              {
+                "key": {
+                  "type": "string",
+                  "value": "0-0-0"
+                },
+                "pos": "0-0-0",
+                "level": 1,
+                "index": 0,
+                "nodeKey": {
+                  "type": "undefined",
+                  "value": null
+                },
+                "originalKey": {
+                  "type": "undefined",
+                  "value": null
+                },
+                "title": "Leaf without key",
+                "originalNode": true,
+                "nodes": [
+                  {
+                    "type": "undefined",
+                    "value": null
+                  },
+                  {
+                    "type": "undefined",
+                    "value": null
+                  }
+                ],
+                "originalPathNodes": true,
+                "parent": {
+                  "type": "string",
+                  "value": "0-0"
+                },
+                "hasChildren": false,
+                "children": [],
+                "fields": [
+                  "index",
+                  "key",
+                  "level",
+                  "node",
+                  "nodes",
+                  "parent",
+                  "pos"
+                ]
+              }
+            ]
+          },
+          {
+            "query": {
+              "type": "string",
+              "value": "missing"
+            },
+            "path": []
+          }
+        ],
+        "savedPaths": [
+          {
+            "query": {
+              "type": "string",
+              "value": "0-0"
+            },
+            "path": [
+              {
+                "key": {
+                  "type": "string",
+                  "value": "0-0"
+                },
+                "pos": "0-0",
+                "level": 0,
+                "index": 0,
+                "nodeKey": {
+                  "type": "undefined",
+                  "value": null
+                },
+                "originalKey": {
+                  "type": "undefined",
+                  "value": null
+                },
+                "title": "Root without key",
+                "originalNode": true,
+                "nodes": [
+                  {
+                    "type": "undefined",
+                    "value": null
+                  }
+                ],
+                "originalPathNodes": true,
+                "parent": null,
+                "hasChildren": true,
+                "children": [
+                  {
+                    "type": "string",
+                    "value": "0-0-0"
+                  }
+                ],
+                "fields": [
+                  "children",
+                  "index",
+                  "key",
+                  "level",
+                  "node",
+                  "nodes",
+                  "parent",
+                  "pos"
+                ]
+              }
+            ]
+          },
+          {
+            "query": {
+              "type": "string",
+              "value": "0-0-0"
+            },
+            "path": [
+              {
+                "key": {
+                  "type": "string",
+                  "value": "0-0"
+                },
+                "pos": "0-0",
+                "level": 0,
+                "index": 0,
+                "nodeKey": {
+                  "type": "undefined",
+                  "value": null
+                },
+                "originalKey": {
+                  "type": "undefined",
+                  "value": null
+                },
+                "title": "Root without key",
+                "originalNode": true,
+                "nodes": [
+                  {
+                    "type": "undefined",
+                    "value": null
+                  }
+                ],
+                "originalPathNodes": true,
+                "parent": null,
+                "hasChildren": true,
+                "children": [
+                  {
+                    "type": "string",
+                    "value": "0-0-0"
+                  }
+                ],
+                "fields": [
+                  "children",
+                  "index",
+                  "key",
+                  "level",
+                  "node",
+                  "nodes",
+                  "parent",
+                  "pos"
+                ]
+              },
+              {
+                "key": {
+                  "type": "string",
+                  "value": "0-0-0"
+                },
+                "pos": "0-0-0",
+                "level": 1,
+                "index": 0,
+                "nodeKey": {
+                  "type": "undefined",
+                  "value": null
+                },
+                "originalKey": {
+                  "type": "undefined",
+                  "value": null
+                },
+                "title": "Leaf without key",
+                "originalNode": true,
+                "nodes": [
+                  {
+                    "type": "undefined",
+                    "value": null
+                  },
+                  {
+                    "type": "undefined",
+                    "value": null
+                  }
+                ],
+                "originalPathNodes": true,
+                "parent": {
+                  "type": "string",
+                  "value": "0-0"
+                },
+                "hasChildren": false,
+                "children": [],
+                "fields": [
+                  "index",
+                  "key",
+                  "level",
+                  "node",
+                  "nodes",
+                  "parent",
+                  "pos"
+                ]
+              }
+            ]
+          },
+          {
+            "query": {
+              "type": "string",
+              "value": "missing"
+            },
+            "path": []
+          }
+        ]
+      }
+    },
+    {
+      "sample": {
+        "id": "real-prototype-keys",
+        "data": [
+          {
+            "key": "__proto__",
+            "children": [
+              {
+                "key": "constructor",
+                "children": [
+                  {
+                    "key": "toString"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "queries": [
+          "__proto__",
+          "constructor",
+          "toString",
+          "missing"
+        ]
+      },
+      "result": {
+        "stable": true,
+        "paths": [
+          {
+            "query": {
+              "type": "string",
+              "value": "__proto__"
+            },
+            "path": [
+              {
+                "key": {
+                  "type": "string",
+                  "value": "__proto__"
+                },
+                "pos": "0-0",
+                "level": 0,
+                "index": 0,
+                "nodeKey": {
+                  "type": "string",
+                  "value": "__proto__"
+                },
+                "originalKey": {
+                  "type": "string",
+                  "value": "__proto__"
+                },
+                "originalNode": true,
+                "nodes": [
+                  {
+                    "type": "string",
+                    "value": "__proto__"
+                  }
+                ],
+                "originalPathNodes": true,
+                "parent": null,
+                "hasChildren": true,
+                "children": [
+                  {
+                    "type": "string",
+                    "value": "constructor"
+                  }
+                ],
+                "fields": [
+                  "children",
+                  "index",
+                  "key",
+                  "level",
+                  "node",
+                  "nodes",
+                  "parent",
+                  "pos"
+                ]
+              }
+            ]
+          },
+          {
+            "query": {
+              "type": "string",
+              "value": "constructor"
+            },
+            "path": [
+              {
+                "key": {
+                  "type": "string",
+                  "value": "__proto__"
+                },
+                "pos": "0-0",
+                "level": 0,
+                "index": 0,
+                "nodeKey": {
+                  "type": "string",
+                  "value": "__proto__"
+                },
+                "originalKey": {
+                  "type": "string",
+                  "value": "__proto__"
+                },
+                "originalNode": true,
+                "nodes": [
+                  {
+                    "type": "string",
+                    "value": "__proto__"
+                  }
+                ],
+                "originalPathNodes": true,
+                "parent": null,
+                "hasChildren": true,
+                "children": [
+                  {
+                    "type": "string",
+                    "value": "constructor"
+                  }
+                ],
+                "fields": [
+                  "children",
+                  "index",
+                  "key",
+                  "level",
+                  "node",
+                  "nodes",
+                  "parent",
+                  "pos"
+                ]
+              },
+              {
+                "key": {
+                  "type": "string",
+                  "value": "constructor"
+                },
+                "pos": "0-0-0",
+                "level": 1,
+                "index": 0,
+                "nodeKey": {
+                  "type": "string",
+                  "value": "constructor"
+                },
+                "originalKey": {
+                  "type": "string",
+                  "value": "constructor"
+                },
+                "originalNode": true,
+                "nodes": [
+                  {
+                    "type": "string",
+                    "value": "__proto__"
+                  },
+                  {
+                    "type": "string",
+                    "value": "constructor"
+                  }
+                ],
+                "originalPathNodes": true,
+                "parent": {
+                  "type": "string",
+                  "value": "__proto__"
+                },
+                "hasChildren": true,
+                "children": [
+                  {
+                    "type": "string",
+                    "value": "toString"
+                  }
+                ],
+                "fields": [
+                  "children",
+                  "index",
+                  "key",
+                  "level",
+                  "node",
+                  "nodes",
+                  "parent",
+                  "pos"
+                ]
+              }
+            ]
+          },
+          {
+            "query": {
+              "type": "string",
+              "value": "toString"
+            },
+            "path": [
+              {
+                "key": {
+                  "type": "string",
+                  "value": "__proto__"
+                },
+                "pos": "0-0",
+                "level": 0,
+                "index": 0,
+                "nodeKey": {
+                  "type": "string",
+                  "value": "__proto__"
+                },
+                "originalKey": {
+                  "type": "string",
+                  "value": "__proto__"
+                },
+                "originalNode": true,
+                "nodes": [
+                  {
+                    "type": "string",
+                    "value": "__proto__"
+                  }
+                ],
+                "originalPathNodes": true,
+                "parent": null,
+                "hasChildren": true,
+                "children": [
+                  {
+                    "type": "string",
+                    "value": "constructor"
+                  }
+                ],
+                "fields": [
+                  "children",
+                  "index",
+                  "key",
+                  "level",
+                  "node",
+                  "nodes",
+                  "parent",
+                  "pos"
+                ]
+              },
+              {
+                "key": {
+                  "type": "string",
+                  "value": "constructor"
+                },
+                "pos": "0-0-0",
+                "level": 1,
+                "index": 0,
+                "nodeKey": {
+                  "type": "string",
+                  "value": "constructor"
+                },
+                "originalKey": {
+                  "type": "string",
+                  "value": "constructor"
+                },
+                "originalNode": true,
+                "nodes": [
+                  {
+                    "type": "string",
+                    "value": "__proto__"
+                  },
+                  {
+                    "type": "string",
+                    "value": "constructor"
+                  }
+                ],
+                "originalPathNodes": true,
+                "parent": {
+                  "type": "string",
+                  "value": "__proto__"
+                },
+                "hasChildren": true,
+                "children": [
+                  {
+                    "type": "string",
+                    "value": "toString"
+                  }
+                ],
+                "fields": [
+                  "children",
+                  "index",
+                  "key",
+                  "level",
+                  "node",
+                  "nodes",
+                  "parent",
+                  "pos"
+                ]
+              },
+              {
+                "key": {
+                  "type": "string",
+                  "value": "toString"
+                },
+                "pos": "0-0-0-0",
+                "level": 2,
+                "index": 0,
+                "nodeKey": {
+                  "type": "string",
+                  "value": "toString"
+                },
+                "originalKey": {
+                  "type": "string",
+                  "value": "toString"
+                },
+                "originalNode": true,
+                "nodes": [
+                  {
+                    "type": "string",
+                    "value": "__proto__"
+                  },
+                  {
+                    "type": "string",
+                    "value": "constructor"
+                  },
+                  {
+                    "type": "string",
+                    "value": "toString"
+                  }
+                ],
+                "originalPathNodes": true,
+                "parent": {
+                  "type": "string",
+                  "value": "constructor"
+                },
+                "hasChildren": false,
+                "children": [],
+                "fields": [
+                  "index",
+                  "key",
+                  "level",
+                  "node",
+                  "nodes",
+                  "parent",
+                  "pos"
+                ]
+              }
+            ]
+          },
+          {
+            "query": {
+              "type": "string",
+              "value": "missing"
+            },
+            "path": []
+          }
+        ],
+        "savedPaths": [
+          {
+            "query": {
+              "type": "string",
+              "value": "__proto__"
+            },
+            "path": [
+              {
+                "key": {
+                  "type": "string",
+                  "value": "__proto__"
+                },
+                "pos": "0-0",
+                "level": 0,
+                "index": 0,
+                "nodeKey": {
+                  "type": "string",
+                  "value": "__proto__"
+                },
+                "originalKey": {
+                  "type": "string",
+                  "value": "__proto__"
+                },
+                "originalNode": true,
+                "nodes": [
+                  {
+                    "type": "string",
+                    "value": "__proto__"
+                  }
+                ],
+                "originalPathNodes": true,
+                "parent": null,
+                "hasChildren": true,
+                "children": [
+                  {
+                    "type": "string",
+                    "value": "constructor"
+                  }
+                ],
+                "fields": [
+                  "children",
+                  "index",
+                  "key",
+                  "level",
+                  "node",
+                  "nodes",
+                  "parent",
+                  "pos"
+                ]
+              }
+            ]
+          },
+          {
+            "query": {
+              "type": "string",
+              "value": "constructor"
+            },
+            "path": [
+              {
+                "key": {
+                  "type": "string",
+                  "value": "__proto__"
+                },
+                "pos": "0-0",
+                "level": 0,
+                "index": 0,
+                "nodeKey": {
+                  "type": "string",
+                  "value": "__proto__"
+                },
+                "originalKey": {
+                  "type": "string",
+                  "value": "__proto__"
+                },
+                "originalNode": true,
+                "nodes": [
+                  {
+                    "type": "string",
+                    "value": "__proto__"
+                  }
+                ],
+                "originalPathNodes": true,
+                "parent": null,
+                "hasChildren": true,
+                "children": [
+                  {
+                    "type": "string",
+                    "value": "constructor"
+                  }
+                ],
+                "fields": [
+                  "children",
+                  "index",
+                  "key",
+                  "level",
+                  "node",
+                  "nodes",
+                  "parent",
+                  "pos"
+                ]
+              },
+              {
+                "key": {
+                  "type": "string",
+                  "value": "constructor"
+                },
+                "pos": "0-0-0",
+                "level": 1,
+                "index": 0,
+                "nodeKey": {
+                  "type": "string",
+                  "value": "constructor"
+                },
+                "originalKey": {
+                  "type": "string",
+                  "value": "constructor"
+                },
+                "originalNode": true,
+                "nodes": [
+                  {
+                    "type": "string",
+                    "value": "__proto__"
+                  },
+                  {
+                    "type": "string",
+                    "value": "constructor"
+                  }
+                ],
+                "originalPathNodes": true,
+                "parent": {
+                  "type": "string",
+                  "value": "__proto__"
+                },
+                "hasChildren": true,
+                "children": [
+                  {
+                    "type": "string",
+                    "value": "toString"
+                  }
+                ],
+                "fields": [
+                  "children",
+                  "index",
+                  "key",
+                  "level",
+                  "node",
+                  "nodes",
+                  "parent",
+                  "pos"
+                ]
+              }
+            ]
+          },
+          {
+            "query": {
+              "type": "string",
+              "value": "toString"
+            },
+            "path": [
+              {
+                "key": {
+                  "type": "string",
+                  "value": "__proto__"
+                },
+                "pos": "0-0",
+                "level": 0,
+                "index": 0,
+                "nodeKey": {
+                  "type": "string",
+                  "value": "__proto__"
+                },
+                "originalKey": {
+                  "type": "string",
+                  "value": "__proto__"
+                },
+                "originalNode": true,
+                "nodes": [
+                  {
+                    "type": "string",
+                    "value": "__proto__"
+                  }
+                ],
+                "originalPathNodes": true,
+                "parent": null,
+                "hasChildren": true,
+                "children": [
+                  {
+                    "type": "string",
+                    "value": "constructor"
+                  }
+                ],
+                "fields": [
+                  "children",
+                  "index",
+                  "key",
+                  "level",
+                  "node",
+                  "nodes",
+                  "parent",
+                  "pos"
+                ]
+              },
+              {
+                "key": {
+                  "type": "string",
+                  "value": "constructor"
+                },
+                "pos": "0-0-0",
+                "level": 1,
+                "index": 0,
+                "nodeKey": {
+                  "type": "string",
+                  "value": "constructor"
+                },
+                "originalKey": {
+                  "type": "string",
+                  "value": "constructor"
+                },
+                "originalNode": true,
+                "nodes": [
+                  {
+                    "type": "string",
+                    "value": "__proto__"
+                  },
+                  {
+                    "type": "string",
+                    "value": "constructor"
+                  }
+                ],
+                "originalPathNodes": true,
+                "parent": {
+                  "type": "string",
+                  "value": "__proto__"
+                },
+                "hasChildren": true,
+                "children": [
+                  {
+                    "type": "string",
+                    "value": "toString"
+                  }
+                ],
+                "fields": [
+                  "children",
+                  "index",
+                  "key",
+                  "level",
+                  "node",
+                  "nodes",
+                  "parent",
+                  "pos"
+                ]
+              },
+              {
+                "key": {
+                  "type": "string",
+                  "value": "toString"
+                },
+                "pos": "0-0-0-0",
+                "level": 2,
+                "index": 0,
+                "nodeKey": {
+                  "type": "string",
+                  "value": "toString"
+                },
+                "originalKey": {
+                  "type": "string",
+                  "value": "toString"
+                },
+                "originalNode": true,
+                "nodes": [
+                  {
+                    "type": "string",
+                    "value": "__proto__"
+                  },
+                  {
+                    "type": "string",
+                    "value": "constructor"
+                  },
+                  {
+                    "type": "string",
+                    "value": "toString"
+                  }
+                ],
+                "originalPathNodes": true,
+                "parent": {
+                  "type": "string",
+                  "value": "constructor"
+                },
+                "hasChildren": false,
+                "children": [],
+                "fields": [
+                  "index",
+                  "key",
+                  "level",
+                  "node",
+                  "nodes",
+                  "parent",
+                  "pos"
+                ]
+              }
+            ]
+          },
+          {
+            "query": {
+              "type": "string",
+              "value": "missing"
+            },
+            "path": []
+          }
+        ]
+      }
+    }
+  ],
+  "updates": {
+    "initial": {
+      "stable": true,
+      "paths": [
+        {
+          "query": {
+            "type": "string",
+            "value": "root"
+          },
+          "path": [
+            {
+              "key": {
+                "type": "string",
+                "value": "root"
+              },
+              "pos": "0-0",
+              "level": 0,
+              "index": 0,
+              "nodeKey": {
+                "type": "string",
+                "value": "root"
+              },
+              "originalKey": {
+                "type": "string",
+                "value": "root"
+              },
+              "title": "Root",
+              "payload": {
+                "tag": "root"
+              },
+              "originalNode": true,
+              "nodes": [
+                {
+                  "type": "string",
+                  "value": "root"
+                }
+              ],
+              "originalPathNodes": true,
+              "parent": null,
+              "hasChildren": true,
+              "children": [
+                {
+                  "type": "number",
+                  "value": "0"
+                },
+                {
+                  "type": "string",
+                  "value": "branch"
+                }
+              ],
+              "fields": [
+                "children",
+                "index",
+                "key",
+                "level",
+                "node",
+                "nodes",
+                "parent",
+                "pos"
+              ]
+            }
+          ]
+        },
+        {
+          "query": {
+            "type": "number",
+            "value": "0"
+          },
+          "path": [
+            {
+              "key": {
+                "type": "string",
+                "value": "root"
+              },
+              "pos": "0-0",
+              "level": 0,
+              "index": 0,
+              "nodeKey": {
+                "type": "string",
+                "value": "root"
+              },
+              "originalKey": {
+                "type": "string",
+                "value": "root"
+              },
+              "title": "Root",
+              "payload": {
+                "tag": "root"
+              },
+              "originalNode": true,
+              "nodes": [
+                {
+                  "type": "string",
+                  "value": "root"
+                }
+              ],
+              "originalPathNodes": true,
+              "parent": null,
+              "hasChildren": true,
+              "children": [
+                {
+                  "type": "number",
+                  "value": "0"
+                },
+                {
+                  "type": "string",
+                  "value": "branch"
+                }
+              ],
+              "fields": [
+                "children",
+                "index",
+                "key",
+                "level",
+                "node",
+                "nodes",
+                "parent",
+                "pos"
+              ]
+            },
+            {
+              "key": {
+                "type": "number",
+                "value": "0"
+              },
+              "pos": "0-0-0",
+              "level": 1,
+              "index": 0,
+              "nodeKey": {
+                "type": "number",
+                "value": "0"
+              },
+              "originalKey": {
+                "type": "number",
+                "value": "0"
+              },
+              "title": "Zero",
+              "payload": {
+                "tag": "zero"
+              },
+              "originalNode": true,
+              "nodes": [
+                {
+                  "type": "string",
+                  "value": "root"
+                },
+                {
+                  "type": "number",
+                  "value": "0"
+                }
+              ],
+              "originalPathNodes": true,
+              "parent": {
+                "type": "string",
+                "value": "root"
+              },
+              "hasChildren": false,
+              "children": [],
+              "fields": [
+                "index",
+                "key",
+                "level",
+                "node",
+                "nodes",
+                "parent",
+                "pos"
+              ]
+            }
+          ]
+        },
+        {
+          "query": {
+            "type": "string",
+            "value": "branch"
+          },
+          "path": [
+            {
+              "key": {
+                "type": "string",
+                "value": "root"
+              },
+              "pos": "0-0",
+              "level": 0,
+              "index": 0,
+              "nodeKey": {
+                "type": "string",
+                "value": "root"
+              },
+              "originalKey": {
+                "type": "string",
+                "value": "root"
+              },
+              "title": "Root",
+              "payload": {
+                "tag": "root"
+              },
+              "originalNode": true,
+              "nodes": [
+                {
+                  "type": "string",
+                  "value": "root"
+                }
+              ],
+              "originalPathNodes": true,
+              "parent": null,
+              "hasChildren": true,
+              "children": [
+                {
+                  "type": "number",
+                  "value": "0"
+                },
+                {
+                  "type": "string",
+                  "value": "branch"
+                }
+              ],
+              "fields": [
+                "children",
+                "index",
+                "key",
+                "level",
+                "node",
+                "nodes",
+                "parent",
+                "pos"
+              ]
+            },
+            {
+              "key": {
+                "type": "string",
+                "value": "branch"
+              },
+              "pos": "0-0-1",
+              "level": 1,
+              "index": 1,
+              "nodeKey": {
+                "type": "string",
+                "value": "branch"
+              },
+              "originalKey": {
+                "type": "string",
+                "value": "branch"
+              },
+              "title": "Branch",
+              "payload": {
+                "tag": "branch"
+              },
+              "originalNode": true,
+              "nodes": [
+                {
+                  "type": "string",
+                  "value": "root"
+                },
+                {
+                  "type": "string",
+                  "value": "branch"
+                }
+              ],
+              "originalPathNodes": true,
+              "parent": {
+                "type": "string",
+                "value": "root"
+              },
+              "hasChildren": true,
+              "children": [
+                {
+                  "type": "string",
+                  "value": "leaf"
+                }
+              ],
+              "fields": [
+                "children",
+                "index",
+                "key",
+                "level",
+                "node",
+                "nodes",
+                "parent",
+                "pos"
+              ]
+            }
+          ]
+        },
+        {
+          "query": {
+            "type": "string",
+            "value": "leaf"
+          },
+          "path": [
+            {
+              "key": {
+                "type": "string",
+                "value": "root"
+              },
+              "pos": "0-0",
+              "level": 0,
+              "index": 0,
+              "nodeKey": {
+                "type": "string",
+                "value": "root"
+              },
+              "originalKey": {
+                "type": "string",
+                "value": "root"
+              },
+              "title": "Root",
+              "payload": {
+                "tag": "root"
+              },
+              "originalNode": true,
+              "nodes": [
+                {
+                  "type": "string",
+                  "value": "root"
+                }
+              ],
+              "originalPathNodes": true,
+              "parent": null,
+              "hasChildren": true,
+              "children": [
+                {
+                  "type": "number",
+                  "value": "0"
+                },
+                {
+                  "type": "string",
+                  "value": "branch"
+                }
+              ],
+              "fields": [
+                "children",
+                "index",
+                "key",
+                "level",
+                "node",
+                "nodes",
+                "parent",
+                "pos"
+              ]
+            },
+            {
+              "key": {
+                "type": "string",
+                "value": "branch"
+              },
+              "pos": "0-0-1",
+              "level": 1,
+              "index": 1,
+              "nodeKey": {
+                "type": "string",
+                "value": "branch"
+              },
+              "originalKey": {
+                "type": "string",
+                "value": "branch"
+              },
+              "title": "Branch",
+              "payload": {
+                "tag": "branch"
+              },
+              "originalNode": true,
+              "nodes": [
+                {
+                  "type": "string",
+                  "value": "root"
+                },
+                {
+                  "type": "string",
+                  "value": "branch"
+                }
+              ],
+              "originalPathNodes": true,
+              "parent": {
+                "type": "string",
+                "value": "root"
+              },
+              "hasChildren": true,
+              "children": [
+                {
+                  "type": "string",
+                  "value": "leaf"
+                }
+              ],
+              "fields": [
+                "children",
+                "index",
+                "key",
+                "level",
+                "node",
+                "nodes",
+                "parent",
+                "pos"
+              ]
+            },
+            {
+              "key": {
+                "type": "string",
+                "value": "leaf"
+              },
+              "pos": "0-0-1-0",
+              "level": 2,
+              "index": 0,
+              "nodeKey": {
+                "type": "string",
+                "value": "leaf"
+              },
+              "originalKey": {
+                "type": "string",
+                "value": "leaf"
+              },
+              "title": "Leaf",
+              "payload": {
+                "tag": "leaf"
+              },
+              "originalNode": true,
+              "nodes": [
+                {
+                  "type": "string",
+                  "value": "root"
+                },
+                {
+                  "type": "string",
+                  "value": "branch"
+                },
+                {
+                  "type": "string",
+                  "value": "leaf"
+                }
+              ],
+              "originalPathNodes": true,
+              "parent": {
+                "type": "string",
+                "value": "branch"
+              },
+              "hasChildren": false,
+              "children": [],
+              "fields": [
+                "index",
+                "key",
+                "level",
+                "node",
+                "nodes",
+                "parent",
+                "pos"
+              ]
+            }
+          ]
+        },
+        {
+          "query": {
+            "type": "string",
+            "value": "missing"
+          },
+          "path": []
+        }
+      ],
+      "savedPaths": [
+        {
+          "query": {
+            "type": "string",
+            "value": "root"
+          },
+          "path": [
+            {
+              "key": {
+                "type": "string",
+                "value": "root"
+              },
+              "pos": "0-0",
+              "level": 0,
+              "index": 0,
+              "nodeKey": {
+                "type": "string",
+                "value": "root"
+              },
+              "originalKey": {
+                "type": "string",
+                "value": "root"
+              },
+              "title": "Root",
+              "payload": {
+                "tag": "root"
+              },
+              "originalNode": true,
+              "nodes": [
+                {
+                  "type": "string",
+                  "value": "root"
+                }
+              ],
+              "originalPathNodes": true,
+              "parent": null,
+              "hasChildren": true,
+              "children": [
+                {
+                  "type": "number",
+                  "value": "0"
+                },
+                {
+                  "type": "string",
+                  "value": "branch"
+                }
+              ],
+              "fields": [
+                "children",
+                "index",
+                "key",
+                "level",
+                "node",
+                "nodes",
+                "parent",
+                "pos"
+              ]
+            }
+          ]
+        },
+        {
+          "query": {
+            "type": "number",
+            "value": "0"
+          },
+          "path": [
+            {
+              "key": {
+                "type": "string",
+                "value": "root"
+              },
+              "pos": "0-0",
+              "level": 0,
+              "index": 0,
+              "nodeKey": {
+                "type": "string",
+                "value": "root"
+              },
+              "originalKey": {
+                "type": "string",
+                "value": "root"
+              },
+              "title": "Root",
+              "payload": {
+                "tag": "root"
+              },
+              "originalNode": true,
+              "nodes": [
+                {
+                  "type": "string",
+                  "value": "root"
+                }
+              ],
+              "originalPathNodes": true,
+              "parent": null,
+              "hasChildren": true,
+              "children": [
+                {
+                  "type": "number",
+                  "value": "0"
+                },
+                {
+                  "type": "string",
+                  "value": "branch"
+                }
+              ],
+              "fields": [
+                "children",
+                "index",
+                "key",
+                "level",
+                "node",
+                "nodes",
+                "parent",
+                "pos"
+              ]
+            },
+            {
+              "key": {
+                "type": "number",
+                "value": "0"
+              },
+              "pos": "0-0-0",
+              "level": 1,
+              "index": 0,
+              "nodeKey": {
+                "type": "number",
+                "value": "0"
+              },
+              "originalKey": {
+                "type": "number",
+                "value": "0"
+              },
+              "title": "Zero",
+              "payload": {
+                "tag": "zero"
+              },
+              "originalNode": true,
+              "nodes": [
+                {
+                  "type": "string",
+                  "value": "root"
+                },
+                {
+                  "type": "number",
+                  "value": "0"
+                }
+              ],
+              "originalPathNodes": true,
+              "parent": {
+                "type": "string",
+                "value": "root"
+              },
+              "hasChildren": false,
+              "children": [],
+              "fields": [
+                "index",
+                "key",
+                "level",
+                "node",
+                "nodes",
+                "parent",
+                "pos"
+              ]
+            }
+          ]
+        },
+        {
+          "query": {
+            "type": "string",
+            "value": "branch"
+          },
+          "path": [
+            {
+              "key": {
+                "type": "string",
+                "value": "root"
+              },
+              "pos": "0-0",
+              "level": 0,
+              "index": 0,
+              "nodeKey": {
+                "type": "string",
+                "value": "root"
+              },
+              "originalKey": {
+                "type": "string",
+                "value": "root"
+              },
+              "title": "Root",
+              "payload": {
+                "tag": "root"
+              },
+              "originalNode": true,
+              "nodes": [
+                {
+                  "type": "string",
+                  "value": "root"
+                }
+              ],
+              "originalPathNodes": true,
+              "parent": null,
+              "hasChildren": true,
+              "children": [
+                {
+                  "type": "number",
+                  "value": "0"
+                },
+                {
+                  "type": "string",
+                  "value": "branch"
+                }
+              ],
+              "fields": [
+                "children",
+                "index",
+                "key",
+                "level",
+                "node",
+                "nodes",
+                "parent",
+                "pos"
+              ]
+            },
+            {
+              "key": {
+                "type": "string",
+                "value": "branch"
+              },
+              "pos": "0-0-1",
+              "level": 1,
+              "index": 1,
+              "nodeKey": {
+                "type": "string",
+                "value": "branch"
+              },
+              "originalKey": {
+                "type": "string",
+                "value": "branch"
+              },
+              "title": "Branch",
+              "payload": {
+                "tag": "branch"
+              },
+              "originalNode": true,
+              "nodes": [
+                {
+                  "type": "string",
+                  "value": "root"
+                },
+                {
+                  "type": "string",
+                  "value": "branch"
+                }
+              ],
+              "originalPathNodes": true,
+              "parent": {
+                "type": "string",
+                "value": "root"
+              },
+              "hasChildren": true,
+              "children": [
+                {
+                  "type": "string",
+                  "value": "leaf"
+                }
+              ],
+              "fields": [
+                "children",
+                "index",
+                "key",
+                "level",
+                "node",
+                "nodes",
+                "parent",
+                "pos"
+              ]
+            }
+          ]
+        },
+        {
+          "query": {
+            "type": "string",
+            "value": "leaf"
+          },
+          "path": [
+            {
+              "key": {
+                "type": "string",
+                "value": "root"
+              },
+              "pos": "0-0",
+              "level": 0,
+              "index": 0,
+              "nodeKey": {
+                "type": "string",
+                "value": "root"
+              },
+              "originalKey": {
+                "type": "string",
+                "value": "root"
+              },
+              "title": "Root",
+              "payload": {
+                "tag": "root"
+              },
+              "originalNode": true,
+              "nodes": [
+                {
+                  "type": "string",
+                  "value": "root"
+                }
+              ],
+              "originalPathNodes": true,
+              "parent": null,
+              "hasChildren": true,
+              "children": [
+                {
+                  "type": "number",
+                  "value": "0"
+                },
+                {
+                  "type": "string",
+                  "value": "branch"
+                }
+              ],
+              "fields": [
+                "children",
+                "index",
+                "key",
+                "level",
+                "node",
+                "nodes",
+                "parent",
+                "pos"
+              ]
+            },
+            {
+              "key": {
+                "type": "string",
+                "value": "branch"
+              },
+              "pos": "0-0-1",
+              "level": 1,
+              "index": 1,
+              "nodeKey": {
+                "type": "string",
+                "value": "branch"
+              },
+              "originalKey": {
+                "type": "string",
+                "value": "branch"
+              },
+              "title": "Branch",
+              "payload": {
+                "tag": "branch"
+              },
+              "originalNode": true,
+              "nodes": [
+                {
+                  "type": "string",
+                  "value": "root"
+                },
+                {
+                  "type": "string",
+                  "value": "branch"
+                }
+              ],
+              "originalPathNodes": true,
+              "parent": {
+                "type": "string",
+                "value": "root"
+              },
+              "hasChildren": true,
+              "children": [
+                {
+                  "type": "string",
+                  "value": "leaf"
+                }
+              ],
+              "fields": [
+                "children",
+                "index",
+                "key",
+                "level",
+                "node",
+                "nodes",
+                "parent",
+                "pos"
+              ]
+            },
+            {
+              "key": {
+                "type": "string",
+                "value": "leaf"
+              },
+              "pos": "0-0-1-0",
+              "level": 2,
+              "index": 0,
+              "nodeKey": {
+                "type": "string",
+                "value": "leaf"
+              },
+              "originalKey": {
+                "type": "string",
+                "value": "leaf"
+              },
+              "title": "Leaf",
+              "payload": {
+                "tag": "leaf"
+              },
+              "originalNode": true,
+              "nodes": [
+                {
+                  "type": "string",
+                  "value": "root"
+                },
+                {
+                  "type": "string",
+                  "value": "branch"
+                },
+                {
+                  "type": "string",
+                  "value": "leaf"
+                }
+              ],
+              "originalPathNodes": true,
+              "parent": {
+                "type": "string",
+                "value": "branch"
+              },
+              "hasChildren": false,
+              "children": [],
+              "fields": [
+                "index",
+                "key",
+                "level",
+                "node",
+                "nodes",
+                "parent",
+                "pos"
+              ]
+            }
+          ]
+        },
+        {
+          "query": {
+            "type": "string",
+            "value": "missing"
+          },
+          "path": []
+        }
+      ]
+    },
+    "data": {
+      "stable": true,
+      "paths": [
+        {
+          "query": {
+            "type": "string",
+            "value": "root"
+          },
+          "path": []
+        },
+        {
+          "query": {
+            "type": "string",
+            "value": "next"
+          },
+          "path": [
+            {
+              "key": {
+                "type": "string",
+                "value": "next"
+              },
+              "pos": "0-0",
+              "level": 0,
+              "index": 0,
+              "nodeKey": {
+                "type": "string",
+                "value": "next"
+              },
+              "originalKey": {
+                "type": "string",
+                "value": "next"
+              },
+              "title": "Next",
+              "originalNode": true,
+              "nodes": [
+                {
+                  "type": "string",
+                  "value": "next"
+                }
+              ],
+              "originalPathNodes": true,
+              "parent": null,
+              "hasChildren": true,
+              "children": [
+                {
+                  "type": "string",
+                  "value": "leaf"
+                }
+              ],
+              "fields": [
+                "children",
+                "index",
+                "key",
+                "level",
+                "node",
+                "nodes",
+                "parent",
+                "pos"
+              ]
+            }
+          ]
+        },
+        {
+          "query": {
+            "type": "string",
+            "value": "leaf"
+          },
+          "path": [
+            {
+              "key": {
+                "type": "string",
+                "value": "next"
+              },
+              "pos": "0-0",
+              "level": 0,
+              "index": 0,
+              "nodeKey": {
+                "type": "string",
+                "value": "next"
+              },
+              "originalKey": {
+                "type": "string",
+                "value": "next"
+              },
+              "title": "Next",
+              "originalNode": true,
+              "nodes": [
+                {
+                  "type": "string",
+                  "value": "next"
+                }
+              ],
+              "originalPathNodes": true,
+              "parent": null,
+              "hasChildren": true,
+              "children": [
+                {
+                  "type": "string",
+                  "value": "leaf"
+                }
+              ],
+              "fields": [
+                "children",
+                "index",
+                "key",
+                "level",
+                "node",
+                "nodes",
+                "parent",
+                "pos"
+              ]
+            },
+            {
+              "key": {
+                "type": "string",
+                "value": "leaf"
+              },
+              "pos": "0-0-0",
+              "level": 1,
+              "index": 0,
+              "nodeKey": {
+                "type": "string",
+                "value": "leaf"
+              },
+              "originalKey": {
+                "type": "string",
+                "value": "leaf"
+              },
+              "title": "Moved leaf",
+              "originalNode": true,
+              "nodes": [
+                {
+                  "type": "string",
+                  "value": "next"
+                },
+                {
+                  "type": "string",
+                  "value": "leaf"
+                }
+              ],
+              "originalPathNodes": true,
+              "parent": {
+                "type": "string",
+                "value": "next"
+              },
+              "hasChildren": false,
+              "children": [],
+              "fields": [
+                "index",
+                "key",
+                "level",
+                "node",
+                "nodes",
+                "parent",
+                "pos"
+              ]
+            }
+          ]
+        }
+      ],
+      "savedPaths": [
+        {
+          "query": {
+            "type": "string",
+            "value": "root"
+          },
+          "path": []
+        },
+        {
+          "query": {
+            "type": "string",
+            "value": "next"
+          },
+          "path": [
+            {
+              "key": {
+                "type": "string",
+                "value": "next"
+              },
+              "pos": "0-0",
+              "level": 0,
+              "index": 0,
+              "nodeKey": {
+                "type": "string",
+                "value": "next"
+              },
+              "originalKey": {
+                "type": "string",
+                "value": "next"
+              },
+              "title": "Next",
+              "originalNode": true,
+              "nodes": [
+                {
+                  "type": "string",
+                  "value": "next"
+                }
+              ],
+              "originalPathNodes": true,
+              "parent": null,
+              "hasChildren": true,
+              "children": [
+                {
+                  "type": "string",
+                  "value": "leaf"
+                }
+              ],
+              "fields": [
+                "children",
+                "index",
+                "key",
+                "level",
+                "node",
+                "nodes",
+                "parent",
+                "pos"
+              ]
+            }
+          ]
+        },
+        {
+          "query": {
+            "type": "string",
+            "value": "leaf"
+          },
+          "path": [
+            {
+              "key": {
+                "type": "string",
+                "value": "next"
+              },
+              "pos": "0-0",
+              "level": 0,
+              "index": 0,
+              "nodeKey": {
+                "type": "string",
+                "value": "next"
+              },
+              "originalKey": {
+                "type": "string",
+                "value": "next"
+              },
+              "title": "Next",
+              "originalNode": true,
+              "nodes": [
+                {
+                  "type": "string",
+                  "value": "next"
+                }
+              ],
+              "originalPathNodes": true,
+              "parent": null,
+              "hasChildren": true,
+              "children": [
+                {
+                  "type": "string",
+                  "value": "leaf"
+                }
+              ],
+              "fields": [
+                "children",
+                "index",
+                "key",
+                "level",
+                "node",
+                "nodes",
+                "parent",
+                "pos"
+              ]
+            },
+            {
+              "key": {
+                "type": "string",
+                "value": "leaf"
+              },
+              "pos": "0-0-0",
+              "level": 1,
+              "index": 0,
+              "nodeKey": {
+                "type": "string",
+                "value": "leaf"
+              },
+              "originalKey": {
+                "type": "string",
+                "value": "leaf"
+              },
+              "title": "Moved leaf",
+              "originalNode": true,
+              "nodes": [
+                {
+                  "type": "string",
+                  "value": "next"
+                },
+                {
+                  "type": "string",
+                  "value": "leaf"
+                }
+              ],
+              "originalPathNodes": true,
+              "parent": {
+                "type": "string",
+                "value": "next"
+              },
+              "hasChildren": false,
+              "children": [],
+              "fields": [
+                "index",
+                "key",
+                "level",
+                "node",
+                "nodes",
+                "parent",
+                "pos"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "fields": {
+      "stable": true,
+      "paths": [
+        {
+          "query": {
+            "type": "string",
+            "value": "root"
+          },
+          "path": [
+            {
+              "key": {
+                "type": "string",
+                "value": "root"
+              },
+              "pos": "0-0",
+              "level": 0,
+              "index": 0,
+              "nodeKey": {
+                "type": "string",
+                "value": "root"
+              },
+              "originalKey": {
+                "type": "string",
+                "value": "raw-root"
+              },
+              "title": "Root alias",
+              "payload": {
+                "tag": "root"
+              },
+              "originalNode": true,
+              "nodes": [
+                {
+                  "type": "string",
+                  "value": "root"
+                }
+              ],
+              "originalPathNodes": true,
+              "parent": null,
+              "hasChildren": true,
+              "children": [
+                {
+                  "type": "number",
+                  "value": "0"
+                },
+                {
+                  "type": "string",
+                  "value": "branch"
+                }
+              ],
+              "fields": [
+                "children",
+                "index",
+                "key",
+                "level",
+                "node",
+                "nodes",
+                "parent",
+                "pos"
+              ]
+            }
+          ]
+        },
+        {
+          "query": {
+            "type": "number",
+            "value": "0"
+          },
+          "path": [
+            {
+              "key": {
+                "type": "string",
+                "value": "root"
+              },
+              "pos": "0-0",
+              "level": 0,
+              "index": 0,
+              "nodeKey": {
+                "type": "string",
+                "value": "root"
+              },
+              "originalKey": {
+                "type": "string",
+                "value": "raw-root"
+              },
+              "title": "Root alias",
+              "payload": {
+                "tag": "root"
+              },
+              "originalNode": true,
+              "nodes": [
+                {
+                  "type": "string",
+                  "value": "root"
+                }
+              ],
+              "originalPathNodes": true,
+              "parent": null,
+              "hasChildren": true,
+              "children": [
+                {
+                  "type": "number",
+                  "value": "0"
+                },
+                {
+                  "type": "string",
+                  "value": "branch"
+                }
+              ],
+              "fields": [
+                "children",
+                "index",
+                "key",
+                "level",
+                "node",
+                "nodes",
+                "parent",
+                "pos"
+              ]
+            },
+            {
+              "key": {
+                "type": "number",
+                "value": "0"
+              },
+              "pos": "0-0-0",
+              "level": 1,
+              "index": 0,
+              "nodeKey": {
+                "type": "number",
+                "value": "0"
+              },
+              "originalKey": {
+                "type": "string",
+                "value": "raw-zero"
+              },
+              "title": "Zero alias",
+              "payload": {
+                "tag": "zero"
+              },
+              "originalNode": true,
+              "nodes": [
+                {
+                  "type": "string",
+                  "value": "root"
+                },
+                {
+                  "type": "number",
+                  "value": "0"
+                }
+              ],
+              "originalPathNodes": true,
+              "parent": {
+                "type": "string",
+                "value": "root"
+              },
+              "hasChildren": false,
+              "children": [],
+              "fields": [
+                "index",
+                "key",
+                "level",
+                "node",
+                "nodes",
+                "parent",
+                "pos"
+              ]
+            }
+          ]
+        },
+        {
+          "query": {
+            "type": "string",
+            "value": "branch"
+          },
+          "path": [
+            {
+              "key": {
+                "type": "string",
+                "value": "root"
+              },
+              "pos": "0-0",
+              "level": 0,
+              "index": 0,
+              "nodeKey": {
+                "type": "string",
+                "value": "root"
+              },
+              "originalKey": {
+                "type": "string",
+                "value": "raw-root"
+              },
+              "title": "Root alias",
+              "payload": {
+                "tag": "root"
+              },
+              "originalNode": true,
+              "nodes": [
+                {
+                  "type": "string",
+                  "value": "root"
+                }
+              ],
+              "originalPathNodes": true,
+              "parent": null,
+              "hasChildren": true,
+              "children": [
+                {
+                  "type": "number",
+                  "value": "0"
+                },
+                {
+                  "type": "string",
+                  "value": "branch"
+                }
+              ],
+              "fields": [
+                "children",
+                "index",
+                "key",
+                "level",
+                "node",
+                "nodes",
+                "parent",
+                "pos"
+              ]
+            },
+            {
+              "key": {
+                "type": "string",
+                "value": "branch"
+              },
+              "pos": "0-0-1",
+              "level": 1,
+              "index": 1,
+              "nodeKey": {
+                "type": "string",
+                "value": "branch"
+              },
+              "originalKey": {
+                "type": "string",
+                "value": "raw-branch"
+              },
+              "title": "Branch alias",
+              "payload": {
+                "tag": "branch"
+              },
+              "originalNode": true,
+              "nodes": [
+                {
+                  "type": "string",
+                  "value": "root"
+                },
+                {
+                  "type": "string",
+                  "value": "branch"
+                }
+              ],
+              "originalPathNodes": true,
+              "parent": {
+                "type": "string",
+                "value": "root"
+              },
+              "hasChildren": true,
+              "children": [
+                {
+                  "type": "string",
+                  "value": "leaf"
+                }
+              ],
+              "fields": [
+                "children",
+                "index",
+                "key",
+                "level",
+                "node",
+                "nodes",
+                "parent",
+                "pos"
+              ]
+            }
+          ]
+        },
+        {
+          "query": {
+            "type": "string",
+            "value": "leaf"
+          },
+          "path": [
+            {
+              "key": {
+                "type": "string",
+                "value": "root"
+              },
+              "pos": "0-0",
+              "level": 0,
+              "index": 0,
+              "nodeKey": {
+                "type": "string",
+                "value": "root"
+              },
+              "originalKey": {
+                "type": "string",
+                "value": "raw-root"
+              },
+              "title": "Root alias",
+              "payload": {
+                "tag": "root"
+              },
+              "originalNode": true,
+              "nodes": [
+                {
+                  "type": "string",
+                  "value": "root"
+                }
+              ],
+              "originalPathNodes": true,
+              "parent": null,
+              "hasChildren": true,
+              "children": [
+                {
+                  "type": "number",
+                  "value": "0"
+                },
+                {
+                  "type": "string",
+                  "value": "branch"
+                }
+              ],
+              "fields": [
+                "children",
+                "index",
+                "key",
+                "level",
+                "node",
+                "nodes",
+                "parent",
+                "pos"
+              ]
+            },
+            {
+              "key": {
+                "type": "string",
+                "value": "branch"
+              },
+              "pos": "0-0-1",
+              "level": 1,
+              "index": 1,
+              "nodeKey": {
+                "type": "string",
+                "value": "branch"
+              },
+              "originalKey": {
+                "type": "string",
+                "value": "raw-branch"
+              },
+              "title": "Branch alias",
+              "payload": {
+                "tag": "branch"
+              },
+              "originalNode": true,
+              "nodes": [
+                {
+                  "type": "string",
+                  "value": "root"
+                },
+                {
+                  "type": "string",
+                  "value": "branch"
+                }
+              ],
+              "originalPathNodes": true,
+              "parent": {
+                "type": "string",
+                "value": "root"
+              },
+              "hasChildren": true,
+              "children": [
+                {
+                  "type": "string",
+                  "value": "leaf"
+                }
+              ],
+              "fields": [
+                "children",
+                "index",
+                "key",
+                "level",
+                "node",
+                "nodes",
+                "parent",
+                "pos"
+              ]
+            },
+            {
+              "key": {
+                "type": "string",
+                "value": "leaf"
+              },
+              "pos": "0-0-1-0",
+              "level": 2,
+              "index": 0,
+              "nodeKey": {
+                "type": "string",
+                "value": "leaf"
+              },
+              "originalKey": {
+                "type": "string",
+                "value": "raw-leaf"
+              },
+              "title": "Leaf alias",
+              "payload": {
+                "tag": "leaf"
+              },
+              "originalNode": true,
+              "nodes": [
+                {
+                  "type": "string",
+                  "value": "root"
+                },
+                {
+                  "type": "string",
+                  "value": "branch"
+                },
+                {
+                  "type": "string",
+                  "value": "leaf"
+                }
+              ],
+              "originalPathNodes": true,
+              "parent": {
+                "type": "string",
+                "value": "branch"
+              },
+              "hasChildren": false,
+              "children": [],
+              "fields": [
+                "index",
+                "key",
+                "level",
+                "node",
+                "nodes",
+                "parent",
+                "pos"
+              ]
+            }
+          ]
+        },
+        {
+          "query": {
+            "type": "string",
+            "value": "missing"
+          },
+          "path": []
+        }
+      ],
+      "savedPaths": [
+        {
+          "query": {
+            "type": "string",
+            "value": "root"
+          },
+          "path": [
+            {
+              "key": {
+                "type": "string",
+                "value": "root"
+              },
+              "pos": "0-0",
+              "level": 0,
+              "index": 0,
+              "nodeKey": {
+                "type": "string",
+                "value": "root"
+              },
+              "originalKey": {
+                "type": "string",
+                "value": "raw-root"
+              },
+              "title": "Root alias",
+              "payload": {
+                "tag": "root"
+              },
+              "originalNode": true,
+              "nodes": [
+                {
+                  "type": "string",
+                  "value": "root"
+                }
+              ],
+              "originalPathNodes": true,
+              "parent": null,
+              "hasChildren": true,
+              "children": [
+                {
+                  "type": "number",
+                  "value": "0"
+                },
+                {
+                  "type": "string",
+                  "value": "branch"
+                }
+              ],
+              "fields": [
+                "children",
+                "index",
+                "key",
+                "level",
+                "node",
+                "nodes",
+                "parent",
+                "pos"
+              ]
+            }
+          ]
+        },
+        {
+          "query": {
+            "type": "number",
+            "value": "0"
+          },
+          "path": [
+            {
+              "key": {
+                "type": "string",
+                "value": "root"
+              },
+              "pos": "0-0",
+              "level": 0,
+              "index": 0,
+              "nodeKey": {
+                "type": "string",
+                "value": "root"
+              },
+              "originalKey": {
+                "type": "string",
+                "value": "raw-root"
+              },
+              "title": "Root alias",
+              "payload": {
+                "tag": "root"
+              },
+              "originalNode": true,
+              "nodes": [
+                {
+                  "type": "string",
+                  "value": "root"
+                }
+              ],
+              "originalPathNodes": true,
+              "parent": null,
+              "hasChildren": true,
+              "children": [
+                {
+                  "type": "number",
+                  "value": "0"
+                },
+                {
+                  "type": "string",
+                  "value": "branch"
+                }
+              ],
+              "fields": [
+                "children",
+                "index",
+                "key",
+                "level",
+                "node",
+                "nodes",
+                "parent",
+                "pos"
+              ]
+            },
+            {
+              "key": {
+                "type": "number",
+                "value": "0"
+              },
+              "pos": "0-0-0",
+              "level": 1,
+              "index": 0,
+              "nodeKey": {
+                "type": "number",
+                "value": "0"
+              },
+              "originalKey": {
+                "type": "string",
+                "value": "raw-zero"
+              },
+              "title": "Zero alias",
+              "payload": {
+                "tag": "zero"
+              },
+              "originalNode": true,
+              "nodes": [
+                {
+                  "type": "string",
+                  "value": "root"
+                },
+                {
+                  "type": "number",
+                  "value": "0"
+                }
+              ],
+              "originalPathNodes": true,
+              "parent": {
+                "type": "string",
+                "value": "root"
+              },
+              "hasChildren": false,
+              "children": [],
+              "fields": [
+                "index",
+                "key",
+                "level",
+                "node",
+                "nodes",
+                "parent",
+                "pos"
+              ]
+            }
+          ]
+        },
+        {
+          "query": {
+            "type": "string",
+            "value": "branch"
+          },
+          "path": [
+            {
+              "key": {
+                "type": "string",
+                "value": "root"
+              },
+              "pos": "0-0",
+              "level": 0,
+              "index": 0,
+              "nodeKey": {
+                "type": "string",
+                "value": "root"
+              },
+              "originalKey": {
+                "type": "string",
+                "value": "raw-root"
+              },
+              "title": "Root alias",
+              "payload": {
+                "tag": "root"
+              },
+              "originalNode": true,
+              "nodes": [
+                {
+                  "type": "string",
+                  "value": "root"
+                }
+              ],
+              "originalPathNodes": true,
+              "parent": null,
+              "hasChildren": true,
+              "children": [
+                {
+                  "type": "number",
+                  "value": "0"
+                },
+                {
+                  "type": "string",
+                  "value": "branch"
+                }
+              ],
+              "fields": [
+                "children",
+                "index",
+                "key",
+                "level",
+                "node",
+                "nodes",
+                "parent",
+                "pos"
+              ]
+            },
+            {
+              "key": {
+                "type": "string",
+                "value": "branch"
+              },
+              "pos": "0-0-1",
+              "level": 1,
+              "index": 1,
+              "nodeKey": {
+                "type": "string",
+                "value": "branch"
+              },
+              "originalKey": {
+                "type": "string",
+                "value": "raw-branch"
+              },
+              "title": "Branch alias",
+              "payload": {
+                "tag": "branch"
+              },
+              "originalNode": true,
+              "nodes": [
+                {
+                  "type": "string",
+                  "value": "root"
+                },
+                {
+                  "type": "string",
+                  "value": "branch"
+                }
+              ],
+              "originalPathNodes": true,
+              "parent": {
+                "type": "string",
+                "value": "root"
+              },
+              "hasChildren": true,
+              "children": [
+                {
+                  "type": "string",
+                  "value": "leaf"
+                }
+              ],
+              "fields": [
+                "children",
+                "index",
+                "key",
+                "level",
+                "node",
+                "nodes",
+                "parent",
+                "pos"
+              ]
+            }
+          ]
+        },
+        {
+          "query": {
+            "type": "string",
+            "value": "leaf"
+          },
+          "path": [
+            {
+              "key": {
+                "type": "string",
+                "value": "root"
+              },
+              "pos": "0-0",
+              "level": 0,
+              "index": 0,
+              "nodeKey": {
+                "type": "string",
+                "value": "root"
+              },
+              "originalKey": {
+                "type": "string",
+                "value": "raw-root"
+              },
+              "title": "Root alias",
+              "payload": {
+                "tag": "root"
+              },
+              "originalNode": true,
+              "nodes": [
+                {
+                  "type": "string",
+                  "value": "root"
+                }
+              ],
+              "originalPathNodes": true,
+              "parent": null,
+              "hasChildren": true,
+              "children": [
+                {
+                  "type": "number",
+                  "value": "0"
+                },
+                {
+                  "type": "string",
+                  "value": "branch"
+                }
+              ],
+              "fields": [
+                "children",
+                "index",
+                "key",
+                "level",
+                "node",
+                "nodes",
+                "parent",
+                "pos"
+              ]
+            },
+            {
+              "key": {
+                "type": "string",
+                "value": "branch"
+              },
+              "pos": "0-0-1",
+              "level": 1,
+              "index": 1,
+              "nodeKey": {
+                "type": "string",
+                "value": "branch"
+              },
+              "originalKey": {
+                "type": "string",
+                "value": "raw-branch"
+              },
+              "title": "Branch alias",
+              "payload": {
+                "tag": "branch"
+              },
+              "originalNode": true,
+              "nodes": [
+                {
+                  "type": "string",
+                  "value": "root"
+                },
+                {
+                  "type": "string",
+                  "value": "branch"
+                }
+              ],
+              "originalPathNodes": true,
+              "parent": {
+                "type": "string",
+                "value": "root"
+              },
+              "hasChildren": true,
+              "children": [
+                {
+                  "type": "string",
+                  "value": "leaf"
+                }
+              ],
+              "fields": [
+                "children",
+                "index",
+                "key",
+                "level",
+                "node",
+                "nodes",
+                "parent",
+                "pos"
+              ]
+            },
+            {
+              "key": {
+                "type": "string",
+                "value": "leaf"
+              },
+              "pos": "0-0-1-0",
+              "level": 2,
+              "index": 0,
+              "nodeKey": {
+                "type": "string",
+                "value": "leaf"
+              },
+              "originalKey": {
+                "type": "string",
+                "value": "raw-leaf"
+              },
+              "title": "Leaf alias",
+              "payload": {
+                "tag": "leaf"
+              },
+              "originalNode": true,
+              "nodes": [
+                {
+                  "type": "string",
+                  "value": "root"
+                },
+                {
+                  "type": "string",
+                  "value": "branch"
+                },
+                {
+                  "type": "string",
+                  "value": "leaf"
+                }
+              ],
+              "originalPathNodes": true,
+              "parent": {
+                "type": "string",
+                "value": "branch"
+              },
+              "hasChildren": false,
+              "children": [],
+              "fields": [
+                "index",
+                "key",
+                "level",
+                "node",
+                "nodes",
+                "parent",
+                "pos"
+              ]
+            }
+          ]
+        },
+        {
+          "query": {
+            "type": "string",
+            "value": "missing"
+          },
+          "path": []
+        }
+      ]
+    },
+    "fieldsOnlyInitial": {
+      "stable": true,
+      "paths": [
+        {
+          "query": {
+            "type": "string",
+            "value": "oldRoot"
+          },
+          "path": [
+            {
+              "key": {
+                "type": "string",
+                "value": "oldRoot"
+              },
+              "pos": "0-0",
+              "level": 0,
+              "index": 0,
+              "nodeKey": {
+                "type": "string",
+                "value": "oldRoot"
+              },
+              "originalKey": {
+                "type": "string",
+                "value": "oldRoot"
+              },
+              "title": "Original",
+              "originalNode": true,
+              "nodes": [
+                {
+                  "type": "string",
+                  "value": "oldRoot"
+                }
+              ],
+              "originalPathNodes": true,
+              "parent": null,
+              "hasChildren": true,
+              "children": [
+                {
+                  "type": "string",
+                  "value": "oldLeaf"
+                }
+              ],
+              "fields": [
+                "children",
+                "index",
+                "key",
+                "level",
+                "node",
+                "nodes",
+                "parent",
+                "pos"
+              ]
+            }
+          ]
+        },
+        {
+          "query": {
+            "type": "string",
+            "value": "oldLeaf"
+          },
+          "path": [
+            {
+              "key": {
+                "type": "string",
+                "value": "oldRoot"
+              },
+              "pos": "0-0",
+              "level": 0,
+              "index": 0,
+              "nodeKey": {
+                "type": "string",
+                "value": "oldRoot"
+              },
+              "originalKey": {
+                "type": "string",
+                "value": "oldRoot"
+              },
+              "title": "Original",
+              "originalNode": true,
+              "nodes": [
+                {
+                  "type": "string",
+                  "value": "oldRoot"
+                }
+              ],
+              "originalPathNodes": true,
+              "parent": null,
+              "hasChildren": true,
+              "children": [
+                {
+                  "type": "string",
+                  "value": "oldLeaf"
+                }
+              ],
+              "fields": [
+                "children",
+                "index",
+                "key",
+                "level",
+                "node",
+                "nodes",
+                "parent",
+                "pos"
+              ]
+            },
+            {
+              "key": {
+                "type": "string",
+                "value": "oldLeaf"
+              },
+              "pos": "0-0-0",
+              "level": 1,
+              "index": 0,
+              "nodeKey": {
+                "type": "string",
+                "value": "oldLeaf"
+              },
+              "originalKey": {
+                "type": "string",
+                "value": "oldLeaf"
+              },
+              "title": "Original leaf",
+              "originalNode": true,
+              "nodes": [
+                {
+                  "type": "string",
+                  "value": "oldRoot"
+                },
+                {
+                  "type": "string",
+                  "value": "oldLeaf"
+                }
+              ],
+              "originalPathNodes": true,
+              "parent": {
+                "type": "string",
+                "value": "oldRoot"
+              },
+              "hasChildren": false,
+              "children": [],
+              "fields": [
+                "index",
+                "key",
+                "level",
+                "node",
+                "nodes",
+                "parent",
+                "pos"
+              ]
+            }
+          ]
+        },
+        {
+          "query": {
+            "type": "string",
+            "value": "root"
+          },
+          "path": []
+        },
+        {
+          "query": {
+            "type": "string",
+            "value": "leaf"
+          },
+          "path": []
+        }
+      ],
+      "savedPaths": [
+        {
+          "query": {
+            "type": "string",
+            "value": "oldRoot"
+          },
+          "path": [
+            {
+              "key": {
+                "type": "string",
+                "value": "oldRoot"
+              },
+              "pos": "0-0",
+              "level": 0,
+              "index": 0,
+              "nodeKey": {
+                "type": "string",
+                "value": "oldRoot"
+              },
+              "originalKey": {
+                "type": "string",
+                "value": "oldRoot"
+              },
+              "title": "Original",
+              "originalNode": true,
+              "nodes": [
+                {
+                  "type": "string",
+                  "value": "oldRoot"
+                }
+              ],
+              "originalPathNodes": true,
+              "parent": null,
+              "hasChildren": true,
+              "children": [
+                {
+                  "type": "string",
+                  "value": "oldLeaf"
+                }
+              ],
+              "fields": [
+                "children",
+                "index",
+                "key",
+                "level",
+                "node",
+                "nodes",
+                "parent",
+                "pos"
+              ]
+            }
+          ]
+        },
+        {
+          "query": {
+            "type": "string",
+            "value": "oldLeaf"
+          },
+          "path": [
+            {
+              "key": {
+                "type": "string",
+                "value": "oldRoot"
+              },
+              "pos": "0-0",
+              "level": 0,
+              "index": 0,
+              "nodeKey": {
+                "type": "string",
+                "value": "oldRoot"
+              },
+              "originalKey": {
+                "type": "string",
+                "value": "oldRoot"
+              },
+              "title": "Original",
+              "originalNode": true,
+              "nodes": [
+                {
+                  "type": "string",
+                  "value": "oldRoot"
+                }
+              ],
+              "originalPathNodes": true,
+              "parent": null,
+              "hasChildren": true,
+              "children": [
+                {
+                  "type": "string",
+                  "value": "oldLeaf"
+                }
+              ],
+              "fields": [
+                "children",
+                "index",
+                "key",
+                "level",
+                "node",
+                "nodes",
+                "parent",
+                "pos"
+              ]
+            },
+            {
+              "key": {
+                "type": "string",
+                "value": "oldLeaf"
+              },
+              "pos": "0-0-0",
+              "level": 1,
+              "index": 0,
+              "nodeKey": {
+                "type": "string",
+                "value": "oldLeaf"
+              },
+              "originalKey": {
+                "type": "string",
+                "value": "oldLeaf"
+              },
+              "title": "Original leaf",
+              "originalNode": true,
+              "nodes": [
+                {
+                  "type": "string",
+                  "value": "oldRoot"
+                },
+                {
+                  "type": "string",
+                  "value": "oldLeaf"
+                }
+              ],
+              "originalPathNodes": true,
+              "parent": {
+                "type": "string",
+                "value": "oldRoot"
+              },
+              "hasChildren": false,
+              "children": [],
+              "fields": [
+                "index",
+                "key",
+                "level",
+                "node",
+                "nodes",
+                "parent",
+                "pos"
+              ]
+            }
+          ]
+        },
+        {
+          "query": {
+            "type": "string",
+            "value": "root"
+          },
+          "path": []
+        },
+        {
+          "query": {
+            "type": "string",
+            "value": "leaf"
+          },
+          "path": []
+        }
+      ]
+    },
+    "fieldsOnly": {
+      "stable": true,
+      "paths": [
+        {
+          "query": {
+            "type": "string",
+            "value": "oldRoot"
+          },
+          "path": []
+        },
+        {
+          "query": {
+            "type": "string",
+            "value": "oldLeaf"
+          },
+          "path": []
+        },
+        {
+          "query": {
+            "type": "string",
+            "value": "root"
+          },
+          "path": [
+            {
+              "key": {
+                "type": "string",
+                "value": "root"
+              },
+              "pos": "0-0",
+              "level": 0,
+              "index": 0,
+              "nodeKey": {
+                "type": "string",
+                "value": "root"
+              },
+              "originalKey": {
+                "type": "string",
+                "value": "oldRoot"
+              },
+              "title": "Alias",
+              "originalNode": true,
+              "nodes": [
+                {
+                  "type": "string",
+                  "value": "root"
+                }
+              ],
+              "originalPathNodes": true,
+              "parent": null,
+              "hasChildren": true,
+              "children": [
+                {
+                  "type": "string",
+                  "value": "leaf"
+                }
+              ],
+              "fields": [
+                "children",
+                "index",
+                "key",
+                "level",
+                "node",
+                "nodes",
+                "parent",
+                "pos"
+              ]
+            }
+          ]
+        },
+        {
+          "query": {
+            "type": "string",
+            "value": "leaf"
+          },
+          "path": [
+            {
+              "key": {
+                "type": "string",
+                "value": "root"
+              },
+              "pos": "0-0",
+              "level": 0,
+              "index": 0,
+              "nodeKey": {
+                "type": "string",
+                "value": "root"
+              },
+              "originalKey": {
+                "type": "string",
+                "value": "oldRoot"
+              },
+              "title": "Alias",
+              "originalNode": true,
+              "nodes": [
+                {
+                  "type": "string",
+                  "value": "root"
+                }
+              ],
+              "originalPathNodes": true,
+              "parent": null,
+              "hasChildren": true,
+              "children": [
+                {
+                  "type": "string",
+                  "value": "leaf"
+                }
+              ],
+              "fields": [
+                "children",
+                "index",
+                "key",
+                "level",
+                "node",
+                "nodes",
+                "parent",
+                "pos"
+              ]
+            },
+            {
+              "key": {
+                "type": "string",
+                "value": "leaf"
+              },
+              "pos": "0-0-0",
+              "level": 1,
+              "index": 0,
+              "nodeKey": {
+                "type": "string",
+                "value": "leaf"
+              },
+              "originalKey": {
+                "type": "string",
+                "value": "oldLeaf"
+              },
+              "title": "Alias leaf",
+              "originalNode": true,
+              "nodes": [
+                {
+                  "type": "string",
+                  "value": "root"
+                },
+                {
+                  "type": "string",
+                  "value": "leaf"
+                }
+              ],
+              "originalPathNodes": true,
+              "parent": {
+                "type": "string",
+                "value": "root"
+              },
+              "hasChildren": false,
+              "children": [],
+              "fields": [
+                "index",
+                "key",
+                "level",
+                "node",
+                "nodes",
+                "parent",
+                "pos"
+              ]
+            }
+          ]
+        }
+      ],
+      "savedPaths": [
+        {
+          "query": {
+            "type": "string",
+            "value": "oldRoot"
+          },
+          "path": []
+        },
+        {
+          "query": {
+            "type": "string",
+            "value": "oldLeaf"
+          },
+          "path": []
+        },
+        {
+          "query": {
+            "type": "string",
+            "value": "root"
+          },
+          "path": [
+            {
+              "key": {
+                "type": "string",
+                "value": "root"
+              },
+              "pos": "0-0",
+              "level": 0,
+              "index": 0,
+              "nodeKey": {
+                "type": "string",
+                "value": "root"
+              },
+              "originalKey": {
+                "type": "string",
+                "value": "oldRoot"
+              },
+              "title": "Alias",
+              "originalNode": true,
+              "nodes": [
+                {
+                  "type": "string",
+                  "value": "root"
+                }
+              ],
+              "originalPathNodes": true,
+              "parent": null,
+              "hasChildren": true,
+              "children": [
+                {
+                  "type": "string",
+                  "value": "leaf"
+                }
+              ],
+              "fields": [
+                "children",
+                "index",
+                "key",
+                "level",
+                "node",
+                "nodes",
+                "parent",
+                "pos"
+              ]
+            }
+          ]
+        },
+        {
+          "query": {
+            "type": "string",
+            "value": "leaf"
+          },
+          "path": [
+            {
+              "key": {
+                "type": "string",
+                "value": "root"
+              },
+              "pos": "0-0",
+              "level": 0,
+              "index": 0,
+              "nodeKey": {
+                "type": "string",
+                "value": "root"
+              },
+              "originalKey": {
+                "type": "string",
+                "value": "oldRoot"
+              },
+              "title": "Alias",
+              "originalNode": true,
+              "nodes": [
+                {
+                  "type": "string",
+                  "value": "root"
+                }
+              ],
+              "originalPathNodes": true,
+              "parent": null,
+              "hasChildren": true,
+              "children": [
+                {
+                  "type": "string",
+                  "value": "leaf"
+                }
+              ],
+              "fields": [
+                "children",
+                "index",
+                "key",
+                "level",
+                "node",
+                "nodes",
+                "parent",
+                "pos"
+              ]
+            },
+            {
+              "key": {
+                "type": "string",
+                "value": "leaf"
+              },
+              "pos": "0-0-0",
+              "level": 1,
+              "index": 0,
+              "nodeKey": {
+                "type": "string",
+                "value": "leaf"
+              },
+              "originalKey": {
+                "type": "string",
+                "value": "oldLeaf"
+              },
+              "title": "Alias leaf",
+              "originalNode": true,
+              "nodes": [
+                {
+                  "type": "string",
+                  "value": "root"
+                },
+                {
+                  "type": "string",
+                  "value": "leaf"
+                }
+              ],
+              "originalPathNodes": true,
+              "parent": {
+                "type": "string",
+                "value": "root"
+              },
+              "hasChildren": false,
+              "children": [],
+              "fields": [
+                "index",
+                "key",
+                "level",
+                "node",
+                "nodes",
+                "parent",
+                "pos"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "updateInputs": {
+    "data": [
+      {
+        "key": "next",
+        "title": "Next",
+        "children": [
+          {
+            "key": "leaf",
+            "title": "Moved leaf"
+          }
+        ]
+      }
+    ],
+    "fieldsData": [
+      {
+        "id": "root",
+        "key": "raw-root",
+        "caption": "Root alias",
+        "payload": {
+          "tag": "root"
+        },
+        "items": [
+          {
+            "id": 0,
+            "key": "raw-zero",
+            "caption": "Zero alias",
+            "payload": {
+              "tag": "zero"
+            }
+          },
+          {
+            "id": "branch",
+            "key": "raw-branch",
+            "caption": "Branch alias",
+            "payload": {
+              "tag": "branch"
+            },
+            "items": [
+              {
+                "id": "leaf",
+                "key": "raw-leaf",
+                "caption": "Leaf alias",
+                "payload": {
+                  "tag": "leaf"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "fieldsOnlyData": [
+      {
+        "key": "oldRoot",
+        "id": "root",
+        "title": "Original",
+        "caption": "Alias",
+        "children": [
+          {
+            "key": "oldLeaf",
+            "id": "leaf",
+            "title": "Original leaf",
+            "caption": "Alias leaf"
+          }
+        ]
+      }
+    ]
+  },
+  "inherited": {
+    "stable": true,
+    "paths": [
+      {
+        "query": {
+          "type": "string",
+          "value": "constructor"
+        },
+        "path": [
+          {
+            "invalidEntity": true,
+            "type": "function",
+            "keys": []
+          }
+        ]
+      },
+      {
+        "query": {
+          "type": "string",
+          "value": "__proto__"
+        },
+        "path": [
+          {
+            "invalidEntity": true,
+            "type": "object",
+            "keys": []
+          }
+        ]
+      },
+      {
+        "query": {
+          "type": "string",
+          "value": "toString"
+        },
+        "path": [
+          {
+            "invalidEntity": true,
+            "type": "function",
+            "keys": []
+          }
+        ]
+      }
+    ],
+    "savedPaths": [
+      {
+        "query": {
+          "type": "string",
+          "value": "constructor"
+        },
+        "path": [
+          {
+            "invalidEntity": true,
+            "type": "function",
+            "keys": []
+          }
+        ]
+      },
+      {
+        "query": {
+          "type": "string",
+          "value": "__proto__"
+        },
+        "path": [
+          {
+            "invalidEntity": true,
+            "type": "object",
+            "keys": []
+          }
+        ]
+      },
+      {
+        "query": {
+          "type": "string",
+          "value": "toString"
+        },
+        "path": [
+          {
+            "invalidEntity": true,
+            "type": "function",
+            "keys": []
+          }
+        ]
+      }
+    ]
+  }
+}

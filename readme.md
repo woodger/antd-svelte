@@ -6613,6 +6613,53 @@ semantic/config API и collapse/appear анимации ещё не перене
 Deprecated `TreeNode` children не входят в перенос: rc-tree 1.4.0 прямо помечает
 `Tree.children` как deprecated и предлагает `treeData`.
 
+### Data utilities
+
+`createTree` соответствует React `Tree.useTree`. Модель предоставляет стабильный
+`getPath(key)`: массив entities от корня до найденного узла включительно.
+Entity содержит `key`, `pos`, `level`, `index`, исходный `node`, путь исходных
+объектов `nodes`, `parent` и `children` при наличии потомков. Lookup по string,
+number и bigint использует исходное строковое сопоставление ключей.
+
+```svelte
+<script lang="ts">
+  import { createTree, type TreeFieldNames } from 'antd-svelte';
+
+  interface Item {
+    id: string;
+    caption: string;
+    items?: Item[];
+  }
+  let items = $state.raw<Item[]>([{ id: 'root', caption: 'Корень', items: [
+    { id: 'leaf', caption: 'Лист' }
+  ] }]);
+  let fields = $state<TreeFieldNames>({ key: 'id', title: 'caption', children: 'items' });
+  const model = createTree(() => items, { get fieldNames() { return fields; } });
+  let path = $derived(model.getPath('leaf').map(entity => entity.key));
+</script>
+
+<output>{path.join(' / ')}</output>
+```
+
+Getter data и getter `config.fieldNames` читаются при каждом lookup; новая ссылка
+на data или schema перестраивает индекс. Для изменений используйте новый массив
+и новый объект fieldNames. Сохранённая функция `getPath` читает актуальные inputs,
+включая вызов через `$derived`. Статический массив также принимается.
+Модель работает без DOM, effects и timers, в том числе при SSR. Generic payload
+и identity исходных объектов сохраняются; title не переименовывается в raw node.
+У UI-компонентов Tree/DirectoryTree собственные fieldNames/generic props пока
+остаются в списке расширений; этот API относится к data-модели.
+
+[Исходный UMD-эталон](./tests/browser/fixtures/ant-design-tree-data-model-reference.json)
+фиксирует entities, aliases, positional fallback и обновления data/schema.
+Неизвестный ключ возвращает `[]`. Это исправляет явную ошибку rc-tree 1.4.0:
+lookup отсутствующих constructor/__proto__/toString читает plain object prototype
+и возвращает function/Object.prototype вместо DataEntity. Исходное наблюдение
+сохранено; реальные data keys с такими именами поддерживаются.
+[Unit](./src/lib/tree-data-model.test.ts),
+[browser](./tests/browser/tree-data-model.spec.ts) и
+[package/SSR](./tests/package/tree-data-model.ssr.test.ts) проверяют модель.
+
 ### DirectoryTree
 
 Отдельный экспорт `DirectoryTree` соответствует React `Tree.DirectoryTree` и

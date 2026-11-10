@@ -1,32 +1,51 @@
-import type { TreeCheckedKeys, TreeDataNode, TreeKey } from './tree.types';
-export interface TreeEntity {
+import type { TreeCheckedKeys, TreeDataNode, TreeFieldNames, TreeKey } from './tree.types';
+export interface TreeEntity<Data extends object = TreeDataNode> {
   key: TreeKey;
-  node: TreeDataNode;
-  parent?: TreeEntity;
-  children: TreeEntity[];
+  node: Data;
+  parent?: TreeEntity<Data>;
+  children: TreeEntity<Data>[];
   level: number;
   pos: string;
   index: number;
   siblings: number;
   ends: boolean[];
 }
-export function buildTreeEntities(nodes: readonly TreeDataNode[]) {
-  const entities = new Map<string, TreeEntity>();
-  function walk(list: readonly TreeDataNode[], parent?: TreeEntity) {
-    return list.map((node, index): TreeEntity => {
-      const entry: TreeEntity = {
-        key: node.key,
+export function buildTreeEntities<Data extends object = TreeDataNode>(
+  nodes: readonly Data[],
+  fieldNames?: TreeFieldNames
+) {
+  const entities = new Map<string, TreeEntity<Data>>();
+  const keyField = fieldNames?.key || 'key';
+  const childrenField = fieldNames?.children || 'children';
+
+  function walk(list: readonly Data[], parent?: TreeEntity<Data>) {
+    return list.map((node, index): TreeEntity<Data> => {
+      const pos = `${parent?.pos ?? '0'}-${index}`;
+      const value: unknown = Reflect.get(node, keyField);
+      const key = value ?? pos;
+      if (typeof key !== 'string' && typeof key !== 'number' && typeof key !== 'bigint') {
+        throw new TypeError('Tree data key must be a string, number or bigint');
+      }
+
+      const entry: TreeEntity<Data> = {
+        key,
         node,
         parent,
         children: [],
         level: parent ? parent.level + 1 : 0,
-        pos: `${parent?.pos ?? '0'}-${index}`,
+        pos,
         index,
         siblings: list.length,
         ends: [...parent?.ends ?? [], index === list.length - 1]
       };
-      entities.set(String(node.key), entry);
-      entry.children = walk(node.children ?? [], entry);
+      const children: unknown = Reflect.get(node, childrenField);
+      if (children && !Array.isArray(children)) {
+        throw new TypeError('Tree data children must be an array');
+      }
+
+      entities.set(String(key), entry);
+      // Один Data type применяется также к рекурсивному полю, заданному fieldNames.
+      entry.children = walk((children || []) as readonly Data[], entry);
       return entry;
     });
   }
@@ -35,7 +54,8 @@ export function buildTreeEntities(nodes: readonly TreeDataNode[]) {
   const ordered = Object.keys(Object.fromEntries(entities)).map(key => entities.get(key)!);
   return { entities, ordered, roots };
 }
-export type TreeIndex = ReturnType<typeof buildTreeEntities>;
+export type TreeIndex<Data extends object = TreeDataNode> =
+  ReturnType<typeof buildTreeEntities<Data>>;
 export function flattenTree(index: TreeIndex, keys: readonly TreeKey[]) {
   const expanded = new Set(keys);
   const result: TreeEntity[] = [];

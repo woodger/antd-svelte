@@ -9,6 +9,10 @@
 
 ### Added
 
+- createTree переносит Tree.useTree/getPath: generic entities, original data,
+  fieldNames и стабильный getter при обновлении data/schema. Ошибка Source
+  с унаследованными prototype keys сохранена отдельно; Native возвращает пустой путь.
+
 - Tree поддерживает per-node switcherIcon, showLeafIcon snippets и node hover
   callbacks. Сохранены исходные приоритеты loading/renderer, вычисленный isLeaf
   для иконок, исходные данные событий, native DOM/focus и refs.
