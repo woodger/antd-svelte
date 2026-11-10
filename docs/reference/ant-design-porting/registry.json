@@ -17780,7 +17780,16 @@
         "tests/browser/fixtures/TreeDataModelScope.svelte",
         "tests/browser/fixtures/TreeDataModelFixtures.svelte",
         "tests/browser/tree-data-model.spec.ts",
-        "tests/package/tree-data-model.ssr.test.ts"
+        "tests/package/tree-data-model.ssr.test.ts",
+        "src/lib/TreeTitle.svelte",
+        "src/lib/tree-load.engine.ts",
+        "tests/browser/fixtures/TreeFieldsScope.svelte",
+        "tests/browser/fixtures/TreeFieldsFixtures.svelte",
+        "tests/browser/fixtures/TreeGenericFields.svelte",
+        "tests/browser/fixtures/ant-design-tree-fields-reference.json",
+        "tests/browser/tree-fields-metrics.ts",
+        "tests/browser/tree-fields.spec.ts",
+        "tests/package/tree-fields.ssr.test.ts"
       ],
       "features": [
         {
@@ -17828,11 +17837,11 @@
         },
         {
           "id": "extended-api",
-          "title": "FieldNames, полный generic/ref/semantic/config API и motion",
+          "title": "Полный ref/semantic/config API и motion",
           "state": "missing",
           "requiredForV1": false,
           "evidence": [],
-          "note": "Нет fieldNames, полного generic data API, semantic classNames/styles и ConfigProvider.tree. Ref предоставляет focus/blur и bind:nativeElement. Collapse/appear motion и полный rc-tree ref отдельно. Deprecated Tree.children/TreeNode JSX composition исключена по es/Tree.js @rc-component/tree1.4.0: runtime warning помечает children самого Tree deprecated и предлагает treeData. TreeDataNode.children остаётся актуальным data API."
+          "note": "Нет semantic classNames/styles и ConfigProvider.tree; generic data и fieldNames перенесены отдельно. Ref предоставляет focus/blur и bind:nativeElement. Collapse/appear motion и полный rc-tree ref отдельно. Deprecated Tree.children/TreeNode JSX composition исключена по es/Tree.js @rc-component/tree1.4.0: runtime warning помечает children самого Tree deprecated и предлагает treeData. TreeDataNode.children остаётся актуальным data API."
         },
         {
           "id": "component-theme",
@@ -17958,7 +17967,7 @@
             "tests/package/directory-tree.ssr.test.ts",
             "readme.md"
           ],
-          "note": "Отдельный Svelte export вместо React Tree.DirectoryTree. Исходные defaults expandAction=click, showIcon/blockNode=true допускают overrides; folder/file paths из icons-svg4.6.0. Обычный клик сохраняет одиночный выбор, Ctrl/Meta переключает ключи и anchor/cache, Shift объединяет cached keys с диапазоном видимых узлов; disabled/nonselectable промежуточные узлы пропускаются. selected=true даже при Ctrl removal, selectedNodes в полном DFS порядке и с исходными data nodes. DefaultExpandAll включает leaf keys, defaultExpandParent учитывает disabled границы; controlled hold/accept, pending lazy collapse, prefix/RTL/Tree directory tokens, native focus/blur/ref и SSR используют существующий Tree. 15 raw UMD6.6.8 cases повторены без изменений; расширенные generic/fieldNames/virtual/drag/semantic/config/motion API остаются пробелами общего Tree."
+          "note": "Отдельный Svelte export вместо React Tree.DirectoryTree. Исходные defaults expandAction=click, showIcon/blockNode=true допускают overrides; folder/file paths из icons-svg4.6.0. Обычный клик сохраняет одиночный выбор, Ctrl/Meta переключает ключи и anchor/cache, Shift объединяет cached keys с диапазоном видимых узлов; disabled/nonselectable промежуточные узлы пропускаются. selected=true даже при Ctrl removal, selectedNodes в полном DFS порядке и с исходными data nodes. DefaultExpandAll включает leaf keys, defaultExpandParent учитывает disabled границы; controlled hold/accept, pending lazy collapse, prefix/RTL/Tree directory tokens, native focus/blur/ref и SSR используют существующий Tree. 15 raw UMD6.6.8 cases повторены без изменений; расширенные virtual/drag/semantic/config/motion API остаются пробелами общего Tree."
         },
         {
           "id": "native-directory-control-release",
@@ -17990,7 +17999,7 @@
             "tests/package/tree-node-renderers.ssr.test.ts",
             "readme.md"
           ],
-          "note": "TreeDataNode.switcherIcon перекрывает общий Ant switcher, loading и leaf line; действует также на листья. Общий renderer уступает loading, showLine.showLeafIcon принимает snippet и не возвращается к fallback при пустом содержимом. Snippet получает вычисленный isLeaf; данные onMouseEnter/onMouseLeave сохраняют исходный флаг и актуальные состояния, disabled не отключает hover, pointer на switcher не вызывает node content callback. 14 исходных UMD6.6.8 / rc-tree1.4.0 конфигураций повторены побайтно: text/element/empty, loading, RTL/local prefix и DirectoryTree; snapshots включают callback order, renderer flags, содержимое, font-size и text-align switcher. Сброс native button styles не перекрывает source центрирование switcher; content сохраняет text-align:inherit. Native controls/ARIA, class/value/refs и DOM/focus сохраняются. Snippets остаются opaque Svelte content без ReactElement cloning; пустой snippet сохраняет native wrapper, React-specific false-return removal не является отдельным Native snippet API. Расширенный generic/fieldNames/semantic/config/virtual/drag/motion API остаётся отдельным объёмом. Исходное retained-node disposal observation подтверждает отсутствие hover после unmount. Native guard не публикует callbacks от удержанного detached DOM."
+          "note": "TreeDataNode.switcherIcon перекрывает общий Ant switcher, loading и leaf line; действует также на листья. Общий renderer уступает loading, showLine.showLeafIcon принимает snippet и не возвращается к fallback при пустом содержимом. Snippet получает вычисленный isLeaf; данные onMouseEnter/onMouseLeave сохраняют исходный флаг и актуальные состояния, disabled не отключает hover, pointer на switcher не вызывает node content callback. 14 исходных UMD6.6.8 / rc-tree1.4.0 конфигураций повторены побайтно: text/element/empty, loading, RTL/local prefix и DirectoryTree; snapshots включают callback order, renderer flags, содержимое, font-size и text-align switcher. Сброс native button styles не перекрывает source центрирование switcher; content сохраняет text-align:inherit. Native controls/ARIA, class/value/refs и DOM/focus сохраняются. Snippets остаются opaque Svelte content без ReactElement cloning; пустой snippet сохраняет native wrapper, React-specific false-return removal не является отдельным Native snippet API. Расширенный semantic/config/virtual/drag/motion API остаётся отдельным объёмом. Исходное retained-node disposal observation подтверждает отсутствие hover после unmount. Native guard не публикует callbacks от удержанного detached DOM."
         },
         {
           "id": "data-model-get-path",
@@ -18010,7 +18019,7 @@
             "tests/package/tree-data-model.ssr.test.ts",
             "readme.md"
           ],
-          "note": "Отдельный createTree вместо React Tree.useTree. Статический массив или getter data, getter config.fieldNames; стабильный getPath читает текущие ссылки data/schema. Generic payload, original node/nodes identities, key/pos/level/index/parent/optional children и полный root-to-target path сохраняются. Поддержаны aliases key/title/children, empty-name defaults, positional fallback, zero/bigint и реальные prototype-named keys. Пять raw UMD моделей и data/schema transitions фиксируют поведение useTree @rc-component/tree1.4.0; Svelte $derived отслеживает getter inputs без DOM/effects/timers в factory. FieldNames здесь относится к data-модели: Tree/DirectoryTree UI props, callbacks и renderer generic API остаются отдельным неперенесённым объёмом."
+          "note": "Отдельный createTree вместо React Tree.useTree. Статический массив или getter data, getter config.fieldNames; стабильный getPath читает текущие ссылки data/schema. Generic payload, original node/nodes identities, key/pos/level/index/parent/optional children и полный root-to-target path сохраняются. Поддержаны aliases key/title/children, empty-name defaults, positional fallback, zero/bigint и реальные prototype-named keys. Пять raw UMD моделей и data/schema transitions фиксируют поведение useTree @rc-component/tree1.4.0; Svelte $derived отслеживает getter inputs без DOM/effects/timers в factory. Модель принимает fieldNames в config; generic/fieldNames UI props, callbacks и renderer Tree/DirectoryTree учитываются отдельной feature."
         },
         {
           "id": "native-model-missing-prototype-key",
@@ -18025,6 +18034,48 @@
             "readme.md"
           ],
           "note": "Ошибка Source Ant Design6.6.8 / 984592267de88fbf9cdaecc96a56629e721c709d / rc-tree1.4.0: getEntity читает plain keyEntities[key], поэтому getPath для отсутствующих constructor/__proto__/toString возвращает унаследованные function/Object.prototype вместо DataEntity. Raw observation сохранено отдельно от желаемого поведения. Native Map не берёт значения из prototype и возвращает []; одноимённые реальные data keys сохраняются."
+        },
+        {
+          "id": "generic-data-field-names",
+          "title": "Generic data и fieldNames в Tree/DirectoryTree, событиях, renderers и lazy load",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Tree.svelte",
+            "src/lib/DirectoryTree.svelte",
+            "src/lib/TreeTitle.svelte",
+            "src/lib/tree.types.ts",
+            "src/lib/tree.engine.ts",
+            "src/lib/tree.engine.test.ts",
+            "src/lib/tree-load.engine.ts",
+            "src/lib/tree-load.engine.test.ts",
+            "src/lib/directory-tree.engine.ts",
+            "src/lib/directory-tree.engine.test.ts",
+            "src/lib/index.ts",
+            "tests/browser/fixtures/TreeFieldsScope.svelte",
+            "tests/browser/fixtures/TreeFieldsFixtures.svelte",
+            "tests/browser/fixtures/TreeGenericFields.svelte",
+            "tests/browser/fixtures/ant-design-tree-fields-reference.json",
+            "tests/browser/tree-fields-metrics.ts",
+            "tests/browser/tree-fields.spec.ts",
+            "tests/package/tree-fields.ssr.test.ts",
+            "readme.md"
+          ],
+          "note": "TreeProps/Data, DirectoryTreeProps/Data, TreeEventNode/Data и TreeCheckInfo/Data сохраняют пользовательский payload; TreeFieldDataNode помогает описать рекурсивное поле children. Aliases key/title/children и пустые имена работают в index/leaf/expand/check/load, Directory ranges, title/icon/switcher/filter callbacks. Event key и state перекрывают canonical raw fields; selectedNodes/checkedNodes/positions сохраняют исходные объекты. Node title snippet имеет приоритет над titleRender; literal arrays/zero/empty и object payload с titleRender поддержаны. 27 raw UMD6.6.8 конфигураций сохраняют labels/ARIA, иконки и события: aliases/частичная схема/canonical shadows, strict/conduction, lazy/preloaded, hold/accept, Directory ranges/all, RTL/prefix и data/schema transitions. Native generic fixture проверяет вывод типов без index signature, discriminated unions, исходные literal key/state, snippets и recursive helper. SSR не загружает детей и не создаёт timers; обновление schema сохраняет DOM/ref/active IDs, selection, keyboard и внешний draft. Virtual/drag/ref/semantic/config/motion остаются отдельными пробелами."
+        },
+        {
+          "id": "native-field-names-refresh",
+          "title": "Смена только fieldNames обновляет UI вместо stale Source cache",
+          "state": "partial",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Tree.svelte",
+            "tests/browser/fixtures/ant-design-tree-fields-reference.json",
+            "tests/browser/tree-fields.spec.ts",
+            "tests/package/tree-fields.ssr.test.ts",
+            "readme.md"
+          ],
+          "note": "Ошибка Source Ant Design6.6.8 / 984592267de88fbf9cdaecc96a56629e721c709d / rc-tree1.4.0: смена fieldNames без новых treeData/expandedKeys оставляет cached flatten entities и прежние заголовки. Raw schema-only-observation сохранён без изменения; Native derived index обновляется по data или schema. Desired counterpart — неизменённый публичный Source со сменой схемы и новой ссылкой массива. Existing keys, DOM/ref и state сохраняются; ошибка upstream не копируется."
         }
       ]
     },

@@ -4,6 +4,8 @@ import {
   conductTreeCheck,
   expandTreeParents,
   flattenTree,
+  getTreeChildren,
+  getTreeNodeTitle,
   selectTreeKeys,
   toggleTreeCheck,
   treeLeaf
@@ -21,6 +23,31 @@ const data: TreeDataNode[] = [
   { key: 0, title: 'Zero' }
 ];
 describe('Tree engines', () => {
+  it('uses mapped children for leaf state and conduction without mutating payload data', () => {
+    const child = { id: 0, payload: { text: 'Zero' }, children: [{ id: 'phantom' }] };
+    const nodes = [{ id: 'root', nodes: [child], children: [{ id: 'phantom' }] }];
+    const fields = { key: 'id', children: 'nodes' };
+    const index = buildTreeEntities(nodes, fields);
+
+    expect(getTreeChildren(nodes[0], fields)).toBe(nodes[0].nodes);
+    expect(flattenTree(index, ['root']).map(entry => entry.key)).toEqual(['root', 0]);
+    expect(index.entities.get('0')?.node).toBe(child);
+    expect(treeLeaf(child, false, false, fields)).toBe(true);
+    expect(treeLeaf(nodes[0], false, false, fields)).toBe(false);
+    expect(conductTreeCheck(['root'], index)).toEqual({ checked: ['root', 0], halfChecked: [] });
+    expect(nodes[0].children).toEqual([{ id: 'phantom' }]);
+  });
+  it('preserves scalar, empty and array titles through the mapped field', () => {
+    const fields = { title: 'caption' };
+
+    expect(getTreeNodeTitle({ caption: [0, false, null, 'Text'] }, fields))
+      .toEqual([0, false, null, 'Text']);
+    expect(getTreeNodeTitle({ caption: null }, fields)).toBeNull();
+    expect(getTreeNodeTitle({ caption: false }, fields)).toBe(false);
+    expect(getTreeNodeTitle({ title: 'Text' }, fields)).toBe('---');
+    expect(getTreeNodeTitle({ title: 0 }, { title: '' })).toBe(0);
+    expect(() => getTreeNodeTitle({ caption: {} }, fields)).toThrow(TypeError);
+  });
   it('preserves keys, positions and ancestry while flattening only expanded branches', () => {
     const index = buildTreeEntities(data);
 

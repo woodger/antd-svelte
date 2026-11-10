@@ -1,4 +1,46 @@
-import type { TreeCheckedKeys, TreeDataNode, TreeFieldNames, TreeKey } from './tree.types';
+import type {
+  TreeCheckedKeys,
+  TreeDataNode,
+  TreeFieldNames,
+  TreeKey,
+  TreeTitleContent
+} from './tree.types';
+import type { Snippet } from 'svelte';
+
+export function getTreeChildren<Data extends object>(
+  node: Data,
+  fieldNames?: TreeFieldNames
+): readonly Data[] {
+  const children: unknown = Reflect.get(node, fieldNames?.children || 'children');
+  if (children && !Array.isArray(children)) {
+    throw new TypeError('Tree data children must be an array');
+  }
+
+  // Один Data type применяется также к рекурсивному полю, заданному fieldNames.
+  return (children || []) as readonly Data[];
+}
+
+export function getTreeNodeTitle<Data extends object>(
+  node: Data,
+  fieldNames?: TreeFieldNames,
+  titleRender?: Snippet<[Data]>
+): TreeTitleContent<Data> {
+  const value: unknown = Reflect.get(node, fieldNames?.title || 'title');
+  // Source выбирает node renderer до общего; произвольный payload не рендерится как literal.
+  if (typeof value === 'function') return value as Snippet<[Data]>;
+  if (titleRender) return titleRender;
+
+  function content(value: unknown): TreeTitleContent<Data> {
+    if (value == null || typeof value === 'string' || typeof value === 'number'
+      || typeof value === 'boolean') return value;
+    // Функциональное содержимое Native API — Svelte snippet с data-аргументом.
+    if (typeof value === 'function') return value as Snippet<[Data]>;
+    if (Array.isArray(value)) return value.map(child => content(child));
+    throw new TypeError('Tree title must be text, a snippet or an array of renderable values');
+  }
+
+  return value === undefined ? '---' : content(value);
+}
 export interface TreeEntity<Data extends object = TreeDataNode> {
   key: TreeKey;
   node: Data;
@@ -16,7 +58,6 @@ export function buildTreeEntities<Data extends object = TreeDataNode>(
 ) {
   const entities = new Map<string, TreeEntity<Data>>();
   const keyField = fieldNames?.key || 'key';
-  const childrenField = fieldNames?.children || 'children';
 
   function walk(list: readonly Data[], parent?: TreeEntity<Data>) {
     return list.map((node, index): TreeEntity<Data> => {
@@ -38,14 +79,8 @@ export function buildTreeEntities<Data extends object = TreeDataNode>(
         siblings: list.length,
         ends: [...parent?.ends ?? [], index === list.length - 1]
       };
-      const children: unknown = Reflect.get(node, childrenField);
-      if (children && !Array.isArray(children)) {
-        throw new TypeError('Tree data children must be an array');
-      }
-
       entities.set(String(key), entry);
-      // Один Data type применяется также к рекурсивному полю, заданному fieldNames.
-      entry.children = walk((children || []) as readonly Data[], entry);
+      entry.children = walk(getTreeChildren(node, fieldNames), entry);
       return entry;
     });
   }
@@ -56,10 +91,10 @@ export function buildTreeEntities<Data extends object = TreeDataNode>(
 }
 export type TreeIndex<Data extends object = TreeDataNode> =
   ReturnType<typeof buildTreeEntities<Data>>;
-export function flattenTree(index: TreeIndex, keys: readonly TreeKey[]) {
+export function flattenTree<Data extends object>(index: TreeIndex<Data>, keys: readonly TreeKey[]) {
   const expanded = new Set(keys);
-  const result: TreeEntity[] = [];
-  function walk(entries: readonly TreeEntity[]) {
+  const result: TreeEntity<Data>[] = [];
+  function walk(entries: readonly TreeEntity<Data>[]) {
     for (const entry of entries) {
       result.push(entry);
       if (expanded.has(entry.key))
@@ -69,46 +104,57 @@ export function flattenTree(index: TreeIndex, keys: readonly TreeKey[]) {
   walk(index.roots);
   return result;
 }
-export function expandTreeParents(keys: readonly TreeKey[], index: TreeIndex): TreeKey[] {
+export function expandTreeParents<Data extends object>(
+  keys: readonly TreeKey[],
+  index: TreeIndex<Data>
+): TreeKey[] {
   const expanded = new Set<TreeKey>();
   function up(key: TreeKey) {
     if (expanded.has(key)) return;
     const entry = index.entities.get(String(key));
     if (!entry) return;
     expanded.add(key);
-    if (!entry.node.disabled && entry.parent)
+    if (!Reflect.get(entry.node, 'disabled') && entry.parent)
       up(entry.parent.key);
   }
   keys.forEach(up);
   return [...expanded];
 }
-export function treeLeaf(node: TreeDataNode, loadData: boolean, loaded: boolean): boolean {
-  if (node.isLeaf === false) return false;
+export function treeLeaf(
+  node: object,
+  loadData: boolean,
+  loaded: boolean,
+  fieldNames?: TreeFieldNames
+): boolean {
+  const isLeaf: unknown = Reflect.get(node, 'isLeaf');
+  if (isLeaf === false) return false;
+  const children = getTreeChildren(node, fieldNames);
   return Boolean(
-    node.isLeaf
+    isLeaf
     || !loadData
-    && !node.children?.length
+    && !children.length
     || loadData
     && loaded
-    && !node.children?.length
+    && !children.length
   );
 }
-export function treeCheckDisabled(node: TreeDataNode): boolean {
-  return Boolean(node.disabled || node.disableCheckbox || node.checkable === false);
+export function treeCheckDisabled(node: object): boolean {
+  return Boolean(Reflect.get(node, 'disabled') || Reflect.get(node, 'disableCheckbox')
+    || Reflect.get(node, 'checkable') === false);
 }
 export function parseTreeChecked(keys: readonly TreeKey[] | TreeCheckedKeys): TreeCheckedKeys {
   return Array.isArray(keys) ? { checked: keys, halfChecked: [] } : keys as TreeCheckedKeys;
 }
 // conductUtil из rc-tree 1.4.0; MIT, vendor/LICENSE.rc-tree. Disabled nodes разрывают conduction.
-export function conductTreeCheck(
+export function conductTreeCheck<Data extends object>(
   keys: readonly TreeKey[],
-  index: TreeIndex,
+  index: TreeIndex<Data>,
   cleanHalf?: readonly TreeKey[]
 ): { checked: TreeKey[]; halfChecked: TreeKey[]; } {
   const checked = new Set(keys.filter(key => index.entities.has(String(key))));
   let half = new Set(cleanHalf);
   const clean = cleanHalf !== undefined;
-  const levels = new Map<number, TreeEntity[]>();
+  const levels = new Map<number, TreeEntity<Data>[]>();
   let max = 0;
   for (const entry of index.ordered) {
     const level = levels.get(entry.level) ?? [];
@@ -150,10 +196,10 @@ export function conductTreeCheck(
     }
   return { checked: [...checked], halfChecked: [...half].filter(key => !checked.has(key)) };
 }
-export function toggleTreeCheck(
+export function toggleTreeCheck<Data extends object>(
   key: TreeKey,
   checked: readonly TreeKey[],
-  index: TreeIndex,
+  index: TreeIndex<Data>,
   next: boolean
 ) {
   const filled = conductTreeCheck([...checked, key], index);

@@ -32,22 +32,38 @@ export interface TreeInstance<Data extends object = TreeDataNode> {
   getPath: (key: TreeKey) => TreeDataEntity<Data>[];
 }
 
-export interface TreeDataNode {
-  key: TreeKey;
-  title?: string | number | Snippet<[TreeDataNode]>;
-  children?: readonly TreeDataNode[];
+/** Общие атрибуты узла; Data сохраняет тип пользовательского payload в snippets. */
+export interface TreeBasicDataNode<Data extends object = TreeDataNode> {
   disabled?: boolean;
   disableCheckbox?: boolean;
   checkable?: boolean;
   selectable?: boolean;
   isLeaf?: boolean;
-  icon?: Snippet<[TreeEventNode]>;
+  icon?: Snippet<[TreeEventNode<Data>]>;
   /** Собственный switcher перекрывает общий renderer и loading; isLeaf вычислен для узла. */
-  switcherIcon?: Snippet<[TreeEventNode]>;
+  switcherIcon?: Snippet<[TreeEventNode<Data>]>;
   class?: string;
   style?: string;
 }
-export interface TreeEventNode extends TreeDataNode {
+
+/** Текст, вложенное содержимое или Svelte snippet с исходным узлом. */
+export type TreeTitleContent<Data extends object = TreeDataNode> =
+  string | number | boolean | null | undefined | Snippet<[Data]>
+  | readonly TreeTitleContent<Data>[];
+
+export interface TreeDataNode extends TreeBasicDataNode<TreeDataNode> {
+  key: TreeKey;
+  title?: TreeTitleContent<TreeDataNode>;
+  children?: readonly TreeDataNode[];
+}
+
+/** Recursive data с произвольным payload и именем дочернего поля. */
+export type TreeFieldDataNode<Payload extends object, ChildFieldName extends string = 'children'> =
+  Payload & TreeBasicDataNode<TreeFieldDataNode<Payload, ChildFieldName>>
+  & Partial<Record<ChildFieldName, readonly TreeFieldDataNode<Payload, ChildFieldName>[]>>;
+
+interface TreeNodeState {
+  key: TreeKey;
   expanded: boolean;
   selected: boolean;
   checked: boolean;
@@ -60,28 +76,42 @@ export interface TreeEventNode extends TreeDataNode {
   dragOverGapTop: false;
   dragOverGapBottom: false;
 }
+
+/** State и canonical key перекрывают одноимённые поля payload; остальные данные сохранены. */
+export type TreeEventNode<Data extends object = TreeDataNode> = {
+  [Key in keyof Data as Key extends keyof TreeNodeState ? never : Key]: Data[Key];
+} & TreeNodeState & Omit<TreeBasicDataNode<Data>, 'icon' | 'switcherIcon'>;
 export interface TreeCheckedKeys {
   checked: readonly TreeKey[];
   halfChecked: readonly TreeKey[];
 }
-export interface TreeCheckInfo {
+export interface TreeCheckInfo<Data extends object = TreeDataNode> {
   event: 'check';
-  node: TreeEventNode;
+  node: TreeEventNode<Data>;
   checked: boolean;
   nativeEvent?: MouseEvent | KeyboardEvent;
-  checkedNodes: TreeDataNode[];
-  checkedNodesPositions?: { node: TreeDataNode; pos: string; }[];
+  checkedNodes: Data[];
+  checkedNodesPositions?: { node: Data; pos: string; }[];
   halfCheckedKeys?: TreeKey[];
 }
 /** Дерево со стабильными keys, раскрытием, выбором, отметками и lazy children. */
-export interface TreeProps extends Omit<HTMLAttributes<HTMLDivElement>, 'children' | 'onselect'> {
+export interface TreeProps<Data extends object = TreeDataNode> extends Omit<
+  HTMLAttributes<HTMLDivElement>, 'children' | 'onselect'
+> {
   /** Локальный namespace дерева и nodes; пустая строка наследует ConfigProvider. */
   prefixCls?: string;
   /** @internal Тема составного владельца вместо Tree defaults, до пользовательского style. */
   _themeStyle?: string;
   /** CSS внешнего корня; прежний native contract сохранён, React style относится к inner list. */
   style?: HTMLAttributes<HTMLDivElement>['style'];
-  treeData?: readonly TreeDataNode[];
+  /** Canonical поля допустимы также при стирании generic в Svelte render/component tooling. */
+  treeData?: readonly (Data & TreeBasicDataNode<Data> & {
+    key?: unknown;
+    title?: unknown;
+    children?: unknown;
+  })[];
+  /** Имена key/title/children; смена схемы сохраняет raw data в callbacks. */
+  fieldNames?: TreeFieldNames;
   /** Управляемые ключи раскрытия; изменения запрашиваются через onExpand. */
   expandedKeys?: readonly TreeKey[];
   /** Начальное локальное значение; последующие изменения prop не переинициализируют состояние. */
@@ -112,44 +142,44 @@ export interface TreeProps extends Omit<HTMLAttributes<HTMLDivElement>, 'childre
   disabled?: boolean;
   loadedKeys?: readonly TreeKey[];
   /** Promise загрузки детей; обновление treeData остаётся у потребителя. */
-  loadData?: (node: TreeEventNode) => PromiseLike<unknown>;
+  loadData?: (node: TreeEventNode<Data>) => PromiseLike<unknown>;
   onExpand?: (
     keys: TreeKey[],
-    info: { expanded: boolean; node: TreeEventNode; nativeEvent?: MouseEvent | KeyboardEvent; }
+    info: { expanded: boolean; node: TreeEventNode<Data>; nativeEvent?: MouseEvent | KeyboardEvent; }
   ) => void;
   onSelect?: (
     keys: TreeKey[],
     info: {
       event: 'select';
       selected: boolean;
-      node: TreeEventNode;
-      selectedNodes: TreeDataNode[];
+      node: TreeEventNode<Data>;
+      selectedNodes: Data[];
       nativeEvent?: MouseEvent | KeyboardEvent;
     }
   ) => void;
-  onCheck?: (keys: TreeKey[] | TreeCheckedKeys, info: TreeCheckInfo) => void;
-  onLoad?: (keys: TreeKey[], info: { event: 'load'; node: TreeEventNode; }) => void;
-  onClick?: (event: MouseEvent, node: TreeEventNode) => void;
-  onDoubleClick?: (event: MouseEvent, node: TreeEventNode) => void;
-  onRightClick?: (info: { event: MouseEvent; node: TreeEventNode; }) => void;
+  onCheck?: (keys: TreeKey[] | TreeCheckedKeys, info: TreeCheckInfo<Data>) => void;
+  onLoad?: (keys: TreeKey[], info: { event: 'load'; node: TreeEventNode<Data>; }) => void;
+  onClick?: (event: MouseEvent, node: TreeEventNode<Data>) => void;
+  onDoubleClick?: (event: MouseEvent, node: TreeEventNode<Data>) => void;
+  onRightClick?: (info: { event: MouseEvent; node: TreeEventNode<Data>; }) => void;
   /** Наведение на содержимое строки; disabled не блокирует уведомление. */
-  onMouseEnter?: (info: { event: MouseEvent; node: TreeEventNode; }) => void;
+  onMouseEnter?: (info: { event: MouseEvent; node: TreeEventNode<Data>; }) => void;
   /** Уход с содержимого строки; node отражает актуальное состояние. */
-  onMouseLeave?: (info: { event: MouseEvent; node: TreeEventNode; }) => void;
+  onMouseLeave?: (info: { event: MouseEvent; node: TreeEventNode<Data>; }) => void;
   onActiveChange?: (key: TreeKey | null) => void;
   activeKey?: TreeKey | null;
   /** @defaultValue false */
   showIcon?: boolean;
   /** @defaultValue false */
-  showLine?: boolean | { showLeafIcon: boolean | Snippet<[TreeEventNode]>; };
+  showLine?: boolean | { showLeafIcon: boolean | Snippet<[TreeEventNode<Data>]>; };
   /** @defaultValue false */
   blockNode?: boolean;
-  icon?: Snippet<[TreeEventNode]>;
+  icon?: Snippet<[TreeEventNode<Data>]>;
   /** Renderer ветки; loading имеет приоритет. Аргумент содержит вычисленный isLeaf. */
-  switcherIcon?: Snippet<[TreeEventNode]>;
-  switcherLoadingIcon?: Snippet<[TreeEventNode]>;
-  titleRender?: Snippet<[TreeDataNode]>;
-  filterTreeNode?: (node: TreeEventNode) => boolean;
+  switcherIcon?: Snippet<[TreeEventNode<Data>]>;
+  switcherLoadingIcon?: Snippet<[TreeEventNode<Data>]>;
+  titleRender?: Snippet<[Data]>;
+  filterTreeNode?: (node: TreeEventNode<Data>) => boolean;
   /** @defaultValue true */
   focusable?: boolean;
   height?: number;
@@ -163,7 +193,7 @@ export interface TreeProps extends Omit<HTMLAttributes<HTMLDivElement>, 'childre
  * Shift выбирает видимый диапазон. OnSelect всегда сообщает selected=true;
  * снятие controlled-режима сохраняет последние принятые ключи.
  */
-export interface DirectoryTreeProps extends TreeProps {
+export interface DirectoryTreeProps<Data extends object = TreeDataNode> extends TreeProps<Data> {
   /** Раскрытие заголовком. @defaultValue 'click' */
   expandAction?: TreeExpandAction;
   /** @defaultValue true */

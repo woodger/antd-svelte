@@ -1,7 +1,7 @@
 import { describe, expect, it, vi } from 'vitest';
 import { createTreeLoader } from './tree-load.engine';
 import type { TreeEventNode, TreeKey } from './tree.types';
-const node: TreeEventNode = {
+const node = {
   key: 'p',
   expanded: false,
   selected: false,
@@ -14,7 +14,7 @@ const node: TreeEventNode = {
   dragOver: false,
   dragOverGapTop: false,
   dragOverGapBottom: false
-};
+} satisfies TreeEventNode;
 function setup(load: (node: TreeEventNode) => PromiseLike<unknown>) {
   let loaded: TreeKey[] = [];
   let loading: TreeKey[] = [];
@@ -46,6 +46,34 @@ function setup(load: (node: TreeEventNode) => PromiseLike<unknown>) {
   };
 }
 describe('Tree async load lifecycle', () => {
+  it('guards mapped preloaded children and ignores canonical shadow children', async () => {
+    type Data = { id: string; nodes?: Data[]; children?: Data[]; payload: string; };
+    const load = vi.fn(() => Promise.resolve());
+    let loading: TreeKey[] = [];
+    let loaded: TreeKey[] = [];
+    const controller = createTreeLoader<Data>({
+      load,
+      fieldNames: () => ({ key: 'id', children: 'nodes' }),
+      loading: () => loading,
+      loaded: () => loaded,
+      setLoading: keys => { loading = keys; },
+      finish: keys => { loaded = keys; },
+      fail: () => {}
+    });
+    const preloaded = { ...node, id: 'p', payload: 'Parent',
+      nodes: [{ id: 'child', payload: 'Child' }] };
+    const shadow = { ...node, id: 'p', payload: 'Parent',
+      children: [{ id: 'phantom', payload: 'Phantom' }] };
+
+    expect(controller.load(preloaded)).toBeUndefined();
+    expect(load).not.toHaveBeenCalled();
+    await controller.load(shadow);
+
+    expect(load).toHaveBeenCalledWith(shadow);
+    expect(loaded).toEqual(['p']);
+    expect(loading).toEqual([]);
+    controller.dispose();
+  });
   it('deduplicates in-flight loads and marks success after settlement', async () => {
     let resolve!: () => void;
     const load = vi.fn(() => new Promise<void>(done => {

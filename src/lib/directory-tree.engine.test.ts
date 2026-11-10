@@ -12,6 +12,20 @@ const nodes: TreeDataNode[] = [
 ];
 
 describe('DirectoryTree ranges', () => {
+  it('uses aliased keys and children for ranges and returns original records in DFS order', () => {
+    const zero = { id: 0, key: 'raw-zero', metadata: { name: 'Zero' } };
+    const last = { id: 'last', key: 'raw-last', metadata: { name: 'Last' } };
+    const root = { id: 'root', nodes: [zero, { id: 'locked', disabled: true }, last],
+      children: [{ id: 'phantom' }] };
+    const fields = { key: 'id', children: 'nodes' };
+
+    expect(getDirectoryRangeKeys([root], ['root'], 0, 'last', fields)).toEqual([0, 'last']);
+    expect(getDirectoryRangeKeys([root], [], 'root', 'last', fields)).toEqual(['root']);
+    const selected = getDirectorySelectedNodes([root], ['last', 0], fields);
+    expect(selected).toEqual([zero, last]);
+    expect(selected[0]).toBe(zero);
+    expect(selected[1]).toBe(last);
+  });
   it('selects visible enabled intermediate nodes in tree order in either direction', () => {
     expect(getDirectoryRangeKeys(nodes, [0, 'other'], 'a', 'x'))
       .toEqual(['a', 'b', 'other', 'x']);

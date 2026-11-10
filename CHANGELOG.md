@@ -9,6 +9,11 @@
 
 ### Added
 
+- Tree и DirectoryTree принимают generic записи и fieldNames во всех data,
+  selection/check/load и renderer callbacks. Сохранены исходные объекты,
+  canonical key/state событий и приоритет node title snippet над titleRender.
+  Ошибка Source при смене только fieldNames записана отдельно; Native обновляет схему.
+
 - createTree переносит Tree.useTree/getPath: generic entities, original data,
   fieldNames и стабильный getter при обновлении data/schema. Ошибка Source
   с унаследованными prototype keys сохранена отдельно; Native возвращает пустой путь.

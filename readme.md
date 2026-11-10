@@ -6475,7 +6475,7 @@ collapse motion. Иконки соответствуют @ant-design/icons-svg 4
 ```
 
 TreeData — массив узлов со стабильным уникальным key (string/number/bigint), title
-(string/number/Snippet<[TreeDataNode]>) и children. Ключи должны быть уникальны и
+(текст, число, пустое содержимое, массив или snippet) и children. Ключи должны быть уникальны и
 после String(key), как в upstream entity index. Поддержаны disabled,
 disableCheckbox, checkable, selectable, isLeaf, icon и локальные class/style.
 ExpandedKeys/selectedKeys/checkedKeys/loadedKeys — controlled props; default-пары
@@ -6557,6 +6557,51 @@ switcherIcon/switcherLoadingIcon, titleRender и filterTreeNode поддержа
 Height ограничивает native scroll viewport; виртуализация пока не применяется.
 SSR рендерит видимые строки без загрузки и browser APIs.
 
+Tree и DirectoryTree выводят тип пользовательской записи из `treeData`.
+`fieldNames={{ key: 'id', title: 'caption', children: 'items' }}` задаёт имена полей;
+пустые имена используют стандартные key/title/children. Поля с прежними именами
+не подменяют выбранную схему. Настройка действует на раскрытие, leaf state,
+conduction, lazy load, renderers и диапазоны DirectoryTree.
+
+```svelte
+<script lang="ts">
+  import { Tree } from 'antd-svelte';
+
+  interface Entry {
+    id: number;
+    caption: string;
+    priority: number;
+    items?: Entry[];
+  }
+  const entries: Entry[] = [{ id: 0, caption: 'Документ', priority: 2 }];
+</script>
+
+<Tree treeData={entries} fieldNames={{ key: 'id', title: 'caption', children: 'items' }}
+  onSelect={(_keys, info) => console.log(info.node.priority, info.selectedNodes)} />
+```
+
+`TreeProps<Data>`, `DirectoryTreeProps<Data>`, `TreeEventNode<Data>` и
+`TreeCheckInfo<Data>` сохраняют тип payload, включая discriminated unions;
+`TreeFieldDataNode<Payload, ChildName>`
+помогает объявить рекурсивные записи с общими flags и snippets. `info.node` содержит
+исходные поля, но canonical key и state flags перекрываются состоянием дерева.
+`selectedNodes`, `checkedNodes` и позиции отметок сохраняют исходные объекты,
+включая прежний raw key. `titleRender` получает исходную запись; snippet в самом
+поле title имеет приоритет над общим renderer, как в Source. При titleRender
+поле заголовка может содержать произвольный payload, который читает этот snippet.
+
+Новые ссылки на `treeData` или `fieldNames` обновляют индекс без замены компонента.
+Смена только fieldNames также обновляет заголовки и дочерние поля. Это исправляет
+явную ошибку cache в rc-tree 1.4.0: Source оставляет старые flatten entities до
+замены treeData. Raw observation сохранено вместе с публичным Source counterpart,
+который обновляет оба props. Существующие keys, DOM/ref и active IDs сохраняются.
+[27 raw UMD сценариев и наблюдение](./tests/browser/fixtures/ant-design-tree-fields-reference.json),
+[browser](./tests/browser/tree-fields.spec.ts),
+[SSR](./tests/package/tree-fields.ssr.test.ts) и
+[типизированные записи](./tests/browser/fixtures/TreeGenericFields.svelte) проверяют
+aliases, исходные объекты, strict/conduction, lazy load, controlled keys, snippets,
+DirectoryTree, RTL/prefix и смену схемы.
+
 `TreeDataNode.switcherIcon` задаёт switcher конкретного узла, включая лист,
 и имеет приоритет над общим renderer, линиями и loading icon. Общий
 `switcherIcon` применяется к веткам после loading; `showLine.showLeafIcon`
@@ -6607,8 +6652,8 @@ DOM, фокуса, active descendant, отметок и pending load при об
 браузерные ресурсы. Декларации сверяются с официальным UMD отдельным
 [unit-набором](src/lib/theme-tree-tokens-reference.test.ts).
 
-Drag/drop, virtual/scrollTo, fieldNames, полный generic node API,
-semantic/config API и collapse/appear анимации ещё не перенесены. Реестр
+Drag/drop, virtual/scrollTo, полный ref/semantic/config API
+и collapse/appear анимации ещё не перенесены. Реестр
 отделяет этот объём от полного React API Tree.
 Deprecated `TreeNode` children не входят в перенос: rc-tree 1.4.0 прямо помечает
 `Tree.children` как deprecated и предлагает `treeData`.
@@ -6647,8 +6692,8 @@ Getter data и getter `config.fieldNames` читаются при каждом l
 включая вызов через `$derived`. Статический массив также принимается.
 Модель работает без DOM, effects и timers, в том числе при SSR. Generic payload
 и identity исходных объектов сохраняются; title не переименовывается в raw node.
-У UI-компонентов Tree/DirectoryTree собственные fieldNames/generic props пока
-остаются в списке расширений; этот API относится к data-модели.
+UI-компоненты Tree/DirectoryTree принимают ту же схему полей через prop fieldNames;
+модель передаёт её отдельно через config.
 
 [Исходный UMD-эталон](./tests/browser/fixtures/ant-design-tree-data-model-reference.json)
 фиксирует entities, aliases, positional fallback и обновления data/schema.

@@ -1,8 +1,15 @@
-<script lang="ts">
+<script lang="ts" generics="Data extends object = TreeDataNode">
   import { onDestroy, tick, untrack } from 'svelte';
   import ThemeScopeStyle from './ThemeScopeStyle.svelte';
   import { getTreePrefixCss } from './tree-prefix.engine';
-  import type { TreeProps, TreeKey, TreeEventNode, TreeCheckedKeys } from './tree.types';
+  import type {
+    TreeProps,
+    TreeBasicDataNode,
+    TreeDataNode,
+    TreeKey,
+    TreeEventNode,
+    TreeCheckedKeys
+  } from './tree.types';
   import {
     buildTreeEntities,
     flattenTree,
@@ -13,6 +20,7 @@
     selectTreeKeys,
     treeLeaf,
     treeCheckDisabled,
+    getTreeNodeTitle,
     type TreeEntity
   } from './tree.engine';
   import { createTreeLoader } from './tree-load.engine';
@@ -20,9 +28,12 @@
   import { useComponentTheme } from './theme-component.svelte';
   import { useForm } from './form-context';
   import TreeIcon from './TreeIcon.svelte';
+  import TreeTitle from './TreeTitle.svelte';
+  type Entry = TreeEntity<Data & TreeBasicDataNode<Data>>;
   let {
     prefixCls: customizePrefixCls,
     treeData = [],
+    fieldNames,
     expandedKeys,
     defaultExpandedKeys = [],
     defaultExpandAll = false,
@@ -71,7 +82,7 @@
     onfocus,
     onblur,
     ...attributes
-  }: TreeProps = $props();
+  }: TreeProps<Data> = $props();
   const config = useConfig();
   let componentPrefix = $derived(config.getPrefixCls('tree', customizePrefixCls));
   let rootPrefix = $derived(config.getPrefixCls());
@@ -80,7 +91,7 @@
   let themeStyle = $derived(_themeStyle ?? componentTheme.style);
   const form = useForm();
   const generated = $props.id();
-  let index = $derived(buildTreeEntities(treeData));
+  let index = $derived(buildTreeEntities(treeData, fieldNames));
   let blocked = $derived(disabled ?? form?.disabled ?? config.componentDisabled);
   let expanded = $state.raw<TreeKey[]>(untrack(() => {
     const keys = expandedKeys
@@ -124,13 +135,14 @@
   let focusElement = $state<HTMLDivElement>();
   let pointerFocus = false;
   let previous = untrack(
-    () => ({ expandedKeys, autoExpandParent, selectedKeys, checkedKeys, treeData })
+    () => ({ expandedKeys, autoExpandParent, selectedKeys, checkedKeys, treeData, fieldNames })
   );
   $effect(() => {
-    const next = { expandedKeys, autoExpandParent, selectedKeys, checkedKeys, treeData };
+    const next = { expandedKeys, autoExpandParent, selectedKeys, checkedKeys, treeData, fieldNames };
     untrack(() => {
       if (next.expandedKeys !== previous.expandedKeys
-        || next.autoExpandParent !== previous.autoExpandParent)
+        || next.autoExpandParent !== previous.autoExpandParent
+        || autoExpandParent && next.fieldNames !== previous.fieldNames)
         expanded = autoExpandParent
           ? expandTreeParents(expandedKeys ?? expanded, index)
           : [...expandedKeys ?? expanded];
@@ -138,15 +150,17 @@
         selected = [...(multiple ? selectedKeys : selectedKeys.slice(0, 1))];
       if (checkable
         && (next.checkedKeys !== previous.checkedKeys
-          || next.treeData !== previous.treeData)) {
+          || next.treeData !== previous.treeData
+          || next.fieldNames !== previous.fieldNames)) {
         const parsed = parseTreeChecked(checkedKeys ?? checked);
         checked = checkStrictly ? parsed : conductTreeCheck(parsed.checked, index);
       }
       previous = next;
     });
   });
-  const loader = createTreeLoader({
+  const loader = createTreeLoader<Data>({
     load: node => loadData?.(node),
+    fieldNames: () => fieldNames,
     loaded: () => actualLoaded,
     loading: () => loading,
     setLoading: keys => {
@@ -175,7 +189,8 @@
         && !treeLeaf(
           entry.node,
           true,
-          actualLoaded.includes(entry.key)
+          actualLoaded.includes(entry.key),
+          fieldNames
         )
         && !actualLoaded.includes(
           entry.key
@@ -191,7 +206,7 @@
       });
     });
   });
-  function eventNode(entry: TreeEntity): TreeEventNode {
+  function eventNode(entry: Entry): TreeEventNode<Data> {
     return {
       ...entry.node,
       key: entry.key,
@@ -211,8 +226,8 @@
   function nodeId(key: TreeKey) {
     return `ant-tree-${generated}-${encodeURIComponent(String(key))}`;
   }
-  function leaf(entry: TreeEntity) {
-    return treeLeaf(entry.node, Boolean(loadData), actualLoaded.includes(entry.key));
+  function leaf(entry: Entry) {
+    return treeLeaf(entry.node, Boolean(loadData), actualLoaded.includes(entry.key), fieldNames);
   }
   function setActive(key: TreeKey | null) {
     if (active === key) return;
@@ -227,9 +242,9 @@
     });
   }
   function expand(
-    entry: TreeEntity,
+    entry: Entry,
     event?: MouseEvent,
-    snapshot?: TreeEventNode,
+    snapshot?: TreeEventNode<Data>,
     fromTitle = false
   ) {
     // Selector rc-tree допускает collapse pending-ветки; switcher по-прежнему ждёт загрузку.
@@ -244,7 +259,7 @@
     if (!node.expanded && loadData)
       void loader.load(node);
   }
-  function select(entry: TreeEntity, event?: MouseEvent, snapshot?: TreeEventNode) {
+  function select(entry: Entry, event?: MouseEvent, snapshot?: TreeEventNode<Data>) {
     if (blocked || entry.node.disabled || !(entry.node.selectable ?? selectable)) return;
     const node = snapshot ?? eventNode(entry);
     const next = selectTreeKeys(selected, entry.key, multiple, snapshot?.selected);
@@ -262,10 +277,10 @@
     });
   }
   function check(
-    entry: TreeEntity,
+    entry: Entry,
     event?: MouseEvent,
     force?: boolean,
-    snapshot?: TreeEventNode
+    snapshot?: TreeEventNode<Data>
   ) {
     if (!checkable || blocked || treeCheckDisabled(entry.node)) return;
     const node = snapshot ?? eventNode(entry);
@@ -304,7 +319,7 @@
       }
     );
   }
-  function click(entry: TreeEntity, event: MouseEvent) {
+  function click(entry: Entry, event: MouseEvent) {
     const node = eventNode(entry);
     if (expandAction === 'click' && !event.ctrlKey && !event.metaKey && !event.shiftKey)
       expand(entry, event, node, true);
@@ -313,7 +328,7 @@
     if (entry.node.selectable ?? selectable)
       select(entry, event, snapshot); else check(entry, event, undefined, snapshot);
   }
-  function doubleClick(entry: TreeEntity, event: MouseEvent, node: TreeEventNode) {
+  function doubleClick(entry: Entry, event: MouseEvent, node: TreeEventNode<Data>) {
     if (expandAction === 'doubleClick' && !event.ctrlKey && !event.metaKey && !event.shiftKey)
       expand(entry, event, node, true);
     onDoubleClick?.(event, node);
@@ -429,6 +444,7 @@
     <div data-ant-tree-list-inner class={`${componentPrefix}-list-holder-inner`}>
       {#each visible as entry (entry.key)}
         {@const node = eventNode(entry)}
+        {@const title = getTreeNodeTitle<Data>(entry.node, fieldNames, titleRender)}
         {@const isLeaf = leaf(entry)}
         {@const unavailable = blocked || Boolean(entry.node.disabled)}
         {@const hasCheck = checkable && entry.node.checkable !== false}
@@ -492,7 +508,7 @@
                 `${componentPrefix}-iconEle`,
                 `${componentPrefix}-icon__${isLeaf ? 'docu' : node.expanded ? 'open' : 'close'}`
               ]}>{#if entry.node.icon}{@render entry.node.icon(node)}{:else if icon}{@render icon(node)}{/if}</span>{/if}
-            <span id={`${nodeId(entry.key)}-title`} class={`${componentPrefix}-title`}>{#if titleRender}{@render titleRender(entry.node)}{:else if typeof entry.node.title === 'function'}{@render entry.node.title(entry.node)}{:else}{entry.node.title ?? '---'}{/if}</span>
+            <span id={`${nodeId(entry.key)}-title`} class={`${componentPrefix}-title`}>{#if typeof title === 'function'}{@render title(entry.node)}{:else}<TreeTitle value={title} node={entry.node} />{/if}</span>
           </button>
         </div>
       {/each}

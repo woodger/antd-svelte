@@ -1,21 +1,23 @@
-import type { TreeEventNode, TreeKey } from './tree.types';
+import { getTreeChildren } from './tree.engine';
+import type { TreeDataNode, TreeEventNode, TreeFieldNames, TreeKey } from './tree.types';
 // onNodeLoad rc-tree 1.4.0; MIT, vendor/LICENSE.rc-tree.
-export function createTreeLoader(options: {
-  load: (node: TreeEventNode) => PromiseLike<unknown> | undefined;
+export function createTreeLoader<Data extends object = TreeDataNode>(options: {
+  load: (node: TreeEventNode<Data>) => PromiseLike<unknown> | undefined;
+  fieldNames?: () => TreeFieldNames | undefined;
   loaded: () => readonly TreeKey[];
   loading: () => readonly TreeKey[];
   setLoading: (keys: TreeKey[]) => void;
-  finish: (keys: TreeKey[], node: TreeEventNode, success: boolean) => void;
+  finish: (keys: TreeKey[], node: TreeEventNode<Data>, success: boolean) => void;
   fail: (key: TreeKey) => void;
 }) {
   let disposed = false;
   const pending = new Map<TreeKey, Promise<void>>();
   const retries = new Map<TreeKey, number>();
-  function load(node: TreeEventNode): Promise<void> | undefined {
+  function load(node: TreeEventNode<Data>): Promise<void> | undefined {
     const { key } = node;
     if (disposed
       || options.loaded().includes(key)
-      || node.children?.length
+      || getTreeChildren(node, options.fieldNames?.()).length
       || (retries.get(key)
         ?? 0) >= 10) return;
     if (pending.has(key)) return pending.get(key);

@@ -1,14 +1,15 @@
-<script lang="ts">
+<script lang="ts" generics="Data extends object = TreeDataNode">
   import { untrack } from 'svelte';
   import Tree from './Tree.svelte';
   import TreeIcon from './TreeIcon.svelte';
   import { useConfig } from './config-context';
   import { buildTreeEntities, expandTreeParents, treeLeaf } from './tree.engine';
   import { getDirectoryRangeKeys, getDirectorySelectedNodes } from './directory-tree.engine';
-  import type { DirectoryTreeProps, TreeEventNode, TreeKey } from './tree.types';
+  import type { DirectoryTreeProps, TreeDataNode, TreeEventNode, TreeKey } from './tree.types';
 
   let {
     treeData = [],
+    fieldNames,
     defaultExpandAll = false,
     defaultExpandParent = true,
     defaultExpandedKeys = [],
@@ -26,15 +27,15 @@
     onSelect,
     nativeElement = $bindable(),
     ...props
-  }: DirectoryTreeProps = $props();
+  }: DirectoryTreeProps<Data> = $props();
   const config = useConfig();
   let prefix = $derived(config.getPrefixCls('tree', customizePrefixCls));
-  let tree = $state<Tree>();
+  let tree = $state<{ focus(options?: FocusOptions): void; blur(): void; }>();
   let internalSelected = $state.raw<TreeKey[]>(untrack(() =>
     [...(selectedKeys ?? defaultSelectedKeys)]
   ));
   let internalExpanded = $state.raw<TreeKey[]>(untrack(() => {
-    const index = buildTreeEntities(treeData);
+    const index = buildTreeEntities(treeData, fieldNames);
     const keys = expandedKeys ?? defaultExpandedKeys;
 
     if (defaultExpandAll) return index.ordered.map(entry => entry.key);
@@ -52,11 +53,11 @@
     if (expandedKeys !== undefined) internalExpanded = [...expandedKeys];
   });
 
-  const expand: NonNullable<DirectoryTreeProps['onExpand']> = (keys, info) => {
+  const expand: NonNullable<DirectoryTreeProps<Data>['onExpand']> = (keys, info) => {
     if (expandedKeys === undefined) internalExpanded = keys;
     onExpand?.(keys, info);
   };
-  const select: NonNullable<DirectoryTreeProps['onSelect']> = (keys, info) => {
+  const select: NonNullable<DirectoryTreeProps<Data>['onSelect']> = (keys, info) => {
     const { key } = info.node;
     const event = info.nativeEvent;
     const ctrl = event?.ctrlKey || event?.metaKey;
@@ -69,7 +70,7 @@
     } else if (multiple && event?.shiftKey) {
       next = [...new Set([
         ...(cachedSelectedKeys ?? []),
-        ...getDirectoryRangeKeys(treeData, actualExpanded, key, lastSelectedKey)
+        ...getDirectoryRangeKeys(treeData, actualExpanded, key, lastSelectedKey, fieldNames)
       ])];
     } else {
       next = [key];
@@ -79,7 +80,7 @@
     onSelect?.(next, {
       ...info,
       selected: true,
-      selectedNodes: getDirectorySelectedNodes(treeData, next)
+      selectedNodes: getDirectorySelectedNodes(treeData, next, fieldNames)
     });
 
     if (selectedKeys === undefined) internalSelected = next;
@@ -94,12 +95,12 @@
   }
 </script>
 
-{#snippet directoryIcon(node: TreeEventNode)}
-  <TreeIcon name={treeLeaf(node, Boolean(props.loadData), node.loaded) ? 'file'
+{#snippet directoryIcon(node: TreeEventNode<Data>)}
+  <TreeIcon name={treeLeaf(node, Boolean(props.loadData), node.loaded, fieldNames) ? 'file'
     : node.expanded ? 'folder-open' : 'folder'} />
 {/snippet}
 
-<Tree {...props} {treeData} {multiple} {expandAction} {showIcon} {blockNode}
+<Tree {...props} {treeData} {fieldNames} {multiple} {expandAction} {showIcon} {blockNode}
   icon={icon ?? directoryIcon} prefixCls={prefix} {defaultExpandParent}
   expandedKeys={actualExpanded} selectedKeys={actualSelected}
   onExpand={expand} onSelect={select} bind:nativeElement bind:this={tree}
