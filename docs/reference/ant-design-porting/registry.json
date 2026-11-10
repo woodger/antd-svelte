@@ -17695,7 +17695,7 @@
       "name": "Tree",
       "category": "data-display",
       "scope": "target",
-      "scopeReason": "Tree и DirectoryTree по Ant Design 6.6.8 / rc-tree 1.4.0: treeData, состояния, conduction, async loading, клавиатура, выбор диапазона, virtual list и scrollTo; drag/drop и motion отдельно.",
+      "scopeReason": "Tree и DirectoryTree по Ant Design 6.6.8 / rc-tree 1.4.0: treeData, состояния, conduction, async loading, клавиатура, выбор диапазона, drag/drop, virtual list и scrollTo; motion отдельно.",
       "upstreamPath": "components/tree",
       "reviewedRevision": "984592267de88fbf9cdaecc96a56629e721c709d",
       "exports": [
@@ -17827,7 +17827,22 @@
         "tests/browser/tree-virtual-metrics.ts",
         "tests/browser/tree-virtual.spec.ts",
         "tests/browser/tree-virtual-native.spec.ts",
-        "tests/package/tree-virtual.ssr.test.ts"
+        "tests/package/tree-virtual.ssr.test.ts",
+        "src/lib/tree-drag.engine.ts",
+        "src/lib/tree-drag.engine.test.ts",
+        "src/lib/tree-drag.model.svelte.ts",
+        "src/lib/vendor/tree.css",
+        "tests/browser/fixtures/TreeDragFixtures.svelte",
+        "tests/browser/fixtures/TreeDragScope.svelte",
+        "tests/browser/fixtures/TreeDragGeneric.svelte",
+        "tests/browser/fixtures/tree-drag-cases.ts",
+        "tests/browser/fixtures/ant-design-tree-drag-reference.json",
+        "tests/browser/fixtures/ant-design-tree-drag-ssr-reference.json",
+        "tests/browser/tree-drag-metrics.ts",
+        "tests/browser/tree-drag-test.ts",
+        "tests/browser/tree-drag.spec.ts",
+        "tests/browser/tree-drag-native.spec.ts",
+        "tests/package/tree-drag.ssr.test.ts"
       ],
       "features": [
         {
@@ -17868,10 +17883,33 @@
         {
           "id": "virtual-drag-directory",
           "title": "Drag/drop",
-          "state": "missing",
+          "state": "supported",
           "requiredForV1": false,
-          "evidence": [],
-          "note": "Draggable, drop indicator, allowDrop и drag callbacks ещё не перенесены. Виртуальные окна, scrollTo, DirectoryTree и expandAction учтены отдельными features."
+          "evidence": [
+            "src/lib/Tree.svelte",
+            "src/lib/tree.types.ts",
+            "src/lib/TreeIcon.svelte",
+            "src/lib/index.ts",
+            "src/lib/tree-drag.engine.ts",
+            "src/lib/tree-drag.engine.test.ts",
+            "src/lib/tree-drag.model.svelte.ts",
+            "src/lib/vendor/tree.css",
+            "src/lib/vendor/tree-prefix.css.js",
+            "tools/ant-design-css-recipes.json",
+            "tests/browser/fixtures/TreeDragFixtures.svelte",
+            "tests/browser/fixtures/TreeDragScope.svelte",
+            "tests/browser/fixtures/TreeDragGeneric.svelte",
+            "tests/browser/fixtures/tree-drag-cases.ts",
+            "tests/browser/fixtures/ant-design-tree-drag-reference.json",
+            "tests/browser/fixtures/ant-design-tree-drag-ssr-reference.json",
+            "tests/browser/tree-drag-metrics.ts",
+            "tests/browser/tree-drag-test.ts",
+            "tests/browser/tree-drag.spec.ts",
+            "tests/browser/tree-drag-native.spec.ts",
+            "tests/package/tree-drag.ssr.test.ts",
+            "readme.md"
+          ],
+          "note": "Draggable boolean/function/config, raw generic nodeDraggable/allowDrop, icon=false и opaque snippets, фиксированный Ant indicator, cross-level positions, RTL и captured indent. Predicate=false отключает drag и drop строки; disabled запрещает начало, targets ограничивает allowDrop. Нативные DragEvent callbacks сохраняют canonical key/state и original data, fieldNames/zero/bigint. DragNode хранит state начала drag и исходную data-ссылку, независимо от мутаций callback snapshots; dragNodesKeys собираются на начало. Uncontrolled Tree сворачивает source без onExpand; Directory сохраняет controlled wrapper. 800 ms hover вызывает onExpand, добавляя только существующую ветку с детьми; controlled ключи остаются у владельца. Данные переставляет потребитель. Native buttons, keyboard/focus, refs, themes, virtual windows и реальные mouse drags сохранены. Ant wrapper перезаписывает inherited rc dropIndicatorRender; no-op prop не добавлен. Collapse/appear motion учитывается отдельно."
         },
         {
           "id": "extended-api",
@@ -18099,7 +18137,7 @@
             "tests/package/tree-fields.ssr.test.ts",
             "readme.md"
           ],
-          "note": "TreeProps/Data, DirectoryTreeProps/Data, TreeEventNode/Data и TreeCheckInfo/Data сохраняют пользовательский payload; TreeFieldDataNode помогает описать рекурсивное поле children. Aliases key/title/children и пустые имена работают в index/leaf/expand/check/load, Directory ranges, title/icon/switcher/filter callbacks. Event key и state перекрывают canonical raw fields; selectedNodes/checkedNodes/positions сохраняют исходные объекты. Node title snippet имеет приоритет над titleRender; literal arrays/zero/empty и object payload с titleRender поддержаны. 27 raw UMD6.6.8 конфигураций сохраняют labels/ARIA, иконки и события: aliases/частичная схема/canonical shadows, strict/conduction, lazy/preloaded, hold/accept, Directory ranges/all, RTL/prefix и data/schema transitions. Native generic fixture проверяет вывод типов без index signature, discriminated unions, исходные literal key/state, snippets и recursive helper. SSR не загружает детей и не создаёт timers; обновление schema сохраняет DOM/ref/active IDs, selection, keyboard и внешний draft. Drag/drop и motion остаются отдельными пробелами; virtual/scrollTo учтены отдельно."
+          "note": "TreeProps/Data, DirectoryTreeProps/Data, TreeEventNode/Data и TreeCheckInfo/Data сохраняют пользовательский payload; TreeFieldDataNode помогает описать рекурсивное поле children. Aliases key/title/children и пустые имена работают в index/leaf/expand/check/load, Directory ranges, title/icon/switcher/filter callbacks. Event key и state перекрывают canonical raw fields; selectedNodes/checkedNodes/positions сохраняют исходные объекты. Node title snippet имеет приоритет над titleRender; literal arrays/zero/empty и object payload с titleRender поддержаны. 27 raw UMD6.6.8 конфигураций сохраняют labels/ARIA, иконки и события: aliases/частичная схема/canonical shadows, strict/conduction, lazy/preloaded, hold/accept, Directory ranges/all, RTL/prefix и data/schema transitions. Native generic fixture проверяет вывод типов без index signature, discriminated unions, исходные literal key/state, snippets и recursive helper. SSR не загружает детей и не создаёт timers; обновление schema сохраняет DOM/ref/active IDs, selection, keyboard и внешний draft. Motion остаётся отдельным пробелом; drag/drop и virtual/scrollTo учтены отдельно."
         },
         {
           "id": "native-field-names-refresh",
@@ -18283,6 +18321,90 @@
             "readme.md"
           ],
           "note": "Ошибка Source virtual-list1.5.1: keepInHorizontalRange сначала ограничивает offset снизу0, затем отрицательным scrollWidth-size.width. При width200 и viewport280 получается offset=-80 и marginLeft=80px. Raw undersized-width-observation сохранён; Native ограничивает максимум снизу0, сохраняет margin=0 и не создаёт лишний горизонтальный scrollbar."
+        },
+        {
+          "id": "native-drag-allow-refresh",
+          "title": "Drop учитывает актуальный allowDrop",
+          "state": "partial",
+          "requiredForV1": false,
+          "evidence": [
+            "tests/browser/fixtures/ant-design-tree-drag-reference.json",
+            "tests/browser/tree-drag-native.spec.ts",
+            "src/lib/tree-drag.model.svelte.ts",
+            "src/lib/tree-drag.engine.ts",
+            "readme.md"
+          ],
+          "note": "Ошибка Source rc-tree1.4.0: dragover с новым запретом не очищает прежний разрешённый target, а onDrop использует старый dropAllowed. Raw stale-allow-observation сохранён. Native очищает target и проверяет текущий predicate перед drop, в том числе без дополнительного dragover."
+        },
+        {
+          "id": "native-drag-descendants",
+          "title": "Drop запрещён в потомка, добавленного после dragstart",
+          "state": "partial",
+          "requiredForV1": false,
+          "evidence": [
+            "tests/browser/fixtures/ant-design-tree-drag-reference.json",
+            "tests/browser/tree-drag-native.spec.ts",
+            "src/lib/tree-drag.model.svelte.ts",
+            "src/lib/tree-drag.engine.ts",
+            "readme.md"
+          ],
+          "note": "Ошибка Source rc-tree1.4.0: dragChildrenKeys фиксируется на dragstart; новый потомок отсутствует в запрете и получает onDrop собственного предка. Raw late-descendant-observation сохранён. Native проверяет текущее дерево entities, сохраняя исходный dragNodesKeys snapshot для разрешённого drop."
+        },
+        {
+          "id": "native-drag-end",
+          "title": "Оконный dragend сохраняет валидный source node",
+          "state": "partial",
+          "requiredForV1": false,
+          "evidence": [
+            "tests/browser/fixtures/ant-design-tree-drag-reference.json",
+            "tests/browser/tree-drag-native.spec.ts",
+            "src/lib/tree-drag.model.svelte.ts",
+            "src/lib/tree-drag.engine.ts",
+            "readme.md"
+          ],
+          "note": "Ошибка Source rc-tree1.4.0: onWindowDragEnd передаёт null nodeProps в convertNodePropsToEventData и выбрасывает TypeError. Raw window-end-observation использует виртуальную прокрутку, удалившую source DOM. Native завершает drag с текущим source entity либо сохранённым snapshot; повторный оконный event не вызывает callback."
+        },
+        {
+          "id": "native-drag-cleanup",
+          "title": "Unmount отменяет отложенное drag раскрытие",
+          "state": "partial",
+          "requiredForV1": false,
+          "evidence": [
+            "tests/browser/fixtures/ant-design-tree-drag-reference.json",
+            "tests/browser/tree-drag-native.spec.ts",
+            "src/lib/tree-drag.model.svelte.ts",
+            "src/lib/tree-drag.engine.ts",
+            "readme.md"
+          ],
+          "note": "Ошибка Source rc-tree1.4.0: componentWillUnmount удаляет window listener, но не delayedDragEnter timer; после unmount приходит onExpand. Raw unmount-timer-observation сохранён. Native очищает timer/listener и игнорирует удержанные DOM handlers; отмена draggable или удаление source также очищают session."
+        },
+        {
+          "id": "native-drag-zero-container",
+          "title": "Drop container сохраняет нулевой key",
+          "state": "partial",
+          "requiredForV1": false,
+          "evidence": [
+            "tests/browser/fixtures/ant-design-tree-drag-reference.json",
+            "tests/browser/tree-drag-native.spec.ts",
+            "src/lib/tree-drag.model.svelte.ts",
+            "src/lib/tree-drag.engine.ts",
+            "readme.md"
+          ],
+          "note": "Ошибка Source rc-tree1.4.0: calcDropPosition использует parent.key || null и теряет key=0. Raw zero-container-observation сохранён. Native сохраняет canonical container key через nullish fallback; правила позиции и indicator не меняются."
+        },
+        {
+          "id": "native-drag-handle-prefix",
+          "title": "Drag handle обновляет namespace при смене prefix",
+          "state": "partial",
+          "requiredForV1": false,
+          "evidence": [
+            "tests/browser/fixtures/ant-design-tree-drag-reference.json",
+            "tests/browser/tree-drag-native.spec.ts",
+            "src/lib/tree-drag.model.svelte.ts",
+            "src/lib/tree-drag.engine.ts",
+            "readme.md"
+          ],
+          "note": "Ошибка Source rc-tree1.4.0: dragHandlerNode memo зависит от draggable, но пропускает prefixCls. Стабильный draggable=true сохраняет старые handle classes после смены prefix. Raw prefix-cache-observation сохранён. Native обновляет namespace и оформление, сохраняя root/node DOM, refs и текущий drag; custom controls остаются opaque."
         }
       ]
     },

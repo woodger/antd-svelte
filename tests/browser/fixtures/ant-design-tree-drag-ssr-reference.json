@@ -1,0 +1,1119 @@
+{
+  "reference": {
+    "version": "6.6.8",
+    "react": "18.3.1",
+    "domAvailable": false,
+    "delegate": "@rc-component/tree1.4.0"
+  },
+  "cases": [
+    {
+      "sample": {
+        "id": "before-first",
+        "actions": [
+          {
+            "kind": "dragstart",
+            "key": "c",
+            "x": 100
+          },
+          {
+            "kind": "dragenter",
+            "key": "a",
+            "x": 100,
+            "y": 0.2
+          },
+          {
+            "kind": "dragover",
+            "key": "a",
+            "x": 100,
+            "y": 0.2
+          },
+          {
+            "kind": "drop",
+            "key": "a",
+            "x": 100,
+            "y": 0.2
+          },
+          {
+            "kind": "dragend",
+            "key": "c"
+          }
+        ]
+      },
+      "result": {
+        "nodes": [
+          {
+            "key": "a",
+            "draggable": true,
+            "draggableClass": true,
+            "disabled": false
+          },
+          {
+            "key": "a1",
+            "draggable": true,
+            "draggableClass": true,
+            "disabled": false
+          },
+          {
+            "key": "a2",
+            "draggable": true,
+            "draggableClass": true,
+            "disabled": false
+          },
+          {
+            "key": "a21",
+            "draggable": true,
+            "draggableClass": true,
+            "disabled": false
+          },
+          {
+            "key": "a22",
+            "draggable": true,
+            "draggableClass": true,
+            "disabled": false
+          },
+          {
+            "key": "b",
+            "draggable": true,
+            "draggableClass": true,
+            "disabled": false
+          },
+          {
+            "key": "c",
+            "draggable": true,
+            "draggableClass": true,
+            "disabled": false
+          },
+          {
+            "key": "disabled",
+            "draggable": false,
+            "draggableClass": true,
+            "disabled": true
+          },
+          {
+            "key": "0",
+            "draggable": true,
+            "draggableClass": true,
+            "disabled": false
+          }
+        ],
+        "handleCount": 9,
+        "defaultIconCount": 9,
+        "callbacks": [],
+        "timerCalls": 0
+      }
+    },
+    {
+      "sample": {
+        "id": "predicate",
+        "predicate": true,
+        "actions": [
+          {
+            "kind": "dragstart",
+            "key": "c",
+            "x": 100
+          },
+          {
+            "kind": "dragenter",
+            "key": "b",
+            "x": 160,
+            "y": 0.75
+          },
+          {
+            "kind": "dragover",
+            "key": "b",
+            "x": 160,
+            "y": 0.75
+          },
+          {
+            "kind": "drop",
+            "key": "b",
+            "x": 160,
+            "y": 0.75
+          },
+          {
+            "kind": "dragend",
+            "key": "c"
+          }
+        ]
+      },
+      "result": {
+        "nodes": [
+          {
+            "key": "a",
+            "draggable": true,
+            "draggableClass": true,
+            "disabled": false
+          },
+          {
+            "key": "a1",
+            "draggable": true,
+            "draggableClass": true,
+            "disabled": false
+          },
+          {
+            "key": "a2",
+            "draggable": true,
+            "draggableClass": true,
+            "disabled": false
+          },
+          {
+            "key": "a21",
+            "draggable": true,
+            "draggableClass": true,
+            "disabled": false
+          },
+          {
+            "key": "a22",
+            "draggable": true,
+            "draggableClass": true,
+            "disabled": false
+          },
+          {
+            "key": "b",
+            "draggable": false,
+            "draggableClass": false,
+            "disabled": false
+          },
+          {
+            "key": "c",
+            "draggable": true,
+            "draggableClass": true,
+            "disabled": false
+          },
+          {
+            "key": "disabled",
+            "draggable": false,
+            "draggableClass": true,
+            "disabled": true
+          },
+          {
+            "key": "0",
+            "draggable": true,
+            "draggableClass": true,
+            "disabled": false
+          }
+        ],
+        "handleCount": 9,
+        "defaultIconCount": 9,
+        "callbacks": [],
+        "timerCalls": 0
+      }
+    },
+    {
+      "sample": {
+        "id": "hidden-handle",
+        "icon": "hidden",
+        "actions": [
+          {
+            "kind": "dragstart",
+            "key": "c",
+            "x": 100
+          },
+          {
+            "kind": "dragenter",
+            "key": "b",
+            "x": 160,
+            "y": 0.75
+          },
+          {
+            "kind": "dragover",
+            "key": "b",
+            "x": 160,
+            "y": 0.75
+          },
+          {
+            "kind": "drop",
+            "key": "b",
+            "x": 160,
+            "y": 0.75
+          },
+          {
+            "kind": "dragend",
+            "key": "c"
+          }
+        ]
+      },
+      "result": {
+        "nodes": [
+          {
+            "key": "a",
+            "draggable": true,
+            "draggableClass": true,
+            "disabled": false
+          },
+          {
+            "key": "a1",
+            "draggable": true,
+            "draggableClass": true,
+            "disabled": false
+          },
+          {
+            "key": "a2",
+            "draggable": true,
+            "draggableClass": true,
+            "disabled": false
+          },
+          {
+            "key": "a21",
+            "draggable": true,
+            "draggableClass": true,
+            "disabled": false
+          },
+          {
+            "key": "a22",
+            "draggable": true,
+            "draggableClass": true,
+            "disabled": false
+          },
+          {
+            "key": "b",
+            "draggable": true,
+            "draggableClass": true,
+            "disabled": false
+          },
+          {
+            "key": "c",
+            "draggable": true,
+            "draggableClass": true,
+            "disabled": false
+          },
+          {
+            "key": "disabled",
+            "draggable": false,
+            "draggableClass": true,
+            "disabled": true
+          },
+          {
+            "key": "0",
+            "draggable": true,
+            "draggableClass": true,
+            "disabled": false
+          }
+        ],
+        "handleCount": 0,
+        "defaultIconCount": 0,
+        "callbacks": [],
+        "timerCalls": 0
+      }
+    },
+    {
+      "sample": {
+        "id": "custom-handle",
+        "icon": "custom",
+        "actions": [
+          {
+            "kind": "dragstart",
+            "key": "c",
+            "x": 100
+          },
+          {
+            "kind": "dragenter",
+            "key": "b",
+            "x": 160,
+            "y": 0.75
+          },
+          {
+            "kind": "dragover",
+            "key": "b",
+            "x": 160,
+            "y": 0.75
+          },
+          {
+            "kind": "drop",
+            "key": "b",
+            "x": 160,
+            "y": 0.75
+          },
+          {
+            "kind": "dragend",
+            "key": "c"
+          }
+        ]
+      },
+      "result": {
+        "nodes": [
+          {
+            "key": "a",
+            "draggable": true,
+            "draggableClass": true,
+            "disabled": false
+          },
+          {
+            "key": "a1",
+            "draggable": true,
+            "draggableClass": true,
+            "disabled": false
+          },
+          {
+            "key": "a2",
+            "draggable": true,
+            "draggableClass": true,
+            "disabled": false
+          },
+          {
+            "key": "a21",
+            "draggable": true,
+            "draggableClass": true,
+            "disabled": false
+          },
+          {
+            "key": "a22",
+            "draggable": true,
+            "draggableClass": true,
+            "disabled": false
+          },
+          {
+            "key": "b",
+            "draggable": true,
+            "draggableClass": true,
+            "disabled": false
+          },
+          {
+            "key": "c",
+            "draggable": true,
+            "draggableClass": true,
+            "disabled": false
+          },
+          {
+            "key": "disabled",
+            "draggable": false,
+            "draggableClass": true,
+            "disabled": true
+          },
+          {
+            "key": "0",
+            "draggable": true,
+            "draggableClass": true,
+            "disabled": false
+          }
+        ],
+        "handleCount": 9,
+        "defaultIconCount": 0,
+        "callbacks": [],
+        "timerCalls": 0
+      }
+    },
+    {
+      "sample": {
+        "id": "empty-handle",
+        "icon": "empty",
+        "actions": [
+          {
+            "kind": "dragstart",
+            "key": "c",
+            "x": 100
+          },
+          {
+            "kind": "dragenter",
+            "key": "b",
+            "x": 160,
+            "y": 0.75
+          },
+          {
+            "kind": "dragover",
+            "key": "b",
+            "x": 160,
+            "y": 0.75
+          },
+          {
+            "kind": "drop",
+            "key": "b",
+            "x": 160,
+            "y": 0.75
+          },
+          {
+            "kind": "dragend",
+            "key": "c"
+          }
+        ]
+      },
+      "result": {
+        "nodes": [
+          {
+            "key": "a",
+            "draggable": true,
+            "draggableClass": true,
+            "disabled": false
+          },
+          {
+            "key": "a1",
+            "draggable": true,
+            "draggableClass": true,
+            "disabled": false
+          },
+          {
+            "key": "a2",
+            "draggable": true,
+            "draggableClass": true,
+            "disabled": false
+          },
+          {
+            "key": "a21",
+            "draggable": true,
+            "draggableClass": true,
+            "disabled": false
+          },
+          {
+            "key": "a22",
+            "draggable": true,
+            "draggableClass": true,
+            "disabled": false
+          },
+          {
+            "key": "b",
+            "draggable": true,
+            "draggableClass": true,
+            "disabled": false
+          },
+          {
+            "key": "c",
+            "draggable": true,
+            "draggableClass": true,
+            "disabled": false
+          },
+          {
+            "key": "disabled",
+            "draggable": false,
+            "draggableClass": true,
+            "disabled": true
+          },
+          {
+            "key": "0",
+            "draggable": true,
+            "draggableClass": true,
+            "disabled": false
+          }
+        ],
+        "handleCount": 9,
+        "defaultIconCount": 0,
+        "callbacks": [],
+        "timerCalls": 0
+      }
+    },
+    {
+      "sample": {
+        "id": "disabled-tree",
+        "disabled": true,
+        "actions": [
+          {
+            "kind": "dragstart",
+            "key": "c",
+            "x": 100
+          },
+          {
+            "kind": "dragenter",
+            "key": "b",
+            "x": 160
+          },
+          {
+            "kind": "dragover",
+            "key": "b",
+            "x": 160
+          }
+        ]
+      },
+      "result": {
+        "nodes": [
+          {
+            "key": "a",
+            "draggable": false,
+            "draggableClass": true,
+            "disabled": true
+          },
+          {
+            "key": "a1",
+            "draggable": false,
+            "draggableClass": true,
+            "disabled": true
+          },
+          {
+            "key": "a2",
+            "draggable": false,
+            "draggableClass": true,
+            "disabled": true
+          },
+          {
+            "key": "a21",
+            "draggable": false,
+            "draggableClass": true,
+            "disabled": true
+          },
+          {
+            "key": "a22",
+            "draggable": false,
+            "draggableClass": true,
+            "disabled": true
+          },
+          {
+            "key": "b",
+            "draggable": false,
+            "draggableClass": true,
+            "disabled": true
+          },
+          {
+            "key": "c",
+            "draggable": false,
+            "draggableClass": true,
+            "disabled": true
+          },
+          {
+            "key": "disabled",
+            "draggable": false,
+            "draggableClass": true,
+            "disabled": true
+          },
+          {
+            "key": "0",
+            "draggable": false,
+            "draggableClass": true,
+            "disabled": true
+          }
+        ],
+        "handleCount": 9,
+        "defaultIconCount": 9,
+        "callbacks": [],
+        "timerCalls": 0
+      }
+    },
+    {
+      "sample": {
+        "id": "directory",
+        "directory": true,
+        "actions": [
+          {
+            "kind": "dragstart",
+            "key": "a"
+          },
+          {
+            "kind": "dragenter",
+            "key": "b",
+            "x": 160
+          },
+          {
+            "kind": "wait",
+            "milliseconds": 801
+          },
+          {
+            "kind": "drop",
+            "key": "b",
+            "x": 160
+          },
+          {
+            "kind": "dragend",
+            "key": "a"
+          }
+        ]
+      },
+      "result": {
+        "nodes": [
+          {
+            "key": "a",
+            "draggable": true,
+            "draggableClass": true,
+            "disabled": false
+          },
+          {
+            "key": "a1",
+            "draggable": true,
+            "draggableClass": true,
+            "disabled": false
+          },
+          {
+            "key": "a2",
+            "draggable": true,
+            "draggableClass": true,
+            "disabled": false
+          },
+          {
+            "key": "a21",
+            "draggable": true,
+            "draggableClass": true,
+            "disabled": false
+          },
+          {
+            "key": "a22",
+            "draggable": true,
+            "draggableClass": true,
+            "disabled": false
+          },
+          {
+            "key": "b",
+            "draggable": true,
+            "draggableClass": true,
+            "disabled": false
+          },
+          {
+            "key": "c",
+            "draggable": true,
+            "draggableClass": true,
+            "disabled": false
+          },
+          {
+            "key": "disabled",
+            "draggable": false,
+            "draggableClass": true,
+            "disabled": true
+          },
+          {
+            "key": "0",
+            "draggable": true,
+            "draggableClass": true,
+            "disabled": false
+          }
+        ],
+        "handleCount": 9,
+        "defaultIconCount": 9,
+        "callbacks": [],
+        "timerCalls": 0
+      }
+    },
+    {
+      "sample": {
+        "id": "virtual",
+        "virtual": true,
+        "actions": [
+          {
+            "kind": "dragstart",
+            "key": "v0"
+          },
+          {
+            "kind": "dragenter",
+            "key": "v2",
+            "x": 160
+          },
+          {
+            "kind": "dragover",
+            "key": "v2",
+            "x": 160
+          },
+          {
+            "kind": "drop",
+            "key": "v2",
+            "x": 160
+          },
+          {
+            "kind": "dragend",
+            "key": "v0"
+          }
+        ]
+      },
+      "result": {
+        "nodes": [
+          {
+            "key": "v0",
+            "draggable": true,
+            "draggableClass": true,
+            "disabled": false
+          },
+          {
+            "key": "v1",
+            "draggable": true,
+            "draggableClass": true,
+            "disabled": false
+          },
+          {
+            "key": "v2",
+            "draggable": true,
+            "draggableClass": true,
+            "disabled": false
+          },
+          {
+            "key": "v3",
+            "draggable": true,
+            "draggableClass": true,
+            "disabled": false
+          },
+          {
+            "key": "v4",
+            "draggable": true,
+            "draggableClass": true,
+            "disabled": false
+          }
+        ],
+        "handleCount": 5,
+        "defaultIconCount": 5,
+        "callbacks": [],
+        "timerCalls": 0
+      }
+    },
+    {
+      "sample": {
+        "id": "prefix",
+        "prefix": "dense",
+        "localPrefix": "branch",
+        "actions": [
+          {
+            "kind": "dragstart",
+            "key": "c",
+            "x": 100
+          },
+          {
+            "kind": "dragenter",
+            "key": "b",
+            "x": 160,
+            "y": 0.75
+          },
+          {
+            "kind": "dragover",
+            "key": "b",
+            "x": 160,
+            "y": 0.75
+          },
+          {
+            "kind": "drop",
+            "key": "b",
+            "x": 160,
+            "y": 0.75
+          },
+          {
+            "kind": "dragend",
+            "key": "c"
+          }
+        ]
+      },
+      "result": {
+        "nodes": [
+          {
+            "key": "a",
+            "draggable": true,
+            "draggableClass": true,
+            "disabled": false
+          },
+          {
+            "key": "a1",
+            "draggable": true,
+            "draggableClass": true,
+            "disabled": false
+          },
+          {
+            "key": "a2",
+            "draggable": true,
+            "draggableClass": true,
+            "disabled": false
+          },
+          {
+            "key": "a21",
+            "draggable": true,
+            "draggableClass": true,
+            "disabled": false
+          },
+          {
+            "key": "a22",
+            "draggable": true,
+            "draggableClass": true,
+            "disabled": false
+          },
+          {
+            "key": "b",
+            "draggable": true,
+            "draggableClass": true,
+            "disabled": false
+          },
+          {
+            "key": "c",
+            "draggable": true,
+            "draggableClass": true,
+            "disabled": false
+          },
+          {
+            "key": "disabled",
+            "draggable": false,
+            "draggableClass": true,
+            "disabled": true
+          },
+          {
+            "key": "0",
+            "draggable": true,
+            "draggableClass": true,
+            "disabled": false
+          }
+        ],
+        "handleCount": 9,
+        "defaultIconCount": 9,
+        "callbacks": [],
+        "timerCalls": 0
+      }
+    },
+    {
+      "sample": {
+        "id": "controlled-reject",
+        "controlled": "reject",
+        "actions": [
+          {
+            "kind": "dragstart",
+            "key": "a"
+          },
+          {
+            "kind": "dragenter",
+            "key": "b",
+            "x": 160
+          },
+          {
+            "kind": "wait",
+            "milliseconds": 801
+          },
+          {
+            "kind": "dragend",
+            "key": "a"
+          }
+        ]
+      },
+      "result": {
+        "nodes": [
+          {
+            "key": "a",
+            "draggable": true,
+            "draggableClass": true,
+            "disabled": false
+          },
+          {
+            "key": "a1",
+            "draggable": true,
+            "draggableClass": true,
+            "disabled": false
+          },
+          {
+            "key": "a2",
+            "draggable": true,
+            "draggableClass": true,
+            "disabled": false
+          },
+          {
+            "key": "a21",
+            "draggable": true,
+            "draggableClass": true,
+            "disabled": false
+          },
+          {
+            "key": "a22",
+            "draggable": true,
+            "draggableClass": true,
+            "disabled": false
+          },
+          {
+            "key": "b",
+            "draggable": true,
+            "draggableClass": true,
+            "disabled": false
+          },
+          {
+            "key": "c",
+            "draggable": true,
+            "draggableClass": true,
+            "disabled": false
+          },
+          {
+            "key": "disabled",
+            "draggable": false,
+            "draggableClass": true,
+            "disabled": true
+          },
+          {
+            "key": "0",
+            "draggable": true,
+            "draggableClass": true,
+            "disabled": false
+          }
+        ],
+        "handleCount": 9,
+        "defaultIconCount": 9,
+        "callbacks": [],
+        "timerCalls": 0
+      }
+    },
+    {
+      "sample": {
+        "id": "custom-indent",
+        "indent": 36,
+        "actions": [
+          {
+            "kind": "dragstart",
+            "key": "c",
+            "x": 100
+          },
+          {
+            "kind": "dragenter",
+            "key": "a22",
+            "x": 56,
+            "y": 0.75
+          },
+          {
+            "kind": "dragover",
+            "key": "a22",
+            "x": 56,
+            "y": 0.75
+          },
+          {
+            "kind": "drop",
+            "key": "a22",
+            "x": 56,
+            "y": 0.75
+          },
+          {
+            "kind": "dragend",
+            "key": "c"
+          }
+        ]
+      },
+      "result": {
+        "nodes": [
+          {
+            "key": "a",
+            "draggable": true,
+            "draggableClass": true,
+            "disabled": false
+          },
+          {
+            "key": "a1",
+            "draggable": true,
+            "draggableClass": true,
+            "disabled": false
+          },
+          {
+            "key": "a2",
+            "draggable": true,
+            "draggableClass": true,
+            "disabled": false
+          },
+          {
+            "key": "a21",
+            "draggable": true,
+            "draggableClass": true,
+            "disabled": false
+          },
+          {
+            "key": "a22",
+            "draggable": true,
+            "draggableClass": true,
+            "disabled": false
+          },
+          {
+            "key": "b",
+            "draggable": true,
+            "draggableClass": true,
+            "disabled": false
+          },
+          {
+            "key": "c",
+            "draggable": true,
+            "draggableClass": true,
+            "disabled": false
+          },
+          {
+            "key": "disabled",
+            "draggable": false,
+            "draggableClass": true,
+            "disabled": true
+          },
+          {
+            "key": "0",
+            "draggable": true,
+            "draggableClass": true,
+            "disabled": false
+          }
+        ],
+        "handleCount": 9,
+        "defaultIconCount": 9,
+        "callbacks": [],
+        "timerCalls": 0
+      }
+    },
+    {
+      "sample": {
+        "id": "zero-indent",
+        "indent": 0,
+        "actions": [
+          {
+            "kind": "dragstart",
+            "key": "c",
+            "x": 100
+          },
+          {
+            "kind": "dragenter",
+            "key": "b",
+            "x": 88,
+            "y": 0.75
+          },
+          {
+            "kind": "dragover",
+            "key": "b",
+            "x": 88,
+            "y": 0.75
+          },
+          {
+            "kind": "drop",
+            "key": "b",
+            "x": 88,
+            "y": 0.75
+          },
+          {
+            "kind": "dragend",
+            "key": "c"
+          }
+        ]
+      },
+      "result": {
+        "nodes": [
+          {
+            "key": "a",
+            "draggable": true,
+            "draggableClass": true,
+            "disabled": false
+          },
+          {
+            "key": "a1",
+            "draggable": true,
+            "draggableClass": true,
+            "disabled": false
+          },
+          {
+            "key": "a2",
+            "draggable": true,
+            "draggableClass": true,
+            "disabled": false
+          },
+          {
+            "key": "a21",
+            "draggable": true,
+            "draggableClass": true,
+            "disabled": false
+          },
+          {
+            "key": "a22",
+            "draggable": true,
+            "draggableClass": true,
+            "disabled": false
+          },
+          {
+            "key": "b",
+            "draggable": true,
+            "draggableClass": true,
+            "disabled": false
+          },
+          {
+            "key": "c",
+            "draggable": true,
+            "draggableClass": true,
+            "disabled": false
+          },
+          {
+            "key": "disabled",
+            "draggable": false,
+            "draggableClass": true,
+            "disabled": true
+          },
+          {
+            "key": "0",
+            "draggable": true,
+            "draggableClass": true,
+            "disabled": false
+          }
+        ],
+        "handleCount": 9,
+        "defaultIconCount": 9,
+        "callbacks": [],
+        "timerCalls": 0
+      }
+    }
+  ]
+}

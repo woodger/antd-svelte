@@ -6459,8 +6459,8 @@ tag/popup render hooks, treeExpandAction, остальные semantic slots/conf
 Tree переносит Ant Design 6.6.8 и @rc-component/tree 1.4.0. Чистые engines отвечают
 за flatten/родителей, исходную checkbox conduction и async load lifecycle.
 React/rc-tree runtime не устанавливаются; лицензия сохранена в vendor/LICENSE.rc-tree.
-CSS-рецепт извлекает 98 правил из закреплённого antd.css, исключая TreeSelect и
-collapse motion. Иконки соответствуют @ant-design/icons-svg 4.6.0.
+CSS-рецепт извлекает 98 правил и keyframe drag feedback из закреплённого antd.css,
+исключая TreeSelect и collapse motion. Иконки соответствуют @ant-design/icons-svg 4.6.0.
 
 ```svelte
 <script lang="ts">
@@ -6735,10 +6735,61 @@ Svelte-содержимым; CSS относится к существующим 
 nested/reset/replaced/sibling scopes, DirectoryTree, prefix/RTL, style priorities
 и обновления, включая pending loading и независимый TreeSelect.
 
-Drag/drop и collapse/appear анимации ещё не перенесены. Реестр
+Collapse/appear анимации ещё не перенесены. Реестр
 отделяет этот объём от полного React API Tree.
 Deprecated `TreeNode` children не входят в перенос: rc-tree 1.4.0 прямо помечает
 `Tree.children` как deprecated и предлагает `treeData`.
+
+### Drag/drop
+
+`draggable` включает HTML5 drag/drop в Tree и DirectoryTree. Принимаются boolean,
+predicate исходного data-узла или `{ nodeDraggable, icon }`. Predicate=false
+отключает и начало drag, и drop handlers строки, как в Source. По умолчанию
+показывается Holder icon; `icon: false` убирает handle, snippet заменяет его
+содержимое, включая пустой результат. Интерактивное содержимое handle сохраняет
+свои DOM controls и фокус. Клик обычного handle возвращает фокус tree-root;
+draggable строки имеют tabindex=-1 и не добавляют tree tab stops.
+
+`allowDrop({ dragNode, dropNode, dropPosition })` получает исходные data-объекты
+и относительную позицию -1/0/1. Позиция зависит от вертикальной половины
+event.target, горизонтального смещения, раскрытых веток и indent; поддержаны
+переходы между уровнями, RTL и виртуальные окна. Disabled запрещает начать drag,
+но сам по себе не исключает drop target: при необходимости проверяйте
+`dropNode.disabled` в allowDrop. Индикатор фиксирован Ant wrapper, который также
+перезаписывает унаследованный rc `dropIndicatorRender`.
+
+`onDragStart`, `onDragEnter`, `onDragOver`, `onDragLeave` и `onDragEnd` получают
+`{event,node}` с нативным DragEvent и canonical key/state. OnDragEnter добавляет
+expandedKeys до отложенного раскрытия. Через 800 ms приходит onExpand с
+expanded=true; key добавляется при наличии детей. Для листа набор может остаться
+прежним; hover сам по себе не загружает lazy children. Uncontrolled Tree сворачивает
+source при dragstart без onExpand; DirectoryTree сохраняет своё управление
+expandedKeys и не сворачивает source этим действием.
+
+`onDrop` добавляет dragNode, dragNodesKeys, dropToGap и dropPosition. Последний
+равен sibling index dropNode плюс -1/0/1. DropNode может быть предком строки,
+над которой находится индикатор; dragOver flags относятся к строке индикатора.
+DragNode сохраняет state начала drag и исходную data-ссылку: изменения свойств
+этого объекта видны onDrop, а замена узла новым объектом не меняет сохранённую
+ссылку. DragNodesKeys содержит source и всех его потомков на начало drag,
+включая свёрнутые ветки. Перестановка treeData остаётся у потребителя;
+проверки не меняют выбор, checkbox, native refs и существующую клавиатуру.
+
+[38 независимых Source сценариев и шесть raw наблюдений](./tests/browser/fixtures/ant-design-tree-drag-reference.json),
+[12 Source SSR вариантов без DOM](./tests/browser/fixtures/ant-design-tree-drag-ssr-reference.json),
+[engine](./src/lib/tree-drag.engine.test.ts),
+[SSR](./tests/package/tree-drag.ssr.test.ts) и
+[browser](./tests/browser/tree-drag.spec.ts) фиксируют геометрию, snapshots,
+defaults, controlled keys, generic data/fieldNames, icons, prefix/RTL и lifecycle.
+[Native проверки](./tests/browser/tree-drag-native.spec.ts) включают реальные
+mouse drags, виртуальную прокрутку, смену данных и сохранение фокуса/DOM.
+Ошибки rc-tree1.4.0 не воспроизводятся:
+
+- allowDrop проверяется перед drop; запрет в dragover очищает прежний target.
+- Проверяется текущее дерево потомков, включая добавленных после dragstart.
+- Оконный dragend сохраняет source node, даже когда его DOM вышел из окна.
+- Unmount отменяет таймер раскрытия и listeners; поздних callbacks нет.
+- Drop container сохраняет key=0, а handle обновляет namespace при смене prefix.
 
 ### Data utilities
 

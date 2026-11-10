@@ -111,6 +111,15 @@ export type {
   TreeEventNode,
   TreeKey,
   TreeExpandAction,
+  TreeDropPosition,
+  TreeDraggableFn,
+  TreeDraggableConfig,
+  TreeDraggable,
+  TreeAllowDropInfo,
+  TreeAllowDrop,
+  TreeDragInfo,
+  TreeDragEnterInfo,
+  TreeDropInfo,
   TreeCheckedKeys,
   TreeCheckInfo
 } from './tree.types';

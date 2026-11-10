@@ -9,6 +9,12 @@
 
 ### Added
 
+- Tree/DirectoryTree поддерживают HTML5 drag/drop: draggable predicates и handle snippets,
+  allowDrop, cross-level/RTL indicator, callbacks, delayed expansion и виртуальные окна.
+  Сохранены generic raw data, canonical state, native focus/refs и controlled keys.
+  Шесть ошибок Source записаны отдельно; Native проверяет актуальные запреты/потомков
+  и очищает drag ресурсы после окончания и unmount.
+
 - Tree/DirectoryTree поддерживают измеряемые виртуальные окна, scrollTo по key/index,
   обе оси прокрутки, function offsets и ConfigProvider.virtual. Общие расчёты
   используются также Listy. Ошибки Source с RTL, stale estimate и active ARIA

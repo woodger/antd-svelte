@@ -4,6 +4,7 @@ import type { VirtualScrollAlign } from './virtual-list.engine';
 import type { VirtualScrollOffset, VirtualScrollOffsetInfo } from './virtual-list.types';
 export type TreeKey = string | number | bigint;
 export type TreeExpandAction = false | 'click' | 'doubleClick';
+export type TreeDropPosition = -1 | 0 | 1;
 export type TreeScrollAlign = VirtualScrollAlign;
 export type TreeScrollOffsetInfo = VirtualScrollOffsetInfo<TreeKey>;
 /** Функция получает измеренные/оценённые размеры; NaN/Infinity заменяются нулём. */
@@ -90,15 +91,51 @@ interface TreeNodeState {
   loading: boolean;
   pos: string;
   active: boolean;
-  dragOver: false;
-  dragOverGapTop: false;
-  dragOverGapBottom: false;
+  dragOver: boolean;
+  dragOverGapTop: boolean;
+  dragOverGapBottom: boolean;
 }
 
 /** State и canonical key перекрывают одноимённые поля payload; остальные данные сохранены. */
 export type TreeEventNode<Data extends object = TreeDataNode> = {
   [Key in keyof Data as Key extends keyof TreeNodeState ? never : Key]: Data[Key];
 } & TreeNodeState & Omit<TreeBasicDataNode<Data>, 'icon' | 'switcherIcon'>;
+
+/** Predicate получает исходные data; false отключает и drag, и drop на строке, как Source. */
+export type TreeDraggableFn<Data extends object = TreeDataNode> = (node: Data) => boolean;
+/** False скрывает handle; snippet заменяет Holder icon, включая пустое содержимое. */
+export interface TreeDraggableConfig<Data extends object = TreeDataNode> {
+  icon?: Snippet | false | null;
+  nodeDraggable?: TreeDraggableFn<Data>;
+}
+export type TreeDraggable<Data extends object = TreeDataNode> =
+  boolean | TreeDraggableFn<Data> | TreeDraggableConfig<Data>;
+/** Drop position относительно dropNode; данные не подменяются event-state объектами. */
+export interface TreeAllowDropInfo<Data extends object = TreeDataNode> {
+  dragNode: Data;
+  dropNode: Data;
+  dropPosition: TreeDropPosition;
+}
+export type TreeAllowDrop<Data extends object = TreeDataNode> =
+  (info: TreeAllowDropInfo<Data>) => boolean;
+/** Нативный DragEvent и canonical key/state узла; при оконном dragend сохраняется source node. */
+export interface TreeDragInfo<Data extends object = TreeDataNode> {
+  event: DragEvent;
+  node: TreeEventNode<Data>;
+}
+export interface TreeDragEnterInfo<Data extends object = TreeDataNode> extends TreeDragInfo<Data> {
+  /** Ключи до отложенного раскрытия; onExpand сообщает следующий набор через 800 ms. */
+  expandedKeys: TreeKey[];
+}
+export interface TreeDropInfo<Data extends object = TreeDataNode> extends TreeDragInfo<Data> {
+  /** State начала drag до сворачивания source; данные читаются из исходной data-ссылки. */
+  dragNode: TreeEventNode<Data>;
+  /** На начало drag: source key, затем все потомки, включая свёрнутые ветки. */
+  dragNodesKeys: TreeKey[];
+  /** Индекс dropNode среди siblings плюс относительная позиция -1/0/1. */
+  dropPosition: number;
+  dropToGap: boolean;
+}
 export interface TreeCheckedKeys {
   checked: readonly TreeKey[];
   halfChecked: readonly TreeKey[];
@@ -131,7 +168,7 @@ export interface TreeConfig {
 
 /** Дерево со стабильными keys, раскрытием, выбором, отметками и lazy children. */
 export interface TreeProps<Data extends object = TreeDataNode> extends Omit<
-  HTMLAttributes<HTMLDivElement>, 'children' | 'onselect'
+  HTMLAttributes<HTMLDivElement>, 'children' | 'onselect' | 'draggable'
 > {
   /** Локальный namespace дерева и nodes; пустая строка наследует ConfigProvider. */
   prefixCls?: string;
@@ -179,6 +216,16 @@ export interface TreeProps<Data extends object = TreeDataNode> extends Omit<
   /** Начальное локальное значение; последующие изменения prop не переинициализируют состояние. */
   defaultCheckedKeys?: readonly TreeKey[];
   disabled?: boolean;
+  /** HTML5 drag/drop; данные переставляет потребитель в onDrop. @defaultValue false */
+  draggable?: TreeDraggable<Data>;
+  /** Проверяется для кандидатов и повторно перед drop; по умолчанию разрешены все позиции. */
+  allowDrop?: TreeAllowDrop<Data>;
+  onDragStart?: (info: TreeDragInfo<Data>) => void;
+  onDragEnter?: (info: TreeDragEnterInfo<Data>) => void;
+  onDragOver?: (info: TreeDragInfo<Data>) => void;
+  onDragLeave?: (info: TreeDragInfo<Data>) => void;
+  onDragEnd?: (info: TreeDragInfo<Data>) => void;
+  onDrop?: (info: TreeDropInfo<Data>) => void;
   loadedKeys?: readonly TreeKey[];
   /** Promise загрузки детей; обновление treeData остаётся у потребителя. */
   loadData?: (node: TreeEventNode<Data>) => PromiseLike<unknown>;

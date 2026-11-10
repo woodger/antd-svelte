@@ -27,6 +27,7 @@
   import { createTreeLoader } from './tree-load.engine';
   import { treeSemantics } from './tree-semantic.engine';
   import { treeItemHeight } from './tree-virtual.engine';
+  import { createTreeDrag } from './tree-drag.model.svelte';
   import { createVirtualList } from './virtual-list.model.svelte';
   import { connectListyGestures } from './listy-gestures.dom';
   import VirtualScrollbar from './ListyScrollbar.svelte';
@@ -62,6 +63,14 @@
     checkedKeys,
     defaultCheckedKeys = [],
     disabled,
+    draggable,
+    allowDrop,
+    onDragStart,
+    onDragEnter,
+    onDragOver,
+    onDragLeave,
+    onDragEnd,
+    onDrop,
     loadedKeys,
     loadData,
     onExpand,
@@ -164,6 +173,7 @@
   let visible = $derived(flattenTree(index, expanded));
   let holder = $state<HTMLDivElement>();
   let inner = $state<HTMLDivElement>();
+  let indentMeasurer = $state<HTMLSpanElement>();
   const viewport = createVirtualList<Entry, TreeKey>({
     rows: () => visible,
     getKey: entry => entry.key,
@@ -171,6 +181,22 @@
     estimate: () => itemHeight ?? treeItemHeight(tokens.state.token),
     enabled: () => virtual ?? config.virtual ?? true,
     width: () => scrollWidth
+  });
+  const drag = createTreeDrag<Data>({
+    props: () => ({
+      draggable, allowDrop, onDragStart, onDragEnter, onDragOver, onDragLeave, onDragEnd,
+      onDrop, onExpand
+    }),
+    index: () => index,
+    visible: () => visible,
+    expanded: () => expanded,
+    setExpanded: keys => {
+      if (expandedKeys === undefined) expanded = keys;
+    },
+    node: eventNode,
+    disabled: () => blocked,
+    indent: () => indentMeasurer?.offsetWidth ?? 0,
+    rtl: () => config.direction === 'rtl'
   });
   let range = $derived(viewport.range);
   let rendered = $derived(visible.slice(range.start, range.end + 1));
@@ -256,6 +282,7 @@
   onDestroy(() => {
     disposed = true;
     loader.dispose();
+    drag.dispose();
   });
   $effect(() => {
     if (!loadData) return;
@@ -293,9 +320,7 @@
       loading: loading.includes(entry.key),
       pos: entry.pos,
       active: active === entry.key,
-      dragOver: false,
-      dragOverGapTop: false,
-      dragOverGapBottom: false
+      ...drag.flags(entry.key)
     };
   }
   function nodeId(key: TreeKey) {
@@ -405,6 +430,7 @@
     );
   }
   function click(entry: Entry, event: MouseEvent) {
+    if (draggable && event.detail) mouseFocus(event, true);
     const node = eventNode(entry);
     if (expandAction === 'click' && !event.ctrlKey && !event.metaKey && !event.shiftKey)
       expand(entry, event, node, true);
@@ -426,13 +452,23 @@
       );
     onfocus?.(event);
   }
-  function mouseFocus(event: MouseEvent) {
-    event.preventDefault();
+  function mouseFocus(event: Event, allowDrag = false) {
+    if (!allowDrag) event.preventDefault();
     if (!blocked) {
       pointerFocus = true;
       focusElement?.focus({ preventScroll: true });
       pointerFocus = false;
     }
+  }
+  function handleDragClick(event: MouseEvent) {
+    if (disposed || event.defaultPrevented || !(event.target instanceof Element)) return;
+    const handle = event.target.closest('[data-ant-tree-drag-handle]');
+    if (!handle) return;
+    const control = event.target.closest(
+      'button,input,select,textarea,a[href],[tabindex],[contenteditable]'
+    );
+    if (control && control !== event.currentTarget && handle.contains(control)) return;
+    mouseFocus(event, true);
   }
   function keyboard(event: KeyboardEvent & { currentTarget: EventTarget & HTMLDivElement; }) {
     if (blocked || event.isComposing || event.defaultPrevented) return;
@@ -535,6 +571,8 @@
           focused = false;
           onblur?.(event);
         }}>
+    {#if draggable}<span bind:this={indentMeasurer} class={`${componentPrefix}-indent-unit`}
+      aria-hidden="true" style="position:absolute;visibility:hidden;pointer-events:none"></span>{/if}
     <div bind:this={holder} class={`${componentPrefix}-list-holder`} role="presentation" onscroll={handleScroll}
       onmouseenter={viewport.flashScrollbar}
       style={height ? `max-height:${height}px;overflow-y:${range.useVirtual ? 'hidden' : 'auto'};overflow-anchor:none;${range.useVirtual && scrollWidth ? 'overflow-x:hidden;' : ''}${viewport.moving ? 'pointer-events:none' : ''}` : undefined}>
@@ -549,7 +587,8 @@
         {@const isLeaf = leaf(entry)}
         {@const unavailable = blocked || Boolean(entry.node.disabled)}
         {@const hasCheck = checkable && entry.node.checkable !== false}
-        <div id={nodeId(entry.key)} role="treeitem" aria-labelledby={`${nodeId(entry.key)}-title`} aria-level={entry.level + 1} aria-posinset={entry.index + 1} aria-setsize={entry.siblings} aria-expanded={isLeaf ? undefined : node.expanded} aria-selected={(entry.node.selectable ?? selectable) && !unavailable
+        {@const nodeDraggable = drag.draggable(entry)}
+        <div id={nodeId(entry.key)} role="treeitem" tabindex={nodeDraggable && !unavailable ? -1 : undefined} aria-labelledby={`${nodeId(entry.key)}-title`} aria-level={entry.level + 1} aria-posinset={entry.index + 1} aria-setsize={entry.siblings} aria-expanded={isLeaf ? undefined : node.expanded} aria-selected={(entry.node.selectable ?? selectable) && !unavailable
             ? node.selected
             : undefined} aria-checked={hasCheck && !unavailable
                 ? node.halfChecked ? 'mixed' : node.checked
@@ -563,17 +602,46 @@
               node.halfChecked && `${componentPrefix}-treenode-checkbox-indeterminate`,
               node.loading && `${componentPrefix}-treenode-loading`,
               active === entry.key && `${componentPrefix}-treenode-active`,
+              nodeDraggable && `${componentPrefix}-treenode-draggable`,
+              drag.draggingKey === entry.key && 'dragging',
+              drag.target?.dropTargetKey === entry.key && 'drop-target',
+              drag.target?.dropContainerKey === entry.key && 'drop-container',
+              !unavailable && node.dragOver && 'drag-over',
+              !unavailable && node.dragOverGapTop && 'drag-over-gap-top',
+              !unavailable && node.dragOverGapBottom && 'drag-over-gap-bottom',
               isLeaf && `${componentPrefix}-treenode-leaf`,
               entry.ends.at(-1) && `${componentPrefix}-treenode-leaf-last`,
               filterTreeNode?.(node) && 'filter-node',
               entry.node.class,
               classes.item
-            ]} style={[entry.node.style, slots.item].filter(Boolean).join(';') || undefined}>
+            ]} style={[entry.node.style, slots.item].filter(Boolean).join(';') || undefined}
+          draggable={draggable ? nodeDraggable && !unavailable : undefined}
+          ondragstart={nodeDraggable && !unavailable ? event => {
+            mouseFocus(event, true);
+            drag.start(event, entry);
+          } : undefined}
+          ondragenter={nodeDraggable ? event => drag.enter(event, entry) : undefined}
+          ondragover={nodeDraggable ? event => drag.over(event, entry) : undefined}
+          ondragleave={nodeDraggable ? event => drag.leave(event, entry) : undefined}
+          ondragend={nodeDraggable ? event => drag.end(event, entry) : undefined}
+          ondrop={nodeDraggable ? event => drag.drop(event, entry) : undefined}
+          onclick={nodeDraggable ? handleDragClick : undefined}
+          onkeydown={nodeDraggable ? event => {
+            if (event.target !== event.currentTarget) return;
+            mouseFocus(event, true);
+            if (activeKey === undefined) setActive(entry.key);
+          } : undefined}>
           <span class={`${componentPrefix}-indent`} aria-hidden="true">{#each entry.ends.slice(0, -1) as end}<span class={[
               `${componentPrefix}-indent-unit`,
               !end && `${componentPrefix}-indent-unit-start`,
               end && `${componentPrefix}-indent-unit-end`
             ]}></span>{/each}</span>
+          {#if draggable && !(typeof draggable === 'object' && draggable.icon === false)}
+            <span data-ant-tree-drag-handle class={`${componentPrefix}-draggable-icon`}>
+              {#if typeof draggable === 'object' && draggable.icon}{@render draggable.icon()}
+              {:else}<TreeIcon name="holder" class="anticon-holder" />{/if}
+            </span>
+          {/if}
           {#if isLeaf}<span data-ant-tree-switcher class={[`${componentPrefix}-switcher ${componentPrefix}-switcher-noop`, classes.itemSwitcher]} style={slots.itemSwitcher} aria-hidden="true">{#if entry.node.switcherIcon}{@render entry.node.switcherIcon({ ...node, isLeaf })}{:else if showLine}{#if typeof showLine === 'object' && typeof showLine.showLeafIcon === 'function'}{@render showLine.showLeafIcon({ ...node, isLeaf })}{:else if typeof showLine === 'object' && showLine.showLeafIcon}<TreeIcon name="file" class={`${componentPrefix}-switcher-line-icon`} />{:else}<span class={`${componentPrefix}-switcher-leaf-line`}></span>{/if}{/if}</span>
           {:else}<button type="button" data-ant-tree-switcher tabindex="-1" class={[
               `${componentPrefix}-switcher`,
@@ -595,8 +663,9 @@
               `${componentPrefix}-node-content-wrapper-${isLeaf
                 ? 'normal'
                 : node.expanded ? 'open' : 'close'}`,
-              !unavailable && node.selected && `${componentPrefix}-node-selected`
-            ]} onmousedown={mouseFocus} onclick={event => click(entry, event)} ondblclick={event => doubleClick(entry, event, node)} onmouseenter={event => {
+              !unavailable && (node.selected || drag.highlightedKey === entry.key)
+                && `${componentPrefix}-node-selected`
+            ]} onmousedown={event => mouseFocus(event, nodeDraggable && !unavailable)} onclick={event => click(entry, event)} ondblclick={event => doubleClick(entry, event, node)} onmouseenter={event => {
                 // Удержанный DOM-узел может получать события и после unmount.
                 if (!disposed) onMouseEnter?.({ event, node });
               }} onmouseleave={event => {
@@ -615,6 +684,10 @@
                 classes.itemIcon
               ]} style={slots.itemIcon}>{#if showIcon && entry.node.icon}{@render entry.node.icon(node)}{:else if showIcon && icon}{@render icon(node)}{/if}</span>{/if}
             <span id={`${nodeId(entry.key)}-title`} class={[`${componentPrefix}-title`, classes.itemTitle]} style={slots.itemTitle}>{#if typeof title === 'function'}{@render title(entry.node)}{:else}<TreeTitle value={title} node={entry.node} />{/if}</span>
+            {#if draggable && !entry.node.disabled && drag.target?.dragOverNodeKey === entry.key}
+              <span class={`${componentPrefix}-drop-indicator`} style={drag.indicatorStyle}
+                aria-hidden="true"></span>
+            {/if}
           </button>
         </div>
       {/each}
