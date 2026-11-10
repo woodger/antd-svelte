@@ -17789,7 +17789,17 @@
         "tests/browser/fixtures/ant-design-tree-fields-reference.json",
         "tests/browser/tree-fields-metrics.ts",
         "tests/browser/tree-fields.spec.ts",
-        "tests/package/tree-fields.ssr.test.ts"
+        "tests/package/tree-fields.ssr.test.ts",
+        "src/lib/tree-semantic.engine.ts",
+        "src/lib/semantic-style.engine.ts",
+        "src/lib/ConfigProvider.svelte",
+        "src/lib/config-context.ts",
+        "tests/browser/fixtures/TreeSemanticScope.svelte",
+        "tests/browser/fixtures/TreeSemanticFixtures.svelte",
+        "tests/browser/fixtures/ant-design-tree-semantic-reference.json",
+        "tests/browser/tree-semantic-metrics.ts",
+        "tests/browser/tree-semantic.spec.ts",
+        "tests/package/tree-semantic.ssr.test.ts"
       ],
       "features": [
         {
@@ -17837,11 +17847,11 @@
         },
         {
           "id": "extended-api",
-          "title": "Полный ref/semantic/config API и motion",
+          "title": "Полный ref API и motion",
           "state": "missing",
           "requiredForV1": false,
           "evidence": [],
-          "note": "Нет semantic classNames/styles и ConfigProvider.tree; generic data и fieldNames перенесены отдельно. Ref предоставляет focus/blur и bind:nativeElement. Collapse/appear motion и полный rc-tree ref отдельно. Deprecated Tree.children/TreeNode JSX composition исключена по es/Tree.js @rc-component/tree1.4.0: runtime warning помечает children самого Tree deprecated и предлагает treeData. TreeDataNode.children остаётся актуальным data API."
+          "note": "Ref предоставляет focus/blur и bind:nativeElement; scrollTo/virtual, drag/drop и collapse/appear motion остаются отдельным объёмом. Полный motion object в semantic callback props не эмулируется до переноса motion API. Пять semantic slots и ConfigProvider.tree перенесены отдельно. Deprecated Tree.children/TreeNode JSX composition исключена по es/Tree.js @rc-component/tree1.4.0; TreeDataNode.children остаётся актуальным data API."
         },
         {
           "id": "component-theme",
@@ -17872,7 +17882,7 @@
             "tests/browser/fixtures/ant-design-tree-theme-reference.json",
             "readme.md"
           ],
-          "note": "Существующий native contract сохранён: style применяется к внешнему .ant-tree. В React/rc-tree style передаётся внутреннему .ant-tree-list, а внешний корень получает rootStyle/semantic root styles. Исходные style attributes и computed font/color обоих слоёв сохранены в stylePlacementObservations; source сверка сравнивает видимый list и узлы отдельно от container background/border/direction. Это явное отличие размещения style, а не полное совпадение root style API."
+          "note": "Существующий native contract сохранён: style применяется к внешнему .ant-tree. В React/rc-tree style передаётся внутреннему .ant-tree-list, а внешний корень получает rootStyle/semantic root styles. Исходные style attributes и computed font/color обоих слоёв сохранены в stylePlacementObservations; source сверка сравнивает видимый list и узлы отдельно от container background/border/direction. Это явное отличие размещения style, а не полное совпадение root style API. ConfigProvider.tree.style следует той же существующей Native outer-root границе. Отдельные raw context/local observations и public styles.root counterparts хранят оба слоя без сокрытия различия."
         },
         {
           "id": "component-prefix",
@@ -17967,7 +17977,7 @@
             "tests/package/directory-tree.ssr.test.ts",
             "readme.md"
           ],
-          "note": "Отдельный Svelte export вместо React Tree.DirectoryTree. Исходные defaults expandAction=click, showIcon/blockNode=true допускают overrides; folder/file paths из icons-svg4.6.0. Обычный клик сохраняет одиночный выбор, Ctrl/Meta переключает ключи и anchor/cache, Shift объединяет cached keys с диапазоном видимых узлов; disabled/nonselectable промежуточные узлы пропускаются. selected=true даже при Ctrl removal, selectedNodes в полном DFS порядке и с исходными data nodes. DefaultExpandAll включает leaf keys, defaultExpandParent учитывает disabled границы; controlled hold/accept, pending lazy collapse, prefix/RTL/Tree directory tokens, native focus/blur/ref и SSR используют существующий Tree. 15 raw UMD6.6.8 cases повторены без изменений; расширенные virtual/drag/semantic/config/motion API остаются пробелами общего Tree."
+          "note": "Отдельный Svelte export вместо React Tree.DirectoryTree. Исходные defaults expandAction=click, showIcon/blockNode=true допускают overrides; folder/file paths из icons-svg4.6.0. Обычный клик сохраняет одиночный выбор, Ctrl/Meta переключает ключи и anchor/cache, Shift объединяет cached keys с диапазоном видимых узлов; disabled/nonselectable промежуточные узлы пропускаются. selected=true даже при Ctrl removal, selectedNodes в полном DFS порядке и с исходными data nodes. DefaultExpandAll включает leaf keys, defaultExpandParent учитывает disabled границы; controlled hold/accept, pending lazy collapse, prefix/RTL/Tree directory tokens, native focus/blur/ref и SSR используют существующий Tree. 15 raw UMD6.6.8 cases повторены без изменений; расширенные virtual/drag/motion API остаются пробелами общего Tree."
         },
         {
           "id": "native-directory-control-release",
@@ -17999,7 +18009,7 @@
             "tests/package/tree-node-renderers.ssr.test.ts",
             "readme.md"
           ],
-          "note": "TreeDataNode.switcherIcon перекрывает общий Ant switcher, loading и leaf line; действует также на листья. Общий renderer уступает loading, showLine.showLeafIcon принимает snippet и не возвращается к fallback при пустом содержимом. Snippet получает вычисленный isLeaf; данные onMouseEnter/onMouseLeave сохраняют исходный флаг и актуальные состояния, disabled не отключает hover, pointer на switcher не вызывает node content callback. 14 исходных UMD6.6.8 / rc-tree1.4.0 конфигураций повторены побайтно: text/element/empty, loading, RTL/local prefix и DirectoryTree; snapshots включают callback order, renderer flags, содержимое, font-size и text-align switcher. Сброс native button styles не перекрывает source центрирование switcher; content сохраняет text-align:inherit. Native controls/ARIA, class/value/refs и DOM/focus сохраняются. Snippets остаются opaque Svelte content без ReactElement cloning; пустой snippet сохраняет native wrapper, React-specific false-return removal не является отдельным Native snippet API. Расширенный semantic/config/virtual/drag/motion API остаётся отдельным объёмом. Исходное retained-node disposal observation подтверждает отсутствие hover после unmount. Native guard не публикует callbacks от удержанного detached DOM."
+          "note": "TreeDataNode.switcherIcon перекрывает общий Ant switcher, loading и leaf line; действует также на листья. Общий renderer уступает loading, showLine.showLeafIcon принимает snippet и не возвращается к fallback при пустом содержимом. Snippet получает вычисленный isLeaf; данные onMouseEnter/onMouseLeave сохраняют исходный флаг и актуальные состояния, disabled не отключает hover, pointer на switcher не вызывает node content callback. 14 исходных UMD6.6.8 / rc-tree1.4.0 конфигураций повторены побайтно: text/element/empty, loading, RTL/local prefix и DirectoryTree; snapshots включают callback order, renderer flags, содержимое, font-size и text-align switcher. Сброс native button styles не перекрывает source центрирование switcher; content сохраняет text-align:inherit. Native controls/ARIA, class/value/refs и DOM/focus сохраняются. Snippets остаются opaque Svelte content без ReactElement cloning; пустой snippet сохраняет native wrapper, React-specific false-return removal не является отдельным Native snippet API. Расширенный virtual/drag/motion API остаётся отдельным объёмом. Исходное retained-node disposal observation подтверждает отсутствие hover после unmount. Native guard не публикует callbacks от удержанного detached DOM."
         },
         {
           "id": "data-model-get-path",
@@ -18061,7 +18071,7 @@
             "tests/package/tree-fields.ssr.test.ts",
             "readme.md"
           ],
-          "note": "TreeProps/Data, DirectoryTreeProps/Data, TreeEventNode/Data и TreeCheckInfo/Data сохраняют пользовательский payload; TreeFieldDataNode помогает описать рекурсивное поле children. Aliases key/title/children и пустые имена работают в index/leaf/expand/check/load, Directory ranges, title/icon/switcher/filter callbacks. Event key и state перекрывают canonical raw fields; selectedNodes/checkedNodes/positions сохраняют исходные объекты. Node title snippet имеет приоритет над titleRender; literal arrays/zero/empty и object payload с titleRender поддержаны. 27 raw UMD6.6.8 конфигураций сохраняют labels/ARIA, иконки и события: aliases/частичная схема/canonical shadows, strict/conduction, lazy/preloaded, hold/accept, Directory ranges/all, RTL/prefix и data/schema transitions. Native generic fixture проверяет вывод типов без index signature, discriminated unions, исходные literal key/state, snippets и recursive helper. SSR не загружает детей и не создаёт timers; обновление schema сохраняет DOM/ref/active IDs, selection, keyboard и внешний draft. Virtual/drag/ref/semantic/config/motion остаются отдельными пробелами."
+          "note": "TreeProps/Data, DirectoryTreeProps/Data, TreeEventNode/Data и TreeCheckInfo/Data сохраняют пользовательский payload; TreeFieldDataNode помогает описать рекурсивное поле children. Aliases key/title/children и пустые имена работают в index/leaf/expand/check/load, Directory ranges, title/icon/switcher/filter callbacks. Event key и state перекрывают canonical raw fields; selectedNodes/checkedNodes/positions сохраняют исходные объекты. Node title snippet имеет приоритет над titleRender; literal arrays/zero/empty и object payload с titleRender поддержаны. 27 raw UMD6.6.8 конфигураций сохраняют labels/ARIA, иконки и события: aliases/частичная схема/canonical shadows, strict/conduction, lazy/preloaded, hold/accept, Directory ranges/all, RTL/prefix и data/schema transitions. Native generic fixture проверяет вывод типов без index signature, discriminated unions, исходные literal key/state, snippets и recursive helper. SSR не загружает детей и не создаёт timers; обновление schema сохраняет DOM/ref/active IDs, selection, keyboard и внешний draft. Virtual/drag/ref/motion остаются отдельными пробелами."
         },
         {
           "id": "native-field-names-refresh",
@@ -18076,6 +18086,47 @@
             "readme.md"
           ],
           "note": "Ошибка Source Ant Design6.6.8 / 984592267de88fbf9cdaecc96a56629e721c709d / rc-tree1.4.0: смена fieldNames без новых treeData/expandedKeys оставляет cached flatten entities и прежние заголовки. Raw schema-only-observation сохранён без изменения; Native derived index обновляется по data или schema. Desired counterpart — неизменённый публичный Source со сменой схемы и новой ссылкой массива. Existing keys, DOM/ref и state сохраняются; ошибка upstream не копируется."
+        },
+        {
+          "id": "semantic-component-config",
+          "title": "Пять semantic slots и ConfigProvider.tree с generic callbacks",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Tree.svelte",
+            "src/lib/DirectoryTree.svelte",
+            "src/lib/TreeSelect.svelte",
+            "src/lib/tree.types.ts",
+            "src/lib/tree-semantic.engine.ts",
+            "src/lib/semantic-style.engine.ts",
+            "src/lib/ConfigProvider.svelte",
+            "src/lib/config-context.ts",
+            "src/lib/index.ts",
+            "tests/browser/fixtures/TreeSemanticScope.svelte",
+            "tests/browser/fixtures/TreeSemanticFixtures.svelte",
+            "tests/browser/fixtures/ant-design-tree-semantic-reference.json",
+            "tests/browser/tree-semantic-metrics.ts",
+            "tests/browser/tree-semantic.spec.ts",
+            "tests/package/tree-semantic.ssr.test.ts",
+            "tests/browser/fixtures/TreeGenericFields.svelte",
+            "tests/browser/tree-fields.spec.ts",
+            "readme.md"
+          ],
+          "note": "Class/style и object/function classNames/styles для root,item,itemIcon,itemTitle,itemSwitcher. Config record наследуется при undefined и заменяется целиком любым объектом, включая {}; sibling scope изолирован. Callback получает исходные Native props с wrapper defaults showIcon/blockNode/checkable/selectable/disabled; rc-tree defaults не подставляются, generic data и identity сохраняются. Provider callbacks универсальны для data любой схемы, local callbacks выводят Data. Classes накапливаются; root сохраняет Native слои context semantic/plain и local semantic/plain после theme variables. Semantic item style перекрывает data node.style; leaf switcher и pending icon при showIcon=false получают slots. TreeSelect явно использует свою компонентную конфигурацию. 18 неизменённых UMD6.6.8 случаев и3 observations фиксируют CSS/classes, callback input markers, local/context/whole-record replacement, Directory overrides, prefix/RTL, style priorities, pending и live default icon/context updates. Raw plain-style placement отделён от public root-style counterpart существующего Native contract; raw stale icon memo отделён от public custom-icon refresh counterpart. Motion props остаются отдельным API. SSR не загружает детей и не создаёт timers; updates сохраняют DOM/ref/active IDs/selection/focus, один pending load и внешний draft."
+        },
+        {
+          "id": "native-semantic-icon-refresh",
+          "title": "Default icon обновляет semantic styles вместо stale Source memo",
+          "state": "partial",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Tree.svelte",
+            "tests/browser/fixtures/ant-design-tree-semantic-reference.json",
+            "tests/browser/tree-semantic.spec.ts",
+            "tests/package/tree-semantic.ssr.test.ts",
+            "readme.md"
+          ],
+          "note": "Ошибка Source Ant Design6.6.8 / 984592267de88fbf9cdaecc96a56629e721c709d / rc-tree1.4.0: iconNode memo зависит от prefixCls/nodeState/loading, но не styles/classNames. Semantic-only update оставляет прежние itemIcon classes/color, хотя title уже обновился. Raw observation повторён без изменений; public custom icon counterpart обновляет те же wrappers/CSS. Native не кэширует старые slots, сохраняет default icon, DOM и pending load. Source bug не копируется."
         }
       ]
     },
@@ -21282,7 +21333,19 @@
         "tests/package/config-prefix.ssr.test.ts",
         "tests/package/prefix-text-boundaries.ssr.test.ts",
         "tests/browser/fixtures/PrefixTextBoundariesFixtures.svelte",
-        "tests/browser/prefix-text-boundaries.spec.ts"
+        "tests/browser/prefix-text-boundaries.spec.ts",
+        "src/lib/DirectoryTree.svelte",
+        "src/lib/TreeSelect.svelte",
+        "src/lib/tree.types.ts",
+        "src/lib/tree-semantic.engine.ts",
+        "tests/browser/fixtures/TreeSemanticScope.svelte",
+        "tests/browser/fixtures/TreeSemanticFixtures.svelte",
+        "tests/browser/fixtures/ant-design-tree-semantic-reference.json",
+        "tests/browser/tree-semantic-metrics.ts",
+        "tests/browser/tree-semantic.spec.ts",
+        "tests/package/tree-semantic.ssr.test.ts",
+        "tests/browser/fixtures/TreeGenericFields.svelte",
+        "tests/browser/tree-fields.spec.ts"
       ],
       "features": [
         {
@@ -22534,6 +22597,33 @@
             "tests/package/config-prefix.ssr.test.ts"
           ],
           "note": "Framework/Native boundary: без source theme Svelte сохраняет прежние цвета и canonical variables; useToken.cssVar остаётся в унаследованном ant namespace, даже если class prefix изменён. UMD 6.6.8 useToken использует getPrefixCls fallback и без DesignTokenContext override, возвращая var(--suite-...). Raw without-theme case сохранён; сравнение явно ограничено сохранённым Native namespace без source config. Source theme с собственным cssVar/token config использует общий fallback точно. Это наблюдение для отдельного разбора, а не объявленная ошибка upstream."
+        },
+        {
+          "id": "tree-semantic-config",
+          "title": "ConfigProvider.tree: class/style и пять semantic defaults",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Tree.svelte",
+            "src/lib/DirectoryTree.svelte",
+            "src/lib/TreeSelect.svelte",
+            "src/lib/tree.types.ts",
+            "src/lib/tree-semantic.engine.ts",
+            "src/lib/semantic-style.engine.ts",
+            "src/lib/ConfigProvider.svelte",
+            "src/lib/config-context.ts",
+            "src/lib/index.ts",
+            "tests/browser/fixtures/TreeSemanticScope.svelte",
+            "tests/browser/fixtures/TreeSemanticFixtures.svelte",
+            "tests/browser/fixtures/ant-design-tree-semantic-reference.json",
+            "tests/browser/tree-semantic-metrics.ts",
+            "tests/browser/tree-semantic.spec.ts",
+            "tests/package/tree-semantic.ssr.test.ts",
+            "tests/browser/fixtures/TreeGenericFields.svelte",
+            "tests/browser/tree-fields.spec.ts",
+            "readme.md"
+          ],
+          "note": "Class/style и object/function classNames/styles для root,item,itemIcon,itemTitle,itemSwitcher. Config record наследуется при undefined и заменяется целиком любым объектом, включая {}; sibling scope изолирован. Callback получает исходные Native props с wrapper defaults showIcon/blockNode/checkable/selectable/disabled; rc-tree defaults не подставляются, generic data и identity сохраняются. Provider callbacks универсальны для data любой схемы, local callbacks выводят Data. Classes накапливаются; root сохраняет Native слои context semantic/plain и local semantic/plain после theme variables. Semantic item style перекрывает data node.style; leaf switcher и pending icon при showIcon=false получают slots. TreeSelect явно использует свою компонентную конфигурацию. 18 неизменённых UMD6.6.8 случаев и3 observations фиксируют CSS/classes, callback input markers, local/context/whole-record replacement, Directory overrides, prefix/RTL, style priorities, pending и live default icon/context updates. Raw plain-style placement отделён от public root-style counterpart существующего Native contract; raw stale icon memo отделён от public custom-icon refresh counterpart. Motion props остаются отдельным API. SSR не загружает детей и не создаёт timers; updates сохраняют DOM/ref/active IDs/selection/focus, один pending load и внешний draft."
         }
       ]
     },

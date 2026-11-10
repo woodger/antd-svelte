@@ -94,6 +94,23 @@ export interface TreeCheckInfo<Data extends object = TreeDataNode> {
   checkedNodesPositions?: { node: Data; pos: string; }[];
   halfCheckedKeys?: TreeKey[];
 }
+
+export type TreeSemanticName = 'root' | 'item' | 'itemIcon' | 'itemTitle' | 'itemSwitcher';
+export type TreeClassNames = Partial<Record<TreeSemanticName, string>>;
+export type TreeStyles = Partial<Record<TreeSemanticName, string>>;
+export type TreeSemanticValue<Value, Data extends object = TreeDataNode> = Value
+  | ((info: { props: TreeProps<Data>; }) => Value | undefined);
+
+/** Общий provider не ограничивает data конкретной схемой одного дерева. */
+export interface TreeConfig {
+  class?: string;
+  style?: string;
+  classNames?: TreeClassNames
+    | (<Data extends object>(info: { props: TreeProps<Data>; }) => TreeClassNames | undefined);
+  styles?: TreeStyles
+    | (<Data extends object>(info: { props: TreeProps<Data>; }) => TreeStyles | undefined);
+}
+
 /** Дерево со стабильными keys, раскрытием, выбором, отметками и lazy children. */
 export interface TreeProps<Data extends object = TreeDataNode> extends Omit<
   HTMLAttributes<HTMLDivElement>, 'children' | 'onselect'
@@ -102,8 +119,12 @@ export interface TreeProps<Data extends object = TreeDataNode> extends Omit<
   prefixCls?: string;
   /** @internal Тема составного владельца вместо Tree defaults, до пользовательского style. */
   _themeStyle?: string;
+  /** @internal Составной владелец TreeSelect использует собственный component config. */
+  _componentConfig?: boolean;
   /** CSS внешнего корня; прежний native contract сохранён, React style относится к inner list. */
   style?: HTMLAttributes<HTMLDivElement>['style'];
+  classNames?: TreeSemanticValue<TreeClassNames, Data>;
+  styles?: TreeSemanticValue<TreeStyles, Data>;
   /** Canonical поля допустимы также при стирании generic в Svelte render/component tooling. */
   treeData?: readonly (Data & TreeBasicDataNode<Data> & {
     key?: unknown;

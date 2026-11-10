@@ -56,6 +56,9 @@ test('Tree and DirectoryTree infer custom records while preserving raw and event
     await page.goto('/?fixture=tree-generic-fields');
     const tree = page.getByRole('region', { name: 'Typed tree', exact: true });
     const directory = page.getByRole('region', { name: 'Typed directory', exact: true });
+    await expect(tree.locator('[data-ant-tree-root]')).toHaveClass(/typed-tree-root-3/);
+    expect(await tree.locator('[data-ant-tree-root]').evaluate(node =>
+      getComputedStyle(node).getPropertyValue('--typed-rank').trim())).toBe('3');
     await tree.getByText('Typed zero', { exact: true }).click();
 
     await expect(page.locator('[data-typed-tree-result]'))

@@ -64,6 +64,8 @@
   <section aria-label="Typed tree">
     <Tree treeData={data} fieldNames={fields} defaultExpandAll showIcon {icon}
       titleRender={title} switcherIcon={renderer ? switcher : undefined}
+      classNames={({ props }) => ({ root: `typed-tree-root-${props.treeData?.[0].payload.rank}` })}
+      styles={({ props }) => ({ root: `--typed-rank:${props.treeData?.[0].payload.rank}` })}
       filterTreeNode={node => filter && node.payload.rank === 7}
       onSelect={(_keys, info) => record(info)} />
   </section>

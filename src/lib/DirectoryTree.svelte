@@ -16,7 +16,7 @@
     expandedKeys,
     defaultSelectedKeys = [],
     selectedKeys,
-    multiple = false,
+    multiple,
     expandAction = 'click',
     showIcon = true,
     blockNode = true,

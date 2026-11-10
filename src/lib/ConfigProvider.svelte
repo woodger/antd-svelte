@@ -8,6 +8,7 @@
   import type { StepsConfig } from './steps.types';
   import type { LayoutConfig } from './layout.types';
   import type { TreeSelectConfig } from './tree-select.types';
+  import type { TreeConfig } from './tree.types';
   import type { DatePickerConfig } from './date-picker.types';
   import type { CardConfig, CardMetaConfig } from './card.types';
   import type { MentionsComponentConfig } from './mentions.types';
@@ -96,6 +97,8 @@
     layout?: LayoutConfig;
     select?: SelectConfig;
     treeSelect?: TreeSelectConfig;
+    /** Tree/DirectoryTree slots; собственный record заменяет родительский целиком. */
+    tree?: TreeConfig;
     datePicker?: DatePickerConfig;
     card?: CardConfig;
     cardMeta?: CardMetaConfig;
@@ -192,6 +195,7 @@
     layout,
     select,
     treeSelect,
+    tree,
     datePicker,
     card,
     cardMeta,
@@ -307,6 +311,9 @@
     },
     get treeSelect() {
       return treeSelect ?? parent.treeSelect;
+    },
+    get tree() {
+      return tree ?? parent.tree;
     },
     get datePicker() {
       return datePicker ?? parent.datePicker;

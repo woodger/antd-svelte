@@ -6652,7 +6652,44 @@ DOM, фокуса, active descendant, отметок и pending load при об
 браузерные ресурсы. Декларации сверяются с официальным UMD отдельным
 [unit-набором](src/lib/theme-tree-tokens-reference.test.ts).
 
-Drag/drop, virtual/scrollTo, полный ref/semantic/config API
+`classNames` и `styles` настраивают пять частей: root, item, itemIcon, itemTitle
+и itemSwitcher. Они принимают объект или `({props}) => slots`; props сохраняют
+тип данных и входные Native props. Подставляются defaults Ant wrapper для
+showIcon/blockNode/checkable/selectable/disabled, остальные внутренние defaults
+дерева не подменяют отсутствующие входные значения. Общий `ConfigProvider.tree`
+принимает class/style и те же semantic slots. Отсутствующий record наследуется,
+любой собственный объект, включая `{}`, заменяет родительский целиком.
+
+```svelte
+<ConfigProvider tree={{ styles: { itemTitle: 'font-weight:600' } }}>
+  <Tree treeData={nodes} classNames={{ item: 'document-row' }}
+    styles={({ props }) => ({ itemSwitcher: props.disabled ? 'opacity:0.5' : undefined })} />
+</ConfigProvider>
+```
+
+Классы provider и local накапливаются. Внешний root использует слои
+provider styles.root → provider style → local styles.root → local style после
+theme variables. Прежний `Tree.style` остаётся на внешнем корне; `tree.style`
+следует той же Native границе. В React обычные style/context style относятся к
+inner list. Raw наблюдения и публичные Source counterparts через styles.root
+сохранены отдельно; это отличие не выдаётся за одинаковую структуру.
+На строке `styles.item` перекрывает node.style, как Source. Switcher slots
+действуют также на листья; itemIcon существует у pending загрузки при showIcon=false.
+TreeSelect сохраняет собственную конфигурацию внутреннего дерева и не читает tree record.
+
+Смена slots сохраняет DOM/ref, выбор и active IDs, фокус и pending load.
+Native обновляет также default icon: rc-tree 1.4.0 ошибочно кэширует прежние
+itemIcon classes/styles при их изменении без смены prefix/expanded/loading.
+Исходный stale-cache сохранён отдельно; корректный Source counterpart использует
+публичный custom icon. Ошибка не переносится. Snippets остаются непрозрачным
+Svelte-содержимым; CSS относится к существующим wrappers.
+[18 Source случаев и три raw наблюдения](./tests/browser/fixtures/ant-design-tree-semantic-reference.json),
+[browser](./tests/browser/tree-semantic.spec.ts) и
+[SSR](./tests/package/tree-semantic.ssr.test.ts) проверяют slots, callbacks/defaults,
+nested/reset/replaced/sibling scopes, DirectoryTree, prefix/RTL, style priorities
+и обновления, включая pending loading и независимый TreeSelect.
+
+Drag/drop, virtual/scrollTo, полный ref API
 и collapse/appear анимации ещё не перенесены. Реестр
 отделяет этот объём от полного React API Tree.
 Deprecated `TreeNode` children не входят в перенос: rc-tree 1.4.0 прямо помечает

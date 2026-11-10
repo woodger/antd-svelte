@@ -24,12 +24,19 @@
     type TreeEntity
   } from './tree.engine';
   import { createTreeLoader } from './tree-load.engine';
+  import { treeSemantics } from './tree-semantic.engine';
   import { useConfig } from './config-context';
   import { useComponentTheme } from './theme-component.svelte';
   import { useForm } from './form-context';
   import TreeIcon from './TreeIcon.svelte';
   import TreeTitle from './TreeTitle.svelte';
   type Entry = TreeEntity<Data & TreeBasicDataNode<Data>>;
+  let {
+    nativeElement = $bindable(),
+    _themeStyle,
+    _componentConfig = true,
+    ...componentProps
+  }: TreeProps<Data> = $props();
   let {
     prefixCls: customizePrefixCls,
     treeData = [],
@@ -74,15 +81,15 @@
     height,
     class: className = '',
     rootClassName = '',
+    classNames,
+    styles,
     style,
-    _themeStyle,
-    nativeElement = $bindable(),
     tabindex = 0,
     onkeydown,
     onfocus,
     onblur,
     ...attributes
-  }: TreeProps<Data> = $props();
+  }: TreeProps<Data> = $derived(componentProps);
   const config = useConfig();
   let componentPrefix = $derived(config.getPrefixCls('tree', customizePrefixCls));
   let rootPrefix = $derived(config.getPrefixCls());
@@ -93,6 +100,19 @@
   const generated = $props.id();
   let index = $derived(buildTreeEntities(treeData, fieldNames));
   let blocked = $derived(disabled ?? form?.disabled ?? config.componentDisabled);
+  let context = $derived(_componentConfig ? config.tree : undefined);
+  let semanticProps = $derived<TreeProps<Data>>({
+    ...componentProps,
+    // Только defaults Ant Tree wrapper; внутренние rc-tree defaults здесь не подставляются.
+    showIcon,
+    blockNode,
+    checkable,
+    selectable,
+    disabled: blocked
+  });
+  let semantic = $derived(treeSemantics(context, semanticProps));
+  let classes = $derived(semantic.classes);
+  let slots = $derived(semantic.styles);
   let expanded = $state.raw<TreeKey[]>(untrack(() => {
     const keys = expandedKeys
       ?? (defaultExpandAll
@@ -431,9 +451,11 @@
     blocked && `${componentPrefix}-disabled`,
     focused && `${componentPrefix}-focused`,
     config.direction === 'rtl' && `${componentPrefix}-rtl`,
+    context?.class,
     className,
+    classes.root,
     rootClassName
-  ]} style={themeStyle ? [themeStyle, style].filter(Boolean).join(';') : style} dir={config.direction}>
+  ]} style={themeStyle ? [themeStyle, slots.root].filter(Boolean).join(';') : slots.root} dir={config.direction}>
   <div {...attributes} bind:this={focusElement} class={`${componentPrefix}-list`} role="tree" tabindex={!blocked && focusable ? tabindex : undefined} aria-multiselectable={multiple || undefined} aria-disabled={blocked || undefined} aria-activedescendant={visible.some(entry => entry.key === active)
       ? nodeId(active!)
       : undefined} onkeydown={keyboard} onfocus={focusIn} onblur={event => {
@@ -465,18 +487,20 @@
               isLeaf && `${componentPrefix}-treenode-leaf`,
               entry.ends.at(-1) && `${componentPrefix}-treenode-leaf-last`,
               filterTreeNode?.(node) && 'filter-node',
-              entry.node.class
-            ]} style={entry.node.style}>
+              entry.node.class,
+              classes.item
+            ]} style={[entry.node.style, slots.item].filter(Boolean).join(';') || undefined}>
           <span class={`${componentPrefix}-indent`} aria-hidden="true">{#each entry.ends.slice(0, -1) as end}<span class={[
               `${componentPrefix}-indent-unit`,
               !end && `${componentPrefix}-indent-unit-start`,
               end && `${componentPrefix}-indent-unit-end`
             ]}></span>{/each}</span>
-          {#if isLeaf}<span data-ant-tree-switcher class={`${componentPrefix}-switcher ${componentPrefix}-switcher-noop`} aria-hidden="true">{#if entry.node.switcherIcon}{@render entry.node.switcherIcon({ ...node, isLeaf })}{:else if showLine}{#if typeof showLine === 'object' && typeof showLine.showLeafIcon === 'function'}{@render showLine.showLeafIcon({ ...node, isLeaf })}{:else if typeof showLine === 'object' && showLine.showLeafIcon}<TreeIcon name="file" class={`${componentPrefix}-switcher-line-icon`} />{:else}<span class={`${componentPrefix}-switcher-leaf-line`}></span>{/if}{/if}</span>
+          {#if isLeaf}<span data-ant-tree-switcher class={[`${componentPrefix}-switcher ${componentPrefix}-switcher-noop`, classes.itemSwitcher]} style={slots.itemSwitcher} aria-hidden="true">{#if entry.node.switcherIcon}{@render entry.node.switcherIcon({ ...node, isLeaf })}{:else if showLine}{#if typeof showLine === 'object' && typeof showLine.showLeafIcon === 'function'}{@render showLine.showLeafIcon({ ...node, isLeaf })}{:else if typeof showLine === 'object' && showLine.showLeafIcon}<TreeIcon name="file" class={`${componentPrefix}-switcher-line-icon`} />{:else}<span class={`${componentPrefix}-switcher-leaf-line`}></span>{/if}{/if}</span>
           {:else}<button type="button" data-ant-tree-switcher tabindex="-1" class={[
               `${componentPrefix}-switcher`,
-              `${componentPrefix}-switcher_${node.expanded ? 'open' : 'close'}`
-            ]} aria-label={node.expanded
+              `${componentPrefix}-switcher_${node.expanded ? 'open' : 'close'}`,
+              classes.itemSwitcher
+            ]} style={slots.itemSwitcher} aria-label={node.expanded
                 ? config.locale.tree?.collapse ?? 'Collapse'
                 : config.locale.tree?.expand ?? 'Expand'} aria-expanded={node.expanded} onmousedown={mouseFocus} onclick={event => expand(entry, event)}>{#if entry.node.switcherIcon}{@render entry.node.switcherIcon({ ...node, isLeaf })}{:else if node.loading}{#if switcherLoadingIcon}{@render switcherLoadingIcon(node)}{:else}<TreeIcon name="loading" class={`${componentPrefix}-switcher-loading-icon`} />{/if}{:else if switcherIcon}{@render switcherIcon({ ...node, isLeaf })}{:else}<TreeIcon name={showLine ? node.expanded ? 'minus' : 'plus' : 'caret'} class={showLine
                   ? `${componentPrefix}-switcher-line-icon`
@@ -504,11 +528,14 @@
                   onRightClick({ event, node });
                 }
               }}>
-            {#if showIcon}<span class={[
+            {#if showIcon || loadData && node.loading}<span class={[
                 `${componentPrefix}-iconEle`,
-                `${componentPrefix}-icon__${isLeaf ? 'docu' : node.expanded ? 'open' : 'close'}`
-              ]}>{#if entry.node.icon}{@render entry.node.icon(node)}{:else if icon}{@render icon(node)}{/if}</span>{/if}
-            <span id={`${nodeId(entry.key)}-title`} class={`${componentPrefix}-title`}>{#if typeof title === 'function'}{@render title(entry.node)}{:else}<TreeTitle value={title} node={entry.node} />{/if}</span>
+                `${componentPrefix}-icon__${isLeaf ? 'docu' : node.expanded ? 'open' : 'close'}`,
+                node.loading && !(showIcon && (entry.node.icon || icon))
+                  && `${componentPrefix}-icon_loading`,
+                classes.itemIcon
+              ]} style={slots.itemIcon}>{#if showIcon && entry.node.icon}{@render entry.node.icon(node)}{:else if showIcon && icon}{@render icon(node)}{/if}</span>{/if}
+            <span id={`${nodeId(entry.key)}-title`} class={[`${componentPrefix}-title`, classes.itemTitle]} style={slots.itemTitle}>{#if typeof title === 'function'}{@render title(entry.node)}{:else}<TreeTitle value={title} node={entry.node} />{/if}</span>
           </button>
         </div>
       {/each}

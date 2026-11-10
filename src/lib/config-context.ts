@@ -7,6 +7,7 @@ import type { TimelineConfig } from './timeline.types';
 import type { StepsConfig } from './steps.types';
 import type { LayoutConfig } from './layout.types';
 import type { TreeSelectConfig } from './tree-select.types';
+import type { TreeConfig } from './tree.types';
 import type { DatePickerConfig } from './date-picker.types';
 import type { CardConfig, CardMetaConfig } from './card.types';
 import type { MentionsComponentConfig } from './mentions.types';
@@ -78,6 +79,7 @@ export interface ConfigContext {
   readonly layout?: LayoutConfig;
   readonly select?: SelectConfig;
   readonly treeSelect?: TreeSelectConfig;
+  readonly tree?: TreeConfig;
   readonly datePicker?: DatePickerConfig;
   readonly card?: CardConfig;
   readonly cardMeta?: CardMetaConfig;

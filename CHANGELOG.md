@@ -9,6 +9,11 @@
 
 ### Added
 
+- Tree/DirectoryTree поддерживают пять semantic slots и ConfigProvider.tree
+  с object/function defaults и заменой вложенных records. Сохранены Native root
+  style, generic props, DOM/focus/refs и независимый TreeSelect. Ошибка cache
+  стандартной иконки Source записана отдельно; Native обновляет её оформление.
+
 - Tree и DirectoryTree принимают generic записи и fieldNames во всех data,
   selection/check/load и renderer callbacks. Сохранены исходные объекты,
   canonical key/state событий и приоритет node title snippet над titleRender.
