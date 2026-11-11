@@ -87,3 +87,30 @@ test('TreeSelect hydrates a hidden virtual window before scrolling to the select
   await page.evaluate(() => window.virtualTreeSelectHydration!.dispose());
   await expect(page.locator('[popover]:popover-open')).toHaveCount(0);
 });
+
+test('TreeSelect hydrates declarative nodes and the existing popup without replacing the field', async ({ page }) => {
+  const module = await server.ssrLoadModule(fileURLToPath(new URL(
+    './fixtures/tree-select-nodes-hydration.server.ts', import.meta.url
+  )));
+  const { head, body } = module.renderDeclaredTreeSelect();
+  await page.goto('/tree-select-surface-hydration.html');
+  await page.evaluate(({ head, body }) => {
+    document.head.insertAdjacentHTML('beforeend', head);
+    document.getElementById('root')!.innerHTML = body;
+  }, { head, body });
+  await expect(page.locator('[popover][hidden] [role="treeitem"]')).toHaveCount(5);
+  await page.addScriptTag({ type: 'module', url: '/tree-select-nodes-hydration.client.ts' });
+  await page.waitForFunction(() => window.declaredTreeSelectHydration);
+  const input = page.getByRole('combobox', { name: 'Declared selection', exact: true });
+  await expect(page.locator('[popover]:popover-open .ant-tree-title'))
+    .toHaveText(['Node Parent', 'Node Zero', 'Node Beta', 'Node Disabled', 'Node Tail']);
+  expect(await page.evaluate(() => ({
+    input: window.declaredTreeSelectHydration!.input === document.querySelector('[aria-label="Declared selection"]'),
+    popup: window.declaredTreeSelectHydration!.popup === document.querySelector('[popover]:popover-open')
+  }))).toEqual({ input: true, popup: true });
+  await page.locator('[popover]:popover-open [data-node-marker="beta"] [data-ant-tree-content]').click();
+  await expect(input).toHaveValue('Node Beta');
+  await expect(input).toBeFocused();
+  await page.evaluate(() => window.declaredTreeSelectHydration!.dispose());
+  await expect(page.locator('[popover]:popover-open')).toHaveCount(0);
+});

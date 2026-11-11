@@ -1,0 +1,5698 @@
+{
+  "reference": {
+    "version": "6.6.8",
+    "react": "18.3.1",
+    "revision": "984592267de88fbf9cdaecc96a56629e721c709d",
+    "treeSelect": "1.16.1",
+    "tree": "1.4.0",
+    "select": "1.10.1",
+    "archiveSha256": "8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa",
+    "browser": "Unmodified Ant Design UMD; declarative children and data rendered and changed through actual React state",
+    "titleSnippet": "React Context consumer represents a reactive Svelte title snippet",
+    "server": "Unmodified ReactDOMServer UMD in a DOM-free VM; DOM projected after render",
+    "errors": [],
+    "warnings": [
+      {
+        "id": "data-wins",
+        "message": "Warning: Seems `scrollTo` with `rc-virtual-list` reach the max limitation. Please fire issue for us. Thanks."
+      }
+    ]
+  },
+  "cases": [
+    {
+      "id": "declared",
+      "initial": {
+        "open": true,
+        "selected": null,
+        "tags": [],
+        "rows": [
+          {
+            "title": "Node Parent",
+            "marker": "parent",
+            "ariaLabel": null,
+            "expanded": true,
+            "selected": false,
+            "ariaSelected": "false",
+            "checked": false,
+            "checkbox": false,
+            "disabled": false,
+            "className": false,
+            "margin": "",
+            "icon": null,
+            "customIcon": false,
+            "switcher": "p|0|1|0|parent"
+          },
+          {
+            "title": "Node Zero",
+            "marker": "zero",
+            "ariaLabel": null,
+            "expanded": false,
+            "selected": true,
+            "ariaSelected": "true",
+            "checked": false,
+            "checkbox": false,
+            "disabled": false,
+            "className": false,
+            "margin": "",
+            "icon": null,
+            "customIcon": false,
+            "switcher": ""
+          },
+          {
+            "title": "Node Beta",
+            "marker": "beta",
+            "ariaLabel": null,
+            "expanded": false,
+            "selected": false,
+            "ariaSelected": "false",
+            "checked": false,
+            "checkbox": false,
+            "disabled": false,
+            "className": false,
+            "margin": "",
+            "icon": null,
+            "customIcon": false,
+            "switcher": ""
+          },
+          {
+            "title": "Node Disabled",
+            "marker": "disabled",
+            "ariaLabel": null,
+            "expanded": false,
+            "selected": false,
+            "ariaSelected": null,
+            "checked": false,
+            "checkbox": false,
+            "disabled": true,
+            "className": false,
+            "margin": "",
+            "icon": null,
+            "customIcon": false,
+            "switcher": ""
+          },
+          {
+            "title": "Node Tail",
+            "marker": "tail",
+            "ariaLabel": null,
+            "expanded": false,
+            "selected": false,
+            "ariaSelected": "false",
+            "checked": false,
+            "checkbox": false,
+            "disabled": false,
+            "className": false,
+            "margin": "",
+            "icon": null,
+            "customIcon": false,
+            "switcher": "Leaf switcher"
+          }
+        ],
+        "changeLabels": "",
+        "events": [],
+        "globalIconCalled": false
+      },
+      "steps": [
+        {
+          "action": "choose-beta",
+          "view": {
+            "open": false,
+            "selected": "Node Beta",
+            "tags": [],
+            "rows": [],
+            "changeLabels": "Node Beta",
+            "events": [
+              [
+                "change",
+                "b",
+                "b"
+              ],
+              [
+                "select",
+                "b",
+                "beta"
+              ],
+              [
+                "open",
+                false
+              ]
+            ],
+            "globalIconCalled": false
+          }
+        },
+        {
+          "action": "open",
+          "view": {
+            "open": true,
+            "selected": null,
+            "tags": [],
+            "rows": [
+              {
+                "title": "Node Parent",
+                "marker": "parent",
+                "ariaLabel": null,
+                "expanded": true,
+                "selected": false,
+                "ariaSelected": "false",
+                "checked": false,
+                "checkbox": false,
+                "disabled": false,
+                "className": false,
+                "margin": "",
+                "icon": null,
+                "customIcon": false,
+                "switcher": "p|0|1|0|parent"
+              },
+              {
+                "title": "Node Zero",
+                "marker": "zero",
+                "ariaLabel": null,
+                "expanded": false,
+                "selected": false,
+                "ariaSelected": "false",
+                "checked": false,
+                "checkbox": false,
+                "disabled": false,
+                "className": false,
+                "margin": "",
+                "icon": null,
+                "customIcon": false,
+                "switcher": ""
+              },
+              {
+                "title": "Node Beta",
+                "marker": "beta",
+                "ariaLabel": null,
+                "expanded": false,
+                "selected": true,
+                "ariaSelected": "true",
+                "checked": false,
+                "checkbox": false,
+                "disabled": false,
+                "className": false,
+                "margin": "",
+                "icon": null,
+                "customIcon": false,
+                "switcher": ""
+              },
+              {
+                "title": "Node Disabled",
+                "marker": "disabled",
+                "ariaLabel": null,
+                "expanded": false,
+                "selected": false,
+                "ariaSelected": null,
+                "checked": false,
+                "checkbox": false,
+                "disabled": true,
+                "className": false,
+                "margin": "",
+                "icon": null,
+                "customIcon": false,
+                "switcher": ""
+              },
+              {
+                "title": "Node Tail",
+                "marker": "tail",
+                "ariaLabel": null,
+                "expanded": false,
+                "selected": false,
+                "ariaSelected": "false",
+                "checked": false,
+                "checkbox": false,
+                "disabled": false,
+                "className": false,
+                "margin": "",
+                "icon": null,
+                "customIcon": false,
+                "switcher": "Leaf switcher"
+              }
+            ],
+            "changeLabels": "Node Beta",
+            "events": [
+              [
+                "change",
+                "b",
+                "b"
+              ],
+              [
+                "select",
+                "b",
+                "beta"
+              ],
+              [
+                "open",
+                false
+              ],
+              [
+                "open",
+                true
+              ]
+            ],
+            "globalIconCalled": false
+          }
+        }
+      ],
+      "calls": {
+        "load": 0,
+        "globalIcon": 0
+      }
+    },
+    {
+      "id": "data",
+      "initial": {
+        "open": true,
+        "selected": null,
+        "tags": [],
+        "rows": [
+          {
+            "title": "Node Parent",
+            "marker": "parent",
+            "ariaLabel": null,
+            "expanded": true,
+            "selected": false,
+            "ariaSelected": "false",
+            "checked": false,
+            "checkbox": false,
+            "disabled": false,
+            "className": false,
+            "margin": "",
+            "icon": null,
+            "customIcon": false,
+            "switcher": "p|0|1|0|parent"
+          },
+          {
+            "title": "Node Zero",
+            "marker": "zero",
+            "ariaLabel": null,
+            "expanded": false,
+            "selected": true,
+            "ariaSelected": "true",
+            "checked": false,
+            "checkbox": false,
+            "disabled": false,
+            "className": false,
+            "margin": "",
+            "icon": null,
+            "customIcon": false,
+            "switcher": ""
+          },
+          {
+            "title": "Node Beta",
+            "marker": "beta",
+            "ariaLabel": null,
+            "expanded": false,
+            "selected": false,
+            "ariaSelected": "false",
+            "checked": false,
+            "checkbox": false,
+            "disabled": false,
+            "className": false,
+            "margin": "",
+            "icon": null,
+            "customIcon": false,
+            "switcher": ""
+          },
+          {
+            "title": "Node Disabled",
+            "marker": "disabled",
+            "ariaLabel": null,
+            "expanded": false,
+            "selected": false,
+            "ariaSelected": null,
+            "checked": false,
+            "checkbox": false,
+            "disabled": true,
+            "className": false,
+            "margin": "",
+            "icon": null,
+            "customIcon": false,
+            "switcher": ""
+          },
+          {
+            "title": "Node Tail",
+            "marker": "tail",
+            "ariaLabel": null,
+            "expanded": false,
+            "selected": false,
+            "ariaSelected": "false",
+            "checked": false,
+            "checkbox": false,
+            "disabled": false,
+            "className": false,
+            "margin": "",
+            "icon": null,
+            "customIcon": false,
+            "switcher": "Leaf switcher"
+          }
+        ],
+        "changeLabels": "",
+        "events": [],
+        "globalIconCalled": false
+      },
+      "steps": [
+        {
+          "action": "choose-beta",
+          "view": {
+            "open": false,
+            "selected": "Node Beta",
+            "tags": [],
+            "rows": [],
+            "changeLabels": "Node Beta",
+            "events": [
+              [
+                "change",
+                "b",
+                "b"
+              ],
+              [
+                "select",
+                "b",
+                "beta"
+              ],
+              [
+                "open",
+                false
+              ]
+            ],
+            "globalIconCalled": false
+          }
+        },
+        {
+          "action": "open",
+          "view": {
+            "open": true,
+            "selected": null,
+            "tags": [],
+            "rows": [
+              {
+                "title": "Node Parent",
+                "marker": "parent",
+                "ariaLabel": null,
+                "expanded": true,
+                "selected": false,
+                "ariaSelected": "false",
+                "checked": false,
+                "checkbox": false,
+                "disabled": false,
+                "className": false,
+                "margin": "",
+                "icon": null,
+                "customIcon": false,
+                "switcher": "p|0|1|0|parent"
+              },
+              {
+                "title": "Node Zero",
+                "marker": "zero",
+                "ariaLabel": null,
+                "expanded": false,
+                "selected": false,
+                "ariaSelected": "false",
+                "checked": false,
+                "checkbox": false,
+                "disabled": false,
+                "className": false,
+                "margin": "",
+                "icon": null,
+                "customIcon": false,
+                "switcher": ""
+              },
+              {
+                "title": "Node Beta",
+                "marker": "beta",
+                "ariaLabel": null,
+                "expanded": false,
+                "selected": true,
+                "ariaSelected": "true",
+                "checked": false,
+                "checkbox": false,
+                "disabled": false,
+                "className": false,
+                "margin": "",
+                "icon": null,
+                "customIcon": false,
+                "switcher": ""
+              },
+              {
+                "title": "Node Disabled",
+                "marker": "disabled",
+                "ariaLabel": null,
+                "expanded": false,
+                "selected": false,
+                "ariaSelected": null,
+                "checked": false,
+                "checkbox": false,
+                "disabled": true,
+                "className": false,
+                "margin": "",
+                "icon": null,
+                "customIcon": false,
+                "switcher": ""
+              },
+              {
+                "title": "Node Tail",
+                "marker": "tail",
+                "ariaLabel": null,
+                "expanded": false,
+                "selected": false,
+                "ariaSelected": "false",
+                "checked": false,
+                "checkbox": false,
+                "disabled": false,
+                "className": false,
+                "margin": "",
+                "icon": null,
+                "customIcon": false,
+                "switcher": "Leaf switcher"
+              }
+            ],
+            "changeLabels": "Node Beta",
+            "events": [
+              [
+                "change",
+                "b",
+                "b"
+              ],
+              [
+                "select",
+                "b",
+                "beta"
+              ],
+              [
+                "open",
+                false
+              ],
+              [
+                "open",
+                true
+              ]
+            ],
+            "globalIconCalled": false
+          }
+        }
+      ],
+      "calls": {
+        "load": 0,
+        "globalIcon": 0
+      }
+    },
+    {
+      "id": "declared-simple",
+      "initial": {
+        "open": true,
+        "selected": null,
+        "tags": [],
+        "rows": [
+          {
+            "title": "Node Parent",
+            "marker": "parent",
+            "ariaLabel": null,
+            "expanded": true,
+            "selected": false,
+            "ariaSelected": "false",
+            "checked": false,
+            "checkbox": false,
+            "disabled": false,
+            "className": false,
+            "margin": "",
+            "icon": null,
+            "customIcon": false,
+            "switcher": "p|0|1|0|parent"
+          },
+          {
+            "title": "Node Zero",
+            "marker": "zero",
+            "ariaLabel": null,
+            "expanded": false,
+            "selected": true,
+            "ariaSelected": "true",
+            "checked": false,
+            "checkbox": false,
+            "disabled": false,
+            "className": false,
+            "margin": "",
+            "icon": null,
+            "customIcon": false,
+            "switcher": ""
+          },
+          {
+            "title": "Node Beta",
+            "marker": "beta",
+            "ariaLabel": null,
+            "expanded": false,
+            "selected": false,
+            "ariaSelected": "false",
+            "checked": false,
+            "checkbox": false,
+            "disabled": false,
+            "className": false,
+            "margin": "",
+            "icon": null,
+            "customIcon": false,
+            "switcher": ""
+          },
+          {
+            "title": "Node Disabled",
+            "marker": "disabled",
+            "ariaLabel": null,
+            "expanded": false,
+            "selected": false,
+            "ariaSelected": null,
+            "checked": false,
+            "checkbox": false,
+            "disabled": true,
+            "className": false,
+            "margin": "",
+            "icon": null,
+            "customIcon": false,
+            "switcher": ""
+          },
+          {
+            "title": "Node Tail",
+            "marker": "tail",
+            "ariaLabel": null,
+            "expanded": false,
+            "selected": false,
+            "ariaSelected": "false",
+            "checked": false,
+            "checkbox": false,
+            "disabled": false,
+            "className": false,
+            "margin": "",
+            "icon": null,
+            "customIcon": false,
+            "switcher": "Leaf switcher"
+          }
+        ],
+        "changeLabels": "",
+        "events": [],
+        "globalIconCalled": false
+      },
+      "steps": [
+        {
+          "action": "choose-beta",
+          "view": {
+            "open": false,
+            "selected": "Node Beta",
+            "tags": [],
+            "rows": [],
+            "changeLabels": "Node Beta",
+            "events": [
+              [
+                "change",
+                "b",
+                "b"
+              ],
+              [
+                "select",
+                "b",
+                "beta"
+              ],
+              [
+                "open",
+                false
+              ]
+            ],
+            "globalIconCalled": false
+          }
+        }
+      ],
+      "calls": {
+        "load": 0,
+        "globalIcon": 0
+      }
+    },
+    {
+      "id": "data-wins",
+      "initial": {
+        "open": true,
+        "selected": null,
+        "tags": [],
+        "rows": [
+          {
+            "title": "Data Override",
+            "marker": "override",
+            "ariaLabel": null,
+            "expanded": false,
+            "selected": false,
+            "ariaSelected": "false",
+            "checked": false,
+            "checkbox": false,
+            "disabled": false,
+            "className": false,
+            "margin": "",
+            "icon": null,
+            "customIcon": false,
+            "switcher": ""
+          }
+        ],
+        "changeLabels": "",
+        "events": [],
+        "globalIconCalled": false
+      },
+      "steps": [],
+      "calls": {
+        "load": 0,
+        "globalIcon": 0
+      }
+    },
+    {
+      "id": "empty-data-wins",
+      "initial": {
+        "open": true,
+        "selected": null,
+        "tags": [],
+        "rows": [],
+        "changeLabels": "",
+        "events": [],
+        "globalIconCalled": false
+      },
+      "steps": [],
+      "calls": {
+        "load": 0,
+        "globalIcon": 0
+      }
+    },
+    {
+      "id": "aliases",
+      "initial": {
+        "open": true,
+        "selected": null,
+        "tags": [],
+        "rows": [
+          {
+            "title": "Node Parent",
+            "marker": "parent",
+            "ariaLabel": null,
+            "expanded": true,
+            "selected": false,
+            "ariaSelected": "false",
+            "checked": false,
+            "checkbox": false,
+            "disabled": false,
+            "className": false,
+            "margin": "",
+            "icon": null,
+            "customIcon": false,
+            "switcher": "p|0|1|0|parent"
+          },
+          {
+            "title": "Node Zero",
+            "marker": "zero",
+            "ariaLabel": null,
+            "expanded": false,
+            "selected": true,
+            "ariaSelected": "true",
+            "checked": false,
+            "checkbox": false,
+            "disabled": false,
+            "className": false,
+            "margin": "",
+            "icon": null,
+            "customIcon": false,
+            "switcher": ""
+          },
+          {
+            "title": "Node Beta",
+            "marker": "beta",
+            "ariaLabel": null,
+            "expanded": false,
+            "selected": false,
+            "ariaSelected": "false",
+            "checked": false,
+            "checkbox": false,
+            "disabled": false,
+            "className": false,
+            "margin": "",
+            "icon": null,
+            "customIcon": false,
+            "switcher": ""
+          },
+          {
+            "title": "Node Disabled",
+            "marker": "disabled",
+            "ariaLabel": null,
+            "expanded": false,
+            "selected": false,
+            "ariaSelected": null,
+            "checked": false,
+            "checkbox": false,
+            "disabled": true,
+            "className": false,
+            "margin": "",
+            "icon": null,
+            "customIcon": false,
+            "switcher": ""
+          },
+          {
+            "title": "Node Tail",
+            "marker": "tail",
+            "ariaLabel": null,
+            "expanded": false,
+            "selected": false,
+            "ariaSelected": "false",
+            "checked": false,
+            "checkbox": false,
+            "disabled": false,
+            "className": false,
+            "margin": "",
+            "icon": null,
+            "customIcon": false,
+            "switcher": "Leaf switcher"
+          }
+        ],
+        "changeLabels": "",
+        "events": [],
+        "globalIconCalled": false
+      },
+      "steps": [
+        {
+          "action": "choose-beta",
+          "view": {
+            "open": false,
+            "selected": "Node Beta",
+            "tags": [],
+            "rows": [],
+            "changeLabels": "Node Beta",
+            "events": [
+              [
+                "change",
+                "b",
+                "b"
+              ],
+              [
+                "select",
+                "b",
+                "beta"
+              ],
+              [
+                "open",
+                false
+              ]
+            ],
+            "globalIconCalled": false
+          }
+        },
+        {
+          "action": "open",
+          "view": {
+            "open": true,
+            "selected": null,
+            "tags": [],
+            "rows": [
+              {
+                "title": "Node Parent",
+                "marker": "parent",
+                "ariaLabel": null,
+                "expanded": true,
+                "selected": false,
+                "ariaSelected": "false",
+                "checked": false,
+                "checkbox": false,
+                "disabled": false,
+                "className": false,
+                "margin": "",
+                "icon": null,
+                "customIcon": false,
+                "switcher": "p|0|1|0|parent"
+              },
+              {
+                "title": "Node Zero",
+                "marker": "zero",
+                "ariaLabel": null,
+                "expanded": false,
+                "selected": false,
+                "ariaSelected": "false",
+                "checked": false,
+                "checkbox": false,
+                "disabled": false,
+                "className": false,
+                "margin": "",
+                "icon": null,
+                "customIcon": false,
+                "switcher": ""
+              },
+              {
+                "title": "Node Beta",
+                "marker": "beta",
+                "ariaLabel": null,
+                "expanded": false,
+                "selected": true,
+                "ariaSelected": "true",
+                "checked": false,
+                "checkbox": false,
+                "disabled": false,
+                "className": false,
+                "margin": "",
+                "icon": null,
+                "customIcon": false,
+                "switcher": ""
+              },
+              {
+                "title": "Node Disabled",
+                "marker": "disabled",
+                "ariaLabel": null,
+                "expanded": false,
+                "selected": false,
+                "ariaSelected": null,
+                "checked": false,
+                "checkbox": false,
+                "disabled": true,
+                "className": false,
+                "margin": "",
+                "icon": null,
+                "customIcon": false,
+                "switcher": ""
+              },
+              {
+                "title": "Node Tail",
+                "marker": "tail",
+                "ariaLabel": null,
+                "expanded": false,
+                "selected": false,
+                "ariaSelected": "false",
+                "checked": false,
+                "checkbox": false,
+                "disabled": false,
+                "className": false,
+                "margin": "",
+                "icon": null,
+                "customIcon": false,
+                "switcher": "Leaf switcher"
+              }
+            ],
+            "changeLabels": "Node Beta",
+            "events": [
+              [
+                "change",
+                "b",
+                "b"
+              ],
+              [
+                "select",
+                "b",
+                "beta"
+              ],
+              [
+                "open",
+                false
+              ],
+              [
+                "open",
+                true
+              ]
+            ],
+            "globalIconCalled": false
+          }
+        },
+        {
+          "action": "search",
+          "view": {
+            "open": true,
+            "selected": null,
+            "tags": [],
+            "rows": [
+              {
+                "title": "Node Parent",
+                "marker": "parent",
+                "ariaLabel": null,
+                "expanded": true,
+                "selected": false,
+                "ariaSelected": "false",
+                "checked": false,
+                "checkbox": false,
+                "disabled": false,
+                "className": false,
+                "margin": "",
+                "icon": null,
+                "customIcon": false,
+                "switcher": "p|0|1|0|parent"
+              },
+              {
+                "title": "Node Beta",
+                "marker": "beta",
+                "ariaLabel": null,
+                "expanded": false,
+                "selected": true,
+                "ariaSelected": "true",
+                "checked": false,
+                "checkbox": false,
+                "disabled": false,
+                "className": false,
+                "margin": "",
+                "icon": null,
+                "customIcon": false,
+                "switcher": ""
+              }
+            ],
+            "changeLabels": "Node Beta",
+            "events": [
+              [
+                "change",
+                "b",
+                "b"
+              ],
+              [
+                "select",
+                "b",
+                "beta"
+              ],
+              [
+                "open",
+                false
+              ],
+              [
+                "open",
+                true
+              ],
+              [
+                "search",
+                "b"
+              ]
+            ],
+            "globalIconCalled": false
+          }
+        },
+        {
+          "action": "reset-search",
+          "view": {
+            "open": true,
+            "selected": null,
+            "tags": [],
+            "rows": [
+              {
+                "title": "Node Parent",
+                "marker": "parent",
+                "ariaLabel": null,
+                "expanded": true,
+                "selected": false,
+                "ariaSelected": "false",
+                "checked": false,
+                "checkbox": false,
+                "disabled": false,
+                "className": false,
+                "margin": "",
+                "icon": null,
+                "customIcon": false,
+                "switcher": "p|0|1|0|parent"
+              },
+              {
+                "title": "Node Zero",
+                "marker": "zero",
+                "ariaLabel": null,
+                "expanded": false,
+                "selected": false,
+                "ariaSelected": "false",
+                "checked": false,
+                "checkbox": false,
+                "disabled": false,
+                "className": false,
+                "margin": "",
+                "icon": null,
+                "customIcon": false,
+                "switcher": ""
+              },
+              {
+                "title": "Node Beta",
+                "marker": "beta",
+                "ariaLabel": null,
+                "expanded": false,
+                "selected": true,
+                "ariaSelected": "true",
+                "checked": false,
+                "checkbox": false,
+                "disabled": false,
+                "className": false,
+                "margin": "",
+                "icon": null,
+                "customIcon": false,
+                "switcher": ""
+              },
+              {
+                "title": "Node Disabled",
+                "marker": "disabled",
+                "ariaLabel": null,
+                "expanded": false,
+                "selected": false,
+                "ariaSelected": null,
+                "checked": false,
+                "checkbox": false,
+                "disabled": true,
+                "className": false,
+                "margin": "",
+                "icon": null,
+                "customIcon": false,
+                "switcher": ""
+              },
+              {
+                "title": "Node Tail",
+                "marker": "tail",
+                "ariaLabel": null,
+                "expanded": false,
+                "selected": false,
+                "ariaSelected": "false",
+                "checked": false,
+                "checkbox": false,
+                "disabled": false,
+                "className": false,
+                "margin": "",
+                "icon": null,
+                "customIcon": false,
+                "switcher": "Leaf switcher"
+              }
+            ],
+            "changeLabels": "Node Beta",
+            "events": [
+              [
+                "change",
+                "b",
+                "b"
+              ],
+              [
+                "select",
+                "b",
+                "beta"
+              ],
+              [
+                "open",
+                false
+              ],
+              [
+                "open",
+                true
+              ],
+              [
+                "search",
+                "b"
+              ],
+              [
+                "search",
+                ""
+              ]
+            ],
+            "globalIconCalled": false
+          }
+        }
+      ],
+      "calls": {
+        "load": 0,
+        "globalIcon": 0
+      }
+    },
+    {
+      "id": "declared-icons",
+      "initial": {
+        "open": true,
+        "selected": null,
+        "tags": [],
+        "rows": [
+          {
+            "title": "Node Parent",
+            "marker": "parent",
+            "ariaLabel": null,
+            "expanded": true,
+            "selected": false,
+            "ariaSelected": "false",
+            "checked": false,
+            "checkbox": false,
+            "disabled": false,
+            "className": false,
+            "margin": "",
+            "icon": "p|0|1|0|0|parent",
+            "customIcon": true,
+            "switcher": "p|0|1|0|parent"
+          },
+          {
+            "title": "Node Zero",
+            "marker": "zero",
+            "ariaLabel": null,
+            "expanded": false,
+            "selected": true,
+            "ariaSelected": "true",
+            "checked": false,
+            "checkbox": false,
+            "disabled": false,
+            "className": false,
+            "margin": "",
+            "icon": "Icon zero",
+            "customIcon": true,
+            "switcher": ""
+          },
+          {
+            "title": "Node Beta",
+            "marker": "beta",
+            "ariaLabel": null,
+            "expanded": false,
+            "selected": false,
+            "ariaSelected": "false",
+            "checked": false,
+            "checkbox": false,
+            "disabled": false,
+            "className": false,
+            "margin": "",
+            "icon": "b|0|0|0|0|beta",
+            "customIcon": true,
+            "switcher": ""
+          },
+          {
+            "title": "Node Disabled",
+            "marker": "disabled",
+            "ariaLabel": null,
+            "expanded": false,
+            "selected": false,
+            "ariaSelected": null,
+            "checked": false,
+            "checkbox": false,
+            "disabled": true,
+            "className": false,
+            "margin": "",
+            "icon": "Icon disabled",
+            "customIcon": true,
+            "switcher": ""
+          },
+          {
+            "title": "Node Tail",
+            "marker": "tail",
+            "ariaLabel": null,
+            "expanded": false,
+            "selected": false,
+            "ariaSelected": "false",
+            "checked": false,
+            "checkbox": false,
+            "disabled": false,
+            "className": false,
+            "margin": "",
+            "icon": "Icon tail",
+            "customIcon": true,
+            "switcher": "Leaf switcher"
+          }
+        ],
+        "changeLabels": "",
+        "events": [],
+        "globalIconCalled": false
+      },
+      "steps": [
+        {
+          "action": "choose-beta",
+          "view": {
+            "open": false,
+            "selected": "Node Beta",
+            "tags": [],
+            "rows": [],
+            "changeLabels": "Node Beta",
+            "events": [
+              [
+                "change",
+                "b",
+                "b"
+              ],
+              [
+                "select",
+                "b",
+                "beta"
+              ],
+              [
+                "open",
+                false
+              ]
+            ],
+            "globalIconCalled": false
+          }
+        },
+        {
+          "action": "open",
+          "view": {
+            "open": true,
+            "selected": null,
+            "tags": [],
+            "rows": [
+              {
+                "title": "Node Parent",
+                "marker": "parent",
+                "ariaLabel": null,
+                "expanded": true,
+                "selected": false,
+                "ariaSelected": "false",
+                "checked": false,
+                "checkbox": false,
+                "disabled": false,
+                "className": false,
+                "margin": "",
+                "icon": "p|0|1|0|0|parent",
+                "customIcon": true,
+                "switcher": "p|0|1|0|parent"
+              },
+              {
+                "title": "Node Zero",
+                "marker": "zero",
+                "ariaLabel": null,
+                "expanded": false,
+                "selected": false,
+                "ariaSelected": "false",
+                "checked": false,
+                "checkbox": false,
+                "disabled": false,
+                "className": false,
+                "margin": "",
+                "icon": "Icon zero",
+                "customIcon": true,
+                "switcher": ""
+              },
+              {
+                "title": "Node Beta",
+                "marker": "beta",
+                "ariaLabel": null,
+                "expanded": false,
+                "selected": true,
+                "ariaSelected": "true",
+                "checked": false,
+                "checkbox": false,
+                "disabled": false,
+                "className": false,
+                "margin": "",
+                "icon": "b|1|0|1|0|beta",
+                "customIcon": true,
+                "switcher": ""
+              },
+              {
+                "title": "Node Disabled",
+                "marker": "disabled",
+                "ariaLabel": null,
+                "expanded": false,
+                "selected": false,
+                "ariaSelected": null,
+                "checked": false,
+                "checkbox": false,
+                "disabled": true,
+                "className": false,
+                "margin": "",
+                "icon": "Icon disabled",
+                "customIcon": true,
+                "switcher": ""
+              },
+              {
+                "title": "Node Tail",
+                "marker": "tail",
+                "ariaLabel": null,
+                "expanded": false,
+                "selected": false,
+                "ariaSelected": "false",
+                "checked": false,
+                "checkbox": false,
+                "disabled": false,
+                "className": false,
+                "margin": "",
+                "icon": "Icon tail",
+                "customIcon": true,
+                "switcher": "Leaf switcher"
+              }
+            ],
+            "changeLabels": "Node Beta",
+            "events": [
+              [
+                "change",
+                "b",
+                "b"
+              ],
+              [
+                "select",
+                "b",
+                "beta"
+              ],
+              [
+                "open",
+                false
+              ],
+              [
+                "open",
+                true
+              ]
+            ],
+            "globalIconCalled": false
+          }
+        },
+        {
+          "action": "collapse",
+          "view": {
+            "open": true,
+            "selected": null,
+            "tags": [],
+            "rows": [
+              {
+                "title": "Node Parent",
+                "marker": "parent",
+                "ariaLabel": null,
+                "expanded": false,
+                "selected": false,
+                "ariaSelected": "false",
+                "checked": false,
+                "checkbox": false,
+                "disabled": false,
+                "className": false,
+                "margin": "",
+                "icon": "p|0|0|0|0|parent",
+                "customIcon": true,
+                "switcher": "p|0|0|0|parent"
+              },
+              {
+                "title": "Node Tail",
+                "marker": "tail",
+                "ariaLabel": null,
+                "expanded": false,
+                "selected": false,
+                "ariaSelected": "false",
+                "checked": false,
+                "checkbox": false,
+                "disabled": false,
+                "className": false,
+                "margin": "",
+                "icon": "Icon tail",
+                "customIcon": true,
+                "switcher": "Leaf switcher"
+              }
+            ],
+            "changeLabels": "Node Beta",
+            "events": [
+              [
+                "change",
+                "b",
+                "b"
+              ],
+              [
+                "select",
+                "b",
+                "beta"
+              ],
+              [
+                "open",
+                false
+              ],
+              [
+                "open",
+                true
+              ],
+              [
+                "expand",
+                []
+              ]
+            ],
+            "globalIconCalled": false
+          }
+        },
+        {
+          "action": "expand",
+          "view": {
+            "open": true,
+            "selected": null,
+            "tags": [],
+            "rows": [
+              {
+                "title": "Node Parent",
+                "marker": "parent",
+                "ariaLabel": null,
+                "expanded": true,
+                "selected": false,
+                "ariaSelected": "false",
+                "checked": false,
+                "checkbox": false,
+                "disabled": false,
+                "className": false,
+                "margin": "",
+                "icon": "p|0|1|0|0|parent",
+                "customIcon": true,
+                "switcher": "p|0|1|0|parent"
+              },
+              {
+                "title": "Node Zero",
+                "marker": "zero",
+                "ariaLabel": null,
+                "expanded": false,
+                "selected": false,
+                "ariaSelected": "false",
+                "checked": false,
+                "checkbox": false,
+                "disabled": false,
+                "className": false,
+                "margin": "",
+                "icon": "Icon zero",
+                "customIcon": true,
+                "switcher": ""
+              },
+              {
+                "title": "Node Beta",
+                "marker": "beta",
+                "ariaLabel": null,
+                "expanded": false,
+                "selected": true,
+                "ariaSelected": "true",
+                "checked": false,
+                "checkbox": false,
+                "disabled": false,
+                "className": false,
+                "margin": "",
+                "icon": "b|1|0|0|0|beta",
+                "customIcon": true,
+                "switcher": ""
+              },
+              {
+                "title": "Node Disabled",
+                "marker": "disabled",
+                "ariaLabel": null,
+                "expanded": false,
+                "selected": false,
+                "ariaSelected": null,
+                "checked": false,
+                "checkbox": false,
+                "disabled": true,
+                "className": false,
+                "margin": "",
+                "icon": "Icon disabled",
+                "customIcon": true,
+                "switcher": ""
+              },
+              {
+                "title": "Node Tail",
+                "marker": "tail",
+                "ariaLabel": null,
+                "expanded": false,
+                "selected": false,
+                "ariaSelected": "false",
+                "checked": false,
+                "checkbox": false,
+                "disabled": false,
+                "className": false,
+                "margin": "",
+                "icon": "Icon tail",
+                "customIcon": true,
+                "switcher": "Leaf switcher"
+              }
+            ],
+            "changeLabels": "Node Beta",
+            "events": [
+              [
+                "change",
+                "b",
+                "b"
+              ],
+              [
+                "select",
+                "b",
+                "beta"
+              ],
+              [
+                "open",
+                false
+              ],
+              [
+                "open",
+                true
+              ],
+              [
+                "expand",
+                []
+              ],
+              [
+                "expand",
+                [
+                  "p"
+                ]
+              ]
+            ],
+            "globalIconCalled": false
+          }
+        }
+      ],
+      "calls": {
+        "load": 0,
+        "globalIcon": 0
+      }
+    },
+    {
+      "id": "data-icons",
+      "initial": {
+        "open": true,
+        "selected": null,
+        "tags": [],
+        "rows": [
+          {
+            "title": "Node Parent",
+            "marker": "parent",
+            "ariaLabel": null,
+            "expanded": true,
+            "selected": false,
+            "ariaSelected": "false",
+            "checked": false,
+            "checkbox": false,
+            "disabled": false,
+            "className": false,
+            "margin": "",
+            "icon": "p|0|1|0|0|parent",
+            "customIcon": true,
+            "switcher": "p|0|1|0|parent"
+          },
+          {
+            "title": "Node Zero",
+            "marker": "zero",
+            "ariaLabel": null,
+            "expanded": false,
+            "selected": true,
+            "ariaSelected": "true",
+            "checked": false,
+            "checkbox": false,
+            "disabled": false,
+            "className": false,
+            "margin": "",
+            "icon": "Icon zero",
+            "customIcon": true,
+            "switcher": ""
+          },
+          {
+            "title": "Node Beta",
+            "marker": "beta",
+            "ariaLabel": null,
+            "expanded": false,
+            "selected": false,
+            "ariaSelected": "false",
+            "checked": false,
+            "checkbox": false,
+            "disabled": false,
+            "className": false,
+            "margin": "",
+            "icon": "b|0|0|0|0|beta",
+            "customIcon": true,
+            "switcher": ""
+          },
+          {
+            "title": "Node Disabled",
+            "marker": "disabled",
+            "ariaLabel": null,
+            "expanded": false,
+            "selected": false,
+            "ariaSelected": null,
+            "checked": false,
+            "checkbox": false,
+            "disabled": true,
+            "className": false,
+            "margin": "",
+            "icon": "Icon disabled",
+            "customIcon": true,
+            "switcher": ""
+          },
+          {
+            "title": "Node Tail",
+            "marker": "tail",
+            "ariaLabel": null,
+            "expanded": false,
+            "selected": false,
+            "ariaSelected": "false",
+            "checked": false,
+            "checkbox": false,
+            "disabled": false,
+            "className": false,
+            "margin": "",
+            "icon": "Icon tail",
+            "customIcon": true,
+            "switcher": "Leaf switcher"
+          }
+        ],
+        "changeLabels": "",
+        "events": [],
+        "globalIconCalled": false
+      },
+      "steps": [
+        {
+          "action": "choose-beta",
+          "view": {
+            "open": false,
+            "selected": "Node Beta",
+            "tags": [],
+            "rows": [],
+            "changeLabels": "Node Beta",
+            "events": [
+              [
+                "change",
+                "b",
+                "b"
+              ],
+              [
+                "select",
+                "b",
+                "beta"
+              ],
+              [
+                "open",
+                false
+              ]
+            ],
+            "globalIconCalled": false
+          }
+        },
+        {
+          "action": "open",
+          "view": {
+            "open": true,
+            "selected": null,
+            "tags": [],
+            "rows": [
+              {
+                "title": "Node Parent",
+                "marker": "parent",
+                "ariaLabel": null,
+                "expanded": true,
+                "selected": false,
+                "ariaSelected": "false",
+                "checked": false,
+                "checkbox": false,
+                "disabled": false,
+                "className": false,
+                "margin": "",
+                "icon": "p|0|1|0|0|parent",
+                "customIcon": true,
+                "switcher": "p|0|1|0|parent"
+              },
+              {
+                "title": "Node Zero",
+                "marker": "zero",
+                "ariaLabel": null,
+                "expanded": false,
+                "selected": false,
+                "ariaSelected": "false",
+                "checked": false,
+                "checkbox": false,
+                "disabled": false,
+                "className": false,
+                "margin": "",
+                "icon": "Icon zero",
+                "customIcon": true,
+                "switcher": ""
+              },
+              {
+                "title": "Node Beta",
+                "marker": "beta",
+                "ariaLabel": null,
+                "expanded": false,
+                "selected": true,
+                "ariaSelected": "true",
+                "checked": false,
+                "checkbox": false,
+                "disabled": false,
+                "className": false,
+                "margin": "",
+                "icon": "b|1|0|1|0|beta",
+                "customIcon": true,
+                "switcher": ""
+              },
+              {
+                "title": "Node Disabled",
+                "marker": "disabled",
+                "ariaLabel": null,
+                "expanded": false,
+                "selected": false,
+                "ariaSelected": null,
+                "checked": false,
+                "checkbox": false,
+                "disabled": true,
+                "className": false,
+                "margin": "",
+                "icon": "Icon disabled",
+                "customIcon": true,
+                "switcher": ""
+              },
+              {
+                "title": "Node Tail",
+                "marker": "tail",
+                "ariaLabel": null,
+                "expanded": false,
+                "selected": false,
+                "ariaSelected": "false",
+                "checked": false,
+                "checkbox": false,
+                "disabled": false,
+                "className": false,
+                "margin": "",
+                "icon": "Icon tail",
+                "customIcon": true,
+                "switcher": "Leaf switcher"
+              }
+            ],
+            "changeLabels": "Node Beta",
+            "events": [
+              [
+                "change",
+                "b",
+                "b"
+              ],
+              [
+                "select",
+                "b",
+                "beta"
+              ],
+              [
+                "open",
+                false
+              ],
+              [
+                "open",
+                true
+              ]
+            ],
+            "globalIconCalled": false
+          }
+        }
+      ],
+      "calls": {
+        "load": 0,
+        "globalIcon": 0
+      }
+    },
+    {
+      "id": "hidden-icons",
+      "initial": {
+        "open": true,
+        "selected": null,
+        "tags": [],
+        "rows": [
+          {
+            "title": "Node Parent",
+            "marker": "parent",
+            "ariaLabel": null,
+            "expanded": true,
+            "selected": false,
+            "ariaSelected": "false",
+            "checked": false,
+            "checkbox": false,
+            "disabled": false,
+            "className": false,
+            "margin": "",
+            "icon": null,
+            "customIcon": false,
+            "switcher": "p|0|1|0|parent"
+          },
+          {
+            "title": "Node Zero",
+            "marker": "zero",
+            "ariaLabel": null,
+            "expanded": false,
+            "selected": true,
+            "ariaSelected": "true",
+            "checked": false,
+            "checkbox": false,
+            "disabled": false,
+            "className": false,
+            "margin": "",
+            "icon": null,
+            "customIcon": false,
+            "switcher": ""
+          },
+          {
+            "title": "Node Beta",
+            "marker": "beta",
+            "ariaLabel": null,
+            "expanded": false,
+            "selected": false,
+            "ariaSelected": "false",
+            "checked": false,
+            "checkbox": false,
+            "disabled": false,
+            "className": false,
+            "margin": "",
+            "icon": null,
+            "customIcon": false,
+            "switcher": ""
+          },
+          {
+            "title": "Node Disabled",
+            "marker": "disabled",
+            "ariaLabel": null,
+            "expanded": false,
+            "selected": false,
+            "ariaSelected": null,
+            "checked": false,
+            "checkbox": false,
+            "disabled": true,
+            "className": false,
+            "margin": "",
+            "icon": null,
+            "customIcon": false,
+            "switcher": ""
+          },
+          {
+            "title": "Node Tail",
+            "marker": "tail",
+            "ariaLabel": null,
+            "expanded": false,
+            "selected": false,
+            "ariaSelected": "false",
+            "checked": false,
+            "checkbox": false,
+            "disabled": false,
+            "className": false,
+            "margin": "",
+            "icon": null,
+            "customIcon": false,
+            "switcher": "Leaf switcher"
+          }
+        ],
+        "changeLabels": "",
+        "events": [],
+        "globalIconCalled": false
+      },
+      "steps": [
+        {
+          "action": "choose-beta",
+          "view": {
+            "open": false,
+            "selected": "Node Beta",
+            "tags": [],
+            "rows": [],
+            "changeLabels": "Node Beta",
+            "events": [
+              [
+                "change",
+                "b",
+                "b"
+              ],
+              [
+                "select",
+                "b",
+                "beta"
+              ],
+              [
+                "open",
+                false
+              ]
+            ],
+            "globalIconCalled": false
+          }
+        },
+        {
+          "action": "open",
+          "view": {
+            "open": true,
+            "selected": null,
+            "tags": [],
+            "rows": [
+              {
+                "title": "Node Parent",
+                "marker": "parent",
+                "ariaLabel": null,
+                "expanded": true,
+                "selected": false,
+                "ariaSelected": "false",
+                "checked": false,
+                "checkbox": false,
+                "disabled": false,
+                "className": false,
+                "margin": "",
+                "icon": null,
+                "customIcon": false,
+                "switcher": "p|0|1|0|parent"
+              },
+              {
+                "title": "Node Zero",
+                "marker": "zero",
+                "ariaLabel": null,
+                "expanded": false,
+                "selected": false,
+                "ariaSelected": "false",
+                "checked": false,
+                "checkbox": false,
+                "disabled": false,
+                "className": false,
+                "margin": "",
+                "icon": null,
+                "customIcon": false,
+                "switcher": ""
+              },
+              {
+                "title": "Node Beta",
+                "marker": "beta",
+                "ariaLabel": null,
+                "expanded": false,
+                "selected": true,
+                "ariaSelected": "true",
+                "checked": false,
+                "checkbox": false,
+                "disabled": false,
+                "className": false,
+                "margin": "",
+                "icon": null,
+                "customIcon": false,
+                "switcher": ""
+              },
+              {
+                "title": "Node Disabled",
+                "marker": "disabled",
+                "ariaLabel": null,
+                "expanded": false,
+                "selected": false,
+                "ariaSelected": null,
+                "checked": false,
+                "checkbox": false,
+                "disabled": true,
+                "className": false,
+                "margin": "",
+                "icon": null,
+                "customIcon": false,
+                "switcher": ""
+              },
+              {
+                "title": "Node Tail",
+                "marker": "tail",
+                "ariaLabel": null,
+                "expanded": false,
+                "selected": false,
+                "ariaSelected": "false",
+                "checked": false,
+                "checkbox": false,
+                "disabled": false,
+                "className": false,
+                "margin": "",
+                "icon": null,
+                "customIcon": false,
+                "switcher": "Leaf switcher"
+              }
+            ],
+            "changeLabels": "Node Beta",
+            "events": [
+              [
+                "change",
+                "b",
+                "b"
+              ],
+              [
+                "select",
+                "b",
+                "beta"
+              ],
+              [
+                "open",
+                false
+              ],
+              [
+                "open",
+                true
+              ]
+            ],
+            "globalIconCalled": false
+          }
+        }
+      ],
+      "calls": {
+        "load": 0,
+        "globalIcon": 0
+      }
+    },
+    {
+      "id": "truthy-icon",
+      "initial": {
+        "open": true,
+        "selected": null,
+        "tags": [],
+        "rows": [
+          {
+            "title": "Node Parent",
+            "marker": "parent",
+            "ariaLabel": null,
+            "expanded": true,
+            "selected": false,
+            "ariaSelected": "false",
+            "checked": false,
+            "checkbox": false,
+            "disabled": false,
+            "className": false,
+            "margin": "",
+            "icon": "p|0|1|0|0|parent",
+            "customIcon": true,
+            "switcher": "p|0|1|0|parent"
+          },
+          {
+            "title": "Node Zero",
+            "marker": "zero",
+            "ariaLabel": null,
+            "expanded": false,
+            "selected": true,
+            "ariaSelected": "true",
+            "checked": false,
+            "checkbox": false,
+            "disabled": false,
+            "className": false,
+            "margin": "",
+            "icon": "Icon zero",
+            "customIcon": true,
+            "switcher": ""
+          },
+          {
+            "title": "Node Beta",
+            "marker": "beta",
+            "ariaLabel": null,
+            "expanded": false,
+            "selected": false,
+            "ariaSelected": "false",
+            "checked": false,
+            "checkbox": false,
+            "disabled": false,
+            "className": false,
+            "margin": "",
+            "icon": "b|0|0|0|0|beta",
+            "customIcon": true,
+            "switcher": ""
+          },
+          {
+            "title": "Node Disabled",
+            "marker": "disabled",
+            "ariaLabel": null,
+            "expanded": false,
+            "selected": false,
+            "ariaSelected": null,
+            "checked": false,
+            "checkbox": false,
+            "disabled": true,
+            "className": false,
+            "margin": "",
+            "icon": "Icon disabled",
+            "customIcon": true,
+            "switcher": ""
+          },
+          {
+            "title": "Node Tail",
+            "marker": "tail",
+            "ariaLabel": null,
+            "expanded": false,
+            "selected": false,
+            "ariaSelected": "false",
+            "checked": false,
+            "checkbox": false,
+            "disabled": false,
+            "className": false,
+            "margin": "",
+            "icon": "Icon tail",
+            "customIcon": true,
+            "switcher": "Leaf switcher"
+          }
+        ],
+        "changeLabels": "",
+        "events": [],
+        "globalIconCalled": false
+      },
+      "steps": [
+        {
+          "action": "choose-beta",
+          "view": {
+            "open": false,
+            "selected": "Node Beta",
+            "tags": [],
+            "rows": [],
+            "changeLabels": "Node Beta",
+            "events": [
+              [
+                "change",
+                "b",
+                "b"
+              ],
+              [
+                "select",
+                "b",
+                "beta"
+              ],
+              [
+                "open",
+                false
+              ]
+            ],
+            "globalIconCalled": false
+          }
+        },
+        {
+          "action": "open",
+          "view": {
+            "open": true,
+            "selected": null,
+            "tags": [],
+            "rows": [
+              {
+                "title": "Node Parent",
+                "marker": "parent",
+                "ariaLabel": null,
+                "expanded": true,
+                "selected": false,
+                "ariaSelected": "false",
+                "checked": false,
+                "checkbox": false,
+                "disabled": false,
+                "className": false,
+                "margin": "",
+                "icon": "p|0|1|0|0|parent",
+                "customIcon": true,
+                "switcher": "p|0|1|0|parent"
+              },
+              {
+                "title": "Node Zero",
+                "marker": "zero",
+                "ariaLabel": null,
+                "expanded": false,
+                "selected": false,
+                "ariaSelected": "false",
+                "checked": false,
+                "checkbox": false,
+                "disabled": false,
+                "className": false,
+                "margin": "",
+                "icon": "Icon zero",
+                "customIcon": true,
+                "switcher": ""
+              },
+              {
+                "title": "Node Beta",
+                "marker": "beta",
+                "ariaLabel": null,
+                "expanded": false,
+                "selected": true,
+                "ariaSelected": "true",
+                "checked": false,
+                "checkbox": false,
+                "disabled": false,
+                "className": false,
+                "margin": "",
+                "icon": "b|1|0|1|0|beta",
+                "customIcon": true,
+                "switcher": ""
+              },
+              {
+                "title": "Node Disabled",
+                "marker": "disabled",
+                "ariaLabel": null,
+                "expanded": false,
+                "selected": false,
+                "ariaSelected": null,
+                "checked": false,
+                "checkbox": false,
+                "disabled": true,
+                "className": false,
+                "margin": "",
+                "icon": "Icon disabled",
+                "customIcon": true,
+                "switcher": ""
+              },
+              {
+                "title": "Node Tail",
+                "marker": "tail",
+                "ariaLabel": null,
+                "expanded": false,
+                "selected": false,
+                "ariaSelected": "false",
+                "checked": false,
+                "checkbox": false,
+                "disabled": false,
+                "className": false,
+                "margin": "",
+                "icon": "Icon tail",
+                "customIcon": true,
+                "switcher": "Leaf switcher"
+              }
+            ],
+            "changeLabels": "Node Beta",
+            "events": [
+              [
+                "change",
+                "b",
+                "b"
+              ],
+              [
+                "select",
+                "b",
+                "beta"
+              ],
+              [
+                "open",
+                false
+              ],
+              [
+                "open",
+                true
+              ]
+            ],
+            "globalIconCalled": false
+          }
+        }
+      ],
+      "calls": {
+        "load": 0,
+        "globalIcon": 0
+      }
+    },
+    {
+      "id": "node-styles",
+      "initial": {
+        "open": true,
+        "selected": null,
+        "tags": [],
+        "rows": [
+          {
+            "title": "Node Parent",
+            "marker": "parent",
+            "ariaLabel": null,
+            "expanded": true,
+            "selected": false,
+            "ariaSelected": "false",
+            "checked": false,
+            "checkbox": false,
+            "disabled": false,
+            "className": true,
+            "margin": "6px",
+            "icon": "p|0|1|0|0|parent",
+            "customIcon": true,
+            "switcher": "p|0|1|0|parent"
+          },
+          {
+            "title": "Node Zero",
+            "marker": "zero",
+            "ariaLabel": null,
+            "expanded": false,
+            "selected": true,
+            "ariaSelected": "true",
+            "checked": false,
+            "checkbox": false,
+            "disabled": false,
+            "className": true,
+            "margin": "6px",
+            "icon": "Icon zero",
+            "customIcon": true,
+            "switcher": ""
+          },
+          {
+            "title": "Node Beta",
+            "marker": "beta",
+            "ariaLabel": null,
+            "expanded": false,
+            "selected": false,
+            "ariaSelected": "false",
+            "checked": false,
+            "checkbox": false,
+            "disabled": false,
+            "className": true,
+            "margin": "6px",
+            "icon": "b|0|0|0|0|beta",
+            "customIcon": true,
+            "switcher": ""
+          },
+          {
+            "title": "Node Disabled",
+            "marker": "disabled",
+            "ariaLabel": null,
+            "expanded": false,
+            "selected": false,
+            "ariaSelected": null,
+            "checked": false,
+            "checkbox": false,
+            "disabled": true,
+            "className": true,
+            "margin": "6px",
+            "icon": "Icon disabled",
+            "customIcon": true,
+            "switcher": ""
+          },
+          {
+            "title": "Node Tail",
+            "marker": "tail",
+            "ariaLabel": null,
+            "expanded": false,
+            "selected": false,
+            "ariaSelected": "false",
+            "checked": false,
+            "checkbox": false,
+            "disabled": false,
+            "className": true,
+            "margin": "6px",
+            "icon": "Icon tail",
+            "customIcon": true,
+            "switcher": "Leaf switcher"
+          }
+        ],
+        "changeLabels": "",
+        "events": [],
+        "globalIconCalled": false
+      },
+      "steps": [
+        {
+          "action": "update",
+          "view": {
+            "open": true,
+            "selected": null,
+            "tags": [],
+            "rows": [
+              {
+                "title": "Node Parent",
+                "marker": "parent",
+                "ariaLabel": null,
+                "expanded": true,
+                "selected": false,
+                "ariaSelected": "false",
+                "checked": false,
+                "checkbox": false,
+                "disabled": false,
+                "className": true,
+                "margin": "12px",
+                "icon": "p|0|1|0|0|parent",
+                "customIcon": true,
+                "switcher": "p|0|1|0|parent"
+              },
+              {
+                "title": "Updated Zero",
+                "marker": "zero",
+                "ariaLabel": null,
+                "expanded": false,
+                "selected": true,
+                "ariaSelected": "true",
+                "checked": false,
+                "checkbox": false,
+                "disabled": false,
+                "className": true,
+                "margin": "12px",
+                "icon": "Icon zero",
+                "customIcon": true,
+                "switcher": ""
+              },
+              {
+                "title": "Node Beta",
+                "marker": "beta",
+                "ariaLabel": null,
+                "expanded": false,
+                "selected": false,
+                "ariaSelected": "false",
+                "checked": false,
+                "checkbox": false,
+                "disabled": false,
+                "className": true,
+                "margin": "12px",
+                "icon": "b|0|0|0|0|beta",
+                "customIcon": true,
+                "switcher": ""
+              },
+              {
+                "title": "Node Disabled",
+                "marker": "disabled",
+                "ariaLabel": null,
+                "expanded": false,
+                "selected": false,
+                "ariaSelected": null,
+                "checked": false,
+                "checkbox": false,
+                "disabled": true,
+                "className": true,
+                "margin": "12px",
+                "icon": "Icon disabled",
+                "customIcon": true,
+                "switcher": ""
+              },
+              {
+                "title": "Node Tail",
+                "marker": "tail",
+                "ariaLabel": null,
+                "expanded": false,
+                "selected": false,
+                "ariaSelected": "false",
+                "checked": false,
+                "checkbox": false,
+                "disabled": false,
+                "className": true,
+                "margin": "12px",
+                "icon": "Icon tail",
+                "customIcon": true,
+                "switcher": "Leaf switcher"
+              }
+            ],
+            "changeLabels": "",
+            "events": [],
+            "globalIconCalled": false
+          }
+        }
+      ],
+      "calls": {
+        "load": 0,
+        "globalIcon": 0
+      }
+    },
+    {
+      "id": "node-aria",
+      "initial": {
+        "open": true,
+        "selected": null,
+        "tags": [],
+        "rows": [
+          {
+            "title": "Node Parent",
+            "marker": "parent",
+            "ariaLabel": "Accessible parent",
+            "expanded": true,
+            "selected": false,
+            "ariaSelected": "false",
+            "checked": false,
+            "checkbox": false,
+            "disabled": false,
+            "className": false,
+            "margin": "",
+            "icon": null,
+            "customIcon": false,
+            "switcher": "p|0|1|0|parent"
+          },
+          {
+            "title": "Node Zero",
+            "marker": "zero",
+            "ariaLabel": "Accessible zero",
+            "expanded": false,
+            "selected": true,
+            "ariaSelected": "true",
+            "checked": false,
+            "checkbox": false,
+            "disabled": false,
+            "className": false,
+            "margin": "",
+            "icon": null,
+            "customIcon": false,
+            "switcher": ""
+          },
+          {
+            "title": "Node Beta",
+            "marker": "beta",
+            "ariaLabel": "Accessible beta",
+            "expanded": false,
+            "selected": false,
+            "ariaSelected": "false",
+            "checked": false,
+            "checkbox": false,
+            "disabled": false,
+            "className": false,
+            "margin": "",
+            "icon": null,
+            "customIcon": false,
+            "switcher": ""
+          },
+          {
+            "title": "Node Disabled",
+            "marker": "disabled",
+            "ariaLabel": "Accessible disabled",
+            "expanded": false,
+            "selected": false,
+            "ariaSelected": null,
+            "checked": false,
+            "checkbox": false,
+            "disabled": true,
+            "className": false,
+            "margin": "",
+            "icon": null,
+            "customIcon": false,
+            "switcher": ""
+          },
+          {
+            "title": "Node Tail",
+            "marker": "tail",
+            "ariaLabel": "Accessible tail",
+            "expanded": false,
+            "selected": false,
+            "ariaSelected": "false",
+            "checked": false,
+            "checkbox": false,
+            "disabled": false,
+            "className": false,
+            "margin": "",
+            "icon": null,
+            "customIcon": false,
+            "switcher": "Leaf switcher"
+          }
+        ],
+        "changeLabels": "",
+        "events": [],
+        "globalIconCalled": false
+      },
+      "steps": [
+        {
+          "action": "choose-beta",
+          "view": {
+            "open": false,
+            "selected": "Node Beta",
+            "tags": [],
+            "rows": [],
+            "changeLabels": "Node Beta",
+            "events": [
+              [
+                "change",
+                "b",
+                "b"
+              ],
+              [
+                "select",
+                "b",
+                "beta"
+              ],
+              [
+                "open",
+                false
+              ]
+            ],
+            "globalIconCalled": false
+          }
+        }
+      ],
+      "calls": {
+        "load": 0,
+        "globalIcon": 0
+      }
+    },
+    {
+      "id": "checkable",
+      "initial": {
+        "open": true,
+        "selected": null,
+        "tags": [
+          "Node Zero"
+        ],
+        "rows": [
+          {
+            "title": "Node Parent",
+            "marker": "parent",
+            "ariaLabel": null,
+            "expanded": true,
+            "selected": false,
+            "ariaSelected": "false",
+            "checked": false,
+            "checkbox": true,
+            "disabled": false,
+            "className": false,
+            "margin": "",
+            "icon": null,
+            "customIcon": false,
+            "switcher": "p|0|1|0|parent"
+          },
+          {
+            "title": "Node Zero",
+            "marker": "zero",
+            "ariaLabel": null,
+            "expanded": false,
+            "selected": false,
+            "ariaSelected": "false",
+            "checked": true,
+            "checkbox": true,
+            "disabled": false,
+            "className": false,
+            "margin": "",
+            "icon": null,
+            "customIcon": false,
+            "switcher": ""
+          },
+          {
+            "title": "Node Beta",
+            "marker": "beta",
+            "ariaLabel": null,
+            "expanded": false,
+            "selected": false,
+            "ariaSelected": "false",
+            "checked": false,
+            "checkbox": true,
+            "disabled": false,
+            "className": false,
+            "margin": "",
+            "icon": null,
+            "customIcon": false,
+            "switcher": ""
+          },
+          {
+            "title": "Node Disabled",
+            "marker": "disabled",
+            "ariaLabel": null,
+            "expanded": false,
+            "selected": false,
+            "ariaSelected": null,
+            "checked": false,
+            "checkbox": true,
+            "disabled": true,
+            "className": false,
+            "margin": "",
+            "icon": null,
+            "customIcon": false,
+            "switcher": ""
+          },
+          {
+            "title": "Node Tail",
+            "marker": "tail",
+            "ariaLabel": null,
+            "expanded": false,
+            "selected": false,
+            "ariaSelected": "false",
+            "checked": false,
+            "checkbox": true,
+            "disabled": false,
+            "className": false,
+            "margin": "",
+            "icon": null,
+            "customIcon": false,
+            "switcher": "Leaf switcher"
+          }
+        ],
+        "changeLabels": "",
+        "events": [],
+        "globalIconCalled": false
+      },
+      "steps": [
+        {
+          "action": "choose-beta",
+          "view": {
+            "open": true,
+            "selected": null,
+            "tags": [
+              "Node Zero",
+              "Node Beta"
+            ],
+            "rows": [
+              {
+                "title": "Node Parent",
+                "marker": "parent",
+                "ariaLabel": null,
+                "expanded": true,
+                "selected": false,
+                "ariaSelected": "false",
+                "checked": true,
+                "checkbox": true,
+                "disabled": false,
+                "className": false,
+                "margin": "",
+                "icon": null,
+                "customIcon": false,
+                "switcher": "p|0|1|0|parent"
+              },
+              {
+                "title": "Node Zero",
+                "marker": "zero",
+                "ariaLabel": null,
+                "expanded": false,
+                "selected": false,
+                "ariaSelected": "false",
+                "checked": true,
+                "checkbox": true,
+                "disabled": false,
+                "className": false,
+                "margin": "",
+                "icon": null,
+                "customIcon": false,
+                "switcher": ""
+              },
+              {
+                "title": "Node Beta",
+                "marker": "beta",
+                "ariaLabel": null,
+                "expanded": false,
+                "selected": false,
+                "ariaSelected": "false",
+                "checked": true,
+                "checkbox": true,
+                "disabled": false,
+                "className": false,
+                "margin": "",
+                "icon": null,
+                "customIcon": false,
+                "switcher": ""
+              },
+              {
+                "title": "Node Disabled",
+                "marker": "disabled",
+                "ariaLabel": null,
+                "expanded": false,
+                "selected": false,
+                "ariaSelected": null,
+                "checked": false,
+                "checkbox": true,
+                "disabled": true,
+                "className": false,
+                "margin": "",
+                "icon": null,
+                "customIcon": false,
+                "switcher": ""
+              },
+              {
+                "title": "Node Tail",
+                "marker": "tail",
+                "ariaLabel": null,
+                "expanded": false,
+                "selected": false,
+                "ariaSelected": "false",
+                "checked": false,
+                "checkbox": true,
+                "disabled": false,
+                "className": false,
+                "margin": "",
+                "icon": null,
+                "customIcon": false,
+                "switcher": "Leaf switcher"
+              }
+            ],
+            "changeLabels": "Node ZeroNode Beta",
+            "events": [
+              [
+                "change",
+                [
+                  0,
+                  "b"
+                ],
+                "b"
+              ],
+              [
+                "select",
+                "b",
+                "beta"
+              ]
+            ],
+            "globalIconCalled": false
+          }
+        },
+        {
+          "action": "choose-zero",
+          "view": {
+            "open": true,
+            "selected": null,
+            "tags": [
+              "Node Beta"
+            ],
+            "rows": [
+              {
+                "title": "Node Parent",
+                "marker": "parent",
+                "ariaLabel": null,
+                "expanded": true,
+                "selected": false,
+                "ariaSelected": "false",
+                "checked": false,
+                "checkbox": true,
+                "disabled": false,
+                "className": false,
+                "margin": "",
+                "icon": null,
+                "customIcon": false,
+                "switcher": "p|0|1|0|parent"
+              },
+              {
+                "title": "Node Zero",
+                "marker": "zero",
+                "ariaLabel": null,
+                "expanded": false,
+                "selected": false,
+                "ariaSelected": "false",
+                "checked": false,
+                "checkbox": true,
+                "disabled": false,
+                "className": false,
+                "margin": "",
+                "icon": null,
+                "customIcon": false,
+                "switcher": ""
+              },
+              {
+                "title": "Node Beta",
+                "marker": "beta",
+                "ariaLabel": null,
+                "expanded": false,
+                "selected": false,
+                "ariaSelected": "false",
+                "checked": true,
+                "checkbox": true,
+                "disabled": false,
+                "className": false,
+                "margin": "",
+                "icon": null,
+                "customIcon": false,
+                "switcher": ""
+              },
+              {
+                "title": "Node Disabled",
+                "marker": "disabled",
+                "ariaLabel": null,
+                "expanded": false,
+                "selected": false,
+                "ariaSelected": null,
+                "checked": false,
+                "checkbox": true,
+                "disabled": true,
+                "className": false,
+                "margin": "",
+                "icon": null,
+                "customIcon": false,
+                "switcher": ""
+              },
+              {
+                "title": "Node Tail",
+                "marker": "tail",
+                "ariaLabel": null,
+                "expanded": false,
+                "selected": false,
+                "ariaSelected": "false",
+                "checked": false,
+                "checkbox": true,
+                "disabled": false,
+                "className": false,
+                "margin": "",
+                "icon": null,
+                "customIcon": false,
+                "switcher": "Leaf switcher"
+              }
+            ],
+            "changeLabels": "Node Beta",
+            "events": [
+              [
+                "change",
+                [
+                  0,
+                  "b"
+                ],
+                "b"
+              ],
+              [
+                "select",
+                "b",
+                "beta"
+              ],
+              [
+                "change",
+                [
+                  "b"
+                ],
+                0
+              ]
+            ],
+            "globalIconCalled": false
+          }
+        }
+      ],
+      "calls": {
+        "load": 0,
+        "globalIcon": 0
+      }
+    },
+    {
+      "id": "strict",
+      "initial": {
+        "open": true,
+        "selected": null,
+        "tags": [
+          "Node Zero"
+        ],
+        "rows": [
+          {
+            "title": "Node Parent",
+            "marker": "parent",
+            "ariaLabel": null,
+            "expanded": true,
+            "selected": false,
+            "ariaSelected": "false",
+            "checked": false,
+            "checkbox": true,
+            "disabled": false,
+            "className": false,
+            "margin": "",
+            "icon": null,
+            "customIcon": false,
+            "switcher": "p|0|1|0|parent"
+          },
+          {
+            "title": "Node Zero",
+            "marker": "zero",
+            "ariaLabel": null,
+            "expanded": false,
+            "selected": false,
+            "ariaSelected": "false",
+            "checked": true,
+            "checkbox": true,
+            "disabled": false,
+            "className": false,
+            "margin": "",
+            "icon": null,
+            "customIcon": false,
+            "switcher": ""
+          },
+          {
+            "title": "Node Beta",
+            "marker": "beta",
+            "ariaLabel": null,
+            "expanded": false,
+            "selected": false,
+            "ariaSelected": "false",
+            "checked": false,
+            "checkbox": true,
+            "disabled": false,
+            "className": false,
+            "margin": "",
+            "icon": null,
+            "customIcon": false,
+            "switcher": ""
+          },
+          {
+            "title": "Node Disabled",
+            "marker": "disabled",
+            "ariaLabel": null,
+            "expanded": false,
+            "selected": false,
+            "ariaSelected": null,
+            "checked": false,
+            "checkbox": true,
+            "disabled": true,
+            "className": false,
+            "margin": "",
+            "icon": null,
+            "customIcon": false,
+            "switcher": ""
+          },
+          {
+            "title": "Node Tail",
+            "marker": "tail",
+            "ariaLabel": null,
+            "expanded": false,
+            "selected": false,
+            "ariaSelected": "false",
+            "checked": false,
+            "checkbox": true,
+            "disabled": false,
+            "className": false,
+            "margin": "",
+            "icon": null,
+            "customIcon": false,
+            "switcher": "Leaf switcher"
+          }
+        ],
+        "changeLabels": "",
+        "events": [],
+        "globalIconCalled": false
+      },
+      "steps": [
+        {
+          "action": "choose-beta",
+          "view": {
+            "open": true,
+            "selected": null,
+            "tags": [
+              "Node Zero",
+              "Node Beta"
+            ],
+            "rows": [
+              {
+                "title": "Node Parent",
+                "marker": "parent",
+                "ariaLabel": null,
+                "expanded": true,
+                "selected": false,
+                "ariaSelected": "false",
+                "checked": false,
+                "checkbox": true,
+                "disabled": false,
+                "className": false,
+                "margin": "",
+                "icon": null,
+                "customIcon": false,
+                "switcher": "p|0|1|0|parent"
+              },
+              {
+                "title": "Node Zero",
+                "marker": "zero",
+                "ariaLabel": null,
+                "expanded": false,
+                "selected": false,
+                "ariaSelected": "false",
+                "checked": true,
+                "checkbox": true,
+                "disabled": false,
+                "className": false,
+                "margin": "",
+                "icon": null,
+                "customIcon": false,
+                "switcher": ""
+              },
+              {
+                "title": "Node Beta",
+                "marker": "beta",
+                "ariaLabel": null,
+                "expanded": false,
+                "selected": false,
+                "ariaSelected": "false",
+                "checked": true,
+                "checkbox": true,
+                "disabled": false,
+                "className": false,
+                "margin": "",
+                "icon": null,
+                "customIcon": false,
+                "switcher": ""
+              },
+              {
+                "title": "Node Disabled",
+                "marker": "disabled",
+                "ariaLabel": null,
+                "expanded": false,
+                "selected": false,
+                "ariaSelected": null,
+                "checked": false,
+                "checkbox": true,
+                "disabled": true,
+                "className": false,
+                "margin": "",
+                "icon": null,
+                "customIcon": false,
+                "switcher": ""
+              },
+              {
+                "title": "Node Tail",
+                "marker": "tail",
+                "ariaLabel": null,
+                "expanded": false,
+                "selected": false,
+                "ariaSelected": "false",
+                "checked": false,
+                "checkbox": true,
+                "disabled": false,
+                "className": false,
+                "margin": "",
+                "icon": null,
+                "customIcon": false,
+                "switcher": "Leaf switcher"
+              }
+            ],
+            "changeLabels": "",
+            "events": [
+              [
+                "change",
+                [
+                  {
+                    "label": "Node Zero",
+                    "value": 0
+                  },
+                  {
+                    "label": "Node Beta",
+                    "value": "b"
+                  }
+                ],
+                "b"
+              ],
+              [
+                "select",
+                "b",
+                "beta"
+              ]
+            ],
+            "globalIconCalled": false
+          }
+        },
+        {
+          "action": "choose-zero",
+          "view": {
+            "open": true,
+            "selected": null,
+            "tags": [
+              "Node Beta"
+            ],
+            "rows": [
+              {
+                "title": "Node Parent",
+                "marker": "parent",
+                "ariaLabel": null,
+                "expanded": true,
+                "selected": false,
+                "ariaSelected": "false",
+                "checked": false,
+                "checkbox": true,
+                "disabled": false,
+                "className": false,
+                "margin": "",
+                "icon": null,
+                "customIcon": false,
+                "switcher": "p|0|1|0|parent"
+              },
+              {
+                "title": "Node Zero",
+                "marker": "zero",
+                "ariaLabel": null,
+                "expanded": false,
+                "selected": false,
+                "ariaSelected": "false",
+                "checked": false,
+                "checkbox": true,
+                "disabled": false,
+                "className": false,
+                "margin": "",
+                "icon": null,
+                "customIcon": false,
+                "switcher": ""
+              },
+              {
+                "title": "Node Beta",
+                "marker": "beta",
+                "ariaLabel": null,
+                "expanded": false,
+                "selected": false,
+                "ariaSelected": "false",
+                "checked": true,
+                "checkbox": true,
+                "disabled": false,
+                "className": false,
+                "margin": "",
+                "icon": null,
+                "customIcon": false,
+                "switcher": ""
+              },
+              {
+                "title": "Node Disabled",
+                "marker": "disabled",
+                "ariaLabel": null,
+                "expanded": false,
+                "selected": false,
+                "ariaSelected": null,
+                "checked": false,
+                "checkbox": true,
+                "disabled": true,
+                "className": false,
+                "margin": "",
+                "icon": null,
+                "customIcon": false,
+                "switcher": ""
+              },
+              {
+                "title": "Node Tail",
+                "marker": "tail",
+                "ariaLabel": null,
+                "expanded": false,
+                "selected": false,
+                "ariaSelected": "false",
+                "checked": false,
+                "checkbox": true,
+                "disabled": false,
+                "className": false,
+                "margin": "",
+                "icon": null,
+                "customIcon": false,
+                "switcher": "Leaf switcher"
+              }
+            ],
+            "changeLabels": "",
+            "events": [
+              [
+                "change",
+                [
+                  {
+                    "label": "Node Zero",
+                    "value": 0
+                  },
+                  {
+                    "label": "Node Beta",
+                    "value": "b"
+                  }
+                ],
+                "b"
+              ],
+              [
+                "select",
+                "b",
+                "beta"
+              ],
+              [
+                "change",
+                [
+                  {
+                    "label": "Node Beta",
+                    "value": "b"
+                  }
+                ],
+                0
+              ]
+            ],
+            "globalIconCalled": false
+          }
+        }
+      ],
+      "calls": {
+        "load": 0,
+        "globalIcon": 0
+      }
+    },
+    {
+      "id": "live-order",
+      "initial": {
+        "open": true,
+        "selected": null,
+        "tags": [],
+        "rows": [
+          {
+            "title": "Node Parent",
+            "marker": "parent",
+            "ariaLabel": null,
+            "expanded": true,
+            "selected": false,
+            "ariaSelected": "false",
+            "checked": false,
+            "checkbox": false,
+            "disabled": false,
+            "className": false,
+            "margin": "",
+            "icon": null,
+            "customIcon": false,
+            "switcher": "p|0|1|0|parent"
+          },
+          {
+            "title": "Node Zero",
+            "marker": "zero",
+            "ariaLabel": null,
+            "expanded": false,
+            "selected": true,
+            "ariaSelected": "true",
+            "checked": false,
+            "checkbox": false,
+            "disabled": false,
+            "className": false,
+            "margin": "",
+            "icon": null,
+            "customIcon": false,
+            "switcher": ""
+          },
+          {
+            "title": "Node Beta",
+            "marker": "beta",
+            "ariaLabel": null,
+            "expanded": false,
+            "selected": false,
+            "ariaSelected": "false",
+            "checked": false,
+            "checkbox": false,
+            "disabled": false,
+            "className": false,
+            "margin": "",
+            "icon": null,
+            "customIcon": false,
+            "switcher": ""
+          },
+          {
+            "title": "Node Disabled",
+            "marker": "disabled",
+            "ariaLabel": null,
+            "expanded": false,
+            "selected": false,
+            "ariaSelected": null,
+            "checked": false,
+            "checkbox": false,
+            "disabled": true,
+            "className": false,
+            "margin": "",
+            "icon": null,
+            "customIcon": false,
+            "switcher": ""
+          },
+          {
+            "title": "Node Tail",
+            "marker": "tail",
+            "ariaLabel": null,
+            "expanded": false,
+            "selected": false,
+            "ariaSelected": "false",
+            "checked": false,
+            "checkbox": false,
+            "disabled": false,
+            "className": false,
+            "margin": "",
+            "icon": null,
+            "customIcon": false,
+            "switcher": "Leaf switcher"
+          }
+        ],
+        "changeLabels": "",
+        "events": [],
+        "globalIconCalled": false
+      },
+      "steps": [
+        {
+          "action": "reverse",
+          "view": {
+            "open": true,
+            "selected": null,
+            "tags": [],
+            "rows": [
+              {
+                "title": "Node Parent",
+                "marker": "parent",
+                "ariaLabel": null,
+                "expanded": true,
+                "selected": false,
+                "ariaSelected": "false",
+                "checked": false,
+                "checkbox": false,
+                "disabled": false,
+                "className": false,
+                "margin": "",
+                "icon": null,
+                "customIcon": false,
+                "switcher": "p|0|1|0|parent"
+              },
+              {
+                "title": "Node Disabled",
+                "marker": "disabled",
+                "ariaLabel": null,
+                "expanded": false,
+                "selected": false,
+                "ariaSelected": null,
+                "checked": false,
+                "checkbox": false,
+                "disabled": true,
+                "className": false,
+                "margin": "",
+                "icon": null,
+                "customIcon": false,
+                "switcher": ""
+              },
+              {
+                "title": "Node Beta",
+                "marker": "beta",
+                "ariaLabel": null,
+                "expanded": false,
+                "selected": false,
+                "ariaSelected": "false",
+                "checked": false,
+                "checkbox": false,
+                "disabled": false,
+                "className": false,
+                "margin": "",
+                "icon": null,
+                "customIcon": false,
+                "switcher": ""
+              },
+              {
+                "title": "Node Zero",
+                "marker": "zero",
+                "ariaLabel": null,
+                "expanded": false,
+                "selected": true,
+                "ariaSelected": "true",
+                "checked": false,
+                "checkbox": false,
+                "disabled": false,
+                "className": false,
+                "margin": "",
+                "icon": null,
+                "customIcon": false,
+                "switcher": ""
+              },
+              {
+                "title": "Node Tail",
+                "marker": "tail",
+                "ariaLabel": null,
+                "expanded": false,
+                "selected": false,
+                "ariaSelected": "false",
+                "checked": false,
+                "checkbox": false,
+                "disabled": false,
+                "className": false,
+                "margin": "",
+                "icon": null,
+                "customIcon": false,
+                "switcher": "Leaf switcher"
+              }
+            ],
+            "changeLabels": "",
+            "events": [],
+            "globalIconCalled": false
+          }
+        },
+        {
+          "action": "remove",
+          "view": {
+            "open": true,
+            "selected": null,
+            "tags": [],
+            "rows": [
+              {
+                "title": "Node Parent",
+                "marker": "parent",
+                "ariaLabel": null,
+                "expanded": true,
+                "selected": false,
+                "ariaSelected": "false",
+                "checked": false,
+                "checkbox": false,
+                "disabled": false,
+                "className": false,
+                "margin": "",
+                "icon": null,
+                "customIcon": false,
+                "switcher": "p|0|1|0|parent"
+              },
+              {
+                "title": "Node Disabled",
+                "marker": "disabled",
+                "ariaLabel": null,
+                "expanded": false,
+                "selected": false,
+                "ariaSelected": null,
+                "checked": false,
+                "checkbox": false,
+                "disabled": true,
+                "className": false,
+                "margin": "",
+                "icon": null,
+                "customIcon": false,
+                "switcher": ""
+              },
+              {
+                "title": "Node Zero",
+                "marker": "zero",
+                "ariaLabel": null,
+                "expanded": false,
+                "selected": true,
+                "ariaSelected": "true",
+                "checked": false,
+                "checkbox": false,
+                "disabled": false,
+                "className": false,
+                "margin": "",
+                "icon": null,
+                "customIcon": false,
+                "switcher": ""
+              },
+              {
+                "title": "Node Tail",
+                "marker": "tail",
+                "ariaLabel": null,
+                "expanded": false,
+                "selected": false,
+                "ariaSelected": "false",
+                "checked": false,
+                "checkbox": false,
+                "disabled": false,
+                "className": false,
+                "margin": "",
+                "icon": null,
+                "customIcon": false,
+                "switcher": "Leaf switcher"
+              }
+            ],
+            "changeLabels": "",
+            "events": [],
+            "globalIconCalled": false
+          }
+        },
+        {
+          "action": "add",
+          "view": {
+            "open": true,
+            "selected": null,
+            "tags": [],
+            "rows": [
+              {
+                "title": "Node Parent",
+                "marker": "parent",
+                "ariaLabel": null,
+                "expanded": true,
+                "selected": false,
+                "ariaSelected": "false",
+                "checked": false,
+                "checkbox": false,
+                "disabled": false,
+                "className": false,
+                "margin": "",
+                "icon": null,
+                "customIcon": false,
+                "switcher": "p|0|1|0|parent"
+              },
+              {
+                "title": "Node New",
+                "marker": "new",
+                "ariaLabel": null,
+                "expanded": false,
+                "selected": false,
+                "ariaSelected": "false",
+                "checked": false,
+                "checkbox": false,
+                "disabled": false,
+                "className": false,
+                "margin": "",
+                "icon": null,
+                "customIcon": false,
+                "switcher": ""
+              },
+              {
+                "title": "Node Disabled",
+                "marker": "disabled",
+                "ariaLabel": null,
+                "expanded": false,
+                "selected": false,
+                "ariaSelected": null,
+                "checked": false,
+                "checkbox": false,
+                "disabled": true,
+                "className": false,
+                "margin": "",
+                "icon": null,
+                "customIcon": false,
+                "switcher": ""
+              },
+              {
+                "title": "Node Zero",
+                "marker": "zero",
+                "ariaLabel": null,
+                "expanded": false,
+                "selected": true,
+                "ariaSelected": "true",
+                "checked": false,
+                "checkbox": false,
+                "disabled": false,
+                "className": false,
+                "margin": "",
+                "icon": null,
+                "customIcon": false,
+                "switcher": ""
+              },
+              {
+                "title": "Node Tail",
+                "marker": "tail",
+                "ariaLabel": null,
+                "expanded": false,
+                "selected": false,
+                "ariaSelected": "false",
+                "checked": false,
+                "checkbox": false,
+                "disabled": false,
+                "className": false,
+                "margin": "",
+                "icon": null,
+                "customIcon": false,
+                "switcher": "Leaf switcher"
+              }
+            ],
+            "changeLabels": "",
+            "events": [],
+            "globalIconCalled": false
+          }
+        },
+        {
+          "action": "update",
+          "view": {
+            "open": true,
+            "selected": null,
+            "tags": [],
+            "rows": [
+              {
+                "title": "Node Parent",
+                "marker": "parent",
+                "ariaLabel": null,
+                "expanded": true,
+                "selected": false,
+                "ariaSelected": "false",
+                "checked": false,
+                "checkbox": false,
+                "disabled": false,
+                "className": false,
+                "margin": "",
+                "icon": null,
+                "customIcon": false,
+                "switcher": "p|0|1|0|parent"
+              },
+              {
+                "title": "Node New",
+                "marker": "new",
+                "ariaLabel": null,
+                "expanded": false,
+                "selected": false,
+                "ariaSelected": "false",
+                "checked": false,
+                "checkbox": false,
+                "disabled": false,
+                "className": false,
+                "margin": "",
+                "icon": null,
+                "customIcon": false,
+                "switcher": ""
+              },
+              {
+                "title": "Node Disabled",
+                "marker": "disabled",
+                "ariaLabel": null,
+                "expanded": false,
+                "selected": false,
+                "ariaSelected": null,
+                "checked": false,
+                "checkbox": false,
+                "disabled": true,
+                "className": false,
+                "margin": "",
+                "icon": null,
+                "customIcon": false,
+                "switcher": ""
+              },
+              {
+                "title": "Updated Zero",
+                "marker": "zero",
+                "ariaLabel": null,
+                "expanded": false,
+                "selected": true,
+                "ariaSelected": "true",
+                "checked": false,
+                "checkbox": false,
+                "disabled": false,
+                "className": false,
+                "margin": "",
+                "icon": null,
+                "customIcon": false,
+                "switcher": ""
+              },
+              {
+                "title": "Node Tail",
+                "marker": "tail",
+                "ariaLabel": null,
+                "expanded": false,
+                "selected": false,
+                "ariaSelected": "false",
+                "checked": false,
+                "checkbox": false,
+                "disabled": false,
+                "className": false,
+                "margin": "",
+                "icon": null,
+                "customIcon": false,
+                "switcher": "Leaf switcher"
+              }
+            ],
+            "changeLabels": "",
+            "events": [],
+            "globalIconCalled": false
+          }
+        }
+      ],
+      "calls": {
+        "load": 0,
+        "globalIcon": 0
+      }
+    },
+    {
+      "id": "live-data",
+      "initial": {
+        "open": true,
+        "selected": null,
+        "tags": [],
+        "rows": [
+          {
+            "title": "Node Parent",
+            "marker": "parent",
+            "ariaLabel": null,
+            "expanded": true,
+            "selected": false,
+            "ariaSelected": "false",
+            "checked": false,
+            "checkbox": false,
+            "disabled": false,
+            "className": false,
+            "margin": "",
+            "icon": null,
+            "customIcon": false,
+            "switcher": "p|0|1|0|parent"
+          },
+          {
+            "title": "Node Zero",
+            "marker": "zero",
+            "ariaLabel": null,
+            "expanded": false,
+            "selected": true,
+            "ariaSelected": "true",
+            "checked": false,
+            "checkbox": false,
+            "disabled": false,
+            "className": false,
+            "margin": "",
+            "icon": null,
+            "customIcon": false,
+            "switcher": ""
+          },
+          {
+            "title": "Node Beta",
+            "marker": "beta",
+            "ariaLabel": null,
+            "expanded": false,
+            "selected": false,
+            "ariaSelected": "false",
+            "checked": false,
+            "checkbox": false,
+            "disabled": false,
+            "className": false,
+            "margin": "",
+            "icon": null,
+            "customIcon": false,
+            "switcher": ""
+          },
+          {
+            "title": "Node Disabled",
+            "marker": "disabled",
+            "ariaLabel": null,
+            "expanded": false,
+            "selected": false,
+            "ariaSelected": null,
+            "checked": false,
+            "checkbox": false,
+            "disabled": true,
+            "className": false,
+            "margin": "",
+            "icon": null,
+            "customIcon": false,
+            "switcher": ""
+          },
+          {
+            "title": "Node Tail",
+            "marker": "tail",
+            "ariaLabel": null,
+            "expanded": false,
+            "selected": false,
+            "ariaSelected": "false",
+            "checked": false,
+            "checkbox": false,
+            "disabled": false,
+            "className": false,
+            "margin": "",
+            "icon": null,
+            "customIcon": false,
+            "switcher": "Leaf switcher"
+          }
+        ],
+        "changeLabels": "",
+        "events": [],
+        "globalIconCalled": false
+      },
+      "steps": [
+        {
+          "action": "data",
+          "view": {
+            "open": true,
+            "selected": null,
+            "tags": [],
+            "rows": [
+              {
+                "title": "Data Override",
+                "marker": "override",
+                "ariaLabel": null,
+                "expanded": false,
+                "selected": false,
+                "ariaSelected": "false",
+                "checked": false,
+                "checkbox": false,
+                "disabled": false,
+                "className": false,
+                "margin": "",
+                "icon": null,
+                "customIcon": false,
+                "switcher": ""
+              }
+            ],
+            "changeLabels": "",
+            "events": [],
+            "globalIconCalled": false
+          }
+        },
+        {
+          "action": "empty-data",
+          "view": {
+            "open": true,
+            "selected": null,
+            "tags": [],
+            "rows": [],
+            "changeLabels": "",
+            "events": [],
+            "globalIconCalled": false
+          }
+        },
+        {
+          "action": "declarations",
+          "view": {
+            "open": true,
+            "selected": null,
+            "tags": [],
+            "rows": [
+              {
+                "title": "Node Parent",
+                "marker": "parent",
+                "ariaLabel": null,
+                "expanded": true,
+                "selected": false,
+                "ariaSelected": "false",
+                "checked": false,
+                "checkbox": false,
+                "disabled": false,
+                "className": false,
+                "margin": "",
+                "icon": null,
+                "customIcon": false,
+                "switcher": "p|0|1|0|parent"
+              },
+              {
+                "title": "Node Zero",
+                "marker": "zero",
+                "ariaLabel": null,
+                "expanded": false,
+                "selected": true,
+                "ariaSelected": "true",
+                "checked": false,
+                "checkbox": false,
+                "disabled": false,
+                "className": false,
+                "margin": "",
+                "icon": null,
+                "customIcon": false,
+                "switcher": ""
+              },
+              {
+                "title": "Node Beta",
+                "marker": "beta",
+                "ariaLabel": null,
+                "expanded": false,
+                "selected": false,
+                "ariaSelected": "false",
+                "checked": false,
+                "checkbox": false,
+                "disabled": false,
+                "className": false,
+                "margin": "",
+                "icon": null,
+                "customIcon": false,
+                "switcher": ""
+              },
+              {
+                "title": "Node Disabled",
+                "marker": "disabled",
+                "ariaLabel": null,
+                "expanded": false,
+                "selected": false,
+                "ariaSelected": null,
+                "checked": false,
+                "checkbox": false,
+                "disabled": true,
+                "className": false,
+                "margin": "",
+                "icon": null,
+                "customIcon": false,
+                "switcher": ""
+              },
+              {
+                "title": "Node Tail",
+                "marker": "tail",
+                "ariaLabel": null,
+                "expanded": false,
+                "selected": false,
+                "ariaSelected": "false",
+                "checked": false,
+                "checkbox": false,
+                "disabled": false,
+                "className": false,
+                "margin": "",
+                "icon": null,
+                "customIcon": false,
+                "switcher": "Leaf switcher"
+              }
+            ],
+            "changeLabels": "",
+            "events": [],
+            "globalIconCalled": false
+          }
+        }
+      ],
+      "calls": {
+        "load": 0,
+        "globalIcon": 0
+      }
+    },
+    {
+      "id": "expanded-lazy",
+      "initial": {
+        "open": true,
+        "selected": null,
+        "tags": [],
+        "rows": [
+          {
+            "title": "Node Parent",
+            "marker": "parent",
+            "ariaLabel": null,
+            "expanded": true,
+            "selected": false,
+            "ariaSelected": "false",
+            "checked": false,
+            "checkbox": false,
+            "disabled": false,
+            "className": false,
+            "margin": "",
+            "icon": "p|0|1|1|1|parent",
+            "customIcon": true,
+            "switcher": "p|0|1|1|parent"
+          },
+          {
+            "title": "Node Tail",
+            "marker": "tail",
+            "ariaLabel": null,
+            "expanded": false,
+            "selected": false,
+            "ariaSelected": "false",
+            "checked": false,
+            "checkbox": false,
+            "disabled": false,
+            "className": false,
+            "margin": "",
+            "icon": "Icon tail",
+            "customIcon": true,
+            "switcher": "Leaf switcher"
+          }
+        ],
+        "changeLabels": "",
+        "events": [],
+        "globalIconCalled": false
+      },
+      "steps": [
+        {
+          "action": "resolve",
+          "view": {
+            "open": true,
+            "selected": null,
+            "tags": [],
+            "rows": [
+              {
+                "title": "Node Parent",
+                "marker": "parent",
+                "ariaLabel": null,
+                "expanded": true,
+                "selected": false,
+                "ariaSelected": "false",
+                "checked": false,
+                "checkbox": false,
+                "disabled": false,
+                "className": false,
+                "margin": "",
+                "icon": "p|0|1|1|0|parent",
+                "customIcon": true,
+                "switcher": "p|0|1|0|parent"
+              },
+              {
+                "title": "Node Zero",
+                "marker": "zero",
+                "ariaLabel": null,
+                "expanded": false,
+                "selected": false,
+                "ariaSelected": "false",
+                "checked": false,
+                "checkbox": false,
+                "disabled": false,
+                "className": false,
+                "margin": "",
+                "icon": "Icon zero",
+                "customIcon": true,
+                "switcher": "0|0"
+              },
+              {
+                "title": "Node Beta",
+                "marker": "beta",
+                "ariaLabel": null,
+                "expanded": false,
+                "selected": false,
+                "ariaSelected": "false",
+                "checked": false,
+                "checkbox": false,
+                "disabled": false,
+                "className": false,
+                "margin": "",
+                "icon": "b|0|0|0|0|beta",
+                "customIcon": true,
+                "switcher": "b|0"
+              },
+              {
+                "title": "Node Disabled",
+                "marker": "disabled",
+                "ariaLabel": null,
+                "expanded": false,
+                "selected": false,
+                "ariaSelected": null,
+                "checked": false,
+                "checkbox": false,
+                "disabled": true,
+                "className": false,
+                "margin": "",
+                "icon": "Icon disabled",
+                "customIcon": true,
+                "switcher": "d|0"
+              },
+              {
+                "title": "Node Tail",
+                "marker": "tail",
+                "ariaLabel": null,
+                "expanded": false,
+                "selected": false,
+                "ariaSelected": "false",
+                "checked": false,
+                "checkbox": false,
+                "disabled": false,
+                "className": false,
+                "margin": "",
+                "icon": "Icon tail",
+                "customIcon": true,
+                "switcher": "Leaf switcher"
+              }
+            ],
+            "changeLabels": "",
+            "events": [
+              [
+                "load",
+                [
+                  "p"
+                ]
+              ]
+            ],
+            "globalIconCalled": false
+          }
+        },
+        {
+          "action": "choose-zero",
+          "view": {
+            "open": false,
+            "selected": "Node Zero",
+            "tags": [],
+            "rows": [],
+            "changeLabels": "Node Zero",
+            "events": [
+              [
+                "load",
+                [
+                  "p"
+                ]
+              ],
+              [
+                "change",
+                0,
+                0
+              ],
+              [
+                "select",
+                0,
+                "zero"
+              ],
+              [
+                "open",
+                false
+              ]
+            ],
+            "globalIconCalled": false
+          }
+        }
+      ],
+      "calls": {
+        "load": 1,
+        "globalIcon": 0
+      }
+    },
+    {
+      "id": "rich-title",
+      "initial": {
+        "open": true,
+        "selected": null,
+        "tags": [],
+        "rows": [
+          {
+            "title": "Node Parent",
+            "marker": "parent",
+            "ariaLabel": null,
+            "expanded": true,
+            "selected": false,
+            "ariaSelected": "false",
+            "checked": false,
+            "checkbox": false,
+            "disabled": false,
+            "className": false,
+            "margin": "",
+            "icon": null,
+            "customIcon": false,
+            "switcher": "p|0|1|0|parent"
+          },
+          {
+            "title": "Node Zero",
+            "marker": "zero",
+            "ariaLabel": null,
+            "expanded": false,
+            "selected": true,
+            "ariaSelected": "true",
+            "checked": false,
+            "checkbox": false,
+            "disabled": false,
+            "className": false,
+            "margin": "",
+            "icon": null,
+            "customIcon": false,
+            "switcher": ""
+          },
+          {
+            "title": "Node Beta",
+            "marker": "beta",
+            "ariaLabel": null,
+            "expanded": false,
+            "selected": false,
+            "ariaSelected": "false",
+            "checked": false,
+            "checkbox": false,
+            "disabled": false,
+            "className": false,
+            "margin": "",
+            "icon": null,
+            "customIcon": false,
+            "switcher": ""
+          },
+          {
+            "title": "Node Disabled",
+            "marker": "disabled",
+            "ariaLabel": null,
+            "expanded": false,
+            "selected": false,
+            "ariaSelected": null,
+            "checked": false,
+            "checkbox": false,
+            "disabled": true,
+            "className": false,
+            "margin": "",
+            "icon": null,
+            "customIcon": false,
+            "switcher": ""
+          },
+          {
+            "title": "Node Tail",
+            "marker": "tail",
+            "ariaLabel": null,
+            "expanded": false,
+            "selected": false,
+            "ariaSelected": "false",
+            "checked": false,
+            "checkbox": false,
+            "disabled": false,
+            "className": false,
+            "margin": "",
+            "icon": null,
+            "customIcon": false,
+            "switcher": "Leaf switcher"
+          }
+        ],
+        "changeLabels": "",
+        "events": [],
+        "globalIconCalled": false
+      },
+      "steps": [
+        {
+          "action": "choose-zero",
+          "view": {
+            "open": false,
+            "selected": "Node Zero",
+            "tags": [],
+            "rows": [],
+            "changeLabels": "Node Zero",
+            "events": [
+              [
+                "change",
+                0,
+                0
+              ],
+              [
+                "select",
+                0,
+                "zero"
+              ],
+              [
+                "open",
+                false
+              ]
+            ],
+            "globalIconCalled": false
+          }
+        },
+        {
+          "action": "open",
+          "view": {
+            "open": true,
+            "selected": null,
+            "tags": [],
+            "rows": [
+              {
+                "title": "Node Parent",
+                "marker": "parent",
+                "ariaLabel": null,
+                "expanded": true,
+                "selected": false,
+                "ariaSelected": "false",
+                "checked": false,
+                "checkbox": false,
+                "disabled": false,
+                "className": false,
+                "margin": "",
+                "icon": null,
+                "customIcon": false,
+                "switcher": "p|0|1|0|parent"
+              },
+              {
+                "title": "Node Zero",
+                "marker": "zero",
+                "ariaLabel": null,
+                "expanded": false,
+                "selected": true,
+                "ariaSelected": "true",
+                "checked": false,
+                "checkbox": false,
+                "disabled": false,
+                "className": false,
+                "margin": "",
+                "icon": null,
+                "customIcon": false,
+                "switcher": ""
+              },
+              {
+                "title": "Node Beta",
+                "marker": "beta",
+                "ariaLabel": null,
+                "expanded": false,
+                "selected": false,
+                "ariaSelected": "false",
+                "checked": false,
+                "checkbox": false,
+                "disabled": false,
+                "className": false,
+                "margin": "",
+                "icon": null,
+                "customIcon": false,
+                "switcher": ""
+              },
+              {
+                "title": "Node Disabled",
+                "marker": "disabled",
+                "ariaLabel": null,
+                "expanded": false,
+                "selected": false,
+                "ariaSelected": null,
+                "checked": false,
+                "checkbox": false,
+                "disabled": true,
+                "className": false,
+                "margin": "",
+                "icon": null,
+                "customIcon": false,
+                "switcher": ""
+              },
+              {
+                "title": "Node Tail",
+                "marker": "tail",
+                "ariaLabel": null,
+                "expanded": false,
+                "selected": false,
+                "ariaSelected": "false",
+                "checked": false,
+                "checkbox": false,
+                "disabled": false,
+                "className": false,
+                "margin": "",
+                "icon": null,
+                "customIcon": false,
+                "switcher": "Leaf switcher"
+              }
+            ],
+            "changeLabels": "Node Zero",
+            "events": [
+              [
+                "change",
+                0,
+                0
+              ],
+              [
+                "select",
+                0,
+                "zero"
+              ],
+              [
+                "open",
+                false
+              ],
+              [
+                "open",
+                true
+              ]
+            ],
+            "globalIconCalled": false
+          }
+        },
+        {
+          "action": "update",
+          "view": {
+            "open": true,
+            "selected": null,
+            "tags": [],
+            "rows": [
+              {
+                "title": "Node Parent",
+                "marker": "parent",
+                "ariaLabel": null,
+                "expanded": true,
+                "selected": false,
+                "ariaSelected": "false",
+                "checked": false,
+                "checkbox": false,
+                "disabled": false,
+                "className": false,
+                "margin": "",
+                "icon": null,
+                "customIcon": false,
+                "switcher": "p|0|1|0|parent"
+              },
+              {
+                "title": "Updated Zero",
+                "marker": "zero",
+                "ariaLabel": null,
+                "expanded": false,
+                "selected": true,
+                "ariaSelected": "true",
+                "checked": false,
+                "checkbox": false,
+                "disabled": false,
+                "className": false,
+                "margin": "",
+                "icon": null,
+                "customIcon": false,
+                "switcher": ""
+              },
+              {
+                "title": "Node Beta",
+                "marker": "beta",
+                "ariaLabel": null,
+                "expanded": false,
+                "selected": false,
+                "ariaSelected": "false",
+                "checked": false,
+                "checkbox": false,
+                "disabled": false,
+                "className": false,
+                "margin": "",
+                "icon": null,
+                "customIcon": false,
+                "switcher": ""
+              },
+              {
+                "title": "Node Disabled",
+                "marker": "disabled",
+                "ariaLabel": null,
+                "expanded": false,
+                "selected": false,
+                "ariaSelected": null,
+                "checked": false,
+                "checkbox": false,
+                "disabled": true,
+                "className": false,
+                "margin": "",
+                "icon": null,
+                "customIcon": false,
+                "switcher": ""
+              },
+              {
+                "title": "Node Tail",
+                "marker": "tail",
+                "ariaLabel": null,
+                "expanded": false,
+                "selected": false,
+                "ariaSelected": "false",
+                "checked": false,
+                "checkbox": false,
+                "disabled": false,
+                "className": false,
+                "margin": "",
+                "icon": null,
+                "customIcon": false,
+                "switcher": "Leaf switcher"
+              }
+            ],
+            "changeLabels": "Updated Zero",
+            "events": [
+              [
+                "change",
+                0,
+                0
+              ],
+              [
+                "select",
+                0,
+                "zero"
+              ],
+              [
+                "open",
+                false
+              ],
+              [
+                "open",
+                true
+              ]
+            ],
+            "globalIconCalled": false
+          }
+        }
+      ],
+      "calls": {
+        "load": 0,
+        "globalIcon": 0
+      }
+    },
+    {
+      "id": "disabled",
+      "initial": {
+        "open": false,
+        "selected": "Node Zero",
+        "tags": [],
+        "rows": [],
+        "changeLabels": "",
+        "events": [],
+        "globalIconCalled": false
+      },
+      "steps": [],
+      "calls": {
+        "load": 0,
+        "globalIcon": 0
+      }
+    },
+    {
+      "id": "closed",
+      "initial": {
+        "open": false,
+        "selected": "Node Zero",
+        "tags": [],
+        "rows": [],
+        "changeLabels": "",
+        "events": [],
+        "globalIconCalled": false
+      },
+      "steps": [
+        {
+          "action": "open",
+          "view": {
+            "open": true,
+            "selected": null,
+            "tags": [],
+            "rows": [
+              {
+                "title": "Node Parent",
+                "marker": "parent",
+                "ariaLabel": null,
+                "expanded": true,
+                "selected": false,
+                "ariaSelected": "false",
+                "checked": false,
+                "checkbox": false,
+                "disabled": false,
+                "className": false,
+                "margin": "",
+                "icon": null,
+                "customIcon": false,
+                "switcher": "p|0|1|0|parent"
+              },
+              {
+                "title": "Node Zero",
+                "marker": "zero",
+                "ariaLabel": null,
+                "expanded": false,
+                "selected": true,
+                "ariaSelected": "true",
+                "checked": false,
+                "checkbox": false,
+                "disabled": false,
+                "className": false,
+                "margin": "",
+                "icon": null,
+                "customIcon": false,
+                "switcher": ""
+              },
+              {
+                "title": "Node Beta",
+                "marker": "beta",
+                "ariaLabel": null,
+                "expanded": false,
+                "selected": false,
+                "ariaSelected": "false",
+                "checked": false,
+                "checkbox": false,
+                "disabled": false,
+                "className": false,
+                "margin": "",
+                "icon": null,
+                "customIcon": false,
+                "switcher": ""
+              },
+              {
+                "title": "Node Disabled",
+                "marker": "disabled",
+                "ariaLabel": null,
+                "expanded": false,
+                "selected": false,
+                "ariaSelected": null,
+                "checked": false,
+                "checkbox": false,
+                "disabled": true,
+                "className": false,
+                "margin": "",
+                "icon": null,
+                "customIcon": false,
+                "switcher": ""
+              },
+              {
+                "title": "Node Tail",
+                "marker": "tail",
+                "ariaLabel": null,
+                "expanded": false,
+                "selected": false,
+                "ariaSelected": "false",
+                "checked": false,
+                "checkbox": false,
+                "disabled": false,
+                "className": false,
+                "margin": "",
+                "icon": null,
+                "customIcon": false,
+                "switcher": "Leaf switcher"
+              }
+            ],
+            "changeLabels": "",
+            "events": [
+              [
+                "open",
+                true
+              ]
+            ],
+            "globalIconCalled": false
+          }
+        },
+        {
+          "action": "choose-beta",
+          "view": {
+            "open": false,
+            "selected": "Node Beta",
+            "tags": [],
+            "rows": [],
+            "changeLabels": "Node Beta",
+            "events": [
+              [
+                "open",
+                true
+              ],
+              [
+                "change",
+                "b",
+                "b"
+              ],
+              [
+                "select",
+                "b",
+                "beta"
+              ],
+              [
+                "open",
+                false
+              ]
+            ],
+            "globalIconCalled": false
+          }
+        }
+      ],
+      "calls": {
+        "load": 0,
+        "globalIcon": 0
+      }
+    },
+    {
+      "id": "long-declarations",
+      "initial": {
+        "open": true,
+        "selected": null,
+        "tags": [],
+        "rows": [
+          {
+            "title": "Node 57",
+            "marker": "item-57",
+            "ariaLabel": null,
+            "expanded": false,
+            "selected": false,
+            "ariaSelected": "false",
+            "checked": false,
+            "checkbox": false,
+            "disabled": false,
+            "className": false,
+            "margin": "",
+            "icon": null,
+            "customIcon": false,
+            "switcher": ""
+          },
+          {
+            "title": "Node 58",
+            "marker": "item-58",
+            "ariaLabel": null,
+            "expanded": false,
+            "selected": false,
+            "ariaSelected": "false",
+            "checked": false,
+            "checkbox": false,
+            "disabled": false,
+            "className": false,
+            "margin": "",
+            "icon": null,
+            "customIcon": false,
+            "switcher": ""
+          },
+          {
+            "title": "Node 59",
+            "marker": "item-59",
+            "ariaLabel": null,
+            "expanded": false,
+            "selected": false,
+            "ariaSelected": "false",
+            "checked": false,
+            "checkbox": false,
+            "disabled": false,
+            "className": false,
+            "margin": "",
+            "icon": null,
+            "customIcon": false,
+            "switcher": ""
+          },
+          {
+            "title": "Node 60",
+            "marker": "item-60",
+            "ariaLabel": null,
+            "expanded": false,
+            "selected": true,
+            "ariaSelected": "true",
+            "checked": false,
+            "checkbox": false,
+            "disabled": false,
+            "className": false,
+            "margin": "",
+            "icon": null,
+            "customIcon": false,
+            "switcher": ""
+          },
+          {
+            "title": "Node 61",
+            "marker": "item-61",
+            "ariaLabel": null,
+            "expanded": false,
+            "selected": false,
+            "ariaSelected": "false",
+            "checked": false,
+            "checkbox": false,
+            "disabled": false,
+            "className": false,
+            "margin": "",
+            "icon": null,
+            "customIcon": false,
+            "switcher": ""
+          },
+          {
+            "title": "Node 62",
+            "marker": "item-62",
+            "ariaLabel": null,
+            "expanded": false,
+            "selected": false,
+            "ariaSelected": "false",
+            "checked": false,
+            "checkbox": false,
+            "disabled": false,
+            "className": false,
+            "margin": "",
+            "icon": null,
+            "customIcon": false,
+            "switcher": ""
+          }
+        ],
+        "changeLabels": "",
+        "events": [],
+        "globalIconCalled": false
+      },
+      "steps": [],
+      "calls": {
+        "load": 0,
+        "globalIcon": 0
+      }
+    },
+    {
+      "id": "missing-title",
+      "initial": {
+        "open": true,
+        "selected": null,
+        "tags": [],
+        "rows": [
+          {
+            "title": "---",
+            "marker": "untitled",
+            "ariaLabel": null,
+            "expanded": false,
+            "selected": false,
+            "ariaSelected": "false",
+            "checked": false,
+            "checkbox": false,
+            "disabled": false,
+            "className": false,
+            "margin": "",
+            "icon": null,
+            "customIcon": false,
+            "switcher": ""
+          },
+          {
+            "title": "",
+            "marker": "empty",
+            "ariaLabel": null,
+            "expanded": false,
+            "selected": false,
+            "ariaSelected": "false",
+            "checked": false,
+            "checkbox": false,
+            "disabled": false,
+            "className": false,
+            "margin": "",
+            "icon": null,
+            "customIcon": false,
+            "switcher": ""
+          },
+          {
+            "title": "0",
+            "marker": "zero",
+            "ariaLabel": null,
+            "expanded": false,
+            "selected": false,
+            "ariaSelected": "false",
+            "checked": false,
+            "checkbox": false,
+            "disabled": false,
+            "className": false,
+            "margin": "",
+            "icon": null,
+            "customIcon": false,
+            "switcher": ""
+          },
+          {
+            "title": "",
+            "marker": "null",
+            "ariaLabel": null,
+            "expanded": false,
+            "selected": false,
+            "ariaSelected": "false",
+            "checked": false,
+            "checkbox": false,
+            "disabled": false,
+            "className": false,
+            "margin": "",
+            "icon": null,
+            "customIcon": false,
+            "switcher": ""
+          },
+          {
+            "title": "Label fallback",
+            "marker": "fallback",
+            "ariaLabel": null,
+            "expanded": false,
+            "selected": false,
+            "ariaSelected": "false",
+            "checked": false,
+            "checkbox": false,
+            "disabled": false,
+            "className": false,
+            "margin": "",
+            "icon": null,
+            "customIcon": false,
+            "switcher": ""
+          }
+        ],
+        "changeLabels": "",
+        "events": [],
+        "globalIconCalled": false
+      },
+      "steps": [],
+      "calls": {
+        "load": 0,
+        "globalIcon": 0
+      }
+    },
+    {
+      "id": "node-flags",
+      "initial": {
+        "open": true,
+        "selected": null,
+        "tags": [
+          "Node Zero"
+        ],
+        "rows": [
+          {
+            "title": "Node Parent",
+            "marker": "parent",
+            "ariaLabel": null,
+            "expanded": true,
+            "selected": false,
+            "ariaSelected": "false",
+            "checked": true,
+            "checkbox": true,
+            "disabled": false,
+            "className": false,
+            "margin": "",
+            "icon": null,
+            "customIcon": false,
+            "switcher": "p|0|1|0|parent"
+          },
+          {
+            "title": "Node Zero",
+            "marker": "zero",
+            "ariaLabel": null,
+            "expanded": false,
+            "selected": false,
+            "ariaSelected": null,
+            "checked": true,
+            "checkbox": true,
+            "disabled": false,
+            "className": false,
+            "margin": "",
+            "icon": null,
+            "customIcon": false,
+            "switcher": ""
+          },
+          {
+            "title": "Node Beta",
+            "marker": "beta",
+            "ariaLabel": null,
+            "expanded": false,
+            "selected": false,
+            "ariaSelected": "false",
+            "checked": false,
+            "checkbox": false,
+            "disabled": false,
+            "className": false,
+            "margin": "",
+            "icon": null,
+            "customIcon": false,
+            "switcher": ""
+          },
+          {
+            "title": "Node Disabled",
+            "marker": "disabled",
+            "ariaLabel": null,
+            "expanded": false,
+            "selected": false,
+            "ariaSelected": null,
+            "checked": false,
+            "checkbox": true,
+            "disabled": true,
+            "className": false,
+            "margin": "",
+            "icon": null,
+            "customIcon": false,
+            "switcher": ""
+          },
+          {
+            "title": "Node Tail",
+            "marker": "tail",
+            "ariaLabel": null,
+            "expanded": false,
+            "selected": false,
+            "ariaSelected": "false",
+            "checked": false,
+            "checkbox": true,
+            "disabled": false,
+            "className": false,
+            "margin": "",
+            "icon": null,
+            "customIcon": false,
+            "switcher": "Leaf switcher"
+          }
+        ],
+        "changeLabels": "",
+        "events": [],
+        "globalIconCalled": false
+      },
+      "steps": [],
+      "calls": {
+        "load": 0,
+        "globalIcon": 0
+      }
+    }
+  ],
+  "observations": [
+    {
+      "id": "lazy",
+      "initial": {
+        "open": true,
+        "selected": null,
+        "tags": [],
+        "rows": [
+          {
+            "title": "Node Parent",
+            "marker": "parent",
+            "ariaLabel": null,
+            "expanded": false,
+            "selected": false,
+            "ariaSelected": "false",
+            "checked": false,
+            "checkbox": false,
+            "disabled": false,
+            "className": false,
+            "margin": "",
+            "icon": "p|0|0|1|0|parent",
+            "customIcon": true,
+            "switcher": "p|0|0|0|parent"
+          },
+          {
+            "title": "Node Tail",
+            "marker": "tail",
+            "ariaLabel": null,
+            "expanded": false,
+            "selected": false,
+            "ariaSelected": "false",
+            "checked": false,
+            "checkbox": false,
+            "disabled": false,
+            "className": false,
+            "margin": "",
+            "icon": "Icon tail",
+            "customIcon": true,
+            "switcher": "Leaf switcher"
+          }
+        ],
+        "changeLabels": "",
+        "events": [],
+        "globalIconCalled": false
+      },
+      "steps": [
+        {
+          "action": "expand",
+          "view": {
+            "open": true,
+            "selected": null,
+            "tags": [],
+            "rows": [
+              {
+                "title": "Node Parent",
+                "marker": "parent",
+                "ariaLabel": null,
+                "expanded": true,
+                "selected": false,
+                "ariaSelected": "false",
+                "checked": false,
+                "checkbox": false,
+                "disabled": false,
+                "className": false,
+                "margin": "",
+                "icon": "p|0|1|0|1|parent",
+                "customIcon": true,
+                "switcher": "p|0|1|1|parent"
+              },
+              {
+                "title": "Node Tail",
+                "marker": "tail",
+                "ariaLabel": null,
+                "expanded": false,
+                "selected": false,
+                "ariaSelected": "false",
+                "checked": false,
+                "checkbox": false,
+                "disabled": false,
+                "className": false,
+                "margin": "",
+                "icon": "Icon tail",
+                "customIcon": true,
+                "switcher": "Leaf switcher"
+              }
+            ],
+            "changeLabels": "",
+            "events": [
+              [
+                "expand",
+                [
+                  "p"
+                ]
+              ]
+            ],
+            "globalIconCalled": false
+          }
+        },
+        {
+          "action": "resolve",
+          "view": {
+            "open": true,
+            "selected": null,
+            "tags": [],
+            "rows": [
+              {
+                "title": "Node Parent",
+                "marker": "parent",
+                "ariaLabel": null,
+                "expanded": true,
+                "selected": false,
+                "ariaSelected": "false",
+                "checked": false,
+                "checkbox": false,
+                "disabled": false,
+                "className": false,
+                "margin": "",
+                "icon": "p|0|1|0|0|parent",
+                "customIcon": true,
+                "switcher": "p|0|1|0|parent"
+              },
+              {
+                "title": "Node Zero",
+                "marker": "zero",
+                "ariaLabel": null,
+                "expanded": false,
+                "selected": false,
+                "ariaSelected": "false",
+                "checked": false,
+                "checkbox": false,
+                "disabled": false,
+                "className": false,
+                "margin": "",
+                "icon": "Icon zero",
+                "customIcon": true,
+                "switcher": "0|0"
+              },
+              {
+                "title": "Node Beta",
+                "marker": "beta",
+                "ariaLabel": null,
+                "expanded": false,
+                "selected": false,
+                "ariaSelected": "false",
+                "checked": false,
+                "checkbox": false,
+                "disabled": false,
+                "className": false,
+                "margin": "",
+                "icon": "b|0|0|0|0|beta",
+                "customIcon": true,
+                "switcher": "b|0"
+              },
+              {
+                "title": "Node Disabled",
+                "marker": "disabled",
+                "ariaLabel": null,
+                "expanded": false,
+                "selected": false,
+                "ariaSelected": null,
+                "checked": false,
+                "checkbox": false,
+                "disabled": true,
+                "className": false,
+                "margin": "",
+                "icon": "Icon disabled",
+                "customIcon": true,
+                "switcher": "d|0"
+              },
+              {
+                "title": "Node Tail",
+                "marker": "tail",
+                "ariaLabel": null,
+                "expanded": false,
+                "selected": false,
+                "ariaSelected": "false",
+                "checked": false,
+                "checkbox": false,
+                "disabled": false,
+                "className": false,
+                "margin": "",
+                "icon": "Icon tail",
+                "customIcon": true,
+                "switcher": "Leaf switcher"
+              }
+            ],
+            "changeLabels": "",
+            "events": [
+              [
+                "expand",
+                [
+                  "p"
+                ]
+              ],
+              [
+                "load",
+                [
+                  "p"
+                ]
+              ],
+              [
+                "load",
+                [
+                  "p"
+                ]
+              ]
+            ],
+            "globalIconCalled": false
+          }
+        },
+        {
+          "action": "choose-zero",
+          "view": {
+            "open": false,
+            "selected": "Node Zero",
+            "tags": [],
+            "rows": [],
+            "changeLabels": "Node Zero",
+            "events": [
+              [
+                "expand",
+                [
+                  "p"
+                ]
+              ],
+              [
+                "load",
+                [
+                  "p"
+                ]
+              ],
+              [
+                "load",
+                [
+                  "p"
+                ]
+              ],
+              [
+                "change",
+                0,
+                0
+              ],
+              [
+                "select",
+                0,
+                "zero"
+              ],
+              [
+                "open",
+                false
+              ]
+            ],
+            "globalIconCalled": false
+          }
+        }
+      ],
+      "calls": {
+        "load": 2,
+        "globalIcon": 0
+      }
+    },
+    {
+      "id": "literal-title-observation",
+      "initial": {
+        "open": true,
+        "selected": null,
+        "tags": [],
+        "rows": [
+          {
+            "title": "Node Parent",
+            "marker": "parent",
+            "ariaLabel": null,
+            "expanded": true,
+            "selected": false,
+            "ariaSelected": "false",
+            "checked": false,
+            "checkbox": false,
+            "disabled": false,
+            "className": false,
+            "margin": "",
+            "icon": null,
+            "customIcon": false,
+            "switcher": "p|0|1|0|parent"
+          },
+          {
+            "title": "Node Zero",
+            "marker": "zero",
+            "ariaLabel": null,
+            "expanded": false,
+            "selected": true,
+            "ariaSelected": "true",
+            "checked": false,
+            "checkbox": false,
+            "disabled": false,
+            "className": false,
+            "margin": "",
+            "icon": null,
+            "customIcon": false,
+            "switcher": ""
+          },
+          {
+            "title": "Node Beta",
+            "marker": "beta",
+            "ariaLabel": null,
+            "expanded": false,
+            "selected": false,
+            "ariaSelected": "false",
+            "checked": false,
+            "checkbox": false,
+            "disabled": false,
+            "className": false,
+            "margin": "",
+            "icon": null,
+            "customIcon": false,
+            "switcher": ""
+          },
+          {
+            "title": "Node Disabled",
+            "marker": "disabled",
+            "ariaLabel": null,
+            "expanded": false,
+            "selected": false,
+            "ariaSelected": null,
+            "checked": false,
+            "checkbox": false,
+            "disabled": true,
+            "className": false,
+            "margin": "",
+            "icon": null,
+            "customIcon": false,
+            "switcher": ""
+          },
+          {
+            "title": "Node Tail",
+            "marker": "tail",
+            "ariaLabel": null,
+            "expanded": false,
+            "selected": false,
+            "ariaSelected": "false",
+            "checked": false,
+            "checkbox": false,
+            "disabled": false,
+            "className": false,
+            "margin": "",
+            "icon": null,
+            "customIcon": false,
+            "switcher": "Leaf switcher"
+          }
+        ],
+        "changeLabels": "",
+        "events": [],
+        "globalIconCalled": false
+      },
+      "steps": [
+        {
+          "action": "choose-zero",
+          "view": {
+            "open": false,
+            "selected": "Node Zero",
+            "tags": [],
+            "rows": [],
+            "changeLabels": "Node Zero",
+            "events": [
+              [
+                "change",
+                0,
+                0
+              ],
+              [
+                "select",
+                0,
+                "zero"
+              ],
+              [
+                "open",
+                false
+              ]
+            ],
+            "globalIconCalled": false
+          }
+        },
+        {
+          "action": "open",
+          "view": {
+            "open": true,
+            "selected": null,
+            "tags": [],
+            "rows": [
+              {
+                "title": "Node Parent",
+                "marker": "parent",
+                "ariaLabel": null,
+                "expanded": true,
+                "selected": false,
+                "ariaSelected": "false",
+                "checked": false,
+                "checkbox": false,
+                "disabled": false,
+                "className": false,
+                "margin": "",
+                "icon": null,
+                "customIcon": false,
+                "switcher": "p|0|1|0|parent"
+              },
+              {
+                "title": "Node Zero",
+                "marker": "zero",
+                "ariaLabel": null,
+                "expanded": false,
+                "selected": true,
+                "ariaSelected": "true",
+                "checked": false,
+                "checkbox": false,
+                "disabled": false,
+                "className": false,
+                "margin": "",
+                "icon": null,
+                "customIcon": false,
+                "switcher": ""
+              },
+              {
+                "title": "Node Beta",
+                "marker": "beta",
+                "ariaLabel": null,
+                "expanded": false,
+                "selected": false,
+                "ariaSelected": "false",
+                "checked": false,
+                "checkbox": false,
+                "disabled": false,
+                "className": false,
+                "margin": "",
+                "icon": null,
+                "customIcon": false,
+                "switcher": ""
+              },
+              {
+                "title": "Node Disabled",
+                "marker": "disabled",
+                "ariaLabel": null,
+                "expanded": false,
+                "selected": false,
+                "ariaSelected": null,
+                "checked": false,
+                "checkbox": false,
+                "disabled": true,
+                "className": false,
+                "margin": "",
+                "icon": null,
+                "customIcon": false,
+                "switcher": ""
+              },
+              {
+                "title": "Node Tail",
+                "marker": "tail",
+                "ariaLabel": null,
+                "expanded": false,
+                "selected": false,
+                "ariaSelected": "false",
+                "checked": false,
+                "checkbox": false,
+                "disabled": false,
+                "className": false,
+                "margin": "",
+                "icon": null,
+                "customIcon": false,
+                "switcher": "Leaf switcher"
+              }
+            ],
+            "changeLabels": "Node Zero",
+            "events": [
+              [
+                "change",
+                0,
+                0
+              ],
+              [
+                "select",
+                0,
+                "zero"
+              ],
+              [
+                "open",
+                false
+              ],
+              [
+                "open",
+                true
+              ]
+            ],
+            "globalIconCalled": false
+          }
+        },
+        {
+          "action": "update",
+          "view": {
+            "open": true,
+            "selected": null,
+            "tags": [],
+            "rows": [
+              {
+                "title": "Node Parent",
+                "marker": "parent",
+                "ariaLabel": null,
+                "expanded": true,
+                "selected": false,
+                "ariaSelected": "false",
+                "checked": false,
+                "checkbox": false,
+                "disabled": false,
+                "className": false,
+                "margin": "",
+                "icon": null,
+                "customIcon": false,
+                "switcher": "p|0|1|0|parent"
+              },
+              {
+                "title": "Updated Zero",
+                "marker": "zero",
+                "ariaLabel": null,
+                "expanded": false,
+                "selected": true,
+                "ariaSelected": "true",
+                "checked": false,
+                "checkbox": false,
+                "disabled": false,
+                "className": false,
+                "margin": "",
+                "icon": null,
+                "customIcon": false,
+                "switcher": ""
+              },
+              {
+                "title": "Node Beta",
+                "marker": "beta",
+                "ariaLabel": null,
+                "expanded": false,
+                "selected": false,
+                "ariaSelected": "false",
+                "checked": false,
+                "checkbox": false,
+                "disabled": false,
+                "className": false,
+                "margin": "",
+                "icon": null,
+                "customIcon": false,
+                "switcher": ""
+              },
+              {
+                "title": "Node Disabled",
+                "marker": "disabled",
+                "ariaLabel": null,
+                "expanded": false,
+                "selected": false,
+                "ariaSelected": null,
+                "checked": false,
+                "checkbox": false,
+                "disabled": true,
+                "className": false,
+                "margin": "",
+                "icon": null,
+                "customIcon": false,
+                "switcher": ""
+              },
+              {
+                "title": "Node Tail",
+                "marker": "tail",
+                "ariaLabel": null,
+                "expanded": false,
+                "selected": false,
+                "ariaSelected": "false",
+                "checked": false,
+                "checkbox": false,
+                "disabled": false,
+                "className": false,
+                "margin": "",
+                "icon": null,
+                "customIcon": false,
+                "switcher": "Leaf switcher"
+              }
+            ],
+            "changeLabels": "Node Zero",
+            "events": [
+              [
+                "change",
+                0,
+                0
+              ],
+              [
+                "select",
+                0,
+                "zero"
+              ],
+              [
+                "open",
+                false
+              ],
+              [
+                "open",
+                true
+              ]
+            ],
+            "globalIconCalled": false
+          }
+        }
+      ],
+      "calls": {
+        "load": 0,
+        "globalIcon": 0
+      }
+    }
+  ],
+  "ssr": [
+    {
+      "id": "declared",
+      "view": {
+        "open": false,
+        "selected": "Node Zero",
+        "tags": [],
+        "rows": [],
+        "changeLabels": "",
+        "events": [],
+        "globalIconCalled": false
+      },
+      "timers": 0,
+      "calls": {
+        "load": 0,
+        "globalIcon": 0
+      }
+    },
+    {
+      "id": "data",
+      "view": {
+        "open": false,
+        "selected": "Node Zero",
+        "tags": [],
+        "rows": [],
+        "changeLabels": "",
+        "events": [],
+        "globalIconCalled": false
+      },
+      "timers": 0,
+      "calls": {
+        "load": 0,
+        "globalIcon": 0
+      }
+    },
+    {
+      "id": "declared-simple",
+      "view": {
+        "open": false,
+        "selected": "Node Zero",
+        "tags": [],
+        "rows": [],
+        "changeLabels": "",
+        "events": [],
+        "globalIconCalled": false
+      },
+      "timers": 0,
+      "calls": {
+        "load": 0,
+        "globalIcon": 0
+      }
+    },
+    {
+      "id": "empty-data-wins",
+      "view": {
+        "open": false,
+        "selected": "0",
+        "tags": [],
+        "rows": [],
+        "changeLabels": "",
+        "events": [],
+        "globalIconCalled": false
+      },
+      "timers": 0,
+      "calls": {
+        "load": 0,
+        "globalIcon": 0
+      }
+    },
+    {
+      "id": "aliases",
+      "view": {
+        "open": false,
+        "selected": "Node Zero",
+        "tags": [],
+        "rows": [],
+        "changeLabels": "",
+        "events": [],
+        "globalIconCalled": false
+      },
+      "timers": 0,
+      "calls": {
+        "load": 0,
+        "globalIcon": 0
+      }
+    },
+    {
+      "id": "checkable",
+      "view": {
+        "open": false,
+        "selected": "Node Zero",
+        "tags": [
+          "Node Zero"
+        ],
+        "rows": [],
+        "changeLabels": "",
+        "events": [],
+        "globalIconCalled": false
+      },
+      "timers": 0,
+      "calls": {
+        "load": 0,
+        "globalIcon": 0
+      }
+    },
+    {
+      "id": "lazy",
+      "view": {
+        "open": false,
+        "selected": "",
+        "tags": [],
+        "rows": [],
+        "changeLabels": "",
+        "events": [],
+        "globalIconCalled": false
+      },
+      "timers": 0,
+      "calls": {
+        "load": 0,
+        "globalIcon": 0
+      }
+    },
+    {
+      "id": "rich-title",
+      "view": {
+        "open": false,
+        "selected": "Node Zero",
+        "tags": [],
+        "rows": [],
+        "changeLabels": "",
+        "events": [],
+        "globalIconCalled": false
+      },
+      "timers": 0,
+      "calls": {
+        "load": 0,
+        "globalIcon": 0
+      }
+    },
+    {
+      "id": "long-declarations",
+      "view": {
+        "open": false,
+        "selected": "Node 60",
+        "tags": [],
+        "rows": [],
+        "changeLabels": "",
+        "events": [],
+        "globalIconCalled": false
+      },
+      "timers": 0,
+      "calls": {
+        "load": 0,
+        "globalIcon": 0
+      }
+    }
+  ]
+}

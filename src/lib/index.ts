@@ -67,7 +67,8 @@ export type {
   MenuClickInfo,
   MenuSelectInfo
 } from './menu.types';
-export { default as TreeSelect } from './TreeSelect.svelte';
+export { default as TreeSelect } from './tree-select.component.js';
+export { default as TreeSelectTreeNode } from './TreeSelectTreeNode.svelte';
 export {
   TREE_SELECT_SHOW_ALL,
   TREE_SELECT_SHOW_PARENT,
@@ -77,6 +78,8 @@ export type {
   TreeSelectProps,
   TreeSelectRef,
   TreeSelectNode,
+  TreeSelectNodeIcon,
+  TreeSelectTreeNodeProps,
   TreeSelectRawValue,
   TreeSelectLabel,
   TreeSelectSuffixInfo,

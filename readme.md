@@ -6358,6 +6358,40 @@ signature. OnSelect/onDeselect и filterTreeNode получают shallow copy �
 LoadData получает те же пользовательские поля с вычисленными key/state, как Tree.
 Пользовательское поле props сохраняется; deprecated React wrapper не создаётся.
 
+`TreeSelect.TreeNode` объявляет узлы через вложенный `children` snippet. Компонент
+также доступен как `TreeSelectTreeNode`, тип его props — `TreeSelectTreeNodeProps`.
+`TreeSelectNode` описывает запись данных. `treeData`, включая пустой массив,
+имеет приоритет над объявлениями. Simple mode применяется к `treeData`.
+
+```svelte
+<TreeSelect defaultValue={0} treeDefaultExpandAll treeIcon>
+  <TreeSelect.TreeNode value="docs" title="Документы">
+    <TreeSelect.TreeNode value={0} title="Введение" icon="📄" />
+  </TreeSelect.TreeNode>
+</TreeSelect>
+```
+
+Объявления собираются до рендера поля. Скрытый контейнер и элементы `template`
+позволяют получить выбранный label и раскрытые ветки при SSR, а также отслеживать
+порядок keyed-списков, добавление и удаление узлов. Изменение объявлений сохраняет
+DOM поля, фокус и связанные refs. Для пользовательского payload в декларативной
+форме используются `TreeSelectProps<ValueType, Data>` и `TreeSelectTreeNodeProps<Data>`.
+
+`icon` и `switcherIcon` узла принимают содержимое или
+`Snippet<[TreeEventNode<Data>]>`. Состояние и пользовательские поля передаются
+как в Tree. Switcher дополнительно получает вычисленный `isLeaf`. Собственный
+switcher перекрывает общий renderer и загрузочный значок. `treeIcon` включает
+ячейки значков, содержимое берётся из `icon` узла. Как в wrapper React 6.6.8,
+функция в `treeIcon` используется как флаг.
+
+`className` узла задаёт класс строки, локальный `class` имеет приоритет.
+`style` принимает CSS-строку. Атрибуты `data-*` и `aria-*` применяются к строке,
+включая её доступное имя. `styles.popup.item` перекрывает собственные стили узла.
+Реактивный title snippet продолжает читать свой контекст и после передачи через
+callback labels. В эталоне этому соответствует React-компонент с Context.
+[Сверка узлов](./tests/browser/tree-select-nodes.spec.ts) охватывает объявления,
+данные, aliases, renderers, порядок, загрузку и обновления.
+
 `treeDataSimpleMode` строит дерево из плоского списка id/pId. Объект настраивает
 имена id/pId и rootPId; по умолчанию rootPId=null оставляет все узлы без найденного
 родителя корнями. Другое значение, включая 0, сравнивается строго. Порядок
@@ -6388,6 +6422,8 @@ triggerNode/allCheckedNodes и wrappers node.props исключены из пе�
 В checkbox-режиме исходная conduction уважает disabled/disableCheckbox/checkable
 границы. ShowCheckedStrategy по умолчанию SHOW_CHILD; отдельные экспорты
 TREE_SELECT_SHOW_CHILD/SHOW_PARENT/SHOW_ALL соответствуют константам React TreeSelect.
+Они также доступны как `TreeSelect.SHOW_CHILD`, `TreeSelect.SHOW_PARENT` и
+`TreeSelect.SHOW_ALL`.
 Стратегия влияет и на теги, и на onChange при conduction. Внутренние полные отметки
 сохраняются отдельно: снятие потомка или удаление тега корректирует родителей.
 Без treeCheckable стратегия равна SHOW_ALL, включая independent strict mode.
@@ -6600,6 +6636,7 @@ Native combobox удерживает фокус при действиях в п�
 снимает ограничение высоты. `listItemScrollOffset` добавляет отступ при переходе к
 активному узлу. Прокрутка сохраняет активный ключ, а `aria-activedescendant`
 указывает на узел, пока его строка в DOM.
+Движение мыши по строке сбрасывает активный клавиатурный узел, как в `rc-tree`.
 
 `bind:nativeElement` и `bind:inputElement` дают DOM. `bind:this` предоставляет
 `TreeSelectRef` с `focus(options)`, `blur()` и `scrollTo(config)`. `TreeScrollConfig`
@@ -6635,8 +6672,8 @@ DOM панели, фокус и выделение; ShadowRoot требует с
 TreeSelect/Cascader с 40 сценариями официального UMD —
 [choice-container](./tests/browser/choice-container.spec.ts), `?fixture=choice-container`.
 
-Следующие этапы TreeSelect охватывают объявления `TreeNode`, свойства узлов,
-остальные trigger/input props, Form feedback и переходы панели.
+Следующие этапы TreeSelect охватывают остальные trigger/input props,
+Form feedback, alignment и переходы панели.
 Deprecated React extras исключены.
 Класс popup задаётся через classNames.popup.root; popupClassName удалён.
 

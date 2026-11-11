@@ -51,18 +51,30 @@ export type TreeSelectValue =
   | readonly (TreeSelectRawValue | TreeSelectLabeledValue)[]
   | null
   | undefined;
-export interface TreeSelectNode {
+export type TreeSelectNodeIcon<Data extends object = TreeSelectNode> = TreeTitleContent<TreeEventNode<Data>>;
+interface TreeSelectBasicNode<Data extends object = TreeSelectNode> {
   value: TreeSelectRawValue;
   key?: TreeKey;
   title?: TreeSelectLabel;
   label?: TreeSelectLabel;
-  children?: readonly TreeSelectNode[];
   disabled?: boolean;
   disableCheckbox?: boolean;
   checkable?: boolean;
   selectable?: boolean;
   isLeaf?: boolean;
+  icon?: TreeSelectNodeIcon<Data>;
+  switcherIcon?: TreeSelectNodeIcon<Data>;
+  class?: string;
+  className?: string;
+  style?: string;
   [property: string]: unknown;
+}
+export interface TreeSelectNode extends TreeSelectBasicNode {
+  children?: readonly TreeSelectNode[];
+}
+/** Декларативный узел TreeSelect.TreeNode; children содержит вложенные объявления. */
+export interface TreeSelectTreeNodeProps<Data extends object = TreeSelectNode> extends TreeSelectBasicNode<Data> {
+  children?: Snippet;
 }
 export type TreeSelectStrategy = 'SHOW_ALL' | 'SHOW_PARENT' | 'SHOW_CHILD';
 /** Поиск и фильтрация дерева TreeSelect, включая controlled searchValue. */
@@ -127,6 +139,8 @@ export interface TreeSelectProps<
   /** Локальный namespace Select/TreeSelect; пустая строка наследует ConfigProvider. */
   prefixCls?: string;
   treeData?: readonly Data[];
+  /** Используется при отсутствии treeData. */
+  children?: Snippet;
   fieldNames?: TreeSelectFieldNames;
   /** Плоский список; false/undefined сохраняют вложенную структуру. */
   treeDataSimpleMode?: TreeSelectSimpleMode;
@@ -195,7 +209,7 @@ export interface TreeSelectProps<
   /** @defaultValue false */
   treeLine?: boolean | { showLeafIcon: TreeSelectSwitcherIcon; };
   /** @defaultValue false */
-  treeIcon?: boolean;
+  treeIcon?: TreeSelectNodeIcon;
   switcherIcon?: TreeSelectSwitcherIcon;
   /** Для известного узла label в onChange и omitted records — snippet с этим узлом. */
   treeTitleRender?: Snippet<[Data]>;

@@ -9,6 +9,11 @@
 
 ### Added
 
+- TreeSelect поддерживает декларативные `TreeSelect.TreeNode`, именованный
+  `TreeSelectTreeNode` и статические checked strategies. Иконки, switchers,
+  классы, стили и атрибуты строк работают с объявлениями и `treeData`.
+  Объявления учитываются при SSR и перестановке keyed-списков.
+
 - TreeSelect виртуализирует строки выпадающей панели и предоставляет `scrollTo`
   через `bind:this`. Поддержаны `virtual`, `listItemHeight`, `listItemScrollOffset`
   и настройки `ConfigProvider.virtual` и `ConfigProvider.popupMatchSelectWidth`.
@@ -1586,6 +1591,9 @@
   тип результата `createMessage` подготовлен к генерации деклараций.
 
 ### Fixed
+
+- TreeSelect сбрасывает активный клавиатурный узел при движении мыши над строкой.
+  Tree использует исходный класс `icon__customize` для пользовательских значков.
 
 - Изменение высоты viewport Tree сохраняет текущую прокрутку, если активный
   ключ остался прежним.

@@ -47,6 +47,7 @@
     _themeStyle,
     _componentConfig = true,
     _nodeDisabled,
+    _clearActiveOnMouseMove = false,
     ...componentProps
   }: TreeProps<Data> = $props();
   let {
@@ -586,7 +587,8 @@
   {@const unavailable = blocked || Boolean(entry.node.disabled || _nodeDisabled?.(entry.node))}
   {@const hasCheck = checkable && entry.node.checkable !== false}
   {@const nodeDraggable = drag.draggable(entry)}
-  <div id={nodeId(entry.key)} role="treeitem" tabindex={nodeDraggable && !unavailable ? -1 : undefined} aria-labelledby={`${nodeId(entry.key)}-title`} aria-level={entry.level + 1} aria-posinset={entry.index + 1} aria-setsize={entry.siblings} aria-expanded={isLeaf ? undefined : node.expanded} aria-selected={(entry.node.selectable ?? selectable) && !unavailable
+  {@const nodeAttributes = Object.fromEntries(Object.entries(entry.node).filter(([name]) => name.startsWith('data-') || name.startsWith('aria-')))}
+  <div id={nodeId(entry.key)} role="treeitem" tabindex={nodeDraggable && !unavailable ? -1 : undefined} aria-labelledby={nodeAttributes['aria-label'] === undefined ? `${nodeId(entry.key)}-title` : undefined} aria-level={entry.level + 1} aria-posinset={entry.index + 1} aria-setsize={entry.siblings} aria-expanded={isLeaf ? undefined : node.expanded} aria-selected={(entry.node.selectable ?? selectable) && !unavailable
       ? node.selected
       : undefined} aria-checked={hasCheck && !unavailable
           ? node.halfChecked ? 'mixed' : node.checked
@@ -628,7 +630,7 @@
       if (event.target !== event.currentTarget) return;
       mouseFocus(event, true);
       if (activeKey === undefined) setActive(entry.key);
-    } : undefined}>
+    } : undefined} onmousemove={_clearActiveOnMouseMove ? () => setActive(null) : undefined} {...nodeAttributes}>
     <span class={`${componentPrefix}-indent`} aria-hidden="true">{#each entry.ends.slice(0, -1) as end}<span class={[
         `${componentPrefix}-indent-unit`,
         !end && `${componentPrefix}-indent-unit-start`,
@@ -676,7 +678,7 @@
         }}>
       {#if showIcon || loadData && node.loading}<span class={[
           `${componentPrefix}-iconEle`,
-          `${componentPrefix}-icon__${isLeaf ? 'docu' : node.expanded ? 'open' : 'close'}`,
+          `${componentPrefix}-icon__${showIcon && (entry.node.icon || icon) ? 'customize' : isLeaf ? 'docu' : node.expanded ? 'open' : 'close'}`,
           node.loading && !(showIcon && (entry.node.icon || icon))
             && `${componentPrefix}-icon_loading`,
           classes.itemIcon

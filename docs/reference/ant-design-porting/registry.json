@@ -11033,7 +11033,7 @@
       "name": "TreeSelect",
       "category": "data-entry",
       "scope": "target",
-      "scopeReason": "TreeSelect по Ant Design 6.6.8 и rc-tree-select 1.16.1. Перенесены значения, check/стратегии, поиск, loadData, fieldNames/simple mode, generic data, title expansion, maxCount, tag display, renderer labels, popupRender, control slots, semantic config, переключатели узлов, виртуализация и scrollTo. Оставшийся API и motion переносятся отдельно.",
+      "scopeReason": "TreeSelect по Ant Design 6.6.8 и rc-tree-select 1.16.1. Перенесены значения, check/стратегии, поиск, loadData, fieldNames/simple mode, generic data, title expansion, maxCount, tag display, renderer labels, popupRender, control slots, semantic config, переключатели узлов, виртуализация, scrollTo и декларативные TreeNode со свойствами строк. Оставшийся API и motion переносятся отдельно.",
       "upstreamPath": "components/tree-select",
       "reviewedRevision": "984592267de88fbf9cdaecc96a56629e721c709d",
       "exports": [
@@ -11041,6 +11041,12 @@
           "upstream": "TreeSelect",
           "local": [
             "TreeSelect"
+          ]
+        },
+        {
+          "upstream": "TreeSelect.TreeNode",
+          "local": [
+            "TreeSelectTreeNode"
           ]
         }
       ],
@@ -11077,6 +11083,7 @@
       "effort": "L",
       "evidence": [
         "src/lib/TreeSelect.svelte",
+        "src/lib/TreeSelectControl.svelte",
         "src/lib/tree-select.engine.test.ts",
         "tests/package/tree-select.ssr.test.ts",
         "tests/browser/tree-select.spec.ts",
@@ -11216,6 +11223,7 @@
           "requiredForV1": true,
           "evidence": [
             "src/lib/TreeSelect.svelte",
+            "src/lib/TreeSelectControl.svelte",
             "src/lib/tree-select.engine.test.ts",
             "tests/package/tree-select.ssr.test.ts",
             "tests/browser/tree-select.spec.ts"
@@ -11270,7 +11278,7 @@
         },
         {
           "id": "extended-api",
-          "title": "Оставшиеся TreeNode, trigger и Form API",
+          "title": "Оставшиеся trigger и Form API",
           "state": "partial",
           "requiredForV1": false,
           "evidence": [
@@ -11290,7 +11298,7 @@
             "tests/package/tree-select-data.ssr.test.ts",
             "readme.md"
           ],
-          "note": "FieldNames, treeDataSimpleMode, generic raw data, treeExpandAction, maxCount, tag text/count/placeholder/render API, renderer labels, popup/control slots, semantic config и общие switcherIcon/treeLine.showLeafIcon перенесены. Остаются TreeNode children и API узлов, унаследованные trigger/input props и Form feedback. Deprecated extra.triggerNode/allCheckedNodes и node.props React wrappers исключены. Собственное поле props данных сохраняется."
+          "note": "FieldNames, treeDataSimpleMode, generic raw data, treeExpandAction, maxCount, tag text/count/placeholder/render API, renderer labels, popup/control slots, semantic config и общие switcherIcon/treeLine.showLeafIcon перенесены. Декларативные TreeNode и свойства узлов перенесены. Остаются унаследованные trigger/input props и Form feedback. Deprecated extra.triggerNode/allCheckedNodes и node.props React wrappers исключены. Собственное поле props данных сохраняется."
         },
         {
           "id": "virtual-motion",
@@ -11299,6 +11307,7 @@
           "requiredForV1": false,
           "evidence": [
             "src/lib/TreeSelect.svelte",
+            "src/lib/TreeSelectControl.svelte",
             "src/lib/tree-select.types.ts",
             "src/lib/Tree.svelte",
             "src/lib/popup.dom.ts",
@@ -11321,6 +11330,7 @@
           "requiredForV1": false,
           "evidence": [
             "src/lib/TreeSelect.svelte",
+            "src/lib/TreeSelectControl.svelte",
             "src/lib/theme-tree-tokens.engine.ts",
             "src/lib/theme-component-style.engine.ts",
             "src/lib/Tree.svelte",
@@ -11357,6 +11367,7 @@
           "requiredForV1": false,
           "evidence": [
             "src/lib/TreeSelect.svelte",
+            "src/lib/TreeSelectControl.svelte",
             "src/lib/RenderEmpty.svelte",
             "tests/package/render-empty.ssr.test.ts",
             "tests/browser/render-empty.spec.ts",
@@ -11403,6 +11414,7 @@
             "tests/browser/tree-select-prefix.spec.ts",
             "tests/package/tree-select-prefix.ssr.test.ts",
             "src/lib/TreeSelect.svelte",
+            "src/lib/TreeSelectControl.svelte",
             "src/lib/tree-select.types.ts",
             "readme.md"
           ],
@@ -11454,6 +11466,7 @@
           "requiredForV1": false,
           "evidence": [
             "src/lib/TreeSelect.svelte",
+            "src/lib/TreeSelectControl.svelte",
             "src/lib/tree-select.types.ts",
             "src/lib/Tree.svelte",
             "tests/browser/fixtures/TreeSelectExpandActionScope.svelte",
@@ -11487,6 +11500,7 @@
             "src/lib/tree-select-limit.engine.ts",
             "src/lib/tree-select-limit.engine.test.ts",
             "src/lib/TreeSelect.svelte",
+            "src/lib/TreeSelectControl.svelte",
             "src/lib/tree-select.types.ts",
             "src/lib/Tree.svelte",
             "src/lib/tree.types.ts",
@@ -11538,6 +11552,7 @@
             "src/lib/tree-select-tags.engine.test.ts",
             "src/lib/tree-select.types.ts",
             "src/lib/TreeSelect.svelte",
+            "src/lib/TreeSelectControl.svelte",
             "src/lib/select-tag-text.engine.ts",
             "src/lib/select-tag-overflow.dom.ts",
             "tests/browser/fixtures/tree-select-tag-cases.ts",
@@ -11616,6 +11631,7 @@
           "requiredForV1": false,
           "evidence": [
             "src/lib/TreeSelect.svelte",
+            "src/lib/TreeSelectControl.svelte",
             "src/lib/tree-select.engine.ts",
             "src/lib/tree-select.engine.test.ts",
             "src/lib/tree-select.types.ts",
@@ -11658,6 +11674,7 @@
           "requiredForV1": false,
           "evidence": [
             "src/lib/TreeSelect.svelte",
+            "src/lib/TreeSelectControl.svelte",
             "src/lib/tree-select.types.ts",
             "tests/browser/fixtures/ant-design-tree-select-surface-reference.json",
             "tests/browser/fixtures/ant-design-tree-select-surface-ssr-reference.json",
@@ -11674,6 +11691,7 @@
           "requiredForV1": false,
           "evidence": [
             "src/lib/TreeSelect.svelte",
+            "src/lib/TreeSelectControl.svelte",
             "src/lib/TreeSelectPopupContent.svelte",
             "tests/browser/fixtures/ant-design-tree-select-surface-reference.json",
             "tests/browser/fixtures/ant-design-tree-select-surface-ssr-reference.json",
@@ -11703,6 +11721,7 @@
           "requiredForV1": false,
           "evidence": [
             "src/lib/TreeSelect.svelte",
+            "src/lib/TreeSelectControl.svelte",
             "src/lib/tree-select.types.ts",
             "src/lib/tree-select-semantic.engine.ts",
             "src/lib/ConfigProvider.svelte",
@@ -11715,6 +11734,33 @@
             "readme.md"
           ],
           "note": "Object/function classNames и CSS-строки styles покрывают control slots, clear из rc-select и popup.root/item/itemTitle/itemSwitcher. Callbacks получают исходные generic props и разрешённые size/disabled/status/variant. Root classes и styles переходят на панель, local style остаётся у поля. Popup slots объединяют классы и заменяют styles на уровне отдельного слота. Числовая ширина и popup z-index имеют исходный приоритет. CSS min/max ограничивают измеренную ширину поля, live updates сохраняют DOM/фокус/черновик. ConfigProvider.treeSelect наследует или заменяет запись целиком. Raw provider-plain-fields фиксирует поля типа className/style без применения к TreeSelect в 6.6.8, оформление задают semantic slots. SwitcherIcon использует local ?? provider, поддерживает literal/array/snippet, false и 0. TreeLine.showLeafIcon и loading priority сверены на данных с fieldNames. 24 browser и 24 DOM-free SSR UMD cases."
+        },
+        {
+          "id": "node-declarations",
+          "title": "Декларативные TreeNode, иконки и свойства строк",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/TreeSelect.svelte",
+            "src/lib/TreeSelectControl.svelte",
+            "src/lib/TreeSelectTreeNode.svelte",
+            "src/lib/tree-select-nodes.svelte.ts",
+            "src/lib/tree-select.component.js",
+            "src/lib/tree-select.types.ts",
+            "src/lib/tree-select.engine.ts",
+            "src/lib/Tree.svelte",
+            "tests/browser/fixtures/tree-select-nodes-cases.ts",
+            "tests/browser/fixtures/TreeSelectNodesCase.svelte",
+            "tests/browser/fixtures/TreeSelectNodesFixtures.svelte",
+            "tests/browser/fixtures/TreeSelectNodesGeneric.svelte",
+            "tests/browser/fixtures/ant-design-tree-select-nodes-reference.json",
+            "tests/browser/tree-select-nodes-metrics.ts",
+            "tests/browser/tree-select-nodes.spec.ts",
+            "tests/browser/tree-select-surface-hydration.spec.ts",
+            "tests/package/tree-select-nodes.ssr.test.ts",
+            "readme.md"
+          ],
+          "note": "TreeSelect.TreeNode и TreeSelectTreeNode собирают объявления до рендера поля, включая SSR. Скрытый контейнер и template markers учитывают порядок keyed each, добавление, удаление и обновление props. TreeData, включая [], имеет приоритет, simple mode применяется только к данным. Namespace сохраняет SHOW_ALL/SHOW_PARENT/SHOW_CHILD. Literal/array/Snippet icon/switcherIcon, className и Native class/style, data/aria props работают в данных и объявлениях. Renderers получают Native TreeEventNode<Data>, исходный payload и вычисленный isLeaf у switcher. Внутренний TreeSelect очищает active при mousemove над строкой, как rc-tree. Tree применяет исходный icon__customize. 23 неизменённых UMD6.6.8 сценария, 39 действий, 9 DOM-free SSR случаев, строгая гидратация и typed generic declarations проверяют API. Два raw наблюдения сохраняют отличия представления title и повторную загрузку. В Source6.6.8 / 984592267de88fbf9cdaecc96a56629e721c709d раскрытие пустого узла вызывает loadData дважды и публикует два onTreeLoad после одного Promise. Native сохраняет один pending Promise и callback. React literal title сохраняет текст на момент callback, реактивный Svelte snippet читает текущий контекст. Source counterpart использует React Context consumer. TreeIcon, включая truthy function, служит флагом отображения, global renderer из него не вызывается в Ant wrapper. Deprecated Tree.TreeNode composition к этому актуальному API не относится."
         }
       ]
     },
@@ -18915,6 +18961,21 @@
             "readme.md"
           ],
           "note": "Ошибка Source rc-tree1.4.0: скрытый expanded key при defaultExpandParent=false создаёт пустую motion group перед корнем и блокирует onNodeExpand видимой ветки до deadline500 ms. Raw hidden-key-observation сохранён. Native не создаёт группу для невидимого ключа или пустого диапазона; ветка раскрывается сразу и сохраняет pending lazy contract."
+        },
+        {
+          "id": "native-pointer-keyboard-continuity",
+          "title": "Активная клавиатурная строка после pointer действий отдельного Tree",
+          "state": "partial",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Tree.svelte",
+            "src/lib/tree.types.ts",
+            "tests/browser/tree-drag-native.spec.ts",
+            "tests/browser/tree-motion-native.spec.ts",
+            "tests/browser/fixtures/ant-design-tree-select-nodes-reference.json",
+            "readme.md"
+          ],
+          "note": "В rc-tree1.4.0, закреплённом для Ant Design6.6.8 / 984592267de88fbf9cdaecc96a56629e721c709d, NodeList передаёт строкам onMouseMove, вызывающий onActiveChange(null). Raw TreeSelect renderer state в эталоне узлов подтверждает сброс. Существующий Native контракт отдельного Tree сохраняет активную строку для клавиатуры после drag/drop и pointer раскрытия. Внутренний TreeSelect включает Source поведение отдельной внутренней настройкой, сохраняя согласованный контракт Tree."
         }
       ]
     },

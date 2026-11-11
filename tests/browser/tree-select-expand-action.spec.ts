@@ -69,8 +69,10 @@ async function rootIdentity(page: Page, control: Locator) {
       expect(await handle!.evaluate(node => node.isConnected)).toBe(true);
     }
     expect(await root!.getAttribute('id')).toBe(id);
-    await expect(control).toHaveAttribute('aria-activedescendant', activeId!);
+    await expect(control).not.toHaveAttribute('aria-activedescendant');
     await expect(page.locator(`[id="${activeId}"]`)).toHaveCount(1);
+    await control.press('ArrowDown');
+    await expect(control).toHaveAttribute('aria-activedescendant', id!);
     await expect(control).toBeFocused();
     await expect(page.locator('[data-tree-select-expand-refs]')).toHaveText('true:true');
   };

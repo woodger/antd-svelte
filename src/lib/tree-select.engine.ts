@@ -1,5 +1,5 @@
 import { buildTreeEntities, conductTreeCheck, treeCheckDisabled } from './tree.engine';
-import type { TreeDataNode, TreeKey } from './tree.types';
+import type { TreeBasicDataNode, TreeDataNode, TreeKey } from './tree.types';
 import { treeSelectChildren, treeSelectFields, treeSelectNodeLabel, treeSelectNodeValue } from './tree-select-data.engine';
 import type {
   TreeSelectNode,
@@ -15,16 +15,24 @@ import type {
 export const TREE_SELECT_SHOW_ALL = 'SHOW_ALL';
 export const TREE_SELECT_SHOW_PARENT = 'SHOW_PARENT';
 export const TREE_SELECT_SHOW_CHILD = 'SHOW_CHILD';
-export function treeSelectIndex<Data extends object>(nodes: readonly Data[], fieldNames?: TreeSelectFieldNames) {
+export function treeSelectIndex<Data extends object>(
+  nodes: readonly Data[],
+  fieldNames?: TreeSelectFieldNames,
+  renderers?: Required<Pick<TreeBasicDataNode, 'icon' | 'switcherIcon'>>
+) {
   const fields = treeSelectFields(fieldNames);
   const values = new Map<TreeSelectRawValue, Data>();
   function map(list: readonly Data[]): TreeDataNode[] {
     return list.map(node => {
       const value = treeSelectNodeValue(node, fields);
       const children = treeSelectChildren(node, fields);
+      const className = (Reflect.get(node, 'class') ?? Reflect.get(node, 'className')) as string | undefined;
       values.set(value, node);
       return {
         ...node,
+        ...(className !== undefined ? { class: className } : {}),
+        ...(renderers && Reflect.get(node, 'icon') ? { icon: renderers.icon } : {}),
+        ...(renderers && Reflect.get(node, 'switcherIcon') ? { switcherIcon: renderers.switcherIcon } : {}),
         key: value,
         title: treeSelectNodeLabel(node, fields),
         children: Reflect.get(node, fields.children) ? map(children) : undefined
