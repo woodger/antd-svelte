@@ -1,7 +1,8 @@
 import type { Snippet } from 'svelte';
 import type { HTMLInputAttributes, HTMLAttributes } from 'svelte/elements';
-import type { ComponentSize } from './types';
-import type { TreeEventNode, TreeExpandAction, TreeKey } from './tree.types';
+import type { ComponentSize, Variant } from './types';
+import type { FormValidateStatus } from './form-error-list.types';
+import type { TreeEventNode, TreeExpandAction, TreeKey, TreeTitleContent } from './tree.types';
 import type { SelectTagInfo } from './select.types';
 export type TreeSelectRawValue = string | number;
 export type TreeSelectLabel = string | number | boolean | null | undefined | Snippet
@@ -73,9 +74,45 @@ export interface TreeSelectSearchConfig<Data extends object = TreeSelectNode> {
 export interface TreeSelectChangeInfo {
   triggerValue?: TreeSelectRawValue;
 }
-/** Настройки ConfigProvider.treeSelect; пока перенесён только variant. */
+type TreeSelectControlSlots<Value> = Partial<Record<
+  'root' | 'prefix' | 'input' | 'suffix' | 'clear' | 'content' | 'placeholder'
+  | 'item' | 'itemContent' | 'itemRemove', Value
+>>;
+type TreeSelectPopupSlots<Value> = Partial<Record<'root' | 'item' | 'itemTitle' | 'itemSwitcher', Value>>;
+export type TreeSelectClassNames = TreeSelectControlSlots<string> & {
+  /** Строка назначается popup.root. */
+  popup?: string | TreeSelectPopupSlots<string>;
+};
+export type TreeSelectStyles = TreeSelectControlSlots<string> & {
+  popup?: TreeSelectPopupSlots<string>;
+};
+export interface TreeSelectSemanticInfo<
+  ValueType extends TreeSelectValue = TreeSelectValue,
+  Data extends object = TreeSelectNode
+> {
+  props: Omit<TreeSelectProps<ValueType, Data>, 'disabled' | 'status' | 'variant' | 'onChange'> & {
+    onChange?(value: ValueType, labels: TreeSelectLabel[] | null, extra: TreeSelectChangeInfo): void;
+    disabled: boolean;
+    status?: FormValidateStatus;
+    variant: Variant;
+  };
+}
+export type TreeSelectSemanticValue<
+  Slots, ValueType extends TreeSelectValue = TreeSelectValue, Data extends object = TreeSelectNode
+> = Slots | ((info: TreeSelectSemanticInfo<ValueType, Data>) => Slots | undefined);
+export type TreeSelectSwitcherIcon = TreeTitleContent<TreeEventNode>;
+/** Настройки ConfigProvider.treeSelect. Для оформления используются classNames и styles. */
 export interface TreeSelectConfig {
-  variant?: TreeSelectProps['variant'];
+  class?: string;
+  style?: string;
+  variant?: Variant;
+  classNames?: TreeSelectClassNames | (<ValueType extends TreeSelectValue, Data extends object>(
+    info: TreeSelectSemanticInfo<ValueType, Data>
+  ) => TreeSelectClassNames | undefined);
+  styles?: TreeSelectStyles | (<ValueType extends TreeSelectValue, Data extends object>(
+    info: TreeSelectSemanticInfo<ValueType, Data>
+  ) => TreeSelectStyles | undefined);
+  switcherIcon?: TreeSelectSwitcherIcon;
 }
 /** Single/multiple выбор узлов дерева с check strategies, поиском и lazy load. */
 export interface TreeSelectProps<
@@ -83,7 +120,7 @@ export interface TreeSelectProps<
   Data extends object = TreeSelectNode
 > extends Omit<
   HTMLInputAttributes,
-  'value' | 'defaultValue' | 'size' | 'type' | 'prefix' | 'children' | 'onchange' | 'oninput'
+  'value' | 'defaultValue' | 'size' | 'type' | 'prefix' | 'placeholder' | 'children' | 'onchange' | 'oninput'
 > {
   /** Локальный namespace Select/TreeSelect; пустая строка наследует ConfigProvider. */
   prefixCls?: string;
@@ -126,6 +163,7 @@ export interface TreeSelectProps<
   /** @defaultValue false */
   defaultOpen?: boolean;
   onOpenChange?: (open: boolean) => void;
+  placeholder?: TreeSelectLabel;
   prefix?: TreeSelectLabel;
   /** Содержимое или snippet с состоянием поля. null/undefined используют suffixIcon. */
   suffix?: TreeSelectSuffix;
@@ -153,10 +191,10 @@ export interface TreeSelectProps<
   /** Асинхронная загрузка children; во время поиска не запускается. */
   loadData?: (node: TreeEventNode<Data>) => PromiseLike<unknown>;
   /** @defaultValue false */
-  treeLine?: boolean | { showLeafIcon: boolean; };
+  treeLine?: boolean | { showLeafIcon: TreeSelectSwitcherIcon; };
   /** @defaultValue false */
   treeIcon?: boolean;
-  switcherIcon?: Snippet<[TreeEventNode]>;
+  switcherIcon?: TreeSelectSwitcherIcon;
   /** Для известного узла label в onChange и omitted records — snippet с этим узлом. */
   treeTitleRender?: Snippet<[Data]>;
   /** @defaultValue 256 */
@@ -167,14 +205,14 @@ export interface TreeSelectProps<
   onPopupScroll?: HTMLAttributes<HTMLDivElement>['onscroll'];
   /** Локальный getter получает корень Select; undefined наследует ConfigProvider. */
   getPopupContainer?: (trigger: HTMLElement) => HTMLElement | ShadowRoot;
-  /** Класс popup; остальные semantic slots пока не перенесены. */
-  classNames?: { popup?: { root?: string; }; };
+  classNames?: TreeSelectSemanticValue<TreeSelectClassNames, ValueType, Data>;
+  styles?: TreeSelectSemanticValue<TreeSelectStyles, ValueType, Data>;
   rootClassName?: string;
   size?: ComponentSize;
   status?: 'error' | 'warning';
   /** @defaultValue 'outlined' */
   /** Приоритет: variant, Form, treeSelect config, global variant, outlined. */
-  variant?: 'outlined' | 'borderless' | 'filled' | 'underlined';
+  variant?: Variant;
   /** Нативный ref доступен после mount и очищается при unmount. */
   nativeElement?: HTMLDivElement;
   /** Нативный ref доступен после mount и очищается при unmount. */

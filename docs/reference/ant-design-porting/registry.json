@@ -11033,7 +11033,7 @@
       "name": "TreeSelect",
       "category": "data-entry",
       "scope": "target",
-      "scopeReason": "TreeSelect по Ant Design 6.6.8 и rc-tree-select 1.16.1. Перенесены значения, check/стратегии, поиск, loadData, fieldNames/simple mode, generic data, title expansion, maxCount, tag display, renderer labels, popupRender и содержимое control slots. Оставшийся API, virtual и motion переносятся отдельно.",
+      "scopeReason": "TreeSelect по Ant Design 6.6.8 и rc-tree-select 1.16.1. Перенесены значения, check/стратегии, поиск, loadData, fieldNames/simple mode, generic data, title expansion, maxCount, tag display, renderer labels, popupRender, control slots, semantic config и переключатели узлов. Оставшийся API, virtual и motion переносятся отдельно.",
       "upstreamPath": "components/tree-select",
       "reviewedRevision": "984592267de88fbf9cdaecc96a56629e721c709d",
       "exports": [
@@ -11190,7 +11190,18 @@
         "tests/browser/fixtures/tree-select-surface-hydration.server.ts",
         "tests/browser/fixtures/tree-select-surface-hydration.html",
         "tests/browser/tree-select-surface-hydration.spec.ts",
-        "tests/package/tree-select-surface.ssr.test.ts"
+        "tests/package/tree-select-surface.ssr.test.ts",
+        "src/lib/tree-select-semantic.engine.ts",
+        "src/lib/popup.dom.ts",
+        "src/lib/overlay-style.model.svelte.ts",
+        "tests/browser/fixtures/tree-select-semantic-cases.ts",
+        "tests/browser/fixtures/TreeSelectSemanticFixtures.svelte",
+        "tests/browser/fixtures/TreeSelectSemanticScope.svelte",
+        "tests/browser/fixtures/ant-design-tree-select-semantic-reference.json",
+        "tests/browser/fixtures/ant-design-tree-select-semantic-ssr-reference.json",
+        "tests/browser/tree-select-semantic-metrics.ts",
+        "tests/browser/tree-select-semantic.spec.ts",
+        "tests/package/tree-select-semantic.ssr.test.ts"
       ],
       "features": [
         {
@@ -11254,7 +11265,7 @@
         },
         {
           "id": "extended-api",
-          "title": "Оставшиеся TreeNode, semantic, config и ref API",
+          "title": "Оставшиеся TreeNode, trigger, ref и Form API",
           "state": "partial",
           "requiredForV1": false,
           "evidence": [
@@ -11274,7 +11285,7 @@
             "tests/package/tree-select-data.ssr.test.ts",
             "readme.md"
           ],
-          "note": "FieldNames, treeDataSimpleMode, generic raw data, treeExpandAction, maxCount, tag text/count/placeholder/render API, renderer labels и popup/control slots перенесены. Остаются TreeNode children, полный switcherIcon/treeLine, component config, semantic/ref API и Form feedback. Deprecated extra.triggerNode/allCheckedNodes и node.props React wrappers исключены. Собственное поле props данных сохраняется."
+          "note": "FieldNames, treeDataSimpleMode, generic raw data, treeExpandAction, maxCount, tag text/count/placeholder/render API, renderer labels, popup/control slots, semantic config и общие switcherIcon/treeLine.showLeafIcon перенесены. Остаются TreeNode children и API узлов, унаследованные trigger/input props, ref и Form feedback. Deprecated extra.triggerNode/allCheckedNodes и node.props React wrappers исключены. Собственное поле props данных сохраняется."
         },
         {
           "id": "virtual-motion",
@@ -11354,7 +11365,7 @@
             "tests/browser/config-variants.spec.ts",
             "tests/package/config-variants.ssr.test.ts"
           ],
-          "note": "Local variant, Form, treeSelect.variant, global и outlined. Config пока только variant; lazy tree/check/search/value и popup contracts не меняются."
+          "note": "Local variant, Form, treeSelect.variant, global и outlined. Остальные настройки treeSelect описаны в semantic-config."
         },
         {
           "id": "local-shared-prefix",
@@ -11665,6 +11676,26 @@
             "readme.md"
           ],
           "note": "Ant Design 6.6.8 / 984592267de88fbf9cdaecc96a56629e721c709d, rc-select 1.10.1, rc-tree-select 1.16.1, официальный UMD. В popup-empty popupRender возвращает null. После открытия Enter не выбирает узел, Escape оставляет aria-expanded=true без onOpenChange. Native сохраняет закрытие по Escape с onOpenChange(false) и без скрытого выбора."
+        },
+        {
+          "id": "semantic-config",
+          "title": "Semantic slots, ConfigProvider.treeSelect и переключатели узлов",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/TreeSelect.svelte",
+            "src/lib/tree-select.types.ts",
+            "src/lib/tree-select-semantic.engine.ts",
+            "src/lib/ConfigProvider.svelte",
+            "src/lib/popup.dom.ts",
+            "src/lib/overlay-style.model.svelte.ts",
+            "tests/browser/fixtures/ant-design-tree-select-semantic-reference.json",
+            "tests/browser/fixtures/ant-design-tree-select-semantic-ssr-reference.json",
+            "tests/browser/tree-select-semantic.spec.ts",
+            "tests/package/tree-select-semantic.ssr.test.ts",
+            "readme.md"
+          ],
+          "note": "Object/function classNames и CSS-строки styles покрывают control slots, clear из rc-select и popup.root/item/itemTitle/itemSwitcher. Callbacks получают исходные generic props и разрешённые size/disabled/status/variant. Root classes и styles переходят на панель, local style остаётся у поля. Popup slots объединяют классы и заменяют styles на уровне отдельного слота. Числовая ширина и popup z-index имеют исходный приоритет. CSS min/max ограничивают измеренную ширину поля, live updates сохраняют DOM/фокус/черновик. ConfigProvider.treeSelect наследует или заменяет запись целиком. Raw provider-plain-fields фиксирует поля типа className/style без применения к TreeSelect в 6.6.8, оформление задают semantic slots. SwitcherIcon использует local ?? provider, поддерживает literal/array/snippet, false и 0. TreeLine.showLeafIcon и loading priority сверены на данных с fieldNames. 24 browser и 24 DOM-free SSR UMD cases."
         }
       ]
     },
@@ -22879,7 +22910,7 @@
             "tests/browser/config-variants.spec.ts",
             "tests/package/config-variants.ssr.test.ts"
           ],
-          "note": "ConfigProvider.variant и Form.variant по form/hooks/useVariants 6.6.8: local, ближайший Form, component, fallback Input, global, outlined. Подключены все 18 представлений source consumers, включая Search button/input, Card и Pagination. Component records наследуются либо заменяются целиком; вложенный global не отменяет inherited component variant, theme.inherit=false сохраняет config. Select/treeSelect/datePicker/mentions config пока содержат только variant; Card поддерживает class/style/semantic config отдельной feature. Source raw classes/colors/borders и native DOM/focus/selection/FormData/callback boundaries закреплены в evidence; общий аудит provider остаётся незавершённым."
+          "note": "ConfigProvider.variant и Form.variant по form/hooks/useVariants 6.6.8: local, ближайший Form, component, fallback Input, global, outlined. Подключены все 18 представлений source consumers, включая Search button/input, Card и Pagination. Component records наследуются либо заменяются целиком; вложенный global не отменяет inherited component variant, theme.inherit=false сохраняет config. Select/datePicker/mentions config пока содержат только variant. Дополнительная конфигурация Card и TreeSelect описана в соответствующих features. Source raw classes/colors/borders и native DOM/focus/selection/FormData/callback boundaries закреплены в evidence; общий аудит provider остаётся незавершённым."
         },
         {
           "id": "card-component-config",

@@ -7,6 +7,7 @@
     TreeSelectRawValue,
     TreeSelectLabeledValue,
     TreeSelectLabel,
+    TreeSelectSemanticInfo,
     TreeSelectNode
   } from './tree-select.types';
   import type { TreeDataNode, TreeEventNode, TreeKey } from './tree.types';
@@ -26,6 +27,7 @@
   import TreeSelectLabelBinding from './TreeSelectLabelBinding.svelte';
   import TreeSelectPopupContent from './TreeSelectPopupContent.svelte';
   import { treeSelectTagText, treeSelectTagOverflow } from './tree-select-tags.engine';
+  import { treeSelectSemantics } from './tree-select-semantic.engine';
   import { connectSelectTagOverflow, measureSelectInput } from './select-tag-overflow.dom';
   import { useConfig } from './config-context';
   import ThemeScopeStyle from './ThemeScopeStyle.svelte';
@@ -39,12 +41,18 @@
   import { compactClasses } from './space-compact.engine';
   import { connectPopup, getPopupActiveElement } from './popup.dom';
   import { createPopupContainer } from './popup-container.model.svelte.js';
+  import { createOverlayStyle } from './overlay-style.model.svelte';
+  import { serializeInlineStyleLayers } from './inline-style.engine';
   import { useComponentTheme } from './theme-component.svelte';
-  import { connectComponentTheme } from './theme-component.dom';
   import Tree from './Tree.svelte';
   import TreeTitle from './TreeTitle.svelte';
   import Icon from './Icon.svelte';
   import NoCompactStyle from './NoCompactStyle.svelte';
+  let {
+    nativeElement = $bindable(),
+    inputElement = $bindable(),
+    ...componentProps
+  }: TreeSelectProps<ValueType, Data> = $props();
   let {
     prefixCls,
     treeData = [],
@@ -97,6 +105,7 @@
     onPopupScroll,
     getPopupContainer,
     classNames,
+    styles,
     rootClassName = '',
     size,
     status,
@@ -107,15 +116,13 @@
     placeholder,
     class: className = '',
     style,
-    nativeElement = $bindable(),
-    inputElement = $bindable(),
     onkeydown,
     onfocus,
     onblur,
     ...attributes
   }: TreeSelectProps<
     ValueType, Data
-  > = $props();
+  > = $derived(componentProps);
   const config = useConfig();
   let prefix = $derived(config.getPrefixCls('select', prefixCls));
   let treePrefix = $derived(config.getPrefixCls('tree-select', prefixCls));
@@ -205,13 +212,32 @@
   let blocked = $derived(
     disabled ?? field?.disabled ?? form?.disabled ?? config.componentDisabled
   );
-  let resolvedSize = $derived(size ?? compact?.size ?? config.componentSize);
+  let semanticSize = $derived(size ?? compact?.size ?? config.explicitComponentSize);
+  let resolvedSize = $derived(semanticSize ?? config.componentSize);
   let resolvedStatus = $derived(status ?? field?.status);
+  let context = $derived(config.treeSelect);
+  let semanticInfo = $derived<TreeSelectSemanticInfo<ValueType, Data>>({ props: {
+    ...componentProps, classNames, styles, size: semanticSize, status: resolvedStatus,
+    disabled: blocked, variant: appearance
+  } });
+  let semantics = $derived(treeSelectSemantics(context, semanticInfo));
+  let classes = $derived(semantics.classes);
+  let css = $derived(semantics.styles);
+  let resolvedSwitcher = $derived(switcherIcon ?? context?.switcherIcon);
+  let switcher = $derived(typeof resolvedSwitcher === 'function' ? resolvedSwitcher
+    : resolvedSwitcher === undefined ? undefined : panelSwitcher);
+  let leafIcon = $derived(typeof treeLine === 'object' ? treeLine?.showLeafIcon : undefined);
+  let showLine = $derived(treeLine && typeof treeLine === 'object'
+    ? { showLeafIcon: typeof leafIcon === 'boolean' || typeof leafIcon === 'function'
+      ? leafIcon : leafIcon ? panelLeafIcon : false }
+    : Boolean(treeLine));
   let canClear = $derived(Boolean(allowClear && !blocked && (display.length || search)));
   let clearConfig = $derived(typeof allowClear === 'object' ? allowClear : undefined);
   let showArrow = $derived(suffix != null || suffixIcon !== null);
   let defaultSuffix = $derived(suffix == null && suffixIcon === undefined);
   let customPopup = $derived(Boolean(popupRender));
+  let placeholderText = $derived(typeof placeholder === 'string' || typeof placeholder === 'number'
+    ? String(placeholder) : undefined);
   let controlId = $derived(id ?? field?.id ?? `ant-tree-select-${generated}`);
   let internalOpen = $state(untrack(() => defaultOpen));
   let visible = $derived((open ?? internalOpen) && !blocked);
@@ -228,11 +254,23 @@
   let popup = $state<HTMLDivElement>();
   let menuElement = $state<HTMLDivElement>();
   let popupMouseDownTimer: ReturnType<typeof setTimeout> | undefined;
+  const anchorWidthVariable = '--ant-tree-select-anchor-width';
+  let matchPopupWidth = $derived(popupMatchSelectWidth !== false
+    && (typeof popupMatchSelectWidth === 'number' || !semantics.popupSizing.width));
+  let stretchPopup = $derived(matchPopupWidth && typeof popupMatchSelectWidth !== 'number'
+    && (semantics.popupSizing.minWidth || semantics.popupSizing.maxWidth));
+  let popupLayers = $derived([
+    componentStyle, matchPopupWidth && !stretchPopup ? undefined : 'min-width:0',
+    stretchPopup ? `width:var(${anchorWidthVariable})` : undefined, semantics.popupRootStyle,
+    typeof popupMatchSelectWidth === 'number' ? `width:${popupMatchSelectWidth}px` : undefined
+  ]);
+  const popupStyle = createOverlayStyle(() => popupLayers);
   const portal = createPopupContainer(() => ({
     open: visible,
     reference: root,
     getPopupContainer: getPopupContainer || config.getPopupContainer,
-    themeStyle: componentStyle
+    themeStyle: serializeInlineStyleLayers(popupLayers),
+    preserveVariables: [anchorWidthVariable]
   }));
   let treeElement = $state<HTMLDivElement>();
   let active = $state<TreeKey | null>(null);
@@ -369,9 +407,13 @@
       gap: 4,
       align: position.endsWith('Right') ? 'right' : 'left',
       autoAdjustOverflow: true,
-      maxWidth: '100vw',
-      matchAnchorWidth: popupMatchSelectWidth !== false,
+      get maxWidth() { return untrack(() => semantics.popupSizing.maxWidth ? false : '100vw'); },
+      get matchAnchorWidth() {
+        return untrack(() => matchPopupWidth && !stretchPopup && !semantics.popupSizing.minWidth);
+      },
+      get anchorWidthVariable() { return untrack(() => stretchPopup ? anchorWidthVariable : undefined); },
       preserveFocus: !customPopup,
+      applyPosition: value => untrack(() => popupStyle.position(value)),
       onPlacement: () => { },
       onVisibilityChange: next => {
         shown = next;
@@ -661,7 +703,8 @@
   [data-ant-tree-choice-control][data-ant-tree-choice-source-theme] { align-items:flex-start; }
   [data-ant-tree-choice-control][data-ant-tree-choice-source-theme]:focus-within { outline:0;outline-offset:0; }
   [data-ant-tree-choice-control] [data-ant-tree-choice-input] { position:relative;inset:auto;width:100%;min-width:0;padding:0;border:0;outline:0;background:transparent;color:inherit;font:inherit;line-height:inherit;cursor:inherit; }
-  [data-ant-tree-choice-input]::placeholder { color:var(--ant-color-text-placeholder); }
+  [data-ant-tree-choice-input]::placeholder { color:transparent; }
+  .placeholder { position:absolute;inset-inline-start:0;max-width:100%;pointer-events:none; }
   [data-ant-tree-choice-multiple] { height:auto;min-height:var(--ant-native-tree-choice-height); }
   [data-ant-tree-choice-multiple] [data-ant-tree-choice-content] { gap:0; }
   [data-ant-tree-choice-multiple] [data-ant-tree-choice-input] { flex:1 1 60px;width:60px;min-width:40px;max-width:100%; }
@@ -695,6 +738,12 @@
   {@const original = filteredIndex.values.get(node.key as TreeSelectRawValue)}
   {#if treeTitleRender && original}{@render treeTitleRender(original)}{/if}
 {/snippet}
+{#snippet panelSwitcher(node: TreeEventNode)}
+  <TreeTitle value={resolvedSwitcher} {node} />
+{/snippet}
+{#snippet panelLeafIcon(node: TreeEventNode)}
+  <TreeTitle value={leafIcon} {node} />
+{/snippet}
 {#if selectPrefixCss}<ThemeScopeStyle css={selectPrefixCss} scope={`tree-select-control-prefix:${prefix}:${rootPrefix}`} />{/if}{#if treePrefixCss}<ThemeScopeStyle css={treePrefixCss} scope={`tree-select-prefix:${treePrefix}:${rootPrefix}`} />{/if}<div data-ant-tree-choice-control data-ant-select-prefix={prefix} data-ant-select-root-prefix={rootPrefix}
   data-ant-tree-select-prefix={treePrefix} data-ant-tree-select-root-prefix={rootPrefix}
   data-ant-tree-choice-source-theme={Boolean(selectTheme.className) || undefined}
@@ -711,7 +760,7 @@
       requestOpen(true);
     }
   }} dir={config.direction}
-  style={[componentStyle, style].filter(Boolean).join(';') || undefined} class={[
+  style={serializeInlineStyleLayers([componentStyle, css.root, style ?? undefined])} class={[
       `${prefix} ant-select-css-var ant-tree-select-css-var`,
       selectTheme.className,
       selectTheme.className && `${prefix}-source-theme`,
@@ -730,11 +779,17 @@
       config.direction === 'rtl' && `${prefix}-rtl`,
       compactClasses(prefix, config.direction, compact),
       className,
-      rootClassName
+      rootClassName,
+      classes.root
     ]}>
   {#if name??field?.name}{#each display as item(item.value)}<input type="hidden" name={name ?? field?.name} value={String(item.value)} disabled={blocked} />{/each}{/if}
-  {#if leading}<div class={`${prefix}-prefix`}><RenderContent value={leading} /></div>{/if}
-  <div data-ant-tree-choice-content class={`${prefix}-content`} bind:this={tagContent}>
+  {#if leading}<div class={[`${prefix}-prefix`, classes.prefix]} style={css.prefix}><RenderContent value={leading} /></div>{/if}
+  <div data-ant-tree-choice-content class={[`${prefix}-content`, classes.content]} style={css.content} bind:this={tagContent}>
+    {#if !display.length && (!isMultiple || !inputValue)}
+      <div class={['placeholder', `${prefix}-placeholder`, classes.placeholder]}
+        style={serializeInlineStyleLayers([inputValue ? 'visibility:hidden' : undefined, css.placeholder])}
+        aria-hidden={placeholderText !== undefined || undefined}><RenderContent value={placeholder} /></div>
+    {/if}
     {#if isMultiple}{#each renderedTags as item, index(item.value)}
       {@const hidden = responsiveTags && (!tagsReady || !visibleTagKeys.has(item.value))}
       {#snippet tagLabel()}{@render labelNode(item, true)}{/snippet}
@@ -743,7 +798,8 @@
         data-tree-choice-tag={responsiveTags || undefined}
         data-tree-choice-custom-tag={renderTag ? '' : undefined}
         class={[renderTag ? 'custom-tag' : `${prefix}-selection-item`, hidden && 'measure-tag',
-          !renderTag && (blocked || item.disabled) && `${prefix}-selection-item-disabled`]}
+          !renderTag && (blocked || item.disabled) && `${prefix}-selection-item-disabled`, !renderTag && classes.item]}
+        style={renderTag ? undefined : css.item}
         title={renderTag ? undefined : tagText(item)} role="presentation"
         onmousedown={renderTag ? customTagMouseDown : undefined} aria-hidden={hidden || undefined} inert={hidden}
         {@attach node => connectTagElement(node, item.value)}>
@@ -755,8 +811,9 @@
             choose(item.value, 'selection', false);
           }
         })}{:else}
-          <span class={`${prefix}-selection-item-content`}>{@render tagLabel()}</span>{#if !blocked && !item.disabled}
-            <button type="button" data-ant-tree-choice-selection-item-remove class={`${prefix}-selection-item-remove`}
+          <span class={[`${prefix}-selection-item-content`, classes.itemContent]} style={css.itemContent}>{@render tagLabel()}</span>{#if !blocked && !item.disabled}
+            <button type="button" data-ant-tree-choice-selection-item-remove
+              class={[`${prefix}-selection-item-remove`, classes.itemRemove]} style={css.itemRemove}
               aria-label={`${config.locale.removeText ?? 'Remove'} ${tagText(item)}`}
               onpointerdown={event => event.preventDefault()} onclick={() => choose(item.value, 'selection')}>
               {#if removeIcon === undefined}<Icon name="close" />{:else}<RenderContent value={removeIcon ?? '×'} />{/if}
@@ -775,19 +832,20 @@
         data-tree-choice-rest={responsiveTags || undefined}
         data-tree-choice-custom-tag={renderTag ? '' : undefined}
         class={[`${prefix}-selection-overflow-item-rest`,
-          renderTag ? 'custom-tag' : `${prefix}-selection-item`,
+          renderTag ? 'custom-tag' : `${prefix}-selection-item`, !renderTag && classes.item,
           (!tagOverflow.omitted.length || responsiveTags && !tagsReady) && 'measure-tag']}
+        style={renderTag ? undefined : css.item}
         title={renderTag ? undefined : placeholderTitle} role="presentation"
         onmousedown={renderTag ? customTagMouseDown : undefined}
         aria-hidden={!tagOverflow.omitted.length || responsiveTags && !tagsReady || undefined}
         inert={!tagOverflow.omitted.length || responsiveTags && !tagsReady}>
         {#if renderTag}{@render renderTag({
           label: restLabel, isMaxTag: true, disabled: false, closable: false
-        })}{:else}<span class={`${prefix}-selection-item-content`}>{@render restLabel()}</span>{/if}
+        })}{:else}<span class={[`${prefix}-selection-item-content`, classes.itemContent]} style={css.itemContent}>{@render restLabel()}</span>{/if}
       </span>
     {/if}
     {:else if (!visible || !canSearch) && (treeTitleRender || typeof display[0]?.label==='function' || Array.isArray(display[0]?.label)) && display[0]}<span class="single-snippet">{@render labelNode(display[0])}</span>{/if}
-    <input {...attributes} bind:this={editor} id={controlId} data-ant-tree-choice-input class={`${prefix}-input`} type="text" role="combobox" aria-haspopup="tree" aria-controls={!popupRender || menuElement ? `${controlId}-list` : undefined} aria-expanded={visible} aria-autocomplete={canSearch ? 'list' : 'none'} aria-activedescendant={visible && treeElement ? activeDescendant : undefined} aria-invalid={field?.invalid || resolvedStatus === 'error'
+    <input {...attributes} bind:this={editor} id={controlId} data-ant-tree-choice-input class={[`${prefix}-input`, classes.input]} style={css.input} type="text" role="combobox" aria-haspopup="tree" aria-controls={!popupRender || menuElement ? `${controlId}-list` : undefined} aria-expanded={visible} aria-autocomplete={canSearch ? 'list' : 'none'} aria-activedescendant={visible && treeElement ? activeDescendant : undefined} aria-invalid={field?.invalid || resolvedStatus === 'error'
         || attributes['aria-invalid']
         || undefined} aria-describedby={[attributes['aria-describedby'], field?.describedBy].filter(
             Boolean
@@ -795,7 +853,7 @@
             .join(
               ' '
             )
-            || undefined} aria-required={attributes.required ?? field?.required} aria-busy={loading || undefined} autocomplete="off" disabled={blocked} readonly={!canSearch} placeholder={display.length ? '' : placeholder} value={inputValue} oninput={event => searchInput(event.currentTarget.value)} onclick={() => requestOpen(true)} onkeydown={keyboard} onfocus={event => {
+            || undefined} aria-required={attributes.required ?? field?.required} aria-busy={loading || undefined} autocomplete="off" disabled={blocked} readonly={!canSearch} placeholder={display.length ? '' : placeholderText} value={inputValue} oninput={event => searchInput(event.currentTarget.value)} onclick={() => requestOpen(true)} onkeydown={keyboard} onfocus={event => {
             focused = true;
             editorFocused = true;
             onfocus?.(event);
@@ -807,7 +865,7 @@
   </div>
   {#if suffix != null ? suffix : showArrow}
     <div class={['suffix', defaultSuffix && 'default-suffix', (selectTheme.className || !defaultSuffix) && `${prefix}-suffix`,
-        loading && `${prefix}-suffix-loading`]} aria-hidden={defaultSuffix || undefined}>
+        loading && `${prefix}-suffix-loading`, classes.suffix]} style={css.suffix} aria-hidden={defaultSuffix || undefined}>
       {#if typeof suffix === 'function'}{@render suffix({ searchValue: search, open: visible,
           focused: editorFocused, showSearch: suffixSearch, loading })}
       {:else if suffix != null}<RenderContent value={suffix} />
@@ -816,7 +874,8 @@
     </div>
   {/if}
   {#if canClear}
-    <button type="button" class={['clear', (selectTheme.className || clearConfig) && `${prefix}-clear`]}
+    <button type="button" class={['clear', (selectTheme.className || clearConfig) && `${prefix}-clear`, classes.clear]}
+      style={css.clear}
       aria-label={clearConfig?.label ?? config.locale.clearText}
       onpointerdown={clearPointerDown} onclick={clear}>
       {#if allowClear === true}<Icon name="close-circle-filled" />
@@ -825,7 +884,7 @@
   {/if}
 </div>
 <NoCompactStyle>{#if mounted}
-{@const initialPopupStyle = untrack(() => componentStyle)}
+{@const initialPopupStyle = untrack(() => serializeInlineStyleLayers(popupLayers))}
 <div data-ant-select-prefix={prefix} data-ant-select-root-prefix={rootPrefix}
   data-ant-tree-select-prefix={treePrefix} data-ant-tree-select-root-prefix={rootPrefix}
   bind:this={popup} role="presentation" popover="manual" hidden={!visible || !shown} dir={config.direction} class={[
@@ -833,23 +892,24 @@
     selectTheme.className,
     selectTheme.className && 'ant-tree-select-source-popup',
     config.direction === 'rtl' && `${treePrefix}-dropdown-rtl`,
-    classNames?.popup?.root
+    rootClassName, classes.root, classes.popup.root
   ]} style={initialPopupStyle}
-  {@attach node => connectComponentTheme(node, componentStyle)}
+  {@attach popupStyle.attach}
   {@attach portal}
-  style:width={typeof popupMatchSelectWidth === 'number'
-      ? `${popupMatchSelectWidth}px`
-      : undefined} onfocusout={blurWithin} onmousedown={customPopup ? popupMouseDown : undefined}>
+  onfocusout={blurWithin} onmousedown={customPopup ? popupMouseDown : undefined}>
   {#snippet menu()}
   <div class="popup-body" role="presentation" bind:this={menuElement} style:max-height={`${listHeight}px`} onscroll={onPopupScroll}
     onpointerdown={customPopup ? event => event.preventDefault() : undefined}>
-    {#if filtered.length}<Tree prefixCls="ant-tree" motion={false} _themeStyle={componentStyle} _componentConfig={false} _nodeDisabled={node => limit.disabled.has(node.key as TreeSelectRawValue)} bind:nativeElement={treeElement} treeData={filteredIndex.data} id={`${controlId}-list`} class={treeSelectTheme.className && 'ant-tree-select-source-tree'} aria-label={attributes['aria-label'] ?? placeholder ?? config.locale.searchText} focusable={false} multiple={isMultiple} checkable={checkable} checkStrictly checkedKeys={{ checked: checks.checked, halfChecked: checks.halfChecked }} selectedKeys={checkable ? [] : checks.checked} expandedKeys={panelExpanded} expandAction={treeExpandAction} activeKey={active} onActiveChange={key => {
+    {#if filtered.length}<Tree prefixCls="ant-tree" motion={false} _themeStyle={componentStyle} _componentConfig={false} _nodeDisabled={node => limit.disabled.has(node.key as TreeSelectRawValue)} bind:nativeElement={treeElement} treeData={filteredIndex.data} id={`${controlId}-list`} class={treeSelectTheme.className && 'ant-tree-select-source-tree'}
+      classNames={{ item: classes.popup.item, itemTitle: classes.popup.itemTitle, itemSwitcher: classes.popup.itemSwitcher }}
+      styles={{ item: css.popup.item, itemTitle: css.popup.itemTitle, itemSwitcher: css.popup.itemSwitcher }}
+      aria-label={attributes['aria-label'] ?? placeholderText ?? config.locale.searchText} focusable={false} multiple={isMultiple} checkable={checkable} checkStrictly checkedKeys={{ checked: checks.checked, halfChecked: checks.halfChecked }} selectedKeys={checkable ? [] : checks.checked} expandedKeys={panelExpanded} expandAction={treeExpandAction} activeKey={active} onActiveChange={key => {
         active = key;
       }} onSelect={(_keys, info) => panelSelect(info.node)} onCheck={(_keys, info) => panelSelect(info.node)} onExpand={expandPanel} loadedKeys={treeLoadedKeys ?? loaded} onLoad={(keys) => {
           onTreeLoad?.(keys);
           if (treeLoadedKeys === undefined)
             loaded = keys;
-        }} loadData={visible && !search && loadData ? loadPanel : undefined} showLine={treeLine} showIcon={treeIcon} {switcherIcon} titleRender={treeTitleRender ? panelTitle : undefined} filterTreeNode={node => Boolean(
+        }} loadData={visible && !search && loadData ? loadPanel : undefined} {showLine} showIcon={treeIcon} switcherIcon={switcher} titleRender={treeTitleRender ? panelTitle : undefined} filterTreeNode={node => Boolean(
           search
           && String(
             index.values.has(node.key as TreeSelectRawValue)

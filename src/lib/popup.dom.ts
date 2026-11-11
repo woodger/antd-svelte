@@ -36,6 +36,7 @@ export function connectPopup(popup: HTMLElement, anchor: Element, options: {
   maxWidth?: string | false;
   align?: 'left' | 'right' | 'top' | 'bottom';
   matchAnchorWidth?: boolean;
+  anchorWidthVariable?: string;
   gap?: number | (() => number | undefined);
   allowZeroSize?: boolean | (() => boolean);
   allowOffscreenAnchor?: boolean;
@@ -107,8 +108,13 @@ export function connectPopup(popup: HTMLElement, anchor: Element, options: {
           viewport.width - 16
         )}px)`;
     }
-    if (options.matchAnchorWidth)
-      popup.style.minWidth = `${Math.min(rect.width, Math.max(0, viewport.width - 16))}px`;
+    const { matchAnchorWidth, anchorWidthVariable } = options;
+    if (matchAnchorWidth || anchorWidthVariable) {
+      const width = `${Math.min(rect.width, Math.max(0, viewport.width - 16))}px`;
+      if (matchAnchorWidth) popup.style.minWidth = width;
+      if (anchorWidthVariable && popup.style.getPropertyValue(anchorWidthVariable) !== width)
+        popup.style.setProperty(anchorWidthVariable, width);
+    }
     popup.hidden = false;
 
     if (!popup.matches(':popover-open')) {

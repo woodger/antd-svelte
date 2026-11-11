@@ -6513,6 +6513,44 @@ Form.Item остаётся частью переноса Form.
 [SSR](tests/package/tree-select-surface.ssr.test.ts),
 [hydration](tests/browser/tree-select-surface-hydration.spec.ts).
 
+`classNames` и `styles` принимают объект слотов или функцию с
+`TreeSelectSemanticInfo<ValueType, Data>`. В `info.props` передаются исходные
+props и разрешённые `size`, `disabled`, `status` и `variant`. `open` отражает
+значение владельца. Стили задаются CSS-строками. Слоты поля охватывают
+`root`, `prefix`, `input`, `suffix`, `clear`, `content`, `placeholder`, `item`,
+`itemContent` и `itemRemove`. Слоты тегов применяются к обычным тегам и счётчику
+скрытых тегов. `tagRender` задаёт собственную разметку.
+
+Строка `classNames.popup` задаёт класс `popup.root`. Классы `rootClassName`
+и `classNames.root` применяются к полю и панели. `popup.item`, `popup.itemTitle`
+и `popup.itemSwitcher` относятся к узлу дерева, заголовку и переключателю.
+Панель получает `styles.root`, затем `styles.popup.root`. Числовой
+`popupMatchSelectWidth` имеет приоритет над `width` в стилях. При `true` панель
+берёт ширину поля с учётом заданных `min-width` и `max-width`. Смена стилей открытой панели
+сохраняет DOM, фокус и черновики вложенных полей.
+
+`ConfigProvider.treeSelect` задаёт `variant`, `classNames`, `styles` и
+`switcherIcon`. Вложенный объект заменяет ближайшую запись целиком, `{}`
+сбрасывает её. Классы слотов объединяются с локальными. Локальная CSS-строка
+в `styles.popup` заменяет одноимённый слот провайдера. Оформление из провайдера
+задаётся через `classNames` и `styles`. Поля `class` и `style` записи принимаются
+для совместимости с типом Ant Design 6.6.8.
+
+`placeholder` принимает текст, число, массив или snippet. Текстовый placeholder
+также доступен через нативный атрибут поля. Локальный `switcherIcon` имеет
+приоритет над настройкой провайдера. `null` и `undefined` используют
+провайдер, `false` оставляет пустой переключатель, `0` выводит число.
+`treeLine.showLeafIcon` принимает boolean, содержимое или snippet с состоянием
+узла. Во время загрузки ветки показывается индикатор загрузки. Классы внутри
+snippet задаёт его владелец.
+
+24 UMD-сценария и 24 серверных рендера фиксируют слоты, порядок стилей,
+размеры панели, область конфигурации и переключатели узлов.
+[UMD](tests/browser/fixtures/ant-design-tree-select-semantic-reference.json),
+[Source SSR](tests/browser/fixtures/ant-design-tree-select-semantic-ssr-reference.json),
+[browser](tests/browser/tree-select-semantic.spec.ts),
+[SSR](tests/package/tree-select-semantic.ssr.test.ts).
+
 ShowSearch по умолчанию false для single и true для multiple. Объект showSearch
 поддерживает searchValue/onSearch, autoClearSearchValue, filterTreeNode и
 treeNodeFilterProp. Одноимённые deprecated top-level props удалены.

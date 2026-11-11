@@ -9,6 +9,11 @@
 
 ### Added
 
+- TreeSelect поддерживает объект и функции для `classNames` и `styles`,
+  настройки `ConfigProvider.treeSelect`, содержимое `placeholder` и значки
+  `switcherIcon` и `treeLine.showLeafIcon`. Стили открытой панели обновляются
+  с сохранением фокуса и черновиков.
+
 - TreeSelect поддерживает `popupRender`, `prefix`, `suffix`, `suffixIcon`,
   `removeIcon` и объект `allowClear` с собственным значком и именем кнопки.
   Пользовательская панель сохраняет черновики между открытиями и позволяет
