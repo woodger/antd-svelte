@@ -6698,7 +6698,7 @@ TreeSelect/Cascader с 40 сценариями официального UMD —
 [choice-container](./tests/browser/choice-container.spec.ts), `?fixture=choice-container`.
 
 Следующие этапы TreeSelect охватывают оставшиеся inherited render/input props,
-Form feedback, pointer toggle, alignment и переходы панели.
+pointer toggle, alignment и переходы панели.
 Deprecated React extras исключены.
 Класс popup задаётся через classNames.popup.root; popupClassName удалён.
 
@@ -11623,7 +11623,29 @@ Metadata берётся по точному имени, без touched пото�
 выставляют aria-invalid при visual error без ошибок модели; source его не задаёт.
 Transfer получает ошибку и доступное описание на корне, как официальный компонент.
 Обновления сохраняют DOM, draft, focus/selection; reset очищает автоматический статус.
-HasFeedback/feedbackIcons пока не перенесены.
+`FormItem.hasFeedback` включает значок статуса. `Form.feedbackIcons` задаёт функцию
+`({ status, errors, warnings }) => ({ success, error, warning, validating })`;
+`hasFeedback={{ icons }}` перекрывает её для одного Item. Значения — содержимое
+или Svelte snippets. `false` скрывает значок; null/undefined/0/пустая строка
+выбирают стандартный. Пустой map использует стандартные значки и заменяет Form renderer.
+Validated-поле без touched получает success только при hasFeedback; прежний порядок
+validating/errors/warnings и явный validateStatus сохраняется.
+
+NoStyle без собственного hasFeedback наследует значок родителя, даже если имеет
+свой validateStatus. Локальный false отключает feedback. Вложенный Form сбрасывает
+значок и visual status, сохраняя metadata ближайшего Item. Label/extra не получают
+контекст собственного поля. Сигнатура useFormItemStatus остаётся прежней.
+
+Feedback подключён к TreeSelect: отдельные классы control/Item, исходные glyphs,
+цвета, размеры, local Form/Item prefixes и данные custom renderer проверены по React.
+Значок следует статусу Item, даже если локальный status TreeSelect другой.
+SuffixIcon=null оставляет только feedback; собственный suffix имеет приоритет.
+PopupRender и ячейки InputOTP изолируют feedback. Обновления сохраняют DOM и focus
+поля; reset использует прежний remount. SSR не запускает validation или timers.
+Остальные controls получают visual status; их feedback renderers ещё переносятся.
+Сверка: [45 сценариев](./tests/browser/fixtures/ant-design-form-feedback-reference.json),
+[браузер](./tests/browser/form-feedback.spec.ts),
+[SSR](./tests/package/form-feedback.ssr.test.ts), `?fixture=form-feedback`.
 Сверка: [29 исходных состояний](./tests/browser/fixtures/ant-design-form-status-reference.json),
 [браузер и доступность controls](./tests/browser/form-status.spec.ts),
 [публичный пакет и SSR](./tests/package/form-status.ssr.test.ts), `?fixture=form-status`.

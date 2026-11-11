@@ -143,3 +143,34 @@ test('TreeSelect hydrates autofocus without taking focus from another control an
   await page.evaluate(() => window.treeSelectTriggerHydration!.dispose());
   await expect(page.locator('[popover]')).toHaveCount(0);
 });
+
+test('TreeSelect hydrates custom Form feedback in place and keeps its field during status updates', async ({ page }) => {
+  const module = await server.ssrLoadModule(fileURLToPath(new URL(
+    './fixtures/form-feedback-hydration.server.ts', import.meta.url
+  )));
+  const { head, body } = module.renderFormFeedback();
+  await page.goto('/tree-select-surface-hydration.html');
+  await page.evaluate(({ head, body }) => {
+    document.head.insertAdjacentHTML('beforeend', head);
+    document.getElementById('root')!.innerHTML = body;
+  }, { head, body });
+  const outside = page.getByRole('button', { name: 'Outside feedback', exact: true });
+  await outside.focus();
+  await page.addScriptTag({ type: 'module', url: '/form-feedback-hydration.client.ts' });
+  await page.waitForFunction(() => window.formFeedbackHydration);
+  await expect(outside).toBeFocused();
+  expect(await page.evaluate(() => ({
+    input: window.formFeedbackHydration!.input === document.querySelector('[aria-label="Feedback selection"]'),
+    icon: window.formFeedbackHydration!.icon === document.querySelector('[data-custom-feedback]')
+  }))).toEqual({ input: true, icon: true });
+  const input = page.getByRole('combobox', { name: 'Feedback selection', exact: true });
+  await input.focus();
+  await page.getByRole('combobox', { name: 'Feedback action', exact: true }).selectOption('1');
+  await page.getByRole('button', { name: 'Apply feedback action', exact: true }).dispatchEvent('click');
+  await expect(page.locator('[data-custom-feedback]')).toHaveText('local 0 error');
+  await expect(input).toBeFocused();
+  expect(await page.evaluate(() => window.formFeedbackHydration!.input
+    === document.querySelector('[aria-label="Feedback selection"]'))).toBe(true);
+  await page.evaluate(() => window.formFeedbackHydration!.dispose());
+  await expect(page.locator('[class*="-item-feedback-icon"]')).toHaveCount(0);
+});

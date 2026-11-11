@@ -9,6 +9,7 @@
   import { useVariant } from './variant.svelte';
   import { provideFormField, useForm, useFormField } from './form-context';
   import { provideFormItemStatus, useFormItemStatusContext } from './form-item-status';
+  import { provideFormFeedback, useFormFeedback } from './form-feedback-context';
   import { isOTPCompleteChange, patchOTPCells } from './input-otp.engine';
   import { useComponentTheme } from './theme-component.svelte';
   import { getInputOTPPrefixCss } from './input-otp-prefix.engine';
@@ -59,6 +60,9 @@
   };
   const field = useFormField(() => controlRef);
   const itemStatus = useFormItemStatusContext();
+  provideFormFeedback(Object.create(useFormFeedback(), {
+    hasFeedback: { value: false }, icon: { value: undefined }
+  }));
   provideFormItemStatus(Object.create(itemStatus, {
     status: { get: () => status || itemStatus.status }
   }));

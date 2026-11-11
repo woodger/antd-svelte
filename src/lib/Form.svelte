@@ -9,6 +9,7 @@
   import { getFormHooks } from './form-internal';
   import { provideFormList } from './form-list-context';
   import { provideFormItemStatus, useFormItemStatusContext } from './form-item-status';
+  import { provideFormFeedback, useFormFeedback } from './form-feedback-context';
   import type { FormProps, FormSemanticSlots } from './form.types';
   import { resolveValidationRules, type FormValues } from './validation.engine';
   import { mergeComponentSemantics } from './semantic-style.engine';
@@ -29,6 +30,7 @@
     variant,
     size,
     tooltip,
+    feedbackIcons,
     validateMessages,
     component = 'form',
     disabled,
@@ -84,6 +86,9 @@
   provideFormItemStatus(Object.create(useFormItemStatusContext(), {
     status: { get: () => undefined }
   }));
+  provideFormFeedback(Object.create(useFormFeedback(), {
+    hasFeedback: { value: false }, icon: { value: undefined }
+  }));
 
   // Form передаёт SizeContext/DisabledContext; остальные reactive defaults сохраняют владельца.
   const fieldConfig: ConfigContext = Object.create(config, {
@@ -132,6 +137,9 @@
     },
     get tooltip() {
       return resolvedTooltip;
+    },
+    get feedbackIcons() {
+      return feedbackIcons;
     },
     get resetKey() {
       return getFormHooks(form)?.resetKey ?? form.values;

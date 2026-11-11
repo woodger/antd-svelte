@@ -21,7 +21,7 @@
   import NoFormItemColumns from './NoFormItemColumns.svelte';
   import type { ColProps } from './grid.types';
   import { resolveFormWrapperCol } from './form-columns.engine';
-  import type { FormItemTooltip as FormItemTooltipContent } from './form.types';
+  import type { FormFeedbackIcons, FormItemTooltip as FormItemTooltipContent } from './form.types';
   import type { FormValidateStatus } from './form-error-list.types';
   import { resolveFormStatus } from './form-status.engine';
   import { resolveFormTooltip } from './form-tooltip.engine';
@@ -30,6 +30,7 @@
   import FormItemBinding from './FormItemBinding.svelte';
   import FormItemStatusProvider from './FormItemStatusProvider.svelte';
   import { useFormItemStatusContext, type FormItemStatus } from './form-item-status';
+  import { useFormFeedback, type FormFeedbackContext, type FormFeedbackIcon } from './form-feedback-context';
   import { useFormItemMeta, type FormItemMetaContext } from './form-item-meta-context';
   import { mergeFormItemMessages, type FormItemMessages } from './form-no-style.engine';
 
@@ -79,6 +80,7 @@
     validateDebounce?: number;
     /** Визуальный статус поверх metadata; '' отключает автоматический, не очищая errors/ARIA. */
     validateStatus?: FormValidateStatus;
+    hasFeedback?: boolean | { icons?: FormFeedbackIcons; };
     htmlFor?: string;
     /**
      * Native element, bind:this либо объект с focus/nativeElement пользовательского control.
@@ -114,6 +116,7 @@
     validateFirst,
     validateDebounce,
     validateStatus,
+    hasFeedback,
     htmlFor,
     controlRef,
     rootClassName,
@@ -136,6 +139,7 @@
     : `--${config.getPrefixCls().replace(/\./g, '')}-grid-display:var(--ant-grid-display,flex)`);
   const list = useFormList();
   const parentStatus = useFormItemStatusContext();
+  const parentFeedback = useFormFeedback();
   const parentMeta = useFormItemMeta();
   const componentTheme = useComponentTheme('Form');
   const generatedId = $props.id();
@@ -169,9 +173,25 @@
   let errors = $derived(hasName ? form?.getFieldError(path) ?? [] : []);
   let warnings = $derived(hasName ? form?.getFieldWarning(path) ?? [] : []);
   let meta = $derived(hasName ? form?.getFieldMeta(path) : undefined);
-  let status = $derived(resolveFormStatus({
-    validateStatus, errors, warnings, touched: meta?.touched, validating: meta?.validating
-  }) ?? (!hasLayout ? parentStatus.status : undefined));
+  let ownStatus = $derived(resolveFormStatus({
+    validateStatus, errors, warnings, touched: meta?.touched, validating: meta?.validating,
+    hasFeedback: Boolean(hasFeedback), validated: meta?.validated
+  }));
+  let status = $derived(ownStatus ?? (!hasLayout ? parentStatus.status : undefined));
+  let ownFeedback = $derived.by<{ hasFeedback: boolean; icon?: FormFeedbackIcon; }>(() => {
+    const enabled = Boolean(hasFeedback);
+    if (!enabled || !ownStatus) return { hasFeedback: enabled };
+    const icons = typeof hasFeedback === 'object' && hasFeedback.icons || form?.feedbackIcons;
+    const icon = icons?.({ status: ownStatus, errors, warnings })?.[ownStatus];
+    return { hasFeedback: enabled, icon: icon === false ? undefined
+      : { status: ownStatus, prefixCls: componentPrefix, prefixScope, content: icon || undefined } };
+  });
+  const feedbackContext: FormFeedbackContext = {
+    get isFormItemInput() { return hasLayout ? true : parentFeedback.isFormItemInput; },
+    get hasFeedback() { return !hasLayout && hasFeedback === undefined
+      ? parentFeedback.hasFeedback : ownFeedback.hasFeedback; },
+    get icon() { return !hasLayout && hasFeedback === undefined ? parentFeedback.icon : ownFeedback.icon; }
+  };
   let isRequired = $derived(required
     ?? (hasName && (rules
       ? form?.hasRequiredRules(rules) ?? rules.some((rule) =>
@@ -408,6 +428,7 @@
       status === 'warning' && `${componentPrefix}-item-has-warning`,
       status === 'success' && `${componentPrefix}-item-has-success`,
       status === 'validating' && `${componentPrefix}-item-is-validating`,
+      ownStatus && ownFeedback.hasFeedback && `${componentPrefix}-item-has-feedback`,
       className,
       rootClassName
     ]} style={[componentTheme.style, style].filter(Boolean).join(';') || undefined}>
@@ -447,7 +468,7 @@
           <div {...prefixAttributes} class={`${componentPrefix}-item-control-input`}>
             <div {...prefixAttributes} bind:this={content}
               class={[`${componentPrefix}-item-control-input-content`, form?.classNames?.content]}
-              style={form?.styles?.content}>{#key resetKey}<FormItemStatusProvider value={itemStatus} meta={collector}>{@render children()}</FormItemStatusProvider>{/key}</div>
+              style={form?.styles?.content}>{#key resetKey}<FormItemStatusProvider value={itemStatus} meta={collector} feedback={feedbackContext}>{@render children()}</FormItemStatusProvider>{/key}</div>
           </div>
           {#if messages.errors.length || messages.warnings.length}
             <div {...prefixAttributes} id={descriptionId} class={[`${componentPrefix}-item-explain`, form?.classNames?.help]}
@@ -481,7 +502,7 @@
 
 {#snippet itemBody()}
   {#if hasLayout}{@render itemLayout()}
-  {:else}{#key resetKey}<FormItemStatusProvider value={itemStatus}>{@render children()}</FormItemStatusProvider>{/key}{/if}
+  {:else}{#key resetKey}<FormItemStatusProvider value={itemStatus} feedback={feedbackContext}>{@render children()}</FormItemStatusProvider>{/key}{/if}
 {/snippet}
 
 {#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`form-prefix:${prefixScope}`} />{/if}{#if hasName}

@@ -1,6 +1,6 @@
 import { getContext, onDestroy, onMount, setContext } from 'svelte';
 import type { FormFieldRegistration } from './form-internal';
-import type { FormRequiredMark, FormSemanticSlots, FormTooltipProps } from './form.types';
+import type { FormFeedbackIcons, FormRequiredMark, FormSemanticSlots, FormTooltipProps } from './form.types';
 import type { FormValidateStatus } from './form-error-list.types';
 import type { FormFieldMeta } from './form.model.svelte';
 import type { ColProps } from './grid.types';
@@ -23,10 +23,12 @@ export interface FormContext {
   readonly classNames?: FormSemanticSlots;
   readonly styles?: FormSemanticSlots;
   readonly tooltip?: FormTooltipProps;
+  readonly feedbackIcons?: FormFeedbackIcons;
   readonly resetKey?: object;
   getFieldError(name: NamePath): readonly string[];
   getFieldWarning(name: NamePath): readonly string[];
-  getFieldMeta(name: NamePath): Pick<FormFieldMeta, 'touched' | 'validating'> | undefined;
+  getFieldMeta(name: NamePath): (Pick<FormFieldMeta, 'touched' | 'validating'>
+    & Partial<Pick<FormFieldMeta, 'validated'>>) | undefined;
   isFieldRequired(name: NamePath): boolean;
   hasRequiredRules(rules: readonly FormRule[]): boolean;
   touchField(name: NamePath): void;

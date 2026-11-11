@@ -845,7 +845,7 @@ export type {
 } from './select.types';
 export type {
   FormProps, FormConfig, FormScrollOptions, FormRequiredMark, FormRequiredMarkInfo, FormLocale,
-  FormSemanticSlots, FormSemantic, FormTooltipProps, FormItemTooltip
+  FormSemanticSlots, FormSemantic, FormTooltipProps, FormItemTooltip, FormFeedbackIcons, FormFeedbackInfo
 } from './form.types';
 export type { ModalProps, ModalContent } from './modal.types';
 export type { ConfigProviderProps } from './ConfigProvider.svelte';

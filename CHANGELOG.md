@@ -9,6 +9,11 @@
 
 ### Added
 
+- FormItem поддерживает `hasFeedback`, Form — `feedbackIcons` с локальным
+  переопределением, noStyle inheritance и validated success. TreeSelect выводит
+  feedback с исходными значками, Form prefixes и custom snippets; обновления
+  сохраняют поле, SSR и гидратацию. Подключение остальных controls продолжается.
+
 - TreeSelect поддерживает `showAction`, `autoFocus`, `tabIndex`, input-key hook
   и callbacks фокуса, клавиатуры и мыши корневого control. Native handlers
   сохраняют input targets и отмену обработки. Удерживаемый Enter выбирает

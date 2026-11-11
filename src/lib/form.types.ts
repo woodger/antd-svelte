@@ -8,6 +8,15 @@ import type { ComponentSize, RenderEmptyContent, Variant } from './types';
 import type { Options, ScrollAction } from './vendor/compute-scroll-into-view';
 import type { TooltipProps } from './tooltip.types';
 import type { ValidateMessages } from './validation-messages.types';
+import type { FormValidateStatus } from './form-error-list.types';
+
+export interface FormFeedbackInfo {
+  status: FormValidateStatus;
+  errors: readonly string[];
+  warnings: readonly string[];
+}
+/** False скрывает значок; остальные falsy values используют стандартный значок статуса. */
+export type FormFeedbackIcons = (info: FormFeedbackInfo) => Partial<Record<FormValidateStatus, RenderEmptyContent>>;
 
 /** Defaults подсказки label; icon заменяет React element Svelte snippet. */
 export interface FormTooltipProps extends Omit<TooltipProps, 'children'> {
@@ -92,6 +101,8 @@ export interface FormProps<Values extends FormValues> extends Omit<
   size?: ComponentSize;
   /** Defaults подсказок; не показывают значок без FormItem.tooltip. */
   tooltip?: FormTooltipProps;
+  /** Defaults значков для FormItem.hasFeedback; локальный icons renderer имеет приоритет. */
+  feedbackIcons?: FormFeedbackIcons;
   /** Локальные группы заменяют config целиком; message отдельного правила приоритетнее. */
   validateMessages?: ValidateMessages;
   /** По умолчанию form; false оставляет контекст без native wrapper и DOM-атрибутов. */

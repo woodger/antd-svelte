@@ -39,6 +39,9 @@
   import RenderContent from './RenderContent.svelte';
   import RenderEmpty from './RenderEmpty.svelte';
   import { useForm, useFormField } from './form-context';
+  import { useFormItemStatusContext } from './form-item-status';
+  import { useFormFeedback } from './form-feedback-context';
+  import FormFeedbackIcon from './FormFeedbackIcon.svelte';
   import { useCompact } from './space-compact-context';
   import { compactClasses } from './space-compact.engine';
   import { connectPopup, getPopupActiveElement } from './popup.dom';
@@ -162,6 +165,8 @@
     focus, blur
   };
   const field = useFormField(() => controlRef);
+  const itemStatus = useFormItemStatusContext();
+  const feedback = useFormFeedback();
   const compact = useCompact();
   const selectTheme = useComponentTheme('Select');
   const treeSelectTheme = useComponentTheme('TreeSelect');
@@ -240,7 +245,7 @@
   );
   let semanticSize = $derived(size ?? compact?.size ?? config.explicitComponentSize);
   let resolvedSize = $derived(semanticSize ?? config.componentSize);
-  let resolvedStatus = $derived(status ?? field?.status);
+  let resolvedStatus = $derived(status ?? ('status' in itemStatus ? itemStatus.status : field?.status));
   let context = $derived(config.treeSelect);
   let semanticInfo = $derived<TreeSelectSemanticInfo<ValueType, Data>>({ props: {
     ...componentProps, classNames, styles, size: semanticSize, status: resolvedStatus,
@@ -259,7 +264,7 @@
     : Boolean(treeLine));
   let canClear = $derived(Boolean(allowClear && !blocked && (display.length || search)));
   let clearConfig = $derived(typeof allowClear === 'object' ? allowClear : undefined);
-  let showArrow = $derived(suffix != null || suffixIcon !== null);
+  let showArrow = $derived(suffix != null || suffixIcon !== null || feedback.hasFeedback);
   let defaultSuffix = $derived(suffix == null && suffixIcon === undefined);
   let customPopup = $derived(Boolean(popupRender));
   let placeholderText = $derived(typeof placeholder === 'string' || typeof placeholder === 'number'
@@ -892,6 +897,8 @@
       resolvedSize === 'small' && `${prefix}-sm`,
       resolvedSize === 'large' && `${prefix}-lg`,
       resolvedStatus && `${prefix}-status-${resolvedStatus}`,
+      feedback.hasFeedback && `${prefix}-has-feedback`,
+      feedback.isFormItemInput && `${prefix}-in-form-item`,
       config.direction === 'rtl' && `${prefix}-rtl`,
       compactClasses(prefix, config.direction, compact),
       className,
@@ -984,12 +991,12 @@
   </div>
   {#if suffix != null ? suffix : showArrow}
     <div class={['suffix', defaultSuffix && 'default-suffix', (selectTheme.className || !defaultSuffix) && `${prefix}-suffix`,
-        loading && `${prefix}-suffix-loading`, classes.suffix]} style={css.suffix} aria-hidden={defaultSuffix || undefined}>
+        loading && `${prefix}-suffix-loading`, classes.suffix]} style={css.suffix} aria-hidden={defaultSuffix && !feedback.hasFeedback || undefined}>
       {#if typeof suffix === 'function'}{@render suffix({ searchValue: search, open: visible,
           focused: editorFocused, showSearch: suffixSearch, loading })}
       {:else if suffix != null}<RenderContent value={suffix} />
       {:else if defaultSuffix}<Icon name={loading ? 'loading' : visible && suffixSearch ? 'search' : 'down'} />
-      {:else}<RenderContent value={suffixIcon} />{/if}
+      {:else}<RenderContent value={suffixIcon} />{/if}{#if suffix == null && feedback.hasFeedback}<FormFeedbackIcon descriptor={feedback.icon} />{/if}
     </div>
   {/if}
   {#if canClear}
