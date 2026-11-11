@@ -1,0 +1,5255 @@
+{
+  "reference": {
+    "version": "6.6.8",
+    "revision": "984592267de88fbf9cdaecc96a56629e721c709d",
+    "react": "18.3.1",
+    "archiveSha256": "8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa",
+    "browser": "Unmodified official UMD; actual Form/Item metadata, custom callbacks, DatePicker/RangePicker and TimePicker/TimeRangePicker",
+    "server": "Unmodified ReactDOMServer in a DOM-free VM; markup projected in an inert host",
+    "errors": [],
+    "warnings": [
+      {
+        "id": "date-nested-form",
+        "message": "Warning: [antd: Form.Item] Form.Item.useStatus should be used under Form.Item component. For more information: https://u.ant.design/form-item-usestatus"
+      }
+    ],
+    "serverWarnings": [
+      {
+        "id": "date-nested-form",
+        "args": [
+          "Warning: [antd: Form.Item] Form.Item.useStatus should be used under Form.Item component. For more information: https://u.ant.design/form-item-usestatus"
+        ]
+      }
+    ]
+  },
+  "cases": [
+    {
+      "id": "date-error",
+      "initial": {
+        "root": [
+          "has-feedback",
+          "status-error"
+        ],
+        "item": [
+          "has-error",
+          "has-feedback"
+        ],
+        "suffix": {
+          "text": "",
+          "custom": false,
+          "feedback": true,
+          "glyphs": 2
+        },
+        "icon": {
+          "className": "ant-form-item-feedback-icon ant-form-item-feedback-icon-error",
+          "text": "",
+          "color": "rgb(255, 77, 79)",
+          "fontSize": "14px",
+          "visibility": "visible",
+          "path": [
+            "M512 64c247.4 0 448 200.6 448 448S759.4 960 512 960 64 759.4 64 512 264.6 64 512 64zm127.98 274.82h-.04l-.08.06L512 466.75 384.14 338.88c-.04-.05-.06-.06-.08-.06a.12.12 0 00-.07 0c-.03 0-.05.01-.09.05l-45.02 45.02a.2.2 0 00-.05.09.12.12 0 000 .07v.02a.27.27 0 00.06.06L466.75 512 338.88 639.86c-.05.04-.06.06-.06.08a.12.12 0 000 .07c0 .03.01.05.05.09l45.02 45.02a.2.2 0 00.09.05.12.12 0 00.07 0c.02 0 .04-.01.08-.05L512 557.25l127.86 127.87c.04.04.06.05.08.05a.12.12 0 00.07 0c.03 0 .05-.01.09-.05l45.02-45.02a.2.2 0 00.05-.09.12.12 0 000-.07v-.02a.27.27 0 00-.05-.06L557.25 512l127.87-127.86c.04-.04.05-.06.05-.08a.12.12 0 000-.07c0-.03-.01-.05-.05-.09l-45.02-45.02a.2.2 0 00-.09-.05.12.12 0 00-.07 0z"
+          ],
+          "custom": null
+        },
+        "status": {
+          "status": "error",
+          "errors": [],
+          "warnings": []
+        },
+        "values": [
+          "2025-03-04"
+        ],
+        "focused": -1
+      },
+      "steps": []
+    },
+    {
+      "id": "date-local-status",
+      "initial": {
+        "root": [
+          "has-feedback",
+          "status-warning"
+        ],
+        "item": [
+          "has-feedback",
+          "has-success"
+        ],
+        "suffix": {
+          "text": "",
+          "custom": false,
+          "feedback": true,
+          "glyphs": 2
+        },
+        "icon": {
+          "className": "ant-form-item-feedback-icon ant-form-item-feedback-icon-success",
+          "text": "",
+          "color": "rgb(82, 196, 26)",
+          "fontSize": "14px",
+          "visibility": "visible",
+          "path": [
+            "M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm193.5 301.7l-210.6 292a31.8 31.8 0 01-51.7 0L318.5 484.9c-3.8-5.3 0-12.7 6.5-12.7h46.9c10.2 0 19.9 4.9 25.9 13.3l71.2 98.8 157.2-218c6-8.3 15.6-13.3 25.9-13.3H699c6.5 0 10.3 7.4 6.5 12.7z"
+          ],
+          "custom": null
+        },
+        "status": {
+          "status": "success",
+          "errors": [],
+          "warnings": []
+        },
+        "values": [
+          "2025-03-04"
+        ],
+        "focused": -1
+      },
+      "steps": []
+    },
+    {
+      "id": "date-no-style",
+      "initial": {
+        "root": [
+          "has-feedback",
+          "status-warning"
+        ],
+        "item": [
+          "has-error",
+          "has-feedback"
+        ],
+        "suffix": {
+          "text": "",
+          "custom": false,
+          "feedback": true,
+          "glyphs": 2
+        },
+        "icon": {
+          "className": "ant-form-item-feedback-icon ant-form-item-feedback-icon-error",
+          "text": "",
+          "color": "rgb(255, 77, 79)",
+          "fontSize": "14px",
+          "visibility": "visible",
+          "path": [
+            "M512 64c247.4 0 448 200.6 448 448S759.4 960 512 960 64 759.4 64 512 264.6 64 512 64zm127.98 274.82h-.04l-.08.06L512 466.75 384.14 338.88c-.04-.05-.06-.06-.08-.06a.12.12 0 00-.07 0c-.03 0-.05.01-.09.05l-45.02 45.02a.2.2 0 00-.05.09.12.12 0 000 .07v.02a.27.27 0 00.06.06L466.75 512 338.88 639.86c-.05.04-.06.06-.06.08a.12.12 0 000 .07c0 .03.01.05.05.09l45.02 45.02a.2.2 0 00.09.05.12.12 0 00.07 0c.02 0 .04-.01.08-.05L512 557.25l127.86 127.87c.04.04.06.05.08.05a.12.12 0 00.07 0c.03 0 .05-.01.09-.05l45.02-45.02a.2.2 0 00.05-.09.12.12 0 000-.07v-.02a.27.27 0 00-.05-.06L557.25 512l127.87-127.86c.04-.04.05-.06.05-.08a.12.12 0 000-.07c0-.03-.01-.05-.05-.09l-45.02-45.02a.2.2 0 00-.09-.05.12.12 0 00-.07 0z"
+          ],
+          "custom": null
+        },
+        "status": {
+          "status": "warning",
+          "errors": [],
+          "warnings": []
+        },
+        "values": [
+          "2025-03-04"
+        ],
+        "focused": -1
+      },
+      "steps": []
+    },
+    {
+      "id": "date-nested-form",
+      "initial": {
+        "root": [],
+        "item": [
+          "has-error",
+          "has-feedback"
+        ],
+        "suffix": {
+          "text": "",
+          "custom": false,
+          "feedback": false,
+          "glyphs": 1
+        },
+        "icon": null,
+        "status": {
+          "status": null,
+          "errors": [],
+          "warnings": []
+        },
+        "values": [
+          "2025-03-04"
+        ],
+        "focused": -1
+      },
+      "steps": []
+    },
+    {
+      "id": "date-otp",
+      "initial": {
+        "root": [
+          "status-warning"
+        ],
+        "item": [
+          "has-error",
+          "has-feedback"
+        ],
+        "suffix": {
+          "text": "",
+          "custom": false,
+          "feedback": false,
+          "glyphs": 1
+        },
+        "icon": null,
+        "status": {
+          "status": "warning",
+          "errors": [],
+          "warnings": []
+        },
+        "values": [
+          "2025-03-04"
+        ],
+        "focused": -1
+      },
+      "steps": []
+    },
+    {
+      "id": "date-prefixes",
+      "initial": {
+        "root": [
+          "has-feedback",
+          "status-warning"
+        ],
+        "item": [
+          "has-feedback",
+          "has-warning"
+        ],
+        "suffix": {
+          "text": "",
+          "custom": false,
+          "feedback": true,
+          "glyphs": 2
+        },
+        "icon": {
+          "className": "field-item-feedback-icon field-item-feedback-icon-warning",
+          "text": "",
+          "color": "rgb(250, 173, 20)",
+          "fontSize": "14px",
+          "visibility": "visible",
+          "path": [
+            "M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm-32 232c0-4.4 3.6-8 8-8h48c4.4 0 8 3.6 8 8v272c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8V296zm32 440a48.01 48.01 0 010-96 48.01 48.01 0 010 96z"
+          ],
+          "custom": null
+        },
+        "status": {
+          "status": "warning",
+          "errors": [],
+          "warnings": []
+        },
+        "values": [
+          "2025-03-04"
+        ],
+        "focused": -1
+      },
+      "steps": []
+    },
+    {
+      "id": "date-live",
+      "initial": {
+        "root": [
+          "has-feedback",
+          "status-warning"
+        ],
+        "item": [
+          "has-feedback",
+          "has-warning"
+        ],
+        "suffix": {
+          "text": "local 0 warning",
+          "custom": false,
+          "feedback": true,
+          "glyphs": 1
+        },
+        "icon": {
+          "className": "ant-form-item-feedback-icon ant-form-item-feedback-icon-warning",
+          "text": "local 0 warning",
+          "color": "rgb(250, 173, 20)",
+          "fontSize": "14px",
+          "visibility": "visible",
+          "path": [],
+          "custom": {
+            "status": "warning",
+            "errors": [],
+            "warnings": []
+          }
+        },
+        "status": {
+          "status": "warning",
+          "errors": [],
+          "warnings": []
+        },
+        "values": [
+          "2025-03-04"
+        ],
+        "focused": -1
+      },
+      "steps": [
+        {
+          "action": "focus",
+          "view": {
+            "root": [
+              "has-feedback",
+              "status-warning"
+            ],
+            "item": [
+              "has-feedback",
+              "has-warning"
+            ],
+            "suffix": {
+              "text": "local 0 warning",
+              "custom": false,
+              "feedback": true,
+              "glyphs": 1
+            },
+            "icon": {
+              "className": "ant-form-item-feedback-icon ant-form-item-feedback-icon-warning",
+              "text": "local 0 warning",
+              "color": "rgb(250, 173, 20)",
+              "fontSize": "14px",
+              "visibility": "visible",
+              "path": [],
+              "custom": {
+                "status": "warning",
+                "errors": [],
+                "warnings": []
+              }
+            },
+            "status": {
+              "status": "warning",
+              "errors": [],
+              "warnings": []
+            },
+            "values": [
+              "2025-03-04"
+            ],
+            "focused": 0
+          },
+          "sameInput": true
+        },
+        {
+          "action": "error",
+          "view": {
+            "root": [
+              "has-feedback",
+              "status-error"
+            ],
+            "item": [
+              "has-error",
+              "has-feedback"
+            ],
+            "suffix": {
+              "text": "local 0 error",
+              "custom": false,
+              "feedback": true,
+              "glyphs": 1
+            },
+            "icon": {
+              "className": "ant-form-item-feedback-icon ant-form-item-feedback-icon-error",
+              "text": "local 0 error",
+              "color": "rgb(255, 77, 79)",
+              "fontSize": "14px",
+              "visibility": "visible",
+              "path": [],
+              "custom": {
+                "status": "error",
+                "errors": [],
+                "warnings": []
+              }
+            },
+            "status": {
+              "status": "error",
+              "errors": [],
+              "warnings": []
+            },
+            "values": [
+              "2025-03-04"
+            ],
+            "focused": 0
+          },
+          "sameInput": true
+        },
+        {
+          "action": "update-icon",
+          "view": {
+            "root": [
+              "has-feedback",
+              "status-error"
+            ],
+            "item": [
+              "has-error",
+              "has-feedback"
+            ],
+            "suffix": {
+              "text": "local 1 error",
+              "custom": false,
+              "feedback": true,
+              "glyphs": 1
+            },
+            "icon": {
+              "className": "ant-form-item-feedback-icon ant-form-item-feedback-icon-error",
+              "text": "local 1 error",
+              "color": "rgb(255, 77, 79)",
+              "fontSize": "14px",
+              "visibility": "visible",
+              "path": [],
+              "custom": {
+                "status": "error",
+                "errors": [],
+                "warnings": []
+              }
+            },
+            "status": {
+              "status": "error",
+              "errors": [],
+              "warnings": []
+            },
+            "values": [
+              "2025-03-04"
+            ],
+            "focused": 0
+          },
+          "sameInput": true
+        },
+        {
+          "action": "hide-icon",
+          "view": {
+            "root": [
+              "has-feedback",
+              "status-error"
+            ],
+            "item": [
+              "has-error",
+              "has-feedback"
+            ],
+            "suffix": {
+              "text": "",
+              "custom": false,
+              "feedback": false,
+              "glyphs": 1
+            },
+            "icon": null,
+            "status": {
+              "status": "error",
+              "errors": [],
+              "warnings": []
+            },
+            "values": [
+              "2025-03-04"
+            ],
+            "focused": 0
+          },
+          "sameInput": true
+        },
+        {
+          "action": "show-icon",
+          "view": {
+            "root": [
+              "has-feedback",
+              "status-error"
+            ],
+            "item": [
+              "has-error",
+              "has-feedback"
+            ],
+            "suffix": {
+              "text": "local 1 error",
+              "custom": false,
+              "feedback": true,
+              "glyphs": 1
+            },
+            "icon": {
+              "className": "ant-form-item-feedback-icon ant-form-item-feedback-icon-error",
+              "text": "local 1 error",
+              "color": "rgb(255, 77, 79)",
+              "fontSize": "14px",
+              "visibility": "visible",
+              "path": [],
+              "custom": {
+                "status": "error",
+                "errors": [],
+                "warnings": []
+              }
+            },
+            "status": {
+              "status": "error",
+              "errors": [],
+              "warnings": []
+            },
+            "values": [
+              "2025-03-04"
+            ],
+            "focused": 0
+          },
+          "sameInput": true
+        },
+        {
+          "action": "toggle-feedback",
+          "view": {
+            "root": [
+              "status-error"
+            ],
+            "item": [
+              "has-error"
+            ],
+            "suffix": {
+              "text": "",
+              "custom": false,
+              "feedback": false,
+              "glyphs": 1
+            },
+            "icon": null,
+            "status": {
+              "status": "error",
+              "errors": [],
+              "warnings": []
+            },
+            "values": [
+              "2025-03-04"
+            ],
+            "focused": 0
+          },
+          "sameInput": true
+        },
+        {
+          "action": "toggle-feedback",
+          "view": {
+            "root": [
+              "has-feedback",
+              "status-error"
+            ],
+            "item": [
+              "has-error",
+              "has-feedback"
+            ],
+            "suffix": {
+              "text": "local 1 error",
+              "custom": false,
+              "feedback": true,
+              "glyphs": 1
+            },
+            "icon": {
+              "className": "ant-form-item-feedback-icon ant-form-item-feedback-icon-error",
+              "text": "local 1 error",
+              "color": "rgb(255, 77, 79)",
+              "fontSize": "14px",
+              "visibility": "visible",
+              "path": [],
+              "custom": {
+                "status": "error",
+                "errors": [],
+                "warnings": []
+              }
+            },
+            "status": {
+              "status": "error",
+              "errors": [],
+              "warnings": []
+            },
+            "values": [
+              "2025-03-04"
+            ],
+            "focused": 0
+          },
+          "sameInput": true
+        },
+        {
+          "action": "success",
+          "view": {
+            "root": [
+              "has-feedback",
+              "status-success"
+            ],
+            "item": [
+              "has-feedback",
+              "has-success"
+            ],
+            "suffix": {
+              "text": "local 1 success",
+              "custom": false,
+              "feedback": true,
+              "glyphs": 1
+            },
+            "icon": {
+              "className": "ant-form-item-feedback-icon ant-form-item-feedback-icon-success",
+              "text": "local 1 success",
+              "color": "rgb(82, 196, 26)",
+              "fontSize": "14px",
+              "visibility": "visible",
+              "path": [],
+              "custom": {
+                "status": "success",
+                "errors": [],
+                "warnings": []
+              }
+            },
+            "status": {
+              "status": "success",
+              "errors": [],
+              "warnings": []
+            },
+            "values": [
+              "2025-03-04"
+            ],
+            "focused": 0
+          },
+          "sameInput": true
+        },
+        {
+          "action": "outside",
+          "view": {
+            "root": [
+              "has-feedback",
+              "status-success"
+            ],
+            "item": [
+              "has-feedback",
+              "has-success"
+            ],
+            "suffix": {
+              "text": "local 1 success",
+              "custom": false,
+              "feedback": true,
+              "glyphs": 1
+            },
+            "icon": {
+              "className": "ant-form-item-feedback-icon ant-form-item-feedback-icon-success",
+              "text": "local 1 success",
+              "color": "rgb(82, 196, 26)",
+              "fontSize": "14px",
+              "visibility": "visible",
+              "path": [],
+              "custom": {
+                "status": "success",
+                "errors": [],
+                "warnings": []
+              }
+            },
+            "status": {
+              "status": "success",
+              "errors": [],
+              "warnings": []
+            },
+            "values": [
+              "2025-03-04"
+            ],
+            "focused": -1
+          },
+          "sameInput": true
+        }
+      ]
+    },
+    {
+      "id": "date-async",
+      "initial": {
+        "root": [
+          "has-feedback"
+        ],
+        "item": [],
+        "suffix": {
+          "text": "",
+          "custom": false,
+          "feedback": false,
+          "glyphs": 1
+        },
+        "icon": null,
+        "status": {
+          "status": "",
+          "errors": [],
+          "warnings": []
+        },
+        "values": [
+          "2025-03-04"
+        ],
+        "focused": -1
+      },
+      "steps": [
+        {
+          "action": "validate",
+          "view": {
+            "root": [
+              "has-feedback",
+              "status-validating"
+            ],
+            "item": [
+              "has-feedback",
+              "is-validating"
+            ],
+            "suffix": {
+              "text": "local 0 validating",
+              "custom": false,
+              "feedback": true,
+              "glyphs": 1
+            },
+            "icon": {
+              "className": "ant-form-item-feedback-icon ant-form-item-feedback-icon-validating",
+              "text": "local 0 validating",
+              "color": "rgb(22, 119, 255)",
+              "fontSize": "14px",
+              "visibility": "visible",
+              "path": [],
+              "custom": {
+                "status": "validating",
+                "errors": [],
+                "warnings": []
+              }
+            },
+            "status": {
+              "status": "validating",
+              "errors": [],
+              "warnings": []
+            },
+            "values": [
+              "2025-03-04"
+            ],
+            "focused": -1
+          },
+          "sameInput": true
+        },
+        {
+          "action": "resolve",
+          "view": {
+            "root": [
+              "has-feedback",
+              "status-success"
+            ],
+            "item": [
+              "has-feedback",
+              "has-success"
+            ],
+            "suffix": {
+              "text": "local 0 success",
+              "custom": false,
+              "feedback": true,
+              "glyphs": 1
+            },
+            "icon": {
+              "className": "ant-form-item-feedback-icon ant-form-item-feedback-icon-success",
+              "text": "local 0 success",
+              "color": "rgb(82, 196, 26)",
+              "fontSize": "14px",
+              "visibility": "visible",
+              "path": [],
+              "custom": {
+                "status": "success",
+                "errors": [],
+                "warnings": []
+              }
+            },
+            "status": {
+              "status": "success",
+              "errors": [],
+              "warnings": []
+            },
+            "values": [
+              "2025-03-04"
+            ],
+            "focused": -1
+          },
+          "sameInput": true
+        },
+        {
+          "action": "reset",
+          "view": {
+            "root": [
+              "has-feedback"
+            ],
+            "item": [],
+            "suffix": {
+              "text": "",
+              "custom": false,
+              "feedback": false,
+              "glyphs": 1
+            },
+            "icon": null,
+            "status": {
+              "status": "",
+              "errors": [],
+              "warnings": []
+            },
+            "values": [
+              "2025-03-04"
+            ],
+            "focused": -1
+          },
+          "sameInput": false
+        }
+      ]
+    },
+    {
+      "id": "range-error",
+      "initial": {
+        "root": [
+          "has-feedback",
+          "status-error"
+        ],
+        "item": [
+          "has-error",
+          "has-feedback"
+        ],
+        "suffix": {
+          "text": "",
+          "custom": false,
+          "feedback": true,
+          "glyphs": 2
+        },
+        "icon": {
+          "className": "ant-form-item-feedback-icon ant-form-item-feedback-icon-error",
+          "text": "",
+          "color": "rgb(255, 77, 79)",
+          "fontSize": "14px",
+          "visibility": "visible",
+          "path": [
+            "M512 64c247.4 0 448 200.6 448 448S759.4 960 512 960 64 759.4 64 512 264.6 64 512 64zm127.98 274.82h-.04l-.08.06L512 466.75 384.14 338.88c-.04-.05-.06-.06-.08-.06a.12.12 0 00-.07 0c-.03 0-.05.01-.09.05l-45.02 45.02a.2.2 0 00-.05.09.12.12 0 000 .07v.02a.27.27 0 00.06.06L466.75 512 338.88 639.86c-.05.04-.06.06-.06.08a.12.12 0 000 .07c0 .03.01.05.05.09l45.02 45.02a.2.2 0 00.09.05.12.12 0 00.07 0c.02 0 .04-.01.08-.05L512 557.25l127.86 127.87c.04.04.06.05.08.05a.12.12 0 00.07 0c.03 0 .05-.01.09-.05l45.02-45.02a.2.2 0 00.05-.09.12.12 0 000-.07v-.02a.27.27 0 00-.05-.06L557.25 512l127.87-127.86c.04-.04.05-.06.05-.08a.12.12 0 000-.07c0-.03-.01-.05-.05-.09l-45.02-45.02a.2.2 0 00-.09-.05.12.12 0 00-.07 0z"
+          ],
+          "custom": null
+        },
+        "status": {
+          "status": "error",
+          "errors": [],
+          "warnings": []
+        },
+        "values": [
+          "2025-03-04",
+          "2025-03-05"
+        ],
+        "focused": -1
+      },
+      "steps": []
+    },
+    {
+      "id": "range-local-status",
+      "initial": {
+        "root": [
+          "has-feedback",
+          "status-warning"
+        ],
+        "item": [
+          "has-feedback",
+          "has-success"
+        ],
+        "suffix": {
+          "text": "",
+          "custom": false,
+          "feedback": true,
+          "glyphs": 2
+        },
+        "icon": {
+          "className": "ant-form-item-feedback-icon ant-form-item-feedback-icon-success",
+          "text": "",
+          "color": "rgb(82, 196, 26)",
+          "fontSize": "14px",
+          "visibility": "visible",
+          "path": [
+            "M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm193.5 301.7l-210.6 292a31.8 31.8 0 01-51.7 0L318.5 484.9c-3.8-5.3 0-12.7 6.5-12.7h46.9c10.2 0 19.9 4.9 25.9 13.3l71.2 98.8 157.2-218c6-8.3 15.6-13.3 25.9-13.3H699c6.5 0 10.3 7.4 6.5 12.7z"
+          ],
+          "custom": null
+        },
+        "status": {
+          "status": "success",
+          "errors": [],
+          "warnings": []
+        },
+        "values": [
+          "2025-03-04",
+          "2025-03-05"
+        ],
+        "focused": -1
+      },
+      "steps": []
+    },
+    {
+      "id": "range-no-style",
+      "initial": {
+        "root": [
+          "has-feedback",
+          "status-warning"
+        ],
+        "item": [
+          "has-error",
+          "has-feedback"
+        ],
+        "suffix": {
+          "text": "",
+          "custom": false,
+          "feedback": true,
+          "glyphs": 2
+        },
+        "icon": {
+          "className": "ant-form-item-feedback-icon ant-form-item-feedback-icon-error",
+          "text": "",
+          "color": "rgb(255, 77, 79)",
+          "fontSize": "14px",
+          "visibility": "visible",
+          "path": [
+            "M512 64c247.4 0 448 200.6 448 448S759.4 960 512 960 64 759.4 64 512 264.6 64 512 64zm127.98 274.82h-.04l-.08.06L512 466.75 384.14 338.88c-.04-.05-.06-.06-.08-.06a.12.12 0 00-.07 0c-.03 0-.05.01-.09.05l-45.02 45.02a.2.2 0 00-.05.09.12.12 0 000 .07v.02a.27.27 0 00.06.06L466.75 512 338.88 639.86c-.05.04-.06.06-.06.08a.12.12 0 000 .07c0 .03.01.05.05.09l45.02 45.02a.2.2 0 00.09.05.12.12 0 00.07 0c.02 0 .04-.01.08-.05L512 557.25l127.86 127.87c.04.04.06.05.08.05a.12.12 0 00.07 0c.03 0 .05-.01.09-.05l45.02-45.02a.2.2 0 00.05-.09.12.12 0 000-.07v-.02a.27.27 0 00-.05-.06L557.25 512l127.87-127.86c.04-.04.05-.06.05-.08a.12.12 0 000-.07c0-.03-.01-.05-.05-.09l-45.02-45.02a.2.2 0 00-.09-.05.12.12 0 00-.07 0z"
+          ],
+          "custom": null
+        },
+        "status": {
+          "status": "warning",
+          "errors": [],
+          "warnings": []
+        },
+        "values": [
+          "2025-03-04",
+          "2025-03-05"
+        ],
+        "focused": -1
+      },
+      "steps": []
+    },
+    {
+      "id": "range-nested-form",
+      "initial": {
+        "root": [],
+        "item": [
+          "has-error",
+          "has-feedback"
+        ],
+        "suffix": {
+          "text": "",
+          "custom": false,
+          "feedback": false,
+          "glyphs": 1
+        },
+        "icon": null,
+        "status": {
+          "status": null,
+          "errors": [],
+          "warnings": []
+        },
+        "values": [
+          "2025-03-04",
+          "2025-03-05"
+        ],
+        "focused": -1
+      },
+      "steps": []
+    },
+    {
+      "id": "range-otp",
+      "initial": {
+        "root": [
+          "status-warning"
+        ],
+        "item": [
+          "has-error",
+          "has-feedback"
+        ],
+        "suffix": {
+          "text": "",
+          "custom": false,
+          "feedback": false,
+          "glyphs": 1
+        },
+        "icon": null,
+        "status": {
+          "status": "warning",
+          "errors": [],
+          "warnings": []
+        },
+        "values": [
+          "2025-03-04",
+          "2025-03-05"
+        ],
+        "focused": -1
+      },
+      "steps": []
+    },
+    {
+      "id": "range-prefixes",
+      "initial": {
+        "root": [
+          "has-feedback",
+          "status-warning"
+        ],
+        "item": [
+          "has-feedback",
+          "has-warning"
+        ],
+        "suffix": {
+          "text": "",
+          "custom": false,
+          "feedback": true,
+          "glyphs": 2
+        },
+        "icon": {
+          "className": "field-item-feedback-icon field-item-feedback-icon-warning",
+          "text": "",
+          "color": "rgb(250, 173, 20)",
+          "fontSize": "14px",
+          "visibility": "visible",
+          "path": [
+            "M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm-32 232c0-4.4 3.6-8 8-8h48c4.4 0 8 3.6 8 8v272c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8V296zm32 440a48.01 48.01 0 010-96 48.01 48.01 0 010 96z"
+          ],
+          "custom": null
+        },
+        "status": {
+          "status": "warning",
+          "errors": [],
+          "warnings": []
+        },
+        "values": [
+          "2025-03-04",
+          "2025-03-05"
+        ],
+        "focused": -1
+      },
+      "steps": []
+    },
+    {
+      "id": "range-live",
+      "initial": {
+        "root": [
+          "has-feedback",
+          "status-warning"
+        ],
+        "item": [
+          "has-feedback",
+          "has-warning"
+        ],
+        "suffix": {
+          "text": "local 0 warning",
+          "custom": false,
+          "feedback": true,
+          "glyphs": 1
+        },
+        "icon": {
+          "className": "ant-form-item-feedback-icon ant-form-item-feedback-icon-warning",
+          "text": "local 0 warning",
+          "color": "rgb(250, 173, 20)",
+          "fontSize": "14px",
+          "visibility": "visible",
+          "path": [],
+          "custom": {
+            "status": "warning",
+            "errors": [],
+            "warnings": []
+          }
+        },
+        "status": {
+          "status": "warning",
+          "errors": [],
+          "warnings": []
+        },
+        "values": [
+          "2025-03-04",
+          "2025-03-05"
+        ],
+        "focused": -1
+      },
+      "steps": [
+        {
+          "action": "focus",
+          "view": {
+            "root": [
+              "has-feedback",
+              "status-warning"
+            ],
+            "item": [
+              "has-feedback",
+              "has-warning"
+            ],
+            "suffix": {
+              "text": "local 0 warning",
+              "custom": false,
+              "feedback": true,
+              "glyphs": 1
+            },
+            "icon": {
+              "className": "ant-form-item-feedback-icon ant-form-item-feedback-icon-warning",
+              "text": "local 0 warning",
+              "color": "rgb(250, 173, 20)",
+              "fontSize": "14px",
+              "visibility": "visible",
+              "path": [],
+              "custom": {
+                "status": "warning",
+                "errors": [],
+                "warnings": []
+              }
+            },
+            "status": {
+              "status": "warning",
+              "errors": [],
+              "warnings": []
+            },
+            "values": [
+              "2025-03-04",
+              "2025-03-05"
+            ],
+            "focused": 0
+          },
+          "sameInput": true
+        },
+        {
+          "action": "error",
+          "view": {
+            "root": [
+              "has-feedback",
+              "status-error"
+            ],
+            "item": [
+              "has-error",
+              "has-feedback"
+            ],
+            "suffix": {
+              "text": "local 0 error",
+              "custom": false,
+              "feedback": true,
+              "glyphs": 1
+            },
+            "icon": {
+              "className": "ant-form-item-feedback-icon ant-form-item-feedback-icon-error",
+              "text": "local 0 error",
+              "color": "rgb(255, 77, 79)",
+              "fontSize": "14px",
+              "visibility": "visible",
+              "path": [],
+              "custom": {
+                "status": "error",
+                "errors": [],
+                "warnings": []
+              }
+            },
+            "status": {
+              "status": "error",
+              "errors": [],
+              "warnings": []
+            },
+            "values": [
+              "2025-03-04",
+              "2025-03-05"
+            ],
+            "focused": 0
+          },
+          "sameInput": true
+        },
+        {
+          "action": "update-icon",
+          "view": {
+            "root": [
+              "has-feedback",
+              "status-error"
+            ],
+            "item": [
+              "has-error",
+              "has-feedback"
+            ],
+            "suffix": {
+              "text": "local 1 error",
+              "custom": false,
+              "feedback": true,
+              "glyphs": 1
+            },
+            "icon": {
+              "className": "ant-form-item-feedback-icon ant-form-item-feedback-icon-error",
+              "text": "local 1 error",
+              "color": "rgb(255, 77, 79)",
+              "fontSize": "14px",
+              "visibility": "visible",
+              "path": [],
+              "custom": {
+                "status": "error",
+                "errors": [],
+                "warnings": []
+              }
+            },
+            "status": {
+              "status": "error",
+              "errors": [],
+              "warnings": []
+            },
+            "values": [
+              "2025-03-04",
+              "2025-03-05"
+            ],
+            "focused": 0
+          },
+          "sameInput": true
+        },
+        {
+          "action": "hide-icon",
+          "view": {
+            "root": [
+              "has-feedback",
+              "status-error"
+            ],
+            "item": [
+              "has-error",
+              "has-feedback"
+            ],
+            "suffix": {
+              "text": "",
+              "custom": false,
+              "feedback": false,
+              "glyphs": 1
+            },
+            "icon": null,
+            "status": {
+              "status": "error",
+              "errors": [],
+              "warnings": []
+            },
+            "values": [
+              "2025-03-04",
+              "2025-03-05"
+            ],
+            "focused": 0
+          },
+          "sameInput": true
+        },
+        {
+          "action": "show-icon",
+          "view": {
+            "root": [
+              "has-feedback",
+              "status-error"
+            ],
+            "item": [
+              "has-error",
+              "has-feedback"
+            ],
+            "suffix": {
+              "text": "local 1 error",
+              "custom": false,
+              "feedback": true,
+              "glyphs": 1
+            },
+            "icon": {
+              "className": "ant-form-item-feedback-icon ant-form-item-feedback-icon-error",
+              "text": "local 1 error",
+              "color": "rgb(255, 77, 79)",
+              "fontSize": "14px",
+              "visibility": "visible",
+              "path": [],
+              "custom": {
+                "status": "error",
+                "errors": [],
+                "warnings": []
+              }
+            },
+            "status": {
+              "status": "error",
+              "errors": [],
+              "warnings": []
+            },
+            "values": [
+              "2025-03-04",
+              "2025-03-05"
+            ],
+            "focused": 0
+          },
+          "sameInput": true
+        },
+        {
+          "action": "toggle-feedback",
+          "view": {
+            "root": [
+              "status-error"
+            ],
+            "item": [
+              "has-error"
+            ],
+            "suffix": {
+              "text": "",
+              "custom": false,
+              "feedback": false,
+              "glyphs": 1
+            },
+            "icon": null,
+            "status": {
+              "status": "error",
+              "errors": [],
+              "warnings": []
+            },
+            "values": [
+              "2025-03-04",
+              "2025-03-05"
+            ],
+            "focused": 0
+          },
+          "sameInput": true
+        },
+        {
+          "action": "toggle-feedback",
+          "view": {
+            "root": [
+              "has-feedback",
+              "status-error"
+            ],
+            "item": [
+              "has-error",
+              "has-feedback"
+            ],
+            "suffix": {
+              "text": "local 1 error",
+              "custom": false,
+              "feedback": true,
+              "glyphs": 1
+            },
+            "icon": {
+              "className": "ant-form-item-feedback-icon ant-form-item-feedback-icon-error",
+              "text": "local 1 error",
+              "color": "rgb(255, 77, 79)",
+              "fontSize": "14px",
+              "visibility": "visible",
+              "path": [],
+              "custom": {
+                "status": "error",
+                "errors": [],
+                "warnings": []
+              }
+            },
+            "status": {
+              "status": "error",
+              "errors": [],
+              "warnings": []
+            },
+            "values": [
+              "2025-03-04",
+              "2025-03-05"
+            ],
+            "focused": 0
+          },
+          "sameInput": true
+        },
+        {
+          "action": "success",
+          "view": {
+            "root": [
+              "has-feedback",
+              "status-success"
+            ],
+            "item": [
+              "has-feedback",
+              "has-success"
+            ],
+            "suffix": {
+              "text": "local 1 success",
+              "custom": false,
+              "feedback": true,
+              "glyphs": 1
+            },
+            "icon": {
+              "className": "ant-form-item-feedback-icon ant-form-item-feedback-icon-success",
+              "text": "local 1 success",
+              "color": "rgb(82, 196, 26)",
+              "fontSize": "14px",
+              "visibility": "visible",
+              "path": [],
+              "custom": {
+                "status": "success",
+                "errors": [],
+                "warnings": []
+              }
+            },
+            "status": {
+              "status": "success",
+              "errors": [],
+              "warnings": []
+            },
+            "values": [
+              "2025-03-04",
+              "2025-03-05"
+            ],
+            "focused": 0
+          },
+          "sameInput": true
+        },
+        {
+          "action": "outside",
+          "view": {
+            "root": [
+              "has-feedback",
+              "status-success"
+            ],
+            "item": [
+              "has-feedback",
+              "has-success"
+            ],
+            "suffix": {
+              "text": "local 1 success",
+              "custom": false,
+              "feedback": true,
+              "glyphs": 1
+            },
+            "icon": {
+              "className": "ant-form-item-feedback-icon ant-form-item-feedback-icon-success",
+              "text": "local 1 success",
+              "color": "rgb(82, 196, 26)",
+              "fontSize": "14px",
+              "visibility": "visible",
+              "path": [],
+              "custom": {
+                "status": "success",
+                "errors": [],
+                "warnings": []
+              }
+            },
+            "status": {
+              "status": "success",
+              "errors": [],
+              "warnings": []
+            },
+            "values": [
+              "2025-03-04",
+              "2025-03-05"
+            ],
+            "focused": -1
+          },
+          "sameInput": true
+        }
+      ]
+    },
+    {
+      "id": "range-async",
+      "initial": {
+        "root": [
+          "has-feedback"
+        ],
+        "item": [],
+        "suffix": {
+          "text": "",
+          "custom": false,
+          "feedback": false,
+          "glyphs": 1
+        },
+        "icon": null,
+        "status": {
+          "status": "",
+          "errors": [],
+          "warnings": []
+        },
+        "values": [
+          "2025-03-04",
+          "2025-03-05"
+        ],
+        "focused": -1
+      },
+      "steps": [
+        {
+          "action": "validate",
+          "view": {
+            "root": [
+              "has-feedback",
+              "status-validating"
+            ],
+            "item": [
+              "has-feedback",
+              "is-validating"
+            ],
+            "suffix": {
+              "text": "local 0 validating",
+              "custom": false,
+              "feedback": true,
+              "glyphs": 1
+            },
+            "icon": {
+              "className": "ant-form-item-feedback-icon ant-form-item-feedback-icon-validating",
+              "text": "local 0 validating",
+              "color": "rgb(22, 119, 255)",
+              "fontSize": "14px",
+              "visibility": "visible",
+              "path": [],
+              "custom": {
+                "status": "validating",
+                "errors": [],
+                "warnings": []
+              }
+            },
+            "status": {
+              "status": "validating",
+              "errors": [],
+              "warnings": []
+            },
+            "values": [
+              "2025-03-04",
+              "2025-03-05"
+            ],
+            "focused": -1
+          },
+          "sameInput": true
+        },
+        {
+          "action": "resolve",
+          "view": {
+            "root": [
+              "has-feedback",
+              "status-success"
+            ],
+            "item": [
+              "has-feedback",
+              "has-success"
+            ],
+            "suffix": {
+              "text": "local 0 success",
+              "custom": false,
+              "feedback": true,
+              "glyphs": 1
+            },
+            "icon": {
+              "className": "ant-form-item-feedback-icon ant-form-item-feedback-icon-success",
+              "text": "local 0 success",
+              "color": "rgb(82, 196, 26)",
+              "fontSize": "14px",
+              "visibility": "visible",
+              "path": [],
+              "custom": {
+                "status": "success",
+                "errors": [],
+                "warnings": []
+              }
+            },
+            "status": {
+              "status": "success",
+              "errors": [],
+              "warnings": []
+            },
+            "values": [
+              "2025-03-04",
+              "2025-03-05"
+            ],
+            "focused": -1
+          },
+          "sameInput": true
+        },
+        {
+          "action": "reset",
+          "view": {
+            "root": [
+              "has-feedback"
+            ],
+            "item": [],
+            "suffix": {
+              "text": "",
+              "custom": false,
+              "feedback": false,
+              "glyphs": 1
+            },
+            "icon": null,
+            "status": {
+              "status": "",
+              "errors": [],
+              "warnings": []
+            },
+            "values": [
+              "2025-03-04",
+              "2025-03-05"
+            ],
+            "focused": -1
+          },
+          "sameInput": false
+        }
+      ]
+    },
+    {
+      "id": "time-error",
+      "initial": {
+        "root": [
+          "has-feedback",
+          "status-error"
+        ],
+        "item": [
+          "has-error",
+          "has-feedback"
+        ],
+        "suffix": {
+          "text": "",
+          "custom": false,
+          "feedback": true,
+          "glyphs": 2
+        },
+        "icon": {
+          "className": "ant-form-item-feedback-icon ant-form-item-feedback-icon-error",
+          "text": "",
+          "color": "rgb(255, 77, 79)",
+          "fontSize": "14px",
+          "visibility": "visible",
+          "path": [
+            "M512 64c247.4 0 448 200.6 448 448S759.4 960 512 960 64 759.4 64 512 264.6 64 512 64zm127.98 274.82h-.04l-.08.06L512 466.75 384.14 338.88c-.04-.05-.06-.06-.08-.06a.12.12 0 00-.07 0c-.03 0-.05.01-.09.05l-45.02 45.02a.2.2 0 00-.05.09.12.12 0 000 .07v.02a.27.27 0 00.06.06L466.75 512 338.88 639.86c-.05.04-.06.06-.06.08a.12.12 0 000 .07c0 .03.01.05.05.09l45.02 45.02a.2.2 0 00.09.05.12.12 0 00.07 0c.02 0 .04-.01.08-.05L512 557.25l127.86 127.87c.04.04.06.05.08.05a.12.12 0 00.07 0c.03 0 .05-.01.09-.05l45.02-45.02a.2.2 0 00.05-.09.12.12 0 000-.07v-.02a.27.27 0 00-.05-.06L557.25 512l127.87-127.86c.04-.04.05-.06.05-.08a.12.12 0 000-.07c0-.03-.01-.05-.05-.09l-45.02-45.02a.2.2 0 00-.09-.05.12.12 0 00-.07 0z"
+          ],
+          "custom": null
+        },
+        "status": {
+          "status": "error",
+          "errors": [],
+          "warnings": []
+        },
+        "values": [
+          "12:13:14"
+        ],
+        "focused": -1
+      },
+      "steps": []
+    },
+    {
+      "id": "time-local-status",
+      "initial": {
+        "root": [
+          "has-feedback",
+          "status-warning"
+        ],
+        "item": [
+          "has-feedback",
+          "has-success"
+        ],
+        "suffix": {
+          "text": "",
+          "custom": false,
+          "feedback": true,
+          "glyphs": 2
+        },
+        "icon": {
+          "className": "ant-form-item-feedback-icon ant-form-item-feedback-icon-success",
+          "text": "",
+          "color": "rgb(82, 196, 26)",
+          "fontSize": "14px",
+          "visibility": "visible",
+          "path": [
+            "M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm193.5 301.7l-210.6 292a31.8 31.8 0 01-51.7 0L318.5 484.9c-3.8-5.3 0-12.7 6.5-12.7h46.9c10.2 0 19.9 4.9 25.9 13.3l71.2 98.8 157.2-218c6-8.3 15.6-13.3 25.9-13.3H699c6.5 0 10.3 7.4 6.5 12.7z"
+          ],
+          "custom": null
+        },
+        "status": {
+          "status": "success",
+          "errors": [],
+          "warnings": []
+        },
+        "values": [
+          "12:13:14"
+        ],
+        "focused": -1
+      },
+      "steps": []
+    },
+    {
+      "id": "time-no-style",
+      "initial": {
+        "root": [
+          "has-feedback",
+          "status-warning"
+        ],
+        "item": [
+          "has-error",
+          "has-feedback"
+        ],
+        "suffix": {
+          "text": "",
+          "custom": false,
+          "feedback": true,
+          "glyphs": 2
+        },
+        "icon": {
+          "className": "ant-form-item-feedback-icon ant-form-item-feedback-icon-error",
+          "text": "",
+          "color": "rgb(255, 77, 79)",
+          "fontSize": "14px",
+          "visibility": "visible",
+          "path": [
+            "M512 64c247.4 0 448 200.6 448 448S759.4 960 512 960 64 759.4 64 512 264.6 64 512 64zm127.98 274.82h-.04l-.08.06L512 466.75 384.14 338.88c-.04-.05-.06-.06-.08-.06a.12.12 0 00-.07 0c-.03 0-.05.01-.09.05l-45.02 45.02a.2.2 0 00-.05.09.12.12 0 000 .07v.02a.27.27 0 00.06.06L466.75 512 338.88 639.86c-.05.04-.06.06-.06.08a.12.12 0 000 .07c0 .03.01.05.05.09l45.02 45.02a.2.2 0 00.09.05.12.12 0 00.07 0c.02 0 .04-.01.08-.05L512 557.25l127.86 127.87c.04.04.06.05.08.05a.12.12 0 00.07 0c.03 0 .05-.01.09-.05l45.02-45.02a.2.2 0 00.05-.09.12.12 0 000-.07v-.02a.27.27 0 00-.05-.06L557.25 512l127.87-127.86c.04-.04.05-.06.05-.08a.12.12 0 000-.07c0-.03-.01-.05-.05-.09l-45.02-45.02a.2.2 0 00-.09-.05.12.12 0 00-.07 0z"
+          ],
+          "custom": null
+        },
+        "status": {
+          "status": "warning",
+          "errors": [],
+          "warnings": []
+        },
+        "values": [
+          "12:13:14"
+        ],
+        "focused": -1
+      },
+      "steps": []
+    },
+    {
+      "id": "time-nested-form",
+      "initial": {
+        "root": [],
+        "item": [
+          "has-error",
+          "has-feedback"
+        ],
+        "suffix": {
+          "text": "",
+          "custom": false,
+          "feedback": false,
+          "glyphs": 1
+        },
+        "icon": null,
+        "status": {
+          "status": null,
+          "errors": [],
+          "warnings": []
+        },
+        "values": [
+          "12:13:14"
+        ],
+        "focused": -1
+      },
+      "steps": []
+    },
+    {
+      "id": "time-otp",
+      "initial": {
+        "root": [
+          "status-warning"
+        ],
+        "item": [
+          "has-error",
+          "has-feedback"
+        ],
+        "suffix": {
+          "text": "",
+          "custom": false,
+          "feedback": false,
+          "glyphs": 1
+        },
+        "icon": null,
+        "status": {
+          "status": "warning",
+          "errors": [],
+          "warnings": []
+        },
+        "values": [
+          "12:13:14"
+        ],
+        "focused": -1
+      },
+      "steps": []
+    },
+    {
+      "id": "time-prefixes",
+      "initial": {
+        "root": [
+          "has-feedback",
+          "status-warning"
+        ],
+        "item": [
+          "has-feedback",
+          "has-warning"
+        ],
+        "suffix": {
+          "text": "",
+          "custom": false,
+          "feedback": true,
+          "glyphs": 2
+        },
+        "icon": {
+          "className": "field-item-feedback-icon field-item-feedback-icon-warning",
+          "text": "",
+          "color": "rgb(250, 173, 20)",
+          "fontSize": "14px",
+          "visibility": "visible",
+          "path": [
+            "M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm-32 232c0-4.4 3.6-8 8-8h48c4.4 0 8 3.6 8 8v272c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8V296zm32 440a48.01 48.01 0 010-96 48.01 48.01 0 010 96z"
+          ],
+          "custom": null
+        },
+        "status": {
+          "status": "warning",
+          "errors": [],
+          "warnings": []
+        },
+        "values": [
+          "12:13:14"
+        ],
+        "focused": -1
+      },
+      "steps": []
+    },
+    {
+      "id": "time-live",
+      "initial": {
+        "root": [
+          "has-feedback",
+          "status-warning"
+        ],
+        "item": [
+          "has-feedback",
+          "has-warning"
+        ],
+        "suffix": {
+          "text": "local 0 warning",
+          "custom": false,
+          "feedback": true,
+          "glyphs": 1
+        },
+        "icon": {
+          "className": "ant-form-item-feedback-icon ant-form-item-feedback-icon-warning",
+          "text": "local 0 warning",
+          "color": "rgb(250, 173, 20)",
+          "fontSize": "14px",
+          "visibility": "visible",
+          "path": [],
+          "custom": {
+            "status": "warning",
+            "errors": [],
+            "warnings": []
+          }
+        },
+        "status": {
+          "status": "warning",
+          "errors": [],
+          "warnings": []
+        },
+        "values": [
+          "12:13:14"
+        ],
+        "focused": -1
+      },
+      "steps": [
+        {
+          "action": "focus",
+          "view": {
+            "root": [
+              "has-feedback",
+              "status-warning"
+            ],
+            "item": [
+              "has-feedback",
+              "has-warning"
+            ],
+            "suffix": {
+              "text": "local 0 warning",
+              "custom": false,
+              "feedback": true,
+              "glyphs": 1
+            },
+            "icon": {
+              "className": "ant-form-item-feedback-icon ant-form-item-feedback-icon-warning",
+              "text": "local 0 warning",
+              "color": "rgb(250, 173, 20)",
+              "fontSize": "14px",
+              "visibility": "visible",
+              "path": [],
+              "custom": {
+                "status": "warning",
+                "errors": [],
+                "warnings": []
+              }
+            },
+            "status": {
+              "status": "warning",
+              "errors": [],
+              "warnings": []
+            },
+            "values": [
+              "12:13:14"
+            ],
+            "focused": 0
+          },
+          "sameInput": true
+        },
+        {
+          "action": "error",
+          "view": {
+            "root": [
+              "has-feedback",
+              "status-error"
+            ],
+            "item": [
+              "has-error",
+              "has-feedback"
+            ],
+            "suffix": {
+              "text": "local 0 error",
+              "custom": false,
+              "feedback": true,
+              "glyphs": 1
+            },
+            "icon": {
+              "className": "ant-form-item-feedback-icon ant-form-item-feedback-icon-error",
+              "text": "local 0 error",
+              "color": "rgb(255, 77, 79)",
+              "fontSize": "14px",
+              "visibility": "visible",
+              "path": [],
+              "custom": {
+                "status": "error",
+                "errors": [],
+                "warnings": []
+              }
+            },
+            "status": {
+              "status": "error",
+              "errors": [],
+              "warnings": []
+            },
+            "values": [
+              "12:13:14"
+            ],
+            "focused": 0
+          },
+          "sameInput": true
+        },
+        {
+          "action": "update-icon",
+          "view": {
+            "root": [
+              "has-feedback",
+              "status-error"
+            ],
+            "item": [
+              "has-error",
+              "has-feedback"
+            ],
+            "suffix": {
+              "text": "local 1 error",
+              "custom": false,
+              "feedback": true,
+              "glyphs": 1
+            },
+            "icon": {
+              "className": "ant-form-item-feedback-icon ant-form-item-feedback-icon-error",
+              "text": "local 1 error",
+              "color": "rgb(255, 77, 79)",
+              "fontSize": "14px",
+              "visibility": "visible",
+              "path": [],
+              "custom": {
+                "status": "error",
+                "errors": [],
+                "warnings": []
+              }
+            },
+            "status": {
+              "status": "error",
+              "errors": [],
+              "warnings": []
+            },
+            "values": [
+              "12:13:14"
+            ],
+            "focused": 0
+          },
+          "sameInput": true
+        },
+        {
+          "action": "hide-icon",
+          "view": {
+            "root": [
+              "has-feedback",
+              "status-error"
+            ],
+            "item": [
+              "has-error",
+              "has-feedback"
+            ],
+            "suffix": {
+              "text": "",
+              "custom": false,
+              "feedback": false,
+              "glyphs": 1
+            },
+            "icon": null,
+            "status": {
+              "status": "error",
+              "errors": [],
+              "warnings": []
+            },
+            "values": [
+              "12:13:14"
+            ],
+            "focused": 0
+          },
+          "sameInput": true
+        },
+        {
+          "action": "show-icon",
+          "view": {
+            "root": [
+              "has-feedback",
+              "status-error"
+            ],
+            "item": [
+              "has-error",
+              "has-feedback"
+            ],
+            "suffix": {
+              "text": "local 1 error",
+              "custom": false,
+              "feedback": true,
+              "glyphs": 1
+            },
+            "icon": {
+              "className": "ant-form-item-feedback-icon ant-form-item-feedback-icon-error",
+              "text": "local 1 error",
+              "color": "rgb(255, 77, 79)",
+              "fontSize": "14px",
+              "visibility": "visible",
+              "path": [],
+              "custom": {
+                "status": "error",
+                "errors": [],
+                "warnings": []
+              }
+            },
+            "status": {
+              "status": "error",
+              "errors": [],
+              "warnings": []
+            },
+            "values": [
+              "12:13:14"
+            ],
+            "focused": 0
+          },
+          "sameInput": true
+        },
+        {
+          "action": "toggle-feedback",
+          "view": {
+            "root": [
+              "status-error"
+            ],
+            "item": [
+              "has-error"
+            ],
+            "suffix": {
+              "text": "",
+              "custom": false,
+              "feedback": false,
+              "glyphs": 1
+            },
+            "icon": null,
+            "status": {
+              "status": "error",
+              "errors": [],
+              "warnings": []
+            },
+            "values": [
+              "12:13:14"
+            ],
+            "focused": 0
+          },
+          "sameInput": true
+        },
+        {
+          "action": "toggle-feedback",
+          "view": {
+            "root": [
+              "has-feedback",
+              "status-error"
+            ],
+            "item": [
+              "has-error",
+              "has-feedback"
+            ],
+            "suffix": {
+              "text": "local 1 error",
+              "custom": false,
+              "feedback": true,
+              "glyphs": 1
+            },
+            "icon": {
+              "className": "ant-form-item-feedback-icon ant-form-item-feedback-icon-error",
+              "text": "local 1 error",
+              "color": "rgb(255, 77, 79)",
+              "fontSize": "14px",
+              "visibility": "visible",
+              "path": [],
+              "custom": {
+                "status": "error",
+                "errors": [],
+                "warnings": []
+              }
+            },
+            "status": {
+              "status": "error",
+              "errors": [],
+              "warnings": []
+            },
+            "values": [
+              "12:13:14"
+            ],
+            "focused": 0
+          },
+          "sameInput": true
+        },
+        {
+          "action": "success",
+          "view": {
+            "root": [
+              "has-feedback",
+              "status-success"
+            ],
+            "item": [
+              "has-feedback",
+              "has-success"
+            ],
+            "suffix": {
+              "text": "local 1 success",
+              "custom": false,
+              "feedback": true,
+              "glyphs": 1
+            },
+            "icon": {
+              "className": "ant-form-item-feedback-icon ant-form-item-feedback-icon-success",
+              "text": "local 1 success",
+              "color": "rgb(82, 196, 26)",
+              "fontSize": "14px",
+              "visibility": "visible",
+              "path": [],
+              "custom": {
+                "status": "success",
+                "errors": [],
+                "warnings": []
+              }
+            },
+            "status": {
+              "status": "success",
+              "errors": [],
+              "warnings": []
+            },
+            "values": [
+              "12:13:14"
+            ],
+            "focused": 0
+          },
+          "sameInput": true
+        },
+        {
+          "action": "outside",
+          "view": {
+            "root": [
+              "has-feedback",
+              "status-success"
+            ],
+            "item": [
+              "has-feedback",
+              "has-success"
+            ],
+            "suffix": {
+              "text": "local 1 success",
+              "custom": false,
+              "feedback": true,
+              "glyphs": 1
+            },
+            "icon": {
+              "className": "ant-form-item-feedback-icon ant-form-item-feedback-icon-success",
+              "text": "local 1 success",
+              "color": "rgb(82, 196, 26)",
+              "fontSize": "14px",
+              "visibility": "visible",
+              "path": [],
+              "custom": {
+                "status": "success",
+                "errors": [],
+                "warnings": []
+              }
+            },
+            "status": {
+              "status": "success",
+              "errors": [],
+              "warnings": []
+            },
+            "values": [
+              "12:13:14"
+            ],
+            "focused": -1
+          },
+          "sameInput": true
+        }
+      ]
+    },
+    {
+      "id": "time-async",
+      "initial": {
+        "root": [
+          "has-feedback"
+        ],
+        "item": [],
+        "suffix": {
+          "text": "",
+          "custom": false,
+          "feedback": false,
+          "glyphs": 1
+        },
+        "icon": null,
+        "status": {
+          "status": "",
+          "errors": [],
+          "warnings": []
+        },
+        "values": [
+          "12:13:14"
+        ],
+        "focused": -1
+      },
+      "steps": [
+        {
+          "action": "validate",
+          "view": {
+            "root": [
+              "has-feedback",
+              "status-validating"
+            ],
+            "item": [
+              "has-feedback",
+              "is-validating"
+            ],
+            "suffix": {
+              "text": "local 0 validating",
+              "custom": false,
+              "feedback": true,
+              "glyphs": 1
+            },
+            "icon": {
+              "className": "ant-form-item-feedback-icon ant-form-item-feedback-icon-validating",
+              "text": "local 0 validating",
+              "color": "rgb(22, 119, 255)",
+              "fontSize": "14px",
+              "visibility": "visible",
+              "path": [],
+              "custom": {
+                "status": "validating",
+                "errors": [],
+                "warnings": []
+              }
+            },
+            "status": {
+              "status": "validating",
+              "errors": [],
+              "warnings": []
+            },
+            "values": [
+              "12:13:14"
+            ],
+            "focused": -1
+          },
+          "sameInput": true
+        },
+        {
+          "action": "resolve",
+          "view": {
+            "root": [
+              "has-feedback",
+              "status-success"
+            ],
+            "item": [
+              "has-feedback",
+              "has-success"
+            ],
+            "suffix": {
+              "text": "local 0 success",
+              "custom": false,
+              "feedback": true,
+              "glyphs": 1
+            },
+            "icon": {
+              "className": "ant-form-item-feedback-icon ant-form-item-feedback-icon-success",
+              "text": "local 0 success",
+              "color": "rgb(82, 196, 26)",
+              "fontSize": "14px",
+              "visibility": "visible",
+              "path": [],
+              "custom": {
+                "status": "success",
+                "errors": [],
+                "warnings": []
+              }
+            },
+            "status": {
+              "status": "success",
+              "errors": [],
+              "warnings": []
+            },
+            "values": [
+              "12:13:14"
+            ],
+            "focused": -1
+          },
+          "sameInput": true
+        },
+        {
+          "action": "reset",
+          "view": {
+            "root": [
+              "has-feedback"
+            ],
+            "item": [],
+            "suffix": {
+              "text": "",
+              "custom": false,
+              "feedback": false,
+              "glyphs": 1
+            },
+            "icon": null,
+            "status": {
+              "status": "",
+              "errors": [],
+              "warnings": []
+            },
+            "values": [
+              "12:13:14"
+            ],
+            "focused": -1
+          },
+          "sameInput": false
+        }
+      ]
+    },
+    {
+      "id": "time-range-error",
+      "initial": {
+        "root": [
+          "has-feedback",
+          "status-error"
+        ],
+        "item": [
+          "has-error",
+          "has-feedback"
+        ],
+        "suffix": {
+          "text": "",
+          "custom": false,
+          "feedback": true,
+          "glyphs": 2
+        },
+        "icon": {
+          "className": "ant-form-item-feedback-icon ant-form-item-feedback-icon-error",
+          "text": "",
+          "color": "rgb(255, 77, 79)",
+          "fontSize": "14px",
+          "visibility": "visible",
+          "path": [
+            "M512 64c247.4 0 448 200.6 448 448S759.4 960 512 960 64 759.4 64 512 264.6 64 512 64zm127.98 274.82h-.04l-.08.06L512 466.75 384.14 338.88c-.04-.05-.06-.06-.08-.06a.12.12 0 00-.07 0c-.03 0-.05.01-.09.05l-45.02 45.02a.2.2 0 00-.05.09.12.12 0 000 .07v.02a.27.27 0 00.06.06L466.75 512 338.88 639.86c-.05.04-.06.06-.06.08a.12.12 0 000 .07c0 .03.01.05.05.09l45.02 45.02a.2.2 0 00.09.05.12.12 0 00.07 0c.02 0 .04-.01.08-.05L512 557.25l127.86 127.87c.04.04.06.05.08.05a.12.12 0 00.07 0c.03 0 .05-.01.09-.05l45.02-45.02a.2.2 0 00.05-.09.12.12 0 000-.07v-.02a.27.27 0 00-.05-.06L557.25 512l127.87-127.86c.04-.04.05-.06.05-.08a.12.12 0 000-.07c0-.03-.01-.05-.05-.09l-45.02-45.02a.2.2 0 00-.09-.05.12.12 0 00-.07 0z"
+          ],
+          "custom": null
+        },
+        "status": {
+          "status": "error",
+          "errors": [],
+          "warnings": []
+        },
+        "values": [
+          "12:13:14",
+          "15:16:17"
+        ],
+        "focused": -1
+      },
+      "steps": []
+    },
+    {
+      "id": "time-range-local-status",
+      "initial": {
+        "root": [
+          "has-feedback",
+          "status-warning"
+        ],
+        "item": [
+          "has-feedback",
+          "has-success"
+        ],
+        "suffix": {
+          "text": "",
+          "custom": false,
+          "feedback": true,
+          "glyphs": 2
+        },
+        "icon": {
+          "className": "ant-form-item-feedback-icon ant-form-item-feedback-icon-success",
+          "text": "",
+          "color": "rgb(82, 196, 26)",
+          "fontSize": "14px",
+          "visibility": "visible",
+          "path": [
+            "M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm193.5 301.7l-210.6 292a31.8 31.8 0 01-51.7 0L318.5 484.9c-3.8-5.3 0-12.7 6.5-12.7h46.9c10.2 0 19.9 4.9 25.9 13.3l71.2 98.8 157.2-218c6-8.3 15.6-13.3 25.9-13.3H699c6.5 0 10.3 7.4 6.5 12.7z"
+          ],
+          "custom": null
+        },
+        "status": {
+          "status": "success",
+          "errors": [],
+          "warnings": []
+        },
+        "values": [
+          "12:13:14",
+          "15:16:17"
+        ],
+        "focused": -1
+      },
+      "steps": []
+    },
+    {
+      "id": "time-range-no-style",
+      "initial": {
+        "root": [
+          "has-feedback",
+          "status-warning"
+        ],
+        "item": [
+          "has-error",
+          "has-feedback"
+        ],
+        "suffix": {
+          "text": "",
+          "custom": false,
+          "feedback": true,
+          "glyphs": 2
+        },
+        "icon": {
+          "className": "ant-form-item-feedback-icon ant-form-item-feedback-icon-error",
+          "text": "",
+          "color": "rgb(255, 77, 79)",
+          "fontSize": "14px",
+          "visibility": "visible",
+          "path": [
+            "M512 64c247.4 0 448 200.6 448 448S759.4 960 512 960 64 759.4 64 512 264.6 64 512 64zm127.98 274.82h-.04l-.08.06L512 466.75 384.14 338.88c-.04-.05-.06-.06-.08-.06a.12.12 0 00-.07 0c-.03 0-.05.01-.09.05l-45.02 45.02a.2.2 0 00-.05.09.12.12 0 000 .07v.02a.27.27 0 00.06.06L466.75 512 338.88 639.86c-.05.04-.06.06-.06.08a.12.12 0 000 .07c0 .03.01.05.05.09l45.02 45.02a.2.2 0 00.09.05.12.12 0 00.07 0c.02 0 .04-.01.08-.05L512 557.25l127.86 127.87c.04.04.06.05.08.05a.12.12 0 00.07 0c.03 0 .05-.01.09-.05l45.02-45.02a.2.2 0 00.05-.09.12.12 0 000-.07v-.02a.27.27 0 00-.05-.06L557.25 512l127.87-127.86c.04-.04.05-.06.05-.08a.12.12 0 000-.07c0-.03-.01-.05-.05-.09l-45.02-45.02a.2.2 0 00-.09-.05.12.12 0 00-.07 0z"
+          ],
+          "custom": null
+        },
+        "status": {
+          "status": "warning",
+          "errors": [],
+          "warnings": []
+        },
+        "values": [
+          "12:13:14",
+          "15:16:17"
+        ],
+        "focused": -1
+      },
+      "steps": []
+    },
+    {
+      "id": "time-range-nested-form",
+      "initial": {
+        "root": [],
+        "item": [
+          "has-error",
+          "has-feedback"
+        ],
+        "suffix": {
+          "text": "",
+          "custom": false,
+          "feedback": false,
+          "glyphs": 1
+        },
+        "icon": null,
+        "status": {
+          "status": null,
+          "errors": [],
+          "warnings": []
+        },
+        "values": [
+          "12:13:14",
+          "15:16:17"
+        ],
+        "focused": -1
+      },
+      "steps": []
+    },
+    {
+      "id": "time-range-otp",
+      "initial": {
+        "root": [
+          "status-warning"
+        ],
+        "item": [
+          "has-error",
+          "has-feedback"
+        ],
+        "suffix": {
+          "text": "",
+          "custom": false,
+          "feedback": false,
+          "glyphs": 1
+        },
+        "icon": null,
+        "status": {
+          "status": "warning",
+          "errors": [],
+          "warnings": []
+        },
+        "values": [
+          "12:13:14",
+          "15:16:17"
+        ],
+        "focused": -1
+      },
+      "steps": []
+    },
+    {
+      "id": "time-range-prefixes",
+      "initial": {
+        "root": [
+          "has-feedback",
+          "status-warning"
+        ],
+        "item": [
+          "has-feedback",
+          "has-warning"
+        ],
+        "suffix": {
+          "text": "",
+          "custom": false,
+          "feedback": true,
+          "glyphs": 2
+        },
+        "icon": {
+          "className": "field-item-feedback-icon field-item-feedback-icon-warning",
+          "text": "",
+          "color": "rgb(250, 173, 20)",
+          "fontSize": "14px",
+          "visibility": "visible",
+          "path": [
+            "M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm-32 232c0-4.4 3.6-8 8-8h48c4.4 0 8 3.6 8 8v272c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8V296zm32 440a48.01 48.01 0 010-96 48.01 48.01 0 010 96z"
+          ],
+          "custom": null
+        },
+        "status": {
+          "status": "warning",
+          "errors": [],
+          "warnings": []
+        },
+        "values": [
+          "12:13:14",
+          "15:16:17"
+        ],
+        "focused": -1
+      },
+      "steps": []
+    },
+    {
+      "id": "time-range-live",
+      "initial": {
+        "root": [
+          "has-feedback",
+          "status-warning"
+        ],
+        "item": [
+          "has-feedback",
+          "has-warning"
+        ],
+        "suffix": {
+          "text": "local 0 warning",
+          "custom": false,
+          "feedback": true,
+          "glyphs": 1
+        },
+        "icon": {
+          "className": "ant-form-item-feedback-icon ant-form-item-feedback-icon-warning",
+          "text": "local 0 warning",
+          "color": "rgb(250, 173, 20)",
+          "fontSize": "14px",
+          "visibility": "visible",
+          "path": [],
+          "custom": {
+            "status": "warning",
+            "errors": [],
+            "warnings": []
+          }
+        },
+        "status": {
+          "status": "warning",
+          "errors": [],
+          "warnings": []
+        },
+        "values": [
+          "12:13:14",
+          "15:16:17"
+        ],
+        "focused": -1
+      },
+      "steps": [
+        {
+          "action": "focus",
+          "view": {
+            "root": [
+              "has-feedback",
+              "status-warning"
+            ],
+            "item": [
+              "has-feedback",
+              "has-warning"
+            ],
+            "suffix": {
+              "text": "local 0 warning",
+              "custom": false,
+              "feedback": true,
+              "glyphs": 1
+            },
+            "icon": {
+              "className": "ant-form-item-feedback-icon ant-form-item-feedback-icon-warning",
+              "text": "local 0 warning",
+              "color": "rgb(250, 173, 20)",
+              "fontSize": "14px",
+              "visibility": "visible",
+              "path": [],
+              "custom": {
+                "status": "warning",
+                "errors": [],
+                "warnings": []
+              }
+            },
+            "status": {
+              "status": "warning",
+              "errors": [],
+              "warnings": []
+            },
+            "values": [
+              "12:13:14",
+              "15:16:17"
+            ],
+            "focused": 0
+          },
+          "sameInput": true
+        },
+        {
+          "action": "error",
+          "view": {
+            "root": [
+              "has-feedback",
+              "status-error"
+            ],
+            "item": [
+              "has-error",
+              "has-feedback"
+            ],
+            "suffix": {
+              "text": "local 0 error",
+              "custom": false,
+              "feedback": true,
+              "glyphs": 1
+            },
+            "icon": {
+              "className": "ant-form-item-feedback-icon ant-form-item-feedback-icon-error",
+              "text": "local 0 error",
+              "color": "rgb(255, 77, 79)",
+              "fontSize": "14px",
+              "visibility": "visible",
+              "path": [],
+              "custom": {
+                "status": "error",
+                "errors": [],
+                "warnings": []
+              }
+            },
+            "status": {
+              "status": "error",
+              "errors": [],
+              "warnings": []
+            },
+            "values": [
+              "12:13:14",
+              "15:16:17"
+            ],
+            "focused": 0
+          },
+          "sameInput": true
+        },
+        {
+          "action": "update-icon",
+          "view": {
+            "root": [
+              "has-feedback",
+              "status-error"
+            ],
+            "item": [
+              "has-error",
+              "has-feedback"
+            ],
+            "suffix": {
+              "text": "local 1 error",
+              "custom": false,
+              "feedback": true,
+              "glyphs": 1
+            },
+            "icon": {
+              "className": "ant-form-item-feedback-icon ant-form-item-feedback-icon-error",
+              "text": "local 1 error",
+              "color": "rgb(255, 77, 79)",
+              "fontSize": "14px",
+              "visibility": "visible",
+              "path": [],
+              "custom": {
+                "status": "error",
+                "errors": [],
+                "warnings": []
+              }
+            },
+            "status": {
+              "status": "error",
+              "errors": [],
+              "warnings": []
+            },
+            "values": [
+              "12:13:14",
+              "15:16:17"
+            ],
+            "focused": 0
+          },
+          "sameInput": true
+        },
+        {
+          "action": "hide-icon",
+          "view": {
+            "root": [
+              "has-feedback",
+              "status-error"
+            ],
+            "item": [
+              "has-error",
+              "has-feedback"
+            ],
+            "suffix": {
+              "text": "",
+              "custom": false,
+              "feedback": false,
+              "glyphs": 1
+            },
+            "icon": null,
+            "status": {
+              "status": "error",
+              "errors": [],
+              "warnings": []
+            },
+            "values": [
+              "12:13:14",
+              "15:16:17"
+            ],
+            "focused": 0
+          },
+          "sameInput": true
+        },
+        {
+          "action": "show-icon",
+          "view": {
+            "root": [
+              "has-feedback",
+              "status-error"
+            ],
+            "item": [
+              "has-error",
+              "has-feedback"
+            ],
+            "suffix": {
+              "text": "local 1 error",
+              "custom": false,
+              "feedback": true,
+              "glyphs": 1
+            },
+            "icon": {
+              "className": "ant-form-item-feedback-icon ant-form-item-feedback-icon-error",
+              "text": "local 1 error",
+              "color": "rgb(255, 77, 79)",
+              "fontSize": "14px",
+              "visibility": "visible",
+              "path": [],
+              "custom": {
+                "status": "error",
+                "errors": [],
+                "warnings": []
+              }
+            },
+            "status": {
+              "status": "error",
+              "errors": [],
+              "warnings": []
+            },
+            "values": [
+              "12:13:14",
+              "15:16:17"
+            ],
+            "focused": 0
+          },
+          "sameInput": true
+        },
+        {
+          "action": "toggle-feedback",
+          "view": {
+            "root": [
+              "status-error"
+            ],
+            "item": [
+              "has-error"
+            ],
+            "suffix": {
+              "text": "",
+              "custom": false,
+              "feedback": false,
+              "glyphs": 1
+            },
+            "icon": null,
+            "status": {
+              "status": "error",
+              "errors": [],
+              "warnings": []
+            },
+            "values": [
+              "12:13:14",
+              "15:16:17"
+            ],
+            "focused": 0
+          },
+          "sameInput": true
+        },
+        {
+          "action": "toggle-feedback",
+          "view": {
+            "root": [
+              "has-feedback",
+              "status-error"
+            ],
+            "item": [
+              "has-error",
+              "has-feedback"
+            ],
+            "suffix": {
+              "text": "local 1 error",
+              "custom": false,
+              "feedback": true,
+              "glyphs": 1
+            },
+            "icon": {
+              "className": "ant-form-item-feedback-icon ant-form-item-feedback-icon-error",
+              "text": "local 1 error",
+              "color": "rgb(255, 77, 79)",
+              "fontSize": "14px",
+              "visibility": "visible",
+              "path": [],
+              "custom": {
+                "status": "error",
+                "errors": [],
+                "warnings": []
+              }
+            },
+            "status": {
+              "status": "error",
+              "errors": [],
+              "warnings": []
+            },
+            "values": [
+              "12:13:14",
+              "15:16:17"
+            ],
+            "focused": 0
+          },
+          "sameInput": true
+        },
+        {
+          "action": "success",
+          "view": {
+            "root": [
+              "has-feedback",
+              "status-success"
+            ],
+            "item": [
+              "has-feedback",
+              "has-success"
+            ],
+            "suffix": {
+              "text": "local 1 success",
+              "custom": false,
+              "feedback": true,
+              "glyphs": 1
+            },
+            "icon": {
+              "className": "ant-form-item-feedback-icon ant-form-item-feedback-icon-success",
+              "text": "local 1 success",
+              "color": "rgb(82, 196, 26)",
+              "fontSize": "14px",
+              "visibility": "visible",
+              "path": [],
+              "custom": {
+                "status": "success",
+                "errors": [],
+                "warnings": []
+              }
+            },
+            "status": {
+              "status": "success",
+              "errors": [],
+              "warnings": []
+            },
+            "values": [
+              "12:13:14",
+              "15:16:17"
+            ],
+            "focused": 0
+          },
+          "sameInput": true
+        },
+        {
+          "action": "outside",
+          "view": {
+            "root": [
+              "has-feedback",
+              "status-success"
+            ],
+            "item": [
+              "has-feedback",
+              "has-success"
+            ],
+            "suffix": {
+              "text": "local 1 success",
+              "custom": false,
+              "feedback": true,
+              "glyphs": 1
+            },
+            "icon": {
+              "className": "ant-form-item-feedback-icon ant-form-item-feedback-icon-success",
+              "text": "local 1 success",
+              "color": "rgb(82, 196, 26)",
+              "fontSize": "14px",
+              "visibility": "visible",
+              "path": [],
+              "custom": {
+                "status": "success",
+                "errors": [],
+                "warnings": []
+              }
+            },
+            "status": {
+              "status": "success",
+              "errors": [],
+              "warnings": []
+            },
+            "values": [
+              "12:13:14",
+              "15:16:17"
+            ],
+            "focused": -1
+          },
+          "sameInput": true
+        }
+      ]
+    },
+    {
+      "id": "time-range-async",
+      "initial": {
+        "root": [
+          "has-feedback"
+        ],
+        "item": [],
+        "suffix": {
+          "text": "",
+          "custom": false,
+          "feedback": false,
+          "glyphs": 1
+        },
+        "icon": null,
+        "status": {
+          "status": "",
+          "errors": [],
+          "warnings": []
+        },
+        "values": [
+          "12:13:14",
+          "15:16:17"
+        ],
+        "focused": -1
+      },
+      "steps": [
+        {
+          "action": "validate",
+          "view": {
+            "root": [
+              "has-feedback",
+              "status-validating"
+            ],
+            "item": [
+              "has-feedback",
+              "is-validating"
+            ],
+            "suffix": {
+              "text": "local 0 validating",
+              "custom": false,
+              "feedback": true,
+              "glyphs": 1
+            },
+            "icon": {
+              "className": "ant-form-item-feedback-icon ant-form-item-feedback-icon-validating",
+              "text": "local 0 validating",
+              "color": "rgb(22, 119, 255)",
+              "fontSize": "14px",
+              "visibility": "visible",
+              "path": [],
+              "custom": {
+                "status": "validating",
+                "errors": [],
+                "warnings": []
+              }
+            },
+            "status": {
+              "status": "validating",
+              "errors": [],
+              "warnings": []
+            },
+            "values": [
+              "12:13:14",
+              "15:16:17"
+            ],
+            "focused": -1
+          },
+          "sameInput": true
+        },
+        {
+          "action": "resolve",
+          "view": {
+            "root": [
+              "has-feedback",
+              "status-success"
+            ],
+            "item": [
+              "has-feedback",
+              "has-success"
+            ],
+            "suffix": {
+              "text": "local 0 success",
+              "custom": false,
+              "feedback": true,
+              "glyphs": 1
+            },
+            "icon": {
+              "className": "ant-form-item-feedback-icon ant-form-item-feedback-icon-success",
+              "text": "local 0 success",
+              "color": "rgb(82, 196, 26)",
+              "fontSize": "14px",
+              "visibility": "visible",
+              "path": [],
+              "custom": {
+                "status": "success",
+                "errors": [],
+                "warnings": []
+              }
+            },
+            "status": {
+              "status": "success",
+              "errors": [],
+              "warnings": []
+            },
+            "values": [
+              "12:13:14",
+              "15:16:17"
+            ],
+            "focused": -1
+          },
+          "sameInput": true
+        },
+        {
+          "action": "reset",
+          "view": {
+            "root": [
+              "has-feedback"
+            ],
+            "item": [],
+            "suffix": {
+              "text": "",
+              "custom": false,
+              "feedback": false,
+              "glyphs": 1
+            },
+            "icon": null,
+            "status": {
+              "status": "",
+              "errors": [],
+              "warnings": []
+            },
+            "values": [
+              "12:13:14",
+              "15:16:17"
+            ],
+            "focused": -1
+          },
+          "sameInput": false
+        }
+      ]
+    },
+    {
+      "id": "time-suffix-0",
+      "initial": {
+        "root": [
+          "has-feedback",
+          "status-error"
+        ],
+        "item": [
+          "has-error",
+          "has-feedback"
+        ],
+        "suffix": {
+          "text": "",
+          "custom": false,
+          "feedback": true,
+          "glyphs": 2
+        },
+        "icon": {
+          "className": "ant-form-item-feedback-icon ant-form-item-feedback-icon-error",
+          "text": "",
+          "color": "rgb(255, 77, 79)",
+          "fontSize": "14px",
+          "visibility": "visible",
+          "path": [
+            "M512 64c247.4 0 448 200.6 448 448S759.4 960 512 960 64 759.4 64 512 264.6 64 512 64zm127.98 274.82h-.04l-.08.06L512 466.75 384.14 338.88c-.04-.05-.06-.06-.08-.06a.12.12 0 00-.07 0c-.03 0-.05.01-.09.05l-45.02 45.02a.2.2 0 00-.05.09.12.12 0 000 .07v.02a.27.27 0 00.06.06L466.75 512 338.88 639.86c-.05.04-.06.06-.06.08a.12.12 0 000 .07c0 .03.01.05.05.09l45.02 45.02a.2.2 0 00.09.05.12.12 0 00.07 0c.02 0 .04-.01.08-.05L512 557.25l127.86 127.87c.04.04.06.05.08.05a.12.12 0 00.07 0c.03 0 .05-.01.09-.05l45.02-45.02a.2.2 0 00.05-.09.12.12 0 000-.07v-.02a.27.27 0 00-.05-.06L557.25 512l127.87-127.86c.04-.04.05-.06.05-.08a.12.12 0 000-.07c0-.03-.01-.05-.05-.09l-45.02-45.02a.2.2 0 00-.09-.05.12.12 0 00-.07 0z"
+          ],
+          "custom": null
+        },
+        "status": {
+          "status": "error",
+          "errors": [],
+          "warnings": []
+        },
+        "values": [
+          "12:13:14"
+        ],
+        "focused": -1
+      },
+      "steps": []
+    },
+    {
+      "id": "time-suffix-1",
+      "initial": {
+        "root": [
+          "has-feedback",
+          "status-error"
+        ],
+        "item": [
+          "has-error",
+          "has-feedback"
+        ],
+        "suffix": null,
+        "icon": null,
+        "status": {
+          "status": "error",
+          "errors": [],
+          "warnings": []
+        },
+        "values": [
+          "12:13:14"
+        ],
+        "focused": -1
+      },
+      "steps": []
+    },
+    {
+      "id": "time-suffix-2",
+      "initial": {
+        "root": [
+          "has-feedback",
+          "status-error"
+        ],
+        "item": [
+          "has-error",
+          "has-feedback"
+        ],
+        "suffix": null,
+        "icon": null,
+        "status": {
+          "status": "error",
+          "errors": [],
+          "warnings": []
+        },
+        "values": [
+          "12:13:14"
+        ],
+        "focused": -1
+      },
+      "steps": []
+    },
+    {
+      "id": "time-suffix-3",
+      "initial": {
+        "root": [
+          "has-feedback",
+          "status-error"
+        ],
+        "item": [
+          "has-error",
+          "has-feedback"
+        ],
+        "suffix": null,
+        "icon": null,
+        "status": {
+          "status": "error",
+          "errors": [],
+          "warnings": []
+        },
+        "values": [
+          "12:13:14"
+        ],
+        "focused": -1
+      },
+      "steps": []
+    },
+    {
+      "id": "time-suffix-4",
+      "initial": {
+        "root": [
+          "has-feedback",
+          "status-error"
+        ],
+        "item": [
+          "has-error",
+          "has-feedback"
+        ],
+        "suffix": {
+          "text": "Suffix",
+          "custom": true,
+          "feedback": false,
+          "glyphs": 0
+        },
+        "icon": null,
+        "status": {
+          "status": "error",
+          "errors": [],
+          "warnings": []
+        },
+        "values": [
+          "12:13:14"
+        ],
+        "focused": -1
+      },
+      "steps": []
+    },
+    {
+      "id": "time-config-suffix",
+      "initial": {
+        "root": [
+          "has-feedback",
+          "status-success"
+        ],
+        "item": [
+          "has-feedback",
+          "has-success"
+        ],
+        "suffix": {
+          "text": "Suffix",
+          "custom": true,
+          "feedback": false,
+          "glyphs": 0
+        },
+        "icon": null,
+        "status": {
+          "status": "success",
+          "errors": [],
+          "warnings": []
+        },
+        "values": [
+          "12:13:14"
+        ],
+        "focused": -1
+      },
+      "steps": []
+    },
+    {
+      "id": "time-local-over-config",
+      "initial": {
+        "root": [
+          "has-feedback",
+          "status-success"
+        ],
+        "item": [
+          "has-feedback",
+          "has-success"
+        ],
+        "suffix": {
+          "text": "",
+          "custom": false,
+          "feedback": true,
+          "glyphs": 2
+        },
+        "icon": {
+          "className": "ant-form-item-feedback-icon ant-form-item-feedback-icon-success",
+          "text": "",
+          "color": "rgb(82, 196, 26)",
+          "fontSize": "14px",
+          "visibility": "visible",
+          "path": [
+            "M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm193.5 301.7l-210.6 292a31.8 31.8 0 01-51.7 0L318.5 484.9c-3.8-5.3 0-12.7 6.5-12.7h46.9c10.2 0 19.9 4.9 25.9 13.3l71.2 98.8 157.2-218c6-8.3 15.6-13.3 25.9-13.3H699c6.5 0 10.3 7.4 6.5 12.7z"
+          ],
+          "custom": null
+        },
+        "status": {
+          "status": "success",
+          "errors": [],
+          "warnings": []
+        },
+        "values": [
+          "12:13:14"
+        ],
+        "focused": -1
+      },
+      "steps": []
+    },
+    {
+      "id": "time-range-suffix-0",
+      "initial": {
+        "root": [
+          "has-feedback",
+          "status-error"
+        ],
+        "item": [
+          "has-error",
+          "has-feedback"
+        ],
+        "suffix": {
+          "text": "",
+          "custom": false,
+          "feedback": true,
+          "glyphs": 2
+        },
+        "icon": {
+          "className": "ant-form-item-feedback-icon ant-form-item-feedback-icon-error",
+          "text": "",
+          "color": "rgb(255, 77, 79)",
+          "fontSize": "14px",
+          "visibility": "visible",
+          "path": [
+            "M512 64c247.4 0 448 200.6 448 448S759.4 960 512 960 64 759.4 64 512 264.6 64 512 64zm127.98 274.82h-.04l-.08.06L512 466.75 384.14 338.88c-.04-.05-.06-.06-.08-.06a.12.12 0 00-.07 0c-.03 0-.05.01-.09.05l-45.02 45.02a.2.2 0 00-.05.09.12.12 0 000 .07v.02a.27.27 0 00.06.06L466.75 512 338.88 639.86c-.05.04-.06.06-.06.08a.12.12 0 000 .07c0 .03.01.05.05.09l45.02 45.02a.2.2 0 00.09.05.12.12 0 00.07 0c.02 0 .04-.01.08-.05L512 557.25l127.86 127.87c.04.04.06.05.08.05a.12.12 0 00.07 0c.03 0 .05-.01.09-.05l45.02-45.02a.2.2 0 00.05-.09.12.12 0 000-.07v-.02a.27.27 0 00-.05-.06L557.25 512l127.87-127.86c.04-.04.05-.06.05-.08a.12.12 0 000-.07c0-.03-.01-.05-.05-.09l-45.02-45.02a.2.2 0 00-.09-.05.12.12 0 00-.07 0z"
+          ],
+          "custom": null
+        },
+        "status": {
+          "status": "error",
+          "errors": [],
+          "warnings": []
+        },
+        "values": [
+          "12:13:14",
+          "15:16:17"
+        ],
+        "focused": -1
+      },
+      "steps": []
+    },
+    {
+      "id": "time-range-suffix-1",
+      "initial": {
+        "root": [
+          "has-feedback",
+          "status-error"
+        ],
+        "item": [
+          "has-error",
+          "has-feedback"
+        ],
+        "suffix": null,
+        "icon": null,
+        "status": {
+          "status": "error",
+          "errors": [],
+          "warnings": []
+        },
+        "values": [
+          "12:13:14",
+          "15:16:17"
+        ],
+        "focused": -1
+      },
+      "steps": []
+    },
+    {
+      "id": "time-range-suffix-2",
+      "initial": {
+        "root": [
+          "has-feedback",
+          "status-error"
+        ],
+        "item": [
+          "has-error",
+          "has-feedback"
+        ],
+        "suffix": null,
+        "icon": null,
+        "status": {
+          "status": "error",
+          "errors": [],
+          "warnings": []
+        },
+        "values": [
+          "12:13:14",
+          "15:16:17"
+        ],
+        "focused": -1
+      },
+      "steps": []
+    },
+    {
+      "id": "time-range-suffix-3",
+      "initial": {
+        "root": [
+          "has-feedback",
+          "status-error"
+        ],
+        "item": [
+          "has-error",
+          "has-feedback"
+        ],
+        "suffix": null,
+        "icon": null,
+        "status": {
+          "status": "error",
+          "errors": [],
+          "warnings": []
+        },
+        "values": [
+          "12:13:14",
+          "15:16:17"
+        ],
+        "focused": -1
+      },
+      "steps": []
+    },
+    {
+      "id": "time-range-suffix-4",
+      "initial": {
+        "root": [
+          "has-feedback",
+          "status-error"
+        ],
+        "item": [
+          "has-error",
+          "has-feedback"
+        ],
+        "suffix": {
+          "text": "Suffix",
+          "custom": true,
+          "feedback": false,
+          "glyphs": 0
+        },
+        "icon": null,
+        "status": {
+          "status": "error",
+          "errors": [],
+          "warnings": []
+        },
+        "values": [
+          "12:13:14",
+          "15:16:17"
+        ],
+        "focused": -1
+      },
+      "steps": []
+    },
+    {
+      "id": "time-range-config-suffix",
+      "initial": {
+        "root": [
+          "has-feedback",
+          "status-success"
+        ],
+        "item": [
+          "has-feedback",
+          "has-success"
+        ],
+        "suffix": {
+          "text": "Suffix",
+          "custom": true,
+          "feedback": false,
+          "glyphs": 0
+        },
+        "icon": null,
+        "status": {
+          "status": "success",
+          "errors": [],
+          "warnings": []
+        },
+        "values": [
+          "12:13:14",
+          "15:16:17"
+        ],
+        "focused": -1
+      },
+      "steps": []
+    },
+    {
+      "id": "time-range-local-over-config",
+      "initial": {
+        "root": [
+          "has-feedback",
+          "status-success"
+        ],
+        "item": [
+          "has-feedback",
+          "has-success"
+        ],
+        "suffix": {
+          "text": "",
+          "custom": false,
+          "feedback": true,
+          "glyphs": 2
+        },
+        "icon": {
+          "className": "ant-form-item-feedback-icon ant-form-item-feedback-icon-success",
+          "text": "",
+          "color": "rgb(82, 196, 26)",
+          "fontSize": "14px",
+          "visibility": "visible",
+          "path": [
+            "M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm193.5 301.7l-210.6 292a31.8 31.8 0 01-51.7 0L318.5 484.9c-3.8-5.3 0-12.7 6.5-12.7h46.9c10.2 0 19.9 4.9 25.9 13.3l71.2 98.8 157.2-218c6-8.3 15.6-13.3 25.9-13.3H699c6.5 0 10.3 7.4 6.5 12.7z"
+          ],
+          "custom": null
+        },
+        "status": {
+          "status": "success",
+          "errors": [],
+          "warnings": []
+        },
+        "values": [
+          "12:13:14",
+          "15:16:17"
+        ],
+        "focused": -1
+      },
+      "steps": []
+    },
+    {
+      "id": "date-suffix-0",
+      "initial": {
+        "root": [
+          "has-feedback",
+          "status-error"
+        ],
+        "item": [
+          "has-error",
+          "has-feedback"
+        ],
+        "suffix": {
+          "text": "",
+          "custom": false,
+          "feedback": true,
+          "glyphs": 2
+        },
+        "icon": {
+          "className": "ant-form-item-feedback-icon ant-form-item-feedback-icon-error",
+          "text": "",
+          "color": "rgb(255, 77, 79)",
+          "fontSize": "14px",
+          "visibility": "visible",
+          "path": [
+            "M512 64c247.4 0 448 200.6 448 448S759.4 960 512 960 64 759.4 64 512 264.6 64 512 64zm127.98 274.82h-.04l-.08.06L512 466.75 384.14 338.88c-.04-.05-.06-.06-.08-.06a.12.12 0 00-.07 0c-.03 0-.05.01-.09.05l-45.02 45.02a.2.2 0 00-.05.09.12.12 0 000 .07v.02a.27.27 0 00.06.06L466.75 512 338.88 639.86c-.05.04-.06.06-.06.08a.12.12 0 000 .07c0 .03.01.05.05.09l45.02 45.02a.2.2 0 00.09.05.12.12 0 00.07 0c.02 0 .04-.01.08-.05L512 557.25l127.86 127.87c.04.04.06.05.08.05a.12.12 0 00.07 0c.03 0 .05-.01.09-.05l45.02-45.02a.2.2 0 00.05-.09.12.12 0 000-.07v-.02a.27.27 0 00-.05-.06L557.25 512l127.87-127.86c.04-.04.05-.06.05-.08a.12.12 0 000-.07c0-.03-.01-.05-.05-.09l-45.02-45.02a.2.2 0 00-.09-.05.12.12 0 00-.07 0z"
+          ],
+          "custom": null
+        },
+        "status": {
+          "status": "error",
+          "errors": [],
+          "warnings": []
+        },
+        "values": [
+          "2025-03-04"
+        ],
+        "focused": -1
+      },
+      "steps": []
+    },
+    {
+      "id": "date-suffix-1",
+      "initial": {
+        "root": [
+          "has-feedback",
+          "status-error"
+        ],
+        "item": [
+          "has-error",
+          "has-feedback"
+        ],
+        "suffix": null,
+        "icon": null,
+        "status": {
+          "status": "error",
+          "errors": [],
+          "warnings": []
+        },
+        "values": [
+          "2025-03-04"
+        ],
+        "focused": -1
+      },
+      "steps": []
+    },
+    {
+      "id": "date-suffix-2",
+      "initial": {
+        "root": [
+          "has-feedback",
+          "status-error"
+        ],
+        "item": [
+          "has-error",
+          "has-feedback"
+        ],
+        "suffix": null,
+        "icon": null,
+        "status": {
+          "status": "error",
+          "errors": [],
+          "warnings": []
+        },
+        "values": [
+          "2025-03-04"
+        ],
+        "focused": -1
+      },
+      "steps": []
+    },
+    {
+      "id": "date-suffix-3",
+      "initial": {
+        "root": [
+          "has-feedback",
+          "status-error"
+        ],
+        "item": [
+          "has-error",
+          "has-feedback"
+        ],
+        "suffix": null,
+        "icon": null,
+        "status": {
+          "status": "error",
+          "errors": [],
+          "warnings": []
+        },
+        "values": [
+          "2025-03-04"
+        ],
+        "focused": -1
+      },
+      "steps": []
+    },
+    {
+      "id": "date-suffix-4",
+      "initial": {
+        "root": [
+          "has-feedback",
+          "status-error"
+        ],
+        "item": [
+          "has-error",
+          "has-feedback"
+        ],
+        "suffix": {
+          "text": "0",
+          "custom": false,
+          "feedback": false,
+          "glyphs": 0
+        },
+        "icon": null,
+        "status": {
+          "status": "error",
+          "errors": [],
+          "warnings": []
+        },
+        "values": [
+          "2025-03-04"
+        ],
+        "focused": -1
+      },
+      "steps": []
+    },
+    {
+      "id": "date-suffix-5",
+      "initial": {
+        "root": [
+          "has-feedback",
+          "status-error"
+        ],
+        "item": [
+          "has-error",
+          "has-feedback"
+        ],
+        "suffix": {
+          "text": "Scalar",
+          "custom": false,
+          "feedback": false,
+          "glyphs": 0
+        },
+        "icon": null,
+        "status": {
+          "status": "error",
+          "errors": [],
+          "warnings": []
+        },
+        "values": [
+          "2025-03-04"
+        ],
+        "focused": -1
+      },
+      "steps": []
+    },
+    {
+      "id": "date-suffix-6",
+      "initial": {
+        "root": [
+          "has-feedback",
+          "status-error"
+        ],
+        "item": [
+          "has-error",
+          "has-feedback"
+        ],
+        "suffix": {
+          "text": "Suffix",
+          "custom": true,
+          "feedback": false,
+          "glyphs": 0
+        },
+        "icon": null,
+        "status": {
+          "status": "error",
+          "errors": [],
+          "warnings": []
+        },
+        "values": [
+          "2025-03-04"
+        ],
+        "focused": -1
+      },
+      "steps": []
+    },
+    {
+      "id": "date-config-suffix",
+      "initial": {
+        "root": [
+          "has-feedback",
+          "status-success"
+        ],
+        "item": [
+          "has-feedback",
+          "has-success"
+        ],
+        "suffix": {
+          "text": "Suffix",
+          "custom": true,
+          "feedback": false,
+          "glyphs": 0
+        },
+        "icon": null,
+        "status": {
+          "status": "success",
+          "errors": [],
+          "warnings": []
+        },
+        "values": [
+          "2025-03-04"
+        ],
+        "focused": -1
+      },
+      "steps": []
+    },
+    {
+      "id": "date-local-over-config",
+      "initial": {
+        "root": [
+          "has-feedback",
+          "status-success"
+        ],
+        "item": [
+          "has-feedback",
+          "has-success"
+        ],
+        "suffix": {
+          "text": "",
+          "custom": false,
+          "feedback": true,
+          "glyphs": 2
+        },
+        "icon": {
+          "className": "ant-form-item-feedback-icon ant-form-item-feedback-icon-success",
+          "text": "",
+          "color": "rgb(82, 196, 26)",
+          "fontSize": "14px",
+          "visibility": "visible",
+          "path": [
+            "M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm193.5 301.7l-210.6 292a31.8 31.8 0 01-51.7 0L318.5 484.9c-3.8-5.3 0-12.7 6.5-12.7h46.9c10.2 0 19.9 4.9 25.9 13.3l71.2 98.8 157.2-218c6-8.3 15.6-13.3 25.9-13.3H699c6.5 0 10.3 7.4 6.5 12.7z"
+          ],
+          "custom": null
+        },
+        "status": {
+          "status": "success",
+          "errors": [],
+          "warnings": []
+        },
+        "values": [
+          "2025-03-04"
+        ],
+        "focused": -1
+      },
+      "steps": []
+    },
+    {
+      "id": "date-suffix-live",
+      "initial": {
+        "root": [
+          "has-feedback",
+          "status-warning"
+        ],
+        "item": [
+          "has-feedback",
+          "has-warning"
+        ],
+        "suffix": {
+          "text": "local 0 warning",
+          "custom": false,
+          "feedback": true,
+          "glyphs": 1
+        },
+        "icon": {
+          "className": "ant-form-item-feedback-icon ant-form-item-feedback-icon-warning",
+          "text": "local 0 warning",
+          "color": "rgb(250, 173, 20)",
+          "fontSize": "14px",
+          "visibility": "visible",
+          "path": [],
+          "custom": {
+            "status": "warning",
+            "errors": [],
+            "warnings": []
+          }
+        },
+        "status": {
+          "status": "warning",
+          "errors": [],
+          "warnings": []
+        },
+        "values": [
+          "2025-03-04"
+        ],
+        "focused": -1
+      },
+      "steps": [
+        {
+          "action": "focus",
+          "view": {
+            "root": [
+              "has-feedback",
+              "status-warning"
+            ],
+            "item": [
+              "has-feedback",
+              "has-warning"
+            ],
+            "suffix": {
+              "text": "local 0 warning",
+              "custom": false,
+              "feedback": true,
+              "glyphs": 1
+            },
+            "icon": {
+              "className": "ant-form-item-feedback-icon ant-form-item-feedback-icon-warning",
+              "text": "local 0 warning",
+              "color": "rgb(250, 173, 20)",
+              "fontSize": "14px",
+              "visibility": "visible",
+              "path": [],
+              "custom": {
+                "status": "warning",
+                "errors": [],
+                "warnings": []
+              }
+            },
+            "status": {
+              "status": "warning",
+              "errors": [],
+              "warnings": []
+            },
+            "values": [
+              "2025-03-04"
+            ],
+            "focused": 0
+          },
+          "sameInput": true
+        },
+        {
+          "action": "suffix-null",
+          "view": {
+            "root": [
+              "has-feedback",
+              "status-warning"
+            ],
+            "item": [
+              "has-feedback",
+              "has-warning"
+            ],
+            "suffix": null,
+            "icon": null,
+            "status": {
+              "status": "warning",
+              "errors": [],
+              "warnings": []
+            },
+            "values": [
+              "2025-03-04"
+            ],
+            "focused": 0
+          },
+          "sameInput": true
+        },
+        {
+          "action": "suffix-custom",
+          "view": {
+            "root": [
+              "has-feedback",
+              "status-warning"
+            ],
+            "item": [
+              "has-feedback",
+              "has-warning"
+            ],
+            "suffix": {
+              "text": "Suffix",
+              "custom": true,
+              "feedback": false,
+              "glyphs": 0
+            },
+            "icon": null,
+            "status": {
+              "status": "warning",
+              "errors": [],
+              "warnings": []
+            },
+            "values": [
+              "2025-03-04"
+            ],
+            "focused": 0
+          },
+          "sameInput": true
+        },
+        {
+          "action": "suffix-zero",
+          "view": {
+            "root": [
+              "has-feedback",
+              "status-warning"
+            ],
+            "item": [
+              "has-feedback",
+              "has-warning"
+            ],
+            "suffix": {
+              "text": "0",
+              "custom": false,
+              "feedback": false,
+              "glyphs": 0
+            },
+            "icon": null,
+            "status": {
+              "status": "warning",
+              "errors": [],
+              "warnings": []
+            },
+            "values": [
+              "2025-03-04"
+            ],
+            "focused": 0
+          },
+          "sameInput": true
+        },
+        {
+          "action": "suffix-default",
+          "view": {
+            "root": [
+              "has-feedback",
+              "status-warning"
+            ],
+            "item": [
+              "has-feedback",
+              "has-warning"
+            ],
+            "suffix": {
+              "text": "local 0 warning",
+              "custom": false,
+              "feedback": true,
+              "glyphs": 1
+            },
+            "icon": {
+              "className": "ant-form-item-feedback-icon ant-form-item-feedback-icon-warning",
+              "text": "local 0 warning",
+              "color": "rgb(250, 173, 20)",
+              "fontSize": "14px",
+              "visibility": "visible",
+              "path": [],
+              "custom": {
+                "status": "warning",
+                "errors": [],
+                "warnings": []
+              }
+            },
+            "status": {
+              "status": "warning",
+              "errors": [],
+              "warnings": []
+            },
+            "values": [
+              "2025-03-04"
+            ],
+            "focused": 0
+          },
+          "sameInput": true
+        },
+        {
+          "action": "suffix-false",
+          "view": {
+            "root": [
+              "has-feedback",
+              "status-warning"
+            ],
+            "item": [
+              "has-feedback",
+              "has-warning"
+            ],
+            "suffix": null,
+            "icon": null,
+            "status": {
+              "status": "warning",
+              "errors": [],
+              "warnings": []
+            },
+            "values": [
+              "2025-03-04"
+            ],
+            "focused": 0
+          },
+          "sameInput": true
+        },
+        {
+          "action": "suffix-empty",
+          "view": {
+            "root": [
+              "has-feedback",
+              "status-warning"
+            ],
+            "item": [
+              "has-feedback",
+              "has-warning"
+            ],
+            "suffix": null,
+            "icon": null,
+            "status": {
+              "status": "warning",
+              "errors": [],
+              "warnings": []
+            },
+            "values": [
+              "2025-03-04"
+            ],
+            "focused": 0
+          },
+          "sameInput": true
+        },
+        {
+          "action": "suffix-default",
+          "view": {
+            "root": [
+              "has-feedback",
+              "status-warning"
+            ],
+            "item": [
+              "has-feedback",
+              "has-warning"
+            ],
+            "suffix": {
+              "text": "local 0 warning",
+              "custom": false,
+              "feedback": true,
+              "glyphs": 1
+            },
+            "icon": {
+              "className": "ant-form-item-feedback-icon ant-form-item-feedback-icon-warning",
+              "text": "local 0 warning",
+              "color": "rgb(250, 173, 20)",
+              "fontSize": "14px",
+              "visibility": "visible",
+              "path": [],
+              "custom": {
+                "status": "warning",
+                "errors": [],
+                "warnings": []
+              }
+            },
+            "status": {
+              "status": "warning",
+              "errors": [],
+              "warnings": []
+            },
+            "values": [
+              "2025-03-04"
+            ],
+            "focused": 0
+          },
+          "sameInput": true
+        },
+        {
+          "action": "outside",
+          "view": {
+            "root": [
+              "has-feedback",
+              "status-warning"
+            ],
+            "item": [
+              "has-feedback",
+              "has-warning"
+            ],
+            "suffix": {
+              "text": "local 0 warning",
+              "custom": false,
+              "feedback": true,
+              "glyphs": 1
+            },
+            "icon": {
+              "className": "ant-form-item-feedback-icon ant-form-item-feedback-icon-warning",
+              "text": "local 0 warning",
+              "color": "rgb(250, 173, 20)",
+              "fontSize": "14px",
+              "visibility": "visible",
+              "path": [],
+              "custom": {
+                "status": "warning",
+                "errors": [],
+                "warnings": []
+              }
+            },
+            "status": {
+              "status": "warning",
+              "errors": [],
+              "warnings": []
+            },
+            "values": [
+              "2025-03-04"
+            ],
+            "focused": -1
+          },
+          "sameInput": true
+        }
+      ]
+    },
+    {
+      "id": "range-suffix-0",
+      "initial": {
+        "root": [
+          "has-feedback",
+          "status-error"
+        ],
+        "item": [
+          "has-error",
+          "has-feedback"
+        ],
+        "suffix": {
+          "text": "",
+          "custom": false,
+          "feedback": true,
+          "glyphs": 2
+        },
+        "icon": {
+          "className": "ant-form-item-feedback-icon ant-form-item-feedback-icon-error",
+          "text": "",
+          "color": "rgb(255, 77, 79)",
+          "fontSize": "14px",
+          "visibility": "visible",
+          "path": [
+            "M512 64c247.4 0 448 200.6 448 448S759.4 960 512 960 64 759.4 64 512 264.6 64 512 64zm127.98 274.82h-.04l-.08.06L512 466.75 384.14 338.88c-.04-.05-.06-.06-.08-.06a.12.12 0 00-.07 0c-.03 0-.05.01-.09.05l-45.02 45.02a.2.2 0 00-.05.09.12.12 0 000 .07v.02a.27.27 0 00.06.06L466.75 512 338.88 639.86c-.05.04-.06.06-.06.08a.12.12 0 000 .07c0 .03.01.05.05.09l45.02 45.02a.2.2 0 00.09.05.12.12 0 00.07 0c.02 0 .04-.01.08-.05L512 557.25l127.86 127.87c.04.04.06.05.08.05a.12.12 0 00.07 0c.03 0 .05-.01.09-.05l45.02-45.02a.2.2 0 00.05-.09.12.12 0 000-.07v-.02a.27.27 0 00-.05-.06L557.25 512l127.87-127.86c.04-.04.05-.06.05-.08a.12.12 0 000-.07c0-.03-.01-.05-.05-.09l-45.02-45.02a.2.2 0 00-.09-.05.12.12 0 00-.07 0z"
+          ],
+          "custom": null
+        },
+        "status": {
+          "status": "error",
+          "errors": [],
+          "warnings": []
+        },
+        "values": [
+          "2025-03-04",
+          "2025-03-05"
+        ],
+        "focused": -1
+      },
+      "steps": []
+    },
+    {
+      "id": "range-suffix-1",
+      "initial": {
+        "root": [
+          "has-feedback",
+          "status-error"
+        ],
+        "item": [
+          "has-error",
+          "has-feedback"
+        ],
+        "suffix": null,
+        "icon": null,
+        "status": {
+          "status": "error",
+          "errors": [],
+          "warnings": []
+        },
+        "values": [
+          "2025-03-04",
+          "2025-03-05"
+        ],
+        "focused": -1
+      },
+      "steps": []
+    },
+    {
+      "id": "range-suffix-2",
+      "initial": {
+        "root": [
+          "has-feedback",
+          "status-error"
+        ],
+        "item": [
+          "has-error",
+          "has-feedback"
+        ],
+        "suffix": null,
+        "icon": null,
+        "status": {
+          "status": "error",
+          "errors": [],
+          "warnings": []
+        },
+        "values": [
+          "2025-03-04",
+          "2025-03-05"
+        ],
+        "focused": -1
+      },
+      "steps": []
+    },
+    {
+      "id": "range-suffix-3",
+      "initial": {
+        "root": [
+          "has-feedback",
+          "status-error"
+        ],
+        "item": [
+          "has-error",
+          "has-feedback"
+        ],
+        "suffix": null,
+        "icon": null,
+        "status": {
+          "status": "error",
+          "errors": [],
+          "warnings": []
+        },
+        "values": [
+          "2025-03-04",
+          "2025-03-05"
+        ],
+        "focused": -1
+      },
+      "steps": []
+    },
+    {
+      "id": "range-suffix-4",
+      "initial": {
+        "root": [
+          "has-feedback",
+          "status-error"
+        ],
+        "item": [
+          "has-error",
+          "has-feedback"
+        ],
+        "suffix": {
+          "text": "0",
+          "custom": false,
+          "feedback": false,
+          "glyphs": 0
+        },
+        "icon": null,
+        "status": {
+          "status": "error",
+          "errors": [],
+          "warnings": []
+        },
+        "values": [
+          "2025-03-04",
+          "2025-03-05"
+        ],
+        "focused": -1
+      },
+      "steps": []
+    },
+    {
+      "id": "range-suffix-5",
+      "initial": {
+        "root": [
+          "has-feedback",
+          "status-error"
+        ],
+        "item": [
+          "has-error",
+          "has-feedback"
+        ],
+        "suffix": {
+          "text": "Scalar",
+          "custom": false,
+          "feedback": false,
+          "glyphs": 0
+        },
+        "icon": null,
+        "status": {
+          "status": "error",
+          "errors": [],
+          "warnings": []
+        },
+        "values": [
+          "2025-03-04",
+          "2025-03-05"
+        ],
+        "focused": -1
+      },
+      "steps": []
+    },
+    {
+      "id": "range-suffix-6",
+      "initial": {
+        "root": [
+          "has-feedback",
+          "status-error"
+        ],
+        "item": [
+          "has-error",
+          "has-feedback"
+        ],
+        "suffix": {
+          "text": "Suffix",
+          "custom": true,
+          "feedback": false,
+          "glyphs": 0
+        },
+        "icon": null,
+        "status": {
+          "status": "error",
+          "errors": [],
+          "warnings": []
+        },
+        "values": [
+          "2025-03-04",
+          "2025-03-05"
+        ],
+        "focused": -1
+      },
+      "steps": []
+    },
+    {
+      "id": "range-config-suffix",
+      "initial": {
+        "root": [
+          "has-feedback",
+          "status-success"
+        ],
+        "item": [
+          "has-feedback",
+          "has-success"
+        ],
+        "suffix": {
+          "text": "Suffix",
+          "custom": true,
+          "feedback": false,
+          "glyphs": 0
+        },
+        "icon": null,
+        "status": {
+          "status": "success",
+          "errors": [],
+          "warnings": []
+        },
+        "values": [
+          "2025-03-04",
+          "2025-03-05"
+        ],
+        "focused": -1
+      },
+      "steps": []
+    },
+    {
+      "id": "range-local-over-config",
+      "initial": {
+        "root": [
+          "has-feedback",
+          "status-success"
+        ],
+        "item": [
+          "has-feedback",
+          "has-success"
+        ],
+        "suffix": {
+          "text": "",
+          "custom": false,
+          "feedback": true,
+          "glyphs": 2
+        },
+        "icon": {
+          "className": "ant-form-item-feedback-icon ant-form-item-feedback-icon-success",
+          "text": "",
+          "color": "rgb(82, 196, 26)",
+          "fontSize": "14px",
+          "visibility": "visible",
+          "path": [
+            "M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm193.5 301.7l-210.6 292a31.8 31.8 0 01-51.7 0L318.5 484.9c-3.8-5.3 0-12.7 6.5-12.7h46.9c10.2 0 19.9 4.9 25.9 13.3l71.2 98.8 157.2-218c6-8.3 15.6-13.3 25.9-13.3H699c6.5 0 10.3 7.4 6.5 12.7z"
+          ],
+          "custom": null
+        },
+        "status": {
+          "status": "success",
+          "errors": [],
+          "warnings": []
+        },
+        "values": [
+          "2025-03-04",
+          "2025-03-05"
+        ],
+        "focused": -1
+      },
+      "steps": []
+    },
+    {
+      "id": "range-suffix-live",
+      "initial": {
+        "root": [
+          "has-feedback",
+          "status-warning"
+        ],
+        "item": [
+          "has-feedback",
+          "has-warning"
+        ],
+        "suffix": {
+          "text": "local 0 warning",
+          "custom": false,
+          "feedback": true,
+          "glyphs": 1
+        },
+        "icon": {
+          "className": "ant-form-item-feedback-icon ant-form-item-feedback-icon-warning",
+          "text": "local 0 warning",
+          "color": "rgb(250, 173, 20)",
+          "fontSize": "14px",
+          "visibility": "visible",
+          "path": [],
+          "custom": {
+            "status": "warning",
+            "errors": [],
+            "warnings": []
+          }
+        },
+        "status": {
+          "status": "warning",
+          "errors": [],
+          "warnings": []
+        },
+        "values": [
+          "2025-03-04",
+          "2025-03-05"
+        ],
+        "focused": -1
+      },
+      "steps": [
+        {
+          "action": "focus",
+          "view": {
+            "root": [
+              "has-feedback",
+              "status-warning"
+            ],
+            "item": [
+              "has-feedback",
+              "has-warning"
+            ],
+            "suffix": {
+              "text": "local 0 warning",
+              "custom": false,
+              "feedback": true,
+              "glyphs": 1
+            },
+            "icon": {
+              "className": "ant-form-item-feedback-icon ant-form-item-feedback-icon-warning",
+              "text": "local 0 warning",
+              "color": "rgb(250, 173, 20)",
+              "fontSize": "14px",
+              "visibility": "visible",
+              "path": [],
+              "custom": {
+                "status": "warning",
+                "errors": [],
+                "warnings": []
+              }
+            },
+            "status": {
+              "status": "warning",
+              "errors": [],
+              "warnings": []
+            },
+            "values": [
+              "2025-03-04",
+              "2025-03-05"
+            ],
+            "focused": 0
+          },
+          "sameInput": true
+        },
+        {
+          "action": "suffix-null",
+          "view": {
+            "root": [
+              "has-feedback",
+              "status-warning"
+            ],
+            "item": [
+              "has-feedback",
+              "has-warning"
+            ],
+            "suffix": null,
+            "icon": null,
+            "status": {
+              "status": "warning",
+              "errors": [],
+              "warnings": []
+            },
+            "values": [
+              "2025-03-04",
+              "2025-03-05"
+            ],
+            "focused": 0
+          },
+          "sameInput": true
+        },
+        {
+          "action": "suffix-custom",
+          "view": {
+            "root": [
+              "has-feedback",
+              "status-warning"
+            ],
+            "item": [
+              "has-feedback",
+              "has-warning"
+            ],
+            "suffix": {
+              "text": "Suffix",
+              "custom": true,
+              "feedback": false,
+              "glyphs": 0
+            },
+            "icon": null,
+            "status": {
+              "status": "warning",
+              "errors": [],
+              "warnings": []
+            },
+            "values": [
+              "2025-03-04",
+              "2025-03-05"
+            ],
+            "focused": 0
+          },
+          "sameInput": true
+        },
+        {
+          "action": "suffix-zero",
+          "view": {
+            "root": [
+              "has-feedback",
+              "status-warning"
+            ],
+            "item": [
+              "has-feedback",
+              "has-warning"
+            ],
+            "suffix": {
+              "text": "0",
+              "custom": false,
+              "feedback": false,
+              "glyphs": 0
+            },
+            "icon": null,
+            "status": {
+              "status": "warning",
+              "errors": [],
+              "warnings": []
+            },
+            "values": [
+              "2025-03-04",
+              "2025-03-05"
+            ],
+            "focused": 0
+          },
+          "sameInput": true
+        },
+        {
+          "action": "suffix-default",
+          "view": {
+            "root": [
+              "has-feedback",
+              "status-warning"
+            ],
+            "item": [
+              "has-feedback",
+              "has-warning"
+            ],
+            "suffix": {
+              "text": "local 0 warning",
+              "custom": false,
+              "feedback": true,
+              "glyphs": 1
+            },
+            "icon": {
+              "className": "ant-form-item-feedback-icon ant-form-item-feedback-icon-warning",
+              "text": "local 0 warning",
+              "color": "rgb(250, 173, 20)",
+              "fontSize": "14px",
+              "visibility": "visible",
+              "path": [],
+              "custom": {
+                "status": "warning",
+                "errors": [],
+                "warnings": []
+              }
+            },
+            "status": {
+              "status": "warning",
+              "errors": [],
+              "warnings": []
+            },
+            "values": [
+              "2025-03-04",
+              "2025-03-05"
+            ],
+            "focused": 0
+          },
+          "sameInput": true
+        },
+        {
+          "action": "suffix-false",
+          "view": {
+            "root": [
+              "has-feedback",
+              "status-warning"
+            ],
+            "item": [
+              "has-feedback",
+              "has-warning"
+            ],
+            "suffix": null,
+            "icon": null,
+            "status": {
+              "status": "warning",
+              "errors": [],
+              "warnings": []
+            },
+            "values": [
+              "2025-03-04",
+              "2025-03-05"
+            ],
+            "focused": 0
+          },
+          "sameInput": true
+        },
+        {
+          "action": "suffix-empty",
+          "view": {
+            "root": [
+              "has-feedback",
+              "status-warning"
+            ],
+            "item": [
+              "has-feedback",
+              "has-warning"
+            ],
+            "suffix": null,
+            "icon": null,
+            "status": {
+              "status": "warning",
+              "errors": [],
+              "warnings": []
+            },
+            "values": [
+              "2025-03-04",
+              "2025-03-05"
+            ],
+            "focused": 0
+          },
+          "sameInput": true
+        },
+        {
+          "action": "suffix-default",
+          "view": {
+            "root": [
+              "has-feedback",
+              "status-warning"
+            ],
+            "item": [
+              "has-feedback",
+              "has-warning"
+            ],
+            "suffix": {
+              "text": "local 0 warning",
+              "custom": false,
+              "feedback": true,
+              "glyphs": 1
+            },
+            "icon": {
+              "className": "ant-form-item-feedback-icon ant-form-item-feedback-icon-warning",
+              "text": "local 0 warning",
+              "color": "rgb(250, 173, 20)",
+              "fontSize": "14px",
+              "visibility": "visible",
+              "path": [],
+              "custom": {
+                "status": "warning",
+                "errors": [],
+                "warnings": []
+              }
+            },
+            "status": {
+              "status": "warning",
+              "errors": [],
+              "warnings": []
+            },
+            "values": [
+              "2025-03-04",
+              "2025-03-05"
+            ],
+            "focused": 0
+          },
+          "sameInput": true
+        },
+        {
+          "action": "outside",
+          "view": {
+            "root": [
+              "has-feedback",
+              "status-warning"
+            ],
+            "item": [
+              "has-feedback",
+              "has-warning"
+            ],
+            "suffix": {
+              "text": "local 0 warning",
+              "custom": false,
+              "feedback": true,
+              "glyphs": 1
+            },
+            "icon": {
+              "className": "ant-form-item-feedback-icon ant-form-item-feedback-icon-warning",
+              "text": "local 0 warning",
+              "color": "rgb(250, 173, 20)",
+              "fontSize": "14px",
+              "visibility": "visible",
+              "path": [],
+              "custom": {
+                "status": "warning",
+                "errors": [],
+                "warnings": []
+              }
+            },
+            "status": {
+              "status": "warning",
+              "errors": [],
+              "warnings": []
+            },
+            "values": [
+              "2025-03-04",
+              "2025-03-05"
+            ],
+            "focused": -1
+          },
+          "sameInput": true
+        }
+      ]
+    }
+  ],
+  "ssr": [
+    {
+      "id": "date-error",
+      "view": {
+        "root": [
+          "has-feedback",
+          "status-error"
+        ],
+        "item": [
+          "has-error",
+          "has-feedback"
+        ],
+        "suffix": {
+          "text": "",
+          "custom": false,
+          "feedback": true,
+          "glyphs": 2
+        },
+        "icon": {
+          "className": "ant-form-item-feedback-icon ant-form-item-feedback-icon-error",
+          "text": "",
+          "color": "rgb(0, 0, 0)",
+          "fontSize": "16px",
+          "visibility": "visible",
+          "path": [
+            "M512 64c247.4 0 448 200.6 448 448S759.4 960 512 960 64 759.4 64 512 264.6 64 512 64zm127.98 274.82h-.04l-.08.06L512 466.75 384.14 338.88c-.04-.05-.06-.06-.08-.06a.12.12 0 00-.07 0c-.03 0-.05.01-.09.05l-45.02 45.02a.2.2 0 00-.05.09.12.12 0 000 .07v.02a.27.27 0 00.06.06L466.75 512 338.88 639.86c-.05.04-.06.06-.06.08a.12.12 0 000 .07c0 .03.01.05.05.09l45.02 45.02a.2.2 0 00.09.05.12.12 0 00.07 0c.02 0 .04-.01.08-.05L512 557.25l127.86 127.87c.04.04.06.05.08.05a.12.12 0 00.07 0c.03 0 .05-.01.09-.05l45.02-45.02a.2.2 0 00.05-.09.12.12 0 000-.07v-.02a.27.27 0 00-.05-.06L557.25 512l127.87-127.86c.04-.04.05-.06.05-.08a.12.12 0 000-.07c0-.03-.01-.05-.05-.09l-45.02-45.02a.2.2 0 00-.09-.05.12.12 0 00-.07 0z"
+          ],
+          "custom": null
+        },
+        "status": {
+          "status": "error",
+          "errors": [],
+          "warnings": []
+        },
+        "values": [
+          "2025-03-04"
+        ],
+        "focused": -1
+      },
+      "timers": 0
+    },
+    {
+      "id": "date-nested-form",
+      "view": {
+        "root": [],
+        "item": [
+          "has-error",
+          "has-feedback"
+        ],
+        "suffix": {
+          "text": "",
+          "custom": false,
+          "feedback": false,
+          "glyphs": 1
+        },
+        "icon": null,
+        "status": {
+          "status": null,
+          "errors": [],
+          "warnings": []
+        },
+        "values": [
+          "2025-03-04"
+        ],
+        "focused": -1
+      },
+      "timers": 0
+    },
+    {
+      "id": "range-error",
+      "view": {
+        "root": [
+          "has-feedback",
+          "status-error"
+        ],
+        "item": [
+          "has-error",
+          "has-feedback"
+        ],
+        "suffix": {
+          "text": "",
+          "custom": false,
+          "feedback": true,
+          "glyphs": 2
+        },
+        "icon": {
+          "className": "ant-form-item-feedback-icon ant-form-item-feedback-icon-error",
+          "text": "",
+          "color": "rgb(0, 0, 0)",
+          "fontSize": "16px",
+          "visibility": "visible",
+          "path": [
+            "M512 64c247.4 0 448 200.6 448 448S759.4 960 512 960 64 759.4 64 512 264.6 64 512 64zm127.98 274.82h-.04l-.08.06L512 466.75 384.14 338.88c-.04-.05-.06-.06-.08-.06a.12.12 0 00-.07 0c-.03 0-.05.01-.09.05l-45.02 45.02a.2.2 0 00-.05.09.12.12 0 000 .07v.02a.27.27 0 00.06.06L466.75 512 338.88 639.86c-.05.04-.06.06-.06.08a.12.12 0 000 .07c0 .03.01.05.05.09l45.02 45.02a.2.2 0 00.09.05.12.12 0 00.07 0c.02 0 .04-.01.08-.05L512 557.25l127.86 127.87c.04.04.06.05.08.05a.12.12 0 00.07 0c.03 0 .05-.01.09-.05l45.02-45.02a.2.2 0 00.05-.09.12.12 0 000-.07v-.02a.27.27 0 00-.05-.06L557.25 512l127.87-127.86c.04-.04.05-.06.05-.08a.12.12 0 000-.07c0-.03-.01-.05-.05-.09l-45.02-45.02a.2.2 0 00-.09-.05.12.12 0 00-.07 0z"
+          ],
+          "custom": null
+        },
+        "status": {
+          "status": "error",
+          "errors": [],
+          "warnings": []
+        },
+        "values": [
+          "2025-03-04",
+          "2025-03-05"
+        ],
+        "focused": -1
+      },
+      "timers": 0
+    },
+    {
+      "id": "range-nested-form",
+      "view": {
+        "root": [],
+        "item": [
+          "has-error",
+          "has-feedback"
+        ],
+        "suffix": {
+          "text": "",
+          "custom": false,
+          "feedback": false,
+          "glyphs": 1
+        },
+        "icon": null,
+        "status": {
+          "status": null,
+          "errors": [],
+          "warnings": []
+        },
+        "values": [
+          "2025-03-04",
+          "2025-03-05"
+        ],
+        "focused": -1
+      },
+      "timers": 0
+    },
+    {
+      "id": "time-error",
+      "view": {
+        "root": [
+          "has-feedback",
+          "status-error"
+        ],
+        "item": [
+          "has-error",
+          "has-feedback"
+        ],
+        "suffix": {
+          "text": "",
+          "custom": false,
+          "feedback": true,
+          "glyphs": 2
+        },
+        "icon": {
+          "className": "ant-form-item-feedback-icon ant-form-item-feedback-icon-error",
+          "text": "",
+          "color": "rgb(0, 0, 0)",
+          "fontSize": "16px",
+          "visibility": "visible",
+          "path": [
+            "M512 64c247.4 0 448 200.6 448 448S759.4 960 512 960 64 759.4 64 512 264.6 64 512 64zm127.98 274.82h-.04l-.08.06L512 466.75 384.14 338.88c-.04-.05-.06-.06-.08-.06a.12.12 0 00-.07 0c-.03 0-.05.01-.09.05l-45.02 45.02a.2.2 0 00-.05.09.12.12 0 000 .07v.02a.27.27 0 00.06.06L466.75 512 338.88 639.86c-.05.04-.06.06-.06.08a.12.12 0 000 .07c0 .03.01.05.05.09l45.02 45.02a.2.2 0 00.09.05.12.12 0 00.07 0c.02 0 .04-.01.08-.05L512 557.25l127.86 127.87c.04.04.06.05.08.05a.12.12 0 00.07 0c.03 0 .05-.01.09-.05l45.02-45.02a.2.2 0 00.05-.09.12.12 0 000-.07v-.02a.27.27 0 00-.05-.06L557.25 512l127.87-127.86c.04-.04.05-.06.05-.08a.12.12 0 000-.07c0-.03-.01-.05-.05-.09l-45.02-45.02a.2.2 0 00-.09-.05.12.12 0 00-.07 0z"
+          ],
+          "custom": null
+        },
+        "status": {
+          "status": "error",
+          "errors": [],
+          "warnings": []
+        },
+        "values": [
+          "12:13:14"
+        ],
+        "focused": -1
+      },
+      "timers": 0
+    },
+    {
+      "id": "time-nested-form",
+      "view": {
+        "root": [],
+        "item": [
+          "has-error",
+          "has-feedback"
+        ],
+        "suffix": {
+          "text": "",
+          "custom": false,
+          "feedback": false,
+          "glyphs": 1
+        },
+        "icon": null,
+        "status": {
+          "status": null,
+          "errors": [],
+          "warnings": []
+        },
+        "values": [
+          "12:13:14"
+        ],
+        "focused": -1
+      },
+      "timers": 0
+    },
+    {
+      "id": "time-range-error",
+      "view": {
+        "root": [
+          "has-feedback",
+          "status-error"
+        ],
+        "item": [
+          "has-error",
+          "has-feedback"
+        ],
+        "suffix": {
+          "text": "",
+          "custom": false,
+          "feedback": true,
+          "glyphs": 2
+        },
+        "icon": {
+          "className": "ant-form-item-feedback-icon ant-form-item-feedback-icon-error",
+          "text": "",
+          "color": "rgb(0, 0, 0)",
+          "fontSize": "16px",
+          "visibility": "visible",
+          "path": [
+            "M512 64c247.4 0 448 200.6 448 448S759.4 960 512 960 64 759.4 64 512 264.6 64 512 64zm127.98 274.82h-.04l-.08.06L512 466.75 384.14 338.88c-.04-.05-.06-.06-.08-.06a.12.12 0 00-.07 0c-.03 0-.05.01-.09.05l-45.02 45.02a.2.2 0 00-.05.09.12.12 0 000 .07v.02a.27.27 0 00.06.06L466.75 512 338.88 639.86c-.05.04-.06.06-.06.08a.12.12 0 000 .07c0 .03.01.05.05.09l45.02 45.02a.2.2 0 00.09.05.12.12 0 00.07 0c.02 0 .04-.01.08-.05L512 557.25l127.86 127.87c.04.04.06.05.08.05a.12.12 0 00.07 0c.03 0 .05-.01.09-.05l45.02-45.02a.2.2 0 00.05-.09.12.12 0 000-.07v-.02a.27.27 0 00-.05-.06L557.25 512l127.87-127.86c.04-.04.05-.06.05-.08a.12.12 0 000-.07c0-.03-.01-.05-.05-.09l-45.02-45.02a.2.2 0 00-.09-.05.12.12 0 00-.07 0z"
+          ],
+          "custom": null
+        },
+        "status": {
+          "status": "error",
+          "errors": [],
+          "warnings": []
+        },
+        "values": [
+          "12:13:14",
+          "15:16:17"
+        ],
+        "focused": -1
+      },
+      "timers": 0
+    },
+    {
+      "id": "time-range-nested-form",
+      "view": {
+        "root": [],
+        "item": [
+          "has-error",
+          "has-feedback"
+        ],
+        "suffix": {
+          "text": "",
+          "custom": false,
+          "feedback": false,
+          "glyphs": 1
+        },
+        "icon": null,
+        "status": {
+          "status": null,
+          "errors": [],
+          "warnings": []
+        },
+        "values": [
+          "12:13:14",
+          "15:16:17"
+        ],
+        "focused": -1
+      },
+      "timers": 0
+    },
+    {
+      "id": "time-suffix-2",
+      "view": {
+        "root": [
+          "has-feedback",
+          "status-error"
+        ],
+        "item": [
+          "has-error",
+          "has-feedback"
+        ],
+        "suffix": null,
+        "icon": null,
+        "status": {
+          "status": "error",
+          "errors": [],
+          "warnings": []
+        },
+        "values": [
+          "12:13:14"
+        ],
+        "focused": -1
+      },
+      "timers": 0
+    },
+    {
+      "id": "time-suffix-4",
+      "view": {
+        "root": [
+          "has-feedback",
+          "status-error"
+        ],
+        "item": [
+          "has-error",
+          "has-feedback"
+        ],
+        "suffix": {
+          "text": "Suffix",
+          "custom": true,
+          "feedback": false,
+          "glyphs": 0
+        },
+        "icon": null,
+        "status": {
+          "status": "error",
+          "errors": [],
+          "warnings": []
+        },
+        "values": [
+          "12:13:14"
+        ],
+        "focused": -1
+      },
+      "timers": 0
+    },
+    {
+      "id": "time-range-suffix-2",
+      "view": {
+        "root": [
+          "has-feedback",
+          "status-error"
+        ],
+        "item": [
+          "has-error",
+          "has-feedback"
+        ],
+        "suffix": null,
+        "icon": null,
+        "status": {
+          "status": "error",
+          "errors": [],
+          "warnings": []
+        },
+        "values": [
+          "12:13:14",
+          "15:16:17"
+        ],
+        "focused": -1
+      },
+      "timers": 0
+    },
+    {
+      "id": "time-range-suffix-4",
+      "view": {
+        "root": [
+          "has-feedback",
+          "status-error"
+        ],
+        "item": [
+          "has-error",
+          "has-feedback"
+        ],
+        "suffix": {
+          "text": "Suffix",
+          "custom": true,
+          "feedback": false,
+          "glyphs": 0
+        },
+        "icon": null,
+        "status": {
+          "status": "error",
+          "errors": [],
+          "warnings": []
+        },
+        "values": [
+          "12:13:14",
+          "15:16:17"
+        ],
+        "focused": -1
+      },
+      "timers": 0
+    },
+    {
+      "id": "date-suffix-2",
+      "view": {
+        "root": [
+          "has-feedback",
+          "status-error"
+        ],
+        "item": [
+          "has-error",
+          "has-feedback"
+        ],
+        "suffix": null,
+        "icon": null,
+        "status": {
+          "status": "error",
+          "errors": [],
+          "warnings": []
+        },
+        "values": [
+          "2025-03-04"
+        ],
+        "focused": -1
+      },
+      "timers": 0
+    },
+    {
+      "id": "date-suffix-4",
+      "view": {
+        "root": [
+          "has-feedback",
+          "status-error"
+        ],
+        "item": [
+          "has-error",
+          "has-feedback"
+        ],
+        "suffix": {
+          "text": "0",
+          "custom": false,
+          "feedback": false,
+          "glyphs": 0
+        },
+        "icon": null,
+        "status": {
+          "status": "error",
+          "errors": [],
+          "warnings": []
+        },
+        "values": [
+          "2025-03-04"
+        ],
+        "focused": -1
+      },
+      "timers": 0
+    },
+    {
+      "id": "range-suffix-2",
+      "view": {
+        "root": [
+          "has-feedback",
+          "status-error"
+        ],
+        "item": [
+          "has-error",
+          "has-feedback"
+        ],
+        "suffix": null,
+        "icon": null,
+        "status": {
+          "status": "error",
+          "errors": [],
+          "warnings": []
+        },
+        "values": [
+          "2025-03-04",
+          "2025-03-05"
+        ],
+        "focused": -1
+      },
+      "timers": 0
+    },
+    {
+      "id": "range-suffix-4",
+      "view": {
+        "root": [
+          "has-feedback",
+          "status-error"
+        ],
+        "item": [
+          "has-error",
+          "has-feedback"
+        ],
+        "suffix": {
+          "text": "0",
+          "custom": false,
+          "feedback": false,
+          "glyphs": 0
+        },
+        "icon": null,
+        "status": {
+          "status": "error",
+          "errors": [],
+          "warnings": []
+        },
+        "values": [
+          "2025-03-04",
+          "2025-03-05"
+        ],
+        "focused": -1
+      },
+      "timers": 0
+    }
+  ]
+}

@@ -1,0 +1,4558 @@
+{
+  "reference": {
+    "version": "6.6.8",
+    "revision": "984592267de88fbf9cdaecc96a56629e721c709d",
+    "react": "18.3.1",
+    "archiveSha256": "8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa",
+    "browser": "Unmodified official UMD; actual Form/Item metadata, custom callbacks, Mentions feedback and Transfer root/search context",
+    "server": "Unmodified ReactDOMServer in a DOM-free VM; markup projected in an inert host",
+    "errors": [],
+    "warnings": [
+      {
+        "id": "mentions-nested-form",
+        "message": "Warning: [antd: Form.Item] Form.Item.useStatus should be used under Form.Item component. For more information: https://u.ant.design/form-item-usestatus"
+      }
+    ],
+    "serverWarnings": [
+      {
+        "id": "mentions-nested-form",
+        "args": [
+          "Warning: [antd: Form.Item] Form.Item.useStatus should be used under Form.Item component. For more information: https://u.ant.design/form-item-usestatus"
+        ]
+      }
+    ],
+    "glyphs": {},
+    "noConsumer": [
+      {
+        "status": "error",
+        "errors": [],
+        "warnings": []
+      }
+    ]
+  },
+  "cases": [
+    {
+      "id": "mentions-status-success",
+      "initial": {
+        "root": [
+          "affix-wrapper",
+          "has-suffix",
+          "status-success"
+        ],
+        "item": [
+          "has-feedback",
+          "has-success"
+        ],
+        "suffix": [
+          "feedback"
+        ],
+        "icons": [
+          {
+            "classes": "ant-form-item-feedback-icon ant-form-item-feedback-icon-success",
+            "text": "",
+            "color": "rgb(82, 196, 26)",
+            "fontSize": "14px",
+            "visibility": "visible",
+            "paths": [
+              "M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm193.5 301.7l-210.6 292a31.8 31.8 0 01-51.7 0L318.5 484.9c-3.8-5.3 0-12.7 6.5-12.7h46.9c10.2 0 19.9 4.9 25.9 13.3l71.2 98.8 157.2-218c6-8.3 15.6-13.3 25.9-13.3H699c6.5 0 10.3 7.4 6.5 12.7z"
+            ],
+            "info": null
+          }
+        ],
+        "searches": [],
+        "value": "Alpha",
+        "target": null,
+        "status": {
+          "status": "success",
+          "errors": [],
+          "warnings": []
+        },
+        "focused": false,
+        "popup": false
+      },
+      "steps": []
+    },
+    {
+      "id": "mentions-status-error",
+      "initial": {
+        "root": [
+          "affix-wrapper",
+          "has-suffix",
+          "status-error"
+        ],
+        "item": [
+          "has-error",
+          "has-feedback"
+        ],
+        "suffix": [
+          "feedback"
+        ],
+        "icons": [
+          {
+            "classes": "ant-form-item-feedback-icon ant-form-item-feedback-icon-error",
+            "text": "",
+            "color": "rgb(255, 77, 79)",
+            "fontSize": "14px",
+            "visibility": "visible",
+            "paths": [
+              "M512 64c247.4 0 448 200.6 448 448S759.4 960 512 960 64 759.4 64 512 264.6 64 512 64zm127.98 274.82h-.04l-.08.06L512 466.75 384.14 338.88c-.04-.05-.06-.06-.08-.06a.12.12 0 00-.07 0c-.03 0-.05.01-.09.05l-45.02 45.02a.2.2 0 00-.05.09.12.12 0 000 .07v.02a.27.27 0 00.06.06L466.75 512 338.88 639.86c-.05.04-.06.06-.06.08a.12.12 0 000 .07c0 .03.01.05.05.09l45.02 45.02a.2.2 0 00.09.05.12.12 0 00.07 0c.02 0 .04-.01.08-.05L512 557.25l127.86 127.87c.04.04.06.05.08.05a.12.12 0 00.07 0c.03 0 .05-.01.09-.05l45.02-45.02a.2.2 0 00.05-.09.12.12 0 000-.07v-.02a.27.27 0 00-.05-.06L557.25 512l127.87-127.86c.04-.04.05-.06.05-.08a.12.12 0 000-.07c0-.03-.01-.05-.05-.09l-45.02-45.02a.2.2 0 00-.09-.05.12.12 0 00-.07 0z"
+            ],
+            "info": null
+          }
+        ],
+        "searches": [],
+        "value": "Alpha",
+        "target": null,
+        "status": {
+          "status": "error",
+          "errors": [],
+          "warnings": []
+        },
+        "focused": false,
+        "popup": false
+      },
+      "steps": []
+    },
+    {
+      "id": "mentions-status-warning",
+      "initial": {
+        "root": [
+          "affix-wrapper",
+          "has-suffix",
+          "status-warning"
+        ],
+        "item": [
+          "has-feedback",
+          "has-warning"
+        ],
+        "suffix": [
+          "feedback"
+        ],
+        "icons": [
+          {
+            "classes": "ant-form-item-feedback-icon ant-form-item-feedback-icon-warning",
+            "text": "",
+            "color": "rgb(250, 173, 20)",
+            "fontSize": "14px",
+            "visibility": "visible",
+            "paths": [
+              "M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm-32 232c0-4.4 3.6-8 8-8h48c4.4 0 8 3.6 8 8v272c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8V296zm32 440a48.01 48.01 0 010-96 48.01 48.01 0 010 96z"
+            ],
+            "info": null
+          }
+        ],
+        "searches": [],
+        "value": "Alpha",
+        "target": null,
+        "status": {
+          "status": "warning",
+          "errors": [],
+          "warnings": []
+        },
+        "focused": false,
+        "popup": false
+      },
+      "steps": []
+    },
+    {
+      "id": "mentions-status-validating",
+      "initial": {
+        "root": [
+          "affix-wrapper",
+          "has-suffix",
+          "status-validating"
+        ],
+        "item": [
+          "has-feedback",
+          "is-validating"
+        ],
+        "suffix": [
+          "feedback"
+        ],
+        "icons": [
+          {
+            "classes": "ant-form-item-feedback-icon ant-form-item-feedback-icon-validating",
+            "text": "",
+            "color": "rgb(22, 119, 255)",
+            "fontSize": "14px",
+            "visibility": "visible",
+            "paths": [
+              "M988 548c-19.9 0-36-16.1-36-36 0-59.4-11.6-117-34.6-171.3a440.45 440.45 0 00-94.3-139.9 437.71 437.71 0 00-139.9-94.3C629 83.6 571.4 72 512 72c-19.9 0-36-16.1-36-36s16.1-36 36-36c69.1 0 136.2 13.5 199.3 40.3C772.3 66 827 103 874 150c47 47 83.9 101.8 109.7 162.7 26.7 63.1 40.2 130.2 40.2 199.3.1 19.9-16 36-35.9 36z"
+            ],
+            "info": null
+          }
+        ],
+        "searches": [],
+        "value": "Alpha",
+        "target": null,
+        "status": {
+          "status": "validating",
+          "errors": [],
+          "warnings": []
+        },
+        "focused": false,
+        "popup": false
+      },
+      "steps": []
+    },
+    {
+      "id": "mentions-pristine",
+      "initial": {
+        "root": [
+          "affix-wrapper",
+          "has-suffix"
+        ],
+        "item": [],
+        "suffix": [],
+        "icons": [],
+        "searches": [],
+        "value": "Alpha",
+        "target": null,
+        "status": {
+          "status": "",
+          "errors": [],
+          "warnings": []
+        },
+        "focused": false,
+        "popup": false
+      },
+      "steps": []
+    },
+    {
+      "id": "mentions-feedback-false",
+      "initial": {
+        "root": [
+          "status-error"
+        ],
+        "item": [
+          "has-error"
+        ],
+        "suffix": null,
+        "icons": [],
+        "searches": [],
+        "value": "Alpha",
+        "target": null,
+        "status": {
+          "status": "error",
+          "errors": [],
+          "warnings": []
+        },
+        "focused": false,
+        "popup": false
+      },
+      "steps": []
+    },
+    {
+      "id": "mentions-icon-custom",
+      "initial": {
+        "root": [
+          "affix-wrapper",
+          "has-suffix",
+          "status-warning"
+        ],
+        "item": [
+          "has-feedback",
+          "has-warning"
+        ],
+        "suffix": [
+          "feedback"
+        ],
+        "icons": [
+          {
+            "classes": "ant-form-item-feedback-icon ant-form-item-feedback-icon-warning",
+            "text": "local 0 warning",
+            "color": "rgb(250, 173, 20)",
+            "fontSize": "14px",
+            "visibility": "visible",
+            "paths": [],
+            "info": {
+              "status": "warning",
+              "errors": [],
+              "warnings": []
+            }
+          }
+        ],
+        "searches": [],
+        "value": "Alpha",
+        "target": null,
+        "status": {
+          "status": "warning",
+          "errors": [],
+          "warnings": []
+        },
+        "focused": false,
+        "popup": false
+      },
+      "steps": []
+    },
+    {
+      "id": "mentions-icon-false",
+      "initial": {
+        "root": [
+          "affix-wrapper",
+          "has-suffix",
+          "status-warning"
+        ],
+        "item": [
+          "has-feedback",
+          "has-warning"
+        ],
+        "suffix": [],
+        "icons": [],
+        "searches": [],
+        "value": "Alpha",
+        "target": null,
+        "status": {
+          "status": "warning",
+          "errors": [],
+          "warnings": []
+        },
+        "focused": false,
+        "popup": false
+      },
+      "steps": []
+    },
+    {
+      "id": "mentions-icon-null",
+      "initial": {
+        "root": [
+          "affix-wrapper",
+          "has-suffix",
+          "status-warning"
+        ],
+        "item": [
+          "has-feedback",
+          "has-warning"
+        ],
+        "suffix": [
+          "feedback"
+        ],
+        "icons": [
+          {
+            "classes": "ant-form-item-feedback-icon ant-form-item-feedback-icon-warning",
+            "text": "",
+            "color": "rgb(250, 173, 20)",
+            "fontSize": "14px",
+            "visibility": "visible",
+            "paths": [
+              "M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm-32 232c0-4.4 3.6-8 8-8h48c4.4 0 8 3.6 8 8v272c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8V296zm32 440a48.01 48.01 0 010-96 48.01 48.01 0 010 96z"
+            ],
+            "info": null
+          }
+        ],
+        "searches": [],
+        "value": "Alpha",
+        "target": null,
+        "status": {
+          "status": "warning",
+          "errors": [],
+          "warnings": []
+        },
+        "focused": false,
+        "popup": false
+      },
+      "steps": []
+    },
+    {
+      "id": "mentions-form-icons",
+      "initial": {
+        "root": [
+          "affix-wrapper",
+          "has-suffix",
+          "status-error"
+        ],
+        "item": [
+          "has-error",
+          "has-feedback"
+        ],
+        "suffix": [
+          "feedback"
+        ],
+        "icons": [
+          {
+            "classes": "ant-form-item-feedback-icon ant-form-item-feedback-icon-error",
+            "text": "form 0 error",
+            "color": "rgb(255, 77, 79)",
+            "fontSize": "14px",
+            "visibility": "visible",
+            "paths": [],
+            "info": {
+              "status": "error",
+              "errors": [],
+              "warnings": []
+            }
+          }
+        ],
+        "searches": [],
+        "value": "Alpha",
+        "target": null,
+        "status": {
+          "status": "error",
+          "errors": [],
+          "warnings": []
+        },
+        "focused": false,
+        "popup": false
+      },
+      "steps": []
+    },
+    {
+      "id": "mentions-local-status",
+      "initial": {
+        "root": [
+          "affix-wrapper",
+          "has-suffix",
+          "status-error"
+        ],
+        "item": [
+          "has-feedback",
+          "has-warning"
+        ],
+        "suffix": [
+          "feedback"
+        ],
+        "icons": [
+          {
+            "classes": "ant-form-item-feedback-icon ant-form-item-feedback-icon-warning",
+            "text": "",
+            "color": "rgb(250, 173, 20)",
+            "fontSize": "14px",
+            "visibility": "visible",
+            "paths": [
+              "M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm-32 232c0-4.4 3.6-8 8-8h48c4.4 0 8 3.6 8 8v272c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8V296zm32 440a48.01 48.01 0 010-96 48.01 48.01 0 010 96z"
+            ],
+            "info": null
+          }
+        ],
+        "searches": [],
+        "value": "Alpha",
+        "target": null,
+        "status": {
+          "status": "warning",
+          "errors": [],
+          "warnings": []
+        },
+        "focused": false,
+        "popup": false
+      },
+      "steps": []
+    },
+    {
+      "id": "mentions-no-style-inherit",
+      "initial": {
+        "root": [
+          "affix-wrapper",
+          "has-suffix",
+          "status-error"
+        ],
+        "item": [
+          "has-error",
+          "has-feedback"
+        ],
+        "suffix": [
+          "feedback"
+        ],
+        "icons": [
+          {
+            "classes": "ant-form-item-feedback-icon ant-form-item-feedback-icon-error",
+            "text": "",
+            "color": "rgb(255, 77, 79)",
+            "fontSize": "14px",
+            "visibility": "visible",
+            "paths": [
+              "M512 64c247.4 0 448 200.6 448 448S759.4 960 512 960 64 759.4 64 512 264.6 64 512 64zm127.98 274.82h-.04l-.08.06L512 466.75 384.14 338.88c-.04-.05-.06-.06-.08-.06a.12.12 0 00-.07 0c-.03 0-.05.01-.09.05l-45.02 45.02a.2.2 0 00-.05.09.12.12 0 000 .07v.02a.27.27 0 00.06.06L466.75 512 338.88 639.86c-.05.04-.06.06-.06.08a.12.12 0 000 .07c0 .03.01.05.05.09l45.02 45.02a.2.2 0 00.09.05.12.12 0 00.07 0c.02 0 .04-.01.08-.05L512 557.25l127.86 127.87c.04.04.06.05.08.05a.12.12 0 00.07 0c.03 0 .05-.01.09-.05l45.02-45.02a.2.2 0 00.05-.09.12.12 0 000-.07v-.02a.27.27 0 00-.05-.06L557.25 512l127.87-127.86c.04-.04.05-.06.05-.08a.12.12 0 000-.07c0-.03-.01-.05-.05-.09l-45.02-45.02a.2.2 0 00-.09-.05.12.12 0 00-.07 0z"
+            ],
+            "info": null
+          }
+        ],
+        "searches": [],
+        "value": "Alpha",
+        "target": null,
+        "status": {
+          "status": "error",
+          "errors": [],
+          "warnings": []
+        },
+        "focused": false,
+        "popup": false
+      },
+      "steps": []
+    },
+    {
+      "id": "mentions-no-style-inner-status",
+      "initial": {
+        "root": [
+          "affix-wrapper",
+          "has-suffix",
+          "status-warning"
+        ],
+        "item": [
+          "has-error",
+          "has-feedback"
+        ],
+        "suffix": [
+          "feedback"
+        ],
+        "icons": [
+          {
+            "classes": "ant-form-item-feedback-icon ant-form-item-feedback-icon-error",
+            "text": "",
+            "color": "rgb(255, 77, 79)",
+            "fontSize": "14px",
+            "visibility": "visible",
+            "paths": [
+              "M512 64c247.4 0 448 200.6 448 448S759.4 960 512 960 64 759.4 64 512 264.6 64 512 64zm127.98 274.82h-.04l-.08.06L512 466.75 384.14 338.88c-.04-.05-.06-.06-.08-.06a.12.12 0 00-.07 0c-.03 0-.05.01-.09.05l-45.02 45.02a.2.2 0 00-.05.09.12.12 0 000 .07v.02a.27.27 0 00.06.06L466.75 512 338.88 639.86c-.05.04-.06.06-.06.08a.12.12 0 000 .07c0 .03.01.05.05.09l45.02 45.02a.2.2 0 00.09.05.12.12 0 00.07 0c.02 0 .04-.01.08-.05L512 557.25l127.86 127.87c.04.04.06.05.08.05a.12.12 0 00.07 0c.03 0 .05-.01.09-.05l45.02-45.02a.2.2 0 00.05-.09.12.12 0 000-.07v-.02a.27.27 0 00-.05-.06L557.25 512l127.87-127.86c.04-.04.05-.06.05-.08a.12.12 0 000-.07c0-.03-.01-.05-.05-.09l-45.02-45.02a.2.2 0 00-.09-.05.12.12 0 00-.07 0z"
+            ],
+            "info": null
+          }
+        ],
+        "searches": [],
+        "value": "Alpha",
+        "target": null,
+        "status": {
+          "status": "warning",
+          "errors": [],
+          "warnings": []
+        },
+        "focused": false,
+        "popup": false
+      },
+      "steps": []
+    },
+    {
+      "id": "mentions-no-style-false",
+      "initial": {
+        "root": [
+          "status-warning"
+        ],
+        "item": [
+          "has-feedback",
+          "has-warning"
+        ],
+        "suffix": null,
+        "icons": [],
+        "searches": [],
+        "value": "Alpha",
+        "target": null,
+        "status": {
+          "status": "warning",
+          "errors": [],
+          "warnings": []
+        },
+        "focused": false,
+        "popup": false
+      },
+      "steps": []
+    },
+    {
+      "id": "mentions-no-style-own",
+      "initial": {
+        "root": [
+          "affix-wrapper",
+          "has-suffix",
+          "status-success"
+        ],
+        "item": [
+          "has-feedback",
+          "has-warning"
+        ],
+        "suffix": [
+          "feedback"
+        ],
+        "icons": [
+          {
+            "classes": "inner-field-item-feedback-icon inner-field-item-feedback-icon-success",
+            "text": "",
+            "color": "rgba(0, 0, 0, 0.25)",
+            "fontSize": "12px",
+            "visibility": "visible",
+            "paths": [
+              "M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm193.5 301.7l-210.6 292a31.8 31.8 0 01-51.7 0L318.5 484.9c-3.8-5.3 0-12.7 6.5-12.7h46.9c10.2 0 19.9 4.9 25.9 13.3l71.2 98.8 157.2-218c6-8.3 15.6-13.3 25.9-13.3H699c6.5 0 10.3 7.4 6.5 12.7z"
+            ],
+            "info": null
+          }
+        ],
+        "searches": [],
+        "value": "Alpha",
+        "target": null,
+        "status": {
+          "status": "success",
+          "errors": [],
+          "warnings": []
+        },
+        "focused": false,
+        "popup": false
+      },
+      "steps": []
+    },
+    {
+      "id": "mentions-nested-form",
+      "initial": {
+        "root": [],
+        "item": [
+          "has-error",
+          "has-feedback"
+        ],
+        "suffix": null,
+        "icons": [],
+        "searches": [],
+        "value": "Alpha",
+        "target": null,
+        "status": {
+          "status": null,
+          "errors": [],
+          "warnings": []
+        },
+        "focused": false,
+        "popup": false
+      },
+      "steps": []
+    },
+    {
+      "id": "mentions-prefixes",
+      "initial": {
+        "root": [
+          "affix-wrapper",
+          "has-suffix",
+          "status-error"
+        ],
+        "item": [
+          "has-error",
+          "has-feedback"
+        ],
+        "suffix": [
+          "feedback"
+        ],
+        "icons": [
+          {
+            "classes": "field-item-feedback-icon field-item-feedback-icon-error",
+            "text": "",
+            "color": "rgb(255, 77, 79)",
+            "fontSize": "14px",
+            "visibility": "visible",
+            "paths": [
+              "M512 64c247.4 0 448 200.6 448 448S759.4 960 512 960 64 759.4 64 512 264.6 64 512 64zm127.98 274.82h-.04l-.08.06L512 466.75 384.14 338.88c-.04-.05-.06-.06-.08-.06a.12.12 0 00-.07 0c-.03 0-.05.01-.09.05l-45.02 45.02a.2.2 0 00-.05.09.12.12 0 000 .07v.02a.27.27 0 00.06.06L466.75 512 338.88 639.86c-.05.04-.06.06-.06.08a.12.12 0 000 .07c0 .03.01.05.05.09l45.02 45.02a.2.2 0 00.09.05.12.12 0 00.07 0c.02 0 .04-.01.08-.05L512 557.25l127.86 127.87c.04.04.06.05.08.05a.12.12 0 00.07 0c.03 0 .05-.01.09-.05l45.02-45.02a.2.2 0 00.05-.09.12.12 0 000-.07v-.02a.27.27 0 00-.05-.06L557.25 512l127.87-127.86c.04-.04.05-.06.05-.08a.12.12 0 000-.07c0-.03-.01-.05-.05-.09l-45.02-45.02a.2.2 0 00-.09-.05.12.12 0 00-.07 0z"
+            ],
+            "info": null
+          }
+        ],
+        "searches": [],
+        "value": "Alpha",
+        "target": null,
+        "status": {
+          "status": "error",
+          "errors": [],
+          "warnings": []
+        },
+        "focused": false,
+        "popup": false
+      },
+      "steps": []
+    },
+    {
+      "id": "mentions-dark-rtl",
+      "initial": {
+        "root": [
+          "affix-wrapper",
+          "has-suffix",
+          "status-warning"
+        ],
+        "item": [
+          "has-feedback",
+          "has-warning"
+        ],
+        "suffix": [
+          "feedback"
+        ],
+        "icons": [
+          {
+            "classes": "ant-form-item-feedback-icon ant-form-item-feedback-icon-warning",
+            "text": "",
+            "color": "rgb(216, 150, 20)",
+            "fontSize": "14px",
+            "visibility": "visible",
+            "paths": [
+              "M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm-32 232c0-4.4 3.6-8 8-8h48c4.4 0 8 3.6 8 8v272c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8V296zm32 440a48.01 48.01 0 010-96 48.01 48.01 0 010 96z"
+            ],
+            "info": null
+          }
+        ],
+        "searches": [],
+        "value": "Alpha",
+        "target": null,
+        "status": {
+          "status": "warning",
+          "errors": [],
+          "warnings": []
+        },
+        "focused": false,
+        "popup": false
+      },
+      "steps": []
+    },
+    {
+      "id": "mentions-compact-small",
+      "initial": {
+        "root": [
+          "affix-wrapper",
+          "has-suffix",
+          "status-error"
+        ],
+        "item": [
+          "has-error",
+          "has-feedback"
+        ],
+        "suffix": [
+          "feedback"
+        ],
+        "icons": [
+          {
+            "classes": "ant-form-item-feedback-icon ant-form-item-feedback-icon-error",
+            "text": "",
+            "color": "rgb(255, 77, 79)",
+            "fontSize": "12px",
+            "visibility": "visible",
+            "paths": [
+              "M512 64c247.4 0 448 200.6 448 448S759.4 960 512 960 64 759.4 64 512 264.6 64 512 64zm127.98 274.82h-.04l-.08.06L512 466.75 384.14 338.88c-.04-.05-.06-.06-.08-.06a.12.12 0 00-.07 0c-.03 0-.05.01-.09.05l-45.02 45.02a.2.2 0 00-.05.09.12.12 0 000 .07v.02a.27.27 0 00.06.06L466.75 512 338.88 639.86c-.05.04-.06.06-.06.08a.12.12 0 000 .07c0 .03.01.05.05.09l45.02 45.02a.2.2 0 00.09.05.12.12 0 00.07 0c.02 0 .04-.01.08-.05L512 557.25l127.86 127.87c.04.04.06.05.08.05a.12.12 0 00.07 0c.03 0 .05-.01.09-.05l45.02-45.02a.2.2 0 00.05-.09.12.12 0 000-.07v-.02a.27.27 0 00-.05-.06L557.25 512l127.87-127.86c.04-.04.05-.06.05-.08a.12.12 0 000-.07c0-.03-.01-.05-.05-.09l-45.02-45.02a.2.2 0 00-.09-.05.12.12 0 00-.07 0z"
+            ],
+            "info": null
+          }
+        ],
+        "searches": [],
+        "value": "Alpha",
+        "target": null,
+        "status": {
+          "status": "error",
+          "errors": [],
+          "warnings": []
+        },
+        "focused": false,
+        "popup": false
+      },
+      "steps": []
+    },
+    {
+      "id": "mentions-async-success",
+      "initial": {
+        "root": [
+          "affix-wrapper",
+          "has-suffix"
+        ],
+        "item": [],
+        "suffix": [],
+        "icons": [],
+        "searches": [],
+        "value": "Alpha",
+        "target": null,
+        "status": {
+          "status": "",
+          "errors": [],
+          "warnings": []
+        },
+        "focused": false,
+        "popup": false
+      },
+      "steps": [
+        {
+          "action": "validate",
+          "view": {
+            "root": [
+              "affix-wrapper",
+              "has-suffix",
+              "status-validating"
+            ],
+            "item": [
+              "has-feedback",
+              "is-validating"
+            ],
+            "suffix": [
+              "feedback"
+            ],
+            "icons": [
+              {
+                "classes": "ant-form-item-feedback-icon ant-form-item-feedback-icon-validating",
+                "text": "local 0 validating",
+                "color": "rgb(22, 119, 255)",
+                "fontSize": "14px",
+                "visibility": "visible",
+                "paths": [],
+                "info": {
+                  "status": "validating",
+                  "errors": [],
+                  "warnings": []
+                }
+              }
+            ],
+            "searches": [],
+            "value": "Alpha",
+            "target": null,
+            "status": {
+              "status": "validating",
+              "errors": [],
+              "warnings": []
+            },
+            "focused": false,
+            "popup": false
+          },
+          "sameInput": true
+        },
+        {
+          "action": "resolve",
+          "view": {
+            "root": [
+              "affix-wrapper",
+              "has-suffix",
+              "status-success"
+            ],
+            "item": [
+              "has-feedback",
+              "has-success"
+            ],
+            "suffix": [
+              "feedback"
+            ],
+            "icons": [
+              {
+                "classes": "ant-form-item-feedback-icon ant-form-item-feedback-icon-success",
+                "text": "local 0 success",
+                "color": "rgb(82, 196, 26)",
+                "fontSize": "14px",
+                "visibility": "visible",
+                "paths": [],
+                "info": {
+                  "status": "success",
+                  "errors": [],
+                  "warnings": []
+                }
+              }
+            ],
+            "searches": [],
+            "value": "Alpha",
+            "target": null,
+            "status": {
+              "status": "success",
+              "errors": [],
+              "warnings": []
+            },
+            "focused": false,
+            "popup": false
+          },
+          "sameInput": true
+        },
+        {
+          "action": "reset",
+          "view": {
+            "root": [
+              "affix-wrapper",
+              "has-suffix"
+            ],
+            "item": [],
+            "suffix": [],
+            "icons": [],
+            "searches": [],
+            "value": "Alpha",
+            "target": null,
+            "status": {
+              "status": "",
+              "errors": [],
+              "warnings": []
+            },
+            "focused": false,
+            "popup": false
+          },
+          "sameInput": false
+        }
+      ]
+    },
+    {
+      "id": "transfer-status-success",
+      "initial": {
+        "root": [
+          "has-feedback",
+          "status-success"
+        ],
+        "item": [
+          "has-feedback",
+          "has-success"
+        ],
+        "suffix": null,
+        "icons": [
+          {
+            "classes": "ant-form-item-feedback-icon ant-form-item-feedback-icon-success",
+            "text": "",
+            "color": "rgb(82, 196, 26)",
+            "fontSize": "14px",
+            "visibility": "visible",
+            "paths": [
+              "M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm193.5 301.7l-210.6 292a31.8 31.8 0 01-51.7 0L318.5 484.9c-3.8-5.3 0-12.7 6.5-12.7h46.9c10.2 0 19.9 4.9 25.9 13.3l71.2 98.8 157.2-218c6-8.3 15.6-13.3 25.9-13.3H699c6.5 0 10.3 7.4 6.5 12.7z"
+            ],
+            "info": null
+          },
+          {
+            "classes": "ant-form-item-feedback-icon ant-form-item-feedback-icon-success",
+            "text": "",
+            "color": "rgb(82, 196, 26)",
+            "fontSize": "14px",
+            "visibility": "visible",
+            "paths": [
+              "M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm193.5 301.7l-210.6 292a31.8 31.8 0 01-51.7 0L318.5 484.9c-3.8-5.3 0-12.7 6.5-12.7h46.9c10.2 0 19.9 4.9 25.9 13.3l71.2 98.8 157.2-218c6-8.3 15.6-13.3 25.9-13.3H699c6.5 0 10.3 7.4 6.5 12.7z"
+            ],
+            "info": null
+          }
+        ],
+        "searches": [
+          {
+            "value": "",
+            "icons": 1,
+            "status": [
+              "success"
+            ]
+          },
+          {
+            "value": "",
+            "icons": 1,
+            "status": [
+              "success"
+            ]
+          }
+        ],
+        "value": null,
+        "target": "Beta",
+        "status": {
+          "status": "success",
+          "errors": [],
+          "warnings": []
+        },
+        "focused": false,
+        "popup": false
+      },
+      "steps": []
+    },
+    {
+      "id": "transfer-status-error",
+      "initial": {
+        "root": [
+          "has-feedback",
+          "status-error"
+        ],
+        "item": [
+          "has-error",
+          "has-feedback"
+        ],
+        "suffix": null,
+        "icons": [
+          {
+            "classes": "ant-form-item-feedback-icon ant-form-item-feedback-icon-error",
+            "text": "",
+            "color": "rgb(255, 77, 79)",
+            "fontSize": "14px",
+            "visibility": "visible",
+            "paths": [
+              "M512 64c247.4 0 448 200.6 448 448S759.4 960 512 960 64 759.4 64 512 264.6 64 512 64zm127.98 274.82h-.04l-.08.06L512 466.75 384.14 338.88c-.04-.05-.06-.06-.08-.06a.12.12 0 00-.07 0c-.03 0-.05.01-.09.05l-45.02 45.02a.2.2 0 00-.05.09.12.12 0 000 .07v.02a.27.27 0 00.06.06L466.75 512 338.88 639.86c-.05.04-.06.06-.06.08a.12.12 0 000 .07c0 .03.01.05.05.09l45.02 45.02a.2.2 0 00.09.05.12.12 0 00.07 0c.02 0 .04-.01.08-.05L512 557.25l127.86 127.87c.04.04.06.05.08.05a.12.12 0 00.07 0c.03 0 .05-.01.09-.05l45.02-45.02a.2.2 0 00.05-.09.12.12 0 000-.07v-.02a.27.27 0 00-.05-.06L557.25 512l127.87-127.86c.04-.04.05-.06.05-.08a.12.12 0 000-.07c0-.03-.01-.05-.05-.09l-45.02-45.02a.2.2 0 00-.09-.05.12.12 0 00-.07 0z"
+            ],
+            "info": null
+          },
+          {
+            "classes": "ant-form-item-feedback-icon ant-form-item-feedback-icon-error",
+            "text": "",
+            "color": "rgb(255, 77, 79)",
+            "fontSize": "14px",
+            "visibility": "visible",
+            "paths": [
+              "M512 64c247.4 0 448 200.6 448 448S759.4 960 512 960 64 759.4 64 512 264.6 64 512 64zm127.98 274.82h-.04l-.08.06L512 466.75 384.14 338.88c-.04-.05-.06-.06-.08-.06a.12.12 0 00-.07 0c-.03 0-.05.01-.09.05l-45.02 45.02a.2.2 0 00-.05.09.12.12 0 000 .07v.02a.27.27 0 00.06.06L466.75 512 338.88 639.86c-.05.04-.06.06-.06.08a.12.12 0 000 .07c0 .03.01.05.05.09l45.02 45.02a.2.2 0 00.09.05.12.12 0 00.07 0c.02 0 .04-.01.08-.05L512 557.25l127.86 127.87c.04.04.06.05.08.05a.12.12 0 00.07 0c.03 0 .05-.01.09-.05l45.02-45.02a.2.2 0 00.05-.09.12.12 0 000-.07v-.02a.27.27 0 00-.05-.06L557.25 512l127.87-127.86c.04-.04.05-.06.05-.08a.12.12 0 000-.07c0-.03-.01-.05-.05-.09l-45.02-45.02a.2.2 0 00-.09-.05.12.12 0 00-.07 0z"
+            ],
+            "info": null
+          }
+        ],
+        "searches": [
+          {
+            "value": "",
+            "icons": 1,
+            "status": [
+              "error"
+            ]
+          },
+          {
+            "value": "",
+            "icons": 1,
+            "status": [
+              "error"
+            ]
+          }
+        ],
+        "value": null,
+        "target": "Beta",
+        "status": {
+          "status": "error",
+          "errors": [],
+          "warnings": []
+        },
+        "focused": false,
+        "popup": false
+      },
+      "steps": []
+    },
+    {
+      "id": "transfer-status-warning",
+      "initial": {
+        "root": [
+          "has-feedback",
+          "status-warning"
+        ],
+        "item": [
+          "has-feedback",
+          "has-warning"
+        ],
+        "suffix": null,
+        "icons": [
+          {
+            "classes": "ant-form-item-feedback-icon ant-form-item-feedback-icon-warning",
+            "text": "",
+            "color": "rgb(250, 173, 20)",
+            "fontSize": "14px",
+            "visibility": "visible",
+            "paths": [
+              "M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm-32 232c0-4.4 3.6-8 8-8h48c4.4 0 8 3.6 8 8v272c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8V296zm32 440a48.01 48.01 0 010-96 48.01 48.01 0 010 96z"
+            ],
+            "info": null
+          },
+          {
+            "classes": "ant-form-item-feedback-icon ant-form-item-feedback-icon-warning",
+            "text": "",
+            "color": "rgb(250, 173, 20)",
+            "fontSize": "14px",
+            "visibility": "visible",
+            "paths": [
+              "M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm-32 232c0-4.4 3.6-8 8-8h48c4.4 0 8 3.6 8 8v272c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8V296zm32 440a48.01 48.01 0 010-96 48.01 48.01 0 010 96z"
+            ],
+            "info": null
+          }
+        ],
+        "searches": [
+          {
+            "value": "",
+            "icons": 1,
+            "status": [
+              "warning"
+            ]
+          },
+          {
+            "value": "",
+            "icons": 1,
+            "status": [
+              "warning"
+            ]
+          }
+        ],
+        "value": null,
+        "target": "Beta",
+        "status": {
+          "status": "warning",
+          "errors": [],
+          "warnings": []
+        },
+        "focused": false,
+        "popup": false
+      },
+      "steps": []
+    },
+    {
+      "id": "transfer-status-validating",
+      "initial": {
+        "root": [
+          "has-feedback",
+          "status-validating"
+        ],
+        "item": [
+          "has-feedback",
+          "is-validating"
+        ],
+        "suffix": null,
+        "icons": [
+          {
+            "classes": "ant-form-item-feedback-icon ant-form-item-feedback-icon-validating",
+            "text": "",
+            "color": "rgb(22, 119, 255)",
+            "fontSize": "14px",
+            "visibility": "visible",
+            "paths": [
+              "M988 548c-19.9 0-36-16.1-36-36 0-59.4-11.6-117-34.6-171.3a440.45 440.45 0 00-94.3-139.9 437.71 437.71 0 00-139.9-94.3C629 83.6 571.4 72 512 72c-19.9 0-36-16.1-36-36s16.1-36 36-36c69.1 0 136.2 13.5 199.3 40.3C772.3 66 827 103 874 150c47 47 83.9 101.8 109.7 162.7 26.7 63.1 40.2 130.2 40.2 199.3.1 19.9-16 36-35.9 36z"
+            ],
+            "info": null
+          },
+          {
+            "classes": "ant-form-item-feedback-icon ant-form-item-feedback-icon-validating",
+            "text": "",
+            "color": "rgb(22, 119, 255)",
+            "fontSize": "14px",
+            "visibility": "visible",
+            "paths": [
+              "M988 548c-19.9 0-36-16.1-36-36 0-59.4-11.6-117-34.6-171.3a440.45 440.45 0 00-94.3-139.9 437.71 437.71 0 00-139.9-94.3C629 83.6 571.4 72 512 72c-19.9 0-36-16.1-36-36s16.1-36 36-36c69.1 0 136.2 13.5 199.3 40.3C772.3 66 827 103 874 150c47 47 83.9 101.8 109.7 162.7 26.7 63.1 40.2 130.2 40.2 199.3.1 19.9-16 36-35.9 36z"
+            ],
+            "info": null
+          }
+        ],
+        "searches": [
+          {
+            "value": "",
+            "icons": 1,
+            "status": [
+              "validating"
+            ]
+          },
+          {
+            "value": "",
+            "icons": 1,
+            "status": [
+              "validating"
+            ]
+          }
+        ],
+        "value": null,
+        "target": "Beta",
+        "status": {
+          "status": "validating",
+          "errors": [],
+          "warnings": []
+        },
+        "focused": false,
+        "popup": false
+      },
+      "steps": []
+    },
+    {
+      "id": "transfer-pristine",
+      "initial": {
+        "root": [
+          "has-feedback"
+        ],
+        "item": [],
+        "suffix": null,
+        "icons": [],
+        "searches": [
+          {
+            "value": "",
+            "icons": 0,
+            "status": []
+          },
+          {
+            "value": "",
+            "icons": 0,
+            "status": []
+          }
+        ],
+        "value": null,
+        "target": "Beta",
+        "status": {
+          "status": "",
+          "errors": [],
+          "warnings": []
+        },
+        "focused": false,
+        "popup": false
+      },
+      "steps": []
+    },
+    {
+      "id": "transfer-feedback-false",
+      "initial": {
+        "root": [
+          "status-error"
+        ],
+        "item": [
+          "has-error"
+        ],
+        "suffix": null,
+        "icons": [],
+        "searches": [
+          {
+            "value": "",
+            "icons": 0,
+            "status": [
+              "error"
+            ]
+          },
+          {
+            "value": "",
+            "icons": 0,
+            "status": [
+              "error"
+            ]
+          }
+        ],
+        "value": null,
+        "target": "Beta",
+        "status": {
+          "status": "error",
+          "errors": [],
+          "warnings": []
+        },
+        "focused": false,
+        "popup": false
+      },
+      "steps": []
+    },
+    {
+      "id": "transfer-icon-custom",
+      "initial": {
+        "root": [
+          "has-feedback",
+          "status-warning"
+        ],
+        "item": [
+          "has-feedback",
+          "has-warning"
+        ],
+        "suffix": null,
+        "icons": [
+          {
+            "classes": "ant-form-item-feedback-icon ant-form-item-feedback-icon-warning",
+            "text": "local 0 warning",
+            "color": "rgb(250, 173, 20)",
+            "fontSize": "14px",
+            "visibility": "visible",
+            "paths": [],
+            "info": {
+              "status": "warning",
+              "errors": [],
+              "warnings": []
+            }
+          },
+          {
+            "classes": "ant-form-item-feedback-icon ant-form-item-feedback-icon-warning",
+            "text": "local 0 warning",
+            "color": "rgb(250, 173, 20)",
+            "fontSize": "14px",
+            "visibility": "visible",
+            "paths": [],
+            "info": {
+              "status": "warning",
+              "errors": [],
+              "warnings": []
+            }
+          }
+        ],
+        "searches": [
+          {
+            "value": "",
+            "icons": 1,
+            "status": [
+              "warning"
+            ]
+          },
+          {
+            "value": "",
+            "icons": 1,
+            "status": [
+              "warning"
+            ]
+          }
+        ],
+        "value": null,
+        "target": "Beta",
+        "status": {
+          "status": "warning",
+          "errors": [],
+          "warnings": []
+        },
+        "focused": false,
+        "popup": false
+      },
+      "steps": []
+    },
+    {
+      "id": "transfer-icon-false",
+      "initial": {
+        "root": [
+          "has-feedback",
+          "status-warning"
+        ],
+        "item": [
+          "has-feedback",
+          "has-warning"
+        ],
+        "suffix": null,
+        "icons": [],
+        "searches": [
+          {
+            "value": "",
+            "icons": 0,
+            "status": [
+              "warning"
+            ]
+          },
+          {
+            "value": "",
+            "icons": 0,
+            "status": [
+              "warning"
+            ]
+          }
+        ],
+        "value": null,
+        "target": "Beta",
+        "status": {
+          "status": "warning",
+          "errors": [],
+          "warnings": []
+        },
+        "focused": false,
+        "popup": false
+      },
+      "steps": []
+    },
+    {
+      "id": "transfer-icon-null",
+      "initial": {
+        "root": [
+          "has-feedback",
+          "status-warning"
+        ],
+        "item": [
+          "has-feedback",
+          "has-warning"
+        ],
+        "suffix": null,
+        "icons": [
+          {
+            "classes": "ant-form-item-feedback-icon ant-form-item-feedback-icon-warning",
+            "text": "",
+            "color": "rgb(250, 173, 20)",
+            "fontSize": "14px",
+            "visibility": "visible",
+            "paths": [
+              "M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm-32 232c0-4.4 3.6-8 8-8h48c4.4 0 8 3.6 8 8v272c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8V296zm32 440a48.01 48.01 0 010-96 48.01 48.01 0 010 96z"
+            ],
+            "info": null
+          },
+          {
+            "classes": "ant-form-item-feedback-icon ant-form-item-feedback-icon-warning",
+            "text": "",
+            "color": "rgb(250, 173, 20)",
+            "fontSize": "14px",
+            "visibility": "visible",
+            "paths": [
+              "M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm-32 232c0-4.4 3.6-8 8-8h48c4.4 0 8 3.6 8 8v272c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8V296zm32 440a48.01 48.01 0 010-96 48.01 48.01 0 010 96z"
+            ],
+            "info": null
+          }
+        ],
+        "searches": [
+          {
+            "value": "",
+            "icons": 1,
+            "status": [
+              "warning"
+            ]
+          },
+          {
+            "value": "",
+            "icons": 1,
+            "status": [
+              "warning"
+            ]
+          }
+        ],
+        "value": null,
+        "target": "Beta",
+        "status": {
+          "status": "warning",
+          "errors": [],
+          "warnings": []
+        },
+        "focused": false,
+        "popup": false
+      },
+      "steps": []
+    },
+    {
+      "id": "transfer-form-icons",
+      "initial": {
+        "root": [
+          "has-feedback",
+          "status-error"
+        ],
+        "item": [
+          "has-error",
+          "has-feedback"
+        ],
+        "suffix": null,
+        "icons": [
+          {
+            "classes": "ant-form-item-feedback-icon ant-form-item-feedback-icon-error",
+            "text": "form 0 error",
+            "color": "rgb(255, 77, 79)",
+            "fontSize": "14px",
+            "visibility": "visible",
+            "paths": [],
+            "info": {
+              "status": "error",
+              "errors": [],
+              "warnings": []
+            }
+          },
+          {
+            "classes": "ant-form-item-feedback-icon ant-form-item-feedback-icon-error",
+            "text": "form 0 error",
+            "color": "rgb(255, 77, 79)",
+            "fontSize": "14px",
+            "visibility": "visible",
+            "paths": [],
+            "info": {
+              "status": "error",
+              "errors": [],
+              "warnings": []
+            }
+          }
+        ],
+        "searches": [
+          {
+            "value": "",
+            "icons": 1,
+            "status": [
+              "error"
+            ]
+          },
+          {
+            "value": "",
+            "icons": 1,
+            "status": [
+              "error"
+            ]
+          }
+        ],
+        "value": null,
+        "target": "Beta",
+        "status": {
+          "status": "error",
+          "errors": [],
+          "warnings": []
+        },
+        "focused": false,
+        "popup": false
+      },
+      "steps": []
+    },
+    {
+      "id": "transfer-local-status",
+      "initial": {
+        "root": [
+          "has-feedback",
+          "status-error"
+        ],
+        "item": [
+          "has-feedback",
+          "has-warning"
+        ],
+        "suffix": null,
+        "icons": [
+          {
+            "classes": "ant-form-item-feedback-icon ant-form-item-feedback-icon-warning",
+            "text": "",
+            "color": "rgb(250, 173, 20)",
+            "fontSize": "14px",
+            "visibility": "visible",
+            "paths": [
+              "M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm-32 232c0-4.4 3.6-8 8-8h48c4.4 0 8 3.6 8 8v272c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8V296zm32 440a48.01 48.01 0 010-96 48.01 48.01 0 010 96z"
+            ],
+            "info": null
+          },
+          {
+            "classes": "ant-form-item-feedback-icon ant-form-item-feedback-icon-warning",
+            "text": "",
+            "color": "rgb(250, 173, 20)",
+            "fontSize": "14px",
+            "visibility": "visible",
+            "paths": [
+              "M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm-32 232c0-4.4 3.6-8 8-8h48c4.4 0 8 3.6 8 8v272c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8V296zm32 440a48.01 48.01 0 010-96 48.01 48.01 0 010 96z"
+            ],
+            "info": null
+          }
+        ],
+        "searches": [
+          {
+            "value": "",
+            "icons": 1,
+            "status": [
+              "warning"
+            ]
+          },
+          {
+            "value": "",
+            "icons": 1,
+            "status": [
+              "warning"
+            ]
+          }
+        ],
+        "value": null,
+        "target": "Beta",
+        "status": {
+          "status": "warning",
+          "errors": [],
+          "warnings": []
+        },
+        "focused": false,
+        "popup": false
+      },
+      "steps": []
+    },
+    {
+      "id": "transfer-no-style-inherit",
+      "initial": {
+        "root": [
+          "has-feedback",
+          "status-error"
+        ],
+        "item": [
+          "has-error",
+          "has-feedback"
+        ],
+        "suffix": null,
+        "icons": [
+          {
+            "classes": "ant-form-item-feedback-icon ant-form-item-feedback-icon-error",
+            "text": "",
+            "color": "rgb(255, 77, 79)",
+            "fontSize": "14px",
+            "visibility": "visible",
+            "paths": [
+              "M512 64c247.4 0 448 200.6 448 448S759.4 960 512 960 64 759.4 64 512 264.6 64 512 64zm127.98 274.82h-.04l-.08.06L512 466.75 384.14 338.88c-.04-.05-.06-.06-.08-.06a.12.12 0 00-.07 0c-.03 0-.05.01-.09.05l-45.02 45.02a.2.2 0 00-.05.09.12.12 0 000 .07v.02a.27.27 0 00.06.06L466.75 512 338.88 639.86c-.05.04-.06.06-.06.08a.12.12 0 000 .07c0 .03.01.05.05.09l45.02 45.02a.2.2 0 00.09.05.12.12 0 00.07 0c.02 0 .04-.01.08-.05L512 557.25l127.86 127.87c.04.04.06.05.08.05a.12.12 0 00.07 0c.03 0 .05-.01.09-.05l45.02-45.02a.2.2 0 00.05-.09.12.12 0 000-.07v-.02a.27.27 0 00-.05-.06L557.25 512l127.87-127.86c.04-.04.05-.06.05-.08a.12.12 0 000-.07c0-.03-.01-.05-.05-.09l-45.02-45.02a.2.2 0 00-.09-.05.12.12 0 00-.07 0z"
+            ],
+            "info": null
+          },
+          {
+            "classes": "ant-form-item-feedback-icon ant-form-item-feedback-icon-error",
+            "text": "",
+            "color": "rgb(255, 77, 79)",
+            "fontSize": "14px",
+            "visibility": "visible",
+            "paths": [
+              "M512 64c247.4 0 448 200.6 448 448S759.4 960 512 960 64 759.4 64 512 264.6 64 512 64zm127.98 274.82h-.04l-.08.06L512 466.75 384.14 338.88c-.04-.05-.06-.06-.08-.06a.12.12 0 00-.07 0c-.03 0-.05.01-.09.05l-45.02 45.02a.2.2 0 00-.05.09.12.12 0 000 .07v.02a.27.27 0 00.06.06L466.75 512 338.88 639.86c-.05.04-.06.06-.06.08a.12.12 0 000 .07c0 .03.01.05.05.09l45.02 45.02a.2.2 0 00.09.05.12.12 0 00.07 0c.02 0 .04-.01.08-.05L512 557.25l127.86 127.87c.04.04.06.05.08.05a.12.12 0 00.07 0c.03 0 .05-.01.09-.05l45.02-45.02a.2.2 0 00.05-.09.12.12 0 000-.07v-.02a.27.27 0 00-.05-.06L557.25 512l127.87-127.86c.04-.04.05-.06.05-.08a.12.12 0 000-.07c0-.03-.01-.05-.05-.09l-45.02-45.02a.2.2 0 00-.09-.05.12.12 0 00-.07 0z"
+            ],
+            "info": null
+          }
+        ],
+        "searches": [
+          {
+            "value": "",
+            "icons": 1,
+            "status": [
+              "error"
+            ]
+          },
+          {
+            "value": "",
+            "icons": 1,
+            "status": [
+              "error"
+            ]
+          }
+        ],
+        "value": null,
+        "target": "Beta",
+        "status": {
+          "status": "error",
+          "errors": [],
+          "warnings": []
+        },
+        "focused": false,
+        "popup": false
+      },
+      "steps": []
+    },
+    {
+      "id": "transfer-no-style-inner-status",
+      "initial": {
+        "root": [
+          "has-feedback",
+          "status-warning"
+        ],
+        "item": [
+          "has-error",
+          "has-feedback"
+        ],
+        "suffix": null,
+        "icons": [
+          {
+            "classes": "ant-form-item-feedback-icon ant-form-item-feedback-icon-error",
+            "text": "",
+            "color": "rgb(255, 77, 79)",
+            "fontSize": "14px",
+            "visibility": "visible",
+            "paths": [
+              "M512 64c247.4 0 448 200.6 448 448S759.4 960 512 960 64 759.4 64 512 264.6 64 512 64zm127.98 274.82h-.04l-.08.06L512 466.75 384.14 338.88c-.04-.05-.06-.06-.08-.06a.12.12 0 00-.07 0c-.03 0-.05.01-.09.05l-45.02 45.02a.2.2 0 00-.05.09.12.12 0 000 .07v.02a.27.27 0 00.06.06L466.75 512 338.88 639.86c-.05.04-.06.06-.06.08a.12.12 0 000 .07c0 .03.01.05.05.09l45.02 45.02a.2.2 0 00.09.05.12.12 0 00.07 0c.02 0 .04-.01.08-.05L512 557.25l127.86 127.87c.04.04.06.05.08.05a.12.12 0 00.07 0c.03 0 .05-.01.09-.05l45.02-45.02a.2.2 0 00.05-.09.12.12 0 000-.07v-.02a.27.27 0 00-.05-.06L557.25 512l127.87-127.86c.04-.04.05-.06.05-.08a.12.12 0 000-.07c0-.03-.01-.05-.05-.09l-45.02-45.02a.2.2 0 00-.09-.05.12.12 0 00-.07 0z"
+            ],
+            "info": null
+          },
+          {
+            "classes": "ant-form-item-feedback-icon ant-form-item-feedback-icon-error",
+            "text": "",
+            "color": "rgb(255, 77, 79)",
+            "fontSize": "14px",
+            "visibility": "visible",
+            "paths": [
+              "M512 64c247.4 0 448 200.6 448 448S759.4 960 512 960 64 759.4 64 512 264.6 64 512 64zm127.98 274.82h-.04l-.08.06L512 466.75 384.14 338.88c-.04-.05-.06-.06-.08-.06a.12.12 0 00-.07 0c-.03 0-.05.01-.09.05l-45.02 45.02a.2.2 0 00-.05.09.12.12 0 000 .07v.02a.27.27 0 00.06.06L466.75 512 338.88 639.86c-.05.04-.06.06-.06.08a.12.12 0 000 .07c0 .03.01.05.05.09l45.02 45.02a.2.2 0 00.09.05.12.12 0 00.07 0c.02 0 .04-.01.08-.05L512 557.25l127.86 127.87c.04.04.06.05.08.05a.12.12 0 00.07 0c.03 0 .05-.01.09-.05l45.02-45.02a.2.2 0 00.05-.09.12.12 0 000-.07v-.02a.27.27 0 00-.05-.06L557.25 512l127.87-127.86c.04-.04.05-.06.05-.08a.12.12 0 000-.07c0-.03-.01-.05-.05-.09l-45.02-45.02a.2.2 0 00-.09-.05.12.12 0 00-.07 0z"
+            ],
+            "info": null
+          }
+        ],
+        "searches": [
+          {
+            "value": "",
+            "icons": 1,
+            "status": [
+              "warning"
+            ]
+          },
+          {
+            "value": "",
+            "icons": 1,
+            "status": [
+              "warning"
+            ]
+          }
+        ],
+        "value": null,
+        "target": "Beta",
+        "status": {
+          "status": "warning",
+          "errors": [],
+          "warnings": []
+        },
+        "focused": false,
+        "popup": false
+      },
+      "steps": []
+    },
+    {
+      "id": "transfer-no-style-false",
+      "initial": {
+        "root": [
+          "status-warning"
+        ],
+        "item": [
+          "has-feedback",
+          "has-warning"
+        ],
+        "suffix": null,
+        "icons": [],
+        "searches": [
+          {
+            "value": "",
+            "icons": 0,
+            "status": [
+              "warning"
+            ]
+          },
+          {
+            "value": "",
+            "icons": 0,
+            "status": [
+              "warning"
+            ]
+          }
+        ],
+        "value": null,
+        "target": "Beta",
+        "status": {
+          "status": "warning",
+          "errors": [],
+          "warnings": []
+        },
+        "focused": false,
+        "popup": false
+      },
+      "steps": []
+    },
+    {
+      "id": "transfer-no-style-own",
+      "initial": {
+        "root": [
+          "has-feedback",
+          "status-success"
+        ],
+        "item": [
+          "has-feedback",
+          "has-warning"
+        ],
+        "suffix": null,
+        "icons": [
+          {
+            "classes": "inner-field-item-feedback-icon inner-field-item-feedback-icon-success",
+            "text": "",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "fontSize": "14px",
+            "visibility": "visible",
+            "paths": [
+              "M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm193.5 301.7l-210.6 292a31.8 31.8 0 01-51.7 0L318.5 484.9c-3.8-5.3 0-12.7 6.5-12.7h46.9c10.2 0 19.9 4.9 25.9 13.3l71.2 98.8 157.2-218c6-8.3 15.6-13.3 25.9-13.3H699c6.5 0 10.3 7.4 6.5 12.7z"
+            ],
+            "info": null
+          },
+          {
+            "classes": "inner-field-item-feedback-icon inner-field-item-feedback-icon-success",
+            "text": "",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "fontSize": "14px",
+            "visibility": "visible",
+            "paths": [
+              "M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm193.5 301.7l-210.6 292a31.8 31.8 0 01-51.7 0L318.5 484.9c-3.8-5.3 0-12.7 6.5-12.7h46.9c10.2 0 19.9 4.9 25.9 13.3l71.2 98.8 157.2-218c6-8.3 15.6-13.3 25.9-13.3H699c6.5 0 10.3 7.4 6.5 12.7z"
+            ],
+            "info": null
+          }
+        ],
+        "searches": [
+          {
+            "value": "",
+            "icons": 1,
+            "status": [
+              "success"
+            ]
+          },
+          {
+            "value": "",
+            "icons": 1,
+            "status": [
+              "success"
+            ]
+          }
+        ],
+        "value": null,
+        "target": "Beta",
+        "status": {
+          "status": "success",
+          "errors": [],
+          "warnings": []
+        },
+        "focused": false,
+        "popup": false
+      },
+      "steps": []
+    },
+    {
+      "id": "transfer-nested-form",
+      "initial": {
+        "root": [],
+        "item": [
+          "has-error",
+          "has-feedback"
+        ],
+        "suffix": null,
+        "icons": [],
+        "searches": [
+          {
+            "value": "",
+            "icons": 0,
+            "status": []
+          },
+          {
+            "value": "",
+            "icons": 0,
+            "status": []
+          }
+        ],
+        "value": null,
+        "target": "Beta",
+        "status": {
+          "status": null,
+          "errors": [],
+          "warnings": []
+        },
+        "focused": false,
+        "popup": false
+      },
+      "steps": []
+    },
+    {
+      "id": "transfer-prefixes",
+      "initial": {
+        "root": [
+          "has-feedback",
+          "status-error"
+        ],
+        "item": [
+          "has-error",
+          "has-feedback"
+        ],
+        "suffix": null,
+        "icons": [
+          {
+            "classes": "field-item-feedback-icon field-item-feedback-icon-error",
+            "text": "",
+            "color": "rgb(255, 77, 79)",
+            "fontSize": "14px",
+            "visibility": "visible",
+            "paths": [
+              "M512 64c247.4 0 448 200.6 448 448S759.4 960 512 960 64 759.4 64 512 264.6 64 512 64zm127.98 274.82h-.04l-.08.06L512 466.75 384.14 338.88c-.04-.05-.06-.06-.08-.06a.12.12 0 00-.07 0c-.03 0-.05.01-.09.05l-45.02 45.02a.2.2 0 00-.05.09.12.12 0 000 .07v.02a.27.27 0 00.06.06L466.75 512 338.88 639.86c-.05.04-.06.06-.06.08a.12.12 0 000 .07c0 .03.01.05.05.09l45.02 45.02a.2.2 0 00.09.05.12.12 0 00.07 0c.02 0 .04-.01.08-.05L512 557.25l127.86 127.87c.04.04.06.05.08.05a.12.12 0 00.07 0c.03 0 .05-.01.09-.05l45.02-45.02a.2.2 0 00.05-.09.12.12 0 000-.07v-.02a.27.27 0 00-.05-.06L557.25 512l127.87-127.86c.04-.04.05-.06.05-.08a.12.12 0 000-.07c0-.03-.01-.05-.05-.09l-45.02-45.02a.2.2 0 00-.09-.05.12.12 0 00-.07 0z"
+            ],
+            "info": null
+          },
+          {
+            "classes": "field-item-feedback-icon field-item-feedback-icon-error",
+            "text": "",
+            "color": "rgb(255, 77, 79)",
+            "fontSize": "14px",
+            "visibility": "visible",
+            "paths": [
+              "M512 64c247.4 0 448 200.6 448 448S759.4 960 512 960 64 759.4 64 512 264.6 64 512 64zm127.98 274.82h-.04l-.08.06L512 466.75 384.14 338.88c-.04-.05-.06-.06-.08-.06a.12.12 0 00-.07 0c-.03 0-.05.01-.09.05l-45.02 45.02a.2.2 0 00-.05.09.12.12 0 000 .07v.02a.27.27 0 00.06.06L466.75 512 338.88 639.86c-.05.04-.06.06-.06.08a.12.12 0 000 .07c0 .03.01.05.05.09l45.02 45.02a.2.2 0 00.09.05.12.12 0 00.07 0c.02 0 .04-.01.08-.05L512 557.25l127.86 127.87c.04.04.06.05.08.05a.12.12 0 00.07 0c.03 0 .05-.01.09-.05l45.02-45.02a.2.2 0 00.05-.09.12.12 0 000-.07v-.02a.27.27 0 00-.05-.06L557.25 512l127.87-127.86c.04-.04.05-.06.05-.08a.12.12 0 000-.07c0-.03-.01-.05-.05-.09l-45.02-45.02a.2.2 0 00-.09-.05.12.12 0 00-.07 0z"
+            ],
+            "info": null
+          }
+        ],
+        "searches": [
+          {
+            "value": "",
+            "icons": 1,
+            "status": [
+              "error"
+            ]
+          },
+          {
+            "value": "",
+            "icons": 1,
+            "status": [
+              "error"
+            ]
+          }
+        ],
+        "value": null,
+        "target": "Beta",
+        "status": {
+          "status": "error",
+          "errors": [],
+          "warnings": []
+        },
+        "focused": false,
+        "popup": false
+      },
+      "steps": []
+    },
+    {
+      "id": "transfer-dark-rtl",
+      "initial": {
+        "root": [
+          "has-feedback",
+          "status-warning"
+        ],
+        "item": [
+          "has-feedback",
+          "has-warning"
+        ],
+        "suffix": null,
+        "icons": [
+          {
+            "classes": "ant-form-item-feedback-icon ant-form-item-feedback-icon-warning",
+            "text": "",
+            "color": "rgb(216, 150, 20)",
+            "fontSize": "14px",
+            "visibility": "visible",
+            "paths": [
+              "M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm-32 232c0-4.4 3.6-8 8-8h48c4.4 0 8 3.6 8 8v272c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8V296zm32 440a48.01 48.01 0 010-96 48.01 48.01 0 010 96z"
+            ],
+            "info": null
+          },
+          {
+            "classes": "ant-form-item-feedback-icon ant-form-item-feedback-icon-warning",
+            "text": "",
+            "color": "rgb(216, 150, 20)",
+            "fontSize": "14px",
+            "visibility": "visible",
+            "paths": [
+              "M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm-32 232c0-4.4 3.6-8 8-8h48c4.4 0 8 3.6 8 8v272c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8V296zm32 440a48.01 48.01 0 010-96 48.01 48.01 0 010 96z"
+            ],
+            "info": null
+          }
+        ],
+        "searches": [
+          {
+            "value": "",
+            "icons": 1,
+            "status": [
+              "warning"
+            ]
+          },
+          {
+            "value": "",
+            "icons": 1,
+            "status": [
+              "warning"
+            ]
+          }
+        ],
+        "value": null,
+        "target": "Beta",
+        "status": {
+          "status": "warning",
+          "errors": [],
+          "warnings": []
+        },
+        "focused": false,
+        "popup": false
+      },
+      "steps": []
+    },
+    {
+      "id": "transfer-compact-small",
+      "initial": {
+        "root": [
+          "has-feedback",
+          "status-error"
+        ],
+        "item": [
+          "has-error",
+          "has-feedback"
+        ],
+        "suffix": null,
+        "icons": [
+          {
+            "classes": "ant-form-item-feedback-icon ant-form-item-feedback-icon-error",
+            "text": "",
+            "color": "rgb(255, 77, 79)",
+            "fontSize": "12px",
+            "visibility": "visible",
+            "paths": [
+              "M512 64c247.4 0 448 200.6 448 448S759.4 960 512 960 64 759.4 64 512 264.6 64 512 64zm127.98 274.82h-.04l-.08.06L512 466.75 384.14 338.88c-.04-.05-.06-.06-.08-.06a.12.12 0 00-.07 0c-.03 0-.05.01-.09.05l-45.02 45.02a.2.2 0 00-.05.09.12.12 0 000 .07v.02a.27.27 0 00.06.06L466.75 512 338.88 639.86c-.05.04-.06.06-.06.08a.12.12 0 000 .07c0 .03.01.05.05.09l45.02 45.02a.2.2 0 00.09.05.12.12 0 00.07 0c.02 0 .04-.01.08-.05L512 557.25l127.86 127.87c.04.04.06.05.08.05a.12.12 0 00.07 0c.03 0 .05-.01.09-.05l45.02-45.02a.2.2 0 00.05-.09.12.12 0 000-.07v-.02a.27.27 0 00-.05-.06L557.25 512l127.87-127.86c.04-.04.05-.06.05-.08a.12.12 0 000-.07c0-.03-.01-.05-.05-.09l-45.02-45.02a.2.2 0 00-.09-.05.12.12 0 00-.07 0z"
+            ],
+            "info": null
+          },
+          {
+            "classes": "ant-form-item-feedback-icon ant-form-item-feedback-icon-error",
+            "text": "",
+            "color": "rgb(255, 77, 79)",
+            "fontSize": "12px",
+            "visibility": "visible",
+            "paths": [
+              "M512 64c247.4 0 448 200.6 448 448S759.4 960 512 960 64 759.4 64 512 264.6 64 512 64zm127.98 274.82h-.04l-.08.06L512 466.75 384.14 338.88c-.04-.05-.06-.06-.08-.06a.12.12 0 00-.07 0c-.03 0-.05.01-.09.05l-45.02 45.02a.2.2 0 00-.05.09.12.12 0 000 .07v.02a.27.27 0 00.06.06L466.75 512 338.88 639.86c-.05.04-.06.06-.06.08a.12.12 0 000 .07c0 .03.01.05.05.09l45.02 45.02a.2.2 0 00.09.05.12.12 0 00.07 0c.02 0 .04-.01.08-.05L512 557.25l127.86 127.87c.04.04.06.05.08.05a.12.12 0 00.07 0c.03 0 .05-.01.09-.05l45.02-45.02a.2.2 0 00.05-.09.12.12 0 000-.07v-.02a.27.27 0 00-.05-.06L557.25 512l127.87-127.86c.04-.04.05-.06.05-.08a.12.12 0 000-.07c0-.03-.01-.05-.05-.09l-45.02-45.02a.2.2 0 00-.09-.05.12.12 0 00-.07 0z"
+            ],
+            "info": null
+          }
+        ],
+        "searches": [
+          {
+            "value": "",
+            "icons": 1,
+            "status": [
+              "error"
+            ]
+          },
+          {
+            "value": "",
+            "icons": 1,
+            "status": [
+              "error"
+            ]
+          }
+        ],
+        "value": null,
+        "target": "Beta",
+        "status": {
+          "status": "error",
+          "errors": [],
+          "warnings": []
+        },
+        "focused": false,
+        "popup": false
+      },
+      "steps": []
+    },
+    {
+      "id": "transfer-async-success",
+      "initial": {
+        "root": [
+          "has-feedback"
+        ],
+        "item": [],
+        "suffix": null,
+        "icons": [],
+        "searches": [
+          {
+            "value": "",
+            "icons": 0,
+            "status": []
+          },
+          {
+            "value": "",
+            "icons": 0,
+            "status": []
+          }
+        ],
+        "value": null,
+        "target": "Beta",
+        "status": {
+          "status": "",
+          "errors": [],
+          "warnings": []
+        },
+        "focused": false,
+        "popup": false
+      },
+      "steps": [
+        {
+          "action": "validate",
+          "view": {
+            "root": [
+              "has-feedback",
+              "status-validating"
+            ],
+            "item": [
+              "has-feedback",
+              "is-validating"
+            ],
+            "suffix": null,
+            "icons": [
+              {
+                "classes": "ant-form-item-feedback-icon ant-form-item-feedback-icon-validating",
+                "text": "local 0 validating",
+                "color": "rgb(22, 119, 255)",
+                "fontSize": "14px",
+                "visibility": "visible",
+                "paths": [],
+                "info": {
+                  "status": "validating",
+                  "errors": [],
+                  "warnings": []
+                }
+              },
+              {
+                "classes": "ant-form-item-feedback-icon ant-form-item-feedback-icon-validating",
+                "text": "local 0 validating",
+                "color": "rgb(22, 119, 255)",
+                "fontSize": "14px",
+                "visibility": "visible",
+                "paths": [],
+                "info": {
+                  "status": "validating",
+                  "errors": [],
+                  "warnings": []
+                }
+              }
+            ],
+            "searches": [
+              {
+                "value": "",
+                "icons": 1,
+                "status": [
+                  "validating"
+                ]
+              },
+              {
+                "value": "",
+                "icons": 1,
+                "status": [
+                  "validating"
+                ]
+              }
+            ],
+            "value": null,
+            "target": "Beta",
+            "status": {
+              "status": "validating",
+              "errors": [],
+              "warnings": []
+            },
+            "focused": false,
+            "popup": false
+          },
+          "sameInput": true
+        },
+        {
+          "action": "resolve",
+          "view": {
+            "root": [
+              "has-feedback",
+              "status-success"
+            ],
+            "item": [
+              "has-feedback",
+              "has-success"
+            ],
+            "suffix": null,
+            "icons": [
+              {
+                "classes": "ant-form-item-feedback-icon ant-form-item-feedback-icon-success",
+                "text": "local 0 success",
+                "color": "rgb(82, 196, 26)",
+                "fontSize": "14px",
+                "visibility": "visible",
+                "paths": [],
+                "info": {
+                  "status": "success",
+                  "errors": [],
+                  "warnings": []
+                }
+              },
+              {
+                "classes": "ant-form-item-feedback-icon ant-form-item-feedback-icon-success",
+                "text": "local 0 success",
+                "color": "rgb(82, 196, 26)",
+                "fontSize": "14px",
+                "visibility": "visible",
+                "paths": [],
+                "info": {
+                  "status": "success",
+                  "errors": [],
+                  "warnings": []
+                }
+              }
+            ],
+            "searches": [
+              {
+                "value": "",
+                "icons": 1,
+                "status": [
+                  "success"
+                ]
+              },
+              {
+                "value": "",
+                "icons": 1,
+                "status": [
+                  "success"
+                ]
+              }
+            ],
+            "value": null,
+            "target": "Beta",
+            "status": {
+              "status": "success",
+              "errors": [],
+              "warnings": []
+            },
+            "focused": false,
+            "popup": false
+          },
+          "sameInput": true
+        },
+        {
+          "action": "reset",
+          "view": {
+            "root": [
+              "has-feedback"
+            ],
+            "item": [],
+            "suffix": null,
+            "icons": [],
+            "searches": [
+              {
+                "value": "",
+                "icons": 0,
+                "status": []
+              },
+              {
+                "value": "",
+                "icons": 0,
+                "status": []
+              }
+            ],
+            "value": null,
+            "target": "Beta",
+            "status": {
+              "status": "",
+              "errors": [],
+              "warnings": []
+            },
+            "focused": false,
+            "popup": false
+          },
+          "sameInput": false
+        }
+      ]
+    },
+    {
+      "id": "mentions-clear",
+      "initial": {
+        "root": [
+          "affix-wrapper",
+          "has-suffix",
+          "status-error"
+        ],
+        "item": [
+          "has-error",
+          "has-feedback"
+        ],
+        "suffix": [
+          "clear",
+          "feedback"
+        ],
+        "icons": [
+          {
+            "classes": "ant-form-item-feedback-icon ant-form-item-feedback-icon-error",
+            "text": "",
+            "color": "rgb(255, 77, 79)",
+            "fontSize": "14px",
+            "visibility": "visible",
+            "paths": [
+              "M512 64c247.4 0 448 200.6 448 448S759.4 960 512 960 64 759.4 64 512 264.6 64 512 64zm127.98 274.82h-.04l-.08.06L512 466.75 384.14 338.88c-.04-.05-.06-.06-.08-.06a.12.12 0 00-.07 0c-.03 0-.05.01-.09.05l-45.02 45.02a.2.2 0 00-.05.09.12.12 0 000 .07v.02a.27.27 0 00.06.06L466.75 512 338.88 639.86c-.05.04-.06.06-.06.08a.12.12 0 000 .07c0 .03.01.05.05.09l45.02 45.02a.2.2 0 00.09.05.12.12 0 00.07 0c.02 0 .04-.01.08-.05L512 557.25l127.86 127.87c.04.04.06.05.08.05a.12.12 0 00.07 0c.03 0 .05-.01.09-.05l45.02-45.02a.2.2 0 00.05-.09.12.12 0 000-.07v-.02a.27.27 0 00-.05-.06L557.25 512l127.87-127.86c.04-.04.05-.06.05-.08a.12.12 0 000-.07c0-.03-.01-.05-.05-.09l-45.02-45.02a.2.2 0 00-.09-.05.12.12 0 00-.07 0z"
+            ],
+            "info": null
+          }
+        ],
+        "searches": [],
+        "value": "Alpha",
+        "target": null,
+        "status": {
+          "status": "error",
+          "errors": [],
+          "warnings": []
+        },
+        "focused": false,
+        "popup": false
+      },
+      "steps": [
+        {
+          "action": "focus",
+          "view": {
+            "root": [
+              "affix-wrapper",
+              "has-suffix",
+              "status-error"
+            ],
+            "item": [
+              "has-error",
+              "has-feedback"
+            ],
+            "suffix": [
+              "clear",
+              "feedback"
+            ],
+            "icons": [
+              {
+                "classes": "ant-form-item-feedback-icon ant-form-item-feedback-icon-error",
+                "text": "",
+                "color": "rgb(255, 77, 79)",
+                "fontSize": "14px",
+                "visibility": "visible",
+                "paths": [
+                  "M512 64c247.4 0 448 200.6 448 448S759.4 960 512 960 64 759.4 64 512 264.6 64 512 64zm127.98 274.82h-.04l-.08.06L512 466.75 384.14 338.88c-.04-.05-.06-.06-.08-.06a.12.12 0 00-.07 0c-.03 0-.05.01-.09.05l-45.02 45.02a.2.2 0 00-.05.09.12.12 0 000 .07v.02a.27.27 0 00.06.06L466.75 512 338.88 639.86c-.05.04-.06.06-.06.08a.12.12 0 000 .07c0 .03.01.05.05.09l45.02 45.02a.2.2 0 00.09.05.12.12 0 00.07 0c.02 0 .04-.01.08-.05L512 557.25l127.86 127.87c.04.04.06.05.08.05a.12.12 0 00.07 0c.03 0 .05-.01.09-.05l45.02-45.02a.2.2 0 00.05-.09.12.12 0 000-.07v-.02a.27.27 0 00-.05-.06L557.25 512l127.87-127.86c.04-.04.05-.06.05-.08a.12.12 0 000-.07c0-.03-.01-.05-.05-.09l-45.02-45.02a.2.2 0 00-.09-.05.12.12 0 00-.07 0z"
+                ],
+                "info": null
+              }
+            ],
+            "searches": [],
+            "value": "Alpha",
+            "target": null,
+            "status": {
+              "status": "error",
+              "errors": [],
+              "warnings": []
+            },
+            "focused": true,
+            "popup": false
+          },
+          "sameInput": true
+        },
+        {
+          "action": "clear",
+          "view": {
+            "root": [
+              "affix-wrapper",
+              "has-suffix",
+              "status-error"
+            ],
+            "item": [
+              "has-error",
+              "has-feedback"
+            ],
+            "suffix": [
+              "feedback"
+            ],
+            "icons": [
+              {
+                "classes": "ant-form-item-feedback-icon ant-form-item-feedback-icon-error",
+                "text": "",
+                "color": "rgb(255, 77, 79)",
+                "fontSize": "14px",
+                "visibility": "visible",
+                "paths": [
+                  "M512 64c247.4 0 448 200.6 448 448S759.4 960 512 960 64 759.4 64 512 264.6 64 512 64zm127.98 274.82h-.04l-.08.06L512 466.75 384.14 338.88c-.04-.05-.06-.06-.08-.06a.12.12 0 00-.07 0c-.03 0-.05.01-.09.05l-45.02 45.02a.2.2 0 00-.05.09.12.12 0 000 .07v.02a.27.27 0 00.06.06L466.75 512 338.88 639.86c-.05.04-.06.06-.06.08a.12.12 0 000 .07c0 .03.01.05.05.09l45.02 45.02a.2.2 0 00.09.05.12.12 0 00.07 0c.02 0 .04-.01.08-.05L512 557.25l127.86 127.87c.04.04.06.05.08.05a.12.12 0 00.07 0c.03 0 .05-.01.09-.05l45.02-45.02a.2.2 0 00.05-.09.12.12 0 000-.07v-.02a.27.27 0 00-.05-.06L557.25 512l127.87-127.86c.04-.04.05-.06.05-.08a.12.12 0 000-.07c0-.03-.01-.05-.05-.09l-45.02-45.02a.2.2 0 00-.09-.05.12.12 0 00-.07 0z"
+                ],
+                "info": null
+              }
+            ],
+            "searches": [],
+            "value": "",
+            "target": null,
+            "status": {
+              "status": "error",
+              "errors": [],
+              "warnings": []
+            },
+            "focused": true,
+            "popup": false
+          },
+          "sameInput": true
+        }
+      ]
+    },
+    {
+      "id": "mentions-clear-toggle",
+      "initial": {
+        "root": [
+          "affix-wrapper",
+          "has-suffix",
+          "status-error"
+        ],
+        "item": [
+          "has-error",
+          "has-feedback"
+        ],
+        "suffix": [
+          "clear",
+          "feedback"
+        ],
+        "icons": [
+          {
+            "classes": "ant-form-item-feedback-icon ant-form-item-feedback-icon-error",
+            "text": "",
+            "color": "rgb(255, 77, 79)",
+            "fontSize": "14px",
+            "visibility": "visible",
+            "paths": [
+              "M512 64c247.4 0 448 200.6 448 448S759.4 960 512 960 64 759.4 64 512 264.6 64 512 64zm127.98 274.82h-.04l-.08.06L512 466.75 384.14 338.88c-.04-.05-.06-.06-.08-.06a.12.12 0 00-.07 0c-.03 0-.05.01-.09.05l-45.02 45.02a.2.2 0 00-.05.09.12.12 0 000 .07v.02a.27.27 0 00.06.06L466.75 512 338.88 639.86c-.05.04-.06.06-.06.08a.12.12 0 000 .07c0 .03.01.05.05.09l45.02 45.02a.2.2 0 00.09.05.12.12 0 00.07 0c.02 0 .04-.01.08-.05L512 557.25l127.86 127.87c.04.04.06.05.08.05a.12.12 0 00.07 0c.03 0 .05-.01.09-.05l45.02-45.02a.2.2 0 00.05-.09.12.12 0 000-.07v-.02a.27.27 0 00-.05-.06L557.25 512l127.87-127.86c.04-.04.05-.06.05-.08a.12.12 0 000-.07c0-.03-.01-.05-.05-.09l-45.02-45.02a.2.2 0 00-.09-.05.12.12 0 00-.07 0z"
+            ],
+            "info": null
+          }
+        ],
+        "searches": [],
+        "value": "Alpha",
+        "target": null,
+        "status": {
+          "status": "error",
+          "errors": [],
+          "warnings": []
+        },
+        "focused": false,
+        "popup": false
+      },
+      "steps": [
+        {
+          "action": "focus",
+          "view": {
+            "root": [
+              "affix-wrapper",
+              "has-suffix",
+              "status-error"
+            ],
+            "item": [
+              "has-error",
+              "has-feedback"
+            ],
+            "suffix": [
+              "clear",
+              "feedback"
+            ],
+            "icons": [
+              {
+                "classes": "ant-form-item-feedback-icon ant-form-item-feedback-icon-error",
+                "text": "",
+                "color": "rgb(255, 77, 79)",
+                "fontSize": "14px",
+                "visibility": "visible",
+                "paths": [
+                  "M512 64c247.4 0 448 200.6 448 448S759.4 960 512 960 64 759.4 64 512 264.6 64 512 64zm127.98 274.82h-.04l-.08.06L512 466.75 384.14 338.88c-.04-.05-.06-.06-.08-.06a.12.12 0 00-.07 0c-.03 0-.05.01-.09.05l-45.02 45.02a.2.2 0 00-.05.09.12.12 0 000 .07v.02a.27.27 0 00.06.06L466.75 512 338.88 639.86c-.05.04-.06.06-.06.08a.12.12 0 000 .07c0 .03.01.05.05.09l45.02 45.02a.2.2 0 00.09.05.12.12 0 00.07 0c.02 0 .04-.01.08-.05L512 557.25l127.86 127.87c.04.04.06.05.08.05a.12.12 0 00.07 0c.03 0 .05-.01.09-.05l45.02-45.02a.2.2 0 00.05-.09.12.12 0 000-.07v-.02a.27.27 0 00-.05-.06L557.25 512l127.87-127.86c.04-.04.05-.06.05-.08a.12.12 0 000-.07c0-.03-.01-.05-.05-.09l-45.02-45.02a.2.2 0 00-.09-.05.12.12 0 00-.07 0z"
+                ],
+                "info": null
+              }
+            ],
+            "searches": [],
+            "value": "Alpha",
+            "target": null,
+            "status": {
+              "status": "error",
+              "errors": [],
+              "warnings": []
+            },
+            "focused": true,
+            "popup": false
+          },
+          "sameInput": true
+        },
+        {
+          "action": "toggle-feedback",
+          "view": {
+            "root": [
+              "affix-wrapper",
+              "has-suffix",
+              "status-error"
+            ],
+            "item": [
+              "has-error"
+            ],
+            "suffix": [
+              "clear"
+            ],
+            "icons": [],
+            "searches": [],
+            "value": "Alpha",
+            "target": null,
+            "status": {
+              "status": "error",
+              "errors": [],
+              "warnings": []
+            },
+            "focused": true,
+            "popup": false
+          },
+          "sameInput": true
+        },
+        {
+          "action": "toggle-feedback",
+          "view": {
+            "root": [
+              "affix-wrapper",
+              "has-suffix",
+              "status-error"
+            ],
+            "item": [
+              "has-error",
+              "has-feedback"
+            ],
+            "suffix": [
+              "clear",
+              "feedback"
+            ],
+            "icons": [
+              {
+                "classes": "ant-form-item-feedback-icon ant-form-item-feedback-icon-error",
+                "text": "",
+                "color": "rgb(255, 77, 79)",
+                "fontSize": "14px",
+                "visibility": "visible",
+                "paths": [
+                  "M512 64c247.4 0 448 200.6 448 448S759.4 960 512 960 64 759.4 64 512 264.6 64 512 64zm127.98 274.82h-.04l-.08.06L512 466.75 384.14 338.88c-.04-.05-.06-.06-.08-.06a.12.12 0 00-.07 0c-.03 0-.05.01-.09.05l-45.02 45.02a.2.2 0 00-.05.09.12.12 0 000 .07v.02a.27.27 0 00.06.06L466.75 512 338.88 639.86c-.05.04-.06.06-.06.08a.12.12 0 000 .07c0 .03.01.05.05.09l45.02 45.02a.2.2 0 00.09.05.12.12 0 00.07 0c.02 0 .04-.01.08-.05L512 557.25l127.86 127.87c.04.04.06.05.08.05a.12.12 0 00.07 0c.03 0 .05-.01.09-.05l45.02-45.02a.2.2 0 00.05-.09.12.12 0 000-.07v-.02a.27.27 0 00-.05-.06L557.25 512l127.87-127.86c.04-.04.05-.06.05-.08a.12.12 0 000-.07c0-.03-.01-.05-.05-.09l-45.02-45.02a.2.2 0 00-.09-.05.12.12 0 00-.07 0z"
+                ],
+                "info": null
+              }
+            ],
+            "searches": [],
+            "value": "Alpha",
+            "target": null,
+            "status": {
+              "status": "error",
+              "errors": [],
+              "warnings": []
+            },
+            "focused": true,
+            "popup": false
+          },
+          "sameInput": true
+        },
+        {
+          "action": "clear",
+          "view": {
+            "root": [
+              "affix-wrapper",
+              "has-suffix",
+              "status-error"
+            ],
+            "item": [
+              "has-error",
+              "has-feedback"
+            ],
+            "suffix": [
+              "feedback"
+            ],
+            "icons": [
+              {
+                "classes": "ant-form-item-feedback-icon ant-form-item-feedback-icon-error",
+                "text": "",
+                "color": "rgb(255, 77, 79)",
+                "fontSize": "14px",
+                "visibility": "visible",
+                "paths": [
+                  "M512 64c247.4 0 448 200.6 448 448S759.4 960 512 960 64 759.4 64 512 264.6 64 512 64zm127.98 274.82h-.04l-.08.06L512 466.75 384.14 338.88c-.04-.05-.06-.06-.08-.06a.12.12 0 00-.07 0c-.03 0-.05.01-.09.05l-45.02 45.02a.2.2 0 00-.05.09.12.12 0 000 .07v.02a.27.27 0 00.06.06L466.75 512 338.88 639.86c-.05.04-.06.06-.06.08a.12.12 0 000 .07c0 .03.01.05.05.09l45.02 45.02a.2.2 0 00.09.05.12.12 0 00.07 0c.02 0 .04-.01.08-.05L512 557.25l127.86 127.87c.04.04.06.05.08.05a.12.12 0 00.07 0c.03 0 .05-.01.09-.05l45.02-45.02a.2.2 0 00.05-.09.12.12 0 000-.07v-.02a.27.27 0 00-.05-.06L557.25 512l127.87-127.86c.04-.04.05-.06.05-.08a.12.12 0 000-.07c0-.03-.01-.05-.05-.09l-45.02-45.02a.2.2 0 00-.09-.05.12.12 0 00-.07 0z"
+                ],
+                "info": null
+              }
+            ],
+            "searches": [],
+            "value": "",
+            "target": null,
+            "status": {
+              "status": "error",
+              "errors": [],
+              "warnings": []
+            },
+            "focused": true,
+            "popup": false
+          },
+          "sameInput": true
+        }
+      ]
+    },
+    {
+      "id": "mentions-interaction",
+      "initial": {
+        "root": [
+          "affix-wrapper",
+          "has-suffix",
+          "status-warning"
+        ],
+        "item": [
+          "has-feedback",
+          "has-warning"
+        ],
+        "suffix": [
+          "feedback"
+        ],
+        "icons": [
+          {
+            "classes": "ant-form-item-feedback-icon ant-form-item-feedback-icon-warning",
+            "text": "local 0 warning",
+            "color": "rgb(250, 173, 20)",
+            "fontSize": "14px",
+            "visibility": "visible",
+            "paths": [],
+            "info": {
+              "status": "warning",
+              "errors": [],
+              "warnings": []
+            }
+          }
+        ],
+        "searches": [],
+        "value": "",
+        "target": null,
+        "status": {
+          "status": "warning",
+          "errors": [],
+          "warnings": []
+        },
+        "focused": false,
+        "popup": false
+      },
+      "steps": [
+        {
+          "action": "focus",
+          "view": {
+            "root": [
+              "affix-wrapper",
+              "has-suffix",
+              "status-warning"
+            ],
+            "item": [
+              "has-feedback",
+              "has-warning"
+            ],
+            "suffix": [
+              "feedback"
+            ],
+            "icons": [
+              {
+                "classes": "ant-form-item-feedback-icon ant-form-item-feedback-icon-warning",
+                "text": "local 0 warning",
+                "color": "rgb(250, 173, 20)",
+                "fontSize": "14px",
+                "visibility": "visible",
+                "paths": [],
+                "info": {
+                  "status": "warning",
+                  "errors": [],
+                  "warnings": []
+                }
+              }
+            ],
+            "searches": [],
+            "value": "",
+            "target": null,
+            "status": {
+              "status": "warning",
+              "errors": [],
+              "warnings": []
+            },
+            "focused": true,
+            "popup": false
+          },
+          "sameInput": true
+        },
+        {
+          "action": "type-mention",
+          "view": {
+            "root": [
+              "affix-wrapper",
+              "has-suffix",
+              "status-warning"
+            ],
+            "item": [
+              "has-feedback",
+              "has-warning"
+            ],
+            "suffix": [
+              "feedback"
+            ],
+            "icons": [
+              {
+                "classes": "ant-form-item-feedback-icon ant-form-item-feedback-icon-warning",
+                "text": "local 0 warning",
+                "color": "rgb(250, 173, 20)",
+                "fontSize": "14px",
+                "visibility": "visible",
+                "paths": [],
+                "info": {
+                  "status": "warning",
+                  "errors": [],
+                  "warnings": []
+                }
+              }
+            ],
+            "searches": [],
+            "value": "@a",
+            "target": null,
+            "status": {
+              "status": "warning",
+              "errors": [],
+              "warnings": []
+            },
+            "focused": true,
+            "popup": true
+          },
+          "sameInput": true
+        },
+        {
+          "action": "error",
+          "view": {
+            "root": [
+              "affix-wrapper",
+              "has-suffix",
+              "status-error"
+            ],
+            "item": [
+              "has-error",
+              "has-feedback"
+            ],
+            "suffix": [
+              "feedback"
+            ],
+            "icons": [
+              {
+                "classes": "ant-form-item-feedback-icon ant-form-item-feedback-icon-error",
+                "text": "local 0 error",
+                "color": "rgb(255, 77, 79)",
+                "fontSize": "14px",
+                "visibility": "visible",
+                "paths": [],
+                "info": {
+                  "status": "error",
+                  "errors": [],
+                  "warnings": []
+                }
+              }
+            ],
+            "searches": [],
+            "value": "@a",
+            "target": null,
+            "status": {
+              "status": "error",
+              "errors": [],
+              "warnings": []
+            },
+            "focused": true,
+            "popup": true
+          },
+          "sameInput": true
+        },
+        {
+          "action": "update-icon",
+          "view": {
+            "root": [
+              "affix-wrapper",
+              "has-suffix",
+              "status-error"
+            ],
+            "item": [
+              "has-error",
+              "has-feedback"
+            ],
+            "suffix": [
+              "feedback"
+            ],
+            "icons": [
+              {
+                "classes": "ant-form-item-feedback-icon ant-form-item-feedback-icon-error",
+                "text": "local 1 error",
+                "color": "rgb(255, 77, 79)",
+                "fontSize": "14px",
+                "visibility": "visible",
+                "paths": [],
+                "info": {
+                  "status": "error",
+                  "errors": [],
+                  "warnings": []
+                }
+              }
+            ],
+            "searches": [],
+            "value": "@a",
+            "target": null,
+            "status": {
+              "status": "error",
+              "errors": [],
+              "warnings": []
+            },
+            "focused": true,
+            "popup": true
+          },
+          "sameInput": true
+        },
+        {
+          "action": "choose-mention",
+          "view": {
+            "root": [
+              "affix-wrapper",
+              "has-suffix",
+              "status-error"
+            ],
+            "item": [
+              "has-error",
+              "has-feedback"
+            ],
+            "suffix": [
+              "feedback"
+            ],
+            "icons": [
+              {
+                "classes": "ant-form-item-feedback-icon ant-form-item-feedback-icon-error",
+                "text": "local 1 error",
+                "color": "rgb(255, 77, 79)",
+                "fontSize": "14px",
+                "visibility": "visible",
+                "paths": [],
+                "info": {
+                  "status": "error",
+                  "errors": [],
+                  "warnings": []
+                }
+              }
+            ],
+            "searches": [],
+            "value": "@alice ",
+            "target": null,
+            "status": {
+              "status": "error",
+              "errors": [],
+              "warnings": []
+            },
+            "focused": true,
+            "popup": false
+          },
+          "sameInput": true
+        }
+      ]
+    },
+    {
+      "id": "mentions-live",
+      "initial": {
+        "root": [
+          "affix-wrapper",
+          "has-suffix",
+          "status-warning"
+        ],
+        "item": [
+          "has-feedback",
+          "has-warning"
+        ],
+        "suffix": [
+          "feedback"
+        ],
+        "icons": [
+          {
+            "classes": "ant-form-item-feedback-icon ant-form-item-feedback-icon-warning",
+            "text": "local 0 warning",
+            "color": "rgb(250, 173, 20)",
+            "fontSize": "14px",
+            "visibility": "visible",
+            "paths": [],
+            "info": {
+              "status": "warning",
+              "errors": [],
+              "warnings": []
+            }
+          }
+        ],
+        "searches": [],
+        "value": "Alpha",
+        "target": null,
+        "status": {
+          "status": "warning",
+          "errors": [],
+          "warnings": []
+        },
+        "focused": false,
+        "popup": false
+      },
+      "steps": [
+        {
+          "action": "focus",
+          "view": {
+            "root": [
+              "affix-wrapper",
+              "has-suffix",
+              "status-warning"
+            ],
+            "item": [
+              "has-feedback",
+              "has-warning"
+            ],
+            "suffix": [
+              "feedback"
+            ],
+            "icons": [
+              {
+                "classes": "ant-form-item-feedback-icon ant-form-item-feedback-icon-warning",
+                "text": "local 0 warning",
+                "color": "rgb(250, 173, 20)",
+                "fontSize": "14px",
+                "visibility": "visible",
+                "paths": [],
+                "info": {
+                  "status": "warning",
+                  "errors": [],
+                  "warnings": []
+                }
+              }
+            ],
+            "searches": [],
+            "value": "Alpha",
+            "target": null,
+            "status": {
+              "status": "warning",
+              "errors": [],
+              "warnings": []
+            },
+            "focused": true,
+            "popup": false
+          },
+          "sameInput": true
+        },
+        {
+          "action": "error",
+          "view": {
+            "root": [
+              "affix-wrapper",
+              "has-suffix",
+              "status-error"
+            ],
+            "item": [
+              "has-error",
+              "has-feedback"
+            ],
+            "suffix": [
+              "feedback"
+            ],
+            "icons": [
+              {
+                "classes": "ant-form-item-feedback-icon ant-form-item-feedback-icon-error",
+                "text": "local 0 error",
+                "color": "rgb(255, 77, 79)",
+                "fontSize": "14px",
+                "visibility": "visible",
+                "paths": [],
+                "info": {
+                  "status": "error",
+                  "errors": [],
+                  "warnings": []
+                }
+              }
+            ],
+            "searches": [],
+            "value": "Alpha",
+            "target": null,
+            "status": {
+              "status": "error",
+              "errors": [],
+              "warnings": []
+            },
+            "focused": true,
+            "popup": false
+          },
+          "sameInput": true
+        },
+        {
+          "action": "update-icon",
+          "view": {
+            "root": [
+              "affix-wrapper",
+              "has-suffix",
+              "status-error"
+            ],
+            "item": [
+              "has-error",
+              "has-feedback"
+            ],
+            "suffix": [
+              "feedback"
+            ],
+            "icons": [
+              {
+                "classes": "ant-form-item-feedback-icon ant-form-item-feedback-icon-error",
+                "text": "local 1 error",
+                "color": "rgb(255, 77, 79)",
+                "fontSize": "14px",
+                "visibility": "visible",
+                "paths": [],
+                "info": {
+                  "status": "error",
+                  "errors": [],
+                  "warnings": []
+                }
+              }
+            ],
+            "searches": [],
+            "value": "Alpha",
+            "target": null,
+            "status": {
+              "status": "error",
+              "errors": [],
+              "warnings": []
+            },
+            "focused": true,
+            "popup": false
+          },
+          "sameInput": true
+        },
+        {
+          "action": "hide-icon",
+          "view": {
+            "root": [
+              "affix-wrapper",
+              "has-suffix",
+              "status-error"
+            ],
+            "item": [
+              "has-error",
+              "has-feedback"
+            ],
+            "suffix": [],
+            "icons": [],
+            "searches": [],
+            "value": "Alpha",
+            "target": null,
+            "status": {
+              "status": "error",
+              "errors": [],
+              "warnings": []
+            },
+            "focused": true,
+            "popup": false
+          },
+          "sameInput": true
+        },
+        {
+          "action": "show-icon",
+          "view": {
+            "root": [
+              "affix-wrapper",
+              "has-suffix",
+              "status-error"
+            ],
+            "item": [
+              "has-error",
+              "has-feedback"
+            ],
+            "suffix": [
+              "feedback"
+            ],
+            "icons": [
+              {
+                "classes": "ant-form-item-feedback-icon ant-form-item-feedback-icon-error",
+                "text": "local 1 error",
+                "color": "rgb(255, 77, 79)",
+                "fontSize": "14px",
+                "visibility": "visible",
+                "paths": [],
+                "info": {
+                  "status": "error",
+                  "errors": [],
+                  "warnings": []
+                }
+              }
+            ],
+            "searches": [],
+            "value": "Alpha",
+            "target": null,
+            "status": {
+              "status": "error",
+              "errors": [],
+              "warnings": []
+            },
+            "focused": true,
+            "popup": false
+          },
+          "sameInput": true
+        },
+        {
+          "action": "toggle-feedback",
+          "view": {
+            "root": [
+              "status-error"
+            ],
+            "item": [
+              "has-error"
+            ],
+            "suffix": null,
+            "icons": [],
+            "searches": [],
+            "value": "Alpha",
+            "target": null,
+            "status": {
+              "status": "error",
+              "errors": [],
+              "warnings": []
+            },
+            "focused": false,
+            "popup": false
+          },
+          "sameInput": false
+        },
+        {
+          "action": "toggle-feedback",
+          "view": {
+            "root": [
+              "affix-wrapper",
+              "has-suffix",
+              "status-error"
+            ],
+            "item": [
+              "has-error",
+              "has-feedback"
+            ],
+            "suffix": [
+              "feedback"
+            ],
+            "icons": [
+              {
+                "classes": "ant-form-item-feedback-icon ant-form-item-feedback-icon-error",
+                "text": "local 1 error",
+                "color": "rgb(255, 77, 79)",
+                "fontSize": "14px",
+                "visibility": "visible",
+                "paths": [],
+                "info": {
+                  "status": "error",
+                  "errors": [],
+                  "warnings": []
+                }
+              }
+            ],
+            "searches": [],
+            "value": "Alpha",
+            "target": null,
+            "status": {
+              "status": "error",
+              "errors": [],
+              "warnings": []
+            },
+            "focused": false,
+            "popup": false
+          },
+          "sameInput": false
+        }
+      ]
+    },
+    {
+      "id": "mentions-popup-toggle",
+      "initial": {
+        "root": [
+          "affix-wrapper",
+          "has-suffix",
+          "status-warning"
+        ],
+        "item": [
+          "has-feedback",
+          "has-warning"
+        ],
+        "suffix": [
+          "feedback"
+        ],
+        "icons": [
+          {
+            "classes": "ant-form-item-feedback-icon ant-form-item-feedback-icon-warning",
+            "text": "",
+            "color": "rgb(250, 173, 20)",
+            "fontSize": "14px",
+            "visibility": "visible",
+            "paths": [
+              "M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm-32 232c0-4.4 3.6-8 8-8h48c4.4 0 8 3.6 8 8v272c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8V296zm32 440a48.01 48.01 0 010-96 48.01 48.01 0 010 96z"
+            ],
+            "info": null
+          }
+        ],
+        "searches": [],
+        "value": "Alpha",
+        "target": null,
+        "status": {
+          "status": "warning",
+          "errors": [],
+          "warnings": []
+        },
+        "focused": false,
+        "popup": false
+      },
+      "steps": [
+        {
+          "action": "focus",
+          "view": {
+            "root": [
+              "affix-wrapper",
+              "has-suffix",
+              "status-warning"
+            ],
+            "item": [
+              "has-feedback",
+              "has-warning"
+            ],
+            "suffix": [
+              "feedback"
+            ],
+            "icons": [
+              {
+                "classes": "ant-form-item-feedback-icon ant-form-item-feedback-icon-warning",
+                "text": "",
+                "color": "rgb(250, 173, 20)",
+                "fontSize": "14px",
+                "visibility": "visible",
+                "paths": [
+                  "M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm-32 232c0-4.4 3.6-8 8-8h48c4.4 0 8 3.6 8 8v272c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8V296zm32 440a48.01 48.01 0 010-96 48.01 48.01 0 010 96z"
+                ],
+                "info": null
+              }
+            ],
+            "searches": [],
+            "value": "Alpha",
+            "target": null,
+            "status": {
+              "status": "warning",
+              "errors": [],
+              "warnings": []
+            },
+            "focused": true,
+            "popup": false
+          },
+          "sameInput": true
+        },
+        {
+          "action": "type-mention",
+          "view": {
+            "root": [
+              "affix-wrapper",
+              "has-suffix",
+              "status-warning"
+            ],
+            "item": [
+              "has-feedback",
+              "has-warning"
+            ],
+            "suffix": [
+              "feedback"
+            ],
+            "icons": [
+              {
+                "classes": "ant-form-item-feedback-icon ant-form-item-feedback-icon-warning",
+                "text": "",
+                "color": "rgb(250, 173, 20)",
+                "fontSize": "14px",
+                "visibility": "visible",
+                "paths": [
+                  "M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm-32 232c0-4.4 3.6-8 8-8h48c4.4 0 8 3.6 8 8v272c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8V296zm32 440a48.01 48.01 0 010-96 48.01 48.01 0 010 96z"
+                ],
+                "info": null
+              }
+            ],
+            "searches": [],
+            "value": "Alpha@a",
+            "target": null,
+            "status": {
+              "status": "warning",
+              "errors": [],
+              "warnings": []
+            },
+            "focused": true,
+            "popup": true
+          },
+          "sameInput": true
+        },
+        {
+          "action": "toggle-feedback",
+          "view": {
+            "root": [
+              "status-warning"
+            ],
+            "item": [
+              "has-warning"
+            ],
+            "suffix": null,
+            "icons": [],
+            "searches": [],
+            "value": "Alpha@a",
+            "target": null,
+            "status": {
+              "status": "warning",
+              "errors": [],
+              "warnings": []
+            },
+            "focused": false,
+            "popup": false
+          },
+          "sameInput": false
+        },
+        {
+          "action": "toggle-feedback",
+          "view": {
+            "root": [
+              "affix-wrapper",
+              "has-suffix",
+              "status-warning"
+            ],
+            "item": [
+              "has-feedback",
+              "has-warning"
+            ],
+            "suffix": [
+              "feedback"
+            ],
+            "icons": [
+              {
+                "classes": "ant-form-item-feedback-icon ant-form-item-feedback-icon-warning",
+                "text": "",
+                "color": "rgb(250, 173, 20)",
+                "fontSize": "14px",
+                "visibility": "visible",
+                "paths": [
+                  "M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm-32 232c0-4.4 3.6-8 8-8h48c4.4 0 8 3.6 8 8v272c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8V296zm32 440a48.01 48.01 0 010-96 48.01 48.01 0 010 96z"
+                ],
+                "info": null
+              }
+            ],
+            "searches": [],
+            "value": "Alpha@a",
+            "target": null,
+            "status": {
+              "status": "warning",
+              "errors": [],
+              "warnings": []
+            },
+            "focused": false,
+            "popup": false
+          },
+          "sameInput": false
+        }
+      ]
+    },
+    {
+      "id": "mentions-combined-affixes",
+      "initial": {
+        "root": [
+          "affix-wrapper",
+          "has-suffix",
+          "status-warning"
+        ],
+        "item": [
+          "has-warning"
+        ],
+        "suffix": [
+          "clear"
+        ],
+        "icons": [],
+        "searches": [],
+        "value": "Alpha",
+        "target": null,
+        "status": {
+          "status": "warning",
+          "errors": [],
+          "warnings": []
+        },
+        "focused": false,
+        "popup": false
+      },
+      "steps": [
+        {
+          "action": "focus",
+          "view": {
+            "root": [
+              "affix-wrapper",
+              "has-suffix",
+              "status-warning"
+            ],
+            "item": [
+              "has-warning"
+            ],
+            "suffix": [
+              "clear"
+            ],
+            "icons": [],
+            "searches": [],
+            "value": "Alpha",
+            "target": null,
+            "status": {
+              "status": "warning",
+              "errors": [],
+              "warnings": []
+            },
+            "focused": true,
+            "popup": false
+          },
+          "sameInput": true
+        },
+        {
+          "action": "swap-affixes",
+          "view": {
+            "root": [
+              "affix-wrapper",
+              "has-suffix",
+              "status-warning"
+            ],
+            "item": [
+              "has-feedback",
+              "has-warning"
+            ],
+            "suffix": [
+              "feedback"
+            ],
+            "icons": [
+              {
+                "classes": "ant-form-item-feedback-icon ant-form-item-feedback-icon-warning",
+                "text": "",
+                "color": "rgb(250, 173, 20)",
+                "fontSize": "14px",
+                "visibility": "visible",
+                "paths": [
+                  "M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm-32 232c0-4.4 3.6-8 8-8h48c4.4 0 8 3.6 8 8v272c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8V296zm32 440a48.01 48.01 0 010-96 48.01 48.01 0 010 96z"
+                ],
+                "info": null
+              }
+            ],
+            "searches": [],
+            "value": "Alpha",
+            "target": null,
+            "status": {
+              "status": "warning",
+              "errors": [],
+              "warnings": []
+            },
+            "focused": true,
+            "popup": false
+          },
+          "sameInput": true
+        },
+        {
+          "action": "swap-affixes",
+          "view": {
+            "root": [
+              "affix-wrapper",
+              "has-suffix",
+              "status-warning"
+            ],
+            "item": [
+              "has-warning"
+            ],
+            "suffix": [
+              "clear"
+            ],
+            "icons": [],
+            "searches": [],
+            "value": "Alpha",
+            "target": null,
+            "status": {
+              "status": "warning",
+              "errors": [],
+              "warnings": []
+            },
+            "focused": true,
+            "popup": false
+          },
+          "sameInput": true
+        },
+        {
+          "action": "clear",
+          "view": {
+            "root": [
+              "affix-wrapper",
+              "has-suffix",
+              "status-warning"
+            ],
+            "item": [
+              "has-warning"
+            ],
+            "suffix": [],
+            "icons": [],
+            "searches": [],
+            "value": "",
+            "target": null,
+            "status": {
+              "status": "warning",
+              "errors": [],
+              "warnings": []
+            },
+            "focused": true,
+            "popup": false
+          },
+          "sameInput": true
+        }
+      ]
+    },
+    {
+      "id": "mentions-select-toggle",
+      "initial": {
+        "root": [
+          "affix-wrapper",
+          "has-suffix",
+          "status-warning"
+        ],
+        "item": [
+          "has-feedback",
+          "has-warning"
+        ],
+        "suffix": [
+          "feedback"
+        ],
+        "icons": [
+          {
+            "classes": "ant-form-item-feedback-icon ant-form-item-feedback-icon-warning",
+            "text": "",
+            "color": "rgb(250, 173, 20)",
+            "fontSize": "14px",
+            "visibility": "visible",
+            "paths": [
+              "M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm-32 232c0-4.4 3.6-8 8-8h48c4.4 0 8 3.6 8 8v272c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8V296zm32 440a48.01 48.01 0 010-96 48.01 48.01 0 010 96z"
+            ],
+            "info": null
+          }
+        ],
+        "searches": [],
+        "value": "Alpha",
+        "target": null,
+        "status": {
+          "status": "warning",
+          "errors": [],
+          "warnings": []
+        },
+        "focused": false,
+        "popup": false
+      },
+      "steps": [
+        {
+          "action": "focus",
+          "view": {
+            "root": [
+              "affix-wrapper",
+              "has-suffix",
+              "status-warning"
+            ],
+            "item": [
+              "has-feedback",
+              "has-warning"
+            ],
+            "suffix": [
+              "feedback"
+            ],
+            "icons": [
+              {
+                "classes": "ant-form-item-feedback-icon ant-form-item-feedback-icon-warning",
+                "text": "",
+                "color": "rgb(250, 173, 20)",
+                "fontSize": "14px",
+                "visibility": "visible",
+                "paths": [
+                  "M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm-32 232c0-4.4 3.6-8 8-8h48c4.4 0 8 3.6 8 8v272c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8V296zm32 440a48.01 48.01 0 010-96 48.01 48.01 0 010 96z"
+                ],
+                "info": null
+              }
+            ],
+            "searches": [],
+            "value": "Alpha",
+            "target": null,
+            "status": {
+              "status": "warning",
+              "errors": [],
+              "warnings": []
+            },
+            "focused": true,
+            "popup": false
+          },
+          "sameInput": true
+        },
+        {
+          "action": "type-mention",
+          "view": {
+            "root": [
+              "affix-wrapper",
+              "has-suffix",
+              "status-warning"
+            ],
+            "item": [
+              "has-feedback",
+              "has-warning"
+            ],
+            "suffix": [
+              "feedback"
+            ],
+            "icons": [
+              {
+                "classes": "ant-form-item-feedback-icon ant-form-item-feedback-icon-warning",
+                "text": "",
+                "color": "rgb(250, 173, 20)",
+                "fontSize": "14px",
+                "visibility": "visible",
+                "paths": [
+                  "M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm-32 232c0-4.4 3.6-8 8-8h48c4.4 0 8 3.6 8 8v272c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8V296zm32 440a48.01 48.01 0 010-96 48.01 48.01 0 010 96z"
+                ],
+                "info": null
+              }
+            ],
+            "searches": [],
+            "value": "Alpha@a",
+            "target": null,
+            "status": {
+              "status": "warning",
+              "errors": [],
+              "warnings": []
+            },
+            "focused": true,
+            "popup": true
+          },
+          "sameInput": true
+        },
+        {
+          "action": "choose-mention",
+          "view": {
+            "root": [
+              "status-warning"
+            ],
+            "item": [
+              "has-warning"
+            ],
+            "suffix": null,
+            "icons": [],
+            "searches": [],
+            "value": "Alpha @alice ",
+            "target": null,
+            "status": {
+              "status": "warning",
+              "errors": [],
+              "warnings": []
+            },
+            "focused": false,
+            "popup": false
+          },
+          "sameInput": false
+        }
+      ]
+    },
+    {
+      "id": "transfer-no-search",
+      "initial": {
+        "root": [
+          "has-feedback",
+          "status-error"
+        ],
+        "item": [
+          "has-error",
+          "has-feedback"
+        ],
+        "suffix": null,
+        "icons": [],
+        "searches": [],
+        "value": null,
+        "target": "Beta",
+        "status": {
+          "status": "error",
+          "errors": [],
+          "warnings": []
+        },
+        "focused": false,
+        "popup": false
+      },
+      "steps": []
+    },
+    {
+      "id": "transfer-interaction",
+      "initial": {
+        "root": [
+          "has-feedback",
+          "status-warning"
+        ],
+        "item": [
+          "has-feedback",
+          "has-warning"
+        ],
+        "suffix": null,
+        "icons": [
+          {
+            "classes": "ant-form-item-feedback-icon ant-form-item-feedback-icon-warning",
+            "text": "local 0 warning",
+            "color": "rgb(250, 173, 20)",
+            "fontSize": "14px",
+            "visibility": "visible",
+            "paths": [],
+            "info": {
+              "status": "warning",
+              "errors": [],
+              "warnings": []
+            }
+          },
+          {
+            "classes": "ant-form-item-feedback-icon ant-form-item-feedback-icon-warning",
+            "text": "local 0 warning",
+            "color": "rgb(250, 173, 20)",
+            "fontSize": "14px",
+            "visibility": "visible",
+            "paths": [],
+            "info": {
+              "status": "warning",
+              "errors": [],
+              "warnings": []
+            }
+          }
+        ],
+        "searches": [
+          {
+            "value": "",
+            "icons": 1,
+            "status": [
+              "warning"
+            ]
+          },
+          {
+            "value": "",
+            "icons": 1,
+            "status": [
+              "warning"
+            ]
+          }
+        ],
+        "value": null,
+        "target": "Beta",
+        "status": {
+          "status": "warning",
+          "errors": [],
+          "warnings": []
+        },
+        "focused": false,
+        "popup": false
+      },
+      "steps": [
+        {
+          "action": "focus",
+          "view": {
+            "root": [
+              "has-feedback",
+              "status-warning"
+            ],
+            "item": [
+              "has-feedback",
+              "has-warning"
+            ],
+            "suffix": null,
+            "icons": [
+              {
+                "classes": "ant-form-item-feedback-icon ant-form-item-feedback-icon-warning",
+                "text": "local 0 warning",
+                "color": "rgb(250, 173, 20)",
+                "fontSize": "14px",
+                "visibility": "visible",
+                "paths": [],
+                "info": {
+                  "status": "warning",
+                  "errors": [],
+                  "warnings": []
+                }
+              },
+              {
+                "classes": "ant-form-item-feedback-icon ant-form-item-feedback-icon-warning",
+                "text": "local 0 warning",
+                "color": "rgb(250, 173, 20)",
+                "fontSize": "14px",
+                "visibility": "visible",
+                "paths": [],
+                "info": {
+                  "status": "warning",
+                  "errors": [],
+                  "warnings": []
+                }
+              }
+            ],
+            "searches": [
+              {
+                "value": "",
+                "icons": 1,
+                "status": [
+                  "warning"
+                ]
+              },
+              {
+                "value": "",
+                "icons": 1,
+                "status": [
+                  "warning"
+                ]
+              }
+            ],
+            "value": null,
+            "target": "Beta",
+            "status": {
+              "status": "warning",
+              "errors": [],
+              "warnings": []
+            },
+            "focused": true,
+            "popup": false
+          },
+          "sameInput": true
+        },
+        {
+          "action": "search-transfer",
+          "view": {
+            "root": [
+              "has-feedback",
+              "status-warning"
+            ],
+            "item": [
+              "has-feedback",
+              "has-warning"
+            ],
+            "suffix": null,
+            "icons": [
+              {
+                "classes": "ant-form-item-feedback-icon ant-form-item-feedback-icon-warning",
+                "text": "local 0 warning",
+                "color": "rgb(250, 173, 20)",
+                "fontSize": "14px",
+                "visibility": "visible",
+                "paths": [],
+                "info": {
+                  "status": "warning",
+                  "errors": [],
+                  "warnings": []
+                }
+              },
+              {
+                "classes": "ant-form-item-feedback-icon ant-form-item-feedback-icon-warning",
+                "text": "local 0 warning",
+                "color": "rgb(250, 173, 20)",
+                "fontSize": "14px",
+                "visibility": "visible",
+                "paths": [],
+                "info": {
+                  "status": "warning",
+                  "errors": [],
+                  "warnings": []
+                }
+              }
+            ],
+            "searches": [
+              {
+                "value": "Alpha",
+                "icons": 1,
+                "status": [
+                  "warning"
+                ]
+              },
+              {
+                "value": "",
+                "icons": 1,
+                "status": [
+                  "warning"
+                ]
+              }
+            ],
+            "value": null,
+            "target": "Beta",
+            "status": {
+              "status": "warning",
+              "errors": [],
+              "warnings": []
+            },
+            "focused": true,
+            "popup": false
+          },
+          "sameInput": true
+        },
+        {
+          "action": "error",
+          "view": {
+            "root": [
+              "has-feedback",
+              "status-error"
+            ],
+            "item": [
+              "has-error",
+              "has-feedback"
+            ],
+            "suffix": null,
+            "icons": [
+              {
+                "classes": "ant-form-item-feedback-icon ant-form-item-feedback-icon-error",
+                "text": "local 0 error",
+                "color": "rgb(255, 77, 79)",
+                "fontSize": "14px",
+                "visibility": "visible",
+                "paths": [],
+                "info": {
+                  "status": "error",
+                  "errors": [],
+                  "warnings": []
+                }
+              },
+              {
+                "classes": "ant-form-item-feedback-icon ant-form-item-feedback-icon-error",
+                "text": "local 0 error",
+                "color": "rgb(255, 77, 79)",
+                "fontSize": "14px",
+                "visibility": "visible",
+                "paths": [],
+                "info": {
+                  "status": "error",
+                  "errors": [],
+                  "warnings": []
+                }
+              }
+            ],
+            "searches": [
+              {
+                "value": "Alpha",
+                "icons": 1,
+                "status": [
+                  "error"
+                ]
+              },
+              {
+                "value": "",
+                "icons": 1,
+                "status": [
+                  "error"
+                ]
+              }
+            ],
+            "value": null,
+            "target": "Beta",
+            "status": {
+              "status": "error",
+              "errors": [],
+              "warnings": []
+            },
+            "focused": true,
+            "popup": false
+          },
+          "sameInput": true
+        },
+        {
+          "action": "update-icon",
+          "view": {
+            "root": [
+              "has-feedback",
+              "status-error"
+            ],
+            "item": [
+              "has-error",
+              "has-feedback"
+            ],
+            "suffix": null,
+            "icons": [
+              {
+                "classes": "ant-form-item-feedback-icon ant-form-item-feedback-icon-error",
+                "text": "local 1 error",
+                "color": "rgb(255, 77, 79)",
+                "fontSize": "14px",
+                "visibility": "visible",
+                "paths": [],
+                "info": {
+                  "status": "error",
+                  "errors": [],
+                  "warnings": []
+                }
+              },
+              {
+                "classes": "ant-form-item-feedback-icon ant-form-item-feedback-icon-error",
+                "text": "local 1 error",
+                "color": "rgb(255, 77, 79)",
+                "fontSize": "14px",
+                "visibility": "visible",
+                "paths": [],
+                "info": {
+                  "status": "error",
+                  "errors": [],
+                  "warnings": []
+                }
+              }
+            ],
+            "searches": [
+              {
+                "value": "Alpha",
+                "icons": 1,
+                "status": [
+                  "error"
+                ]
+              },
+              {
+                "value": "",
+                "icons": 1,
+                "status": [
+                  "error"
+                ]
+              }
+            ],
+            "value": null,
+            "target": "Beta",
+            "status": {
+              "status": "error",
+              "errors": [],
+              "warnings": []
+            },
+            "focused": true,
+            "popup": false
+          },
+          "sameInput": true
+        },
+        {
+          "action": "move-transfer",
+          "view": {
+            "root": [
+              "has-feedback",
+              "status-error"
+            ],
+            "item": [
+              "has-error",
+              "has-feedback"
+            ],
+            "suffix": null,
+            "icons": [
+              {
+                "classes": "ant-form-item-feedback-icon ant-form-item-feedback-icon-error",
+                "text": "local 1 error",
+                "color": "rgb(255, 77, 79)",
+                "fontSize": "14px",
+                "visibility": "visible",
+                "paths": [],
+                "info": {
+                  "status": "error",
+                  "errors": [],
+                  "warnings": []
+                }
+              },
+              {
+                "classes": "ant-form-item-feedback-icon ant-form-item-feedback-icon-error",
+                "text": "local 1 error",
+                "color": "rgb(255, 77, 79)",
+                "fontSize": "14px",
+                "visibility": "visible",
+                "paths": [],
+                "info": {
+                  "status": "error",
+                  "errors": [],
+                  "warnings": []
+                }
+              }
+            ],
+            "searches": [
+              {
+                "value": "Alpha",
+                "icons": 1,
+                "status": [
+                  "error"
+                ]
+              },
+              {
+                "value": "",
+                "icons": 1,
+                "status": [
+                  "error"
+                ]
+              }
+            ],
+            "value": null,
+            "target": "Alpha|Beta",
+            "status": {
+              "status": "error",
+              "errors": [],
+              "warnings": []
+            },
+            "focused": false,
+            "popup": false
+          },
+          "sameInput": true
+        },
+        {
+          "action": "toggle-feedback",
+          "view": {
+            "root": [
+              "status-error"
+            ],
+            "item": [
+              "has-error"
+            ],
+            "suffix": null,
+            "icons": [],
+            "searches": [
+              {
+                "value": "Alpha",
+                "icons": 0,
+                "status": [
+                  "error"
+                ]
+              },
+              {
+                "value": "",
+                "icons": 0,
+                "status": [
+                  "error"
+                ]
+              }
+            ],
+            "value": null,
+            "target": "Alpha|Beta",
+            "status": {
+              "status": "error",
+              "errors": [],
+              "warnings": []
+            },
+            "focused": false,
+            "popup": false
+          },
+          "sameInput": true
+        },
+        {
+          "action": "toggle-feedback",
+          "view": {
+            "root": [
+              "has-feedback",
+              "status-error"
+            ],
+            "item": [
+              "has-error",
+              "has-feedback"
+            ],
+            "suffix": null,
+            "icons": [
+              {
+                "classes": "ant-form-item-feedback-icon ant-form-item-feedback-icon-error",
+                "text": "local 1 error",
+                "color": "rgb(255, 77, 79)",
+                "fontSize": "14px",
+                "visibility": "visible",
+                "paths": [],
+                "info": {
+                  "status": "error",
+                  "errors": [],
+                  "warnings": []
+                }
+              },
+              {
+                "classes": "ant-form-item-feedback-icon ant-form-item-feedback-icon-error",
+                "text": "local 1 error",
+                "color": "rgb(255, 77, 79)",
+                "fontSize": "14px",
+                "visibility": "visible",
+                "paths": [],
+                "info": {
+                  "status": "error",
+                  "errors": [],
+                  "warnings": []
+                }
+              }
+            ],
+            "searches": [
+              {
+                "value": "Alpha",
+                "icons": 1,
+                "status": [
+                  "error"
+                ]
+              },
+              {
+                "value": "",
+                "icons": 1,
+                "status": [
+                  "error"
+                ]
+              }
+            ],
+            "value": null,
+            "target": "Alpha|Beta",
+            "status": {
+              "status": "error",
+              "errors": [],
+              "warnings": []
+            },
+            "focused": false,
+            "popup": false
+          },
+          "sameInput": true
+        }
+      ]
+    }
+  ],
+  "ssr": [
+    {
+      "id": "mentions-status-error",
+      "view": {
+        "root": [
+          "affix-wrapper",
+          "has-suffix",
+          "status-error"
+        ],
+        "item": [
+          "has-error",
+          "has-feedback"
+        ],
+        "suffix": [
+          "feedback"
+        ],
+        "icons": [
+          {
+            "classes": "ant-form-item-feedback-icon ant-form-item-feedback-icon-error",
+            "text": "",
+            "color": "rgb(0, 0, 0)",
+            "fontSize": "16px",
+            "visibility": "visible",
+            "paths": [
+              "M512 64c247.4 0 448 200.6 448 448S759.4 960 512 960 64 759.4 64 512 264.6 64 512 64zm127.98 274.82h-.04l-.08.06L512 466.75 384.14 338.88c-.04-.05-.06-.06-.08-.06a.12.12 0 00-.07 0c-.03 0-.05.01-.09.05l-45.02 45.02a.2.2 0 00-.05.09.12.12 0 000 .07v.02a.27.27 0 00.06.06L466.75 512 338.88 639.86c-.05.04-.06.06-.06.08a.12.12 0 000 .07c0 .03.01.05.05.09l45.02 45.02a.2.2 0 00.09.05.12.12 0 00.07 0c.02 0 .04-.01.08-.05L512 557.25l127.86 127.87c.04.04.06.05.08.05a.12.12 0 00.07 0c.03 0 .05-.01.09-.05l45.02-45.02a.2.2 0 00.05-.09.12.12 0 000-.07v-.02a.27.27 0 00-.05-.06L557.25 512l127.87-127.86c.04-.04.05-.06.05-.08a.12.12 0 000-.07c0-.03-.01-.05-.05-.09l-45.02-45.02a.2.2 0 00-.09-.05.12.12 0 00-.07 0z"
+            ],
+            "info": null
+          }
+        ],
+        "searches": [],
+        "value": "Alpha",
+        "target": null,
+        "status": {
+          "status": "error",
+          "errors": [],
+          "warnings": []
+        },
+        "focused": false,
+        "popup": false
+      },
+      "timers": 0
+    },
+    {
+      "id": "mentions-icon-custom",
+      "view": {
+        "root": [
+          "affix-wrapper",
+          "has-suffix",
+          "status-warning"
+        ],
+        "item": [
+          "has-feedback",
+          "has-warning"
+        ],
+        "suffix": [
+          "feedback"
+        ],
+        "icons": [
+          {
+            "classes": "ant-form-item-feedback-icon ant-form-item-feedback-icon-warning",
+            "text": "local 0 warning",
+            "color": "rgb(0, 0, 0)",
+            "fontSize": "16px",
+            "visibility": "visible",
+            "paths": [],
+            "info": {
+              "status": "warning",
+              "errors": [],
+              "warnings": []
+            }
+          }
+        ],
+        "searches": [],
+        "value": "Alpha",
+        "target": null,
+        "status": {
+          "status": "warning",
+          "errors": [],
+          "warnings": []
+        },
+        "focused": false,
+        "popup": false
+      },
+      "timers": 0
+    },
+    {
+      "id": "mentions-icon-false",
+      "view": {
+        "root": [
+          "affix-wrapper",
+          "has-suffix",
+          "status-warning"
+        ],
+        "item": [
+          "has-feedback",
+          "has-warning"
+        ],
+        "suffix": [],
+        "icons": [],
+        "searches": [],
+        "value": "Alpha",
+        "target": null,
+        "status": {
+          "status": "warning",
+          "errors": [],
+          "warnings": []
+        },
+        "focused": false,
+        "popup": false
+      },
+      "timers": 0
+    },
+    {
+      "id": "mentions-nested-form",
+      "view": {
+        "root": [],
+        "item": [
+          "has-error",
+          "has-feedback"
+        ],
+        "suffix": null,
+        "icons": [],
+        "searches": [],
+        "value": "Alpha",
+        "target": null,
+        "status": {
+          "status": null,
+          "errors": [],
+          "warnings": []
+        },
+        "focused": false,
+        "popup": false
+      },
+      "timers": 0
+    },
+    {
+      "id": "mentions-prefixes",
+      "view": {
+        "root": [
+          "affix-wrapper",
+          "has-suffix",
+          "status-error"
+        ],
+        "item": [
+          "has-error",
+          "has-feedback"
+        ],
+        "suffix": [
+          "feedback"
+        ],
+        "icons": [
+          {
+            "classes": "field-item-feedback-icon field-item-feedback-icon-error",
+            "text": "",
+            "color": "rgb(0, 0, 0)",
+            "fontSize": "16px",
+            "visibility": "visible",
+            "paths": [
+              "M512 64c247.4 0 448 200.6 448 448S759.4 960 512 960 64 759.4 64 512 264.6 64 512 64zm127.98 274.82h-.04l-.08.06L512 466.75 384.14 338.88c-.04-.05-.06-.06-.08-.06a.12.12 0 00-.07 0c-.03 0-.05.01-.09.05l-45.02 45.02a.2.2 0 00-.05.09.12.12 0 000 .07v.02a.27.27 0 00.06.06L466.75 512 338.88 639.86c-.05.04-.06.06-.06.08a.12.12 0 000 .07c0 .03.01.05.05.09l45.02 45.02a.2.2 0 00.09.05.12.12 0 00.07 0c.02 0 .04-.01.08-.05L512 557.25l127.86 127.87c.04.04.06.05.08.05a.12.12 0 00.07 0c.03 0 .05-.01.09-.05l45.02-45.02a.2.2 0 00.05-.09.12.12 0 000-.07v-.02a.27.27 0 00-.05-.06L557.25 512l127.87-127.86c.04-.04.05-.06.05-.08a.12.12 0 000-.07c0-.03-.01-.05-.05-.09l-45.02-45.02a.2.2 0 00-.09-.05.12.12 0 00-.07 0z"
+            ],
+            "info": null
+          }
+        ],
+        "searches": [],
+        "value": "Alpha",
+        "target": null,
+        "status": {
+          "status": "error",
+          "errors": [],
+          "warnings": []
+        },
+        "focused": false,
+        "popup": false
+      },
+      "timers": 0
+    },
+    {
+      "id": "transfer-status-error",
+      "view": {
+        "root": [
+          "has-feedback",
+          "status-error"
+        ],
+        "item": [
+          "has-error",
+          "has-feedback"
+        ],
+        "suffix": null,
+        "icons": [
+          {
+            "classes": "ant-form-item-feedback-icon ant-form-item-feedback-icon-error",
+            "text": "",
+            "color": "rgb(0, 0, 0)",
+            "fontSize": "16px",
+            "visibility": "visible",
+            "paths": [
+              "M512 64c247.4 0 448 200.6 448 448S759.4 960 512 960 64 759.4 64 512 264.6 64 512 64zm127.98 274.82h-.04l-.08.06L512 466.75 384.14 338.88c-.04-.05-.06-.06-.08-.06a.12.12 0 00-.07 0c-.03 0-.05.01-.09.05l-45.02 45.02a.2.2 0 00-.05.09.12.12 0 000 .07v.02a.27.27 0 00.06.06L466.75 512 338.88 639.86c-.05.04-.06.06-.06.08a.12.12 0 000 .07c0 .03.01.05.05.09l45.02 45.02a.2.2 0 00.09.05.12.12 0 00.07 0c.02 0 .04-.01.08-.05L512 557.25l127.86 127.87c.04.04.06.05.08.05a.12.12 0 00.07 0c.03 0 .05-.01.09-.05l45.02-45.02a.2.2 0 00.05-.09.12.12 0 000-.07v-.02a.27.27 0 00-.05-.06L557.25 512l127.87-127.86c.04-.04.05-.06.05-.08a.12.12 0 000-.07c0-.03-.01-.05-.05-.09l-45.02-45.02a.2.2 0 00-.09-.05.12.12 0 00-.07 0z"
+            ],
+            "info": null
+          },
+          {
+            "classes": "ant-form-item-feedback-icon ant-form-item-feedback-icon-error",
+            "text": "",
+            "color": "rgb(0, 0, 0)",
+            "fontSize": "16px",
+            "visibility": "visible",
+            "paths": [
+              "M512 64c247.4 0 448 200.6 448 448S759.4 960 512 960 64 759.4 64 512 264.6 64 512 64zm127.98 274.82h-.04l-.08.06L512 466.75 384.14 338.88c-.04-.05-.06-.06-.08-.06a.12.12 0 00-.07 0c-.03 0-.05.01-.09.05l-45.02 45.02a.2.2 0 00-.05.09.12.12 0 000 .07v.02a.27.27 0 00.06.06L466.75 512 338.88 639.86c-.05.04-.06.06-.06.08a.12.12 0 000 .07c0 .03.01.05.05.09l45.02 45.02a.2.2 0 00.09.05.12.12 0 00.07 0c.02 0 .04-.01.08-.05L512 557.25l127.86 127.87c.04.04.06.05.08.05a.12.12 0 00.07 0c.03 0 .05-.01.09-.05l45.02-45.02a.2.2 0 00.05-.09.12.12 0 000-.07v-.02a.27.27 0 00-.05-.06L557.25 512l127.87-127.86c.04-.04.05-.06.05-.08a.12.12 0 000-.07c0-.03-.01-.05-.05-.09l-45.02-45.02a.2.2 0 00-.09-.05.12.12 0 00-.07 0z"
+            ],
+            "info": null
+          }
+        ],
+        "searches": [
+          {
+            "value": "",
+            "icons": 1,
+            "status": [
+              "error"
+            ]
+          },
+          {
+            "value": "",
+            "icons": 1,
+            "status": [
+              "error"
+            ]
+          }
+        ],
+        "value": null,
+        "target": "Beta",
+        "status": {
+          "status": "error",
+          "errors": [],
+          "warnings": []
+        },
+        "focused": false,
+        "popup": false
+      },
+      "timers": 0
+    },
+    {
+      "id": "transfer-icon-custom",
+      "view": {
+        "root": [
+          "has-feedback",
+          "status-warning"
+        ],
+        "item": [
+          "has-feedback",
+          "has-warning"
+        ],
+        "suffix": null,
+        "icons": [
+          {
+            "classes": "ant-form-item-feedback-icon ant-form-item-feedback-icon-warning",
+            "text": "local 0 warning",
+            "color": "rgb(0, 0, 0)",
+            "fontSize": "16px",
+            "visibility": "visible",
+            "paths": [],
+            "info": {
+              "status": "warning",
+              "errors": [],
+              "warnings": []
+            }
+          },
+          {
+            "classes": "ant-form-item-feedback-icon ant-form-item-feedback-icon-warning",
+            "text": "local 0 warning",
+            "color": "rgb(0, 0, 0)",
+            "fontSize": "16px",
+            "visibility": "visible",
+            "paths": [],
+            "info": {
+              "status": "warning",
+              "errors": [],
+              "warnings": []
+            }
+          }
+        ],
+        "searches": [
+          {
+            "value": "",
+            "icons": 1,
+            "status": [
+              "warning"
+            ]
+          },
+          {
+            "value": "",
+            "icons": 1,
+            "status": [
+              "warning"
+            ]
+          }
+        ],
+        "value": null,
+        "target": "Beta",
+        "status": {
+          "status": "warning",
+          "errors": [],
+          "warnings": []
+        },
+        "focused": false,
+        "popup": false
+      },
+      "timers": 0
+    },
+    {
+      "id": "transfer-icon-false",
+      "view": {
+        "root": [
+          "has-feedback",
+          "status-warning"
+        ],
+        "item": [
+          "has-feedback",
+          "has-warning"
+        ],
+        "suffix": null,
+        "icons": [],
+        "searches": [
+          {
+            "value": "",
+            "icons": 0,
+            "status": [
+              "warning"
+            ]
+          },
+          {
+            "value": "",
+            "icons": 0,
+            "status": [
+              "warning"
+            ]
+          }
+        ],
+        "value": null,
+        "target": "Beta",
+        "status": {
+          "status": "warning",
+          "errors": [],
+          "warnings": []
+        },
+        "focused": false,
+        "popup": false
+      },
+      "timers": 0
+    },
+    {
+      "id": "transfer-nested-form",
+      "view": {
+        "root": [],
+        "item": [
+          "has-error",
+          "has-feedback"
+        ],
+        "suffix": null,
+        "icons": [],
+        "searches": [
+          {
+            "value": "",
+            "icons": 0,
+            "status": []
+          },
+          {
+            "value": "",
+            "icons": 0,
+            "status": []
+          }
+        ],
+        "value": null,
+        "target": "Beta",
+        "status": {
+          "status": null,
+          "errors": [],
+          "warnings": []
+        },
+        "focused": false,
+        "popup": false
+      },
+      "timers": 0
+    },
+    {
+      "id": "transfer-prefixes",
+      "view": {
+        "root": [
+          "has-feedback",
+          "status-error"
+        ],
+        "item": [
+          "has-error",
+          "has-feedback"
+        ],
+        "suffix": null,
+        "icons": [
+          {
+            "classes": "field-item-feedback-icon field-item-feedback-icon-error",
+            "text": "",
+            "color": "rgb(0, 0, 0)",
+            "fontSize": "16px",
+            "visibility": "visible",
+            "paths": [
+              "M512 64c247.4 0 448 200.6 448 448S759.4 960 512 960 64 759.4 64 512 264.6 64 512 64zm127.98 274.82h-.04l-.08.06L512 466.75 384.14 338.88c-.04-.05-.06-.06-.08-.06a.12.12 0 00-.07 0c-.03 0-.05.01-.09.05l-45.02 45.02a.2.2 0 00-.05.09.12.12 0 000 .07v.02a.27.27 0 00.06.06L466.75 512 338.88 639.86c-.05.04-.06.06-.06.08a.12.12 0 000 .07c0 .03.01.05.05.09l45.02 45.02a.2.2 0 00.09.05.12.12 0 00.07 0c.02 0 .04-.01.08-.05L512 557.25l127.86 127.87c.04.04.06.05.08.05a.12.12 0 00.07 0c.03 0 .05-.01.09-.05l45.02-45.02a.2.2 0 00.05-.09.12.12 0 000-.07v-.02a.27.27 0 00-.05-.06L557.25 512l127.87-127.86c.04-.04.05-.06.05-.08a.12.12 0 000-.07c0-.03-.01-.05-.05-.09l-45.02-45.02a.2.2 0 00-.09-.05.12.12 0 00-.07 0z"
+            ],
+            "info": null
+          },
+          {
+            "classes": "field-item-feedback-icon field-item-feedback-icon-error",
+            "text": "",
+            "color": "rgb(0, 0, 0)",
+            "fontSize": "16px",
+            "visibility": "visible",
+            "paths": [
+              "M512 64c247.4 0 448 200.6 448 448S759.4 960 512 960 64 759.4 64 512 264.6 64 512 64zm127.98 274.82h-.04l-.08.06L512 466.75 384.14 338.88c-.04-.05-.06-.06-.08-.06a.12.12 0 00-.07 0c-.03 0-.05.01-.09.05l-45.02 45.02a.2.2 0 00-.05.09.12.12 0 000 .07v.02a.27.27 0 00.06.06L466.75 512 338.88 639.86c-.05.04-.06.06-.06.08a.12.12 0 000 .07c0 .03.01.05.05.09l45.02 45.02a.2.2 0 00.09.05.12.12 0 00.07 0c.02 0 .04-.01.08-.05L512 557.25l127.86 127.87c.04.04.06.05.08.05a.12.12 0 00.07 0c.03 0 .05-.01.09-.05l45.02-45.02a.2.2 0 00.05-.09.12.12 0 000-.07v-.02a.27.27 0 00-.05-.06L557.25 512l127.87-127.86c.04-.04.05-.06.05-.08a.12.12 0 000-.07c0-.03-.01-.05-.05-.09l-45.02-45.02a.2.2 0 00-.09-.05.12.12 0 00-.07 0z"
+            ],
+            "info": null
+          }
+        ],
+        "searches": [
+          {
+            "value": "",
+            "icons": 1,
+            "status": [
+              "error"
+            ]
+          },
+          {
+            "value": "",
+            "icons": 1,
+            "status": [
+              "error"
+            ]
+          }
+        ],
+        "value": null,
+        "target": "Beta",
+        "status": {
+          "status": "error",
+          "errors": [],
+          "warnings": []
+        },
+        "focused": false,
+        "popup": false
+      },
+      "timers": 0
+    },
+    {
+      "id": "transfer-no-search",
+      "view": {
+        "root": [
+          "has-feedback",
+          "status-error"
+        ],
+        "item": [
+          "has-error",
+          "has-feedback"
+        ],
+        "suffix": null,
+        "icons": [],
+        "searches": [],
+        "value": null,
+        "target": "Beta",
+        "status": {
+          "status": "error",
+          "errors": [],
+          "warnings": []
+        },
+        "focused": false,
+        "popup": false
+      },
+      "timers": 0
+    }
+  ]
+}

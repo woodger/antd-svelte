@@ -32,6 +32,9 @@
   import { useComponentTheme } from './theme-component.svelte';
   import { connectComponentTheme } from './theme-component.dom';
   import { useForm, useFormField } from './form-context';
+  import { useFormItemStatusContext } from './form-item-status';
+  import { useFormFeedback } from './form-feedback-context';
+  import FormFeedbackIcon from './FormFeedbackIcon.svelte';
   import { useCompact } from './space-compact-context';
   import { compactClasses } from './space-compact.engine';
   import { connectPopup, getPopupActiveElement } from './popup.dom';
@@ -101,6 +104,7 @@
     placement,
     size,
     status,
+    suffixIcon,
     variant,
     locale,
     class: className = '',
@@ -129,6 +133,8 @@
     focus, blur
   };
   const field = useFormField(() => controlRef);
+  const itemStatus = useFormItemStatusContext();
+  const feedback = useFormFeedback();
   const form = useForm();
   const compact = useCompact();
   const generatedId = $props.id();
@@ -251,7 +257,8 @@
   );
   let verticalPlacement = $state<'top' | 'bottom'>('bottom');
   let resolvedSize = $derived(size ?? compact?.size ?? config.componentSize);
-  let resolvedStatus = $derived((time ? time.status : status) ?? field?.status);
+  let resolvedStatus = $derived((time ? time.status : status)
+    ?? ('status' in itemStatus ? itemStatus.status : field?.status));
   let resolvedVariant = $derived(variantContext.variant);
   let resolvedSeparator = $derived(separator ?? config.rangePicker?.separator);
   let semantic = $derived(time ? timeRangeSemantic(time, config.timePicker, config.rangePicker, {
@@ -275,8 +282,9 @@
       ? config.timePicker.allowClear.clearIcon : undefined;
     return local !== undefined ? local : context;
   });
-  let suffixContent = $derived(time?.suffixIcon === undefined
-    ? config.timePicker?.suffixIcon : time.suffixIcon);
+  let suffixContent = $derived(time
+    ? time.suffixIcon === undefined ? config.timePicker?.suffixIcon : time.suffixIcon
+    : suffixIcon !== undefined ? suffixIcon : config.datePicker?.suffixIcon);
   let timeInputSize = $derived.by(() => {
     if (!time) return undefined;
     const first = formats[0];
@@ -1030,6 +1038,7 @@
       resolvedSize === 'large' && `${prefix}-large`,
       resolvedSize === 'small' && `${prefix}-small`,
       resolvedStatus && `${prefix}-status-${resolvedStatus}`,
+      feedback.hasFeedback && `${prefix}-has-feedback`,
       config.direction === 'rtl' && `${prefix}-rtl`,
       compactClasses(prefix, config.direction, compact),
       semantic?.classes.root,
@@ -1102,15 +1111,12 @@
           }} onblur={event => blurInput(1, event)} onkeydown={event => keyboard(event, 1)} />
   </div>
   <div class={`${prefix}-active-bar`} style={`position:absolute;left:${bar.left}px;width:${bar.width}px`}></div>
-  {#if !time || suffixContent !== false && suffixContent !== null && suffixContent !== ''}
+  {#if suffixContent !== false && suffixContent !== null && suffixContent !== ''}
     <span
       class={[`${prefix}-suffix`, semantic?.classes.suffix]}
       style={semantic?.styles.suffix}
       aria-hidden="true"
-    >{#if !time}<PickerCalendarIcon />
-    {:else if typeof suffixContent === 'function'}{@render suffixContent()}
-    {:else if suffixContent === undefined || suffixContent === true}<PickerClockIcon />
-    {:else}{suffixContent}{/if}</span>
+    >{#if typeof suffixContent === 'function'}{@render suffixContent()}{:else if suffixContent === undefined || suffixContent === true}{#if time}<PickerClockIcon />{:else}<PickerCalendarIcon />{/if}{#if feedback.hasFeedback && feedback.icon}<FormFeedbackIcon descriptor={feedback.icon} />{/if}{:else}{suffixContent}{/if}</span>
   {/if}
   {#if (time ? timeAllowClear : allowClear) && (time ? calendar : committed)
       .some((date, index) => (date || time && previewValue

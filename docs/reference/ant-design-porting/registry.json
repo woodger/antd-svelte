@@ -4686,6 +4686,26 @@
             "readme.md"
           ],
           "note": "Как Ant Design 6.6.8 AutoComplete, prefixCls использует общий Select namespace: local непустой приоритетнее ConfigProvider, пустой наследует. Control/content/clear/groups/options/popup получают owner classes и общий Select CSS data module. Служебные Select variables и вложенные Input/Typography selectors следуют общему namespace, canonical token names/markers сохраняются. 28 неизменённых UMD конфигураций в normal/nested/reset scopes включают Input/TextArea, filled/disabled Input, aliases, sizes/variants/status, groups и открытые options; raw input background/border сравниваются отдельно от внешнего control. Три Source live transitions и Native сценарии обычного/custom editor сохраняют DOM, refs/IDs/query/text selection/focus/FormData/callbacks и portalled popup/options. Сохранены plain empty fallback, native constraints, IME/backfill/keyboard/reset и независимая тема вложенных controls. SSR выводит namespaces без браузерных ресурсов. Остальной extended API остаётся отдельным пробелом."
+        },
+        {
+          "id": "form-feedback",
+          "title": "Form feedback, suffix и вложенные status scopes",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/AutoComplete.svelte",
+            "src/lib/form-feedback-context.ts",
+            "src/lib/FormFeedbackIcon.svelte",
+            "readme.md",
+            "tests/browser/fixtures/FormFeedbackAutoCompleteCase.svelte",
+            "tests/browser/fixtures/form-feedback-autocomplete-cases.ts",
+            "tests/browser/fixtures/ant-design-form-feedback-autocomplete-reference.json",
+            "tests/browser/form-feedback-autocomplete-metrics.ts",
+            "tests/browser/form-feedback-autocomplete.spec.ts",
+            "tests/package/form-feedback-autocomplete.ssr.test.ts",
+            "tests/browser/fixtures/ant-design-form-feedback-autocomplete-clear-reference.json"
+          ],
+          "note": "Pinned Antd6.6.8 Select-based feedback: has-feedback/show-arrow/in-form-item, status mask и feedback-only suffix. Native input/textarea дают один значок; custom Antd Input/TextArea дают два, как реально наблюдается в official UMD. Opaque Snippet не интроспектируется и не получает новый suppress API. Scoped opacity adapter компенсирует retained native popup sibling, сохраняя Source hover hiding при clear. Pointer-clear откладывает close через MessageChannel после clear/change/search; click-only не закрывает, controlled owner может отклонить false request. 34UMD cases/55actions/9DOM-freeSSR плюс3 raw callback traces; strict hydration для default/Input/TextArea. Native values/events/refs/ARIA и clear callback order сохранены."
         }
       ]
     },
@@ -5069,6 +5089,26 @@
             "readme.md"
           ],
           "note": "В записанном UMD Panel при ConfigProvider.direction=rtl сохраняет computed root direction=ltr, задавая RTL внутри. Прежний Native root dir=rtl сохранён. Raw root direction отделён от дополнительного обычного HTML dir=rtl wrapper counterpart в normal/nested scopes; reset sibling остаётся LTR. Это существующая Native boundary, а не объявленная ошибка направления Source columns."
+        },
+        {
+          "id": "form-feedback",
+          "title": "Form feedback, suffix и вложенные status scopes",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/CascaderCore.svelte",
+            "src/lib/CascaderPopupContent.svelte",
+            "src/lib/form-feedback-context.ts",
+            "src/lib/FormFeedbackIcon.svelte",
+            "readme.md",
+            "tests/browser/fixtures/FormFeedbackCascaderCase.svelte",
+            "tests/browser/fixtures/form-feedback-cascader-cases.ts",
+            "tests/browser/fixtures/ant-design-form-feedback-cascader-reference.json",
+            "tests/browser/form-feedback-cascader-metrics.ts",
+            "tests/browser/form-feedback-cascader.spec.ts",
+            "tests/package/form-feedback-cascader.ssr.test.ts"
+          ],
+          "note": "Pinned Antd6.6.8: has-feedback/in-form-item и public status mask; Form icon сохраняет собственный namespace независимо от select/cascader prefix. Generated/custom suffixIcon предшествует feedback; null/false убирают стрелку, сохраняя feedback. Custom trigger/standalone Panel не получают selector suffix. PopupRender сбрасывает feedback/status/binding по Source ContextIsolator. 35UMD cases/29actions/11DOM-freeSSR, metadata/noStyle/Form/OTP/prefix/RTL/loading/multiple, async reset/disposal и строгая гидратация. Native path/value/keyboard/ref/ARIA contracts сохранены."
         }
       ]
     },
@@ -5975,6 +6015,27 @@
             "tests/browser/fixtures/PrefixTextBoundariesFixtures.svelte"
           ],
           "note": "Single/Range date/time используют getPrefixCls(picker, local) и отдельный scoped template из 262 правил. Private affix-color следует общему prefix; component tokens/marker canonical, Tag/Button namespaces независимы. Time cellRender.info.prefixCls и originNode получают фактический picker owner. 33 raw UMD cases x normal/nested/sibling и 12 live transitions покрывают date/datetime/time, range, RTL, sizes/variants/status/affix, aliases и cssVar prefix. DOM/ref/IDs, unfinished input/caret/focus, pending datetime и собственный portal сохраняются. DatePicker/RangePicker синхронизируют текст по value и его отображению, поэтому prefix-only context repaint не сбрасывает draft; реальные value/format updates продолжают синхронизацию. UTC/precision, default millisecondStep=100, последовательное подтверждение границ и callbacks не меняются. Прежнее оформление без source theme и cleanup проверены отдельно. Canonical Native default styles сравниваются с custom shared prefix в light/blue, dark/green и compact/purple, включая открытые панели и focus. Component defaults Date/TimePicker и Calendar имеют нулевую specificity и не перекрывают поздней вставкой Native bridge; Source theme overrides/aliases сохраняются. Head stylesheet/snippet/NoCompactStyle boundaries не создают внешние text nodes; default и local prefix, closed/defaultOpen и live shared-prefix updates сохраняют соседний текст."
+        },
+        {
+          "id": "form-feedback",
+          "title": "Form feedback, suffix и вложенные status scopes",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/SinglePicker.svelte",
+            "src/lib/RangePickerCore.svelte",
+            "src/lib/date-picker.types.ts",
+            "src/lib/form-feedback-context.ts",
+            "src/lib/FormFeedbackIcon.svelte",
+            "readme.md",
+            "tests/browser/fixtures/FormFeedbackPickerCase.svelte",
+            "tests/browser/fixtures/form-feedback-picker-cases.ts",
+            "tests/browser/fixtures/ant-design-form-feedback-picker-reference.json",
+            "tests/browser/form-feedback-picker-metrics.ts",
+            "tests/browser/form-feedback-picker.spec.ts",
+            "tests/package/form-feedback-picker.ssr.test.ts"
+          ],
+          "note": "Pinned Antd6.6.8 Date/Range используют has-feedback без in-form-item, public Form status mask и общий Form renderer. Новый текущий suffixIcon prop и ConfigProvider.datePicker.suffixIcon: local !==undefined перекрывает config, true/undefined дают calendar+feedback, null/false/empty string скрывают suffix, 0/text/snippet заменяют generated suffix/feedback. RangePicker наследует prop и datePicker config; rangePicker config не расширялся. С TimePicker66UMD cases/66actions/16DOM-freeSSR, live suffix swaps с сохранением input/focus, scopes/prefixes/async reset/disposal и4 strict hydration. Dayjs/value/form/ARIA/ref/confirmation contracts сохранены."
         }
       ]
     },
@@ -7501,9 +7562,50 @@
             "src/lib/InputPassword.svelte",
             "src/lib/InputSearch.svelte",
             "src/lib/SpaceCompact.svelte",
-            "src/lib/feedback.dom.ts"
+            "src/lib/feedback.dom.ts",
+            "src/lib/CascaderCore.svelte",
+            "src/lib/CascaderPopupContent.svelte",
+            "src/lib/AutoComplete.svelte",
+            "src/lib/Mentions.svelte",
+            "src/lib/Transfer.svelte",
+            "src/lib/SinglePicker.svelte",
+            "src/lib/RangePickerCore.svelte",
+            "src/lib/date-picker.types.ts",
+            "tests/browser/fixtures/FormFeedbackCascaderCase.svelte",
+            "tests/browser/fixtures/form-feedback-cascader-cases.ts",
+            "tests/browser/fixtures/ant-design-form-feedback-cascader-reference.json",
+            "tests/browser/form-feedback-cascader-metrics.ts",
+            "tests/browser/form-feedback-cascader.spec.ts",
+            "tests/package/form-feedback-cascader.ssr.test.ts",
+            "tests/browser/fixtures/FormFeedbackAutoCompleteCase.svelte",
+            "tests/browser/fixtures/form-feedback-autocomplete-cases.ts",
+            "tests/browser/fixtures/ant-design-form-feedback-autocomplete-reference.json",
+            "tests/browser/form-feedback-autocomplete-metrics.ts",
+            "tests/browser/form-feedback-autocomplete.spec.ts",
+            "tests/package/form-feedback-autocomplete.ssr.test.ts",
+            "tests/browser/fixtures/FormFeedbackMentionsCase.svelte",
+            "tests/browser/fixtures/form-feedback-mentions-cases.ts",
+            "tests/browser/fixtures/ant-design-form-feedback-mentions-reference.json",
+            "tests/browser/form-feedback-mentions-metrics.ts",
+            "tests/browser/form-feedback-mentions.spec.ts",
+            "tests/package/form-feedback-mentions.ssr.test.ts",
+            "tests/browser/fixtures/FormFeedbackPickerCase.svelte",
+            "tests/browser/fixtures/form-feedback-picker-cases.ts",
+            "tests/browser/fixtures/ant-design-form-feedback-picker-reference.json",
+            "tests/browser/form-feedback-picker-metrics.ts",
+            "tests/browser/form-feedback-picker.spec.ts",
+            "tests/package/form-feedback-picker.ssr.test.ts",
+            "tests/browser/form-feedback-cascader-hydration.spec.ts",
+            "tests/browser/fixtures/form-feedback-cascader-hydration.client.ts",
+            "tests/browser/fixtures/form-feedback-cascader-hydration.server.ts",
+            "tests/browser/form-feedback-autocomplete-hydration.spec.ts",
+            "tests/browser/fixtures/form-feedback-autocomplete-hydration.client.ts",
+            "tests/browser/fixtures/form-feedback-autocomplete-hydration.server.ts",
+            "tests/browser/form-feedback-picker-hydration.spec.ts",
+            "tests/browser/fixtures/form-feedback-picker-hydration.client.ts",
+            "tests/browser/fixtures/form-feedback-picker-hydration.server.ts"
           ],
-          "note": "FormItem.hasFeedback=true/{icons}, Form.feedbackIcons, FormFeedbackIcons/FormFeedbackInfo и отдельный внутренний feedback context сохраняют публичный useFormItemStatus. Custom false подавляет значок, прочие falsy значения выбирают default, true/empty arrays сохраняют пустой wrapper. Local renderer заменяет Form defaults целиком. Validated success при untouched включается только с hasFeedback. Styled Item вычисляет renderer и без consumer; noStyle наследует parent icon/flag при undefined, локальный false подавляет их. Hidden noStyle использует styled scope. Form сбрасывает feedback/status, сохраняя outer metadata/isFormItemInput; InputOTP и TreeSelect popup изолируют feedback. TreeSelect использует Form status context, включая маску вложенного Form, и добавляет in-form-item/has-feedback. Его local status не меняет Form icon. 45 unmodified UMD6.6.8 случаев /31 действие, 12 DOM-free SSR, отдельный SSR no-consumer callback, generic public types, strict hydration, async completion/reset/disposal и live prefixes. Четыре SVG glyphs извлечены из закреплённого UMD; общие Native icons не менялись. Source useStatus diagnostic после nested Form reset записан raw; Native hook сохраняет отсутствие React diagnostics. Input/TextArea/InputNumber/Select и составные InputPassword/InputSearch используют общий renderer; 128 дополнительных unmodified UMD случаев /118 переходов /20 DOM-free SSR. Input/InputNumber добавляют значок после пользовательского suffix, TextArea — между clear и счётчиком. InputNumber/Select добавляют has-feedback/in-form-item. Calendar header сохраняет feedback/status и сбрасывает только isFormItemInput, Pagination наследует оба признака. ColorPicker panel и Mentions popupRender сбрасывают feedback/status. Переключение hasFeedback у Input/TextArea может менять wrapper и снимать focus, как в Source; смена status/icon сохраняет input, native refs/values/events и ARIA. Strict hydration проверена для четырёх controls. Renderer остальных controls и оставшаяся Form motion ещё переносятся. Сохранён согласованный focus recovery SpaceCompact: после toggle hasFeedback InputSearch получает новый input с восстановленным focus; raw UMD6.6.8 при тех же переходах меняет input и теряет focus. Browser test явно выделяет только это отличие, исходная запись не меняется."
+          "note": "FormItem.hasFeedback=true/{icons}, Form.feedbackIcons, FormFeedbackIcons/FormFeedbackInfo и отдельный внутренний feedback context сохраняют публичный useFormItemStatus. Custom false подавляет значок, прочие falsy значения выбирают default, true/empty arrays сохраняют пустой wrapper. Local renderer заменяет Form defaults целиком. Validated success при untouched включается только с hasFeedback. Styled Item вычисляет renderer и без consumer; noStyle наследует parent icon/flag при undefined, локальный false подавляет их. Hidden noStyle использует styled scope. Form сбрасывает feedback/status, сохраняя outer metadata/isFormItemInput; InputOTP и TreeSelect popup изолируют feedback. TreeSelect использует Form status context, включая маску вложенного Form, и добавляет in-form-item/has-feedback. Его local status не меняет Form icon. 45 unmodified UMD6.6.8 случаев /31 действие, 12 DOM-free SSR, отдельный SSR no-consumer callback, generic public types, strict hydration, async completion/reset/disposal и live prefixes. Четыре SVG glyphs извлечены из закреплённого UMD; общие Native icons не менялись. Source useStatus diagnostic после nested Form reset записан raw; Native hook сохраняет отсутствие React diagnostics. Input/TextArea/InputNumber/Select и составные InputPassword/InputSearch используют общий renderer; 128 дополнительных unmodified UMD случаев /118 переходов /20 DOM-free SSR. Input/InputNumber добавляют значок после пользовательского suffix, TextArea — между clear и счётчиком. InputNumber/Select добавляют has-feedback/in-form-item. Calendar header сохраняет feedback/status и сбрасывает только isFormItemInput, Pagination наследует оба признака. ColorPicker panel и Mentions popupRender сбрасывают feedback/status. Переключение hasFeedback у Input/TextArea может менять wrapper и снимать focus, как в Source; смена status/icon сохраняет input, native refs/values/events и ARIA. Strict hydration проверена для четырёх controls. Остальные Form feedback consumers подключены отдельным этапом: Cascader, AutoComplete, Mentions, Transfer и date/time single/range. 184 дополнительных UMD cases/192actions/47DOM-freeSSR плюс3 callback traces; raw Source replay совпадает побайтно. Source affix/editor lifecycle Mentions,2 Transfer search icons,2 icons custom AutoComplete Input/TextArea и Date/Range suffixIcon prop/config сверены; статус/иконка сохраняют editor, feedback toggle следует Source affix boundaries. Pickers не получают in-form-item. Native Mentions root остаётся DIV; остальная Form motion ещё переносится. Сохранён согласованный focus recovery SpaceCompact: после toggle hasFeedback InputSearch получает новый input с восстановленным focus; raw UMD6.6.8 при тех же переходах меняет input и теряет focus. Browser test явно выделяет только это отличие, исходная запись не меняется."
         }
       ]
     },
@@ -8547,6 +8649,25 @@
             "tests/package/mentions-prefix.ssr.test.ts"
           ],
           "note": "Ant Design6.6.8 / rc-mentions1.12.0: local nonempty wins; empty/undefined наследуют ConfigProvider. CSS prefixCls независим от текстовых prefix triggers. 102 Source CSS rules с canonical token markers/variables, общим namespace private cmp-mentions variables и Form feedback selector. Native geometry/ARIA/button/clear/IME, ID/ref/value/form/reset и measurement модели не меняются. 25 raw UMD configurations в normal/nested/sibling scopes и3 live updates с открытым popup/query, сохранением DOM/focus/selection/FormData. Fresh public Inner class измерен отдельно; совпадает с raw. Прежний plain locale.emptyText fallback сохранён: Source default Small Empty остаётся в result, public notFoundContent counterpart записан в nativeEmpty."
+        },
+        {
+          "id": "form-feedback",
+          "title": "Form feedback, suffix и вложенные status scopes",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Mentions.svelte",
+            "src/lib/form-feedback-context.ts",
+            "src/lib/FormFeedbackIcon.svelte",
+            "readme.md",
+            "tests/browser/fixtures/FormFeedbackMentionsCase.svelte",
+            "tests/browser/fixtures/form-feedback-mentions-cases.ts",
+            "tests/browser/fixtures/ant-design-form-feedback-mentions-reference.json",
+            "tests/browser/form-feedback-mentions-metrics.ts",
+            "tests/browser/form-feedback-mentions.spec.ts",
+            "tests/package/form-feedback-mentions.ssr.test.ts"
+          ],
+          "note": "Pinned Antd6.6.8/RcMentions использует has-suffix/affix-wrapper, не has-feedback. Общие Form status mask и feedback-only suffix сохраняют native clear glyph/handlers. При feedback transition с изменением effective affix заменяются textarea/mirror, закрывается popup и теряется focus, как в Source; при постоянном clear-wrapper или совместном swap affixes editor сохраняется. Pending choose/tick проверяет исходный editor и не фокусирует замену. Status/icon/prefix updates сохраняют editor; root/nativeElement остаётся DIV. С Transfer49UMD cases/42actions/11DOM-freeSSR, scopes/metadata/selection/clear/async/reset/disposal. Source fixtures явно типизируют array/string rules, без нецелевой default type ошибки."
         }
       ]
     },
@@ -10879,6 +11000,26 @@
             "tests/browser/fixtures/PrefixTextBoundariesFixtures.svelte"
           ],
           "note": "Single/Range date/time используют getPrefixCls(picker, local) и отдельный scoped template из 262 правил. Private affix-color следует общему prefix; component tokens/marker canonical, Tag/Button namespaces независимы. Time cellRender.info.prefixCls и originNode получают фактический picker owner. 33 raw UMD cases x normal/nested/sibling и 12 live transitions покрывают date/datetime/time, range, RTL, sizes/variants/status/affix, aliases и cssVar prefix. DOM/ref/IDs, unfinished input/caret/focus, pending datetime и собственный portal сохраняются. DatePicker/RangePicker синхронизируют текст по value и его отображению, поэтому prefix-only context repaint не сбрасывает draft; реальные value/format updates продолжают синхронизацию. UTC/precision, default millisecondStep=100, последовательное подтверждение границ и callbacks не меняются. Прежнее оформление без source theme и cleanup проверены отдельно. Canonical Native default styles сравниваются с custom shared prefix в light/blue, dark/green и compact/purple, включая открытые панели и focus. Component defaults Date/TimePicker и Calendar имеют нулевую specificity и не перекрывают поздней вставкой Native bridge; Source theme overrides/aliases сохраняются. Head stylesheet/snippet/NoCompactStyle boundaries не создают внешние text nodes; default и local prefix, closed/defaultOpen и live shared-prefix updates сохраняют соседний текст."
+        },
+        {
+          "id": "form-feedback",
+          "title": "Form feedback, suffix и вложенные status scopes",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/SinglePicker.svelte",
+            "src/lib/RangePickerCore.svelte",
+            "src/lib/form-feedback-context.ts",
+            "src/lib/FormFeedbackIcon.svelte",
+            "readme.md",
+            "tests/browser/fixtures/FormFeedbackPickerCase.svelte",
+            "tests/browser/fixtures/form-feedback-picker-cases.ts",
+            "tests/browser/fixtures/ant-design-form-feedback-picker-reference.json",
+            "tests/browser/form-feedback-picker-metrics.ts",
+            "tests/browser/form-feedback-picker.spec.ts",
+            "tests/package/form-feedback-picker.ssr.test.ts"
+          ],
+          "note": "Pinned Antd6.6.8 Time/TimeRange используют has-feedback без in-form-item, public Form status mask и calendar/clock generated suffix composition. Существующий local suffixIcon перекрывает ConfigProvider.timePicker: true/undefined показывают clock+feedback; null/false/empty string скрывают suffix, custom content заменяет generated feedback. Date/Range используют отдельный datePicker config. С DatePicker66UMD cases/66actions/16DOM-freeSSR,4 strict hydration и pending disposal. Существующие UTC/Dayjs/precision/value/event/ref и readonly contracts сохранены."
         }
       ]
     },
@@ -11164,6 +11305,25 @@
             "readme.md"
           ],
           "note": "Local непустой prefixCls приоритетнее ConfigProvider, пустой наследует общий namespace. 54 исходных CSS rules подключены как data module; owner parts/states и class-prefix box-sizing selectors отделены от общих Button/Input/Pagination/Table namespaces. Private Checkbox/Pagination используют существующие prefix engines и canonical token markers. 20 неизменённых UMD конфигураций в normal/nested/reset scopes и три live transitions сохраняют root/input/checkbox identity, query, focus и text selection. Native pager draft/page, refs, checked keys и move callbacks сохраняются при смене prefix; package SSR выводит независимые namespaces без DOM/timers/callbacks. Raw remove font-size не изменяется: прежний Native font:inherit проверяется явным сравнением со Source item font-size. Custom list geometry измеряется в одинаковом контейнере 760px. Остальные Native selection/form/reset и Empty boundaries сохранены."
+        },
+        {
+          "id": "form-feedback",
+          "title": "Form feedback, suffix и вложенные status scopes",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Transfer.svelte",
+            "src/lib/form-feedback-context.ts",
+            "src/lib/FormFeedbackIcon.svelte",
+            "readme.md",
+            "tests/browser/fixtures/FormFeedbackMentionsCase.svelte",
+            "tests/browser/fixtures/form-feedback-mentions-cases.ts",
+            "tests/browser/fixtures/ant-design-form-feedback-mentions-reference.json",
+            "tests/browser/form-feedback-mentions-metrics.ts",
+            "tests/browser/form-feedback-mentions.spec.ts",
+            "tests/package/form-feedback-mentions.ssr.test.ts"
+          ],
+          "note": "Pinned Antd6.6.8 Transfer читает Form hasFeedback для root has-feedback, без отдельного root icon. Оба внутренних search Input наследуют Form feedback/status; при showSearch=false иконок нет. Public status mask сохраняет nested Form reset. Metadata/noStyle/local override, global/local prefixes, RTL/size, поиск/move/async/reset и2 search icons проверены независимым UMD вместе с Mentions49cases/42actions/11DOM-freeSSR. Native targetKeys/selection/callback order/field association и ARIA contracts не меняются."
         }
       ]
     },

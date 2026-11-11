@@ -19,6 +19,9 @@
   import { useComponentTheme } from './theme-component.svelte';
   import { connectComponentTheme } from './theme-component.dom';
   import { useForm, useFormField } from './form-context';
+  import { useFormItemStatusContext } from './form-item-status';
+  import { useFormFeedback } from './form-feedback-context';
+  import FormFeedbackIcon from './FormFeedbackIcon.svelte';
   import { useCompact } from './space-compact-context';
   import { compactClasses } from './space-compact.engine';
   import { connectPopup, getPopupActiveElement } from './popup.dom';
@@ -64,6 +67,7 @@
     showNow = true,
     size,
     status,
+    suffixIcon,
     variant,
     locale,
     onChange,
@@ -104,6 +108,8 @@
     focus, blur
   };
   const field = useFormField(() => controlRef);
+  const itemStatus = useFormItemStatusContext();
+  const feedback = useFormFeedback();
   const form = useForm();
   const compact = useCompact();
   const generatedId = $props.id();
@@ -126,7 +132,8 @@
   );
   let confirm = $derived(needConfirm ?? Boolean(showTime));
   let resolvedSize = $derived(size ?? compact?.size ?? config.componentSize);
-  let resolvedStatus = $derived((time ? time.status : status) ?? field?.status);
+  let resolvedStatus = $derived((time ? time.status : status)
+    ?? ('status' in itemStatus ? itemStatus.status : field?.status));
   let now = $state.raw(untrack(() => adapter.getNow()));
   let draft = $state.raw<Dayjs | null>(untrack(() => value === undefined ? initialValue : value));
   let internalPanel = $state.raw(
@@ -192,8 +199,9 @@
       ? config.timePicker.allowClear.clearIcon : undefined;
     return local !== undefined ? local : context;
   });
-  let suffixContent = $derived(time?.suffixIcon === undefined
-    ? config.timePicker?.suffixIcon : time.suffixIcon);
+  let suffixContent = $derived(time
+    ? time.suffixIcon === undefined ? config.timePicker?.suffixIcon : time.suffixIcon
+    : suffixIcon !== undefined ? suffixIcon : config.datePicker?.suffixIcon);
   let placeholderText = $derived(time
     ? attributes.placeholder ?? locale?.timePickerLocale?.placeholder
       ?? config.locale.datePicker?.timePickerLocale?.placeholder
@@ -705,6 +713,7 @@
       resolvedSize === 'large' && `${prefix}-large`,
       resolvedSize === 'small' && `${prefix}-small`,
       resolvedStatus && `${prefix}-status-${resolvedStatus}`,
+      feedback.hasFeedback && `${prefix}-has-feedback`,
       config.direction === 'rtl' && `${prefix}-rtl`,
       compactClasses(prefix, config.direction, compact),
       time && config.timePicker?.class,
@@ -772,16 +781,13 @@
             onblur?.(event);
             blurWithin(event);
           }} />
-    {#if !time || suffixContent !== false && suffixContent !== null && suffixContent !== ''}
+    {#if suffixContent !== false && suffixContent !== null && suffixContent !== ''}
       <span
         class={[`${prefix}-suffix`, semantic?.classes.suffix]}
         style={semantic?.styles.suffix}
         aria-hidden="true"
       >
-        {#if !time}<PickerCalendarIcon />
-        {:else if typeof suffixContent === 'function'}{@render suffixContent()}
-        {:else if suffixContent === undefined || suffixContent === true}<PickerClockIcon />
-        {:else}{suffixContent}{/if}
+        {#if typeof suffixContent === 'function'}{@render suffixContent()}{:else if suffixContent === undefined || suffixContent === true}{#if time}<PickerClockIcon />{:else}<PickerCalendarIcon />{/if}{#if feedback.hasFeedback && feedback.icon}<FormFeedbackIcon descriptor={feedback.icon} />{/if}{:else}{suffixContent}{/if}
       </span>
     {/if}
     {#if time}{@render clearButton()}{/if}

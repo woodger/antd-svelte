@@ -9,6 +9,8 @@
   import { useConfig } from './config-context';
   import { useComponentTheme } from './theme-component.svelte';
   import { provideFormField, useForm, useFormField } from './form-context';
+  import { useFormItemStatusContext } from './form-item-status';
+  import { useFormFeedback } from './form-feedback-context';
   import {
     transferData, transferDisabled, transferKey, transferMove, transferSelectAll,
     transferSelection, transferSelectRange
@@ -28,6 +30,8 @@
   const componentTheme = useComponentTheme('Transfer');
   const form = useForm();
   const field = useFormField(() => nativeElement);
+  const itemStatus = useFormItemStatusContext();
+  const feedback = useFormFeedback();
   // Служебные checkbox/search не являются отдельными полями внешнего FormItem.
   provideFormField(field ? {
     get disabled() {
@@ -53,7 +57,7 @@
   let rootPrefix = $derived(config.getPrefixCls());
   let prefixCss = $derived(getTransferPrefixCss(prefix, rootPrefix));
   let disabled = $derived(props.disabled ?? form?.disabled ?? config.componentDisabled);
-  let status = $derived(props.status || field?.status);
+  let status = $derived(props.status || ('status' in itemStatus ? itemStatus.status : field?.status));
   let data = $derived(transferData(props.dataSource ?? [], props.targetKeys ?? [], props.rowKey));
   let selected = $derived(props.selectedKeys ?? localSelected);
   let sourceSelected = $derived(transferSelection(selected, data.left));
@@ -244,6 +248,7 @@
     .filter(Boolean).join(' ') || undefined}
   class={[prefix, 'ant-transfer-css-var', componentTheme.className, disabled && `${prefix}-disabled`,
     config.direction === 'rtl' && `${prefix}-rtl`, props.children && `${prefix}-customize-list`,
+    feedback.hasFeedback && `${prefix}-has-feedback`,
     status && `${prefix}-status-${status}`, config.transfer?.class, props.class,
     props.rootClassName, classes.root]} style={rootStyle}>
   <TransferSection section={source} children={props.children} footer={props.footer}

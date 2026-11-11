@@ -17,6 +17,9 @@
   import { useDesignTokenContext } from './theme-context.svelte';
   import { connectComponentTheme } from './theme-component.dom';
   import { useForm, useFormField } from './form-context';
+  import { useFormItemStatusContext } from './form-item-status';
+  import { useFormFeedback } from './form-feedback-context';
+  import FormFeedbackIcon from './FormFeedbackIcon.svelte';
   import { useCompact } from './space-compact-context';
   import { connectPopup } from './popup.dom';
   import { createPopupContainer } from './popup-container.model.svelte.js';
@@ -86,6 +89,8 @@
     focus, blur
   };
   const field = useFormField(() => controlRef);
+  const itemStatus = useFormItemStatusContext();
+  const feedback = useFormFeedback();
   const compact = useCompact();
   const generated = $props.id();
   let internalValue = $state(untrack(() => value ?? defaultValue));
@@ -94,7 +99,8 @@
     disabled ?? field?.disabled ?? form?.disabled ?? config.componentDisabled
   );
   let resolvedSize = $derived(size ?? compact?.size ?? config.componentSize);
-  let resolvedStatus = $derived(status ?? field?.status);
+  let resolvedStatus = $derived(status ?? ('status' in itemStatus ? itemStatus.status : field?.status));
+  let hasAffix = $derived(Boolean(allowClear || feedback.hasFeedback));
   let controlId = $derived(id ?? field?.id ?? `ant-mentions-${generated}`);
   let prefixes = $derived(typeof prefix === 'string' ? [prefix] : prefix);
   let measuring = $state(false);
@@ -142,7 +148,31 @@
   let measure: ReturnType<typeof connectMentionsMeasure> | undefined;
   let blurTimer: ReturnType<typeof setTimeout> | undefined;
   let previousValue = untrack(() => value);
+  let previousFeedback = untrack(() => Boolean(feedback.hasFeedback));
+  let previousAffix = untrack(() => hasAffix);
+  let editorGeneration = $state(0);
   let alive = true;
+  $effect.pre(() => {
+    const current = Boolean(feedback.hasFeedback);
+    const affix = hasAffix;
+    const replaceEditor = current !== previousFeedback && affix !== previousAffix;
+    previousFeedback = current;
+    previousAffix = affix;
+    if (replaceEditor) {
+      // RcMentions replaces its editor when feedback adds/removes the affix wrapper.
+      // A persistent allowClear wrapper keeps the editor; the native root stays a DIV.
+      untrack(() => {
+        editorGeneration++;
+        focused = false;
+        measuring = false;
+        query = '';
+        token = '';
+        location = 0;
+        active = 0;
+        if (blurTimer !== undefined) clearTimeout(blurTimer);
+      });
+    }
+  });
   onDestroy(() => {
     alive = false;
     if (blurTimer !== undefined)
@@ -244,6 +274,7 @@
   }
   async function choose(option: MentionsOption) {
     if (blocked || readonly || loading || option.disabled || !editor) return;
+    const selectedEditor = editor;
     const result = replaceMention(
       text,
       {
@@ -261,7 +292,7 @@
     location = 0;
     onSelect?.({ ...option }, selectedPrefix);
     await tick();
-    if (alive && editor?.isConnected) {
+    if (alive && editor === selectedEditor && selectedEditor.isConnected) {
       editor.focus({ preventScroll: true });
       editor.setSelectionRange(result.selection, result.selection);
     }
@@ -390,7 +421,17 @@
   :where([data-ant-mentions-option]) { border: 0; width: 100%; background: transparent; font: inherit; text-align: start; }
   [data-ant-mentions-clear] { position: absolute; inset-inline-end: var(--ant-padding-xs); top: 50%; transform: translateY(-50%); display: flex; padding: 0; border: 0; color: var(--ant-color-text-quaternary); background: transparent; cursor: pointer; }
   [data-ant-mentions-clear]:focus-visible { outline: 2px solid var(--ant-color-primary); }
+  [data-ant-mentions-feedback-suffix] > [data-ant-mentions-clear] { position: static; transform: none; }
 </style>
+
+{#snippet clearControl()}
+  {#if allowClear && text && !blocked && !readonly}<button data-ant-mentions-clear type="button" class={[
+    `${componentPrefix}-clear ${componentPrefix}-clear-icon`, feedback.hasFeedback && `${componentPrefix}-clear-icon-has-suffix`
+  ]} aria-label={config.locale.clearText}
+    disabled={typeof allowClear === 'object' && allowClear.disabled} onpointerdown={event => event.preventDefault()} onclick={clear}>
+    {#if typeof allowClear === 'object' && allowClear.clearIcon}{@render allowClear.clearIcon()}{:else}<Icon name="close" />{/if}
+  </button>{/if}
+{/snippet}
 
 {#snippet menu()}
   <div id={`${controlId}-list`} role="listbox" class={`${componentPrefix}-dropdown-menu`}
@@ -426,6 +467,7 @@
       `${componentPrefix} ant-mentions-css-var`,
       componentTheme.className,
       `${componentPrefix}-${appearance}`,
+      hasAffix && `${componentPrefix}-has-suffix ${componentPrefix}-affix-wrapper`,
       focused && `${componentPrefix}-focused`,
       blocked && `${componentPrefix}-disabled`,
       config.direction === 'rtl' && `${componentPrefix}-rtl`,
@@ -435,7 +477,7 @@
       className,
       rootClassName
     ]}>
-  <textarea {...attributes} data-ant-mentions-textarea bind:this={editor} id={controlId} name={name ?? field?.name} rows={attributes.rows ?? 1}
+  {#key editorGeneration}<textarea {...attributes} data-ant-mentions-textarea bind:this={editor} id={controlId} name={name ?? field?.name} rows={attributes.rows ?? 1}
     class={[
         `${componentPrefix}-textarea`,
         config.direction === 'rtl' && `${componentPrefix}-textarea-rtl`
@@ -454,11 +496,8 @@
         )
         || undefined}
     oninput={handleInput} onkeydown={handleKeydown} onkeyup={handleKeyup} onfocus={handleFocus} onblur={handleBlur}></textarea>
-  <div data-ant-mentions-measure bind:this={mirror} class={`${componentPrefix}-measure`} aria-hidden="true">{text.slice(0, location)}{#if visible}<span bind:this={prefixElement}>{token}</span>{:else}{token}{/if}<span bind:this={anchor} class="caret-anchor"></span>{text.slice(location + token.length)}</div>
-  {#if allowClear && text && !blocked && !readonly}<button data-ant-mentions-clear type="button" class={`${componentPrefix}-clear`} aria-label={config.locale.clearText}
-    disabled={typeof allowClear === 'object' && allowClear.disabled} onpointerdown={event => event.preventDefault()} onclick={clear}>
-    {#if typeof allowClear === 'object' && allowClear.clearIcon}{@render allowClear.clearIcon()}{:else}<Icon name="close" />{/if}
-  </button>{/if}
+  <div data-ant-mentions-measure bind:this={mirror} class={`${componentPrefix}-measure`} aria-hidden="true">{text.slice(0, location)}{#if visible}<span bind:this={prefixElement}>{token}</span>{:else}{token}{/if}<span bind:this={anchor} class="caret-anchor"></span>{text.slice(location + token.length)}</div>{/key}
+  {#if hasAffix}<span data-ant-mentions-feedback-suffix class={`${componentPrefix}-suffix`}>{@render clearControl()}{#if feedback.hasFeedback && feedback.icon}<FormFeedbackIcon descriptor={feedback.icon} />{/if}</span>{/if}
   {#key popupContainer}
     {#if mounted}
       <div {...prefixAttributes} bind:this={popup} popover="manual" hidden={!visible || !shown}

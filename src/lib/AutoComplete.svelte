@@ -19,6 +19,9 @@
   import { useCompact } from './space-compact-context';
   import { compactClasses } from './space-compact.engine';
   import { useForm, useFormField } from './form-context';
+  import { useFormItemStatusContext } from './form-item-status';
+  import { useFormFeedback } from './form-feedback-context';
+  import FormFeedbackIcon from './FormFeedbackIcon.svelte';
   import { connectPopup } from './popup.dom';
   import { createPopupContainer } from './popup-container.model.svelte.js';
   import { useComponentTheme } from './theme-component.svelte';
@@ -78,6 +81,8 @@
     focus, blur
   };
   const field = useFormField(() => controlRef);
+  const itemStatus = useFormItemStatusContext();
+  const feedback = useFormFeedback();
   const form = useForm();
   const compact = useCompact();
   const componentTheme = useComponentTheme('Select');
@@ -90,7 +95,7 @@
     disabled ?? field?.disabled ?? form?.disabled ?? config.componentDisabled
   );
   let resolvedSize = $derived(size ?? compact?.size ?? config.componentSize);
-  let resolvedStatus = $derived(status ?? field?.status);
+  let resolvedStatus = $derived(status ?? ('status' in itemStatus ? itemStatus.status : field?.status));
   let showClear = $derived(Boolean(allowClear && text && !blocked && !readonly));
   let controlId = $derived(id ?? field?.id ?? `ant-auto-complete-${generated}`);
   let searchConfig = $derived<AutoCompleteSearchConfig>(
@@ -129,9 +134,11 @@
     themeStyle: componentTheme.style
   }));
   let enterLock = false;
+  let pendingClearClose: MessageChannel | undefined;
   let previous = untrack(() => ({ value, open }));
   onMount(() => {
     hydrated = true;
+    return cancelClearClose;
   });
 
   // Без bind: обновление spread props может сбросить локальное значение ref prop.
@@ -150,8 +157,10 @@
       innerValue = next.value;
       preview = undefined;
     }
-    if (next.open !== previous.open)
+    if (next.open !== previous.open) {
+      cancelClearClose();
       innerOpen = Boolean(next.open);
+    }
     previous = next;
   });
   $effect(() => {
@@ -212,10 +221,28 @@
     };
   }
   function requestOpen(next: boolean) {
+    cancelClearClose();
     if (next && (blocked || readonly)) return;
     if (next !== visible)
       onOpenChange?.(next);
     innerOpen = next;
+  }
+  function clearPointerDown(event: PointerEvent) {
+    event.preventDefault();
+    if (!visible) return;
+    cancelClearClose();
+    // rc-select closes after the pointer click's clear/change/search callbacks.
+    const channel = new MessageChannel();
+    pendingClearClose = channel;
+    channel.port1.onmessage = () => {
+      if (pendingClearClose === channel) requestOpen(false);
+    };
+    channel.port2.postMessage(null);
+  }
+  function cancelClearClose() {
+    pendingClearClose?.port1.close();
+    pendingClearClose?.port2.close();
+    pendingClearClose = undefined;
   }
   function change(next: string | undefined, before = actualValue) {
     innerValue = next;
@@ -373,6 +400,9 @@
   .auto-complete[data-ant-auto-complete-source-theme][data-ant-auto-complete-customize] { min-height: 0; }
   .clear { display: flex; flex: none; padding: 0; border: 0; background: none; color: var(--ant-color-text-tertiary); cursor: pointer; }
   .clear:focus-visible { outline: 2px solid var(--ant-color-primary); }
+  .feedback-suffix { display: flex; flex: none; pointer-events: none; }
+  /* The retained native popup is a child; Source's portal does not affect :last-child. */
+  .auto-complete[data-ant-select-prefix]:not(:has(> .clear)) > .feedback-suffix { opacity: 1; }
   [data-ant-auto-complete-source-theme] .clear { display: inline-block; color: var(--ant-color-text-quaternary); }
   [data-ant-auto-complete-source-theme] .clear:hover { color: var(--ant-color-icon); }
   [data-ant-auto-complete-source-theme] .clear:focus-visible { opacity: 1; }
@@ -406,6 +436,8 @@
       visible && `${prefix}-open`,
       blocked && `${prefix}-disabled`,
       resolvedStatus && `${prefix}-status-${resolvedStatus}`,
+      feedback.hasFeedback && `${prefix}-has-feedback ${prefix}-show-arrow`,
+      feedback.isFormItemInput && `${prefix}-in-form-item`,
       children && `${prefix}-customize`,
       compactClasses(prefix, config.direction, compact),
       className,
@@ -414,7 +446,8 @@
   <div data-ant-auto-complete-content class={`${prefix}-content`}>
     {#if children}{@render children(input)}{:else}<input {...attributes} {...input.attributes} use:register data-ant-auto-complete-input class={`${prefix}-input`} type="text" />{/if}
   </div>
-  {#if showClear}<button type="button" class={['clear', componentTheme.className && `${prefix}-clear`]} aria-label={config.locale.clearText} onpointerdown={event => event.preventDefault()} onclick={clear}>
+  {#if feedback.hasFeedback}<div class={[`${prefix}-suffix`, 'feedback-suffix']}>{#if feedback.icon}<FormFeedbackIcon descriptor={feedback.icon} />{/if}</div>{/if}
+  {#if showClear}<button type="button" class={['clear', componentTheme.className && `${prefix}-clear`]} aria-label={config.locale.clearText} onpointerdown={clearPointerDown} onclick={clear}>
     {#if typeof allowClear === 'object' && allowClear.clearIcon}{@render allowClear.clearIcon()}{:else}<Icon name="close" />{/if}
   </button>{/if}
   {#if mounted}

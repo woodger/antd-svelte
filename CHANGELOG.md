@@ -9,6 +9,12 @@
 
 ### Added
 
+- Form feedback подключён к Cascader, AutoComplete, Mentions, Transfer и
+  date/time single/range controls с исходными context/suffix rules.
+  DatePicker/RangePicker поддерживают `suffixIcon` и общий
+  `ConfigProvider.datePicker.suffixIcon`. SSR, гидратация, live updates,
+  metadata и toggle/reset/disposal сверены с React 6.6.8.
+
 - Form feedback подключён к Input, TextArea, InputNumber и Select, включая
   InputPassword/InputSearch. Сохранены Source suffix order, вложенные scopes,
   обновления без замены поля и reset/remount. Calendar отключает только

@@ -1,6 +1,7 @@
 import type { Dayjs } from 'dayjs';
 import type { HTMLInputAttributes } from 'svelte/elements';
 import type { Snippet } from 'svelte';
+import type { InputContent } from './input.types';
 import type { ComponentSize } from './types';
 import type { PickerLocale } from './picker-locale.types';
 export type DatePickerLocale = {
@@ -32,9 +33,10 @@ export interface DatePickerTimeConfig {
   hideDisabledOptions?: boolean;
   defaultOpenValue?: Dayjs;
 }
-/** Настройки ConfigProvider.datePicker; пока перенесён только variant. */
+/** Общие настройки DatePicker/RangePicker; local props имеют приоритет. */
 export interface DatePickerConfig {
   variant?: DatePickerProps['variant'];
+  suffixIcon?: InputContent;
 }
 /** Выбор одной даты или datetime через Dayjs, input и локализованную панель. */
 export interface DatePickerProps extends Omit<
@@ -73,6 +75,8 @@ export interface DatePickerProps extends Omit<
   showNow?: boolean;
   size?: ComponentSize;
   status?: 'error' | 'warning';
+  /** true/undefined — calendar и Form feedback; null/false/'' скрывают suffix. */
+  suffixIcon?: InputContent;
   /** Локальное оформление перекрывает Form и ConfigProvider; fallback outlined. */
   variant?: 'outlined' | 'borderless' | 'filled' | 'underlined';
   locale?: DatePickerLocale;

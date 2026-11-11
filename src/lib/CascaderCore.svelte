@@ -37,6 +37,10 @@
   import { getCascaderPrefixCss } from './cascader-prefix.engine';
   import { useVariant } from './variant.svelte';
   import { useForm, useFormField } from './form-context';
+  import { useFormItemStatusContext } from './form-item-status';
+  import { useFormFeedback } from './form-feedback-context';
+  import FormFeedbackIcon from './FormFeedbackIcon.svelte';
+  import CascaderPopupContent from './CascaderPopupContent.svelte';
   import { useCompact } from './space-compact-context';
   import { compactClasses } from './space-compact.engine';
   import { getSelectTagText } from './select-tag-text.engine';
@@ -135,6 +139,8 @@
     focus, blur
   };
   const field = useFormField(() => controlRef);
+  const itemStatus = useFormItemStatusContext();
+  const feedback = useFormFeedback();
   const form = useForm();
   const compact = useCompact();
   const selectTheme = useComponentTheme('Select');
@@ -165,7 +171,7 @@
   let rtl = $derived(resolvedDirection === 'rtl');
   let resolvedSize = $derived(size ?? compact?.size
     ?? config.componentSize);
-  let resolvedStatus = $derived(status ?? field?.status);
+  let resolvedStatus = $derived(status ?? ('status' in itemStatus ? itemStatus.status : field?.status));
   let resolvedVariant = $derived(variantContext.variant);
   let semantic = $derived({
     props: {
@@ -611,7 +617,9 @@
       cascaderTheme.className,
       cascaderTheme.className && `${cascaderPrefix}-source-theme`,
       !children && `${selectPrefix} ant-select-css-var`,
-      !children && suffix !== null && suffix !== false && `${selectPrefix}-show-arrow`,
+      !children && (suffix !== null && suffix !== false || feedback.hasFeedback) && `${selectPrefix}-show-arrow`,
+      !children && feedback.hasFeedback && `${selectPrefix}-has-feedback`,
+      !children && feedback.isFormItemInput && `${selectPrefix}-in-form-item`,
       !children && canSearch && `${selectPrefix}-show-search`,
       !children && hasClear && `${selectPrefix}-allow-clear`,
       !children && loading && `${selectPrefix}-loading`,
@@ -785,10 +793,9 @@
         {#if clearIcon === undefined}<Icon name="close-circle-filled" />
         {:else}{@render content(clearIcon)}{/if}
       </button>{/if}
-      {#if suffix !== null && suffix !== false}
+      {#if suffix !== null && suffix !== false || feedback.hasFeedback}
         <span class={[`suffix ${selectPrefix}-suffix`, classes.suffix]} style={css.suffix} aria-hidden="true">
-          {#if suffix !== undefined}{@render content(suffix)}
-          {:else}<Icon name={loading ? 'loading' : visible && canSearch ? 'search' : 'down'} />{/if}
+          {#if suffix !== undefined}{@render content(suffix)}{:else}<Icon name={loading ? 'loading' : visible && canSearch ? 'search' : 'down'} />{/if}{#if feedback.hasFeedback && feedback.icon}<FormFeedbackIcon descriptor={feedback.icon} />{/if}
         </span>
       {/if}
     {/if}
@@ -811,7 +818,7 @@
           [componentStyle, popupStyle].filter(Boolean).join(';'))}
         {@attach portal}
         onfocusout={blurWithin}>
-        {#if popupRender}{@render popupRender(menus)}
+        {#if popupRender}<CascaderPopupContent {popupRender} menu={menus} />
         {:else}{@render menus()}{/if}
       </div>
     {/if}

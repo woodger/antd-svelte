@@ -5102,6 +5102,14 @@ getPopupContainer с fallback на ConfigProvider.getPopupContainer; undefined
 undefined, затем с root; функция с параметром ждёт DOM ref, как rc-trigger.
 SSR не вызывает getter. Без выбранной функции сохраняется native размещение.
 
+DatePicker/RangePicker поддерживают `suffixIcon`: локальный prop перекрывает
+`ConfigProvider.datePicker.suffixIcon`. `true`/undefined выводят календарь и Form
+feedback; null/false/пустая строка скрывают suffix целиком. Строка, число (включая
+0) или Snippet заменяют generated suffix вместе с feedback. TimePicker/TimeRangePicker
+используют те же правила с часами и `ConfigProvider.timePicker`. RangePicker
+использует общий datePicker config для значка; rangePicker config управляет
+прежними class/style/variant/separator. Смена suffix сохраняет поле и фокус.
+
 Исходный offset до поля — 4 px; координаты при единичном масштабе округляются
 вниз, как rc-trigger. Минимальная ширина popup равна ширине selector.
 Default placement — bottomLeft в LTR и bottomRight в RTL, явное значение имеет
@@ -11661,7 +11669,28 @@ remount. InputSearch сохраняет прежнее восстановлен�
 Сверка: [128 сценариев и 118 переходов](./tests/browser/fixtures/ant-design-form-feedback-control-reference.json),
 [браузер](./tests/browser/form-feedback-control.spec.ts),
 [SSR](./tests/package/form-feedback-control.ssr.test.ts), `?fixture=form-feedback-control`.
-Feedback renderers остальных controls и оставшаяся Form motion ещё переносятся.
+Feedback также подключён к Cascader, AutoComplete, Mentions, Transfer и четырём
+date/time controls. Cascader добавляет значок после generated/custom suffixIcon;
+null/false убирают стрелку, сохраняя feedback. Его popupRender изолирует
+feedback/status и field binding. AutoComplete выводит feedback без стрелки;
+custom Antd Input/TextArea сохраняет собственный значок, поэтому их два, как
+в закреплённом React. Retained native popup не скрывает suffix после открытия.
+Pointer-clear закрывает AutoComplete после clear/change/search; click-only
+сохраняет прежнюю открытость, controlled open остаётся у владельца.
+
+Mentions использует affix/suffix. Toggle feedback без постоянного clear-wrapper
+заменяет textarea и закрывает popup, как React; совместное переключение clear/feedback
+с неизменной обёрткой сохраняет editor. Native root/ref остаётся DIV. Отложенное
+выделение не фокусирует заменённый editor. Transfer добавляет только root flag;
+оба search Input наследуют feedback, без showSearch значков нет. Pickers добавляют
+has-feedback без in-form-item; custom suffix заменяет иконку и feedback целиком.
+Сверка: [Cascader](./tests/browser/form-feedback-cascader.spec.ts),
+[AutoComplete](./tests/browser/form-feedback-autocomplete.spec.ts),
+[Mentions/Transfer](./tests/browser/form-feedback-mentions.spec.ts),
+[pickers](./tests/browser/form-feedback-picker.spec.ts); соответствующие
+`?fixture=form-feedback-cascader`, `form-feedback-autocomplete`,
+`form-feedback-mentions`, `form-feedback-picker`. Проверены DOM-free SSR,
+строгая гидратация и pending disposal. Остальная Form motion ещё переносится.
 Сверка: [29 исходных состояний](./tests/browser/fixtures/ant-design-form-status-reference.json),
 [браузер и доступность controls](./tests/browser/form-status.spec.ts),
 [публичный пакет и SSR](./tests/package/form-status.ssr.test.ts), `?fixture=form-status`.
