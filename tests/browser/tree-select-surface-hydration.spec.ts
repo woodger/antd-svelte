@@ -114,3 +114,32 @@ test('TreeSelect hydrates declarative nodes and the existing popup without repla
   await page.evaluate(() => window.declaredTreeSelectHydration!.dispose());
   await expect(page.locator('[popover]:popover-open')).toHaveCount(0);
 });
+
+test('TreeSelect hydrates autofocus without taking focus from another control and opens on the next focus', async ({ page }) => {
+  const module = await server.ssrLoadModule(fileURLToPath(new URL(
+    './fixtures/tree-select-trigger-hydration.server.ts', import.meta.url
+  )));
+  const { head, body } = module.renderTreeSelectTrigger();
+  await page.goto('/tree-select-surface-hydration.html');
+  await page.evaluate(({ head, body }) => {
+    document.head.insertAdjacentHTML('beforeend', head);
+    document.getElementById('root')!.innerHTML = body;
+  }, { head, body });
+  const outside = page.getByRole('button', { name: 'Outside trigger', exact: true });
+  await outside.focus();
+  await page.addScriptTag({ type: 'module', url: '/tree-select-trigger-hydration.client.ts' });
+  await page.waitForFunction(() => window.treeSelectTriggerHydration);
+  await expect(outside).toBeFocused();
+  await expect(page.locator('[data-trigger-events]')).toHaveText('[]');
+  const editor = page.getByRole('combobox', { name: 'Trigger selection', exact: true });
+  expect(await page.evaluate(() => ({
+    input: window.treeSelectTriggerHydration!.input === document.querySelector('[aria-label="Trigger selection"]'),
+    root: window.treeSelectTriggerHydration!.root === document.querySelector('.ant-select')
+  }))).toEqual({ input: true, root: true });
+  await page.getByRole('button', { name: 'Focus trigger ref', exact: true }).dispatchEvent('click');
+  await expect(editor).toBeFocused();
+  await expect(editor).toHaveAttribute('aria-expanded', 'true');
+  await expect(page.locator('[data-trigger-events]')).toHaveText('[["open",true],["focus","DIV"]]');
+  await page.evaluate(() => window.treeSelectTriggerHydration!.dispose());
+  await expect(page.locator('[popover]')).toHaveCount(0);
+});

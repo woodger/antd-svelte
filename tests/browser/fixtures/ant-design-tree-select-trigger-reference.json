@@ -1,0 +1,5021 @@
+{
+  "reference": {
+    "version": "6.6.8",
+    "react": "18.3.1",
+    "revision": "984592267de88fbf9cdaecc96a56629e721c709d",
+    "treeSelect": "1.16.1",
+    "select": "1.10.1",
+    "archiveSha256": "8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa",
+    "browser": "Unmodified Ant Design UMD with actual React state; keydown and keyup captured as separate settled actions",
+    "server": "Unmodified ReactDOMServer UMD in a DOM-free VM; DOM projected in an inert host after render",
+    "errors": [],
+    "warnings": []
+  },
+  "cases": [
+    {
+      "id": "default",
+      "initial": {
+        "open": false,
+        "focused": false,
+        "focusClass": false,
+        "disabled": false,
+        "selected": "",
+        "tags": [],
+        "maxLength": null,
+        "tabIndex": null,
+        "events": []
+      },
+      "steps": [
+        {
+          "action": "focus",
+          "view": {
+            "open": false,
+            "focused": true,
+            "focusClass": true,
+            "disabled": false,
+            "selected": "",
+            "tags": [],
+            "maxLength": null,
+            "tabIndex": null,
+            "events": [
+              [
+                "focus",
+                "DIV"
+              ]
+            ]
+          }
+        },
+        {
+          "action": "down:ArrowDown",
+          "view": {
+            "open": true,
+            "focused": true,
+            "focusClass": true,
+            "disabled": false,
+            "selected": null,
+            "tags": [],
+            "maxLength": null,
+            "tabIndex": null,
+            "events": [
+              [
+                "focus",
+                "DIV"
+              ],
+              [
+                "input-key",
+                "ArrowDown",
+                "INPUT",
+                false
+              ],
+              [
+                "open",
+                true
+              ],
+              [
+                "root-key",
+                "ArrowDown",
+                "DIV",
+                false
+              ]
+            ]
+          }
+        },
+        {
+          "action": "up:ArrowDown",
+          "view": {
+            "open": true,
+            "focused": true,
+            "focusClass": true,
+            "disabled": false,
+            "selected": null,
+            "tags": [],
+            "maxLength": null,
+            "tabIndex": null,
+            "events": [
+              [
+                "focus",
+                "DIV"
+              ],
+              [
+                "input-key",
+                "ArrowDown",
+                "INPUT",
+                false
+              ],
+              [
+                "open",
+                true
+              ],
+              [
+                "root-key",
+                "ArrowDown",
+                "DIV",
+                false
+              ],
+              [
+                "root-key-up",
+                "ArrowDown",
+                "DIV",
+                false
+              ]
+            ]
+          }
+        },
+        {
+          "action": "down:Enter",
+          "view": {
+            "open": false,
+            "focused": true,
+            "focusClass": true,
+            "disabled": false,
+            "selected": "Alpha",
+            "tags": [],
+            "maxLength": null,
+            "tabIndex": null,
+            "events": [
+              [
+                "focus",
+                "DIV"
+              ],
+              [
+                "input-key",
+                "ArrowDown",
+                "INPUT",
+                false
+              ],
+              [
+                "open",
+                true
+              ],
+              [
+                "root-key",
+                "ArrowDown",
+                "DIV",
+                false
+              ],
+              [
+                "root-key-up",
+                "ArrowDown",
+                "DIV",
+                false
+              ],
+              [
+                "input-key",
+                "Enter",
+                "INPUT",
+                false
+              ],
+              [
+                "change",
+                "a",
+                [
+                  "Alpha"
+                ]
+              ],
+              [
+                "select",
+                "a"
+              ],
+              [
+                "root-key",
+                "Enter",
+                "DIV",
+                true
+              ],
+              [
+                "open",
+                false
+              ]
+            ]
+          }
+        },
+        {
+          "action": "up:Enter",
+          "view": {
+            "open": false,
+            "focused": true,
+            "focusClass": true,
+            "disabled": false,
+            "selected": "Alpha",
+            "tags": [],
+            "maxLength": null,
+            "tabIndex": null,
+            "events": [
+              [
+                "focus",
+                "DIV"
+              ],
+              [
+                "input-key",
+                "ArrowDown",
+                "INPUT",
+                false
+              ],
+              [
+                "open",
+                true
+              ],
+              [
+                "root-key",
+                "ArrowDown",
+                "DIV",
+                false
+              ],
+              [
+                "root-key-up",
+                "ArrowDown",
+                "DIV",
+                false
+              ],
+              [
+                "input-key",
+                "Enter",
+                "INPUT",
+                false
+              ],
+              [
+                "change",
+                "a",
+                [
+                  "Alpha"
+                ]
+              ],
+              [
+                "select",
+                "a"
+              ],
+              [
+                "root-key",
+                "Enter",
+                "DIV",
+                true
+              ],
+              [
+                "open",
+                false
+              ],
+              [
+                "root-key-up",
+                "Enter",
+                "DIV",
+                false
+              ]
+            ]
+          }
+        },
+        {
+          "action": "outside",
+          "view": {
+            "open": false,
+            "focused": false,
+            "focusClass": false,
+            "disabled": false,
+            "selected": "Alpha",
+            "tags": [],
+            "maxLength": null,
+            "tabIndex": null,
+            "events": [
+              [
+                "focus",
+                "DIV"
+              ],
+              [
+                "input-key",
+                "ArrowDown",
+                "INPUT",
+                false
+              ],
+              [
+                "open",
+                true
+              ],
+              [
+                "root-key",
+                "ArrowDown",
+                "DIV",
+                false
+              ],
+              [
+                "root-key-up",
+                "ArrowDown",
+                "DIV",
+                false
+              ],
+              [
+                "input-key",
+                "Enter",
+                "INPUT",
+                false
+              ],
+              [
+                "change",
+                "a",
+                [
+                  "Alpha"
+                ]
+              ],
+              [
+                "select",
+                "a"
+              ],
+              [
+                "root-key",
+                "Enter",
+                "DIV",
+                true
+              ],
+              [
+                "open",
+                false
+              ],
+              [
+                "root-key-up",
+                "Enter",
+                "DIV",
+                false
+              ],
+              [
+                "blur",
+                "DIV"
+              ]
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "focus-action",
+      "initial": {
+        "open": false,
+        "focused": false,
+        "focusClass": false,
+        "disabled": false,
+        "selected": "",
+        "tags": [],
+        "maxLength": null,
+        "tabIndex": null,
+        "events": []
+      },
+      "steps": [
+        {
+          "action": "focus",
+          "view": {
+            "open": true,
+            "focused": true,
+            "focusClass": true,
+            "disabled": false,
+            "selected": null,
+            "tags": [],
+            "maxLength": null,
+            "tabIndex": null,
+            "events": [
+              [
+                "open",
+                true
+              ],
+              [
+                "focus",
+                "DIV"
+              ]
+            ]
+          }
+        },
+        {
+          "action": "down:ArrowDown",
+          "view": {
+            "open": true,
+            "focused": true,
+            "focusClass": true,
+            "disabled": false,
+            "selected": null,
+            "tags": [],
+            "maxLength": null,
+            "tabIndex": null,
+            "events": [
+              [
+                "open",
+                true
+              ],
+              [
+                "focus",
+                "DIV"
+              ],
+              [
+                "input-key",
+                "ArrowDown",
+                "INPUT",
+                true
+              ],
+              [
+                "root-key",
+                "ArrowDown",
+                "DIV",
+                true
+              ]
+            ]
+          }
+        },
+        {
+          "action": "up:ArrowDown",
+          "view": {
+            "open": true,
+            "focused": true,
+            "focusClass": true,
+            "disabled": false,
+            "selected": null,
+            "tags": [],
+            "maxLength": null,
+            "tabIndex": null,
+            "events": [
+              [
+                "open",
+                true
+              ],
+              [
+                "focus",
+                "DIV"
+              ],
+              [
+                "input-key",
+                "ArrowDown",
+                "INPUT",
+                true
+              ],
+              [
+                "root-key",
+                "ArrowDown",
+                "DIV",
+                true
+              ],
+              [
+                "root-key-up",
+                "ArrowDown",
+                "DIV",
+                false
+              ]
+            ]
+          }
+        },
+        {
+          "action": "down:Enter",
+          "view": {
+            "open": false,
+            "focused": true,
+            "focusClass": true,
+            "disabled": false,
+            "selected": "Beta",
+            "tags": [],
+            "maxLength": null,
+            "tabIndex": null,
+            "events": [
+              [
+                "open",
+                true
+              ],
+              [
+                "focus",
+                "DIV"
+              ],
+              [
+                "input-key",
+                "ArrowDown",
+                "INPUT",
+                true
+              ],
+              [
+                "root-key",
+                "ArrowDown",
+                "DIV",
+                true
+              ],
+              [
+                "root-key-up",
+                "ArrowDown",
+                "DIV",
+                false
+              ],
+              [
+                "input-key",
+                "Enter",
+                "INPUT",
+                false
+              ],
+              [
+                "change",
+                "b",
+                [
+                  "Beta"
+                ]
+              ],
+              [
+                "select",
+                "b"
+              ],
+              [
+                "root-key",
+                "Enter",
+                "DIV",
+                true
+              ],
+              [
+                "open",
+                false
+              ]
+            ]
+          }
+        },
+        {
+          "action": "up:Enter",
+          "view": {
+            "open": false,
+            "focused": true,
+            "focusClass": true,
+            "disabled": false,
+            "selected": "Beta",
+            "tags": [],
+            "maxLength": null,
+            "tabIndex": null,
+            "events": [
+              [
+                "open",
+                true
+              ],
+              [
+                "focus",
+                "DIV"
+              ],
+              [
+                "input-key",
+                "ArrowDown",
+                "INPUT",
+                true
+              ],
+              [
+                "root-key",
+                "ArrowDown",
+                "DIV",
+                true
+              ],
+              [
+                "root-key-up",
+                "ArrowDown",
+                "DIV",
+                false
+              ],
+              [
+                "input-key",
+                "Enter",
+                "INPUT",
+                false
+              ],
+              [
+                "change",
+                "b",
+                [
+                  "Beta"
+                ]
+              ],
+              [
+                "select",
+                "b"
+              ],
+              [
+                "root-key",
+                "Enter",
+                "DIV",
+                true
+              ],
+              [
+                "open",
+                false
+              ],
+              [
+                "root-key-up",
+                "Enter",
+                "DIV",
+                false
+              ]
+            ]
+          }
+        },
+        {
+          "action": "outside",
+          "view": {
+            "open": false,
+            "focused": false,
+            "focusClass": false,
+            "disabled": false,
+            "selected": "Beta",
+            "tags": [],
+            "maxLength": null,
+            "tabIndex": null,
+            "events": [
+              [
+                "open",
+                true
+              ],
+              [
+                "focus",
+                "DIV"
+              ],
+              [
+                "input-key",
+                "ArrowDown",
+                "INPUT",
+                true
+              ],
+              [
+                "root-key",
+                "ArrowDown",
+                "DIV",
+                true
+              ],
+              [
+                "root-key-up",
+                "ArrowDown",
+                "DIV",
+                false
+              ],
+              [
+                "input-key",
+                "Enter",
+                "INPUT",
+                false
+              ],
+              [
+                "change",
+                "b",
+                [
+                  "Beta"
+                ]
+              ],
+              [
+                "select",
+                "b"
+              ],
+              [
+                "root-key",
+                "Enter",
+                "DIV",
+                true
+              ],
+              [
+                "open",
+                false
+              ],
+              [
+                "root-key-up",
+                "Enter",
+                "DIV",
+                false
+              ],
+              [
+                "blur",
+                "DIV"
+              ]
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "click-action",
+      "initial": {
+        "open": false,
+        "focused": false,
+        "focusClass": false,
+        "disabled": false,
+        "selected": "",
+        "tags": [],
+        "maxLength": null,
+        "tabIndex": null,
+        "events": []
+      },
+      "steps": [
+        {
+          "action": "focus",
+          "view": {
+            "open": false,
+            "focused": true,
+            "focusClass": true,
+            "disabled": false,
+            "selected": "",
+            "tags": [],
+            "maxLength": null,
+            "tabIndex": null,
+            "events": [
+              [
+                "focus",
+                "DIV"
+              ]
+            ]
+          }
+        },
+        {
+          "action": "click-input",
+          "view": {
+            "open": true,
+            "focused": true,
+            "focusClass": true,
+            "disabled": false,
+            "selected": null,
+            "tags": [],
+            "maxLength": null,
+            "tabIndex": null,
+            "events": [
+              [
+                "focus",
+                "DIV"
+              ],
+              [
+                "mouse-enter",
+                "DIV"
+              ],
+              [
+                "open",
+                true
+              ],
+              [
+                "mouse-down",
+                "DIV"
+              ],
+              [
+                "click",
+                "DIV"
+              ]
+            ]
+          }
+        },
+        {
+          "action": "outside",
+          "view": {
+            "open": false,
+            "focused": false,
+            "focusClass": false,
+            "disabled": false,
+            "selected": "",
+            "tags": [],
+            "maxLength": null,
+            "tabIndex": null,
+            "events": [
+              [
+                "focus",
+                "DIV"
+              ],
+              [
+                "mouse-enter",
+                "DIV"
+              ],
+              [
+                "open",
+                true
+              ],
+              [
+                "mouse-down",
+                "DIV"
+              ],
+              [
+                "click",
+                "DIV"
+              ],
+              [
+                "mouse-leave",
+                "DIV"
+              ],
+              [
+                "blur",
+                "DIV"
+              ],
+              [
+                "open",
+                false
+              ]
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "empty-actions",
+      "initial": {
+        "open": false,
+        "focused": false,
+        "focusClass": false,
+        "disabled": false,
+        "selected": "",
+        "tags": [],
+        "maxLength": null,
+        "tabIndex": null,
+        "events": []
+      },
+      "steps": [
+        {
+          "action": "focus",
+          "view": {
+            "open": false,
+            "focused": true,
+            "focusClass": true,
+            "disabled": false,
+            "selected": "",
+            "tags": [],
+            "maxLength": null,
+            "tabIndex": null,
+            "events": [
+              [
+                "focus",
+                "DIV"
+              ]
+            ]
+          }
+        },
+        {
+          "action": "click-input",
+          "view": {
+            "open": true,
+            "focused": true,
+            "focusClass": true,
+            "disabled": false,
+            "selected": null,
+            "tags": [],
+            "maxLength": null,
+            "tabIndex": null,
+            "events": [
+              [
+                "focus",
+                "DIV"
+              ],
+              [
+                "mouse-enter",
+                "DIV"
+              ],
+              [
+                "open",
+                true
+              ],
+              [
+                "mouse-down",
+                "DIV"
+              ],
+              [
+                "click",
+                "DIV"
+              ]
+            ]
+          }
+        },
+        {
+          "action": "outside",
+          "view": {
+            "open": false,
+            "focused": false,
+            "focusClass": false,
+            "disabled": false,
+            "selected": "",
+            "tags": [],
+            "maxLength": null,
+            "tabIndex": null,
+            "events": [
+              [
+                "focus",
+                "DIV"
+              ],
+              [
+                "mouse-enter",
+                "DIV"
+              ],
+              [
+                "open",
+                true
+              ],
+              [
+                "mouse-down",
+                "DIV"
+              ],
+              [
+                "click",
+                "DIV"
+              ],
+              [
+                "mouse-leave",
+                "DIV"
+              ],
+              [
+                "blur",
+                "DIV"
+              ],
+              [
+                "open",
+                false
+              ]
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "live-focus-action",
+      "initial": {
+        "open": false,
+        "focused": false,
+        "focusClass": false,
+        "disabled": false,
+        "selected": "",
+        "tags": [],
+        "maxLength": null,
+        "tabIndex": null,
+        "events": []
+      },
+      "steps": [
+        {
+          "action": "focus",
+          "view": {
+            "open": false,
+            "focused": true,
+            "focusClass": true,
+            "disabled": false,
+            "selected": "",
+            "tags": [],
+            "maxLength": null,
+            "tabIndex": null,
+            "events": [
+              [
+                "focus",
+                "DIV"
+              ]
+            ]
+          }
+        },
+        {
+          "action": "enable-focus-action",
+          "view": {
+            "open": false,
+            "focused": true,
+            "focusClass": true,
+            "disabled": false,
+            "selected": "",
+            "tags": [],
+            "maxLength": null,
+            "tabIndex": null,
+            "events": [
+              [
+                "focus",
+                "DIV"
+              ]
+            ]
+          }
+        },
+        {
+          "action": "outside",
+          "view": {
+            "open": false,
+            "focused": false,
+            "focusClass": false,
+            "disabled": false,
+            "selected": "",
+            "tags": [],
+            "maxLength": null,
+            "tabIndex": null,
+            "events": [
+              [
+                "focus",
+                "DIV"
+              ],
+              [
+                "blur",
+                "DIV"
+              ]
+            ]
+          }
+        },
+        {
+          "action": "focus",
+          "view": {
+            "open": true,
+            "focused": true,
+            "focusClass": true,
+            "disabled": false,
+            "selected": null,
+            "tags": [],
+            "maxLength": null,
+            "tabIndex": null,
+            "events": [
+              [
+                "focus",
+                "DIV"
+              ],
+              [
+                "blur",
+                "DIV"
+              ],
+              [
+                "open",
+                true
+              ],
+              [
+                "focus",
+                "DIV"
+              ]
+            ]
+          }
+        },
+        {
+          "action": "outside",
+          "view": {
+            "open": false,
+            "focused": false,
+            "focusClass": false,
+            "disabled": false,
+            "selected": "",
+            "tags": [],
+            "maxLength": null,
+            "tabIndex": null,
+            "events": [
+              [
+                "focus",
+                "DIV"
+              ],
+              [
+                "blur",
+                "DIV"
+              ],
+              [
+                "open",
+                true
+              ],
+              [
+                "focus",
+                "DIV"
+              ],
+              [
+                "blur",
+                "DIV"
+              ],
+              [
+                "open",
+                false
+              ]
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "autofocus",
+      "initial": {
+        "open": false,
+        "focused": true,
+        "focusClass": true,
+        "disabled": false,
+        "selected": "",
+        "tags": [],
+        "maxLength": null,
+        "tabIndex": null,
+        "events": [
+          [
+            "focus",
+            "DIV"
+          ]
+        ]
+      },
+      "steps": [
+        {
+          "action": "update",
+          "view": {
+            "open": false,
+            "focused": true,
+            "focusClass": true,
+            "disabled": false,
+            "selected": "",
+            "tags": [],
+            "maxLength": null,
+            "tabIndex": null,
+            "events": [
+              [
+                "focus",
+                "DIV"
+              ]
+            ]
+          }
+        },
+        {
+          "action": "outside",
+          "view": {
+            "open": false,
+            "focused": false,
+            "focusClass": false,
+            "disabled": false,
+            "selected": "",
+            "tags": [],
+            "maxLength": null,
+            "tabIndex": null,
+            "events": [
+              [
+                "focus",
+                "DIV"
+              ],
+              [
+                "blur",
+                "DIV"
+              ]
+            ]
+          }
+        },
+        {
+          "action": "focus",
+          "view": {
+            "open": false,
+            "focused": true,
+            "focusClass": true,
+            "disabled": false,
+            "selected": "",
+            "tags": [],
+            "maxLength": null,
+            "tabIndex": null,
+            "events": [
+              [
+                "focus",
+                "DIV"
+              ],
+              [
+                "blur",
+                "DIV"
+              ],
+              [
+                "focus",
+                "DIV"
+              ]
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "autofocus-open",
+      "initial": {
+        "open": true,
+        "focused": true,
+        "focusClass": true,
+        "disabled": false,
+        "selected": null,
+        "tags": [],
+        "maxLength": null,
+        "tabIndex": null,
+        "events": [
+          [
+            "open",
+            true
+          ],
+          [
+            "focus",
+            "DIV"
+          ]
+        ]
+      },
+      "steps": [
+        {
+          "action": "outside",
+          "view": {
+            "open": false,
+            "focused": false,
+            "focusClass": false,
+            "disabled": false,
+            "selected": "",
+            "tags": [],
+            "maxLength": null,
+            "tabIndex": null,
+            "events": [
+              [
+                "open",
+                true
+              ],
+              [
+                "focus",
+                "DIV"
+              ],
+              [
+                "blur",
+                "DIV"
+              ],
+              [
+                "open",
+                false
+              ]
+            ]
+          }
+        },
+        {
+          "action": "focus",
+          "view": {
+            "open": true,
+            "focused": true,
+            "focusClass": true,
+            "disabled": false,
+            "selected": null,
+            "tags": [],
+            "maxLength": null,
+            "tabIndex": null,
+            "events": [
+              [
+                "open",
+                true
+              ],
+              [
+                "focus",
+                "DIV"
+              ],
+              [
+                "blur",
+                "DIV"
+              ],
+              [
+                "open",
+                false
+              ],
+              [
+                "open",
+                true
+              ],
+              [
+                "focus",
+                "DIV"
+              ]
+            ]
+          }
+        },
+        {
+          "action": "outside",
+          "view": {
+            "open": false,
+            "focused": false,
+            "focusClass": false,
+            "disabled": false,
+            "selected": "",
+            "tags": [],
+            "maxLength": null,
+            "tabIndex": null,
+            "events": [
+              [
+                "open",
+                true
+              ],
+              [
+                "focus",
+                "DIV"
+              ],
+              [
+                "blur",
+                "DIV"
+              ],
+              [
+                "open",
+                false
+              ],
+              [
+                "open",
+                true
+              ],
+              [
+                "focus",
+                "DIV"
+              ],
+              [
+                "blur",
+                "DIV"
+              ],
+              [
+                "open",
+                false
+              ]
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "disabled-autofocus",
+      "initial": {
+        "open": false,
+        "focused": false,
+        "focusClass": false,
+        "disabled": true,
+        "selected": "",
+        "tags": [],
+        "maxLength": null,
+        "tabIndex": null,
+        "events": []
+      },
+      "steps": [
+        {
+          "action": "click-root",
+          "view": {
+            "open": false,
+            "focused": false,
+            "focusClass": false,
+            "disabled": true,
+            "selected": "",
+            "tags": [],
+            "maxLength": null,
+            "tabIndex": null,
+            "events": [
+              [
+                "mouse-enter",
+                "DIV"
+              ],
+              [
+                "mouse-down",
+                "DIV"
+              ],
+              [
+                "click",
+                "DIV"
+              ]
+            ]
+          }
+        },
+        {
+          "action": "enable",
+          "view": {
+            "open": false,
+            "focused": false,
+            "focusClass": false,
+            "disabled": false,
+            "selected": "",
+            "tags": [],
+            "maxLength": null,
+            "tabIndex": null,
+            "events": [
+              [
+                "mouse-enter",
+                "DIV"
+              ],
+              [
+                "mouse-down",
+                "DIV"
+              ],
+              [
+                "click",
+                "DIV"
+              ]
+            ]
+          }
+        },
+        {
+          "action": "focus",
+          "view": {
+            "open": true,
+            "focused": true,
+            "focusClass": true,
+            "disabled": false,
+            "selected": null,
+            "tags": [],
+            "maxLength": null,
+            "tabIndex": null,
+            "events": [
+              [
+                "mouse-enter",
+                "DIV"
+              ],
+              [
+                "mouse-down",
+                "DIV"
+              ],
+              [
+                "click",
+                "DIV"
+              ],
+              [
+                "open",
+                true
+              ],
+              [
+                "focus",
+                "DIV"
+              ]
+            ]
+          }
+        },
+        {
+          "action": "disable",
+          "view": {
+            "open": false,
+            "focused": false,
+            "focusClass": false,
+            "disabled": true,
+            "selected": "",
+            "tags": [],
+            "maxLength": null,
+            "tabIndex": null,
+            "events": [
+              [
+                "mouse-enter",
+                "DIV"
+              ],
+              [
+                "mouse-down",
+                "DIV"
+              ],
+              [
+                "click",
+                "DIV"
+              ],
+              [
+                "open",
+                true
+              ],
+              [
+                "focus",
+                "DIV"
+              ]
+            ]
+          }
+        },
+        {
+          "action": "outside",
+          "view": {
+            "open": false,
+            "focused": false,
+            "focusClass": false,
+            "disabled": true,
+            "selected": "",
+            "tags": [],
+            "maxLength": null,
+            "tabIndex": null,
+            "events": [
+              [
+                "mouse-enter",
+                "DIV"
+              ],
+              [
+                "mouse-down",
+                "DIV"
+              ],
+              [
+                "click",
+                "DIV"
+              ],
+              [
+                "open",
+                true
+              ],
+              [
+                "focus",
+                "DIV"
+              ],
+              [
+                "mouse-leave",
+                "DIV"
+              ]
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "readonly-printable",
+      "initial": {
+        "open": false,
+        "focused": false,
+        "focusClass": false,
+        "disabled": false,
+        "selected": "",
+        "tags": [],
+        "maxLength": null,
+        "tabIndex": null,
+        "events": []
+      },
+      "steps": [
+        {
+          "action": "focus",
+          "view": {
+            "open": false,
+            "focused": true,
+            "focusClass": true,
+            "disabled": false,
+            "selected": "",
+            "tags": [],
+            "maxLength": null,
+            "tabIndex": null,
+            "events": [
+              [
+                "focus",
+                "DIV"
+              ]
+            ]
+          }
+        },
+        {
+          "action": "down:;",
+          "view": {
+            "open": false,
+            "focused": true,
+            "focusClass": true,
+            "disabled": false,
+            "selected": "",
+            "tags": [],
+            "maxLength": null,
+            "tabIndex": null,
+            "events": [
+              [
+                "focus",
+                "DIV"
+              ],
+              [
+                "input-key",
+                ";",
+                "INPUT",
+                false
+              ],
+              [
+                "root-key",
+                ";",
+                "DIV",
+                false
+              ]
+            ]
+          }
+        },
+        {
+          "action": "up:;",
+          "view": {
+            "open": false,
+            "focused": true,
+            "focusClass": true,
+            "disabled": false,
+            "selected": "",
+            "tags": [],
+            "maxLength": null,
+            "tabIndex": null,
+            "events": [
+              [
+                "focus",
+                "DIV"
+              ],
+              [
+                "input-key",
+                ";",
+                "INPUT",
+                false
+              ],
+              [
+                "root-key",
+                ";",
+                "DIV",
+                false
+              ],
+              [
+                "root-key-up",
+                ";",
+                "DIV",
+                false
+              ]
+            ]
+          }
+        },
+        {
+          "action": "down:NumpadAdd",
+          "view": {
+            "open": true,
+            "focused": true,
+            "focusClass": true,
+            "disabled": false,
+            "selected": null,
+            "tags": [],
+            "maxLength": null,
+            "tabIndex": null,
+            "events": [
+              [
+                "focus",
+                "DIV"
+              ],
+              [
+                "input-key",
+                ";",
+                "INPUT",
+                false
+              ],
+              [
+                "root-key",
+                ";",
+                "DIV",
+                false
+              ],
+              [
+                "root-key-up",
+                ";",
+                "DIV",
+                false
+              ],
+              [
+                "input-key",
+                "+",
+                "INPUT",
+                false
+              ],
+              [
+                "open",
+                true
+              ],
+              [
+                "root-key",
+                "+",
+                "DIV",
+                false
+              ]
+            ]
+          }
+        },
+        {
+          "action": "up:NumpadAdd",
+          "view": {
+            "open": true,
+            "focused": true,
+            "focusClass": true,
+            "disabled": false,
+            "selected": null,
+            "tags": [],
+            "maxLength": null,
+            "tabIndex": null,
+            "events": [
+              [
+                "focus",
+                "DIV"
+              ],
+              [
+                "input-key",
+                ";",
+                "INPUT",
+                false
+              ],
+              [
+                "root-key",
+                ";",
+                "DIV",
+                false
+              ],
+              [
+                "root-key-up",
+                ";",
+                "DIV",
+                false
+              ],
+              [
+                "input-key",
+                "+",
+                "INPUT",
+                false
+              ],
+              [
+                "open",
+                true
+              ],
+              [
+                "root-key",
+                "+",
+                "DIV",
+                false
+              ],
+              [
+                "root-key-up",
+                "+",
+                "DIV",
+                false
+              ]
+            ]
+          }
+        },
+        {
+          "action": "outside",
+          "view": {
+            "open": false,
+            "focused": false,
+            "focusClass": false,
+            "disabled": false,
+            "selected": "",
+            "tags": [],
+            "maxLength": null,
+            "tabIndex": null,
+            "events": [
+              [
+                "focus",
+                "DIV"
+              ],
+              [
+                "input-key",
+                ";",
+                "INPUT",
+                false
+              ],
+              [
+                "root-key",
+                ";",
+                "DIV",
+                false
+              ],
+              [
+                "root-key-up",
+                ";",
+                "DIV",
+                false
+              ],
+              [
+                "input-key",
+                "+",
+                "INPUT",
+                false
+              ],
+              [
+                "open",
+                true
+              ],
+              [
+                "root-key",
+                "+",
+                "DIV",
+                false
+              ],
+              [
+                "root-key-up",
+                "+",
+                "DIV",
+                false
+              ],
+              [
+                "blur",
+                "DIV"
+              ],
+              [
+                "open",
+                false
+              ]
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "input-prevent-down",
+      "initial": {
+        "open": false,
+        "focused": false,
+        "focusClass": false,
+        "disabled": false,
+        "selected": "",
+        "tags": [],
+        "maxLength": null,
+        "tabIndex": null,
+        "events": []
+      },
+      "steps": [
+        {
+          "action": "focus",
+          "view": {
+            "open": false,
+            "focused": true,
+            "focusClass": true,
+            "disabled": false,
+            "selected": "",
+            "tags": [],
+            "maxLength": null,
+            "tabIndex": null,
+            "events": [
+              [
+                "focus",
+                "DIV"
+              ]
+            ]
+          }
+        },
+        {
+          "action": "down:ArrowDown",
+          "view": {
+            "open": true,
+            "focused": true,
+            "focusClass": true,
+            "disabled": false,
+            "selected": null,
+            "tags": [],
+            "maxLength": null,
+            "tabIndex": null,
+            "events": [
+              [
+                "focus",
+                "DIV"
+              ],
+              [
+                "input-key",
+                "ArrowDown",
+                "INPUT",
+                false
+              ],
+              [
+                "open",
+                true
+              ],
+              [
+                "root-key",
+                "ArrowDown",
+                "DIV",
+                true
+              ]
+            ]
+          }
+        },
+        {
+          "action": "up:ArrowDown",
+          "view": {
+            "open": true,
+            "focused": true,
+            "focusClass": true,
+            "disabled": false,
+            "selected": null,
+            "tags": [],
+            "maxLength": null,
+            "tabIndex": null,
+            "events": [
+              [
+                "focus",
+                "DIV"
+              ],
+              [
+                "input-key",
+                "ArrowDown",
+                "INPUT",
+                false
+              ],
+              [
+                "open",
+                true
+              ],
+              [
+                "root-key",
+                "ArrowDown",
+                "DIV",
+                true
+              ],
+              [
+                "root-key-up",
+                "ArrowDown",
+                "DIV",
+                false
+              ]
+            ]
+          }
+        },
+        {
+          "action": "down:Enter",
+          "view": {
+            "open": false,
+            "focused": true,
+            "focusClass": true,
+            "disabled": false,
+            "selected": "Alpha",
+            "tags": [],
+            "maxLength": null,
+            "tabIndex": null,
+            "events": [
+              [
+                "focus",
+                "DIV"
+              ],
+              [
+                "input-key",
+                "ArrowDown",
+                "INPUT",
+                false
+              ],
+              [
+                "open",
+                true
+              ],
+              [
+                "root-key",
+                "ArrowDown",
+                "DIV",
+                true
+              ],
+              [
+                "root-key-up",
+                "ArrowDown",
+                "DIV",
+                false
+              ],
+              [
+                "input-key",
+                "Enter",
+                "INPUT",
+                false
+              ],
+              [
+                "change",
+                "a",
+                [
+                  "Alpha"
+                ]
+              ],
+              [
+                "select",
+                "a"
+              ],
+              [
+                "root-key",
+                "Enter",
+                "DIV",
+                true
+              ],
+              [
+                "open",
+                false
+              ]
+            ]
+          }
+        },
+        {
+          "action": "up:Enter",
+          "view": {
+            "open": false,
+            "focused": true,
+            "focusClass": true,
+            "disabled": false,
+            "selected": "Alpha",
+            "tags": [],
+            "maxLength": null,
+            "tabIndex": null,
+            "events": [
+              [
+                "focus",
+                "DIV"
+              ],
+              [
+                "input-key",
+                "ArrowDown",
+                "INPUT",
+                false
+              ],
+              [
+                "open",
+                true
+              ],
+              [
+                "root-key",
+                "ArrowDown",
+                "DIV",
+                true
+              ],
+              [
+                "root-key-up",
+                "ArrowDown",
+                "DIV",
+                false
+              ],
+              [
+                "input-key",
+                "Enter",
+                "INPUT",
+                false
+              ],
+              [
+                "change",
+                "a",
+                [
+                  "Alpha"
+                ]
+              ],
+              [
+                "select",
+                "a"
+              ],
+              [
+                "root-key",
+                "Enter",
+                "DIV",
+                true
+              ],
+              [
+                "open",
+                false
+              ],
+              [
+                "root-key-up",
+                "Enter",
+                "DIV",
+                false
+              ]
+            ]
+          }
+        },
+        {
+          "action": "outside",
+          "view": {
+            "open": false,
+            "focused": false,
+            "focusClass": false,
+            "disabled": false,
+            "selected": "Alpha",
+            "tags": [],
+            "maxLength": null,
+            "tabIndex": null,
+            "events": [
+              [
+                "focus",
+                "DIV"
+              ],
+              [
+                "input-key",
+                "ArrowDown",
+                "INPUT",
+                false
+              ],
+              [
+                "open",
+                true
+              ],
+              [
+                "root-key",
+                "ArrowDown",
+                "DIV",
+                true
+              ],
+              [
+                "root-key-up",
+                "ArrowDown",
+                "DIV",
+                false
+              ],
+              [
+                "input-key",
+                "Enter",
+                "INPUT",
+                false
+              ],
+              [
+                "change",
+                "a",
+                [
+                  "Alpha"
+                ]
+              ],
+              [
+                "select",
+                "a"
+              ],
+              [
+                "root-key",
+                "Enter",
+                "DIV",
+                true
+              ],
+              [
+                "open",
+                false
+              ],
+              [
+                "root-key-up",
+                "Enter",
+                "DIV",
+                false
+              ],
+              [
+                "blur",
+                "DIV"
+              ]
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "input-prevent-enter",
+      "initial": {
+        "open": false,
+        "focused": false,
+        "focusClass": false,
+        "disabled": false,
+        "selected": "",
+        "tags": [],
+        "maxLength": null,
+        "tabIndex": null,
+        "events": []
+      },
+      "steps": [
+        {
+          "action": "focus",
+          "view": {
+            "open": false,
+            "focused": true,
+            "focusClass": true,
+            "disabled": false,
+            "selected": "",
+            "tags": [],
+            "maxLength": null,
+            "tabIndex": null,
+            "events": [
+              [
+                "focus",
+                "DIV"
+              ]
+            ]
+          }
+        },
+        {
+          "action": "down:ArrowDown",
+          "view": {
+            "open": true,
+            "focused": true,
+            "focusClass": true,
+            "disabled": false,
+            "selected": null,
+            "tags": [],
+            "maxLength": null,
+            "tabIndex": null,
+            "events": [
+              [
+                "focus",
+                "DIV"
+              ],
+              [
+                "input-key",
+                "ArrowDown",
+                "INPUT",
+                false
+              ],
+              [
+                "open",
+                true
+              ],
+              [
+                "root-key",
+                "ArrowDown",
+                "DIV",
+                false
+              ]
+            ]
+          }
+        },
+        {
+          "action": "up:ArrowDown",
+          "view": {
+            "open": true,
+            "focused": true,
+            "focusClass": true,
+            "disabled": false,
+            "selected": null,
+            "tags": [],
+            "maxLength": null,
+            "tabIndex": null,
+            "events": [
+              [
+                "focus",
+                "DIV"
+              ],
+              [
+                "input-key",
+                "ArrowDown",
+                "INPUT",
+                false
+              ],
+              [
+                "open",
+                true
+              ],
+              [
+                "root-key",
+                "ArrowDown",
+                "DIV",
+                false
+              ],
+              [
+                "root-key-up",
+                "ArrowDown",
+                "DIV",
+                false
+              ]
+            ]
+          }
+        },
+        {
+          "action": "down:Enter",
+          "view": {
+            "open": false,
+            "focused": true,
+            "focusClass": true,
+            "disabled": false,
+            "selected": "Alpha",
+            "tags": [],
+            "maxLength": null,
+            "tabIndex": null,
+            "events": [
+              [
+                "focus",
+                "DIV"
+              ],
+              [
+                "input-key",
+                "ArrowDown",
+                "INPUT",
+                false
+              ],
+              [
+                "open",
+                true
+              ],
+              [
+                "root-key",
+                "ArrowDown",
+                "DIV",
+                false
+              ],
+              [
+                "root-key-up",
+                "ArrowDown",
+                "DIV",
+                false
+              ],
+              [
+                "input-key",
+                "Enter",
+                "INPUT",
+                false
+              ],
+              [
+                "change",
+                "a",
+                [
+                  "Alpha"
+                ]
+              ],
+              [
+                "select",
+                "a"
+              ],
+              [
+                "root-key",
+                "Enter",
+                "DIV",
+                true
+              ],
+              [
+                "open",
+                false
+              ]
+            ]
+          }
+        },
+        {
+          "action": "up:Enter",
+          "view": {
+            "open": false,
+            "focused": true,
+            "focusClass": true,
+            "disabled": false,
+            "selected": "Alpha",
+            "tags": [],
+            "maxLength": null,
+            "tabIndex": null,
+            "events": [
+              [
+                "focus",
+                "DIV"
+              ],
+              [
+                "input-key",
+                "ArrowDown",
+                "INPUT",
+                false
+              ],
+              [
+                "open",
+                true
+              ],
+              [
+                "root-key",
+                "ArrowDown",
+                "DIV",
+                false
+              ],
+              [
+                "root-key-up",
+                "ArrowDown",
+                "DIV",
+                false
+              ],
+              [
+                "input-key",
+                "Enter",
+                "INPUT",
+                false
+              ],
+              [
+                "change",
+                "a",
+                [
+                  "Alpha"
+                ]
+              ],
+              [
+                "select",
+                "a"
+              ],
+              [
+                "root-key",
+                "Enter",
+                "DIV",
+                true
+              ],
+              [
+                "open",
+                false
+              ],
+              [
+                "root-key-up",
+                "Enter",
+                "DIV",
+                false
+              ]
+            ]
+          }
+        },
+        {
+          "action": "outside",
+          "view": {
+            "open": false,
+            "focused": false,
+            "focusClass": false,
+            "disabled": false,
+            "selected": "Alpha",
+            "tags": [],
+            "maxLength": null,
+            "tabIndex": null,
+            "events": [
+              [
+                "focus",
+                "DIV"
+              ],
+              [
+                "input-key",
+                "ArrowDown",
+                "INPUT",
+                false
+              ],
+              [
+                "open",
+                true
+              ],
+              [
+                "root-key",
+                "ArrowDown",
+                "DIV",
+                false
+              ],
+              [
+                "root-key-up",
+                "ArrowDown",
+                "DIV",
+                false
+              ],
+              [
+                "input-key",
+                "Enter",
+                "INPUT",
+                false
+              ],
+              [
+                "change",
+                "a",
+                [
+                  "Alpha"
+                ]
+              ],
+              [
+                "select",
+                "a"
+              ],
+              [
+                "root-key",
+                "Enter",
+                "DIV",
+                true
+              ],
+              [
+                "open",
+                false
+              ],
+              [
+                "root-key-up",
+                "Enter",
+                "DIV",
+                false
+              ],
+              [
+                "blur",
+                "DIV"
+              ]
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "input-stop-down",
+      "initial": {
+        "open": false,
+        "focused": false,
+        "focusClass": false,
+        "disabled": false,
+        "selected": "",
+        "tags": [],
+        "maxLength": null,
+        "tabIndex": null,
+        "events": []
+      },
+      "steps": [
+        {
+          "action": "focus",
+          "view": {
+            "open": false,
+            "focused": true,
+            "focusClass": true,
+            "disabled": false,
+            "selected": "",
+            "tags": [],
+            "maxLength": null,
+            "tabIndex": null,
+            "events": [
+              [
+                "focus",
+                "DIV"
+              ]
+            ]
+          }
+        },
+        {
+          "action": "down:ArrowDown",
+          "view": {
+            "open": true,
+            "focused": true,
+            "focusClass": true,
+            "disabled": false,
+            "selected": null,
+            "tags": [],
+            "maxLength": null,
+            "tabIndex": null,
+            "events": [
+              [
+                "focus",
+                "DIV"
+              ],
+              [
+                "input-key",
+                "ArrowDown",
+                "INPUT",
+                false
+              ],
+              [
+                "open",
+                true
+              ]
+            ]
+          }
+        },
+        {
+          "action": "up:ArrowDown",
+          "view": {
+            "open": true,
+            "focused": true,
+            "focusClass": true,
+            "disabled": false,
+            "selected": null,
+            "tags": [],
+            "maxLength": null,
+            "tabIndex": null,
+            "events": [
+              [
+                "focus",
+                "DIV"
+              ],
+              [
+                "input-key",
+                "ArrowDown",
+                "INPUT",
+                false
+              ],
+              [
+                "open",
+                true
+              ],
+              [
+                "root-key-up",
+                "ArrowDown",
+                "DIV",
+                false
+              ]
+            ]
+          }
+        },
+        {
+          "action": "down:Enter",
+          "view": {
+            "open": false,
+            "focused": true,
+            "focusClass": true,
+            "disabled": false,
+            "selected": "Alpha",
+            "tags": [],
+            "maxLength": null,
+            "tabIndex": null,
+            "events": [
+              [
+                "focus",
+                "DIV"
+              ],
+              [
+                "input-key",
+                "ArrowDown",
+                "INPUT",
+                false
+              ],
+              [
+                "open",
+                true
+              ],
+              [
+                "root-key-up",
+                "ArrowDown",
+                "DIV",
+                false
+              ],
+              [
+                "input-key",
+                "Enter",
+                "INPUT",
+                false
+              ],
+              [
+                "change",
+                "a",
+                [
+                  "Alpha"
+                ]
+              ],
+              [
+                "select",
+                "a"
+              ],
+              [
+                "root-key",
+                "Enter",
+                "DIV",
+                true
+              ],
+              [
+                "open",
+                false
+              ]
+            ]
+          }
+        },
+        {
+          "action": "up:Enter",
+          "view": {
+            "open": false,
+            "focused": true,
+            "focusClass": true,
+            "disabled": false,
+            "selected": "Alpha",
+            "tags": [],
+            "maxLength": null,
+            "tabIndex": null,
+            "events": [
+              [
+                "focus",
+                "DIV"
+              ],
+              [
+                "input-key",
+                "ArrowDown",
+                "INPUT",
+                false
+              ],
+              [
+                "open",
+                true
+              ],
+              [
+                "root-key-up",
+                "ArrowDown",
+                "DIV",
+                false
+              ],
+              [
+                "input-key",
+                "Enter",
+                "INPUT",
+                false
+              ],
+              [
+                "change",
+                "a",
+                [
+                  "Alpha"
+                ]
+              ],
+              [
+                "select",
+                "a"
+              ],
+              [
+                "root-key",
+                "Enter",
+                "DIV",
+                true
+              ],
+              [
+                "open",
+                false
+              ],
+              [
+                "root-key-up",
+                "Enter",
+                "DIV",
+                false
+              ]
+            ]
+          }
+        },
+        {
+          "action": "outside",
+          "view": {
+            "open": false,
+            "focused": false,
+            "focusClass": false,
+            "disabled": false,
+            "selected": "Alpha",
+            "tags": [],
+            "maxLength": null,
+            "tabIndex": null,
+            "events": [
+              [
+                "focus",
+                "DIV"
+              ],
+              [
+                "input-key",
+                "ArrowDown",
+                "INPUT",
+                false
+              ],
+              [
+                "open",
+                true
+              ],
+              [
+                "root-key-up",
+                "ArrowDown",
+                "DIV",
+                false
+              ],
+              [
+                "input-key",
+                "Enter",
+                "INPUT",
+                false
+              ],
+              [
+                "change",
+                "a",
+                [
+                  "Alpha"
+                ]
+              ],
+              [
+                "select",
+                "a"
+              ],
+              [
+                "root-key",
+                "Enter",
+                "DIV",
+                true
+              ],
+              [
+                "open",
+                false
+              ],
+              [
+                "root-key-up",
+                "Enter",
+                "DIV",
+                false
+              ],
+              [
+                "blur",
+                "DIV"
+              ]
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "input-stop-enter",
+      "initial": {
+        "open": false,
+        "focused": false,
+        "focusClass": false,
+        "disabled": false,
+        "selected": "",
+        "tags": [],
+        "maxLength": null,
+        "tabIndex": null,
+        "events": []
+      },
+      "steps": [
+        {
+          "action": "focus",
+          "view": {
+            "open": false,
+            "focused": true,
+            "focusClass": true,
+            "disabled": false,
+            "selected": "",
+            "tags": [],
+            "maxLength": null,
+            "tabIndex": null,
+            "events": [
+              [
+                "focus",
+                "DIV"
+              ]
+            ]
+          }
+        },
+        {
+          "action": "down:ArrowDown",
+          "view": {
+            "open": true,
+            "focused": true,
+            "focusClass": true,
+            "disabled": false,
+            "selected": null,
+            "tags": [],
+            "maxLength": null,
+            "tabIndex": null,
+            "events": [
+              [
+                "focus",
+                "DIV"
+              ],
+              [
+                "input-key",
+                "ArrowDown",
+                "INPUT",
+                false
+              ],
+              [
+                "open",
+                true
+              ],
+              [
+                "root-key",
+                "ArrowDown",
+                "DIV",
+                false
+              ]
+            ]
+          }
+        },
+        {
+          "action": "up:ArrowDown",
+          "view": {
+            "open": true,
+            "focused": true,
+            "focusClass": true,
+            "disabled": false,
+            "selected": null,
+            "tags": [],
+            "maxLength": null,
+            "tabIndex": null,
+            "events": [
+              [
+                "focus",
+                "DIV"
+              ],
+              [
+                "input-key",
+                "ArrowDown",
+                "INPUT",
+                false
+              ],
+              [
+                "open",
+                true
+              ],
+              [
+                "root-key",
+                "ArrowDown",
+                "DIV",
+                false
+              ],
+              [
+                "root-key-up",
+                "ArrowDown",
+                "DIV",
+                false
+              ]
+            ]
+          }
+        },
+        {
+          "action": "down:Enter",
+          "view": {
+            "open": true,
+            "focused": true,
+            "focusClass": true,
+            "disabled": false,
+            "selected": null,
+            "tags": [],
+            "maxLength": null,
+            "tabIndex": null,
+            "events": [
+              [
+                "focus",
+                "DIV"
+              ],
+              [
+                "input-key",
+                "ArrowDown",
+                "INPUT",
+                false
+              ],
+              [
+                "open",
+                true
+              ],
+              [
+                "root-key",
+                "ArrowDown",
+                "DIV",
+                false
+              ],
+              [
+                "root-key-up",
+                "ArrowDown",
+                "DIV",
+                false
+              ],
+              [
+                "input-key",
+                "Enter",
+                "INPUT",
+                false
+              ]
+            ]
+          }
+        },
+        {
+          "action": "up:Enter",
+          "view": {
+            "open": true,
+            "focused": true,
+            "focusClass": true,
+            "disabled": false,
+            "selected": null,
+            "tags": [],
+            "maxLength": null,
+            "tabIndex": null,
+            "events": [
+              [
+                "focus",
+                "DIV"
+              ],
+              [
+                "input-key",
+                "ArrowDown",
+                "INPUT",
+                false
+              ],
+              [
+                "open",
+                true
+              ],
+              [
+                "root-key",
+                "ArrowDown",
+                "DIV",
+                false
+              ],
+              [
+                "root-key-up",
+                "ArrowDown",
+                "DIV",
+                false
+              ],
+              [
+                "input-key",
+                "Enter",
+                "INPUT",
+                false
+              ],
+              [
+                "root-key-up",
+                "Enter",
+                "DIV",
+                false
+              ]
+            ]
+          }
+        },
+        {
+          "action": "outside",
+          "view": {
+            "open": false,
+            "focused": false,
+            "focusClass": false,
+            "disabled": false,
+            "selected": "",
+            "tags": [],
+            "maxLength": null,
+            "tabIndex": null,
+            "events": [
+              [
+                "focus",
+                "DIV"
+              ],
+              [
+                "input-key",
+                "ArrowDown",
+                "INPUT",
+                false
+              ],
+              [
+                "open",
+                true
+              ],
+              [
+                "root-key",
+                "ArrowDown",
+                "DIV",
+                false
+              ],
+              [
+                "root-key-up",
+                "ArrowDown",
+                "DIV",
+                false
+              ],
+              [
+                "input-key",
+                "Enter",
+                "INPUT",
+                false
+              ],
+              [
+                "root-key-up",
+                "Enter",
+                "DIV",
+                false
+              ],
+              [
+                "blur",
+                "DIV"
+              ],
+              [
+                "open",
+                false
+              ]
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "root-prevent-enter",
+      "initial": {
+        "open": false,
+        "focused": false,
+        "focusClass": false,
+        "disabled": false,
+        "selected": "",
+        "tags": [],
+        "maxLength": null,
+        "tabIndex": null,
+        "events": []
+      },
+      "steps": [
+        {
+          "action": "focus",
+          "view": {
+            "open": false,
+            "focused": true,
+            "focusClass": true,
+            "disabled": false,
+            "selected": "",
+            "tags": [],
+            "maxLength": null,
+            "tabIndex": null,
+            "events": [
+              [
+                "focus",
+                "DIV"
+              ]
+            ]
+          }
+        },
+        {
+          "action": "down:ArrowDown",
+          "view": {
+            "open": true,
+            "focused": true,
+            "focusClass": true,
+            "disabled": false,
+            "selected": null,
+            "tags": [],
+            "maxLength": null,
+            "tabIndex": null,
+            "events": [
+              [
+                "focus",
+                "DIV"
+              ],
+              [
+                "input-key",
+                "ArrowDown",
+                "INPUT",
+                false
+              ],
+              [
+                "open",
+                true
+              ],
+              [
+                "root-key",
+                "ArrowDown",
+                "DIV",
+                false
+              ]
+            ]
+          }
+        },
+        {
+          "action": "up:ArrowDown",
+          "view": {
+            "open": true,
+            "focused": true,
+            "focusClass": true,
+            "disabled": false,
+            "selected": null,
+            "tags": [],
+            "maxLength": null,
+            "tabIndex": null,
+            "events": [
+              [
+                "focus",
+                "DIV"
+              ],
+              [
+                "input-key",
+                "ArrowDown",
+                "INPUT",
+                false
+              ],
+              [
+                "open",
+                true
+              ],
+              [
+                "root-key",
+                "ArrowDown",
+                "DIV",
+                false
+              ],
+              [
+                "root-key-up",
+                "ArrowDown",
+                "DIV",
+                false
+              ]
+            ]
+          }
+        },
+        {
+          "action": "down:Enter",
+          "view": {
+            "open": false,
+            "focused": true,
+            "focusClass": true,
+            "disabled": false,
+            "selected": "Alpha",
+            "tags": [],
+            "maxLength": null,
+            "tabIndex": null,
+            "events": [
+              [
+                "focus",
+                "DIV"
+              ],
+              [
+                "input-key",
+                "ArrowDown",
+                "INPUT",
+                false
+              ],
+              [
+                "open",
+                true
+              ],
+              [
+                "root-key",
+                "ArrowDown",
+                "DIV",
+                false
+              ],
+              [
+                "root-key-up",
+                "ArrowDown",
+                "DIV",
+                false
+              ],
+              [
+                "input-key",
+                "Enter",
+                "INPUT",
+                false
+              ],
+              [
+                "change",
+                "a",
+                [
+                  "Alpha"
+                ]
+              ],
+              [
+                "select",
+                "a"
+              ],
+              [
+                "root-key",
+                "Enter",
+                "DIV",
+                true
+              ],
+              [
+                "open",
+                false
+              ]
+            ]
+          }
+        },
+        {
+          "action": "up:Enter",
+          "view": {
+            "open": false,
+            "focused": true,
+            "focusClass": true,
+            "disabled": false,
+            "selected": "Alpha",
+            "tags": [],
+            "maxLength": null,
+            "tabIndex": null,
+            "events": [
+              [
+                "focus",
+                "DIV"
+              ],
+              [
+                "input-key",
+                "ArrowDown",
+                "INPUT",
+                false
+              ],
+              [
+                "open",
+                true
+              ],
+              [
+                "root-key",
+                "ArrowDown",
+                "DIV",
+                false
+              ],
+              [
+                "root-key-up",
+                "ArrowDown",
+                "DIV",
+                false
+              ],
+              [
+                "input-key",
+                "Enter",
+                "INPUT",
+                false
+              ],
+              [
+                "change",
+                "a",
+                [
+                  "Alpha"
+                ]
+              ],
+              [
+                "select",
+                "a"
+              ],
+              [
+                "root-key",
+                "Enter",
+                "DIV",
+                true
+              ],
+              [
+                "open",
+                false
+              ],
+              [
+                "root-key-up",
+                "Enter",
+                "DIV",
+                false
+              ]
+            ]
+          }
+        },
+        {
+          "action": "outside",
+          "view": {
+            "open": false,
+            "focused": false,
+            "focusClass": false,
+            "disabled": false,
+            "selected": "Alpha",
+            "tags": [],
+            "maxLength": null,
+            "tabIndex": null,
+            "events": [
+              [
+                "focus",
+                "DIV"
+              ],
+              [
+                "input-key",
+                "ArrowDown",
+                "INPUT",
+                false
+              ],
+              [
+                "open",
+                true
+              ],
+              [
+                "root-key",
+                "ArrowDown",
+                "DIV",
+                false
+              ],
+              [
+                "root-key-up",
+                "ArrowDown",
+                "DIV",
+                false
+              ],
+              [
+                "input-key",
+                "Enter",
+                "INPUT",
+                false
+              ],
+              [
+                "change",
+                "a",
+                [
+                  "Alpha"
+                ]
+              ],
+              [
+                "select",
+                "a"
+              ],
+              [
+                "root-key",
+                "Enter",
+                "DIV",
+                true
+              ],
+              [
+                "open",
+                false
+              ],
+              [
+                "root-key-up",
+                "Enter",
+                "DIV",
+                false
+              ],
+              [
+                "blur",
+                "DIV"
+              ]
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "root-mouse",
+      "initial": {
+        "open": false,
+        "focused": false,
+        "focusClass": false,
+        "disabled": false,
+        "selected": "",
+        "tags": [],
+        "maxLength": null,
+        "tabIndex": null,
+        "events": []
+      },
+      "steps": [
+        {
+          "action": "mouse-enter",
+          "view": {
+            "open": false,
+            "focused": false,
+            "focusClass": false,
+            "disabled": false,
+            "selected": "",
+            "tags": [],
+            "maxLength": null,
+            "tabIndex": null,
+            "events": [
+              [
+                "mouse-enter",
+                "DIV"
+              ]
+            ]
+          }
+        },
+        {
+          "action": "click-input",
+          "view": {
+            "open": true,
+            "focused": true,
+            "focusClass": true,
+            "disabled": false,
+            "selected": null,
+            "tags": [],
+            "maxLength": null,
+            "tabIndex": null,
+            "events": [
+              [
+                "mouse-enter",
+                "DIV"
+              ],
+              [
+                "focus",
+                "DIV"
+              ],
+              [
+                "open",
+                true
+              ],
+              [
+                "mouse-down",
+                "DIV"
+              ],
+              [
+                "click",
+                "DIV"
+              ]
+            ]
+          }
+        },
+        {
+          "action": "mouse-leave",
+          "view": {
+            "open": true,
+            "focused": true,
+            "focusClass": true,
+            "disabled": false,
+            "selected": null,
+            "tags": [],
+            "maxLength": null,
+            "tabIndex": null,
+            "events": [
+              [
+                "mouse-enter",
+                "DIV"
+              ],
+              [
+                "focus",
+                "DIV"
+              ],
+              [
+                "open",
+                true
+              ],
+              [
+                "mouse-down",
+                "DIV"
+              ],
+              [
+                "click",
+                "DIV"
+              ],
+              [
+                "mouse-leave",
+                "DIV"
+              ]
+            ]
+          }
+        },
+        {
+          "action": "outside",
+          "view": {
+            "open": false,
+            "focused": false,
+            "focusClass": false,
+            "disabled": false,
+            "selected": "",
+            "tags": [],
+            "maxLength": null,
+            "tabIndex": null,
+            "events": [
+              [
+                "mouse-enter",
+                "DIV"
+              ],
+              [
+                "focus",
+                "DIV"
+              ],
+              [
+                "open",
+                true
+              ],
+              [
+                "mouse-down",
+                "DIV"
+              ],
+              [
+                "click",
+                "DIV"
+              ],
+              [
+                "mouse-leave",
+                "DIV"
+              ],
+              [
+                "blur",
+                "DIV"
+              ],
+              [
+                "open",
+                false
+              ]
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "root-padding",
+      "initial": {
+        "open": false,
+        "focused": false,
+        "focusClass": false,
+        "disabled": false,
+        "selected": "",
+        "tags": [],
+        "maxLength": null,
+        "tabIndex": null,
+        "events": []
+      },
+      "steps": [
+        {
+          "action": "click-root",
+          "view": {
+            "open": true,
+            "focused": true,
+            "focusClass": true,
+            "disabled": false,
+            "selected": null,
+            "tags": [],
+            "maxLength": null,
+            "tabIndex": null,
+            "events": [
+              [
+                "mouse-enter",
+                "DIV"
+              ],
+              [
+                "focus",
+                "DIV"
+              ],
+              [
+                "open",
+                true
+              ],
+              [
+                "mouse-down",
+                "DIV"
+              ],
+              [
+                "click",
+                "DIV"
+              ]
+            ]
+          }
+        },
+        {
+          "action": "outside",
+          "view": {
+            "open": false,
+            "focused": false,
+            "focusClass": false,
+            "disabled": false,
+            "selected": "",
+            "tags": [],
+            "maxLength": null,
+            "tabIndex": null,
+            "events": [
+              [
+                "mouse-enter",
+                "DIV"
+              ],
+              [
+                "focus",
+                "DIV"
+              ],
+              [
+                "open",
+                true
+              ],
+              [
+                "mouse-down",
+                "DIV"
+              ],
+              [
+                "click",
+                "DIV"
+              ],
+              [
+                "mouse-leave",
+                "DIV"
+              ],
+              [
+                "blur",
+                "DIV"
+              ],
+              [
+                "open",
+                false
+              ]
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "input-aliases",
+      "initial": {
+        "open": false,
+        "focused": false,
+        "focusClass": false,
+        "disabled": false,
+        "selected": "",
+        "tags": [],
+        "maxLength": null,
+        "tabIndex": "3",
+        "events": []
+      },
+      "steps": [
+        {
+          "action": "focus",
+          "view": {
+            "open": false,
+            "focused": true,
+            "focusClass": true,
+            "disabled": false,
+            "selected": "",
+            "tags": [],
+            "maxLength": null,
+            "tabIndex": "3",
+            "events": [
+              [
+                "focus",
+                "DIV"
+              ]
+            ]
+          }
+        },
+        {
+          "action": "outside",
+          "view": {
+            "open": false,
+            "focused": false,
+            "focusClass": false,
+            "disabled": false,
+            "selected": "",
+            "tags": [],
+            "maxLength": null,
+            "tabIndex": "3",
+            "events": [
+              [
+                "focus",
+                "DIV"
+              ],
+              [
+                "blur",
+                "DIV"
+              ]
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "controlled-accept",
+      "initial": {
+        "open": false,
+        "focused": false,
+        "focusClass": false,
+        "disabled": false,
+        "selected": "",
+        "tags": [],
+        "maxLength": null,
+        "tabIndex": null,
+        "events": []
+      },
+      "steps": [
+        {
+          "action": "focus",
+          "view": {
+            "open": true,
+            "focused": true,
+            "focusClass": true,
+            "disabled": false,
+            "selected": null,
+            "tags": [],
+            "maxLength": null,
+            "tabIndex": null,
+            "events": [
+              [
+                "open",
+                true
+              ],
+              [
+                "focus",
+                "DIV"
+              ]
+            ]
+          }
+        },
+        {
+          "action": "down:ArrowDown",
+          "view": {
+            "open": true,
+            "focused": true,
+            "focusClass": true,
+            "disabled": false,
+            "selected": null,
+            "tags": [],
+            "maxLength": null,
+            "tabIndex": null,
+            "events": [
+              [
+                "open",
+                true
+              ],
+              [
+                "focus",
+                "DIV"
+              ],
+              [
+                "input-key",
+                "ArrowDown",
+                "INPUT",
+                true
+              ],
+              [
+                "root-key",
+                "ArrowDown",
+                "DIV",
+                true
+              ]
+            ]
+          }
+        },
+        {
+          "action": "up:ArrowDown",
+          "view": {
+            "open": true,
+            "focused": true,
+            "focusClass": true,
+            "disabled": false,
+            "selected": null,
+            "tags": [],
+            "maxLength": null,
+            "tabIndex": null,
+            "events": [
+              [
+                "open",
+                true
+              ],
+              [
+                "focus",
+                "DIV"
+              ],
+              [
+                "input-key",
+                "ArrowDown",
+                "INPUT",
+                true
+              ],
+              [
+                "root-key",
+                "ArrowDown",
+                "DIV",
+                true
+              ],
+              [
+                "root-key-up",
+                "ArrowDown",
+                "DIV",
+                false
+              ]
+            ]
+          }
+        },
+        {
+          "action": "down:Enter",
+          "view": {
+            "open": false,
+            "focused": true,
+            "focusClass": true,
+            "disabled": false,
+            "selected": "Beta",
+            "tags": [],
+            "maxLength": null,
+            "tabIndex": null,
+            "events": [
+              [
+                "open",
+                true
+              ],
+              [
+                "focus",
+                "DIV"
+              ],
+              [
+                "input-key",
+                "ArrowDown",
+                "INPUT",
+                true
+              ],
+              [
+                "root-key",
+                "ArrowDown",
+                "DIV",
+                true
+              ],
+              [
+                "root-key-up",
+                "ArrowDown",
+                "DIV",
+                false
+              ],
+              [
+                "input-key",
+                "Enter",
+                "INPUT",
+                false
+              ],
+              [
+                "change",
+                "b",
+                [
+                  "Beta"
+                ]
+              ],
+              [
+                "select",
+                "b"
+              ],
+              [
+                "root-key",
+                "Enter",
+                "DIV",
+                true
+              ],
+              [
+                "open",
+                false
+              ]
+            ]
+          }
+        },
+        {
+          "action": "up:Enter",
+          "view": {
+            "open": false,
+            "focused": true,
+            "focusClass": true,
+            "disabled": false,
+            "selected": "Beta",
+            "tags": [],
+            "maxLength": null,
+            "tabIndex": null,
+            "events": [
+              [
+                "open",
+                true
+              ],
+              [
+                "focus",
+                "DIV"
+              ],
+              [
+                "input-key",
+                "ArrowDown",
+                "INPUT",
+                true
+              ],
+              [
+                "root-key",
+                "ArrowDown",
+                "DIV",
+                true
+              ],
+              [
+                "root-key-up",
+                "ArrowDown",
+                "DIV",
+                false
+              ],
+              [
+                "input-key",
+                "Enter",
+                "INPUT",
+                false
+              ],
+              [
+                "change",
+                "b",
+                [
+                  "Beta"
+                ]
+              ],
+              [
+                "select",
+                "b"
+              ],
+              [
+                "root-key",
+                "Enter",
+                "DIV",
+                true
+              ],
+              [
+                "open",
+                false
+              ],
+              [
+                "root-key-up",
+                "Enter",
+                "DIV",
+                false
+              ]
+            ]
+          }
+        },
+        {
+          "action": "outside",
+          "view": {
+            "open": false,
+            "focused": false,
+            "focusClass": false,
+            "disabled": false,
+            "selected": "Beta",
+            "tags": [],
+            "maxLength": null,
+            "tabIndex": null,
+            "events": [
+              [
+                "open",
+                true
+              ],
+              [
+                "focus",
+                "DIV"
+              ],
+              [
+                "input-key",
+                "ArrowDown",
+                "INPUT",
+                true
+              ],
+              [
+                "root-key",
+                "ArrowDown",
+                "DIV",
+                true
+              ],
+              [
+                "root-key-up",
+                "ArrowDown",
+                "DIV",
+                false
+              ],
+              [
+                "input-key",
+                "Enter",
+                "INPUT",
+                false
+              ],
+              [
+                "change",
+                "b",
+                [
+                  "Beta"
+                ]
+              ],
+              [
+                "select",
+                "b"
+              ],
+              [
+                "root-key",
+                "Enter",
+                "DIV",
+                true
+              ],
+              [
+                "open",
+                false
+              ],
+              [
+                "root-key-up",
+                "Enter",
+                "DIV",
+                false
+              ],
+              [
+                "blur",
+                "DIV"
+              ]
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "controlled-reject",
+      "initial": {
+        "open": false,
+        "focused": false,
+        "focusClass": false,
+        "disabled": false,
+        "selected": "",
+        "tags": [],
+        "maxLength": null,
+        "tabIndex": null,
+        "events": []
+      },
+      "steps": [
+        {
+          "action": "focus",
+          "view": {
+            "open": false,
+            "focused": true,
+            "focusClass": true,
+            "disabled": false,
+            "selected": "",
+            "tags": [],
+            "maxLength": null,
+            "tabIndex": null,
+            "events": [
+              [
+                "open",
+                true
+              ],
+              [
+                "focus",
+                "DIV"
+              ]
+            ]
+          }
+        },
+        {
+          "action": "outside",
+          "view": {
+            "open": false,
+            "focused": false,
+            "focusClass": false,
+            "disabled": false,
+            "selected": "",
+            "tags": [],
+            "maxLength": null,
+            "tabIndex": null,
+            "events": [
+              [
+                "open",
+                true
+              ],
+              [
+                "focus",
+                "DIV"
+              ],
+              [
+                "blur",
+                "DIV"
+              ]
+            ]
+          }
+        },
+        {
+          "action": "focus",
+          "view": {
+            "open": false,
+            "focused": true,
+            "focusClass": true,
+            "disabled": false,
+            "selected": "",
+            "tags": [],
+            "maxLength": null,
+            "tabIndex": null,
+            "events": [
+              [
+                "open",
+                true
+              ],
+              [
+                "focus",
+                "DIV"
+              ],
+              [
+                "blur",
+                "DIV"
+              ],
+              [
+                "open",
+                true
+              ],
+              [
+                "focus",
+                "DIV"
+              ]
+            ]
+          }
+        },
+        {
+          "action": "outside",
+          "view": {
+            "open": false,
+            "focused": false,
+            "focusClass": false,
+            "disabled": false,
+            "selected": "",
+            "tags": [],
+            "maxLength": null,
+            "tabIndex": null,
+            "events": [
+              [
+                "open",
+                true
+              ],
+              [
+                "focus",
+                "DIV"
+              ],
+              [
+                "blur",
+                "DIV"
+              ],
+              [
+                "open",
+                true
+              ],
+              [
+                "focus",
+                "DIV"
+              ],
+              [
+                "blur",
+                "DIV"
+              ]
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "enter-lock",
+      "initial": {
+        "open": true,
+        "focused": false,
+        "focusClass": false,
+        "disabled": false,
+        "selected": null,
+        "tags": [],
+        "maxLength": null,
+        "tabIndex": null,
+        "events": []
+      },
+      "steps": [
+        {
+          "action": "focus",
+          "view": {
+            "open": true,
+            "focused": true,
+            "focusClass": true,
+            "disabled": false,
+            "selected": null,
+            "tags": [],
+            "maxLength": null,
+            "tabIndex": null,
+            "events": [
+              [
+                "focus",
+                "DIV"
+              ]
+            ]
+          }
+        },
+        {
+          "action": "down:Enter",
+          "view": {
+            "open": true,
+            "focused": true,
+            "focusClass": true,
+            "disabled": false,
+            "selected": null,
+            "tags": [
+              "Alpha"
+            ],
+            "maxLength": null,
+            "tabIndex": null,
+            "events": [
+              [
+                "focus",
+                "DIV"
+              ],
+              [
+                "input-key",
+                "Enter",
+                "INPUT",
+                false
+              ],
+              [
+                "change",
+                [
+                  "a"
+                ],
+                [
+                  "Alpha"
+                ]
+              ],
+              [
+                "select",
+                "a"
+              ],
+              [
+                "root-key",
+                "Enter",
+                "DIV",
+                true
+              ]
+            ]
+          }
+        },
+        {
+          "action": "down:Enter",
+          "view": {
+            "open": true,
+            "focused": true,
+            "focusClass": true,
+            "disabled": false,
+            "selected": null,
+            "tags": [
+              "Alpha"
+            ],
+            "maxLength": null,
+            "tabIndex": null,
+            "events": [
+              [
+                "focus",
+                "DIV"
+              ],
+              [
+                "input-key",
+                "Enter",
+                "INPUT",
+                false
+              ],
+              [
+                "change",
+                [
+                  "a"
+                ],
+                [
+                  "Alpha"
+                ]
+              ],
+              [
+                "select",
+                "a"
+              ],
+              [
+                "root-key",
+                "Enter",
+                "DIV",
+                true
+              ],
+              [
+                "input-key",
+                "Enter",
+                "INPUT",
+                false
+              ],
+              [
+                "root-key",
+                "Enter",
+                "DIV",
+                true
+              ]
+            ]
+          }
+        },
+        {
+          "action": "up:Enter",
+          "view": {
+            "open": true,
+            "focused": true,
+            "focusClass": true,
+            "disabled": false,
+            "selected": null,
+            "tags": [
+              "Alpha"
+            ],
+            "maxLength": null,
+            "tabIndex": null,
+            "events": [
+              [
+                "focus",
+                "DIV"
+              ],
+              [
+                "input-key",
+                "Enter",
+                "INPUT",
+                false
+              ],
+              [
+                "change",
+                [
+                  "a"
+                ],
+                [
+                  "Alpha"
+                ]
+              ],
+              [
+                "select",
+                "a"
+              ],
+              [
+                "root-key",
+                "Enter",
+                "DIV",
+                true
+              ],
+              [
+                "input-key",
+                "Enter",
+                "INPUT",
+                false
+              ],
+              [
+                "root-key",
+                "Enter",
+                "DIV",
+                true
+              ],
+              [
+                "root-key-up",
+                "Enter",
+                "DIV",
+                false
+              ]
+            ]
+          }
+        },
+        {
+          "action": "down:Enter",
+          "view": {
+            "open": true,
+            "focused": true,
+            "focusClass": true,
+            "disabled": false,
+            "selected": null,
+            "tags": [],
+            "maxLength": null,
+            "tabIndex": null,
+            "events": [
+              [
+                "focus",
+                "DIV"
+              ],
+              [
+                "input-key",
+                "Enter",
+                "INPUT",
+                false
+              ],
+              [
+                "change",
+                [
+                  "a"
+                ],
+                [
+                  "Alpha"
+                ]
+              ],
+              [
+                "select",
+                "a"
+              ],
+              [
+                "root-key",
+                "Enter",
+                "DIV",
+                true
+              ],
+              [
+                "input-key",
+                "Enter",
+                "INPUT",
+                false
+              ],
+              [
+                "root-key",
+                "Enter",
+                "DIV",
+                true
+              ],
+              [
+                "root-key-up",
+                "Enter",
+                "DIV",
+                false
+              ],
+              [
+                "input-key",
+                "Enter",
+                "INPUT",
+                false
+              ],
+              [
+                "change",
+                [],
+                []
+              ],
+              [
+                "deselect",
+                "a"
+              ],
+              [
+                "root-key",
+                "Enter",
+                "DIV",
+                true
+              ]
+            ]
+          }
+        },
+        {
+          "action": "up:Enter",
+          "view": {
+            "open": true,
+            "focused": true,
+            "focusClass": true,
+            "disabled": false,
+            "selected": null,
+            "tags": [],
+            "maxLength": null,
+            "tabIndex": null,
+            "events": [
+              [
+                "focus",
+                "DIV"
+              ],
+              [
+                "input-key",
+                "Enter",
+                "INPUT",
+                false
+              ],
+              [
+                "change",
+                [
+                  "a"
+                ],
+                [
+                  "Alpha"
+                ]
+              ],
+              [
+                "select",
+                "a"
+              ],
+              [
+                "root-key",
+                "Enter",
+                "DIV",
+                true
+              ],
+              [
+                "input-key",
+                "Enter",
+                "INPUT",
+                false
+              ],
+              [
+                "root-key",
+                "Enter",
+                "DIV",
+                true
+              ],
+              [
+                "root-key-up",
+                "Enter",
+                "DIV",
+                false
+              ],
+              [
+                "input-key",
+                "Enter",
+                "INPUT",
+                false
+              ],
+              [
+                "change",
+                [],
+                []
+              ],
+              [
+                "deselect",
+                "a"
+              ],
+              [
+                "root-key",
+                "Enter",
+                "DIV",
+                true
+              ],
+              [
+                "root-key-up",
+                "Enter",
+                "DIV",
+                false
+              ]
+            ]
+          }
+        },
+        {
+          "action": "outside",
+          "view": {
+            "open": false,
+            "focused": false,
+            "focusClass": false,
+            "disabled": false,
+            "selected": null,
+            "tags": [],
+            "maxLength": null,
+            "tabIndex": null,
+            "events": [
+              [
+                "focus",
+                "DIV"
+              ],
+              [
+                "input-key",
+                "Enter",
+                "INPUT",
+                false
+              ],
+              [
+                "change",
+                [
+                  "a"
+                ],
+                [
+                  "Alpha"
+                ]
+              ],
+              [
+                "select",
+                "a"
+              ],
+              [
+                "root-key",
+                "Enter",
+                "DIV",
+                true
+              ],
+              [
+                "input-key",
+                "Enter",
+                "INPUT",
+                false
+              ],
+              [
+                "root-key",
+                "Enter",
+                "DIV",
+                true
+              ],
+              [
+                "root-key-up",
+                "Enter",
+                "DIV",
+                false
+              ],
+              [
+                "input-key",
+                "Enter",
+                "INPUT",
+                false
+              ],
+              [
+                "change",
+                [],
+                []
+              ],
+              [
+                "deselect",
+                "a"
+              ],
+              [
+                "root-key",
+                "Enter",
+                "DIV",
+                true
+              ],
+              [
+                "root-key-up",
+                "Enter",
+                "DIV",
+                false
+              ],
+              [
+                "blur",
+                "DIV"
+              ],
+              [
+                "open",
+                false
+              ]
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "clear-keyboard",
+      "initial": {
+        "open": false,
+        "focused": false,
+        "focusClass": false,
+        "disabled": false,
+        "selected": "Alpha",
+        "tags": [],
+        "maxLength": null,
+        "tabIndex": null,
+        "events": []
+      },
+      "steps": [
+        {
+          "action": "focus-clear",
+          "view": {
+            "open": false,
+            "focused": false,
+            "focusClass": true,
+            "disabled": false,
+            "selected": "Alpha",
+            "tags": [],
+            "maxLength": null,
+            "tabIndex": null,
+            "events": [
+              [
+                "focus",
+                "DIV"
+              ]
+            ]
+          }
+        },
+        {
+          "action": "down:Enter",
+          "view": {
+            "open": false,
+            "focused": true,
+            "focusClass": true,
+            "disabled": false,
+            "selected": "",
+            "tags": [],
+            "maxLength": null,
+            "tabIndex": null,
+            "events": [
+              [
+                "focus",
+                "DIV"
+              ],
+              [
+                "clear"
+              ],
+              [
+                "blur",
+                "DIV"
+              ],
+              [
+                "focus",
+                "DIV"
+              ],
+              [
+                "change",
+                null,
+                []
+              ],
+              [
+                "click",
+                "DIV"
+              ]
+            ]
+          }
+        },
+        {
+          "action": "up:Enter",
+          "view": {
+            "open": false,
+            "focused": true,
+            "focusClass": true,
+            "disabled": false,
+            "selected": "",
+            "tags": [],
+            "maxLength": null,
+            "tabIndex": null,
+            "events": [
+              [
+                "focus",
+                "DIV"
+              ],
+              [
+                "clear"
+              ],
+              [
+                "blur",
+                "DIV"
+              ],
+              [
+                "focus",
+                "DIV"
+              ],
+              [
+                "change",
+                null,
+                []
+              ],
+              [
+                "click",
+                "DIV"
+              ],
+              [
+                "root-key-up",
+                "Enter",
+                "DIV",
+                false
+              ]
+            ]
+          }
+        },
+        {
+          "action": "outside",
+          "view": {
+            "open": false,
+            "focused": false,
+            "focusClass": false,
+            "disabled": false,
+            "selected": "",
+            "tags": [],
+            "maxLength": null,
+            "tabIndex": null,
+            "events": [
+              [
+                "focus",
+                "DIV"
+              ],
+              [
+                "clear"
+              ],
+              [
+                "blur",
+                "DIV"
+              ],
+              [
+                "focus",
+                "DIV"
+              ],
+              [
+                "change",
+                null,
+                []
+              ],
+              [
+                "click",
+                "DIV"
+              ],
+              [
+                "root-key-up",
+                "Enter",
+                "DIV",
+                false
+              ],
+              [
+                "blur",
+                "DIV"
+              ]
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "observations": [
+    {
+      "id": "readonly-space",
+      "initial": {
+        "open": false,
+        "focused": false,
+        "focusClass": false,
+        "disabled": false,
+        "selected": "",
+        "tags": [],
+        "maxLength": null,
+        "tabIndex": null,
+        "events": []
+      },
+      "steps": [
+        {
+          "action": "focus",
+          "view": {
+            "open": false,
+            "focused": true,
+            "focusClass": true,
+            "disabled": false,
+            "selected": "",
+            "tags": [],
+            "maxLength": null,
+            "tabIndex": null,
+            "events": [
+              [
+                "focus",
+                "DIV"
+              ]
+            ]
+          }
+        },
+        {
+          "action": "down: ",
+          "view": {
+            "open": true,
+            "focused": true,
+            "focusClass": true,
+            "disabled": false,
+            "selected": null,
+            "tags": [],
+            "maxLength": null,
+            "tabIndex": null,
+            "events": [
+              [
+                "focus",
+                "DIV"
+              ],
+              [
+                "input-key",
+                " ",
+                "INPUT",
+                false
+              ],
+              [
+                "open",
+                true
+              ],
+              [
+                "open",
+                true
+              ],
+              [
+                "root-key",
+                " ",
+                "DIV",
+                true
+              ]
+            ]
+          }
+        },
+        {
+          "action": "up: ",
+          "view": {
+            "open": true,
+            "focused": true,
+            "focusClass": true,
+            "disabled": false,
+            "selected": null,
+            "tags": [],
+            "maxLength": null,
+            "tabIndex": null,
+            "events": [
+              [
+                "focus",
+                "DIV"
+              ],
+              [
+                "input-key",
+                " ",
+                "INPUT",
+                false
+              ],
+              [
+                "open",
+                true
+              ],
+              [
+                "open",
+                true
+              ],
+              [
+                "root-key",
+                " ",
+                "DIV",
+                true
+              ],
+              [
+                "root-key-up",
+                " ",
+                "DIV",
+                false
+              ]
+            ]
+          }
+        },
+        {
+          "action": "outside",
+          "view": {
+            "open": false,
+            "focused": false,
+            "focusClass": false,
+            "disabled": false,
+            "selected": "",
+            "tags": [],
+            "maxLength": null,
+            "tabIndex": null,
+            "events": [
+              [
+                "focus",
+                "DIV"
+              ],
+              [
+                "input-key",
+                " ",
+                "INPUT",
+                false
+              ],
+              [
+                "open",
+                true
+              ],
+              [
+                "open",
+                true
+              ],
+              [
+                "root-key",
+                " ",
+                "DIV",
+                true
+              ],
+              [
+                "root-key-up",
+                " ",
+                "DIV",
+                false
+              ],
+              [
+                "blur",
+                "DIV"
+              ],
+              [
+                "open",
+                false
+              ]
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "ssr": [
+    {
+      "id": "default",
+      "view": {
+        "open": false,
+        "focused": false,
+        "focusClass": false,
+        "disabled": false,
+        "selected": "",
+        "tags": [],
+        "maxLength": null,
+        "tabIndex": null,
+        "events": []
+      },
+      "timers": 0,
+      "autofocus": false
+    },
+    {
+      "id": "autofocus",
+      "view": {
+        "open": false,
+        "focused": false,
+        "focusClass": false,
+        "disabled": false,
+        "selected": "",
+        "tags": [],
+        "maxLength": null,
+        "tabIndex": null,
+        "events": []
+      },
+      "timers": 0,
+      "autofocus": true
+    },
+    {
+      "id": "autofocus-open",
+      "view": {
+        "open": false,
+        "focused": false,
+        "focusClass": false,
+        "disabled": false,
+        "selected": "",
+        "tags": [],
+        "maxLength": null,
+        "tabIndex": null,
+        "events": []
+      },
+      "timers": 0,
+      "autofocus": true
+    },
+    {
+      "id": "disabled-autofocus",
+      "view": {
+        "open": false,
+        "focused": false,
+        "focusClass": false,
+        "disabled": true,
+        "selected": "",
+        "tags": [],
+        "maxLength": null,
+        "tabIndex": null,
+        "events": []
+      },
+      "timers": 0,
+      "autofocus": true
+    },
+    {
+      "id": "input-aliases",
+      "view": {
+        "open": false,
+        "focused": false,
+        "focusClass": false,
+        "disabled": false,
+        "selected": "",
+        "tags": [],
+        "maxLength": null,
+        "tabIndex": "3",
+        "events": []
+      },
+      "timers": 0,
+      "autofocus": false
+    },
+    {
+      "id": "enter-lock",
+      "view": {
+        "open": false,
+        "focused": false,
+        "focusClass": false,
+        "disabled": false,
+        "selected": null,
+        "tags": [],
+        "maxLength": null,
+        "tabIndex": null,
+        "events": []
+      },
+      "timers": 0,
+      "autofocus": false
+    }
+  ]
+}

@@ -11033,7 +11033,7 @@
       "name": "TreeSelect",
       "category": "data-entry",
       "scope": "target",
-      "scopeReason": "TreeSelect по Ant Design 6.6.8 и rc-tree-select 1.16.1. Перенесены значения, check/стратегии, поиск, loadData, fieldNames/simple mode, generic data, title expansion, maxCount, tag display, renderer labels, popupRender, control slots, semantic config, переключатели узлов, виртуализация, scrollTo и декларативные TreeNode со свойствами строк. Оставшийся API и motion переносятся отдельно.",
+      "scopeReason": "TreeSelect по Ant Design 6.6.8 и rc-tree-select 1.16.1. Перенесены значения, check/стратегии, поиск, loadData, fieldNames/simple mode, generic data, title expansion, maxCount, tag display, renderer labels, popupRender, control slots, semantic config, переключатели узлов, виртуализация, scrollTo и декларативные TreeNode со свойствами строк, focus actions и trigger events. Оставшийся API и motion переносятся отдельно.",
       "upstreamPath": "components/tree-select",
       "reviewedRevision": "984592267de88fbf9cdaecc96a56629e721c709d",
       "exports": [
@@ -11278,7 +11278,7 @@
         },
         {
           "id": "extended-api",
-          "title": "Оставшиеся trigger и Form API",
+          "title": "Оставшиеся render/input и Form API",
           "state": "partial",
           "requiredForV1": false,
           "evidence": [
@@ -11298,7 +11298,7 @@
             "tests/package/tree-select-data.ssr.test.ts",
             "readme.md"
           ],
-          "note": "FieldNames, treeDataSimpleMode, generic raw data, treeExpandAction, maxCount, tag text/count/placeholder/render API, renderer labels, popup/control slots, semantic config и общие switcherIcon/treeLine.showLeafIcon перенесены. Декларативные TreeNode и свойства узлов перенесены. Остаются унаследованные trigger/input props и Form feedback. Deprecated extra.triggerNode/allCheckedNodes и node.props React wrappers исключены. Собственное поле props данных сохраняется."
+          "note": "FieldNames, treeDataSimpleMode, generic raw data, treeExpandAction, maxCount, tag text/count/placeholder/render API, renderer labels, popup/control slots, semantic config и общие switcherIcon/treeLine.showLeafIcon перенесены. Декларативные TreeNode и свойства узлов перенесены. Focus actions, autoFocus/tabIndex и input/root event hooks перенесены. Остаются inherited components/input render props, showScrollBar, pointer toggle и Form feedback; popup alignment/motion учитываются отдельно. Deprecated extra.triggerNode/allCheckedNodes и node.props React wrappers исключены. Собственное поле props данных сохраняется."
         },
         {
           "id": "virtual-motion",
@@ -11761,6 +11761,41 @@
             "readme.md"
           ],
           "note": "TreeSelect.TreeNode и TreeSelectTreeNode собирают объявления до рендера поля, включая SSR. Скрытый контейнер и template markers учитывают порядок keyed each, добавление, удаление и обновление props. TreeData, включая [], имеет приоритет, simple mode применяется только к данным. Namespace сохраняет SHOW_ALL/SHOW_PARENT/SHOW_CHILD. Literal/array/Snippet icon/switcherIcon, className и Native class/style, data/aria props работают в данных и объявлениях. Renderers получают Native TreeEventNode<Data>, исходный payload и вычисленный isLeaf у switcher. Внутренний TreeSelect очищает active при mousemove над строкой, как rc-tree. Tree применяет исходный icon__customize. 23 неизменённых UMD6.6.8 сценария, 39 действий, 9 DOM-free SSR случаев, строгая гидратация и typed generic declarations проверяют API. Два raw наблюдения сохраняют отличия представления title и повторную загрузку. В Source6.6.8 / 984592267de88fbf9cdaecc96a56629e721c709d раскрытие пустого узла вызывает loadData дважды и публикует два onTreeLoad после одного Promise. Native сохраняет один pending Promise и callback. React literal title сохраняет текст на момент callback, реактивный Svelte snippet читает текущий контекст. Source counterpart использует React Context consumer. TreeIcon, включая truthy function, служит флагом отображения, global renderer из него не вызывается в Ant wrapper. Deprecated Tree.TreeNode composition к этому актуальному API не относится."
+        },
+        {
+          "id": "trigger-events",
+          "title": "Focus actions, autofocus и input/root event hooks",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/TreeSelectControl.svelte",
+            "src/lib/tree-select.types.ts",
+            "tests/browser/fixtures/tree-select-trigger-cases.ts",
+            "tests/browser/fixtures/TreeSelectTriggerCase.svelte",
+            "tests/browser/fixtures/TreeSelectTriggerFixtures.svelte",
+            "tests/browser/fixtures/ant-design-tree-select-trigger-reference.json",
+            "tests/browser/tree-select-trigger-metrics.ts",
+            "tests/browser/tree-select-trigger.spec.ts",
+            "tests/browser/fixtures/tree-select-trigger-hydration.client.ts",
+            "tests/browser/fixtures/tree-select-trigger-hydration.server.ts",
+            "tests/browser/tree-select-surface-hydration.spec.ts",
+            "tests/package/tree-select-trigger.ssr.test.ts",
+            "readme.md"
+          ],
+          "note": "ShowAction focus открывает перед onFocus; click/[] сохраняют pointer opening. AutoFocus/tabIndex имеют native autofocus/tabindex overrides. MaxLength, как в Source TreeSelect, не ограничивает поиск; lowercase maxlength продолжает задавать native limit. OnInputKeyDown получает INPUT, onKeyDown/up/focus/blur/mouse/click — DOM-корень DIV. Native lowercase handlers сохраняют input currentTarget и отмену built-in через onkeydown.preventDefault; Source input hook preventDefault не отменяет выбор, stopPropagation останавливает root handler. Keyboard close и outside dismiss откладываются после root key/blur callback; повторный Enter заблокирован до keyup/blur, Enter/Space кнопки очистки не передаются root keydown, pending close отменяется при unmount. 21 неизменённый UMD6.6.8 сценарий /99 отдельных settled keydown/keyup и pointer/focus actions, 6 DOM-free SSR случаев, strict hydration, controlled open acceptance/rejection и reactive props. SSR DOM projection выполняется в inert host, чтобы browser autofocus не менял результат."
+        },
+        {
+          "id": "native-trigger-event-boundary",
+          "title": "Native DOM event boundary и идемпотентное открытие Space",
+          "state": "partial",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/TreeSelectControl.svelte",
+            "tests/browser/fixtures/ant-design-tree-select-trigger-reference.json",
+            "tests/browser/tree-select-trigger.spec.ts",
+            "readme.md"
+          ],
+          "note": "Ant Design6.6.8 /984592267de88fbf9cdaecc96a56629e721c709d, rc-select1.10.1. Raw readonly-space: input и root handlers до React rerender вызывают onOpenChange(true) дважды на один Space keydown. Native сохраняет один callback перехода; raw observation не нормализуется и не объявляется доказанным дефектом Source. Focus hooks используют реальные focusin/focusout; DOM portal не воспроизводит React synthetic bubbling через component tree. Сохранены Native Escape preventDefault/stopPropagation и открытие ArrowUp/Left/Right закрытого поля. Повторный pointer toggle и дополнительные input/root render paths остаются в очереди."
         }
       ]
     },

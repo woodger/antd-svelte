@@ -83,6 +83,19 @@
     open,
     defaultOpen = false,
     onOpenChange,
+    showAction,
+    autoFocus,
+    tabIndex,
+    maxLength: _maxLength,
+    onInputKeyDown,
+    onKeyDown,
+    onKeyUp,
+    onFocus,
+    onBlur,
+    onMouseDown,
+    onMouseEnter,
+    onMouseLeave,
+    onClick,
     prefix: leading,
     suffix,
     suffixIcon,
@@ -262,6 +275,10 @@
   let shown = $state(false);
   let focused = $state(false);
   let editorFocused = $state(false);
+  const cancelledKeys = new WeakSet<Event>();
+  const openingKeys = new WeakSet<Event>();
+  const forwardedKeys = new WeakSet<Event>();
+  let enterLocked = false;
   let root = $state<HTMLDivElement>();
   let editor = $state<HTMLInputElement>();
   let popup = $state<HTMLDivElement>();
@@ -448,9 +465,9 @@
         shown = next;
       },
       onDismiss: reason => {
-        requestOpen(false);
         if (reason === 'escape')
           editor?.focus();
+        scheduleClose();
       }
     });
   });
@@ -551,7 +568,8 @@
   function choose(
     raw: TreeSelectRawValue,
     source: 'option' | 'selection' = 'option',
-    focusInput = true
+    focusInput = true,
+    deferClose = false
   ) {
     const node = index.values.get(raw);
     if (blocked
@@ -575,8 +593,10 @@
           raw,
           node ? { ...node } : undefined
         );
-    if (!isMultiple)
-      requestOpen(false);
+    if (!isMultiple) {
+      if (deferClose) scheduleClose();
+      else requestOpen(false);
+    }
     if (focusInput) editor?.focus();
   }
   function customTagMouseDown(event: MouseEvent) {
@@ -588,6 +608,15 @@
   function clearPointerDown(event: PointerEvent) {
     event.preventDefault();
     if (!isMultiple && visible) scheduleClose();
+  }
+  function pointerOpen(event: PointerEvent | MouseEvent) {
+    if (renderTag && event.target instanceof Element
+      && event.target.closest('[data-tree-choice-custom-tag]')) return;
+    if (!blocked && event.target instanceof Element && !event.target.closest('button,input')) {
+      event.preventDefault();
+      editor?.focus();
+      requestOpen(true);
+    }
   }
   function scheduleClose() {
     cancelClose();
@@ -672,16 +701,34 @@
         internalSearch = '';
     });
   }
-  async function keyboard(
-    event: KeyboardEvent & { currentTarget: EventTarget & HTMLInputElement; }
-  ) {
+  function inputKeyboard(event: KeyboardEvent & { currentTarget: EventTarget & HTMLInputElement; }) {
     onkeydown?.(event);
-    if (event.defaultPrevented || event.isComposing || blocked) return;
+    const cancelled = event.defaultPrevented || event.isComposing || blocked;
+    if (cancelled) cancelledKeys.add(event);
+    if (!visible) openingKeys.add(event);
+    if (!cancelled && visible && (event.key === 'ArrowDown' || event.key === 'ArrowUp'))
+      event.preventDefault();
+    onInputKeyDown?.(event);
+    if (cancelled || event.ctrlKey || event.altKey || event.metaKey) return;
+    // rc-select открывает поле разрешённой клавишей ещё до root handler.
+    if (event.key && !/^F(?:[1-9]|1[0-2])$/.test(event.key)
+      && event.code !== 'Semicolon' && event.code !== 'Equal'
+      && !['Escape', 'Shift', 'Backspace', 'Tab', 'Meta', 'OS', 'Alt', 'Control', 'CapsLock',
+        'ContextMenu', 'ArrowUp', 'ArrowLeft', 'ArrowRight'].includes(event.key))
+      requestOpen(true);
+  }
+  function keyboard(event: KeyboardEvent & { currentTarget: EventTarget & HTMLDivElement; }) {
+    if (forwardedKeys.has(event)) return;
+    if (event.target === editor && !cancelledKeys.has(event) && !event.isComposing && !blocked)
+      handleKeyboard(event, visible && !openingKeys.has(event));
+    onKeyDown?.(event);
+  }
+  function handleKeyboard(event: KeyboardEvent, wasOpen: boolean) {
     if (event.key === 'Escape') {
-      if (visible) {
+      if (wasOpen) {
         event.preventDefault();
         event.stopPropagation();
-        requestOpen(false);
+        scheduleClose();
       }
       return;
     }
@@ -699,28 +746,33 @@
     }
     if (event.key === 'Enter') {
       event.preventDefault();
-      if (!visible) {
+      if (!wasOpen) {
         requestOpen(true);
         return;
       }
+      if (enterLocked) return;
+      enterLocked = true;
       const node = treeElement?.isConnected && active !== null && index.values.get(active as TreeSelectRawValue);
       if (node && Reflect.get(node, 'selectable') !== false)
-        choose(active as TreeSelectRawValue);
+        choose(active as TreeSelectRawValue, 'option', true, true);
+      return;
+    }
+    if (event.key === ' ') {
+      if (!canSearch) event.preventDefault();
+      requestOpen(true);
       return;
     }
     if (['ArrowDown', 'ArrowUp', 'ArrowLeft', 'ArrowRight'].includes(event.key)) {
-      event.preventDefault();
-      if (!visible) {
+      if (!wasOpen) {
         requestOpen(true);
         return;
       }
-      await tick();
-      treeElement?.querySelector('[role="tree"]')?.dispatchEvent(
-        new KeyboardEvent(
-          'keydown',
-          { key: event.key, bubbles: true, cancelable: true, composed: true }
-        )
-      );
+      event.preventDefault();
+      const forwarded = new KeyboardEvent('keydown', {
+        key: event.key, bubbles: true, cancelable: true, composed: true
+      });
+      forwardedKeys.add(forwarded);
+      treeElement?.querySelector('[role="tree"]')?.dispatchEvent(forwarded);
     }
   }
   export function focus(options?: FocusOptions) {
@@ -802,13 +854,27 @@
   style:--ant-native-tree-choice-height={`var(--${privateNamespace}-select-height)`}
   style:--ant-native-tree-choice-multi-item-height={`var(--${privateNamespace}-select-multi-item-height)`}
   bind:this={root} role="presentation" onpointerdown={event => {
-    if (renderTag && event.target instanceof Element
-      && event.target.closest('[data-tree-choice-custom-tag]')) return;
-    if (!blocked && event.target instanceof Element && !event.target.closest('button,input')) {
-      event.preventDefault();
-      editor?.focus();
+    if (event.pointerType !== 'mouse') pointerOpen(event);
+  }} onmousedown={event => {
+    pointerOpen(event);
+    if (!blocked && event.target === editor) {
+      editor.focus();
       requestOpen(true);
     }
+    onMouseDown?.(event);
+  }} onmouseenter={onMouseEnter} onmouseleave={onMouseLeave} onclick={onClick}
+  onkeydown={keyboard} onkeyup={event => {
+    if (event.key === 'Enter') enterLocked = false;
+    onKeyUp?.(event);
+  }} onfocusin={event => {
+    focused = true;
+    if (!blocked) {
+      if (showAction?.includes('focus')) requestOpen(true);
+      onFocus?.(event);
+    }
+  }} onfocusout={event => {
+    if (!blocked) onBlur?.(event);
+    blurWithin(event);
   }} dir={config.direction}
   style={serializeInlineStyleLayers([componentStyle, css.root, style ?? undefined])} class={[
       `${prefix} ant-select-css-var ant-tree-select-css-var`,
@@ -895,7 +961,10 @@
       </span>
     {/if}
     {:else if (!visible || !canSearch) && (treeTitleRender || typeof display[0]?.label==='function' || Array.isArray(display[0]?.label)) && display[0]}<span class="single-snippet">{@render labelNode(display[0])}</span>{/if}
-    <input {...attributes} bind:this={editor} id={controlId} data-ant-tree-choice-input class={[`${prefix}-input`, classes.input]} style={css.input} type="text" role="combobox" aria-haspopup="tree" aria-controls={!popupRender || menuElement ? `${controlId}-list` : undefined} aria-expanded={visible} aria-autocomplete={canSearch ? 'list' : 'none'} aria-activedescendant={visible && shown && treeElement ? activeDescendant : undefined} aria-invalid={field?.invalid || resolvedStatus === 'error'
+    <input {...attributes} bind:this={editor} id={controlId} data-ant-tree-choice-input class={[`${prefix}-input`, classes.input]} style={css.input} type="text" role="combobox" tabindex={attributes.tabindex ?? tabIndex}
+      {...(attributes.autofocus !== undefined || autoFocus !== undefined
+        ? { autofocus: attributes.autofocus ?? autoFocus } : {})}
+      aria-haspopup="tree" aria-controls={!popupRender || menuElement ? `${controlId}-list` : undefined} aria-expanded={visible} aria-autocomplete={canSearch ? 'list' : 'none'} aria-activedescendant={visible && shown && treeElement ? activeDescendant : undefined} aria-invalid={field?.invalid || resolvedStatus === 'error'
         || attributes['aria-invalid']
         || undefined} aria-describedby={[attributes['aria-describedby'], field?.describedBy].filter(
             Boolean
@@ -903,14 +972,14 @@
             .join(
               ' '
             )
-            || undefined} aria-required={attributes.required ?? field?.required} aria-busy={loading || undefined} autocomplete="off" disabled={blocked} readonly={!canSearch} placeholder={display.length ? '' : placeholderText} value={inputValue} oninput={event => searchInput(event.currentTarget.value)} onclick={() => requestOpen(true)} onkeydown={keyboard} onfocus={event => {
+            || undefined} aria-required={attributes.required ?? field?.required} aria-busy={loading || undefined} autocomplete="off" disabled={blocked} readonly={!canSearch} placeholder={display.length ? '' : placeholderText} value={inputValue} oninput={event => searchInput(event.currentTarget.value)} onclick={() => requestOpen(true)} onkeydown={inputKeyboard} onfocus={event => {
             focused = true;
             editorFocused = true;
             onfocus?.(event);
           }} onblur={event => {
           editorFocused = false;
+          enterLocked = false;
           onblur?.(event);
-          blurWithin(event);
         }} />
   </div>
   {#if suffix != null ? suffix : showArrow}
@@ -927,6 +996,9 @@
     <button type="button" class={['clear', (selectTheme.className || clearConfig) && `${prefix}-clear`, classes.clear]}
       style={css.clear}
       aria-label={clearConfig?.label ?? config.locale.clearText}
+      onkeydown={event => {
+        if (event.key === 'Enter' || event.key === ' ') event.stopPropagation();
+      }}
       onpointerdown={clearPointerDown} onclick={clear}>
       {#if allowClear === true}<Icon name="close-circle-filled" />
       {:else}<RenderContent value={clearConfig?.clearIcon || '×'} />{/if}

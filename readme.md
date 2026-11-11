@@ -6404,6 +6404,31 @@ Value/defaultValue принимают scalar, массив или {value,label?,
 Null очищает; undefined включает внутреннее состояние. Value/open/showSearch.searchValue —
 controlled props с callbacks, без автоматического переписывания владельца.
 При отказе владельца принять onSearch поле восстанавливается из searchValue.
+`showAction={['focus']}` дополнительно открывает панель при фокусе, перед `onFocus`.
+Пустой массив и `['click']` сохраняют обычное открытие указателем. Смена showAction
+при уже установленном фокусе сама панель не открывает. `autoFocus` и `tabIndex`
+задают autofocus/tabindex поля; явные native `autofocus` и `tabindex` приоритетнее.
+Как в Source TreeSelect, `maxLength` не ограничивает поисковый ввод; native
+`maxlength` задаёт ограничение браузера.
+
+`onInputKeyDown` получает событие input. `onKeyDown`, `onKeyUp`, `onFocus`,
+`onBlur`, `onMouseDown`, `onMouseEnter`, `onMouseLeave` и `onClick` относятся
+к DOM-корню control. Нативные lowercase handlers сохраняют input currentTarget.
+Сначала вызывается native onkeydown, затем onInputKeyDown, внутренняя обработка
+и root onKeyDown. Как в Source, preventDefault в onInputKeyDown не отменяет выбор;
+для отмены внутренней обработки используется native onkeydown. StopPropagation
+в input hook останавливает root handler, но сохраняет открытие разрешённой клавишей.
+Удерживаемый Enter выбирает один раз до keyup или blur. Закрытие клавиатурой
+и нажатием снаружи откладывается, чтобы root key/blur callback получил событие первым.
+Enter/Space кнопки очистки запускают её click и не передаются в root onKeyDown.
+Focus hooks получают реальные focusin/focusout; popup portal имеет собственную
+DOM-границу событий. SSR не запускает autofocus, callbacks или timers; гидратация
+сохраняет фокус другого control. [Сверка trigger API](./tests/browser/tree-select-trigger.spec.ts).
+
+Space открывает readonly-поле с одним onOpenChange(true). В raw наблюдении
+React 6.6.8 один keydown вызывает два одинаковых callbacks до перерендера;
+Svelte сохраняет прежнее идемпотентное открытие. Native Escape отменяет default
+и всплытие; ArrowUp/Left/Right сохраняют открытие закрытого поля.
 Enter игнорирует активный узел, удалённый из treeData; выбранные отсутствующие
 значения по-прежнему можно удалить через теги.
 Multiple включает массивы. TreeCheckable включает checkbox и multiple;
@@ -6672,8 +6697,8 @@ DOM панели, фокус и выделение; ShadowRoot требует с
 TreeSelect/Cascader с 40 сценариями официального UMD —
 [choice-container](./tests/browser/choice-container.spec.ts), `?fixture=choice-container`.
 
-Следующие этапы TreeSelect охватывают остальные trigger/input props,
-Form feedback, alignment и переходы панели.
+Следующие этапы TreeSelect охватывают оставшиеся inherited render/input props,
+Form feedback, pointer toggle, alignment и переходы панели.
 Deprecated React extras исключены.
 Класс popup задаётся через classNames.popup.root; popupClassName удалён.
 

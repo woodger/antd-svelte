@@ -9,6 +9,11 @@
 
 ### Added
 
+- TreeSelect поддерживает `showAction`, `autoFocus`, `tabIndex`, input-key hook
+  и callbacks фокуса, клавиатуры и мыши корневого control. Native handlers
+  сохраняют input targets и отмену обработки. Удерживаемый Enter выбирает
+  один раз до keyup/blur; SSR и гидратация сохраняют нативный фокус.
+
 - TreeSelect поддерживает декларативные `TreeSelect.TreeNode`, именованный
   `TreeSelectTreeNode` и статические checked strategies. Иконки, switchers,
   классы, стили и атрибуты строк работают с объявлениями и `treeData`.

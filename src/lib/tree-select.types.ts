@@ -179,6 +179,22 @@ export interface TreeSelectProps<
   /** @defaultValue false */
   defaultOpen?: boolean;
   onOpenChange?: (open: boolean) => void;
+  /** Focus добавляет открытие по фокусу; click сохраняет обычное открытие указателем. */
+  showAction?: ('focus' | 'click')[];
+  autoFocus?: boolean;
+  tabIndex?: number;
+  /** Как в Source TreeSelect, не ограничивает поиск; native maxlength задаёт DOM-ограничение. */
+  maxLength?: number;
+  /** Нативный onkeydown отменяет внутреннюю обработку; этот hook следует порядку Source. */
+  onInputKeyDown?: HTMLInputAttributes['onkeydown'];
+  onKeyDown?: HTMLAttributes<HTMLDivElement>['onkeydown'];
+  onKeyUp?: HTMLAttributes<HTMLDivElement>['onkeyup'];
+  onFocus?: HTMLAttributes<HTMLDivElement>['onfocusin'];
+  onBlur?: HTMLAttributes<HTMLDivElement>['onfocusout'];
+  onMouseDown?: HTMLAttributes<HTMLDivElement>['onmousedown'];
+  onMouseEnter?: HTMLAttributes<HTMLDivElement>['onmouseenter'];
+  onMouseLeave?: HTMLAttributes<HTMLDivElement>['onmouseleave'];
+  onClick?: HTMLAttributes<HTMLDivElement>['onclick'];
   placeholder?: TreeSelectLabel;
   prefix?: TreeSelectLabel;
   /** Содержимое или snippet с состоянием поля. null/undefined используют suffixIcon. */
