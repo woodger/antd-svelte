@@ -25,6 +25,7 @@
   import { expandTreeParents, treeCheckDisabled } from './tree.engine';
   import { treeSelectChildren, treeSelectData, treeSelectNodeValue } from './tree-select-data.engine';
   import { treeSelectLimit } from './tree-select-limit.engine';
+  import { treeSelectPastedSearch, treeSelectTokenSearch } from './tree-select-token.engine';
   import { createTreeSelectLabelCache } from './tree-select-labels';
   import TreeSelectLabelBinding from './TreeSelectLabelBinding.svelte';
   import TreeSelectPopupContent from './TreeSelectPopupContent.svelte';
@@ -82,6 +83,7 @@
     onSelect,
     onDeselect,
     showSearch,
+    tokenSeparators,
     treeNodeLabelProp,
     open,
     defaultOpen = false,
@@ -123,6 +125,7 @@
     listHeight = 256,
     listItemHeight,
     listItemScrollOffset,
+    showScrollBar: _showScrollBar,
     virtual,
     popupMatchSelectWidth,
     placement,
@@ -230,6 +233,8 @@
   const tagElements = new Map<TreeSelectRawValue, HTMLElement>();
   let pendingClose: MessageChannel | undefined;
   let internalSearch = $state('');
+  let composing = false;
+  let pastedText: string | undefined;
   let search = $derived(searchConfig.searchValue ?? internalSearch);
   // Suffix получает исходный showSearch, включая undefined.
   let suffixSearch = $derived(typeof showSearch === 'object' ? true : showSearch);
@@ -271,7 +276,8 @@
     ? String(placeholder) : undefined);
   let controlId = $derived(id ?? field?.id ?? `ant-tree-select-${generated}`);
   let internalOpen = $state(untrack(() => defaultOpen));
-  let visible = $derived((open ?? internalOpen) && !blocked);
+  let rawOpen = $derived(Boolean(open ?? internalOpen));
+  let visible = $derived(rawOpen && !blocked);
   let inputValue = $derived(
     isMultiple || visible && canSearch ? search
       : treeTitleRender || Array.isArray(display[0]?.label) ? '' : text(display[0]?.label)
@@ -335,6 +341,7 @@
   let panelOpened = false;
   let panelSearch = '';
   let previousProps = untrack(() => ({ value, open, search: searchConfig.searchValue }));
+  let handledSearchOpen: boolean | undefined;
   $effect(() => () => {
     cancelClose();
     clearTimeout(popupMouseDownTimer);
@@ -406,6 +413,18 @@
   $effect(() => {
     if (blocked)
       internalOpen = false;
+  });
+  $effect(() => {
+    const isOpen = rawOpen;
+    if (handledSearchOpen === isOpen) return;
+    const resetSearch = handledSearchOpen === undefined || !isOpen;
+    handledSearchOpen = isOpen;
+    // Source монтируется с закрытым ssrSafeOpen даже при initial open=true.
+    if (resetSearch) untrack(() => {
+      if (!isMultiple) searchInput('', false, false);
+      // Synchronous owner update уже обработан mount cleanup в React batch.
+      handledSearchOpen = rawOpen;
+    });
   });
   $effect(() => {
     const nextSearch = search;
@@ -519,13 +538,17 @@
     internalOpen = next;
     onOpenChange?.(next);
   }
-  function searchInput(next: string) {
+  function searchInput(next: string, isComposing = composing, fromTyping = true) {
     const input = editor;
-    internalSearch = next;
-    searchConfig.onSearch?.(next);
-    requestOpen(true);
+    const decision = treeSelectTokenSearch(next, {
+      previousSearch: search, separators: tokenSeparators, composing: isComposing, fromTyping
+    });
+    internalSearch = decision.search;
+    if (decision.open === false) scheduleClose();
+    if (decision.notifySearch) searchConfig.onSearch?.(decision.search);
+    if (decision.open === true) requestOpen(true);
 
-    if (searchConfig.searchValue !== undefined && input) {
+    if ((decision.split || searchConfig.searchValue !== undefined) && input) {
       void tick().then(() => {
         if (input === editor && input.isConnected)
           input.value = inputValue;
@@ -610,17 +633,31 @@
     if (visible) scheduleClose();
     else requestOpen(true);
   }
-  function clearPointerDown(event: PointerEvent) {
+  function clearMouseDown(event: MouseEvent) {
     event.preventDefault();
     if (!isMultiple && visible) scheduleClose();
   }
   function pointerOpen(event: PointerEvent | MouseEvent) {
     if (renderTag && event.target instanceof Element
       && event.target.closest('[data-tree-choice-custom-tag]')) return;
-    if (!blocked && event.target instanceof Element && !event.target.closest('button,input')) {
-      event.preventDefault();
-      editor?.focus();
+    if (blocked || !(event.target instanceof Node)) return;
+    if (popup?.contains(event.target)) {
       requestOpen(true);
+      return;
+    }
+    if (event.target instanceof Element
+      && event.target.closest('[data-ant-tree-choice-selection-item-remove], [data-ant-tree-choice-clear]')) return;
+    const wasOpen = visible;
+    const onInput = Boolean(editor && (event.target === editor || editor.contains(event.target)));
+    if (editor && !onInput) event.preventDefault();
+    const preserveOpen = wasOpen && (!isMultiple && canSearch || isMultiple && onInput);
+    editor?.focus();
+    if (preserveOpen) cancelClose();
+    else {
+      if (wasOpen) scheduleClose();
+      // Source batches focus-open and pointer-open as separate requests.
+      else if (visible) onOpenChange?.(true);
+      else requestOpen(true);
     }
   }
   function scheduleClose() {
@@ -858,26 +895,25 @@
   data-ant-tree-choice-responsive={responsiveTags || undefined}
   style:--ant-native-tree-choice-height={`var(--${privateNamespace}-select-height)`}
   style:--ant-native-tree-choice-multi-item-height={`var(--${privateNamespace}-select-multi-item-height)`}
-  bind:this={root} role="presentation" onpointerdown={event => {
-    if (event.pointerType !== 'mouse') pointerOpen(event);
-  }} onmousedown={event => {
+  bind:this={root} role="presentation" onmousedown={event => {
     pointerOpen(event);
-    if (!blocked && event.target === editor) {
-      editor.focus();
-      requestOpen(true);
-    }
     onMouseDown?.(event);
-  }} onmouseenter={onMouseEnter} onmouseleave={onMouseLeave} onclick={onClick}
+  }} onmouseenter={onMouseEnter} onmouseleave={onMouseLeave} onclick={event => {
+    if (!(event.target instanceof Node && popup?.contains(event.target))) onClick?.(event);
+  }}
   onkeydown={keyboard} onkeyup={event => {
     if (event.key === 'Enter') enterLocked = false;
     onKeyUp?.(event);
   }} onfocusin={event => {
+    if (event.target instanceof Node && popup?.contains(event.target)) return;
     focused = true;
     if (!blocked) {
       if (showAction?.includes('focus')) requestOpen(true);
       onFocus?.(event);
     }
   }} onfocusout={event => {
+    if (event.target instanceof Node && popup?.contains(event.target)) return;
+    if (event.relatedTarget instanceof Node && popup?.contains(event.relatedTarget)) focused = false;
     if (!blocked) onBlur?.(event);
     blurWithin(event);
   }} dir={config.direction}
@@ -979,7 +1015,21 @@
             .join(
               ' '
             )
-            || undefined} aria-required={attributes.required ?? field?.required} aria-busy={loading || undefined} autocomplete="off" disabled={blocked} readonly={!canSearch} placeholder={display.length ? '' : placeholderText} value={inputValue} oninput={event => searchInput(event.currentTarget.value)} onclick={() => requestOpen(true)} onkeydown={inputKeyboard} onfocus={event => {
+            || undefined} aria-required={attributes.required ?? field?.required} aria-busy={loading || undefined} autocomplete="off" disabled={blocked} readonly={!canSearch} placeholder={display.length ? '' : placeholderText} value={inputValue} oninput={event => {
+            const next = treeSelectPastedSearch(event.currentTarget.value, pastedText, tokenSeparators);
+            pastedText = undefined;
+            searchInput(next);
+          }} onpaste={event => {
+            pastedText = event.clipboardData?.getData('text');
+            attributes.onpaste?.(event);
+          }} oncompositionstart={event => {
+            composing = true;
+            attributes.oncompositionstart?.(event);
+          }} oncompositionend={event => {
+            composing = false;
+            searchInput(event.currentTarget.value, false);
+            attributes.oncompositionend?.(event);
+          }} onkeydown={inputKeyboard} onfocus={event => {
             focused = true;
             editorFocused = true;
             onfocus?.(event);
@@ -1000,13 +1050,13 @@
     </div>
   {/if}
   {#if canClear}
-    <button type="button" class={['clear', (selectTheme.className || clearConfig) && `${prefix}-clear`, classes.clear]}
+    <button type="button" data-ant-tree-choice-clear class={['clear', (selectTheme.className || clearConfig) && `${prefix}-clear`, classes.clear]}
       style={css.clear}
       aria-label={clearConfig?.label ?? config.locale.clearText}
       onkeydown={event => {
         if (event.key === 'Enter' || event.key === ' ') event.stopPropagation();
       }}
-      onpointerdown={clearPointerDown} onclick={clear}>
+      onmousedown={clearMouseDown} onclick={clear}>
       {#if allowClear === true}<Icon name="close-circle-filled" />
       {:else}<RenderContent value={clearConfig?.clearIcon || '×'} />{/if}
     </button>

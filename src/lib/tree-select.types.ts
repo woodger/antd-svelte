@@ -4,6 +4,8 @@ import type { ComponentSize, Variant } from './types';
 import type { FormValidateStatus } from './form-error-list.types';
 import type { TreeEventNode, TreeExpandAction, TreeKey, TreeRef, TreeTitleContent } from './tree.types';
 import type { SelectTagInfo } from './select.types';
+import type { TreeSelectTokenSeparators } from './tree-select-token.engine';
+export type { TreeSelectTokenSeparators } from './tree-select-token.engine';
 /** Методы bind:this. DOM-элементы предоставляются через bindable props. */
 export type TreeSelectRef = TreeRef;
 export type TreeSelectRawValue = string | number;
@@ -174,6 +176,8 @@ export interface TreeSelectProps<
   onSelect?: (value: TreeSelectRawValue, node: Data | undefined) => void;
   onDeselect?: (value: TreeSelectRawValue, node: Data | undefined) => void;
   showSearch?: boolean | TreeSelectSearchConfig<Data>;
+  /** Очищает tokenized search и закрывает popup, не выбирая значения дерева. */
+  tokenSeparators?: TreeSelectTokenSeparators;
   treeNodeLabelProp?: string;
   open?: boolean;
   /** @defaultValue false */
@@ -235,6 +239,8 @@ export interface TreeSelectProps<
   listItemHeight?: number;
   /** Дополнительный отступ при прокрутке до активного узла. @defaultValue 0 */
   listItemScrollOffset?: number;
+  /** Закреплённый rc-tree-select не передаёт этот inherited prop в Tree; поведение не меняется. */
+  showScrollBar?: boolean | 'optional';
   /** Undefined наследует ConfigProvider.virtual. @defaultValue true */
   virtual?: boolean;
   /** False оставляет ширину по содержимому и отключает виртуализацию. @defaultValue true */

@@ -11332,7 +11332,7 @@
       "name": "TreeSelect",
       "category": "data-entry",
       "scope": "target",
-      "scopeReason": "TreeSelect по Ant Design 6.6.8 и rc-tree-select 1.16.1. Перенесены значения, check/стратегии, поиск, loadData, fieldNames/simple mode, generic data, title expansion, maxCount, tag display, renderer labels, popupRender, control slots, semantic config, переключатели узлов, виртуализация, scrollTo и декларативные TreeNode со свойствами строк, focus actions и trigger events. Оставшийся API и motion переносятся отдельно.",
+      "scopeReason": "TreeSelect по Ant Design 6.6.8 и rc-tree-select 1.16.1. Перенесены значения, check/стратегии, поиск, loadData, fieldNames/simple mode, generic data, title expansion, maxCount, tag display, renderer labels, popupRender, control slots, semantic config, переключатели узлов, виртуализация, scrollTo и декларативные TreeNode со свойствами строк, focus actions, trigger events, pointer toggle и tokenSeparators; showScrollBar принят с исходным no-op. Оставшийся API и motion переносятся отдельно.",
       "upstreamPath": "components/tree-select",
       "reviewedRevision": "984592267de88fbf9cdaecc96a56629e721c709d",
       "exports": [
@@ -11597,7 +11597,7 @@
             "tests/package/tree-select-data.ssr.test.ts",
             "readme.md"
           ],
-          "note": "FieldNames, treeDataSimpleMode, generic raw data, treeExpandAction, maxCount, tag text/count/placeholder/render API, renderer labels, popup/control slots, semantic config и общие switcherIcon/treeLine.showLeafIcon перенесены. Декларативные TreeNode и свойства узлов перенесены. Focus actions, autoFocus/tabIndex и input/root event hooks перенесены. Остаются inherited components/input render props, showScrollBar, pointer toggle; Form feedback перенесён отдельно, popup alignment/motion учитываются отдельно. Deprecated extra.triggerNode/allCheckedNodes и node.props React wrappers исключены. Собственное поле props данных сохраняется."
+          "note": "FieldNames, treeDataSimpleMode, generic raw data, treeExpandAction, maxCount, tag text/count/placeholder/render API, renderer labels, popup/control slots, semantic config и общие switcherIcon/treeLine.showLeafIcon перенесены. Декларативные TreeNode и свойства узлов перенесены. Focus actions, autoFocus/tabIndex и input/root event hooks перенесены. Pointer toggle, tokenSeparators и inherited showScrollBar no-op перенесены. Остаются components.root/input и остальные inherited current props; getInputElement/getRawInputElement исключены как private, первый также явно Omit в Ant wrapper; Form feedback перенесён отдельно, popup alignment/motion учитываются отдельно. Deprecated extra.triggerNode/allCheckedNodes и node.props React wrappers исключены. Собственное поле props данных сохраняется."
         },
         {
           "id": "virtual-motion",
@@ -12094,7 +12094,7 @@
             "tests/browser/tree-select-trigger.spec.ts",
             "readme.md"
           ],
-          "note": "Ant Design6.6.8 /984592267de88fbf9cdaecc96a56629e721c709d, rc-select1.10.1. Raw readonly-space: input и root handlers до React rerender вызывают onOpenChange(true) дважды на один Space keydown. Native сохраняет один callback перехода; raw observation не нормализуется и не объявляется доказанным дефектом Source. Focus hooks используют реальные focusin/focusout; DOM portal не воспроизводит React synthetic bubbling через component tree. Сохранены Native Escape preventDefault/stopPropagation и открытие ArrowUp/Left/Right закрытого поля. Повторный pointer toggle и дополнительные input/root render paths остаются в очереди."
+          "note": "Ant Design6.6.8 /984592267de88fbf9cdaecc96a56629e721c709d, rc-select1.10.1. Raw readonly-space: input и root handlers до React rerender вызывают onOpenChange(true) дважды на один Space keydown. Native сохраняет один callback перехода; raw observation не нормализуется и не объявляется доказанным дефектом Source. Focus hooks используют реальные focusin/focusout; DOM portal не воспроизводит React synthetic bubbling через component tree. Сохранены Native Escape preventDefault/stopPropagation и открытие ArrowUp/Left/Right закрытого поля. Повторный pointer toggle перенесён отдельно; дополнительные components.root/input render paths остаются в очереди."
         },
         {
           "id": "form-feedback",
@@ -12129,6 +12129,98 @@
             "readme.md"
           ],
           "note": "HasFeedback/feedbackIcons берутся из отдельного Form context. Root/Item flags, Source SVGs/цвета/размеры, custom snippets и callback metadata, validated success, false suppression и falsy defaults повторяют Source. Значок следует статусу FormItem, local status TreeSelect меняет только control. SuffixIcon=null сохраняет feedback-only wrapper; пользовательский suffix перекрывает generated arrow/feedback. NoStyle и nested Form/OTP/popup boundaries сверены; class namespace значка принадлежит FormItem независимо от TreeSelect prefix. SSR без timers/validation, strict hydration на существующем поле/custom icon, async reset/remount и pending unmount проверяют lifecycle. Native readonly messages, raw FormData, reset contracts, доступные имена и reduced-motion spinner сохраняются."
+        },
+        {
+          "id": "pointer-toggle",
+          "title": "Pointer toggle, clear, touch и сохранение editable input",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/TreeSelectControl.svelte",
+            "src/lib/tree-select.types.ts",
+            "readme.md",
+            "tests/browser/fixtures/tree-select-pointer-cases.ts",
+            "tests/browser/fixtures/TreeSelectPointerCase.svelte",
+            "tests/browser/fixtures/TreeSelectPointerFixtures.svelte",
+            "tests/browser/fixtures/ant-design-tree-select-pointer-reference.json",
+            "tests/browser/tree-select-pointer-metrics.ts",
+            "tests/browser/tree-select-pointer.spec.ts",
+            "tests/package/tree-select-pointer.ssr.test.ts"
+          ],
+          "note": "Повторный mousedown закрывает readonly single. Searchable single и multiple input сохраняют popup; multiple root/content/prefix/suffix/label закрывают. Фокус и public root mouse callbacks сохраняют исходный порядок и defaultPrevented. Single clear закрывается после click/change, multiple остаётся открытым; click-only clear не закрывает. ShowAction focus может дать два Source callbacks открытия при первом pointer после blur; это отдельный путь, Native readonly Space остаётся идемпотентным. Controlled open hold/accept, refs/root identity, caret, real touch и CDP touchCancel/swipe сверены без нормализации событий. 38 raw UMD6.6.8 случаев/354 действия и6 DOM-free SSR случаев, включая3 Source explicit-search counterparts для Native multiple default. Native SSR initial-open hidden shell сохранён отдельно от Source server flag=false. Popup внутри trigger root не запускает selector toggle; custom Draft сохраняет popup и свой фокус без selector focus/click callbacks. Default Native popup pointerdown focus adapter и отсутствие React synthetic portal bubbling сохранены. Root probes используют физическую левую границу вне input, исключая неодинаковый Chromium touch retargeting на верхней границе; прежние raw probes сохранены отдельно. Preserved-open pointer отменяет pending custom-tag close согласно прежнему Native lifecycle contract."
+        },
+        {
+          "id": "token-search",
+          "title": "TokenSeparators, IME и вставка поискового запроса",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/TreeSelectControl.svelte",
+            "src/lib/tree-select.types.ts",
+            "readme.md",
+            "src/lib/tree-select-token.engine.ts",
+            "src/lib/tree-select-token.engine.test.ts",
+            "src/lib/select-token.engine.ts",
+            "src/lib/index.ts",
+            "tests/browser/fixtures/tree-select-token-cases.ts",
+            "tests/browser/fixtures/TreeSelectTokenCase.svelte",
+            "tests/browser/fixtures/TreeSelectTokenFixtures.svelte",
+            "tests/browser/fixtures/ant-design-tree-select-token-reference.json",
+            "tests/browser/tree-select-token-metrics.ts",
+            "tests/browser/tree-select-token.spec.ts",
+            "tests/package/tree-select-token.ssr.test.ts",
+            "tests/browser/fixtures/TreeSelectTokenLifecycle.svelte"
+          ],
+          "note": "Массивы и functional splitters повторяют BaseSelect1.10.1: разделённый запрос очищается, popup закрывается отложенно без изменения tree values или selection callbacks. TreeSelect1.16.1 не передаёт maxCount в BaseSelect search; полный/нулевой лимит не блокирует split. IME откладывает splitter до compositionend; paste восстанавливает CR/LF при tokenWithEnter. OnSearch вызывается при изменении merged search; Single search очищается на client mount, включая initial open=true, и при rawOpen=false; смена mode/search/token props сама не перезапускает effect. Source initial ssrSafeOpen=false воспроизводится только search cleanup, Native SSR hidden-open shell сохраняется. Split-close ставится до onSearch, позволяя callback с повторным фокусом отменить закрытие. Paste cache потребляется только input, не compositionend или close effect. 23 неизменённых UMD6.6.8 случая/56 действий и5 DOM-free SSR случаев, controlled search hold/accept, input identity и отсутствие server timers сверены. Native inherited paste/composition handlers сохраняются. Обработанный rawOpen учитывает synchronous owner close из mount onSearch, не повторяя callback; reopen восстанавливает held query. Form reset/unmount отменяют pending split close, lower-case native handlers и refs/model сохраняются."
+        },
+        {
+          "id": "inherited-scrollbar",
+          "title": "ShowScrollBar как inherited no-op закреплённого TreeSelect",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/TreeSelectControl.svelte",
+            "src/lib/tree-select.types.ts",
+            "readme.md",
+            "tests/browser/fixtures/tree-scrollbar.types.ts",
+            "tests/browser/fixtures/tree-scrollbar-cases.ts",
+            "tests/browser/fixtures/TreeScrollbarCase.svelte",
+            "tests/browser/fixtures/TreeScrollbarFixtures.svelte",
+            "tests/browser/fixtures/ant-design-tree-scrollbar-reference.json",
+            "tests/browser/tree-scrollbar-metrics.ts",
+            "tests/browser/tree-scrollbar.spec.ts",
+            "tests/package/tree-scrollbar.ssr.test.ts"
+          ],
+          "note": "Ant Design6.6.8 /984592267de88fbf9cdaecc96a56629e721c709d: BaseSelect1.10.1 принимает true/false/optional, но TreeSelect1.16.1 OptionList не передаёт prop в Tree1.4.0 и VirtualList1.5.1. Native типизирует и потребляет prop без DOM leakage и изменения Tree. Все режимы auto-hide после простоя и показывают полосу при взаимодействии; virtual=false/нет overflow исключают custom bar. 14 raw UMD cases/111 действий включают чувствительный positive Select control: true сохраняет полосу, false скрывает, optional auto-hide. Live modes, drag/wheel/keyboard/scrollTo/resize, refs/unmount и6 DOM-free SSR случаев сверены. Source отсутствие SSR popup отделено от сохранённого Native hidden shell. Это no-op текущего inherited API, не deprecated prop и не объявленная ошибка Source."
+        },
+        {
+          "id": "native-multiple-search-default",
+          "title": "Native default multiple search и raw readonly observation",
+          "state": "partial",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/TreeSelectControl.svelte",
+            "tests/browser/fixtures/ant-design-tree-select-pointer-reference.json",
+            "tests/browser/fixtures/TreeSelectPointerCase.svelte",
+            "tests/browser/tree-select-pointer.spec.ts",
+            "tests/package/tree-select-pointer.ssr.test.ts",
+            "readme.md"
+          ],
+          "note": "Ant Design6.6.8 /984592267de88fbf9cdaecc96a56629e721c709d EN/ZH documentation задаёт showSearch default=false для single и true для multiple. Actual UMD rc-tree-select1.16.1 сохраняет undefined, default multiple/checkable input readonly. Native сохраняет прежний документированный searchable multiple/checkable default. Шесть raw omitted-showSearch observations воспроизводятся с Native explicit false; три независимо captured Source explicit true counterparts проверяют Native undefined. Raw snapshots и readonly/target event projectors не нормализуются. Это зафиксированное расхождение документации/runtime, не объявленная доказанная ошибка Source."
+        },
+        {
+          "id": "native-closed-search-input",
+          "title": "Native closed single input и удержанный controlled query",
+          "state": "partial",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/TreeSelectControl.svelte",
+            "tests/browser/fixtures/ant-design-tree-select-token-reference.json",
+            "tests/browser/tree-select-token.spec.ts",
+            "tests/browser/tree-select.spec.ts",
+            "readme.md"
+          ],
+          "note": "Ant Design6.6.8 /984592267de88fbf9cdaecc96a56629e721c709d initial-open-close-on-search: fixed searchValue=Alpha, initial open=true, onSearch(empty) синхронно закрывает popup. Raw Source сохраняет input.value=Alpha; Native сохраняет прежнее закрытое single поле с selected label/пустой строкой вместо отдельного React overlay. Owner query не меняется. Обе реализации вызывают search(empty) ровно1 раз и при reopening показывают Alpha с прежним input/ref. Native expectation задаёт только closed input presentation; raw Source search=Alpha и reopened view не нормализуются. SSR по-прежнему не вызывает search/splitter."
         }
       ]
     },

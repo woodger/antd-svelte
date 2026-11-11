@@ -1,0 +1,1759 @@
+{
+  "reference": {
+    "version": "6.6.8",
+    "revision": "984592267de88fbf9cdaecc96a56629e721c709d",
+    "react": "18.3.1",
+    "archiveSha256": "8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa",
+    "browser": "Unmodified UMD; actual TreeSelect single/multiple input, search/open/value callbacks, composition and paste; no Native implementation imports",
+    "server": "Unmodified ReactDOMServer in a DOM-free VM, projected in an inert host",
+    "errors": [],
+    "warnings": [],
+    "serverMessages": []
+  },
+  "cases": [
+    {
+      "id": "single-comma",
+      "initial": {
+        "open": false,
+        "search": "",
+        "events": [],
+        "value": null,
+        "controlled": "",
+        "focused": false
+      },
+      "steps": [
+        {
+          "action": {
+            "type": "open"
+          },
+          "view": {
+            "open": true,
+            "search": "",
+            "events": [
+              [
+                "open",
+                true
+              ]
+            ],
+            "value": null,
+            "controlled": "",
+            "focused": true
+          },
+          "sameInput": true
+        },
+        {
+          "action": {
+            "type": "fill",
+            "text": "Alpha,Beta"
+          },
+          "view": {
+            "open": false,
+            "search": "",
+            "events": [
+              [
+                "open",
+                true
+              ],
+              [
+                "open",
+                false
+              ]
+            ],
+            "value": null,
+            "controlled": "",
+            "focused": true
+          },
+          "sameInput": true
+        }
+      ]
+    },
+    {
+      "id": "single-progressive",
+      "initial": {
+        "open": false,
+        "search": "",
+        "events": [],
+        "value": null,
+        "controlled": "",
+        "focused": false
+      },
+      "steps": [
+        {
+          "action": {
+            "type": "open"
+          },
+          "view": {
+            "open": true,
+            "search": "",
+            "events": [
+              [
+                "open",
+                true
+              ]
+            ],
+            "value": null,
+            "controlled": "",
+            "focused": true
+          },
+          "sameInput": true
+        },
+        {
+          "action": {
+            "type": "fill",
+            "text": "Alpha"
+          },
+          "view": {
+            "open": true,
+            "search": "Alpha",
+            "events": [
+              [
+                "open",
+                true
+              ],
+              [
+                "search",
+                "Alpha"
+              ]
+            ],
+            "value": null,
+            "controlled": "",
+            "focused": true
+          },
+          "sameInput": true
+        },
+        {
+          "action": {
+            "type": "fill",
+            "text": "Alpha,Beta"
+          },
+          "view": {
+            "open": false,
+            "search": "",
+            "events": [
+              [
+                "open",
+                true
+              ],
+              [
+                "search",
+                "Alpha"
+              ],
+              [
+                "search",
+                ""
+              ],
+              [
+                "open",
+                false
+              ]
+            ],
+            "value": null,
+            "controlled": "",
+            "focused": true
+          },
+          "sameInput": true
+        }
+      ]
+    },
+    {
+      "id": "multiple-comma",
+      "initial": {
+        "open": false,
+        "search": "",
+        "events": [],
+        "value": [
+          "a"
+        ],
+        "controlled": "",
+        "focused": false
+      },
+      "steps": [
+        {
+          "action": {
+            "type": "open"
+          },
+          "view": {
+            "open": true,
+            "search": "",
+            "events": [
+              [
+                "open",
+                true
+              ]
+            ],
+            "value": [
+              "a"
+            ],
+            "controlled": "",
+            "focused": true
+          },
+          "sameInput": true
+        },
+        {
+          "action": {
+            "type": "fill",
+            "text": "Beta,Alpha"
+          },
+          "view": {
+            "open": false,
+            "search": "",
+            "events": [
+              [
+                "open",
+                true
+              ],
+              [
+                "open",
+                false
+              ]
+            ],
+            "value": [
+              "a"
+            ],
+            "controlled": "",
+            "focused": true
+          },
+          "sameInput": true
+        }
+      ]
+    },
+    {
+      "id": "ordinary-input",
+      "initial": {
+        "open": false,
+        "search": "",
+        "events": [],
+        "value": null,
+        "controlled": "",
+        "focused": false
+      },
+      "steps": [
+        {
+          "action": {
+            "type": "open"
+          },
+          "view": {
+            "open": true,
+            "search": "",
+            "events": [
+              [
+                "open",
+                true
+              ]
+            ],
+            "value": null,
+            "controlled": "",
+            "focused": true
+          },
+          "sameInput": true
+        },
+        {
+          "action": {
+            "type": "fill",
+            "text": "Beta"
+          },
+          "view": {
+            "open": true,
+            "search": "Beta",
+            "events": [
+              [
+                "open",
+                true
+              ],
+              [
+                "search",
+                "Beta"
+              ]
+            ],
+            "value": null,
+            "controlled": "",
+            "focused": true
+          },
+          "sameInput": true
+        },
+        {
+          "action": {
+            "type": "fill",
+            "text": ""
+          },
+          "view": {
+            "open": true,
+            "search": "",
+            "events": [
+              [
+                "open",
+                true
+              ],
+              [
+                "search",
+                "Beta"
+              ],
+              [
+                "search",
+                ""
+              ]
+            ],
+            "value": null,
+            "controlled": "",
+            "focused": true
+          },
+          "sameInput": true
+        }
+      ]
+    },
+    {
+      "id": "empty-separators",
+      "initial": {
+        "open": false,
+        "search": "",
+        "events": [],
+        "value": null,
+        "controlled": "",
+        "focused": false
+      },
+      "steps": [
+        {
+          "action": {
+            "type": "open"
+          },
+          "view": {
+            "open": true,
+            "search": "",
+            "events": [
+              [
+                "open",
+                true
+              ]
+            ],
+            "value": null,
+            "controlled": "",
+            "focused": true
+          },
+          "sameInput": true
+        },
+        {
+          "action": {
+            "type": "fill",
+            "text": "a,b"
+          },
+          "view": {
+            "open": true,
+            "search": "a,b",
+            "events": [
+              [
+                "open",
+                true
+              ],
+              [
+                "search",
+                "a,b"
+              ]
+            ],
+            "value": null,
+            "controlled": "",
+            "focused": true
+          },
+          "sameInput": true
+        }
+      ]
+    },
+    {
+      "id": "empty-first",
+      "initial": {
+        "open": false,
+        "search": "",
+        "events": [],
+        "value": null,
+        "controlled": "",
+        "focused": false
+      },
+      "steps": [
+        {
+          "action": {
+            "type": "open"
+          },
+          "view": {
+            "open": true,
+            "search": "",
+            "events": [
+              [
+                "open",
+                true
+              ]
+            ],
+            "value": null,
+            "controlled": "",
+            "focused": true
+          },
+          "sameInput": true
+        },
+        {
+          "action": {
+            "type": "fill",
+            "text": "a,b"
+          },
+          "view": {
+            "open": true,
+            "search": "a,b",
+            "events": [
+              [
+                "open",
+                true
+              ],
+              [
+                "search",
+                "a,b"
+              ]
+            ],
+            "value": null,
+            "controlled": "",
+            "focused": true
+          },
+          "sameInput": true
+        }
+      ]
+    },
+    {
+      "id": "only-delimiters",
+      "initial": {
+        "open": false,
+        "search": "",
+        "events": [],
+        "value": null,
+        "controlled": "",
+        "focused": false
+      },
+      "steps": [
+        {
+          "action": {
+            "type": "open"
+          },
+          "view": {
+            "open": true,
+            "search": "",
+            "events": [
+              [
+                "open",
+                true
+              ]
+            ],
+            "value": null,
+            "controlled": "",
+            "focused": true
+          },
+          "sameInput": true
+        },
+        {
+          "action": {
+            "type": "fill",
+            "text": ",,"
+          },
+          "view": {
+            "open": false,
+            "search": "",
+            "events": [
+              [
+                "open",
+                true
+              ],
+              [
+                "open",
+                false
+              ]
+            ],
+            "value": null,
+            "controlled": "",
+            "focused": true
+          },
+          "sameInput": true
+        }
+      ]
+    },
+    {
+      "id": "multiple-separators",
+      "initial": {
+        "open": false,
+        "search": "",
+        "events": [],
+        "value": null,
+        "controlled": "",
+        "focused": false
+      },
+      "steps": [
+        {
+          "action": {
+            "type": "open"
+          },
+          "view": {
+            "open": true,
+            "search": "",
+            "events": [
+              [
+                "open",
+                true
+              ]
+            ],
+            "value": null,
+            "controlled": "",
+            "focused": true
+          },
+          "sameInput": true
+        },
+        {
+          "action": {
+            "type": "fill",
+            "text": "Alpha::Beta,"
+          },
+          "view": {
+            "open": false,
+            "search": "",
+            "events": [
+              [
+                "open",
+                true
+              ],
+              [
+                "open",
+                false
+              ]
+            ],
+            "value": null,
+            "controlled": "",
+            "focused": true
+          },
+          "sameInput": true
+        }
+      ]
+    },
+    {
+      "id": "functional-csv",
+      "initial": {
+        "open": false,
+        "search": "",
+        "events": [
+          [
+            "split",
+            ""
+          ]
+        ],
+        "value": null,
+        "controlled": "",
+        "focused": false
+      },
+      "steps": [
+        {
+          "action": {
+            "type": "open"
+          },
+          "view": {
+            "open": true,
+            "search": "",
+            "events": [
+              [
+                "split",
+                ""
+              ],
+              [
+                "open",
+                true
+              ]
+            ],
+            "value": null,
+            "controlled": "",
+            "focused": true
+          },
+          "sameInput": true
+        },
+        {
+          "action": {
+            "type": "fill",
+            "text": "Alpha,Beta"
+          },
+          "view": {
+            "open": false,
+            "search": "",
+            "events": [
+              [
+                "split",
+                ""
+              ],
+              [
+                "open",
+                true
+              ],
+              [
+                "split",
+                "Alpha,Beta"
+              ],
+              [
+                "open",
+                false
+              ],
+              [
+                "split",
+                ""
+              ]
+            ],
+            "value": null,
+            "controlled": "",
+            "focused": true
+          },
+          "sameInput": true
+        }
+      ]
+    },
+    {
+      "id": "functional-empty",
+      "initial": {
+        "open": false,
+        "search": "",
+        "events": [
+          [
+            "split",
+            ""
+          ]
+        ],
+        "value": null,
+        "controlled": "",
+        "focused": false
+      },
+      "steps": [
+        {
+          "action": {
+            "type": "open"
+          },
+          "view": {
+            "open": true,
+            "search": "",
+            "events": [
+              [
+                "split",
+                ""
+              ],
+              [
+                "open",
+                true
+              ]
+            ],
+            "value": null,
+            "controlled": "",
+            "focused": true
+          },
+          "sameInput": true
+        },
+        {
+          "action": {
+            "type": "fill",
+            "text": "Alpha,Beta"
+          },
+          "view": {
+            "open": true,
+            "search": "Alpha,Beta",
+            "events": [
+              [
+                "split",
+                ""
+              ],
+              [
+                "open",
+                true
+              ],
+              [
+                "split",
+                "Alpha,Beta"
+              ],
+              [
+                "search",
+                "Alpha,Beta"
+              ]
+            ],
+            "value": null,
+            "controlled": "",
+            "focused": true
+          },
+          "sameInput": true
+        }
+      ]
+    },
+    {
+      "id": "functional-unchanged",
+      "initial": {
+        "open": false,
+        "search": "",
+        "events": [
+          [
+            "split",
+            ""
+          ]
+        ],
+        "value": null,
+        "controlled": "",
+        "focused": false
+      },
+      "steps": [
+        {
+          "action": {
+            "type": "open"
+          },
+          "view": {
+            "open": true,
+            "search": "",
+            "events": [
+              [
+                "split",
+                ""
+              ],
+              [
+                "open",
+                true
+              ]
+            ],
+            "value": null,
+            "controlled": "",
+            "focused": true
+          },
+          "sameInput": true
+        },
+        {
+          "action": {
+            "type": "fill",
+            "text": "Alpha,Beta"
+          },
+          "view": {
+            "open": true,
+            "search": "Alpha,Beta",
+            "events": [
+              [
+                "split",
+                ""
+              ],
+              [
+                "open",
+                true
+              ],
+              [
+                "split",
+                "Alpha,Beta"
+              ],
+              [
+                "search",
+                "Alpha,Beta"
+              ]
+            ],
+            "value": null,
+            "controlled": "",
+            "focused": true
+          },
+          "sameInput": true
+        }
+      ]
+    },
+    {
+      "id": "composition",
+      "initial": {
+        "open": false,
+        "search": "",
+        "events": [],
+        "value": null,
+        "controlled": "",
+        "focused": false
+      },
+      "steps": [
+        {
+          "action": {
+            "type": "open"
+          },
+          "view": {
+            "open": true,
+            "search": "",
+            "events": [
+              [
+                "open",
+                true
+              ]
+            ],
+            "value": null,
+            "controlled": "",
+            "focused": true
+          },
+          "sameInput": true
+        },
+        {
+          "action": {
+            "type": "composition-start"
+          },
+          "view": {
+            "open": true,
+            "search": "",
+            "events": [
+              [
+                "open",
+                true
+              ]
+            ],
+            "value": null,
+            "controlled": "",
+            "focused": true
+          },
+          "sameInput": true
+        },
+        {
+          "action": {
+            "type": "fill",
+            "text": "Alpha,Beta"
+          },
+          "view": {
+            "open": true,
+            "search": "Alpha,Beta",
+            "events": [
+              [
+                "open",
+                true
+              ],
+              [
+                "search",
+                "Alpha,Beta"
+              ]
+            ],
+            "value": null,
+            "controlled": "",
+            "focused": true
+          },
+          "sameInput": true
+        },
+        {
+          "action": {
+            "type": "composition-end"
+          },
+          "view": {
+            "open": false,
+            "search": "",
+            "events": [
+              [
+                "open",
+                true
+              ],
+              [
+                "search",
+                "Alpha,Beta"
+              ],
+              [
+                "search",
+                ""
+              ],
+              [
+                "open",
+                false
+              ]
+            ],
+            "value": null,
+            "controlled": "",
+            "focused": true
+          },
+          "sameInput": true
+        }
+      ]
+    },
+    {
+      "id": "paste-newline",
+      "initial": {
+        "open": false,
+        "search": "",
+        "events": [],
+        "value": null,
+        "controlled": "",
+        "focused": false
+      },
+      "steps": [
+        {
+          "action": {
+            "type": "open"
+          },
+          "view": {
+            "open": true,
+            "search": "",
+            "events": [
+              [
+                "open",
+                true
+              ]
+            ],
+            "value": null,
+            "controlled": "",
+            "focused": true
+          },
+          "sameInput": true
+        },
+        {
+          "action": {
+            "type": "paste",
+            "text": "Alpha\nBeta"
+          },
+          "view": {
+            "open": true,
+            "search": "",
+            "events": [
+              [
+                "open",
+                true
+              ]
+            ],
+            "value": null,
+            "controlled": "",
+            "focused": true
+          },
+          "sameInput": true
+        },
+        {
+          "action": {
+            "type": "fill",
+            "text": "Alpha Beta"
+          },
+          "view": {
+            "open": false,
+            "search": "",
+            "events": [
+              [
+                "open",
+                true
+              ],
+              [
+                "open",
+                false
+              ]
+            ],
+            "value": null,
+            "controlled": "",
+            "focused": true
+          },
+          "sameInput": true
+        }
+      ]
+    },
+    {
+      "id": "paste-functional",
+      "initial": {
+        "open": false,
+        "search": "",
+        "events": [
+          [
+            "split",
+            ""
+          ]
+        ],
+        "value": null,
+        "controlled": "",
+        "focused": false
+      },
+      "steps": [
+        {
+          "action": {
+            "type": "open"
+          },
+          "view": {
+            "open": true,
+            "search": "",
+            "events": [
+              [
+                "split",
+                ""
+              ],
+              [
+                "open",
+                true
+              ]
+            ],
+            "value": null,
+            "controlled": "",
+            "focused": true
+          },
+          "sameInput": true
+        },
+        {
+          "action": {
+            "type": "paste",
+            "text": "Alpha\r\nBeta"
+          },
+          "view": {
+            "open": true,
+            "search": "",
+            "events": [
+              [
+                "split",
+                ""
+              ],
+              [
+                "open",
+                true
+              ]
+            ],
+            "value": null,
+            "controlled": "",
+            "focused": true
+          },
+          "sameInput": true
+        },
+        {
+          "action": {
+            "type": "fill",
+            "text": "Alpha Beta"
+          },
+          "view": {
+            "open": false,
+            "search": "",
+            "events": [
+              [
+                "split",
+                ""
+              ],
+              [
+                "open",
+                true
+              ],
+              [
+                "split",
+                "Alpha\r\nBeta"
+              ],
+              [
+                "open",
+                false
+              ],
+              [
+                "split",
+                ""
+              ]
+            ],
+            "value": null,
+            "controlled": "",
+            "focused": true
+          },
+          "sameInput": true
+        }
+      ]
+    },
+    {
+      "id": "count-zero",
+      "initial": {
+        "open": false,
+        "search": "",
+        "events": [],
+        "value": null,
+        "controlled": "",
+        "focused": false
+      },
+      "steps": [
+        {
+          "action": {
+            "type": "open"
+          },
+          "view": {
+            "open": true,
+            "search": "",
+            "events": [
+              [
+                "open",
+                true
+              ]
+            ],
+            "value": null,
+            "controlled": "",
+            "focused": true
+          },
+          "sameInput": true
+        },
+        {
+          "action": {
+            "type": "fill",
+            "text": "Alpha,Beta"
+          },
+          "view": {
+            "open": false,
+            "search": "",
+            "events": [
+              [
+                "open",
+                true
+              ],
+              [
+                "open",
+                false
+              ]
+            ],
+            "value": null,
+            "controlled": "",
+            "focused": true
+          },
+          "sameInput": true
+        }
+      ]
+    },
+    {
+      "id": "count-full",
+      "initial": {
+        "open": false,
+        "search": "",
+        "events": [],
+        "value": [
+          "a"
+        ],
+        "controlled": "",
+        "focused": false
+      },
+      "steps": [
+        {
+          "action": {
+            "type": "open"
+          },
+          "view": {
+            "open": true,
+            "search": "",
+            "events": [
+              [
+                "open",
+                true
+              ]
+            ],
+            "value": [
+              "a"
+            ],
+            "controlled": "",
+            "focused": true
+          },
+          "sameInput": true
+        },
+        {
+          "action": {
+            "type": "fill",
+            "text": "Beta,Alpha"
+          },
+          "view": {
+            "open": false,
+            "search": "",
+            "events": [
+              [
+                "open",
+                true
+              ],
+              [
+                "split",
+                "Beta,Alpha"
+              ],
+              [
+                "open",
+                false
+              ]
+            ],
+            "value": [
+              "a"
+            ],
+            "controlled": "",
+            "focused": true
+          },
+          "sameInput": true
+        }
+      ]
+    },
+    {
+      "id": "count-show-parent",
+      "initial": {
+        "open": false,
+        "search": "",
+        "events": [],
+        "value": [
+          "a"
+        ],
+        "controlled": "",
+        "focused": false
+      },
+      "steps": [
+        {
+          "action": {
+            "type": "open"
+          },
+          "view": {
+            "open": true,
+            "search": "",
+            "events": [
+              [
+                "open",
+                true
+              ]
+            ],
+            "value": [
+              "a"
+            ],
+            "controlled": "",
+            "focused": true
+          },
+          "sameInput": true
+        },
+        {
+          "action": {
+            "type": "fill",
+            "text": "Beta"
+          },
+          "view": {
+            "open": true,
+            "search": "Beta",
+            "events": [
+              [
+                "open",
+                true
+              ],
+              [
+                "search",
+                "Beta"
+              ]
+            ],
+            "value": [
+              "a"
+            ],
+            "controlled": "",
+            "focused": true
+          },
+          "sameInput": true
+        },
+        {
+          "action": {
+            "type": "fill",
+            "text": "Beta,Alpha"
+          },
+          "view": {
+            "open": false,
+            "search": "",
+            "events": [
+              [
+                "open",
+                true
+              ],
+              [
+                "search",
+                "Beta"
+              ],
+              [
+                "search",
+                ""
+              ],
+              [
+                "open",
+                false
+              ]
+            ],
+            "value": [
+              "a"
+            ],
+            "controlled": "",
+            "focused": true
+          },
+          "sameInput": true
+        }
+      ]
+    },
+    {
+      "id": "controlled-fixed",
+      "initial": {
+        "open": false,
+        "search": "",
+        "events": [],
+        "value": null,
+        "controlled": "",
+        "focused": false
+      },
+      "steps": [
+        {
+          "action": {
+            "type": "open"
+          },
+          "view": {
+            "open": true,
+            "search": "",
+            "events": [
+              [
+                "open",
+                true
+              ]
+            ],
+            "value": null,
+            "controlled": "",
+            "focused": true
+          },
+          "sameInput": true
+        },
+        {
+          "action": {
+            "type": "fill",
+            "text": "Alpha"
+          },
+          "view": {
+            "open": true,
+            "search": "",
+            "events": [
+              [
+                "open",
+                true
+              ],
+              [
+                "search",
+                "Alpha"
+              ]
+            ],
+            "value": null,
+            "controlled": "",
+            "focused": true
+          },
+          "sameInput": true
+        },
+        {
+          "action": {
+            "type": "fill",
+            "text": "Alpha,Beta"
+          },
+          "view": {
+            "open": false,
+            "search": "",
+            "events": [
+              [
+                "open",
+                true
+              ],
+              [
+                "search",
+                "Alpha"
+              ],
+              [
+                "open",
+                false
+              ]
+            ],
+            "value": null,
+            "controlled": "",
+            "focused": true
+          },
+          "sameInput": true
+        }
+      ]
+    },
+    {
+      "id": "controlled-accept",
+      "initial": {
+        "open": false,
+        "search": "",
+        "events": [],
+        "value": null,
+        "controlled": "",
+        "focused": false
+      },
+      "steps": [
+        {
+          "action": {
+            "type": "open"
+          },
+          "view": {
+            "open": true,
+            "search": "",
+            "events": [
+              [
+                "open",
+                true
+              ]
+            ],
+            "value": null,
+            "controlled": "",
+            "focused": true
+          },
+          "sameInput": true
+        },
+        {
+          "action": {
+            "type": "fill",
+            "text": "Alpha"
+          },
+          "view": {
+            "open": true,
+            "search": "Alpha",
+            "events": [
+              [
+                "open",
+                true
+              ],
+              [
+                "search",
+                "Alpha"
+              ]
+            ],
+            "value": null,
+            "controlled": "Alpha",
+            "focused": true
+          },
+          "sameInput": true
+        },
+        {
+          "action": {
+            "type": "fill",
+            "text": "Alpha,Beta"
+          },
+          "view": {
+            "open": false,
+            "search": "",
+            "events": [
+              [
+                "open",
+                true
+              ],
+              [
+                "search",
+                "Alpha"
+              ],
+              [
+                "search",
+                ""
+              ],
+              [
+                "open",
+                false
+              ]
+            ],
+            "value": null,
+            "controlled": "",
+            "focused": true
+          },
+          "sameInput": true
+        }
+      ]
+    },
+    {
+      "id": "reentrant-search-focus",
+      "initial": {
+        "open": false,
+        "search": "",
+        "events": [],
+        "value": null,
+        "controlled": "",
+        "focused": false
+      },
+      "steps": [
+        {
+          "action": {
+            "type": "focus"
+          },
+          "view": {
+            "open": true,
+            "search": "",
+            "events": [
+              [
+                "open",
+                true
+              ]
+            ],
+            "value": null,
+            "controlled": "",
+            "focused": true
+          },
+          "sameInput": true
+        },
+        {
+          "action": {
+            "type": "fill",
+            "text": "Alpha"
+          },
+          "view": {
+            "open": true,
+            "search": "Alpha",
+            "events": [
+              [
+                "open",
+                true
+              ],
+              [
+                "search",
+                "Alpha"
+              ]
+            ],
+            "value": null,
+            "controlled": "",
+            "focused": true
+          },
+          "sameInput": true
+        },
+        {
+          "action": {
+            "type": "fill",
+            "text": "Alpha,Beta"
+          },
+          "view": {
+            "open": true,
+            "search": "",
+            "events": [
+              [
+                "open",
+                true
+              ],
+              [
+                "search",
+                "Alpha"
+              ],
+              [
+                "search",
+                ""
+              ]
+            ],
+            "value": null,
+            "controlled": "",
+            "focused": true
+          },
+          "sameInput": true
+        }
+      ]
+    },
+    {
+      "id": "paste-before-composition-end",
+      "initial": {
+        "open": false,
+        "search": "",
+        "events": [],
+        "value": null,
+        "controlled": "",
+        "focused": false
+      },
+      "steps": [
+        {
+          "action": {
+            "type": "open"
+          },
+          "view": {
+            "open": true,
+            "search": "",
+            "events": [
+              [
+                "open",
+                true
+              ]
+            ],
+            "value": null,
+            "controlled": "",
+            "focused": true
+          },
+          "sameInput": true
+        },
+        {
+          "action": {
+            "type": "paste",
+            "text": "Alpha\nBeta"
+          },
+          "view": {
+            "open": true,
+            "search": "",
+            "events": [
+              [
+                "open",
+                true
+              ]
+            ],
+            "value": null,
+            "controlled": "",
+            "focused": true
+          },
+          "sameInput": true
+        },
+        {
+          "action": {
+            "type": "composition-end"
+          },
+          "view": {
+            "open": true,
+            "search": "",
+            "events": [
+              [
+                "open",
+                true
+              ]
+            ],
+            "value": null,
+            "controlled": "",
+            "focused": true
+          },
+          "sameInput": true
+        },
+        {
+          "action": {
+            "type": "fill",
+            "text": "Alpha Beta"
+          },
+          "view": {
+            "open": false,
+            "search": "",
+            "events": [
+              [
+                "open",
+                true
+              ],
+              [
+                "open",
+                false
+              ]
+            ],
+            "value": null,
+            "controlled": "",
+            "focused": true
+          },
+          "sameInput": true
+        }
+      ]
+    },
+    {
+      "id": "initial-open-functional",
+      "initial": {
+        "open": true,
+        "search": "",
+        "events": [
+          [
+            "split",
+            ""
+          ]
+        ],
+        "value": null,
+        "controlled": "",
+        "focused": false
+      },
+      "steps": [
+        {
+          "action": {
+            "type": "fill",
+            "text": "Alpha,Beta"
+          },
+          "view": {
+            "open": false,
+            "search": "",
+            "events": [
+              [
+                "split",
+                ""
+              ],
+              [
+                "split",
+                "Alpha,Beta"
+              ],
+              [
+                "open",
+                false
+              ],
+              [
+                "split",
+                ""
+              ]
+            ],
+            "value": null,
+            "controlled": "",
+            "focused": true
+          },
+          "sameInput": true
+        }
+      ]
+    },
+    {
+      "id": "initial-open-close-on-search",
+      "initial": {
+        "open": false,
+        "search": "Alpha",
+        "events": [
+          [
+            "search",
+            ""
+          ]
+        ],
+        "value": null,
+        "controlled": "Alpha",
+        "focused": false
+      },
+      "steps": [
+        {
+          "action": {
+            "type": "open"
+          },
+          "view": {
+            "open": true,
+            "search": "Alpha",
+            "events": [
+              [
+                "search",
+                ""
+              ],
+              [
+                "open",
+                true
+              ]
+            ],
+            "value": null,
+            "controlled": "Alpha",
+            "focused": true
+          },
+          "sameInput": true
+        }
+      ]
+    }
+  ],
+  "ssr": [
+    {
+      "id": "single-comma",
+      "view": {
+        "open": false,
+        "search": "",
+        "events": [],
+        "value": null,
+        "controlled": "",
+        "focused": false
+      },
+      "timers": 0
+    },
+    {
+      "id": "multiple-comma",
+      "view": {
+        "open": false,
+        "search": "",
+        "events": [],
+        "value": [
+          "a"
+        ],
+        "controlled": "",
+        "focused": false
+      },
+      "timers": 0
+    },
+    {
+      "id": "functional-csv",
+      "view": {
+        "open": false,
+        "search": "",
+        "events": [],
+        "value": null,
+        "controlled": "",
+        "focused": false
+      },
+      "timers": 0
+    },
+    {
+      "id": "count-zero",
+      "view": {
+        "open": false,
+        "search": "",
+        "events": [],
+        "value": null,
+        "controlled": "",
+        "focused": false
+      },
+      "timers": 0
+    },
+    {
+      "id": "controlled-fixed",
+      "view": {
+        "open": false,
+        "search": "",
+        "events": [],
+        "value": null,
+        "controlled": "",
+        "focused": false
+      },
+      "timers": 0
+    }
+  ]
+}

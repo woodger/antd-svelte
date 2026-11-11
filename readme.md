@@ -6419,6 +6419,15 @@ controlled props с callbacks, без автоматического переп�
 Как в Source TreeSelect, `maxLength` не ограничивает поисковый ввод; native
 `maxlength` задаёт ограничение браузера.
 
+Повторное нажатие на readonly single control закрывает панель. Single с поиском
+сохраняет её открытой; multiple закрывается при нажатии вне input, а нажатие
+на сам input сохраняет панель. Prefix, suffix и выбранная подпись следуют тем же
+правилам. Закрытие выполняется после click callbacks; очистка single закрывает
+панель, multiple оставляет открытой. Касание использует события мыши браузера:
+отменённое касание и свайп не переключают панель. При `showAction={['focus']}`
+первое нажатие может сообщить об открытии дважды, как React: при фокусе и затем
+при mousedown. [Сверка pointer API](./tests/browser/tree-select-pointer.spec.ts).
+
 `onInputKeyDown` получает событие input. `onKeyDown`, `onKeyUp`, `onFocus`,
 `onBlur`, `onMouseDown`, `onMouseEnter`, `onMouseLeave` и `onClick` относятся
 к DOM-корню control. Нативные lowercase handlers сохраняют input currentTarget.
@@ -6625,6 +6634,9 @@ snippet задаёт его владелец.
 ShowSearch по умолчанию false для single и true для multiple. Объект showSearch
 поддерживает searchValue/onSearch, autoClearSearchValue, filterTreeNode и
 treeNodeFilterProp. Одноимённые deprecated top-level props удалены.
+Этот default multiple сохраняет существующий Svelte-контракт и соответствует
+документации Ant Design. Raw React 6.6.8 при undefined оставляет multiple input
+readonly; независимые наблюдения и counterpart с явным true записаны отдельно.
 Default filter prop — буквальное value даже при fieldNames.value='code'; для другой
 схемы задаётся treeNodeFilterProp. Поиск без учёта регистра сохраняет предков
 совпадения и всех потомков совпавшего родителя. FilterTreeNode=false сохраняет
@@ -6632,6 +6644,21 @@ Default filter prop — буквальное value даже при fieldNames.va
 считается по полному дереву. AutoClearSearchValue=true очищает внутренний search
 после выбора; controlled search очищает владелец. Само автоматическое очищение
 не вызывает onSearch. Загрузка узлов во время поиска отключена.
+
+`tokenSeparators` принимает массив разделителей или функцию, возвращающую массив
+строк. Как в закреплённом TreeSelect, успешное разбиение очищает поиск и отложенно
+закрывает панель, сохраняя выбранные значения без onChange/onSelect/onDeselect.
+MaxCount не ограничивает обработку токенов. IME откладывает разбиение до окончания
+композиции; переносы строк при вставке сохраняются для соответствующих разделителей
+и функций. OnSearch вызывается при изменении запроса. Закрытие single также
+очищает поиск; functional splitter получает пустую строку при mount и после
+закрытия. При initial open=true выполняется тот же клиентский сброс поиска,
+что и в React. SSR не вызывает splitter или callbacks.
+Закрытое single поле сохраняет прежнее нативное представление выбранной подписи;
+удержанный владельцем query возвращается при открытии. Raw React хранит query
+в отдельном input рядом с выбранной подписью; это отличие представления сохранено
+в эталоне и проверяется отдельно.
+[Сверка token API](./tests/browser/tree-select-token.spec.ts).
 
 LoadData(node), treeLoadedKeys/onTreeLoad и treeExpandedKeys/onTreeExpand
 используют механизмы Tree; children добавляет потребитель. TreeDefaultExpandAll
@@ -6681,6 +6708,12 @@ Native combobox удерживает фокус при действиях в п�
 [Сверка React 6.6.8](./tests/browser/tree-select-virtual.spec.ts) охватывает
 границы окна, ширину, измерения строк, прокрутку, поиск и повторное открытие.
 
+Унаследованный `showScrollBar` принимает true, false и 'optional', но не меняет
+прокрутку TreeSelect: закреплённый rc-tree-select не передаёт его внутреннему Tree.
+Полоса по-прежнему появляется при взаимодействии и скрывается после простоя;
+при отсутствии переполнения или virtual=false её нет.
+[Сверка с React и контрольным Select](./tests/browser/tree-scrollbar.spec.ts).
+
 Поддержаны placement, size/status/variant, treeLine/treeIcon/switcherIcon,
 notFoundContent/loading, RTL, темы, Compact и ConfigProvider/Form disabled.
 
@@ -6706,7 +6739,8 @@ TreeSelect/Cascader с 40 сценариями официального UMD —
 [choice-container](./tests/browser/choice-container.spec.ts), `?fixture=choice-container`.
 
 Следующие этапы TreeSelect охватывают оставшиеся inherited render/input props,
-pointer toggle, alignment и переходы панели.
+alignment и переходы панели. Components.root/input требуют Svelte-адаптера;
+private getInputElement/getRawInputElement не входят в публичный перенос.
 Deprecated React extras исключены.
 Класс popup задаётся через classNames.popup.root; popupClassName удалён.
 

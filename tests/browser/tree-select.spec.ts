@@ -448,7 +448,9 @@ for (const search of ['', 'Alpha']) {
 
       await expect(page.getByLabel('Tree select search', { exact: true })).toHaveText(search);
 
-      await page.getByLabel('Accept tree select search', { exact: true }).uncheck();
+      // Меняем owner policy без blur, который теперь запрашивает Source single cleanup.
+      await page.getByLabel('Accept tree select search', { exact: true })
+        .evaluate(node => (node as HTMLInputElement).click());
 
       await input.click();
       await input.fill(search ? 'Beta' : 'Alpha');
@@ -463,7 +465,8 @@ for (const search of ['', 'Alpha']) {
       else
         await expect(row(page, 'Beta')).toBeVisible();
 
-      await page.getByLabel('Accept tree select search', { exact: true }).check();
+      await page.getByLabel('Accept tree select search', { exact: true })
+        .evaluate(node => (node as HTMLInputElement).click());
       await input.fill('Beta');
 
       await expect(input).toHaveValue('Beta');

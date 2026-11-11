@@ -96,6 +96,7 @@ export type {
   TreeSelectTagPlaceholder,
   TreeSelectStrategy,
   TreeSelectSearchConfig,
+  TreeSelectTokenSeparators,
   TreeSelectChangeInfo,
   TreeSelectFieldNames,
   TreeSelectSimpleModeConfig,

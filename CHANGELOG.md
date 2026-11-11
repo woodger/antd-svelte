@@ -9,6 +9,14 @@
 
 ### Added
 
+- TreeSelect поддерживает `tokenSeparators` для поиска, IME и вставки переносов
+  строк. Разбиение очищает поиск и закрывает панель, сохраняя значения дерева.
+  Унаследованный `showScrollBar` принимается как no-op закреплённого React runtime.
+
+- TreeSelect переключает popup указателем с исходными single/multiple/search
+  правилами, порядком focus/mousedown/click и отложенным закрытием после очистки.
+  Проверены касания, отменённые жесты, controlled open и сохранение поля.
+
 - Form feedback подключён к Cascader, AutoComplete, Mentions, Transfer и
   date/time single/range controls с исходными context/suffix rules.
   DatePicker/RangePicker поддерживают `suffixIcon` и общий
