@@ -11642,10 +11642,26 @@ Feedback подключён к TreeSelect: отдельные классы contr
 SuffixIcon=null оставляет только feedback; собственный suffix имеет приоритет.
 PopupRender и ячейки InputOTP изолируют feedback. Обновления сохраняют DOM и focus
 поля; reset использует прежний remount. SSR не запускает validation или timers.
-Остальные controls получают visual status; их feedback renderers ещё переносятся.
 Сверка: [45 сценариев](./tests/browser/fixtures/ant-design-form-feedback-reference.json),
 [браузер](./tests/browser/form-feedback.spec.ts),
 [SSR](./tests/package/form-feedback.ssr.test.ts), `?fixture=form-feedback`.
+
+Input, TextArea, InputNumber и Select также выводят feedback. InputPassword и
+InputSearch наследуют его через Input. Пользовательский suffix Input/InputNumber
+предшествует значку; у TextArea порядок — clear, feedback, счётчик. InputNumber и
+Select получают `has-feedback` и `in-form-item`; Calendar сохраняет feedback у
+Select заголовка, отключая для них только `in-form-item`. Pagination наследует оба
+признака. Панель ColorPicker и popupRender Mentions сбрасывают feedback/status.
+Смена статуса и содержимого значка сохраняет поле и фокус. Переключение самого
+hasFeedback может сменить обёртку Input/TextArea и снять фокус, как в React;
+постоянный prefix/suffix или clear/count сохраняет обёртку. Reset использует прежний
+remount. InputSearch сохраняет прежнее восстановление фокуса SpaceCompact после
+замены поля; в записанном React-эталоне фокус при таком переключении теряется.
+Согласованные native ARIA, значения, события и refs сохраняются.
+Сверка: [128 сценариев и 118 переходов](./tests/browser/fixtures/ant-design-form-feedback-control-reference.json),
+[браузер](./tests/browser/form-feedback-control.spec.ts),
+[SSR](./tests/package/form-feedback-control.ssr.test.ts), `?fixture=form-feedback-control`.
+Feedback renderers остальных controls и оставшаяся Form motion ещё переносятся.
 Сверка: [29 исходных состояний](./tests/browser/fixtures/ant-design-form-status-reference.json),
 [браузер и доступность controls](./tests/browser/form-status.spec.ts),
 [публичный пакет и SSR](./tests/package/form-status.ssr.test.ts), `?fixture=form-status`.

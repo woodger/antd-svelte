@@ -9,6 +9,13 @@
 
 ### Added
 
+- Form feedback подключён к Input, TextArea, InputNumber и Select, включая
+  InputPassword/InputSearch. Сохранены Source suffix order, вложенные scopes,
+  обновления без замены поля и reset/remount. Calendar отключает только
+  in-form-item у header Select; ColorPicker panel и Mentions popupRender
+  изолируют feedback/status. Проверены 128 случаев React и строгая гидратация
+  четырёх базовых controls.
+
 - FormItem поддерживает `hasFeedback`, Form — `feedbackIcons` с локальным
   переопределением, noStyle inheritance и validated success. TreeSelect выводит
   feedback с исходными значками, Form prefixes и custom snippets; обновления

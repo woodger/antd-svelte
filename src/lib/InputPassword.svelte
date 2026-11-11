@@ -203,8 +203,7 @@
         </span>
       {/if}
     </button>
-  {/if}
-  {#if typeof suffix === 'function'}{@render suffix()}{:else if suffix !== true && suffix !== false}{suffix ?? ''}{/if}
+  {/if}{#if typeof suffix === 'function'}{@render suffix()}{:else if suffix !== true && suffix !== false}{suffix ?? ''}{/if}
 {/snippet}
 
 {#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`input-password-prefix:${inputPrefix}:${componentPrefix}`} />{/if}<Input

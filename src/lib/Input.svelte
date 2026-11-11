@@ -10,6 +10,9 @@
   import { useCompact } from './space-compact-context';
   import { compactClasses } from './space-compact.engine';
   import { useForm, useFormField } from './form-context';
+  import { useFormItemStatusContext } from './form-item-status';
+  import { useFormFeedback } from './form-feedback-context';
+  import FormFeedbackIcon from './FormFeedbackIcon.svelte';
   import { inputCountInfo, inputExceedValue, resolveInputClear } from './input-count.engine';
   import { inputChangeEvent } from './input-event.dom';
   import { getInputPrefixCss } from './input-prefix.engine';
@@ -81,6 +84,8 @@
     focus, blur, select, setSelectionRange
   };
   const field = useFormField(() => controlRef);
+  const itemStatus = useFormItemStatusContext();
+  const feedback = useFormFeedback();
   const initialDefault = untrack(() => defaultValue);
   let useDefault = $state(true);
   let focused = $state(false);
@@ -92,7 +97,7 @@
 
   let text = $derived(String(value ?? (useDefault ? initialDefault : '') ?? ''));
   let resolvedSize = $derived(size ?? compact?.size ?? config.componentSize);
-  let resolvedStatus = $derived(status ?? field?.status);
+  let resolvedStatus = $derived(status ?? ('status' in itemStatus ? itemStatus.status : field?.status));
   let blocked = $derived(
     disabled ?? field?.disabled ?? form?.disabled ?? config.componentDisabled
   );
@@ -101,7 +106,7 @@
   let clear = $derived(resolveInputClear(allowClear, config.input?.allowClear));
   let maximum = $derived(maxLength ?? attributes.maxlength ?? undefined);
   let counter = $derived(inputCountInfo(text, count, showCount, maximum));
-  let wrapped = $derived(Boolean(prefix || suffix || clear || counter.show));
+  let wrapped = $derived(Boolean(prefix || suffix || clear || counter.show || feedback.hasFeedback));
   let canClear = $derived(Boolean(clear && !clear.disabled && !blocked && !read && text));
   let info = $derived({
     props: {
@@ -426,7 +431,7 @@
           resolvedSize === 'small' && `${componentPrefix}-affix-wrapper-sm`,
           resolvedSize === 'large' && `${componentPrefix}-affix-wrapper-lg`,
           config.direction === 'rtl' && `${componentPrefix}-affix-wrapper-rtl`,
-          (suffix
+          (suffix || feedback.hasFeedback
             || counter.show)
           && clear
           && text
@@ -445,7 +450,7 @@
           )}
       >{@render content(prefix)}</span>{/if}
       {@render control()}
-      {#if suffix || counter.show || clear}
+      {#if suffix || counter.show || clear || feedback.hasFeedback}
         <span
           class={[
               `${componentPrefix}-suffix`,
@@ -465,7 +470,7 @@
             class={[
                 `${componentPrefix}-clear-icon`,
                 !canClear && `${componentPrefix}-clear-icon-hidden`,
-                (suffix || counter.show) && `${componentPrefix}-clear-icon-has-suffix`,
+                (suffix || counter.show || feedback.hasFeedback) && `${componentPrefix}-clear-icon-has-suffix`,
                 contextClasses?.clear,
                 localClasses?.clear
               ]}
@@ -479,11 +484,10 @@
             onmousedown={event => event.preventDefault()}
             onclick={handleClear}>
             {#if typeof clear.clearIcon === 'function'}{@render clear.clearIcon()}{:else if clear.clearIcon === undefined}<Icon name="close-circle-filled" />{:else}{clear.clearIcon || '✖'}{/if}
-          </button>{/if}
-          {#if counter.show}<span
+          </button>{/if}{#if counter.show}<span
             class={[
                 `${componentPrefix}-show-count-suffix`,
-                suffix && `${componentPrefix}-show-count-has-suffix`,
+                (suffix || feedback.hasFeedback) && `${componentPrefix}-show-count-has-suffix`,
                 contextClasses?.count,
                 localClasses?.count
               ]}
@@ -495,8 +499,7 @@
                   ';'
                 )}>
             {#if typeof counter.content === 'function'}{@render counter.content(counter.info)}{:else if counter.content !== false && counter.content !== true}{counter.content}{/if}
-          </span>{/if}
-          {@render content(suffix)}
+          </span>{/if}{@render content(suffix)}{#if feedback.hasFeedback && feedback.icon}<FormFeedbackIcon descriptor={feedback.icon} />{/if}
         </span>
       {/if}
     </span>

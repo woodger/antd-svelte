@@ -4,6 +4,7 @@
   import RadioButton from './RadioButton.svelte';
   import RadioGroup from './RadioGroup.svelte';
   import { provideFormField, useFormField } from './form-context';
+  import { provideFormFeedback, useFormFeedback } from './form-feedback-context';
   import { useDesignTokenContext } from './theme-context.svelte';
   import { calendarMonthOptions, calendarSetYear, calendarYearOptions } from './calendar.engine';
   import type { CalendarLang, CalendarMode, CalendarSelectInfo } from './calendar.types';
@@ -36,6 +37,9 @@
   } = $props();
 
   const field = useFormField();
+  provideFormFeedback(Object.create(useFormFeedback(), {
+    isFormItemInput: { value: false }
+  }));
   const designToken = useDesignTokenContext();
   // Внутренние controls заголовка не являются отдельными полями внешнего FormItem.
   provideFormField(field ? {

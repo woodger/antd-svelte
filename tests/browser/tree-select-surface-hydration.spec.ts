@@ -174,3 +174,37 @@ test('TreeSelect hydrates custom Form feedback in place and keeps its field duri
   await page.evaluate(() => window.formFeedbackHydration!.dispose());
   await expect(page.locator('[class*="-item-feedback-icon"]')).toHaveCount(0);
 });
+
+for (const control of ['input', 'textarea', 'number', 'select']) {
+  test(`${control} hydrates Form feedback in place and preserves focus during status updates`, async ({ page }) => {
+    const module = await server.ssrLoadModule(fileURLToPath(new URL(
+      './fixtures/form-feedback-control-hydration.server.ts', import.meta.url
+    )));
+    const { head, body } = module.renderFormFeedbackControl(control);
+    await page.goto('/tree-select-surface-hydration.html?feedbackKind=' + control);
+    await page.evaluate(({ head, body }) => {
+      document.head.insertAdjacentHTML('beforeend', head);
+      document.getElementById('root')!.innerHTML = body;
+    }, { head, body });
+    const outside = page.getByRole('button', { name: 'Outside feedback', exact: true });
+    await outside.focus();
+    await page.addScriptTag({ type: 'module', url: '/form-feedback-control-hydration.client.ts' });
+    await page.waitForFunction(() => window.formFeedbackControlHydration);
+    await expect(outside).toBeFocused();
+    expect(await page.evaluate(() => ({
+      input: window.formFeedbackControlHydration!.input === document.querySelector('[aria-label="Feedback field"]'),
+      icon: window.formFeedbackControlHydration!.icon === document.querySelector('[data-custom-feedback]')
+    }))).toEqual({ input: true, icon: true });
+    const input = page.getByLabel('Feedback field', { exact: true });
+    await input.focus();
+    await page.getByRole('combobox', { name: 'Feedback action', exact: true }).selectOption('1');
+    await page.getByRole('button', { name: 'Apply feedback action', exact: true }).dispatchEvent('click');
+    await expect(page.locator('[data-custom-feedback]')).toHaveText('local 0 error');
+    await expect(input).toBeFocused();
+    expect(await page.evaluate(() => window.formFeedbackControlHydration!.input
+      === document.querySelector('[aria-label="Feedback field"]'))).toBe(true);
+    await page.evaluate(() => window.formFeedbackControlHydration!.dispose());
+    await expect(input).toHaveCount(0);
+    await expect(page.locator('[class*="-item-feedback-icon"]')).toHaveCount(0);
+  });
+}

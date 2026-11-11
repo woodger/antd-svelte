@@ -6,6 +6,9 @@
   import { useCompact } from './space-compact-context';
   import { compactClasses } from './space-compact.engine';
   import { useForm, useFormField } from './form-context';
+  import { useFormItemStatusContext } from './form-item-status';
+  import { useFormFeedback } from './form-feedback-context';
+  import FormFeedbackIcon from './FormFeedbackIcon.svelte';
   import {
     textAreaCountInfo,
     textAreaExceedValue,
@@ -79,6 +82,8 @@
     focus, blur
   };
   const field = useFormField(() => controlRef);
+  const itemStatus = useFormItemStatusContext();
+  const feedback = useFormFeedback();
   const initialDefault = untrack(() => defaultValue);
   let useDefault = $state(true);
   let focused = $state(false);
@@ -92,7 +97,7 @@
   let removeMouseUp: (() => void) | undefined;
   let text = $derived(String(value ?? (useDefault ? initialDefault : '') ?? ''));
   let resolvedSize = $derived(size ?? compact?.size ?? config.componentSize);
-  let resolvedStatus = $derived(status ?? field?.status);
+  let resolvedStatus = $derived(status ?? ('status' in itemStatus ? itemStatus.status : field?.status));
 
   let blocked = $derived(
     disabled ?? field?.disabled ?? form?.disabled ?? config.componentDisabled
@@ -102,7 +107,7 @@
   let clear = $derived(resolveTextAreaClear(allowClear, config.textArea?.allowClear));
   let maximum = $derived(maxLength ?? attributes.maxlength ?? undefined);
   let counter = $derived(textAreaCountInfo(text, count, showCount, maximum));
-  let wrapped = $derived(Boolean(clear || counter.show));
+  let wrapped = $derived(Boolean(clear || counter.show || feedback.hasFeedback));
   let canClear = $derived(Boolean(clear && !clear.disabled && !blocked && !read && text));
   let semanticInfo = $derived(
     {
@@ -402,7 +407,7 @@
       showCount && `${componentPrefix}-show-count`,
       (showCount || count?.show) && `${componentPrefix}-textarea-show-count`,
       clear && `${componentPrefix}-textarea-allow-clear`,
-      counter.show && clear && text && `${componentPrefix}-affix-wrapper-input-with-clear-btn`
+      (counter.show || feedback.hasFeedback) && clear && text && `${componentPrefix}-affix-wrapper-input-with-clear-btn`
     ]}
     style={[
         rootStyle,
@@ -417,15 +422,14 @@
       {#if clear}<button type="button" aria-label={config.locale.clearText} class={[
           `${componentPrefix}-clear-icon`,
           !canClear && `${componentPrefix}-clear-icon-hidden`,
-          counter.show && `${componentPrefix}-clear-icon-has-suffix`,
+          (counter.show || feedback.hasFeedback) && `${componentPrefix}-clear-icon-has-suffix`,
           contextClasses?.clear,
           localClasses?.clear
         ]} style={[contextStyles?.clear, localStyles?.clear].filter(Boolean).join(
             ';'
           )} onpointerdown={event => event.preventDefault()} onclick={handleClear}>
         {#if typeof clear.clearIcon === 'function'}{@render clear.clearIcon()}{:else if clear.clearIcon === undefined}<Icon name="close-circle-filled" />{:else}{clear.clearIcon || '✖'}{/if}
-      </button>{/if}
-      {#if counter.show}<span class={[
+      </button>{/if}{#if feedback.hasFeedback}<span class={`${componentPrefix}-textarea-suffix`}>{#if feedback.icon}<FormFeedbackIcon descriptor={feedback.icon} />{/if}</span>{/if}{#if counter.show}<span class={[
           `${componentPrefix}-data-count`,
           contextClasses?.count,
           localClasses?.count

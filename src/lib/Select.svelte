@@ -12,6 +12,9 @@
   import { useCompact } from './space-compact-context';
   import { compactClasses } from './space-compact.engine';
   import { useFormField } from './form-context';
+  import { useFormItemStatusContext } from './form-item-status';
+  import { useFormFeedback } from './form-feedback-context';
+  import FormFeedbackIcon from './FormFeedbackIcon.svelte';
   import {
     filterOptions,
     getEnabledIndex,
@@ -99,6 +102,8 @@
     blur: () => control?.blur()
   };
   const field = useFormField(() => controlRef);
+  const itemStatus = useFormItemStatusContext();
+  const feedback = useFormFeedback();
   let appearance = $derived(variantContext.variant);
   const generatedId = $props.id();
   const initialDefault = untrack(
@@ -249,7 +254,7 @@
     return index < 0 ? getEnabledIndex(filtered, -1, 'first') : index;
   });
   let resolvedDisabled = $derived(disabled ?? field?.disabled ?? config.componentDisabled);
-  let resolvedStatus = $derived(status ?? field?.status);
+  let resolvedStatus = $derived(status ?? ('status' in itemStatus ? itemStatus.status : field?.status));
   let resolvedSize = $derived(size ?? compact?.size ?? config.componentSize);
   let compactItemClasses = $derived(compactClasses(prefix, config.direction, compact));
   // Число 0 остаётся содержимым; null/empty string скрывают пустой список.
@@ -810,6 +815,8 @@
         `${prefix} ant-select-css-var`,
         `${prefix}-${appearance}`,
         `${prefix}-show-arrow`,
+        feedback.hasFeedback && `${prefix}-has-feedback`,
+        feedback.isFormItemInput && `${prefix}-in-form-item`,
         componentTheme.className && `${prefix}-source-theme`,
         componentTheme.className && canSearch && `${prefix}-show-search`,
         componentTheme.className && allowClear && `${prefix}-allow-clear`,
@@ -932,7 +939,7 @@
     {#if allowClear && (multiple ? selectedValues.length || tagMode && search : selected) && !resolvedDisabled}
       <button type="button" class={['clear', componentTheme.className && `${prefix}-clear`]} aria-label={config.locale.clearText} onpointerdown={(event) => event.preventDefault()} onclick={() => choose(undefined)}><Icon name="close" /></button>
     {/if}
-    <span class={['suffix', componentTheme.className && `${prefix}-suffix`]}><Icon name={loading ? 'loading' : 'down'} /></span>
+    <span class={['suffix', componentTheme.className && `${prefix}-suffix`]}><Icon name={loading ? 'loading' : 'down'} />{#if feedback.hasFeedback && feedback.icon}<FormFeedbackIcon descriptor={feedback.icon} />{/if}</span>
   </div>
   {#if name ?? field?.name}
     {#if multiple}

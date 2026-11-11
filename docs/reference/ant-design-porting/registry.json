@@ -7453,7 +7453,7 @@
         },
         {
           "id": "feedback-icons",
-          "title": "HasFeedback/feedbackIcons, scopes и renderer TreeSelect",
+          "title": "HasFeedback/feedbackIcons, scopes и renderers полей",
           "state": "partial",
           "requiredForV1": false,
           "evidence": [
@@ -7481,9 +7481,29 @@
             "tests/browser/fixtures/form-feedback-hydration.client.ts",
             "tests/browser/tree-select-surface-hydration.spec.ts",
             "tests/package/form-feedback.ssr.test.ts",
-            "readme.md"
+            "readme.md",
+            "src/lib/Input.svelte",
+            "src/lib/TextArea.svelte",
+            "src/lib/InputNumberControl.svelte",
+            "src/lib/Select.svelte",
+            "src/lib/CalendarHeader.svelte",
+            "src/lib/ColorPickerPanel.svelte",
+            "src/lib/MentionsPopupContent.svelte",
+            "tests/browser/fixtures/form-feedback-control-cases.ts",
+            "tests/browser/fixtures/FormFeedbackControlCase.svelte",
+            "tests/browser/fixtures/FormFeedbackControlFixtures.svelte",
+            "tests/browser/fixtures/ant-design-form-feedback-control-reference.json",
+            "tests/browser/form-feedback-control-metrics.ts",
+            "tests/browser/form-feedback-control.spec.ts",
+            "tests/package/form-feedback-control.ssr.test.ts",
+            "tests/browser/fixtures/form-feedback-control-hydration.server.ts",
+            "tests/browser/fixtures/form-feedback-control-hydration.client.ts",
+            "src/lib/InputPassword.svelte",
+            "src/lib/InputSearch.svelte",
+            "src/lib/SpaceCompact.svelte",
+            "src/lib/feedback.dom.ts"
           ],
-          "note": "FormItem.hasFeedback=true/{icons}, Form.feedbackIcons, FormFeedbackIcons/FormFeedbackInfo и отдельный внутренний feedback context сохраняют публичный useFormItemStatus. Custom false подавляет значок, прочие falsy значения выбирают default, true/empty arrays сохраняют пустой wrapper. Local renderer заменяет Form defaults целиком. Validated success при untouched включается только с hasFeedback. Styled Item вычисляет renderer и без consumer; noStyle наследует parent icon/flag при undefined, локальный false подавляет их. Hidden noStyle использует styled scope. Form сбрасывает feedback/status, сохраняя outer metadata/isFormItemInput; InputOTP и TreeSelect popup изолируют feedback. TreeSelect использует Form status context, включая маску вложенного Form, и добавляет in-form-item/has-feedback. Его local status не меняет Form icon. 45 unmodified UMD6.6.8 случаев /31 действие, 12 DOM-free SSR, отдельный SSR no-consumer callback, generic public types, strict hydration, async completion/reset/disposal и live prefixes. Четыре SVG glyphs извлечены из закреплённого UMD; общие Native icons не менялись. Source useStatus diagnostic после nested Form reset записан raw; Native hook сохраняет отсутствие React diagnostics. Renderer остальных controls и оставшаяся Form motion ещё переносятся."
+          "note": "FormItem.hasFeedback=true/{icons}, Form.feedbackIcons, FormFeedbackIcons/FormFeedbackInfo и отдельный внутренний feedback context сохраняют публичный useFormItemStatus. Custom false подавляет значок, прочие falsy значения выбирают default, true/empty arrays сохраняют пустой wrapper. Local renderer заменяет Form defaults целиком. Validated success при untouched включается только с hasFeedback. Styled Item вычисляет renderer и без consumer; noStyle наследует parent icon/flag при undefined, локальный false подавляет их. Hidden noStyle использует styled scope. Form сбрасывает feedback/status, сохраняя outer metadata/isFormItemInput; InputOTP и TreeSelect popup изолируют feedback. TreeSelect использует Form status context, включая маску вложенного Form, и добавляет in-form-item/has-feedback. Его local status не меняет Form icon. 45 unmodified UMD6.6.8 случаев /31 действие, 12 DOM-free SSR, отдельный SSR no-consumer callback, generic public types, strict hydration, async completion/reset/disposal и live prefixes. Четыре SVG glyphs извлечены из закреплённого UMD; общие Native icons не менялись. Source useStatus diagnostic после nested Form reset записан raw; Native hook сохраняет отсутствие React diagnostics. Input/TextArea/InputNumber/Select и составные InputPassword/InputSearch используют общий renderer; 128 дополнительных unmodified UMD случаев /118 переходов /20 DOM-free SSR. Input/InputNumber добавляют значок после пользовательского suffix, TextArea — между clear и счётчиком. InputNumber/Select добавляют has-feedback/in-form-item. Calendar header сохраняет feedback/status и сбрасывает только isFormItemInput, Pagination наследует оба признака. ColorPicker panel и Mentions popupRender сбрасывают feedback/status. Переключение hasFeedback у Input/TextArea может менять wrapper и снимать focus, как в Source; смена status/icon сохраняет input, native refs/values/events и ARIA. Strict hydration проверена для четырёх controls. Renderer остальных controls и оставшаяся Form motion ещё переносятся. Сохранён согласованный focus recovery SpaceCompact: после toggle hasFeedback InputSearch получает новый input с восстановленным focus; raw UMD6.6.8 при тех же переходах меняет input и теряет focus. Browser test явно выделяет только это отличие, исходная запись не меняется."
         }
       ]
     },
@@ -7959,6 +7979,37 @@
             "tests/package/input-otp-prefix.ssr.test.ts"
           ],
           "note": "Nonempty local prefix wins; empty/undefined наследуют ConfigProvider. Группа, size/RTL states, input/separator/wrappers/mask используют owner prefix; вложенные Input сохраняют общий namespace. 16 CSS rules сохраняют canonical token variables/markers. Input component tokens применяются к группе, semantic styles/style имеют прежний приоритет. Source wrappers/mask игнорируют local prefix: raw UMD measurements сохранены, expectedNative отдельно измерен с public inner ConfigProvider, согласованным с local OTP. Native не переносит этот дефект; values/UTF-16 distribution, keyboard, reset, refs, focus/selection и SSR defaults/cleanup сохраняются."
+        },
+        {
+          "id": "form-feedback",
+          "title": "Form feedback и вложенные status scopes",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Input.svelte",
+            "src/lib/TextArea.svelte",
+            "src/lib/InputNumberControl.svelte",
+            "src/lib/Select.svelte",
+            "src/lib/CalendarHeader.svelte",
+            "src/lib/ColorPickerPanel.svelte",
+            "src/lib/MentionsPopupContent.svelte",
+            "tests/browser/fixtures/form-feedback-control-cases.ts",
+            "tests/browser/fixtures/FormFeedbackControlCase.svelte",
+            "tests/browser/fixtures/FormFeedbackControlFixtures.svelte",
+            "tests/browser/fixtures/ant-design-form-feedback-control-reference.json",
+            "tests/browser/form-feedback-control-metrics.ts",
+            "tests/browser/form-feedback-control.spec.ts",
+            "tests/package/form-feedback-control.ssr.test.ts",
+            "tests/browser/fixtures/form-feedback-control-hydration.server.ts",
+            "tests/browser/fixtures/form-feedback-control-hydration.client.ts",
+            "tests/browser/tree-select-surface-hydration.spec.ts",
+            "readme.md",
+            "src/lib/InputPassword.svelte",
+            "src/lib/InputSearch.svelte",
+            "src/lib/SpaceCompact.svelte",
+            "src/lib/feedback.dom.ts"
+          ],
+          "note": "Input/TextArea и составные InputPassword/InputSearch получают общий Form feedback. Suffix Input следует перед значком; TextArea использует отдельный textarea-suffix между clear и счётчиком. Local status меняет control, значок следует FormItem. NoStyle/nested Form/OTP scopes, custom false/falsy/empty icons, prefixes/theme/RTL/size, live metadata/async/reset и in-place hydration сверены с official UMD6.6.8. Смена status/icon сохраняет DOM/focus; toggle hasFeedback без постоянных affixes/clear/count меняет wrapper и input, как в Source. Native ARIA, event и refs contracts сохранены. Сохранён согласованный focus recovery SpaceCompact: после toggle hasFeedback InputSearch получает новый input с восстановленным focus; raw UMD6.6.8 при тех же переходах меняет input и теряет focus. Browser test явно выделяет только это отличие, исходная запись не меняется."
         }
       ]
     },
@@ -8226,6 +8277,33 @@
             "tests/package/input-number-prefix.ssr.test.ts"
           ],
           "note": "Nonempty local prefix wins, empty/undefined наследуют ConfigProvider. 124 Source CSS rules покрывают input/spinner, variants, sizes/RTL, affixes/actions и Compact без deprecated addons. Canonical component variables/marker и native geometry/reduced-motion adapters сохранены; semantic props/style priority прежние. Official UMD matrix использует stringMode и проверяет nested/sibling scopes, component aliases и cssVar prefix. Live changes сохраняют root/input/ref, decimal draft, selection/focus и callback count. Source FormData сохраняет draft text; Native hidden field сохраняет canonical decimal value по прежнему контракту. Обычный parser/commit/validation/reset и keyboard arithmetic не меняются. Source rc focus class не совпадает с action CSS: raw measurements и public className counterpart сохранены раздельно; Native сохраняет прежний mode-focused class."
+        },
+        {
+          "id": "form-feedback",
+          "title": "Form feedback и вложенные status scopes",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Input.svelte",
+            "src/lib/TextArea.svelte",
+            "src/lib/InputNumberControl.svelte",
+            "src/lib/Select.svelte",
+            "src/lib/CalendarHeader.svelte",
+            "src/lib/ColorPickerPanel.svelte",
+            "src/lib/MentionsPopupContent.svelte",
+            "tests/browser/fixtures/form-feedback-control-cases.ts",
+            "tests/browser/fixtures/FormFeedbackControlCase.svelte",
+            "tests/browser/fixtures/FormFeedbackControlFixtures.svelte",
+            "tests/browser/fixtures/ant-design-form-feedback-control-reference.json",
+            "tests/browser/form-feedback-control-metrics.ts",
+            "tests/browser/form-feedback-control.spec.ts",
+            "tests/package/form-feedback-control.ssr.test.ts",
+            "tests/browser/fixtures/form-feedback-control-hydration.server.ts",
+            "tests/browser/fixtures/form-feedback-control-hydration.client.ts",
+            "tests/browser/tree-select-surface-hydration.spec.ts",
+            "readme.md"
+          ],
+          "note": "Has-feedback/in-form-item и общий Form status context учитывают явную маску nested Form. Значок следует после пользовательского suffix и сохраняет namespace FormItem. NoStyle/OTP boundaries, local status, icons callbacks, themes/prefixes, async validation/reset, focus/input identity и strict hydration проверены по unmodified UMD6.6.8. Numeric engine, native ARIA/value/events и input/root refs сохранены."
         }
       ]
     },
@@ -9652,6 +9730,33 @@
             "readme.md"
           ],
           "note": "Непустой local prefixCls приоритетнее ConfigProvider; пустой наследует общий prefix. 158 исходных правил single/multiple/tags/variants/options/compact и hover:none подключены data module без slide-up motion. Owner root/parts/states/class-prefix reset selectors отделены от global private metric/color namespace и Typography selector; canonical token names/marker сохраняются. 26 raw UMD конфигураций в normal/nested/reset scopes и три live transitions сверяют размеры, варианты, статусы, aliases и открытые options. Native wrapper/option buttons, current ID generation, forms/reset, callbacks, query/text selection/focus/DOM/open popup и responsive tags сохраняются. Private native aliases читают height/multi-item-height из нужного global namespace; пять прежних compact bridge правил сохраняют геометрию внешнего container. Portalled popup получает свой owner scope без remount. Существующие Source/Native selection и form boundaries не меняются."
+        },
+        {
+          "id": "form-feedback",
+          "title": "Form feedback и вложенные status scopes",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Input.svelte",
+            "src/lib/TextArea.svelte",
+            "src/lib/InputNumberControl.svelte",
+            "src/lib/Select.svelte",
+            "src/lib/CalendarHeader.svelte",
+            "src/lib/ColorPickerPanel.svelte",
+            "src/lib/MentionsPopupContent.svelte",
+            "tests/browser/fixtures/form-feedback-control-cases.ts",
+            "tests/browser/fixtures/FormFeedbackControlCase.svelte",
+            "tests/browser/fixtures/FormFeedbackControlFixtures.svelte",
+            "tests/browser/fixtures/ant-design-form-feedback-control-reference.json",
+            "tests/browser/form-feedback-control-metrics.ts",
+            "tests/browser/form-feedback-control.spec.ts",
+            "tests/package/form-feedback-control.ssr.test.ts",
+            "tests/browser/fixtures/form-feedback-control-hydration.server.ts",
+            "tests/browser/fixtures/form-feedback-control-hydration.client.ts",
+            "tests/browser/tree-select-surface-hydration.spec.ts",
+            "readme.md"
+          ],
+          "note": "Has-feedback/in-form-item, общий Form status context и feedback после generated suffix. Local status не меняет значок FormItem. NoStyle/nested Form/OTP, custom icons/metadata, prefixes/theme/RTL/size, async/reset и strict hydration сверены с unmodified UMD6.6.8. Calendar header сохраняет feedback/status, исключая in-form-item; Pagination наследует оба флага. Native options/value/onValueChange, FormData и ARIA сохраняются; оставшийся suffix/config API относится к extended-api."
         }
       ]
     },

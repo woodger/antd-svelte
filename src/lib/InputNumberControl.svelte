@@ -8,6 +8,9 @@
   import { useCompact } from './space-compact-context';
   import { compactClasses } from './space-compact.engine';
   import { useForm, useFormField } from './form-context';
+  import { useFormItemStatusContext } from './form-item-status';
+  import { useFormFeedback } from './form-feedback-context';
+  import FormFeedbackIcon from './FormFeedbackIcon.svelte';
   import { formatInputNumber, normalizeInputNumber } from './input-number.engine';
   import {
     commitInputNumberValue,
@@ -49,6 +52,8 @@
   const compact = useCompact();
   const form = useForm();
   const field = useFormField(() => ref);
+  const itemStatus = useFormItemStatusContext();
+  const feedback = useFormFeedback();
   const generatedId = $props.id();
   const initialDefault = untrack(() => props.defaultValue);
   const resets = new Set<ReturnType<typeof setTimeout>>();
@@ -69,7 +74,7 @@
   let precision = $derived(options.precision);
   let resolvedValue = $derived(inputNumberValue(decimal, props.stringMode ?? false));
   let size = $derived(props.size ?? compact?.size ?? config.componentSize);
-  let status = $derived(props.status ?? field?.status);
+  let status = $derived(props.status ?? ('status' in itemStatus ? itemStatus.status : field?.status));
   let disabled = $derived(props.disabled ?? field?.disabled ?? form?.disabled
     ?? config.componentDisabled);
   let readonly = $derived(props.readonly ?? props.readOnly);
@@ -460,7 +465,8 @@
   size === 'large' && `${prefixCls}-lg`, size === 'small' && `${prefixCls}-sm`,
   status && `${prefixCls}-status-${status}`, outOfRange && `${prefixCls}-out-of-range`,
   decimal.isNaN() && `${prefixCls}-not-a-number`, config.direction === 'rtl' && `${prefixCls}-rtl`,
-  field && `${prefixCls}-in-form-item`, !controls && `${prefixCls}-without-controls`,
+  feedback.hasFeedback && `${prefixCls}-has-feedback`,
+  feedback.isFormItemInput && `${prefixCls}-in-form-item`, !controls && `${prefixCls}-without-controls`,
   compactClasses(prefixCls, config.direction, compact), config.inputNumber?.class,
   props.class, props.rootClassName, classes.root
 ]} style={styles.root} data-ant-number-theme={config.theme.mode}
@@ -513,9 +519,9 @@
       if (!disabled && !readonly) collect(event.currentTarget.value);
       if (alive) props.oncompositionend?.(event);
     }} />
-  {#if props.suffix !== undefined}
+  {#if props.suffix !== undefined || feedback.hasFeedback}
     <div class={[`${prefixCls}-suffix`, 'input-number-suffix', classes.suffix]} style={styles.suffix}>
-      {#if typeof props.suffix === 'function'}{@render props.suffix()}{:else}{props.suffix}{/if}
+      {#if typeof props.suffix === 'function'}{@render props.suffix()}{:else}{props.suffix}{/if}{#if feedback.hasFeedback && feedback.icon}<FormFeedbackIcon descriptor={feedback.icon} />{/if}
     </div>
   {/if}
   {#if mode === 'spinner' && controls}{@render action('up')}

@@ -1,5 +1,7 @@
 <script lang="ts">
   import { provideFormField } from './form-context';
+  import { provideFormItemStatus, useFormItemStatusContext } from './form-item-status';
+  import { provideFormFeedback } from './form-feedback-context';
   import { provideCompact } from './space-compact-context';
   import type { ColorPickerPanelProps } from './color-picker.types';
   import ColorPickerPicker from './ColorPickerPicker.svelte';
@@ -9,6 +11,10 @@
   let { activeIndex = $bindable(0), dragging = $bindable(false), ...props }:
     ColorPickerPanelProps = $props();
   provideFormField(undefined);
+  provideFormFeedback({});
+  provideFormItemStatus(Object.create(useFormItemStatusContext(), {
+    status: { value: undefined }
+  }));
   provideCompact(null);
 </script>
 
