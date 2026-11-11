@@ -1,4 +1,4 @@
-<script lang="ts" generics="ValueType extends TreeSelectValue = TreeSelectValue, Data extends object = TreeSelectNode">
+<script lang="ts" generics="ValueType extends TreeSelectValue = TreeSelectValue, Data extends object = TreeSelectNode, RootElement extends HTMLElement = HTMLDivElement, EditorElement extends TreeSelectEditorElement = HTMLInputElement">
   import { onMount, tick, untrack } from 'svelte';
   import type {
     TreeSelectProps,
@@ -26,9 +26,13 @@
   import { treeSelectChildren, treeSelectData, treeSelectNodeValue } from './tree-select-data.engine';
   import { treeSelectLimit } from './tree-select-limit.engine';
   import { treeSelectPastedSearch, treeSelectTokenSearch } from './tree-select-token.engine';
+  import type { TreeSelectEditorElement, TreeSelectRootContext, TreeSelectInputContext,
+    TreeSelectRootRegistration, TreeSelectInputRegistration } from './tree-select-components.types';
+  import { mergeTreeSelectComponentAttributes, treeSelectNativeKeyCancelled } from './tree-select-components.engine';
   import { createTreeSelectLabelCache } from './tree-select-labels';
   import TreeSelectLabelBinding from './TreeSelectLabelBinding.svelte';
   import TreeSelectPopupContent from './TreeSelectPopupContent.svelte';
+  import TreeSelectComponentScope from './TreeSelectComponentScope.svelte';
   import { treeSelectTagText, treeSelectTagOverflow } from './tree-select-tags.engine';
   import { treeSelectSemantics } from './tree-select-semantic.engine';
   import { connectSelectTagOverflow, measureSelectInput } from './select-tag-overflow.dom';
@@ -60,10 +64,11 @@
     inputElement = $bindable(),
     _nodes,
     ...componentProps
-  }: TreeSelectProps<ValueType, Data> & { _nodes?: readonly Data[]; } = $props();
+  }: TreeSelectProps<ValueType, Data, RootElement, EditorElement> & { _nodes?: readonly Data[]; } = $props();
   let {
     prefixCls,
     children: _children,
+    components,
     treeData = [],
     fieldNames,
     treeDataSimpleMode,
@@ -148,7 +153,7 @@
     onblur,
     ...attributes
   }: TreeSelectProps<
-    ValueType, Data
+    ValueType, Data, RootElement, EditorElement
   > = $derived(componentProps);
   const config = useConfig();
   const tokens = useToken();
@@ -165,7 +170,7 @@
     get nativeElement() {
       return nativeElement;
     },
-    focus, blur
+    focus, blur, scrollTo
   };
   const field = useFormField(() => controlRef);
   const itemStatus = useFormItemStatusContext();
@@ -232,6 +237,7 @@
   let tagContent = $state<HTMLDivElement>();
   const tagElements = new Map<TreeSelectRawValue, HTMLElement>();
   let pendingClose: MessageChannel | undefined;
+  let selectorMouseDown: MessageChannel | undefined;
   let internalSearch = $state('');
   let composing = false;
   let pastedText: string | undefined;
@@ -252,7 +258,7 @@
   let resolvedSize = $derived(semanticSize ?? config.componentSize);
   let resolvedStatus = $derived(status ?? ('status' in itemStatus ? itemStatus.status : field?.status));
   let context = $derived(config.treeSelect);
-  let semanticInfo = $derived<TreeSelectSemanticInfo<ValueType, Data>>({ props: {
+  let semanticInfo = $derived<TreeSelectSemanticInfo<ValueType, Data, RootElement, EditorElement>>({ props: {
     ...componentProps, classNames, styles, size: semanticSize, status: resolvedStatus,
     disabled: blocked, variant: appearance
   } });
@@ -290,8 +296,24 @@
   const openingKeys = new WeakSet<Event>();
   const forwardedKeys = new WeakSet<Event>();
   let enterLocked = false;
-  let root = $state<HTMLDivElement>();
-  let editor = $state<HTMLInputElement>();
+  let defaultRoot = $state<HTMLDivElement>();
+  let defaultEditor = $state<HTMLInputElement>();
+  let customRoot = $state.raw<{ registration: TreeSelectRootRegistration<RootElement>; }>();
+  let customInput = $state.raw<{ registration: TreeSelectInputRegistration<EditorElement>; }>();
+  let componentInputWidth = $state<number>();
+  let componentInputSuffix = $state<HTMLSpanElement>();
+  let rootSlot = $derived(components?.root);
+  let inputSlot = $derived(!rootSlot && components?.input);
+  let renderRoot = $derived(typeof rootSlot === 'function' ? rootSlot : rootSlot?.render);
+  let renderInput = $derived(typeof inputSlot === 'function' ? inputSlot : inputSlot && inputSlot.render);
+  let root = $derived(rootSlot ? customRoot && rootNode(customRoot.registration) : defaultRoot);
+  let editor = $derived(rootSlot ? undefined : inputSlot
+    ? customInput && inputNode(customInput.registration) : defaultEditor);
+  let editorContainer = $derived(inputSlot && customInput && 'inputElement' in customInput.registration
+    ? customInput.registration.nativeElement ?? editor : editor);
+  let rootContext = $derived.by(componentRootContext);
+  let inputContext = $derived.by(componentInputContext);
+  let componentInputValue = $derived(canSearch && !(isMultiple && !rawOpen && autoClear) ? search : '');
   let popup = $state<HTMLDivElement>();
   let menuElement = $state<HTMLDivElement>();
   let popupMouseDownTimer: ReturnType<typeof setTimeout> | undefined;
@@ -344,6 +366,9 @@
   let handledSearchOpen: boolean | undefined;
   $effect(() => () => {
     cancelClose();
+    selectorMouseDown?.port1.close();
+    selectorMouseDown?.port2.close();
+    selectorMouseDown = undefined;
     clearTimeout(popupMouseDownTimer);
   });
   $effect.pre(() => {
@@ -360,12 +385,21 @@
     });
   });
   $effect(() => {
-    if (!editor || !responsiveTags) return;
+    if (!editor || !responsiveTags || inputSlot) return;
     void search;
     const input = editor;
     const previous = input.style.width;
     input.style.width = `${measureSelectInput(input)}px`;
     return () => { input.style.width = previous; };
+  });
+  $effect(() => {
+    const input = editor;
+    void componentInputValue;
+    if (!inputSlot || !isMultiple || !input) {
+      componentInputWidth = undefined;
+      return;
+    }
+    componentInputWidth = measureSelectInput(input);
   });
   $effect(() => {
     if (!tagContent || !responsiveTags) return;
@@ -375,13 +409,14 @@
     void renderTag;
     void search;
     const host = tagContent;
+    const suffix = inputSlot ? componentInputSuffix : ':scope > input';
     let disposed = false;
     let disconnect: (() => void) | undefined;
     void tick().then(() => {
       if (!disposed) disconnect = connectSelectTagOverflow(host,
         count => { responsiveCount = count; }, {
           tag: ':scope > [data-tree-choice-tag]', rest: ':scope > [data-tree-choice-rest]',
-          input: ':scope > input'
+          input: suffix
         });
     });
     return () => {
@@ -528,10 +563,135 @@
   function tagText(item: TreeSelectLabeledValue): string {
     return text(labelCache.original(item.label) ?? item.value);
   }
-  function requestOpen(next: boolean) {
+  function rootNode(ref: TreeSelectRootRegistration<RootElement>) {
+    return 'nativeElement' in ref ? ref.nativeElement : ref;
+  }
+  function inputNode(ref: TreeSelectInputRegistration<EditorElement>) {
+    return 'inputElement' in ref ? ref.inputElement : ref;
+  }
+  function registerRoot(registration: TreeSelectRootRegistration<RootElement>) {
+    const current = { registration };
+    customRoot = current;
+    return () => { if (customRoot === current) customRoot = undefined; };
+  }
+  function registerInput(registration: TreeSelectInputRegistration<EditorElement>) {
+    const current = { registration };
+    customInput = current;
+    return () => { if (customInput === current) customInput = undefined; };
+  }
+  function rootFocus(event: FocusEvent & { currentTarget: EventTarget & (RootElement | HTMLDivElement); }) {
+    if (event.target instanceof Node && popup?.contains(event.target)) return;
+    focused = true;
+    if (!blocked) {
+      if (showAction?.includes('focus')) requestOpen(true);
+      onFocus?.(event);
+    }
+  }
+  function rootBlur(event: FocusEvent & { currentTarget: EventTarget & (RootElement | HTMLDivElement); }) {
+    if (event.target instanceof Node && popup?.contains(event.target)) return;
+    if (rootSlot || inputSlot || event.relatedTarget instanceof Node && popup?.contains(event.relatedTarget)) focused = false;
+    if ((rootSlot || inputSlot) && isMultiple && search) {
+      internalSearch = '';
+      searchConfig.onSearch?.('');
+    }
+    if (!blocked) onBlur?.(event);
+    blurWithin(event);
+  }
+  function customRootClick(event: MouseEvent & { currentTarget: EventTarget & RootElement; }) {
+    if (visible) scheduleClose();
+    else requestOpen(true, true);
+    onClick?.(event);
+  }
+  function customRootKeyboard(event: KeyboardEvent & { currentTarget: EventTarget & RootElement; }) {
+    const wasOpen = visible;
+    if (event.key === 'Enter' || event.key === ' ') {
+      if (event.key === 'Enter' || !suffixSearch) event.preventDefault();
+      if (!wasOpen) requestOpen(true, true);
+      else handleKeyboard(event, true);
+    } else if (event.key === 'Backspace' && isMultiple && !search) {
+      const last = [...display].reverse().find(item => !item.disabled);
+      if (last) choose(last.value, 'selection', false);
+    } else if (wasOpen) handleKeyboard(event, true);
+    onKeyDown?.(event);
+  }
+  function componentRootContext(): TreeSelectRootContext<RootElement> {
+    const own = typeof rootSlot === 'object' ? rootSlot.props : undefined;
+    const attrs = Object.assign({}, own);
+    const generated = {
+      ...attributes,
+      ...([attributes['aria-describedby'], field?.describedBy].some(Boolean) ? {
+        'aria-describedby': [attributes['aria-describedby'], field?.describedBy].filter(Boolean).join(' ')
+      } : {}),
+      ...(field?.required ? { 'aria-required': attributes['aria-required'] ?? true } : {}),
+      ...(field?.invalid ? { 'aria-invalid': true } : {}),
+      ...(Object.hasOwn(componentProps, 'name') ? { name } : {}),
+      onclick: customRootClick,
+      onfocusin: rootFocus,
+      onfocusout: rootBlur,
+      onkeydown: customRootKeyboard,
+      onkeyup: (event: KeyboardEvent & { currentTarget: EventTarget & RootElement; }) => {
+        if (event.key === 'Enter') enterLocked = false;
+        onKeyUp?.(event);
+      },
+      ...(Object.hasOwn(componentProps, 'onMouseEnter') ? { onmouseenter: onMouseEnter } : {}),
+      ...(Object.hasOwn(componentProps, 'onMouseLeave') ? { onmouseleave: onMouseLeave } : {})
+    };
+    return { attributes: mergeTreeSelectComponentAttributes(attrs, generated,
+      own, 'root'), register: registerRoot };
+  }
+  function editorInput(event: Event & { currentTarget: EventTarget & (EditorElement | HTMLInputElement); }) {
+    const next = treeSelectPastedSearch(event.currentTarget.value, pastedText, tokenSeparators);
+    pastedText = undefined;
+    searchInput(next);
+  }
+  function editorFocus(event: FocusEvent & { currentTarget: EventTarget & (EditorElement | HTMLInputElement); }) {
+    focused = true;
+    editorFocused = true;
+    onfocus?.(event);
+  }
+  function editorBlur(event: FocusEvent & { currentTarget: EventTarget & (EditorElement | HTMLInputElement); }) {
+    editorFocused = false;
+    enterLocked = false;
+    onblur?.(event);
+  }
+  function componentInputContext(): TreeSelectInputContext<EditorElement> {
+    const attrs: TreeSelectInputContext<EditorElement>['attributes'] = {};
+    const generated = {
+      ...attributes, id: controlId,
+      class: [`${prefix}-input`, classes.input].filter(Boolean).join(' '),
+      style: serializeInlineStyleLayers([css.input, componentInputWidth === undefined ? undefined : `--select-input-width:${componentInputWidth}`]),
+      type: 'text', role: 'combobox', tabindex: attributes.tabindex ?? tabIndex,
+      autofocus: attributes.autofocus ?? autoFocus, autocomplete: attributes.autocomplete || 'new-password',
+      disabled: blocked, readonly: !canSearch, value: componentInputValue,
+      'aria-haspopup': 'tree', 'aria-controls': !popupRender || menuElement ? `${controlId}-list` : undefined,
+      'aria-expanded': visible, 'aria-autocomplete': canSearch ? 'list' : 'none',
+      'aria-activedescendant': visible && shown && treeElement ? activeDescendant : undefined,
+      'aria-invalid': field?.invalid || resolvedStatus === 'error' || attributes['aria-invalid'] || undefined,
+      'aria-describedby': [attributes['aria-describedby'], field?.describedBy].filter(Boolean).join(' ') || undefined,
+      'aria-required': attributes.required ?? field?.required ?? attributes['aria-required'], 'aria-busy': loading || undefined,
+      oninput: editorInput, onkeydown: inputKeyboard, onfocus: editorFocus, onblur: editorBlur,
+      onpaste: (event: ClipboardEvent & { currentTarget: EventTarget & (EditorElement | HTMLInputElement); }) => {
+        pastedText = event.clipboardData?.getData('text');
+        attributes.onpaste?.(event);
+      },
+      oncompositionstart: (event: CompositionEvent & { currentTarget: EventTarget & (EditorElement | HTMLInputElement); }) => {
+        composing = true;
+        attributes.oncompositionstart?.(event);
+      },
+      oncompositionend: (event: CompositionEvent & { currentTarget: EventTarget & (EditorElement | HTMLInputElement); }) => {
+        composing = false;
+        searchInput(event.currentTarget.value, false);
+        attributes.oncompositionend?.(event);
+      }
+    };
+    const own = typeof inputSlot === 'object' ? inputSlot.props : undefined;
+    if (typeof inputSlot === 'object') Object.assign(generated, { placeholder: placeholderText });
+    return { attributes: mergeTreeSelectComponentAttributes(attrs, generated, own, 'input'), register: registerInput };
+  }
+  function requestOpen(next: boolean, allowBlocked = false) {
     cancelClose();
-    if (next && blocked || next === visible) return;
-    if (next) {
+    if (next && blocked && !allowBlocked || next === visible) return;
+    if (next && !blocked) {
       initializePanel();
       mounted = true;
     }
@@ -546,12 +706,15 @@
     internalSearch = decision.search;
     if (decision.open === false) scheduleClose();
     if (decision.notifySearch) searchConfig.onSearch?.(decision.search);
-    if (decision.open === true) requestOpen(true);
+    if (decision.open === true) requestOpen(true, Boolean(inputSlot));
 
-    if ((decision.split || searchConfig.searchValue !== undefined) && input) {
+    if (fromTyping && (decision.split || inputSlot || searchConfig.searchValue !== undefined) && input) {
       void tick().then(() => {
-        if (input === editor && input.isConnected)
-          input.value = inputValue;
+        if (!input.isConnected || input !== editor) return;
+        if (inputSlot) {
+          const value = inputContext.attributes.value;
+          if (value != null) input.value = String(value);
+        } else input.value = inputValue;
       });
     }
   }
@@ -648,10 +811,10 @@
     if (event.target instanceof Element
       && event.target.closest('[data-ant-tree-choice-selection-item-remove], [data-ant-tree-choice-clear]')) return;
     const wasOpen = visible;
-    const onInput = Boolean(editor && (event.target === editor || editor.contains(event.target)));
-    if (editor && !onInput) event.preventDefault();
+    const onInput = Boolean(editorContainer && (event.target === editorContainer || editorContainer.contains(event.target)));
+    if (editorContainer && !onInput) event.preventDefault();
     const preserveOpen = wasOpen && (!isMultiple && canSearch || isMultiple && onInput);
-    editor?.focus();
+    focus();
     if (preserveOpen) cancelClose();
     else {
       if (wasOpen) scheduleClose();
@@ -675,6 +838,18 @@
     pendingClose?.port1.close();
     pendingClose?.port2.close();
     pendingClose = undefined;
+  }
+  function markSelectorMouseDown() {
+    selectorMouseDown?.port1.close();
+    selectorMouseDown?.port2.close();
+    const channel = new MessageChannel();
+    selectorMouseDown = channel;
+    channel.port1.onmessage = () => {
+      if (selectorMouseDown === channel) selectorMouseDown = undefined;
+      channel.port1.close();
+      channel.port2.close();
+    };
+    channel.port2.postMessage(null);
   }
   function connectTagElement(node: HTMLElement, value: TreeSelectRawValue) {
     tagElements.set(value, node);
@@ -728,9 +903,9 @@
         || popup?.contains(
           event.relatedTarget
         ))) return;
-    const mouseDownInPopup = popupMouseDownTimer !== undefined;
+    const mouseDownInPopup = popupMouseDownTimer !== undefined || selectorMouseDown !== undefined;
     queueMicrotask(() => {
-      if (root !== element || !element.isConnected) return;
+      if (!element.isConnected || root !== element) return;
       const target = getPopupActiveElement(element);
       const popupTarget = popup && getPopupActiveElement(popup);
       if (target && element.contains(target)
@@ -739,30 +914,40 @@
       field?.onBlur();
       if (mouseDownInPopup) return;
       requestOpen(false);
-      if (autoClear)
+      if (autoClear && isMultiple && !rootSlot && !inputSlot)
         internalSearch = '';
     });
   }
-  function inputKeyboard(event: KeyboardEvent & { currentTarget: EventTarget & HTMLInputElement; }) {
-    onkeydown?.(event);
-    const cancelled = event.defaultPrevented || event.isComposing || blocked;
+  function inputKeyboard(event: KeyboardEvent & { currentTarget: EventTarget & (EditorElement | HTMLInputElement); }) {
+    const nativeCancelled = inputSlot ? treeSelectNativeKeyCancelled(event, onkeydown)
+      : (onkeydown?.(event), event.defaultPrevented);
+    const cancelled = nativeCancelled
+      || event.isComposing || blocked && !inputSlot;
     if (cancelled) cancelledKeys.add(event);
     if (!visible) openingKeys.add(event);
-    if (!cancelled && visible && (event.key === 'ArrowDown' || event.key === 'ArrowUp'))
+    const directTextarea = Boolean(inputSlot && customInput
+      && !('inputElement' in customInput.registration) && editor instanceof HTMLTextAreaElement);
+    if (!cancelled && !directTextarea && visible && (event.key === 'ArrowDown' || event.key === 'ArrowUp'))
       event.preventDefault();
     onInputKeyDown?.(event);
+    if (directTextarea && !visible && ['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(event.key)) {
+      cancelledKeys.add(event);
+      return;
+    }
     if (cancelled || event.ctrlKey || event.altKey || event.metaKey) return;
     // rc-select открывает поле разрешённой клавишей ещё до root handler.
     if (event.key && !/^F(?:[1-9]|1[0-2])$/.test(event.key)
       && event.code !== 'Semicolon' && event.code !== 'Equal'
       && !['Escape', 'Shift', 'Backspace', 'Tab', 'Meta', 'OS', 'Alt', 'Control', 'CapsLock',
         'ContextMenu', 'ArrowUp', 'ArrowLeft', 'ArrowRight'].includes(event.key))
-      requestOpen(true);
+      requestOpen(true, Boolean(inputSlot));
   }
-  function keyboard(event: KeyboardEvent & { currentTarget: EventTarget & HTMLDivElement; }) {
+  function keyboard(event: KeyboardEvent & { currentTarget: EventTarget & (RootElement | HTMLDivElement); }) {
     if (forwardedKeys.has(event)) return;
-    if (event.target === editor && !cancelledKeys.has(event) && !event.isComposing && !blocked)
+    if (event.target === editor && !cancelledKeys.has(event) && !event.isComposing && (!blocked || inputSlot)) {
+      if (inputSlot && openingKeys.has(event) && visible && (event.key === 'Enter' || event.key === ' ')) onOpenChange?.(true);
       handleKeyboard(event, visible && !openingKeys.has(event));
+    }
     onKeyDown?.(event);
   }
   function handleKeyboard(event: KeyboardEvent, wasOpen: boolean) {
@@ -789,7 +974,7 @@
     if (event.key === 'Enter') {
       event.preventDefault();
       if (!wasOpen) {
-        requestOpen(true);
+        requestOpen(true, Boolean(inputSlot));
         return;
       }
       if (enterLocked) return;
@@ -806,7 +991,7 @@
     }
     if (['ArrowDown', 'ArrowUp', 'ArrowLeft', 'ArrowRight'].includes(event.key)) {
       if (!wasOpen) {
-        requestOpen(true);
+        if (!inputSlot) requestOpen(true);
         return;
       }
       event.preventDefault();
@@ -818,10 +1003,16 @@
     }
   }
   export function focus(options?: FocusOptions) {
-    editor?.focus(options);
+    const ref = rootSlot ? customRoot?.registration : inputSlot ? customInput?.registration : undefined;
+    if (ref && 'nativeElement' in ref && ref.focus) ref.focus(options);
+    else if (ref && 'inputElement' in ref && ref.focus) ref.focus(options);
+    else (rootSlot ? root : editor)?.focus(options);
   }
   export function blur() {
-    editor?.blur();
+    const ref = rootSlot ? customRoot?.registration : inputSlot ? customInput?.registration : undefined;
+    if (ref && 'nativeElement' in ref && ref.blur) ref.blur();
+    else if (ref && 'inputElement' in ref && ref.blur) ref.blur();
+    else (rootSlot ? root : editor)?.blur();
   }
   export function scrollTo(settings?: TreeScrollConfig | null) {
     if (!tree) return;
@@ -860,6 +1051,7 @@
   .single-snippet { position:absolute;pointer-events:none;inset-inline-start:0; }
   .measure-tag { position:absolute;inset-block-start:0;inset-inline-start:0;visibility:hidden;pointer-events:none; }
   .custom-tag { display:inline-flex;flex:none;min-width:0;max-width:100%; }
+  [data-ant-tree-choice-input-suffix] { display:inline-flex;flex:none;min-width:0;max-width:100%; }
   [data-ant-tree-choice-responsive] [data-ant-tree-choice-input] { flex:0 0 auto;min-width:4px; }
   .popup { position:fixed;margin:0;border:0;overflow:visible; }
   [data-ant-tree-choice-selection-item-disabled] { color:var(--ant-select-multiple-item-color-disabled); }
@@ -888,35 +1080,29 @@
 {#snippet panelLeafIcon(node: TreeEventNode)}
   <TreeTitle value={leafIcon} {node} />
 {/snippet}
-{#if selectPrefixCss}<ThemeScopeStyle css={selectPrefixCss} scope={`tree-select-control-prefix:${prefix}:${rootPrefix}`} />{/if}{#if treePrefixCss}<ThemeScopeStyle css={treePrefixCss} scope={`tree-select-prefix:${treePrefix}:${rootPrefix}`} />{/if}<div data-ant-tree-choice-control data-ant-select-prefix={prefix} data-ant-select-root-prefix={rootPrefix}
+{#if selectPrefixCss}<ThemeScopeStyle css={selectPrefixCss} scope={`tree-select-control-prefix:${prefix}:${rootPrefix}`} />{/if}{#if treePrefixCss}<ThemeScopeStyle css={treePrefixCss} scope={`tree-select-prefix:${treePrefix}:${rootPrefix}`} />{/if}
+{#if renderRoot}
+  {#if name ?? field?.name}{#each display as item(item.value)}<input type="hidden" name={name ?? field?.name} value={String(item.value)} disabled={blocked} />{/each}{/if}
+  <TreeSelectComponentScope>{@render renderRoot(rootContext)}</TreeSelectComponentScope>
+{:else}
+<div data-ant-tree-choice-control data-ant-select-prefix={prefix} data-ant-select-root-prefix={rootPrefix}
   data-ant-tree-select-prefix={treePrefix} data-ant-tree-select-root-prefix={rootPrefix}
   data-ant-tree-choice-source-theme={Boolean(selectTheme.className) || undefined}
   data-ant-tree-choice-multiple={isMultiple || undefined}
   data-ant-tree-choice-responsive={responsiveTags || undefined}
   style:--ant-native-tree-choice-height={`var(--${privateNamespace}-select-height)`}
   style:--ant-native-tree-choice-multi-item-height={`var(--${privateNamespace}-select-multi-item-height)`}
-  bind:this={root} role="presentation" onmousedown={event => {
+  bind:this={defaultRoot} role="presentation" onmousedown={event => {
     pointerOpen(event);
     onMouseDown?.(event);
+    if (inputSlot) markSelectorMouseDown();
   }} onmouseenter={onMouseEnter} onmouseleave={onMouseLeave} onclick={event => {
     if (!(event.target instanceof Node && popup?.contains(event.target))) onClick?.(event);
   }}
   onkeydown={keyboard} onkeyup={event => {
     if (event.key === 'Enter') enterLocked = false;
     onKeyUp?.(event);
-  }} onfocusin={event => {
-    if (event.target instanceof Node && popup?.contains(event.target)) return;
-    focused = true;
-    if (!blocked) {
-      if (showAction?.includes('focus')) requestOpen(true);
-      onFocus?.(event);
-    }
-  }} onfocusout={event => {
-    if (event.target instanceof Node && popup?.contains(event.target)) return;
-    if (event.relatedTarget instanceof Node && popup?.contains(event.relatedTarget)) focused = false;
-    if (!blocked) onBlur?.(event);
-    blurWithin(event);
-  }} dir={config.direction}
+  }} onfocusin={rootFocus} onfocusout={rootBlur} dir={config.direction}
   style={serializeInlineStyleLayers([componentStyle, css.root, style ?? undefined])} class={[
       `${prefix} ant-select-css-var ant-tree-select-css-var`,
       selectTheme.className,
@@ -943,7 +1129,7 @@
     ]}>
   {#if name??field?.name}{#each display as item(item.value)}<input type="hidden" name={name ?? field?.name} value={String(item.value)} disabled={blocked} />{/each}{/if}
   {#if leading}<div class={[`${prefix}-prefix`, classes.prefix]} style={css.prefix}><RenderContent value={leading} /></div>{/if}
-  <div data-ant-tree-choice-content class={[`${prefix}-content`, classes.content]} style={css.content} bind:this={tagContent}>
+  <div data-ant-tree-choice-content class={[`${prefix}-content`, inputSlot && !isMultiple && display[0]?.label != null && String(display[0].label).trim() && `${prefix}-content-has-value`, inputSlot && !isMultiple && canSearch && search && `${prefix}-content-has-search-value`, classes.content]} style={css.content} bind:this={tagContent}>
     {#if !display.length && (!isMultiple || !inputValue)}
       <div class={['placeholder', `${prefix}-placeholder`, classes.placeholder]}
         style={serializeInlineStyleLayers([inputValue ? 'visibility:hidden' : undefined, css.placeholder])}
@@ -1003,8 +1189,11 @@
         })}{:else}<span class={[`${prefix}-selection-item-content`, classes.itemContent]} style={css.itemContent}>{@render restLabel()}</span>{/if}
       </span>
     {/if}
+    {:else if renderInput && display[0]}<span style:visibility={canSearch && search ? 'hidden' : undefined}>{@render labelNode(display[0])}</span>
     {:else if (!visible || !canSearch) && (treeTitleRender || typeof display[0]?.label==='function' || Array.isArray(display[0]?.label)) && display[0]}<span class="single-snippet">{@render labelNode(display[0])}</span>{/if}
-    <input {...attributes} bind:this={editor} id={controlId} data-ant-tree-choice-input class={[`${prefix}-input`, classes.input]} style={css.input} type="text" role="combobox" tabindex={attributes.tabindex ?? tabIndex}
+    {#if renderInput}{#if isMultiple}<span data-ant-tree-choice-input-suffix bind:this={componentInputSuffix}><TreeSelectComponentScope>{@render renderInput(inputContext)}</TreeSelectComponentScope></span>
+    {:else}<TreeSelectComponentScope>{@render renderInput(inputContext)}</TreeSelectComponentScope>{/if}{:else}
+    <input {...attributes} bind:this={defaultEditor} id={controlId} data-ant-tree-choice-input class={[`${prefix}-input`, classes.input]} style={css.input} type="text" role="combobox" tabindex={attributes.tabindex ?? tabIndex}
       {...(attributes.autofocus !== undefined || autoFocus !== undefined
         ? { autofocus: attributes.autofocus ?? autoFocus } : {})}
       aria-haspopup="tree" aria-controls={!popupRender || menuElement ? `${controlId}-list` : undefined} aria-expanded={visible} aria-autocomplete={canSearch ? 'list' : 'none'} aria-activedescendant={visible && shown && treeElement ? activeDescendant : undefined} aria-invalid={field?.invalid || resolvedStatus === 'error'
@@ -1038,6 +1227,7 @@
           enterLocked = false;
           onblur?.(event);
         }} />
+    {/if}
   </div>
   {#if suffix != null ? suffix : showArrow}
     <div class={['suffix', defaultSuffix && 'default-suffix', (selectTheme.className || !defaultSuffix) && `${prefix}-suffix`,
@@ -1062,6 +1252,7 @@
     </button>
   {/if}
 </div>
+{/if}
 <NoCompactStyle>{#if mounted}
 {@const initialPopupStyle = untrack(() => serializeInlineStyleLayers(popupLayers))}
 <div data-ant-select-prefix={prefix} data-ant-select-root-prefix={rootPrefix}

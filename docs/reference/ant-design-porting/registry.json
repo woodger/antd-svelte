@@ -11332,7 +11332,7 @@
       "name": "TreeSelect",
       "category": "data-entry",
       "scope": "target",
-      "scopeReason": "TreeSelect по Ant Design 6.6.8 и rc-tree-select 1.16.1. Перенесены значения, check/стратегии, поиск, loadData, fieldNames/simple mode, generic data, title expansion, maxCount, tag display, renderer labels, popupRender, control slots, semantic config, переключатели узлов, виртуализация, scrollTo и декларативные TreeNode со свойствами строк, focus actions, trigger events, pointer toggle и tokenSeparators; showScrollBar принят с исходным no-op. Оставшийся API и motion переносятся отдельно.",
+      "scopeReason": "TreeSelect по Ant Design 6.6.8 и rc-tree-select 1.16.1. Перенесены значения, check/стратегии, поиск, loadData, fieldNames/simple mode, generic data, title expansion, maxCount, tag display, renderer labels, popupRender, control slots, semantic config, переключатели узлов, виртуализация, scrollTo и декларативные TreeNode со свойствами строк, focus actions, trigger events, pointer toggle и tokenSeparators; showScrollBar принят с исходным no-op; components.root/input перенесены через Svelte renderers с composite refs, attrs/event chaining и Form association. Оставшийся API и motion переносятся отдельно.",
       "upstreamPath": "components/tree-select",
       "reviewedRevision": "984592267de88fbf9cdaecc96a56629e721c709d",
       "exports": [
@@ -11597,7 +11597,7 @@
             "tests/package/tree-select-data.ssr.test.ts",
             "readme.md"
           ],
-          "note": "FieldNames, treeDataSimpleMode, generic raw data, treeExpandAction, maxCount, tag text/count/placeholder/render API, renderer labels, popup/control slots, semantic config и общие switcherIcon/treeLine.showLeafIcon перенесены. Декларативные TreeNode и свойства узлов перенесены. Focus actions, autoFocus/tabIndex и input/root event hooks перенесены. Pointer toggle, tokenSeparators и inherited showScrollBar no-op перенесены. Остаются components.root/input и остальные inherited current props; getInputElement/getRawInputElement исключены как private, первый также явно Omit в Ant wrapper; Form feedback перенесён отдельно, popup alignment/motion учитываются отдельно. Deprecated extra.triggerNode/allCheckedNodes и node.props React wrappers исключены. Собственное поле props данных сохраняется."
+          "note": "FieldNames, treeDataSimpleMode, generic raw data, treeExpandAction, maxCount, tag text/count/placeholder/render API, renderer labels, popup/control slots, semantic config и общие switcherIcon/treeLine.showLeafIcon перенесены. Декларативные TreeNode и свойства узлов перенесены. Focus actions, autoFocus/tabIndex и input/root event hooks перенесены. Pointer toggle, tokenSeparators и inherited showScrollBar no-op перенесены. Components.root/input перенесены через Snippet/descriptor renderers и registration. Остаются inherited current no-op props onPopupVisibleChange/popupStyle/choiceTransitionName/direction; getInputElement/getRawInputElement исключены как private, первый также явно Omit в Ant wrapper; Form feedback перенесён отдельно, popup alignment/motion учитываются отдельно. Deprecated extra.triggerNode/allCheckedNodes и node.props React wrappers исключены. Собственное поле props данных сохраняется."
         },
         {
           "id": "virtual-motion",
@@ -12094,7 +12094,7 @@
             "tests/browser/tree-select-trigger.spec.ts",
             "readme.md"
           ],
-          "note": "Ant Design6.6.8 /984592267de88fbf9cdaecc96a56629e721c709d, rc-select1.10.1. Raw readonly-space: input и root handlers до React rerender вызывают onOpenChange(true) дважды на один Space keydown. Native сохраняет один callback перехода; raw observation не нормализуется и не объявляется доказанным дефектом Source. Focus hooks используют реальные focusin/focusout; DOM portal не воспроизводит React synthetic bubbling через component tree. Сохранены Native Escape preventDefault/stopPropagation и открытие ArrowUp/Left/Right закрытого поля. Повторный pointer toggle перенесён отдельно; дополнительные components.root/input render paths остаются в очереди."
+          "note": "Ant Design6.6.8 /984592267de88fbf9cdaecc96a56629e721c709d, rc-select1.10.1. Raw readonly-space: input и root handlers до React rerender вызывают onOpenChange(true) дважды на один Space keydown. Native сохраняет один callback перехода; raw observation не нормализуется и не объявляется доказанным дефектом Source. Focus hooks используют реальные focusin/focusout; DOM portal не воспроизводит React synthetic bubbling через component tree. Сохранены Native Escape preventDefault/stopPropagation и открытие ArrowUp/Left/Right закрытого поля. Повторный pointer toggle перенесён отдельно; components.root/input render paths перенесены отдельно."
         },
         {
           "id": "form-feedback",
@@ -12221,6 +12221,152 @@
             "readme.md"
           ],
           "note": "Ant Design6.6.8 /984592267de88fbf9cdaecc96a56629e721c709d initial-open-close-on-search: fixed searchValue=Alpha, initial open=true, onSearch(empty) синхронно закрывает popup. Raw Source сохраняет input.value=Alpha; Native сохраняет прежнее закрытое single поле с selected label/пустой строкой вместо отдельного React overlay. Owner query не меняется. Обе реализации вызывают search(empty) ровно1 раз и при reopening показывают Alpha с прежним input/ref. Native expectation задаёт только closed input presentation; raw Source search=Alpha и reopened view не нормализуются. SSR по-прежнему не вызывает search/splitter."
+        },
+        {
+          "id": "component-renderers",
+          "title": "Components.root/input с Svelte snippets, attrs и composite refs",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/TreeSelect.svelte",
+            "src/lib/TreeSelectControl.svelte",
+            "src/lib/TreeSelectComponentScope.svelte",
+            "src/lib/tree-select-components.types.ts",
+            "src/lib/tree-select-components.engine.ts",
+            "src/lib/tree-select-components.engine.test.ts",
+            "src/lib/tree-select.types.ts",
+            "src/lib/tree-select-semantic.engine.ts",
+            "src/lib/select-tag-overflow.dom.ts",
+            "src/lib/index.ts",
+            "tests/browser/fixtures/tree-select-components.types.ts",
+            "readme.md",
+            "tests/browser/fixtures/TreeSelectRootCase.svelte",
+            "tests/browser/fixtures/TreeSelectRootFixtures.svelte",
+            "tests/browser/fixtures/tree-select-root-cases.ts",
+            "tests/browser/fixtures/ant-design-tree-select-root-reference.json",
+            "tests/browser/tree-select-root-metrics.ts",
+            "tests/browser/tree-select-root.spec.ts",
+            "tests/browser/tree-select-root-hydration.spec.ts",
+            "tests/browser/fixtures/tree-select-root-hydration.client.ts",
+            "tests/browser/fixtures/tree-select-root-hydration.server.ts",
+            "tests/package/tree-select-root.ssr.test.ts",
+            "tests/browser/fixtures/TreeSelectInputCase.svelte",
+            "tests/browser/fixtures/TreeSelectInputFixtures.svelte",
+            "tests/browser/fixtures/tree-select-input-cases.ts",
+            "tests/browser/fixtures/ant-design-tree-select-input-reference.json",
+            "tests/browser/tree-select-input-metrics.ts",
+            "tests/browser/tree-select-input.spec.ts",
+            "tests/browser/tree-select-input-hydration.spec.ts",
+            "tests/browser/fixtures/tree-select-input-hydration.client.ts",
+            "tests/browser/fixtures/tree-select-input-hydration.server.ts",
+            "tests/package/tree-select-input.ssr.test.ts",
+            "tests/browser/fixtures/TreeSelectRootElement.svelte",
+            "tests/browser/fixtures/TreeSelectRootComposite.svelte",
+            "tests/browser/fixtures/TreeSelectRootLifecycle.svelte",
+            "tests/browser/fixtures/TreeSelectInputEditor.svelte",
+            "tests/browser/fixtures/TreeSelectTextareaEditor.svelte",
+            "tests/browser/fixtures/TreeSelectInputLifecycle.svelte",
+            "tests/browser/fixtures/TreeSelectInputLifecycleEditor.svelte",
+            "tests/browser/tree-select-input-native.ts",
+            "tests/browser/fixtures/TreeSelectInputResponsiveCase.svelte",
+            "tests/browser/fixtures/TreeSelectInputResponsiveEditor.svelte",
+            "tests/browser/fixtures/TreeSelectInputResponsiveFixtures.svelte",
+            "tests/browser/fixtures/tree-select-input-responsive-cases.ts",
+            "tests/browser/fixtures/ant-design-tree-select-input-responsive-reference.json",
+            "tests/browser/tree-select-input-responsive-metrics.ts",
+            "tests/browser/tree-select-input-responsive.spec.ts",
+            "tests/package/tree-select-input-responsive.ssr.test.ts"
+          ],
+          "note": "Ant Design6.6.8 /984592267de88fbf9cdaecc96a56629e721c709d и rc-select1.10.1. React tag/component/element заменяются Svelte Snippet либо {render,props}. Root полностью заменяет selector и делает input slot inert, не получает generated id/class/style/tabIndex/disabled/combobox ARIA и использует click Trigger; typing root не меняет search/selection. Input сохраняет label/tags/affixes/clear, получает query и current attrs. Root generated→own callbacks, input own→generated, preventDefault не останавливает цепочку. Own props перекрывают input attrs и целиком заменяют style/class/value; explicit value=undefined остаётся uncontrolled. Direct textarea и composite ref различаются при closed arrows, input helper+root Enter requests сохраняют Source count. Multiple input/textarea измеряют реальный editor и получают --select-input-width; own style стирает generated variable. Responsive overflow измеряет и наблюдает весь custom suffix, включая wrapper и fragment siblings; стандартный editor сохраняет свой путь. Пустая/пробельная выбранная подпись не добавляет has-value class. Контексты регистрируют DOM/composite handle с identity-safe cleanup; popup anchoring, focus/blur/scrollTo и fallback на default nodes работают при live removal. Четыре generic параметра сохраняют default Div/Input bindings и ValueType/Data inference, custom bindings честно включают live fallback. 30 Root cases/112 actions/30 SSR и33 Input cases/144 actions/14 SSR сняты независимо с actual UMD и повторены побайтно. Width3cases/9actions/3SSR и actual Source hydration подтверждают sizing и controlled value reset. Strict Native hydration, live updates/refs/reset/pending disposal и типовые границы проверяются отдельно. Custom responsive:5 независимых Source cases/28actions/5SSR, direct input/textarea, wrapped DOM refs, composite refs, fragment и live prefix resize. Source absolute suffix geometry и Native SSR hidden measuring shell вынесены в отдельную partial границу."
+        },
+        {
+          "id": "component-form-association",
+          "title": "Custom root/input с Form status, feedback и raw values",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/TreeSelect.svelte",
+            "src/lib/TreeSelectControl.svelte",
+            "src/lib/TreeSelectComponentScope.svelte",
+            "src/lib/tree-select-components.types.ts",
+            "tests/browser/fixtures/TreeSelectComponentsFormCase.svelte",
+            "tests/browser/fixtures/TreeSelectComponentsFormFixtures.svelte",
+            "tests/browser/fixtures/tree-select-components-form-cases.ts",
+            "tests/browser/fixtures/ant-design-tree-select-components-form-reference.json",
+            "tests/browser/tree-select-components-form-metrics.ts",
+            "tests/browser/tree-select-components-form.spec.ts",
+            "tests/package/tree-select-components-form.ssr.test.ts",
+            "tests/browser/fixtures/TreeSelectComponentsFormInput.svelte"
+          ],
+          "note": "Actual Source Form.Item(initialValue=a,validateStatus=error,hasFeedback): input slot Antd.Input с prefix даёт2 feedback icons (selector+inner), root slot даёт1. Query typing не меняет raw field value, выбор Beta публикует b. Native custom rendering scope изолирует только field association, сохраняет Form/status/feedback/disabled context и imperative composite methods. Editor не наследует второй successful name/control registration; Native hidden inputs сохраняют raw FormData a/b. Form instance идентифицируется nativeElement и focus/blur/scrollTo методами, public Svelte facade identity не подменяется.2 Source cases/12actions/2DOM-freeSSR повторены; Source empty native FormData и строгая React ref identity записаны отдельно как наблюдения, существующие Native raw inputs/instance adapter сохранены. Required/help ARIA достигают custom root после снятия вложенной field association; локальный bind:value сохраняет независимый draft composite root при обновлении attrs. Source Form SSR выдаёт describedBy до клиентского help DOM; Native сохраняет существующий синхронный SSR help. Existing Native help id choice-help и его describedBy сохраняются вместо Source choice_help; shared projector читает оба реальных DOM ids без нормализации raw Source."
+        },
+        {
+          "id": "native-component-event-boundary",
+          "title": "Native DOM cancellation и connected blur при удалении composite",
+          "state": "partial",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/tree-select-components.engine.ts",
+            "src/lib/TreeSelectControl.svelte",
+            "tests/browser/tree-select-root.spec.ts",
+            "tests/browser/tree-select-input-native.ts",
+            "tests/browser/fixtures/ant-design-tree-select-root-reference.json",
+            "tests/browser/fixtures/ant-design-tree-select-input-reference.json",
+            "readme.md"
+          ],
+          "note": "Pinned React6.6.8 SyntheticEvent.defaultPrevented становится true после preventDefault для noncancelable focus/blur/input, nativeEvent остаётся false. Native сохраняет реальные DOM flags; только эти3 observed event kinds в preventOwn expected отражены отдельно, keyboard/composition/paste остаются raw. При remove(SPAN) focused composite root Chromium доставляет blur/focusout ещё connected=true до unregister; React synthetic callbacks уже сняты, Svelte DOM callbacks публикуют generated/own blur. Native сохраняет этот existing DOM event contract, не перехватывает DOM remove и не откладывает обычный ref.blur. Raw Source не нормализуется; конкретный composite-unmount Native expected отделён и проверяет отсутствие callbacks после settled removal. Detached callbacks и deferred continuations не читают destroyed derived refs. Controlled custom hydration применяет query к прежнему editor, как independently observed Source; default Native draft contracts сохранены."
+        },
+        {
+          "id": "native-component-aria",
+          "title": "Custom editor с существующими Native Tree ARIA связями",
+          "state": "partial",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/TreeSelectControl.svelte",
+            "tests/browser/tree-select-input-native.ts",
+            "tests/browser/tree-select-input.spec.ts",
+            "tests/browser/fixtures/ant-design-tree-select-input-reference.json",
+            "readme.md",
+            "tests/browser/tree-select-components-form.spec.ts",
+            "tests/package/tree-select-components-form.ssr.test.ts"
+          ],
+          "note": "Raw Source shared editor имеет haspopup=listbox, _list controls/owns только open и autocomplete=list даже readonly. Native сохраняет Tree popup, haspopup=tree, существующие -list ids/controls, readonly none и валидный active descendant. Own descriptor role/ARIA/readonly overrides сравниваются raw; generated Native differences задаются отдельным helper, общий projector/Source capture неизменны. Это сохранённый Native accessibility contract, не объявленная ошибка Source. Composite Native Input сохраняет aria-invalid=true от унаследованного error status; Source Form без actual validation errors выдаёт null. Raw Form ARIA и отдельный Native expected проверяются в component-form fixture. Existing Native help id choice-help и его describedBy сохраняются вместо Source choice_help; shared projector читает оба реальных DOM ids без нормализации raw Source."
+        },
+        {
+          "id": "source-component-composite-measurement",
+          "title": "Source multiple composite ref без style выбрасывает TypeError",
+          "state": "partial",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/TreeSelectControl.svelte",
+            "src/lib/select-tag-overflow.dom.ts",
+            "src/lib/tree-select-components.types.ts",
+            "tests/browser/fixtures/TreeSelectInputEditor.svelte",
+            "tests/browser/fixtures/TreeSelectTextareaEditor.svelte",
+            "tests/browser/tree-select-input.spec.ts",
+            "readme.md"
+          ],
+          "note": "rc-select1.10.1 Input.useLayoutEffect при syncWidth пишет inputRef.current.style.width и читает scrollWidth. Actual UMD multiple composite/Antd.Input/Antd.TextArea imperative ref без style выбрасывает Cannot set properties of undefined (setting width), тогда как DOM-free SSR рендерит без ошибки. Native registration явно различает actual editor, wrapper и focus/blur handle и безопасно измеряет editor. Compatible Source composite с DOM style/scrollWidth снят отдельно; native adapter не воспроизводит этот подтверждённый runtime crash."
+        },
+        {
+          "id": "native-component-overflow-layout",
+          "title": "Native flow layout пользовательского responsive suffix",
+          "state": "partial",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/TreeSelectControl.svelte",
+            "src/lib/select-tag-overflow.dom.ts",
+            "tests/browser/fixtures/TreeSelectInputResponsiveCase.svelte",
+            "tests/browser/tree-select-input-responsive-metrics.ts",
+            "tests/browser/tree-select-input-responsive.spec.ts",
+            "tests/browser/fixtures/ant-design-tree-select-input-responsive-reference.json",
+            "readme.md",
+            "tests/browser/fixtures/TreeSelectInputResponsiveEditor.svelte",
+            "tests/browser/fixtures/TreeSelectInputResponsiveFixtures.svelte",
+            "tests/browser/fixtures/tree-select-input-responsive-cases.ts",
+            "tests/package/tree-select-input-responsive.ssr.test.ts"
+          ],
+          "note": "Custom responsive suffix измеряет и наблюдает весь slot, включая textarea, wrappers, composite и fragment siblings; Source-only tag/query/host/editor/prefix/variable/identity snapshots подтверждают reservation и live resize. Существующий Native flow алгоритм сохраняется. Source Overflow может позиционировать suffix absolute и сжимать fragment suffix box до136px при editor109px+prefix64px; Native normal-flow box173px при том же числе тегов. Raw Source suffix measurements сохранены отдельно; exact absolute suffix layout не объявлен перенесённым и остаётся отдельным этапом. DOM-free Source SSR не создаёт Overflow tags, Native сохраняет существующие4 hidden measuring tags без DOM измерений/регистраций/таймеров. Source fragment absolute layout отличается также высотой control, vertical overflow/hit area и popup anchor; это material behavioral gap, а не только pixel parity. Отдельный перенос ограничивается custom multiple responsive, без изменения согласованного default Native flow."
         }
       ]
     },

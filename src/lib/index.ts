@@ -102,6 +102,18 @@ export type {
   TreeSelectSimpleModeConfig,
   TreeSelectSimpleMode
 } from './tree-select.types';
+export type {
+  TreeSelectComponents,
+  TreeSelectRootContext,
+  TreeSelectInputContext,
+  TreeSelectRootRegistration,
+  TreeSelectInputRegistration,
+  TreeSelectRootComponent,
+  TreeSelectInputComponent,
+  TreeSelectEditorElement,
+  TreeSelectRootAttributes,
+  TreeSelectInputAttributes
+} from './tree-select-components.types';
 export { default as Tree } from './Tree.svelte';
 export { default as DirectoryTree } from './DirectoryTree.svelte';
 export { createTree } from './tree-data-model';

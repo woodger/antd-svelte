@@ -1,7 +1,7 @@
 import { getResponsiveTagCount } from './select-tag-overflow.engine';
 
 /** Как SelectInput: scrollWidth при width=0 измеряет текст без остатка flex-контейнера. */
-export function measureSelectInput(input: HTMLInputElement): number {
+export function measureSelectInput(input: HTMLInputElement | HTMLTextAreaElement): number {
   const previous = { width: input.style.width, flex: input.style.flex };
   input.style.flex = 'none';
   input.style.width = '0px';
@@ -15,7 +15,7 @@ export function measureSelectInput(input: HTMLInputElement): number {
 export function connectSelectTagOverflow(
   host: HTMLElement,
   update: (count: number) => void,
-  selectors = {
+  selectors: { tag: string; rest: string; input: string | HTMLElement | undefined; } = {
     tag: ':scope > [data-select-tag]',
     rest: ':scope > [data-select-rest]',
     input: ':scope > input'
@@ -24,7 +24,9 @@ export function connectSelectTagOverflow(
   const view = host.ownerDocument.defaultView!;
   const tags = [...host.querySelectorAll<HTMLElement>(selectors.tag)];
   const rest = host.querySelector<HTMLElement>(selectors.rest);
-  const input = host.querySelector<HTMLInputElement>(selectors.input);
+  const defaultInput = typeof selectors.input === 'string'
+    ? host.querySelector<HTMLInputElement>(selectors.input) : null;
+  const input = typeof selectors.input === 'string' ? defaultInput : selectors.input;
   let frame = 0;
   let previous = -1;
 
@@ -36,7 +38,7 @@ export function connectSelectTagOverflow(
   }
   function measure() {
     frame = 0;
-    const available = host.clientWidth - (input ? measureSelectInput(input) : 4);
+    const available = host.clientWidth - (defaultInput ? measureSelectInput(defaultInput) : input ? width(input) : 4);
     const count = getResponsiveTagCount(tags.map(width), available, rest ? width(rest) : 0);
     if (count !== previous) {
       previous = count;

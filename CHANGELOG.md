@@ -9,6 +9,12 @@
 
 ### Added
 
+- TreeSelect поддерживает `components.root` и `components.input` через Svelte
+  snippets с регистрацией DOM/composite refs. Root полностью заменяет selector,
+  input сохраняет tags/affixes и поиск; собственные attrs и callbacks соединяются
+  в исходном порядке. Поддержаны textarea, live replacement, sizing, Form association
+  и строгая гидратация; обычные типы Div/Input refs сохранены.
+
 - TreeSelect поддерживает `tokenSeparators` для поиска, IME и вставки переносов
   строк. Разбиение очищает поиск и закрывает панель, сохраняя значения дерева.
   Унаследованный `showScrollBar` принимается как no-op закреплённого React runtime.

@@ -6729,7 +6729,8 @@ Source theme объединяет `components.Select` и `components.TreeSelect`
 при SSR; смена темы сохраняет DOM, поиск, выделение, focus, raw FormData и позицию
 открытой панели. В source compact высота узла — 21px. Native-only темы сохранены.
 
-GetPopupContainer получает корневой `.ant-select`; локальная функция перекрывает
+GetPopupContainer получает фактический корень: стандартный `.ant-select` либо
+зарегистрированный `components.root`. Локальная функция перекрывает
 ConfigProvider.getPopupContainer, undefined наследует provider. Getter не вызывается
 на сервере и до первого открытия. Перенос в HTMLElement/ShadowRoot сохраняет
 Select/TreeSelect tokens, поиск, keyboard engine, lazy load и native FormData.
@@ -6738,8 +6739,95 @@ DOM панели, фокус и выделение; ShadowRoot требует с
 TreeSelect/Cascader с 40 сценариями официального UMD —
 [choice-container](./tests/browser/choice-container.spec.ts), `?fixture=choice-container`.
 
-Следующие этапы TreeSelect охватывают оставшиеся inherited render/input props,
-alignment и переходы панели. Components.root/input требуют Svelte-адаптера;
+`components.input` заменяет редактор внутри стандартного selector. Выбранная
+подпись, теги, prefix/suffix, очистка и Form feedback сохраняются. React component,
+tag и element из `components` переносятся в Svelte snippet; объект
+`{render, props}` дополнительно задаёт собственные DOM attrs. Они перекрывают
+generated attrs, включая value, class/style, readonly, disabled и ARIA.
+Собственный callback input вызывается первым, внутренний — следом, даже после
+preventDefault. Нативный `onkeydown` самого TreeSelect сохраняет отмену built-in.
+
+```svelte
+<script lang="ts">
+  import { TreeSelect, type TreeSelectInputContext } from 'antd-svelte';
+  let editor = $state<HTMLInputElement | HTMLTextAreaElement>();
+</script>
+
+{#snippet query({ attributes, register }: TreeSelectInputContext<HTMLTextAreaElement>)}
+  <textarea {...attributes} {@attach register}></textarea>
+{/snippet}
+<TreeSelect treeData={[{ value: 'a', title: 'Alpha' }]} showSearch
+  components={{ input: { render: query, props: { rows: 2 } } }} bind:inputElement={editor} />
+```
+
+Direct textarea сохраняет навигацию стрелками при закрытой панели. Composite ref
+следует своему исходному keyboard path. Multiple editor измеряет текст и меняет
+ширину; собственный style заменяет generated style целиком. Responsive tags
+учитывают весь custom editor, включая wrapper и соседние элементы snippet,
+и реагируют на изменение его ширины. При закрытии multiple
+query скрывается, если autoClearSearchValue не false; controlled owner сохраняет
+свой query. `props.value=undefined` оставляет редактор uncontrolled, фиксированное
+значение перекрывает поиск. При гидратации контролируемое значение custom editor
+применяется к существующему DOM, как в React; фокус и refs сохраняются.
+
+`components.root` полностью заменяет selector: стандартные подписи, теги,
+редактор, affixes и очистка не создаются; `components.input` при этом не вызывается.
+Root переключает popup по click, не по selector mousedown. Его generated callbacks
+выполняются перед собственными. Generated id, class/style, tabIndex, disabled и
+combobox ARIA ему не назначаются; содержимое и DOM attrs задаёт renderer.
+Disabled TreeSelect управляет popup, собственный DOM disabled задаётся через props.
+
+```svelte
+<script lang="ts">
+  import { TreeSelect, type TreeSelectRootContext } from 'antd-svelte';
+</script>
+
+{#snippet response({ attributes, register }: TreeSelectRootContext<HTMLButtonElement>)}
+  <button {...attributes} {@attach register}>Выбрать узел</button>
+{/snippet}
+<TreeSelect treeData={[{ value: 'a', title: 'Alpha' }]}
+  components={{ root: { render: response, props: { type: 'button', class: 'my-trigger' } } }} />
+```
+
+`register(node)` возвращает cleanup для attachment. Composite root регистрирует
+`{nativeElement, focus?, blur?}`, composite input —
+`{inputElement, nativeElement?, focus?, blur?}`. Native element у input может быть
+wrapper; inputElement указывает на редактор. Регистрация заменяется безопасно,
+старый cleanup не очищает новый ref. `focus/blur` используют composite методы;
+popup привязан к фактическому root. Для composite Svelte-компонента attrs
+согласуются с его публичными props, например class/style у Input относятся к root.
+Если composite root использует Input со своим текстом, храните его в состоянии
+адаптера и передавайте через `bind:value`. Это сохраняет черновик при обновлении
+динамического spread attrs; выбранное значение TreeSelect остаётся отдельным.
+
+Обычные bindings остаются HTMLDivElement/HTMLInputElement. Дополнительные параметры
+`TreeSelectProps<ValueType, Data, RootElement, EditorElement>` описывают custom DOM.
+Bindings используют RootElement | HTMLDivElement и EditorElement | HTMLInputElement:
+удаление slot возвращает стандартный элемент. Custom root не создаёт внутренний
+inputElement. Renderers наследуют Form status/feedback, не регистрируя второй
+successful control; required/help ARIA передаются и в custom root.
+Native FormData продолжает хранить raw выбранные значения. Native Input
+отражает error status в aria-invalid; Form сохраняет синхронный SSR help
+и существующие ids вида `choice-help` вместо Source `choice_help`.
+
+Native input связывается с существующим Tree и его ARIA ids. Focus/blur/input
+остаются настоящими DOM events: preventDefault не меняет defaultPrevented у
+noncancelable event, в отличие от React SyntheticEvent. Удаление opaque composite
+root может доставить blur до отсоединения DOM, тогда как React уже снял synthetic
+callbacks. Raw наблюдения сохранены отдельно; после unmount callbacks не приходят.
+Native регистрация actual editor также сохраняет безопасное измерение composite
+input: Source multiple ref без `.style` выбрасывает TypeError.
+Responsive tags сохраняют Native flow layout. У Source absolute suffix может
+сжиматься вокруг fragment: ширина его box отличается при том же числе тегов
+и размерах редактора. Это влияет на высоту control, overflow и popup anchor.
+Сверка custom responsive проверяет резервирование места и resize;
+позиционирование suffix остаётся отдельным этапом.
+[Root](./tests/browser/tree-select-root.spec.ts),
+[input](./tests/browser/tree-select-input.spec.ts),
+[Form](./tests/browser/tree-select-components-form.spec.ts).
+
+Следующие этапы TreeSelect охватывают остальные inherited current props,
+alignment и переходы панели;
 private getInputElement/getRawInputElement не входят в публичный перенос.
 Deprecated React extras исключены.
 Класс popup задаётся через classNames.popup.root; popupClassName удалён.

@@ -1,0 +1,1105 @@
+{
+  "reference": {
+    "version": "6.6.8",
+    "react": "18.3.1",
+    "select": "1.10.1",
+    "treeSelect": "1.16.1",
+    "revision": "984592267de88fbf9cdaecc96a56629e721c709d",
+    "archiveSha256": "8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa",
+    "browser": "Unmodified official UMD Form.Item + TreeSelect with actual prefixed Antd.Input in components.input/root",
+    "server": "Unmodified ReactDOMServer in a DOM-free VM; inert HTML projection",
+    "nativeBoundary": "Source has no successful native fields for choice; Native keeps its existing raw-value hidden inputs. Source strict instance identity is observed separately from Native proxy association. Both composites use the existing Native Input aria-invalid=true for inherited error status; raw Source remains null without actual field errors. Source SSR defers help DOM; Native keeps its existing synchronous help rendering.",
+    "errors": [],
+    "warnings": [],
+    "serverMessages": []
+  },
+  "cases": [
+    {
+      "id": "input-composite",
+      "initial": {
+        "view": {
+          "mounted": true,
+          "value": "",
+          "name": null,
+          "id": "choice",
+          "aria": {
+            "required": "true",
+            "describedBy": "choice_help",
+            "invalid": null
+          },
+          "help": [
+            {
+              "id": "choice_help",
+              "text": "Choice help"
+            }
+          ],
+          "focused": false,
+          "open": false,
+          "model": "a",
+          "events": [],
+          "status": {
+            "itemError": true,
+            "itemFeedback": true,
+            "selectError": true,
+            "selectFeedback": true,
+            "inputError": true
+          },
+          "icons": [
+            {
+              "classes": [
+                "ant-form-item-feedback-icon",
+                "ant-form-item-feedback-icon-error"
+              ],
+              "paths": [
+                "M512 64c247.4 0 448 200.6 448 448S759.4 960 512 960 64 759.4 64 512 264.6 64 512 64zm127.98 274.82h-.04l-.08.06L512 466.75 384.14 338.88c-.04-.05-.06-.06-.08-.06a.12.12 0 00-.07 0c-.03 0-.05.01-.09.05l-45.02 45.02a.2.2 0 00-.05.09.12.12 0 000 .07v.02a.27.27 0 00.06.06L466.75 512 338.88 639.86c-.05.04-.06.06-.06.08a.12.12 0 000 .07c0 .03.01.05.05.09l45.02 45.02a.2.2 0 00.09.05.12.12 0 00.07 0c.02 0 .04-.01.08-.05L512 557.25l127.86 127.87c.04.04.06.05.08.05a.12.12 0 00.07 0c.03 0 .05-.01.09-.05l45.02-45.02a.2.2 0 00.05-.09.12.12 0 000-.07v-.02a.27.27 0 00-.05-.06L557.25 512l127.87-127.86c.04-.04.05-.06.05-.08a.12.12 0 000-.07c0-.03-.01-.05-.05-.09l-45.02-45.02a.2.2 0 00-.09-.05.12.12 0 00-.07 0z"
+              ]
+            },
+            {
+              "classes": [
+                "ant-form-item-feedback-icon",
+                "ant-form-item-feedback-icon-error"
+              ],
+              "paths": [
+                "M512 64c247.4 0 448 200.6 448 448S759.4 960 512 960 64 759.4 64 512 264.6 64 512 64zm127.98 274.82h-.04l-.08.06L512 466.75 384.14 338.88c-.04-.05-.06-.06-.08-.06a.12.12 0 00-.07 0c-.03 0-.05.01-.09.05l-45.02 45.02a.2.2 0 00-.05.09.12.12 0 000 .07v.02a.27.27 0 00.06.06L466.75 512 338.88 639.86c-.05.04-.06.06-.06.08a.12.12 0 000 .07c0 .03.01.05.05.09l45.02 45.02a.2.2 0 00.09.05.12.12 0 00.07 0c.02 0 .04-.01.08-.05L512 557.25l127.86 127.87c.04.04.06.05.08.05a.12.12 0 00.07 0c.03 0 .05-.01.09-.05l45.02-45.02a.2.2 0 00.05-.09.12.12 0 000-.07v-.02a.27.27 0 00-.05-.06L557.25 512l127.87-127.86c.04-.04.05-.06.05-.08a.12.12 0 000-.07c0-.03-.01-.05-.05-.09l-45.02-45.02a.2.2 0 00-.09-.05.12.12 0 00-.07 0z"
+              ]
+            }
+          ],
+          "association": {
+            "present": true,
+            "nativeTag": "DIV",
+            "nativeMatchesControl": true,
+            "focus": true,
+            "blur": true,
+            "scrollTo": true,
+            "select": false
+          }
+        },
+        "observed": {
+          "nativeFormData": [],
+          "strictSourceRefIdentity": true,
+          "fieldErrors": [],
+          "helpStyles": [
+            {
+              "id": "choice_help",
+              "color": "rgb(255, 77, 79)",
+              "fontSize": "14px",
+              "lineHeight": "22px"
+            }
+          ]
+        }
+      },
+      "steps": [
+        {
+          "action": "field-focus",
+          "view": {
+            "mounted": true,
+            "value": "",
+            "name": null,
+            "id": "choice",
+            "aria": {
+              "required": "true",
+              "describedBy": "choice_help",
+              "invalid": null
+            },
+            "help": [
+              {
+                "id": "choice_help",
+                "text": "Choice help"
+              }
+            ],
+            "focused": true,
+            "open": false,
+            "model": "a",
+            "events": [],
+            "status": {
+              "itemError": true,
+              "itemFeedback": true,
+              "selectError": true,
+              "selectFeedback": true,
+              "inputError": true
+            },
+            "icons": [
+              {
+                "classes": [
+                  "ant-form-item-feedback-icon",
+                  "ant-form-item-feedback-icon-error"
+                ],
+                "paths": [
+                  "M512 64c247.4 0 448 200.6 448 448S759.4 960 512 960 64 759.4 64 512 264.6 64 512 64zm127.98 274.82h-.04l-.08.06L512 466.75 384.14 338.88c-.04-.05-.06-.06-.08-.06a.12.12 0 00-.07 0c-.03 0-.05.01-.09.05l-45.02 45.02a.2.2 0 00-.05.09.12.12 0 000 .07v.02a.27.27 0 00.06.06L466.75 512 338.88 639.86c-.05.04-.06.06-.06.08a.12.12 0 000 .07c0 .03.01.05.05.09l45.02 45.02a.2.2 0 00.09.05.12.12 0 00.07 0c.02 0 .04-.01.08-.05L512 557.25l127.86 127.87c.04.04.06.05.08.05a.12.12 0 00.07 0c.03 0 .05-.01.09-.05l45.02-45.02a.2.2 0 00.05-.09.12.12 0 000-.07v-.02a.27.27 0 00-.05-.06L557.25 512l127.87-127.86c.04-.04.05-.06.05-.08a.12.12 0 000-.07c0-.03-.01-.05-.05-.09l-45.02-45.02a.2.2 0 00-.09-.05.12.12 0 00-.07 0z"
+                ]
+              },
+              {
+                "classes": [
+                  "ant-form-item-feedback-icon",
+                  "ant-form-item-feedback-icon-error"
+                ],
+                "paths": [
+                  "M512 64c247.4 0 448 200.6 448 448S759.4 960 512 960 64 759.4 64 512 264.6 64 512 64zm127.98 274.82h-.04l-.08.06L512 466.75 384.14 338.88c-.04-.05-.06-.06-.08-.06a.12.12 0 00-.07 0c-.03 0-.05.01-.09.05l-45.02 45.02a.2.2 0 00-.05.09.12.12 0 000 .07v.02a.27.27 0 00.06.06L466.75 512 338.88 639.86c-.05.04-.06.06-.06.08a.12.12 0 000 .07c0 .03.01.05.05.09l45.02 45.02a.2.2 0 00.09.05.12.12 0 00.07 0c.02 0 .04-.01.08-.05L512 557.25l127.86 127.87c.04.04.06.05.08.05a.12.12 0 00.07 0c.03 0 .05-.01.09-.05l45.02-45.02a.2.2 0 00.05-.09.12.12 0 000-.07v-.02a.27.27 0 00-.05-.06L557.25 512l127.87-127.86c.04-.04.05-.06.05-.08a.12.12 0 000-.07c0-.03-.01-.05-.05-.09l-45.02-45.02a.2.2 0 00-.09-.05.12.12 0 00-.07 0z"
+                ]
+              }
+            ],
+            "association": {
+              "present": true,
+              "nativeTag": "DIV",
+              "nativeMatchesControl": true,
+              "focus": true,
+              "blur": true,
+              "scrollTo": true,
+              "select": false
+            }
+          },
+          "observed": {
+            "nativeFormData": [],
+            "strictSourceRefIdentity": true,
+            "fieldErrors": [],
+            "helpStyles": [
+              {
+                "id": "choice_help",
+                "color": "rgb(255, 77, 79)",
+                "fontSize": "14px",
+                "lineHeight": "22px"
+              }
+            ]
+          },
+          "sameEditor": true
+        },
+        {
+          "action": "type-query",
+          "view": {
+            "mounted": true,
+            "value": "Draft query",
+            "name": null,
+            "id": "choice",
+            "aria": {
+              "required": "true",
+              "describedBy": "choice_help",
+              "invalid": null
+            },
+            "help": [
+              {
+                "id": "choice_help",
+                "text": "Choice help"
+              }
+            ],
+            "focused": true,
+            "open": true,
+            "model": "a",
+            "events": [
+              [
+                "search",
+                "Draft query"
+              ]
+            ],
+            "status": {
+              "itemError": true,
+              "itemFeedback": true,
+              "selectError": true,
+              "selectFeedback": true,
+              "inputError": true
+            },
+            "icons": [
+              {
+                "classes": [
+                  "ant-form-item-feedback-icon",
+                  "ant-form-item-feedback-icon-error"
+                ],
+                "paths": [
+                  "M512 64c247.4 0 448 200.6 448 448S759.4 960 512 960 64 759.4 64 512 264.6 64 512 64zm127.98 274.82h-.04l-.08.06L512 466.75 384.14 338.88c-.04-.05-.06-.06-.08-.06a.12.12 0 00-.07 0c-.03 0-.05.01-.09.05l-45.02 45.02a.2.2 0 00-.05.09.12.12 0 000 .07v.02a.27.27 0 00.06.06L466.75 512 338.88 639.86c-.05.04-.06.06-.06.08a.12.12 0 000 .07c0 .03.01.05.05.09l45.02 45.02a.2.2 0 00.09.05.12.12 0 00.07 0c.02 0 .04-.01.08-.05L512 557.25l127.86 127.87c.04.04.06.05.08.05a.12.12 0 00.07 0c.03 0 .05-.01.09-.05l45.02-45.02a.2.2 0 00.05-.09.12.12 0 000-.07v-.02a.27.27 0 00-.05-.06L557.25 512l127.87-127.86c.04-.04.05-.06.05-.08a.12.12 0 000-.07c0-.03-.01-.05-.05-.09l-45.02-45.02a.2.2 0 00-.09-.05.12.12 0 00-.07 0z"
+                ]
+              },
+              {
+                "classes": [
+                  "ant-form-item-feedback-icon",
+                  "ant-form-item-feedback-icon-error"
+                ],
+                "paths": [
+                  "M512 64c247.4 0 448 200.6 448 448S759.4 960 512 960 64 759.4 64 512 264.6 64 512 64zm127.98 274.82h-.04l-.08.06L512 466.75 384.14 338.88c-.04-.05-.06-.06-.08-.06a.12.12 0 00-.07 0c-.03 0-.05.01-.09.05l-45.02 45.02a.2.2 0 00-.05.09.12.12 0 000 .07v.02a.27.27 0 00.06.06L466.75 512 338.88 639.86c-.05.04-.06.06-.06.08a.12.12 0 000 .07c0 .03.01.05.05.09l45.02 45.02a.2.2 0 00.09.05.12.12 0 00.07 0c.02 0 .04-.01.08-.05L512 557.25l127.86 127.87c.04.04.06.05.08.05a.12.12 0 00.07 0c.03 0 .05-.01.09-.05l45.02-45.02a.2.2 0 00.05-.09.12.12 0 000-.07v-.02a.27.27 0 00-.05-.06L557.25 512l127.87-127.86c.04-.04.05-.06.05-.08a.12.12 0 000-.07c0-.03-.01-.05-.05-.09l-45.02-45.02a.2.2 0 00-.09-.05.12.12 0 00-.07 0z"
+                ]
+              }
+            ],
+            "association": {
+              "present": true,
+              "nativeTag": "DIV",
+              "nativeMatchesControl": true,
+              "focus": true,
+              "blur": true,
+              "scrollTo": true,
+              "select": false
+            }
+          },
+          "observed": {
+            "nativeFormData": [],
+            "strictSourceRefIdentity": true,
+            "fieldErrors": [],
+            "helpStyles": [
+              {
+                "id": "choice_help",
+                "color": "rgb(255, 77, 79)",
+                "fontSize": "14px",
+                "lineHeight": "22px"
+              }
+            ]
+          },
+          "sameEditor": true
+        },
+        {
+          "action": "open",
+          "view": {
+            "mounted": true,
+            "value": "Draft query",
+            "name": null,
+            "id": "choice",
+            "aria": {
+              "required": "true",
+              "describedBy": "choice_help",
+              "invalid": null
+            },
+            "help": [
+              {
+                "id": "choice_help",
+                "text": "Choice help"
+              }
+            ],
+            "focused": true,
+            "open": true,
+            "model": "a",
+            "events": [
+              [
+                "search",
+                "Draft query"
+              ]
+            ],
+            "status": {
+              "itemError": true,
+              "itemFeedback": true,
+              "selectError": true,
+              "selectFeedback": true,
+              "inputError": true
+            },
+            "icons": [
+              {
+                "classes": [
+                  "ant-form-item-feedback-icon",
+                  "ant-form-item-feedback-icon-error"
+                ],
+                "paths": [
+                  "M512 64c247.4 0 448 200.6 448 448S759.4 960 512 960 64 759.4 64 512 264.6 64 512 64zm127.98 274.82h-.04l-.08.06L512 466.75 384.14 338.88c-.04-.05-.06-.06-.08-.06a.12.12 0 00-.07 0c-.03 0-.05.01-.09.05l-45.02 45.02a.2.2 0 00-.05.09.12.12 0 000 .07v.02a.27.27 0 00.06.06L466.75 512 338.88 639.86c-.05.04-.06.06-.06.08a.12.12 0 000 .07c0 .03.01.05.05.09l45.02 45.02a.2.2 0 00.09.05.12.12 0 00.07 0c.02 0 .04-.01.08-.05L512 557.25l127.86 127.87c.04.04.06.05.08.05a.12.12 0 00.07 0c.03 0 .05-.01.09-.05l45.02-45.02a.2.2 0 00.05-.09.12.12 0 000-.07v-.02a.27.27 0 00-.05-.06L557.25 512l127.87-127.86c.04-.04.05-.06.05-.08a.12.12 0 000-.07c0-.03-.01-.05-.05-.09l-45.02-45.02a.2.2 0 00-.09-.05.12.12 0 00-.07 0z"
+                ]
+              },
+              {
+                "classes": [
+                  "ant-form-item-feedback-icon",
+                  "ant-form-item-feedback-icon-error"
+                ],
+                "paths": [
+                  "M512 64c247.4 0 448 200.6 448 448S759.4 960 512 960 64 759.4 64 512 264.6 64 512 64zm127.98 274.82h-.04l-.08.06L512 466.75 384.14 338.88c-.04-.05-.06-.06-.08-.06a.12.12 0 00-.07 0c-.03 0-.05.01-.09.05l-45.02 45.02a.2.2 0 00-.05.09.12.12 0 000 .07v.02a.27.27 0 00.06.06L466.75 512 338.88 639.86c-.05.04-.06.06-.06.08a.12.12 0 000 .07c0 .03.01.05.05.09l45.02 45.02a.2.2 0 00.09.05.12.12 0 00.07 0c.02 0 .04-.01.08-.05L512 557.25l127.86 127.87c.04.04.06.05.08.05a.12.12 0 00.07 0c.03 0 .05-.01.09-.05l45.02-45.02a.2.2 0 00.05-.09.12.12 0 000-.07v-.02a.27.27 0 00-.05-.06L557.25 512l127.87-127.86c.04-.04.05-.06.05-.08a.12.12 0 000-.07c0-.03-.01-.05-.05-.09l-45.02-45.02a.2.2 0 00-.09-.05.12.12 0 00-.07 0z"
+                ]
+              }
+            ],
+            "association": {
+              "present": true,
+              "nativeTag": "DIV",
+              "nativeMatchesControl": true,
+              "focus": true,
+              "blur": true,
+              "scrollTo": true,
+              "select": false
+            }
+          },
+          "observed": {
+            "nativeFormData": [],
+            "strictSourceRefIdentity": true,
+            "fieldErrors": [],
+            "helpStyles": [
+              {
+                "id": "choice_help",
+                "color": "rgb(255, 77, 79)",
+                "fontSize": "14px",
+                "lineHeight": "22px"
+              }
+            ]
+          },
+          "sameEditor": true
+        },
+        {
+          "action": "select-beta",
+          "view": {
+            "mounted": true,
+            "value": "",
+            "name": null,
+            "id": "choice",
+            "aria": {
+              "required": "true",
+              "describedBy": "choice_help",
+              "invalid": null
+            },
+            "help": [
+              {
+                "id": "choice_help",
+                "text": "Choice help"
+              }
+            ],
+            "focused": true,
+            "open": false,
+            "model": "b",
+            "events": [
+              [
+                "search",
+                "Draft query"
+              ],
+              [
+                "change",
+                "b"
+              ]
+            ],
+            "status": {
+              "itemError": true,
+              "itemFeedback": true,
+              "selectError": true,
+              "selectFeedback": true,
+              "inputError": true
+            },
+            "icons": [
+              {
+                "classes": [
+                  "ant-form-item-feedback-icon",
+                  "ant-form-item-feedback-icon-error"
+                ],
+                "paths": [
+                  "M512 64c247.4 0 448 200.6 448 448S759.4 960 512 960 64 759.4 64 512 264.6 64 512 64zm127.98 274.82h-.04l-.08.06L512 466.75 384.14 338.88c-.04-.05-.06-.06-.08-.06a.12.12 0 00-.07 0c-.03 0-.05.01-.09.05l-45.02 45.02a.2.2 0 00-.05.09.12.12 0 000 .07v.02a.27.27 0 00.06.06L466.75 512 338.88 639.86c-.05.04-.06.06-.06.08a.12.12 0 000 .07c0 .03.01.05.05.09l45.02 45.02a.2.2 0 00.09.05.12.12 0 00.07 0c.02 0 .04-.01.08-.05L512 557.25l127.86 127.87c.04.04.06.05.08.05a.12.12 0 00.07 0c.03 0 .05-.01.09-.05l45.02-45.02a.2.2 0 00.05-.09.12.12 0 000-.07v-.02a.27.27 0 00-.05-.06L557.25 512l127.87-127.86c.04-.04.05-.06.05-.08a.12.12 0 000-.07c0-.03-.01-.05-.05-.09l-45.02-45.02a.2.2 0 00-.09-.05.12.12 0 00-.07 0z"
+                ]
+              },
+              {
+                "classes": [
+                  "ant-form-item-feedback-icon",
+                  "ant-form-item-feedback-icon-error"
+                ],
+                "paths": [
+                  "M512 64c247.4 0 448 200.6 448 448S759.4 960 512 960 64 759.4 64 512 264.6 64 512 64zm127.98 274.82h-.04l-.08.06L512 466.75 384.14 338.88c-.04-.05-.06-.06-.08-.06a.12.12 0 00-.07 0c-.03 0-.05.01-.09.05l-45.02 45.02a.2.2 0 00-.05.09.12.12 0 000 .07v.02a.27.27 0 00.06.06L466.75 512 338.88 639.86c-.05.04-.06.06-.06.08a.12.12 0 000 .07c0 .03.01.05.05.09l45.02 45.02a.2.2 0 00.09.05.12.12 0 00.07 0c.02 0 .04-.01.08-.05L512 557.25l127.86 127.87c.04.04.06.05.08.05a.12.12 0 00.07 0c.03 0 .05-.01.09-.05l45.02-45.02a.2.2 0 00.05-.09.12.12 0 000-.07v-.02a.27.27 0 00-.05-.06L557.25 512l127.87-127.86c.04-.04.05-.06.05-.08a.12.12 0 000-.07c0-.03-.01-.05-.05-.09l-45.02-45.02a.2.2 0 00-.09-.05.12.12 0 00-.07 0z"
+                ]
+              }
+            ],
+            "association": {
+              "present": true,
+              "nativeTag": "DIV",
+              "nativeMatchesControl": true,
+              "focus": true,
+              "blur": true,
+              "scrollTo": true,
+              "select": false
+            }
+          },
+          "observed": {
+            "nativeFormData": [],
+            "strictSourceRefIdentity": true,
+            "fieldErrors": [],
+            "helpStyles": [
+              {
+                "id": "choice_help",
+                "color": "rgb(255, 77, 79)",
+                "fontSize": "14px",
+                "lineHeight": "22px"
+              }
+            ]
+          },
+          "sameEditor": true
+        },
+        {
+          "action": "field-focus",
+          "view": {
+            "mounted": true,
+            "value": "",
+            "name": null,
+            "id": "choice",
+            "aria": {
+              "required": "true",
+              "describedBy": "choice_help",
+              "invalid": null
+            },
+            "help": [
+              {
+                "id": "choice_help",
+                "text": "Choice help"
+              }
+            ],
+            "focused": true,
+            "open": false,
+            "model": "b",
+            "events": [
+              [
+                "search",
+                "Draft query"
+              ],
+              [
+                "change",
+                "b"
+              ]
+            ],
+            "status": {
+              "itemError": true,
+              "itemFeedback": true,
+              "selectError": true,
+              "selectFeedback": true,
+              "inputError": true
+            },
+            "icons": [
+              {
+                "classes": [
+                  "ant-form-item-feedback-icon",
+                  "ant-form-item-feedback-icon-error"
+                ],
+                "paths": [
+                  "M512 64c247.4 0 448 200.6 448 448S759.4 960 512 960 64 759.4 64 512 264.6 64 512 64zm127.98 274.82h-.04l-.08.06L512 466.75 384.14 338.88c-.04-.05-.06-.06-.08-.06a.12.12 0 00-.07 0c-.03 0-.05.01-.09.05l-45.02 45.02a.2.2 0 00-.05.09.12.12 0 000 .07v.02a.27.27 0 00.06.06L466.75 512 338.88 639.86c-.05.04-.06.06-.06.08a.12.12 0 000 .07c0 .03.01.05.05.09l45.02 45.02a.2.2 0 00.09.05.12.12 0 00.07 0c.02 0 .04-.01.08-.05L512 557.25l127.86 127.87c.04.04.06.05.08.05a.12.12 0 00.07 0c.03 0 .05-.01.09-.05l45.02-45.02a.2.2 0 00.05-.09.12.12 0 000-.07v-.02a.27.27 0 00-.05-.06L557.25 512l127.87-127.86c.04-.04.05-.06.05-.08a.12.12 0 000-.07c0-.03-.01-.05-.05-.09l-45.02-45.02a.2.2 0 00-.09-.05.12.12 0 00-.07 0z"
+                ]
+              },
+              {
+                "classes": [
+                  "ant-form-item-feedback-icon",
+                  "ant-form-item-feedback-icon-error"
+                ],
+                "paths": [
+                  "M512 64c247.4 0 448 200.6 448 448S759.4 960 512 960 64 759.4 64 512 264.6 64 512 64zm127.98 274.82h-.04l-.08.06L512 466.75 384.14 338.88c-.04-.05-.06-.06-.08-.06a.12.12 0 00-.07 0c-.03 0-.05.01-.09.05l-45.02 45.02a.2.2 0 00-.05.09.12.12 0 000 .07v.02a.27.27 0 00.06.06L466.75 512 338.88 639.86c-.05.04-.06.06-.06.08a.12.12 0 000 .07c0 .03.01.05.05.09l45.02 45.02a.2.2 0 00.09.05.12.12 0 00.07 0c.02 0 .04-.01.08-.05L512 557.25l127.86 127.87c.04.04.06.05.08.05a.12.12 0 00.07 0c.03 0 .05-.01.09-.05l45.02-45.02a.2.2 0 00.05-.09.12.12 0 000-.07v-.02a.27.27 0 00-.05-.06L557.25 512l127.87-127.86c.04-.04.05-.06.05-.08a.12.12 0 000-.07c0-.03-.01-.05-.05-.09l-45.02-45.02a.2.2 0 00-.09-.05.12.12 0 00-.07 0z"
+                ]
+              }
+            ],
+            "association": {
+              "present": true,
+              "nativeTag": "DIV",
+              "nativeMatchesControl": true,
+              "focus": true,
+              "blur": true,
+              "scrollTo": true,
+              "select": false
+            }
+          },
+          "observed": {
+            "nativeFormData": [],
+            "strictSourceRefIdentity": true,
+            "fieldErrors": [],
+            "helpStyles": [
+              {
+                "id": "choice_help",
+                "color": "rgb(255, 77, 79)",
+                "fontSize": "14px",
+                "lineHeight": "22px"
+              }
+            ]
+          },
+          "sameEditor": true
+        },
+        {
+          "action": "unmount",
+          "view": {
+            "mounted": false,
+            "value": null,
+            "name": null,
+            "id": null,
+            "aria": {
+              "required": null,
+              "describedBy": null,
+              "invalid": null
+            },
+            "help": [],
+            "focused": false,
+            "open": false,
+            "model": "b",
+            "events": [
+              [
+                "search",
+                "Draft query"
+              ],
+              [
+                "change",
+                "b"
+              ]
+            ],
+            "status": {
+              "itemError": false,
+              "itemFeedback": false,
+              "selectError": false,
+              "selectFeedback": false,
+              "inputError": false
+            },
+            "icons": [],
+            "association": {
+              "present": false,
+              "nativeTag": null,
+              "nativeMatchesControl": false,
+              "focus": false,
+              "blur": false,
+              "scrollTo": false,
+              "select": false
+            }
+          },
+          "observed": {
+            "nativeFormData": [],
+            "strictSourceRefIdentity": false,
+            "fieldErrors": [],
+            "helpStyles": []
+          },
+          "sameEditor": null
+        }
+      ]
+    },
+    {
+      "id": "root-composite",
+      "initial": {
+        "view": {
+          "mounted": true,
+          "value": "",
+          "name": null,
+          "id": null,
+          "aria": {
+            "required": "true",
+            "describedBy": "choice_help",
+            "invalid": null
+          },
+          "help": [
+            {
+              "id": "choice_help",
+              "text": "Choice help"
+            }
+          ],
+          "focused": false,
+          "open": false,
+          "model": "a",
+          "events": [],
+          "status": {
+            "itemError": true,
+            "itemFeedback": true,
+            "selectError": false,
+            "selectFeedback": false,
+            "inputError": true
+          },
+          "icons": [
+            {
+              "classes": [
+                "ant-form-item-feedback-icon",
+                "ant-form-item-feedback-icon-error"
+              ],
+              "paths": [
+                "M512 64c247.4 0 448 200.6 448 448S759.4 960 512 960 64 759.4 64 512 264.6 64 512 64zm127.98 274.82h-.04l-.08.06L512 466.75 384.14 338.88c-.04-.05-.06-.06-.08-.06a.12.12 0 00-.07 0c-.03 0-.05.01-.09.05l-45.02 45.02a.2.2 0 00-.05.09.12.12 0 000 .07v.02a.27.27 0 00.06.06L466.75 512 338.88 639.86c-.05.04-.06.06-.06.08a.12.12 0 000 .07c0 .03.01.05.05.09l45.02 45.02a.2.2 0 00.09.05.12.12 0 00.07 0c.02 0 .04-.01.08-.05L512 557.25l127.86 127.87c.04.04.06.05.08.05a.12.12 0 00.07 0c.03 0 .05-.01.09-.05l45.02-45.02a.2.2 0 00.05-.09.12.12 0 000-.07v-.02a.27.27 0 00-.05-.06L557.25 512l127.87-127.86c.04-.04.05-.06.05-.08a.12.12 0 000-.07c0-.03-.01-.05-.05-.09l-45.02-45.02a.2.2 0 00-.09-.05.12.12 0 00-.07 0z"
+              ]
+            }
+          ],
+          "association": {
+            "present": true,
+            "nativeTag": "SPAN",
+            "nativeMatchesControl": true,
+            "focus": true,
+            "blur": true,
+            "scrollTo": true,
+            "select": false
+          }
+        },
+        "observed": {
+          "nativeFormData": [],
+          "strictSourceRefIdentity": true,
+          "fieldErrors": [],
+          "helpStyles": [
+            {
+              "id": "choice_help",
+              "color": "rgb(255, 77, 79)",
+              "fontSize": "14px",
+              "lineHeight": "22px"
+            }
+          ]
+        }
+      },
+      "steps": [
+        {
+          "action": "field-focus",
+          "view": {
+            "mounted": true,
+            "value": "",
+            "name": null,
+            "id": null,
+            "aria": {
+              "required": "true",
+              "describedBy": "choice_help",
+              "invalid": null
+            },
+            "help": [
+              {
+                "id": "choice_help",
+                "text": "Choice help"
+              }
+            ],
+            "focused": true,
+            "open": false,
+            "model": "a",
+            "events": [],
+            "status": {
+              "itemError": true,
+              "itemFeedback": true,
+              "selectError": false,
+              "selectFeedback": false,
+              "inputError": true
+            },
+            "icons": [
+              {
+                "classes": [
+                  "ant-form-item-feedback-icon",
+                  "ant-form-item-feedback-icon-error"
+                ],
+                "paths": [
+                  "M512 64c247.4 0 448 200.6 448 448S759.4 960 512 960 64 759.4 64 512 264.6 64 512 64zm127.98 274.82h-.04l-.08.06L512 466.75 384.14 338.88c-.04-.05-.06-.06-.08-.06a.12.12 0 00-.07 0c-.03 0-.05.01-.09.05l-45.02 45.02a.2.2 0 00-.05.09.12.12 0 000 .07v.02a.27.27 0 00.06.06L466.75 512 338.88 639.86c-.05.04-.06.06-.06.08a.12.12 0 000 .07c0 .03.01.05.05.09l45.02 45.02a.2.2 0 00.09.05.12.12 0 00.07 0c.02 0 .04-.01.08-.05L512 557.25l127.86 127.87c.04.04.06.05.08.05a.12.12 0 00.07 0c.03 0 .05-.01.09-.05l45.02-45.02a.2.2 0 00.05-.09.12.12 0 000-.07v-.02a.27.27 0 00-.05-.06L557.25 512l127.87-127.86c.04-.04.05-.06.05-.08a.12.12 0 000-.07c0-.03-.01-.05-.05-.09l-45.02-45.02a.2.2 0 00-.09-.05.12.12 0 00-.07 0z"
+                ]
+              }
+            ],
+            "association": {
+              "present": true,
+              "nativeTag": "SPAN",
+              "nativeMatchesControl": true,
+              "focus": true,
+              "blur": true,
+              "scrollTo": true,
+              "select": false
+            }
+          },
+          "observed": {
+            "nativeFormData": [],
+            "strictSourceRefIdentity": true,
+            "fieldErrors": [],
+            "helpStyles": [
+              {
+                "id": "choice_help",
+                "color": "rgb(255, 77, 79)",
+                "fontSize": "14px",
+                "lineHeight": "22px"
+              }
+            ]
+          },
+          "sameEditor": true
+        },
+        {
+          "action": "type-query",
+          "view": {
+            "mounted": true,
+            "value": "Draft query",
+            "name": null,
+            "id": null,
+            "aria": {
+              "required": "true",
+              "describedBy": "choice_help",
+              "invalid": null
+            },
+            "help": [
+              {
+                "id": "choice_help",
+                "text": "Choice help"
+              }
+            ],
+            "focused": true,
+            "open": false,
+            "model": "a",
+            "events": [],
+            "status": {
+              "itemError": true,
+              "itemFeedback": true,
+              "selectError": false,
+              "selectFeedback": false,
+              "inputError": true
+            },
+            "icons": [
+              {
+                "classes": [
+                  "ant-form-item-feedback-icon",
+                  "ant-form-item-feedback-icon-error"
+                ],
+                "paths": [
+                  "M512 64c247.4 0 448 200.6 448 448S759.4 960 512 960 64 759.4 64 512 264.6 64 512 64zm127.98 274.82h-.04l-.08.06L512 466.75 384.14 338.88c-.04-.05-.06-.06-.08-.06a.12.12 0 00-.07 0c-.03 0-.05.01-.09.05l-45.02 45.02a.2.2 0 00-.05.09.12.12 0 000 .07v.02a.27.27 0 00.06.06L466.75 512 338.88 639.86c-.05.04-.06.06-.06.08a.12.12 0 000 .07c0 .03.01.05.05.09l45.02 45.02a.2.2 0 00.09.05.12.12 0 00.07 0c.02 0 .04-.01.08-.05L512 557.25l127.86 127.87c.04.04.06.05.08.05a.12.12 0 00.07 0c.03 0 .05-.01.09-.05l45.02-45.02a.2.2 0 00.05-.09.12.12 0 000-.07v-.02a.27.27 0 00-.05-.06L557.25 512l127.87-127.86c.04-.04.05-.06.05-.08a.12.12 0 000-.07c0-.03-.01-.05-.05-.09l-45.02-45.02a.2.2 0 00-.09-.05.12.12 0 00-.07 0z"
+                ]
+              }
+            ],
+            "association": {
+              "present": true,
+              "nativeTag": "SPAN",
+              "nativeMatchesControl": true,
+              "focus": true,
+              "blur": true,
+              "scrollTo": true,
+              "select": false
+            }
+          },
+          "observed": {
+            "nativeFormData": [],
+            "strictSourceRefIdentity": true,
+            "fieldErrors": [],
+            "helpStyles": [
+              {
+                "id": "choice_help",
+                "color": "rgb(255, 77, 79)",
+                "fontSize": "14px",
+                "lineHeight": "22px"
+              }
+            ]
+          },
+          "sameEditor": true
+        },
+        {
+          "action": "open",
+          "view": {
+            "mounted": true,
+            "value": "Draft query",
+            "name": null,
+            "id": null,
+            "aria": {
+              "required": "true",
+              "describedBy": "choice_help",
+              "invalid": null
+            },
+            "help": [
+              {
+                "id": "choice_help",
+                "text": "Choice help"
+              }
+            ],
+            "focused": true,
+            "open": true,
+            "model": "a",
+            "events": [],
+            "status": {
+              "itemError": true,
+              "itemFeedback": true,
+              "selectError": false,
+              "selectFeedback": false,
+              "inputError": true
+            },
+            "icons": [
+              {
+                "classes": [
+                  "ant-form-item-feedback-icon",
+                  "ant-form-item-feedback-icon-error"
+                ],
+                "paths": [
+                  "M512 64c247.4 0 448 200.6 448 448S759.4 960 512 960 64 759.4 64 512 264.6 64 512 64zm127.98 274.82h-.04l-.08.06L512 466.75 384.14 338.88c-.04-.05-.06-.06-.08-.06a.12.12 0 00-.07 0c-.03 0-.05.01-.09.05l-45.02 45.02a.2.2 0 00-.05.09.12.12 0 000 .07v.02a.27.27 0 00.06.06L466.75 512 338.88 639.86c-.05.04-.06.06-.06.08a.12.12 0 000 .07c0 .03.01.05.05.09l45.02 45.02a.2.2 0 00.09.05.12.12 0 00.07 0c.02 0 .04-.01.08-.05L512 557.25l127.86 127.87c.04.04.06.05.08.05a.12.12 0 00.07 0c.03 0 .05-.01.09-.05l45.02-45.02a.2.2 0 00.05-.09.12.12 0 000-.07v-.02a.27.27 0 00-.05-.06L557.25 512l127.87-127.86c.04-.04.05-.06.05-.08a.12.12 0 000-.07c0-.03-.01-.05-.05-.09l-45.02-45.02a.2.2 0 00-.09-.05.12.12 0 00-.07 0z"
+                ]
+              }
+            ],
+            "association": {
+              "present": true,
+              "nativeTag": "SPAN",
+              "nativeMatchesControl": true,
+              "focus": true,
+              "blur": true,
+              "scrollTo": true,
+              "select": false
+            }
+          },
+          "observed": {
+            "nativeFormData": [],
+            "strictSourceRefIdentity": true,
+            "fieldErrors": [],
+            "helpStyles": [
+              {
+                "id": "choice_help",
+                "color": "rgb(255, 77, 79)",
+                "fontSize": "14px",
+                "lineHeight": "22px"
+              }
+            ]
+          },
+          "sameEditor": true
+        },
+        {
+          "action": "select-beta",
+          "view": {
+            "mounted": true,
+            "value": "Draft query",
+            "name": null,
+            "id": null,
+            "aria": {
+              "required": "true",
+              "describedBy": "choice_help",
+              "invalid": null
+            },
+            "help": [
+              {
+                "id": "choice_help",
+                "text": "Choice help"
+              }
+            ],
+            "focused": true,
+            "open": false,
+            "model": "b",
+            "events": [
+              [
+                "change",
+                "b"
+              ]
+            ],
+            "status": {
+              "itemError": true,
+              "itemFeedback": true,
+              "selectError": false,
+              "selectFeedback": false,
+              "inputError": true
+            },
+            "icons": [
+              {
+                "classes": [
+                  "ant-form-item-feedback-icon",
+                  "ant-form-item-feedback-icon-error"
+                ],
+                "paths": [
+                  "M512 64c247.4 0 448 200.6 448 448S759.4 960 512 960 64 759.4 64 512 264.6 64 512 64zm127.98 274.82h-.04l-.08.06L512 466.75 384.14 338.88c-.04-.05-.06-.06-.08-.06a.12.12 0 00-.07 0c-.03 0-.05.01-.09.05l-45.02 45.02a.2.2 0 00-.05.09.12.12 0 000 .07v.02a.27.27 0 00.06.06L466.75 512 338.88 639.86c-.05.04-.06.06-.06.08a.12.12 0 000 .07c0 .03.01.05.05.09l45.02 45.02a.2.2 0 00.09.05.12.12 0 00.07 0c.02 0 .04-.01.08-.05L512 557.25l127.86 127.87c.04.04.06.05.08.05a.12.12 0 00.07 0c.03 0 .05-.01.09-.05l45.02-45.02a.2.2 0 00.05-.09.12.12 0 000-.07v-.02a.27.27 0 00-.05-.06L557.25 512l127.87-127.86c.04-.04.05-.06.05-.08a.12.12 0 000-.07c0-.03-.01-.05-.05-.09l-45.02-45.02a.2.2 0 00-.09-.05.12.12 0 00-.07 0z"
+                ]
+              }
+            ],
+            "association": {
+              "present": true,
+              "nativeTag": "SPAN",
+              "nativeMatchesControl": true,
+              "focus": true,
+              "blur": true,
+              "scrollTo": true,
+              "select": false
+            }
+          },
+          "observed": {
+            "nativeFormData": [],
+            "strictSourceRefIdentity": true,
+            "fieldErrors": [],
+            "helpStyles": [
+              {
+                "id": "choice_help",
+                "color": "rgb(255, 77, 79)",
+                "fontSize": "14px",
+                "lineHeight": "22px"
+              }
+            ]
+          },
+          "sameEditor": true
+        },
+        {
+          "action": "field-focus",
+          "view": {
+            "mounted": true,
+            "value": "Draft query",
+            "name": null,
+            "id": null,
+            "aria": {
+              "required": "true",
+              "describedBy": "choice_help",
+              "invalid": null
+            },
+            "help": [
+              {
+                "id": "choice_help",
+                "text": "Choice help"
+              }
+            ],
+            "focused": true,
+            "open": false,
+            "model": "b",
+            "events": [
+              [
+                "change",
+                "b"
+              ]
+            ],
+            "status": {
+              "itemError": true,
+              "itemFeedback": true,
+              "selectError": false,
+              "selectFeedback": false,
+              "inputError": true
+            },
+            "icons": [
+              {
+                "classes": [
+                  "ant-form-item-feedback-icon",
+                  "ant-form-item-feedback-icon-error"
+                ],
+                "paths": [
+                  "M512 64c247.4 0 448 200.6 448 448S759.4 960 512 960 64 759.4 64 512 264.6 64 512 64zm127.98 274.82h-.04l-.08.06L512 466.75 384.14 338.88c-.04-.05-.06-.06-.08-.06a.12.12 0 00-.07 0c-.03 0-.05.01-.09.05l-45.02 45.02a.2.2 0 00-.05.09.12.12 0 000 .07v.02a.27.27 0 00.06.06L466.75 512 338.88 639.86c-.05.04-.06.06-.06.08a.12.12 0 000 .07c0 .03.01.05.05.09l45.02 45.02a.2.2 0 00.09.05.12.12 0 00.07 0c.02 0 .04-.01.08-.05L512 557.25l127.86 127.87c.04.04.06.05.08.05a.12.12 0 00.07 0c.03 0 .05-.01.09-.05l45.02-45.02a.2.2 0 00.05-.09.12.12 0 000-.07v-.02a.27.27 0 00-.05-.06L557.25 512l127.87-127.86c.04-.04.05-.06.05-.08a.12.12 0 000-.07c0-.03-.01-.05-.05-.09l-45.02-45.02a.2.2 0 00-.09-.05.12.12 0 00-.07 0z"
+                ]
+              }
+            ],
+            "association": {
+              "present": true,
+              "nativeTag": "SPAN",
+              "nativeMatchesControl": true,
+              "focus": true,
+              "blur": true,
+              "scrollTo": true,
+              "select": false
+            }
+          },
+          "observed": {
+            "nativeFormData": [],
+            "strictSourceRefIdentity": true,
+            "fieldErrors": [],
+            "helpStyles": [
+              {
+                "id": "choice_help",
+                "color": "rgb(255, 77, 79)",
+                "fontSize": "14px",
+                "lineHeight": "22px"
+              }
+            ]
+          },
+          "sameEditor": true
+        },
+        {
+          "action": "unmount",
+          "view": {
+            "mounted": false,
+            "value": null,
+            "name": null,
+            "id": null,
+            "aria": {
+              "required": null,
+              "describedBy": null,
+              "invalid": null
+            },
+            "help": [],
+            "focused": false,
+            "open": false,
+            "model": "b",
+            "events": [
+              [
+                "change",
+                "b"
+              ]
+            ],
+            "status": {
+              "itemError": false,
+              "itemFeedback": false,
+              "selectError": false,
+              "selectFeedback": false,
+              "inputError": false
+            },
+            "icons": [],
+            "association": {
+              "present": false,
+              "nativeTag": null,
+              "nativeMatchesControl": false,
+              "focus": false,
+              "blur": false,
+              "scrollTo": false,
+              "select": false
+            }
+          },
+          "observed": {
+            "nativeFormData": [],
+            "strictSourceRefIdentity": false,
+            "fieldErrors": [],
+            "helpStyles": []
+          },
+          "sameEditor": null
+        }
+      ]
+    }
+  ],
+  "ssr": [
+    {
+      "id": "input-composite",
+      "view": {
+        "mounted": true,
+        "value": "",
+        "name": null,
+        "id": "choice",
+        "aria": {
+          "required": "true",
+          "describedBy": "choice_help",
+          "invalid": null
+        },
+        "help": [],
+        "focused": false,
+        "open": false,
+        "model": "a",
+        "events": [],
+        "status": {
+          "itemError": true,
+          "itemFeedback": true,
+          "selectError": true,
+          "selectFeedback": true,
+          "inputError": true
+        },
+        "icons": [
+          {
+            "classes": [
+              "ant-form-item-feedback-icon",
+              "ant-form-item-feedback-icon-error"
+            ],
+            "paths": [
+              "M512 64c247.4 0 448 200.6 448 448S759.4 960 512 960 64 759.4 64 512 264.6 64 512 64zm127.98 274.82h-.04l-.08.06L512 466.75 384.14 338.88c-.04-.05-.06-.06-.08-.06a.12.12 0 00-.07 0c-.03 0-.05.01-.09.05l-45.02 45.02a.2.2 0 00-.05.09.12.12 0 000 .07v.02a.27.27 0 00.06.06L466.75 512 338.88 639.86c-.05.04-.06.06-.06.08a.12.12 0 000 .07c0 .03.01.05.05.09l45.02 45.02a.2.2 0 00.09.05.12.12 0 00.07 0c.02 0 .04-.01.08-.05L512 557.25l127.86 127.87c.04.04.06.05.08.05a.12.12 0 00.07 0c.03 0 .05-.01.09-.05l45.02-45.02a.2.2 0 00.05-.09.12.12 0 000-.07v-.02a.27.27 0 00-.05-.06L557.25 512l127.87-127.86c.04-.04.05-.06.05-.08a.12.12 0 000-.07c0-.03-.01-.05-.05-.09l-45.02-45.02a.2.2 0 00-.09-.05.12.12 0 00-.07 0z"
+            ]
+          },
+          {
+            "classes": [
+              "ant-form-item-feedback-icon",
+              "ant-form-item-feedback-icon-error"
+            ],
+            "paths": [
+              "M512 64c247.4 0 448 200.6 448 448S759.4 960 512 960 64 759.4 64 512 264.6 64 512 64zm127.98 274.82h-.04l-.08.06L512 466.75 384.14 338.88c-.04-.05-.06-.06-.08-.06a.12.12 0 00-.07 0c-.03 0-.05.01-.09.05l-45.02 45.02a.2.2 0 00-.05.09.12.12 0 000 .07v.02a.27.27 0 00.06.06L466.75 512 338.88 639.86c-.05.04-.06.06-.06.08a.12.12 0 000 .07c0 .03.01.05.05.09l45.02 45.02a.2.2 0 00.09.05.12.12 0 00.07 0c.02 0 .04-.01.08-.05L512 557.25l127.86 127.87c.04.04.06.05.08.05a.12.12 0 00.07 0c.03 0 .05-.01.09-.05l45.02-45.02a.2.2 0 00.05-.09.12.12 0 000-.07v-.02a.27.27 0 00-.05-.06L557.25 512l127.87-127.86c.04-.04.05-.06.05-.08a.12.12 0 000-.07c0-.03-.01-.05-.05-.09l-45.02-45.02a.2.2 0 00-.09-.05.12.12 0 00-.07 0z"
+            ]
+          }
+        ],
+        "association": {
+          "present": false,
+          "nativeTag": null,
+          "nativeMatchesControl": false,
+          "focus": false,
+          "blur": false,
+          "scrollTo": false,
+          "select": false
+        }
+      },
+      "timers": 0,
+      "nativeFormData": [],
+      "fieldErrors": []
+    },
+    {
+      "id": "root-composite",
+      "view": {
+        "mounted": true,
+        "value": "",
+        "name": null,
+        "id": null,
+        "aria": {
+          "required": "true",
+          "describedBy": "choice_help",
+          "invalid": null
+        },
+        "help": [],
+        "focused": false,
+        "open": false,
+        "model": "a",
+        "events": [],
+        "status": {
+          "itemError": true,
+          "itemFeedback": true,
+          "selectError": false,
+          "selectFeedback": false,
+          "inputError": true
+        },
+        "icons": [
+          {
+            "classes": [
+              "ant-form-item-feedback-icon",
+              "ant-form-item-feedback-icon-error"
+            ],
+            "paths": [
+              "M512 64c247.4 0 448 200.6 448 448S759.4 960 512 960 64 759.4 64 512 264.6 64 512 64zm127.98 274.82h-.04l-.08.06L512 466.75 384.14 338.88c-.04-.05-.06-.06-.08-.06a.12.12 0 00-.07 0c-.03 0-.05.01-.09.05l-45.02 45.02a.2.2 0 00-.05.09.12.12 0 000 .07v.02a.27.27 0 00.06.06L466.75 512 338.88 639.86c-.05.04-.06.06-.06.08a.12.12 0 000 .07c0 .03.01.05.05.09l45.02 45.02a.2.2 0 00.09.05.12.12 0 00.07 0c.02 0 .04-.01.08-.05L512 557.25l127.86 127.87c.04.04.06.05.08.05a.12.12 0 00.07 0c.03 0 .05-.01.09-.05l45.02-45.02a.2.2 0 00.05-.09.12.12 0 000-.07v-.02a.27.27 0 00-.05-.06L557.25 512l127.87-127.86c.04-.04.05-.06.05-.08a.12.12 0 000-.07c0-.03-.01-.05-.05-.09l-45.02-45.02a.2.2 0 00-.09-.05.12.12 0 00-.07 0z"
+            ]
+          }
+        ],
+        "association": {
+          "present": false,
+          "nativeTag": null,
+          "nativeMatchesControl": false,
+          "focus": false,
+          "blur": false,
+          "scrollTo": false,
+          "select": false
+        }
+      },
+      "timers": 0,
+      "nativeFormData": [],
+      "fieldErrors": []
+    }
+  ]
+}

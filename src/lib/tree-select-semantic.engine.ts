@@ -1,4 +1,5 @@
 import { getInlineStyleDeclarations, serializeInlineStyleLayers } from './inline-style.engine';
+import type { TreeSelectEditorElement } from './tree-select-components.types';
 import type {
   TreeSelectClassNames, TreeSelectConfig, TreeSelectSemanticInfo, TreeSelectSemanticValue,
   TreeSelectStyles, TreeSelectValue
@@ -21,18 +22,24 @@ function join(before: string | undefined, after: string | undefined, separator: 
 }
 
 /** Merge order follows Ant Design useMergeSemantic. */
-export function treeSelectSemantics<ValueType extends TreeSelectValue, Data extends object>(
+export function treeSelectSemantics<ValueType extends TreeSelectValue, Data extends object,
+  RootElement extends HTMLElement = HTMLDivElement,
+  EditorElement extends TreeSelectEditorElement = HTMLInputElement>(
   context: TreeSelectConfig | undefined,
-  info: TreeSelectSemanticInfo<ValueType, Data>
+  info: TreeSelectSemanticInfo<ValueType, Data, RootElement, EditorElement>
 ) {
-  function resolve<Slots>(value: TreeSelectSemanticValue<Slots, ValueType, Data> | undefined) {
+  function resolve<Slots>(value: TreeSelectSemanticValue<Slots, ValueType, Data, RootElement, EditorElement> | undefined) {
     return typeof value === 'function'
-      ? (value as (info: TreeSelectSemanticInfo<ValueType, Data>) => Slots | undefined)(info) : value;
+      ? (value as (info: TreeSelectSemanticInfo<ValueType, Data, RootElement, EditorElement>) => Slots | undefined)(info) : value;
   }
-  const inheritedClasses = resolve<TreeSelectClassNames>(context?.classNames);
-  const localClasses = resolve(info.props.classNames);
-  const inheritedStyles = resolve<TreeSelectStyles>(context?.styles);
-  const localStyles = resolve(info.props.styles);
+  const contextClasses = context?.classNames;
+  const inheritedClasses = typeof contextClasses === 'function'
+    ? contextClasses<ValueType, Data, RootElement, EditorElement>(info) : contextClasses;
+  const localClasses = resolve<TreeSelectClassNames>(info.props.classNames);
+  const contextStyles = context?.styles;
+  const inheritedStyles = typeof contextStyles === 'function'
+    ? contextStyles<ValueType, Data, RootElement, EditorElement>(info) : contextStyles;
+  const localStyles = resolve<TreeSelectStyles>(info.props.styles);
   const inheritedPopupClasses = popupClasses(inheritedClasses?.popup);
   const localPopupClasses = popupClasses(localClasses?.popup);
   const classes: ResolvedClassNames = {

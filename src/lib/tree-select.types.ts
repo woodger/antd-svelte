@@ -1,10 +1,11 @@
 import type { Snippet } from 'svelte';
-import type { HTMLInputAttributes, HTMLAttributes } from 'svelte/elements';
+import type { DOMAttributes, HTMLInputAttributes, HTMLAttributes } from 'svelte/elements';
 import type { ComponentSize, Variant } from './types';
 import type { FormValidateStatus } from './form-error-list.types';
 import type { TreeEventNode, TreeExpandAction, TreeKey, TreeRef, TreeTitleContent } from './tree.types';
 import type { SelectTagInfo } from './select.types';
 import type { TreeSelectTokenSeparators } from './tree-select-token.engine';
+import type { TreeSelectComponents, TreeSelectEditorElement } from './tree-select-components.types';
 export type { TreeSelectTokenSeparators } from './tree-select-token.engine';
 /** Методы bind:this. DOM-элементы предоставляются через bindable props. */
 export type TreeSelectRef = TreeRef;
@@ -104,9 +105,11 @@ export type TreeSelectStyles = TreeSelectControlSlots<string> & {
 };
 export interface TreeSelectSemanticInfo<
   ValueType extends TreeSelectValue = TreeSelectValue,
-  Data extends object = TreeSelectNode
+  Data extends object = TreeSelectNode,
+  RootElement extends HTMLElement = HTMLDivElement,
+  EditorElement extends TreeSelectEditorElement = HTMLInputElement
 > {
-  props: Omit<TreeSelectProps<ValueType, Data>, 'disabled' | 'status' | 'variant' | 'onChange'> & {
+  props: Omit<TreeSelectProps<ValueType, Data, RootElement, EditorElement>, 'disabled' | 'status' | 'variant' | 'onChange'> & {
     onChange?(value: ValueType, labels: TreeSelectLabel[] | null, extra: TreeSelectChangeInfo): void;
     disabled: boolean;
     status?: FormValidateStatus;
@@ -114,35 +117,42 @@ export interface TreeSelectSemanticInfo<
   };
 }
 export type TreeSelectSemanticValue<
-  Slots, ValueType extends TreeSelectValue = TreeSelectValue, Data extends object = TreeSelectNode
-> = Slots | ((info: TreeSelectSemanticInfo<ValueType, Data>) => Slots | undefined);
+  Slots, ValueType extends TreeSelectValue = TreeSelectValue, Data extends object = TreeSelectNode,
+  RootElement extends HTMLElement = HTMLDivElement,
+  EditorElement extends TreeSelectEditorElement = HTMLInputElement
+> = Slots | ((info: TreeSelectSemanticInfo<ValueType, Data, RootElement, EditorElement>) => Slots | undefined);
 export type TreeSelectSwitcherIcon = TreeTitleContent<TreeEventNode>;
 /** Настройки ConfigProvider.treeSelect. Для оформления используются classNames и styles. */
 export interface TreeSelectConfig {
   class?: string;
   style?: string;
   variant?: Variant;
-  classNames?: TreeSelectClassNames | (<ValueType extends TreeSelectValue, Data extends object>(
-    info: TreeSelectSemanticInfo<ValueType, Data>
+  classNames?: TreeSelectClassNames | (<ValueType extends TreeSelectValue, Data extends object,
+    RootElement extends HTMLElement, EditorElement extends TreeSelectEditorElement>(
+    info: TreeSelectSemanticInfo<ValueType, Data, RootElement, EditorElement>
   ) => TreeSelectClassNames | undefined);
-  styles?: TreeSelectStyles | (<ValueType extends TreeSelectValue, Data extends object>(
-    info: TreeSelectSemanticInfo<ValueType, Data>
+  styles?: TreeSelectStyles | (<ValueType extends TreeSelectValue, Data extends object,
+    RootElement extends HTMLElement, EditorElement extends TreeSelectEditorElement>(
+    info: TreeSelectSemanticInfo<ValueType, Data, RootElement, EditorElement>
   ) => TreeSelectStyles | undefined);
   switcherIcon?: TreeSelectSwitcherIcon;
 }
 /** Single/multiple выбор узлов дерева с check strategies, поиском и lazy load. */
 export interface TreeSelectProps<
   ValueType extends TreeSelectValue = TreeSelectValue,
-  Data extends object = TreeSelectNode
+  Data extends object = TreeSelectNode,
+  RootElement extends HTMLElement = HTMLDivElement,
+  EditorElement extends TreeSelectEditorElement = HTMLInputElement
 > extends Omit<
   HTMLInputAttributes,
-  'value' | 'defaultValue' | 'size' | 'type' | 'prefix' | 'placeholder' | 'children' | 'onchange' | 'oninput'
-> {
+  keyof DOMAttributes<HTMLInputElement> | 'value' | 'defaultValue' | 'size' | 'type' | 'prefix' | 'placeholder'
+>, Omit<DOMAttributes<EditorElement | HTMLInputElement>, 'children' | 'onchange' | 'oninput'> {
   /** Локальный namespace Select/TreeSelect; пустая строка наследует ConfigProvider. */
   prefixCls?: string;
   treeData?: readonly Data[];
   /** Используется при отсутствии treeData. */
   children?: Snippet;
+  components?: TreeSelectComponents<RootElement, EditorElement>;
   fieldNames?: TreeSelectFieldNames;
   /** Плоский список; false/undefined сохраняют вложенную структуру. */
   treeDataSimpleMode?: TreeSelectSimpleMode;
@@ -190,15 +200,15 @@ export interface TreeSelectProps<
   /** Как в Source TreeSelect, не ограничивает поиск; native maxlength задаёт DOM-ограничение. */
   maxLength?: number;
   /** Нативный onkeydown отменяет внутреннюю обработку; этот hook следует порядку Source. */
-  onInputKeyDown?: HTMLInputAttributes['onkeydown'];
-  onKeyDown?: HTMLAttributes<HTMLDivElement>['onkeydown'];
-  onKeyUp?: HTMLAttributes<HTMLDivElement>['onkeyup'];
-  onFocus?: HTMLAttributes<HTMLDivElement>['onfocusin'];
-  onBlur?: HTMLAttributes<HTMLDivElement>['onfocusout'];
-  onMouseDown?: HTMLAttributes<HTMLDivElement>['onmousedown'];
-  onMouseEnter?: HTMLAttributes<HTMLDivElement>['onmouseenter'];
-  onMouseLeave?: HTMLAttributes<HTMLDivElement>['onmouseleave'];
-  onClick?: HTMLAttributes<HTMLDivElement>['onclick'];
+  onInputKeyDown?: DOMAttributes<EditorElement | HTMLInputElement>['onkeydown'];
+  onKeyDown?: DOMAttributes<RootElement | HTMLDivElement>['onkeydown'];
+  onKeyUp?: DOMAttributes<RootElement | HTMLDivElement>['onkeyup'];
+  onFocus?: DOMAttributes<RootElement | HTMLDivElement>['onfocusin'];
+  onBlur?: DOMAttributes<RootElement | HTMLDivElement>['onfocusout'];
+  onMouseDown?: DOMAttributes<RootElement | HTMLDivElement>['onmousedown'];
+  onMouseEnter?: DOMAttributes<RootElement | HTMLDivElement>['onmouseenter'];
+  onMouseLeave?: DOMAttributes<RootElement | HTMLDivElement>['onmouseleave'];
+  onClick?: DOMAttributes<RootElement | HTMLDivElement>['onclick'];
   placeholder?: TreeSelectLabel;
   prefix?: TreeSelectLabel;
   /** Содержимое или snippet с состоянием поля. null/undefined используют suffixIcon. */
@@ -249,16 +259,16 @@ export interface TreeSelectProps<
   onPopupScroll?: HTMLAttributes<HTMLDivElement>['onscroll'];
   /** Локальный getter получает корень Select; undefined наследует ConfigProvider. */
   getPopupContainer?: (trigger: HTMLElement) => HTMLElement | ShadowRoot;
-  classNames?: TreeSelectSemanticValue<TreeSelectClassNames, ValueType, Data>;
-  styles?: TreeSelectSemanticValue<TreeSelectStyles, ValueType, Data>;
+  classNames?: TreeSelectSemanticValue<TreeSelectClassNames, ValueType, Data, RootElement, EditorElement>;
+  styles?: TreeSelectSemanticValue<TreeSelectStyles, ValueType, Data, RootElement, EditorElement>;
   rootClassName?: string;
   size?: ComponentSize;
   status?: 'error' | 'warning';
   /** @defaultValue 'outlined' */
   /** Приоритет: variant, Form, treeSelect config, global variant, outlined. */
   variant?: Variant;
-  /** Нативный ref доступен после mount и очищается при unmount. */
-  nativeElement?: HTMLDivElement;
-  /** Нативный ref доступен после mount и очищается при unmount. */
-  inputElement?: HTMLInputElement;
+  /** Текущий корень; снятие custom slot возвращает стандартный div. */
+  nativeElement?: NoInfer<RootElement> | HTMLDivElement;
+  /** Текущий редактор; снятие custom slot возвращает стандартный input. */
+  inputElement?: NoInfer<EditorElement> | HTMLInputElement;
 }
