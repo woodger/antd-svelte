@@ -53,11 +53,7 @@ export function treeSelectSemantics<ValueType extends TreeSelectValue, Data exte
     : styles.root;
   const popupRootStyle = join(inheritedRootStyle, styles.popup.root, ';');
   const popupProperties = new Set(Array.from(getInlineStyleDeclarations([popupRootStyle]), ({ property }) => property));
-  const popupSizing = {
-    width: popupProperties.has('width') || popupProperties.has('inline-size'),
-    minWidth: popupProperties.has('min-width') || popupProperties.has('min-inline-size'),
-    maxWidth: popupProperties.has('max-width') || popupProperties.has('max-inline-size')
-  };
+  const popupHasMaxWidth = popupProperties.has('max-width') || popupProperties.has('max-inline-size');
 
-  return { classes, styles, popupRootStyle, popupSizing };
+  return { classes, styles, popupRootStyle, popupHasMaxWidth };
 }

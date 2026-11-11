@@ -368,7 +368,9 @@
   }
   $effect(() => {
     const key = activeKey;
-    if (key != null && height) untrack(() => viewport.scrollTo({ key, offset: itemScrollOffset }));
+    if (key != null) untrack(() => {
+      if (height) viewport.scrollTo({ key, offset: itemScrollOffset });
+    });
   });
   function handleScroll(event: UIEvent & { currentTarget: EventTarget & HTMLDivElement; }) {
     if (disposed) return;

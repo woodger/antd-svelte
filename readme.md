@@ -6525,9 +6525,11 @@ props и разрешённые `size`, `disabled`, `status` и `variant`. `open
 и `classNames.root` применяются к полю и панели. `popup.item`, `popup.itemTitle`
 и `popup.itemSwitcher` относятся к узлу дерева, заголовку и переключателю.
 Панель получает `styles.root`, затем `styles.popup.root`. Числовой
-`popupMatchSelectWidth` имеет приоритет над `width` в стилях. При `true` панель
-берёт ширину поля с учётом заданных `min-width` и `max-width`. Смена стилей открытой панели
-сохраняет DOM, фокус и черновики вложенных полей.
+`popupMatchSelectWidth` имеет приоритет над `width` в стилях. По умолчанию
+панель берёт ширину поля. При `false` она подстраивается под содержимое с шириной
+поля в качестве минимума. Локальный prop имеет приоритет над `ConfigProvider.popupMatchSelectWidth`.
+Стили могут задавать границы ширины. Смена стилей открытой панели сохраняет DOM,
+фокус и черновики вложенных полей.
 
 `ConfigProvider.treeSelect` задаёт `variant`, `classNames`, `styles` и
 `switcherIcon`. Вложенный объект заменяет ближайшую запись целиком, `{}`
@@ -6590,11 +6592,27 @@ Native combobox удерживает фокус при действиях в п�
 раскрывают дерево через его keyboard engine; Enter выбирает активный узел, а не
 переключает раскрытие. Escape/Tab закрывают popup; Backspace удаляет последний
 доступный тег при пустом search. Single закрывает popup после выбора, multiple
-оставляет его открытым. Popup использует существующий native popover lifecycle;
-listHeight ограничивает viewport, onPopupScroll получает его scroll event.
-PopupMatchSelectWidth, placement, size/status/variant, treeLine/treeIcon/switcherIcon,
-notFoundContent/loading, RTL, темы, Compact и ConfigProvider/Form disabled поддержаны.
-Bind:nativeElement/inputElement дают DOM; bind:this — focus(options)/blur().
+оставляет его открытым. `listHeight` ограничивает viewport дерева, по умолчанию
+до 256px. `onPopupScroll` получает событие этого viewport. `virtual` наследуется
+из `ConfigProvider.virtual` и по умолчанию включён. `popupMatchSelectWidth={false}`
+оставляет все строки в DOM. `listItemHeight` задаёт начальную оценку, по умолчанию
+`controlHeightSM + paddingXXS`. Нулевая оценка отключает виртуализацию, а `listHeight={0}`
+снимает ограничение высоты. `listItemScrollOffset` добавляет отступ при переходе к
+активному узлу. Прокрутка сохраняет активный ключ, а `aria-activedescendant`
+указывает на узел, пока его строка в DOM.
+
+`bind:nativeElement` и `bind:inputElement` дают DOM. `bind:this` предоставляет
+`TreeSelectRef` с `focus(options)`, `blur()` и `scrollTo(config)`. `TreeScrollConfig`
+принимает пиксели, координаты, key или index с `align` и `offset`. Для открытой
+пустой панели и отсутствующего ключа вызов безопасен. В закрытой панели
+прокрутка сохраняет прежнюю позицию. `autoExpand` добавляет
+целевой ключ в собственное раскрытие внутреннего дерева до первой пользовательской
+смены `expandedKeys`, если ключи раскрытия не заданы в props.
+[Сверка React 6.6.8](./tests/browser/tree-select-virtual.spec.ts) охватывает
+границы окна, ширину, измерения строк, прокрутку, поиск и повторное открытие.
+
+Поддержаны placement, size/status/variant, treeLine/treeIcon/switcherIcon,
+notFoundContent/loading, RTL, темы, Compact и ConfigProvider/Form disabled.
 
 Name/FormItem создают hidden inputs с raw values для native FormData. Form model
 хранит raw scalar/массивы, поддерживает required/submit/reset; библиотека не меняет
@@ -6617,8 +6635,8 @@ DOM панели, фокус и выделение; ShadowRoot требует с
 TreeSelect/Cascader с 40 сценариями официального UMD —
 [choice-container](./tests/browser/choice-container.spec.ts), `?fixture=choice-container`.
 
-Virtual/scrollTo, TreeNode children, popup render hooks, остальные semantic slots/config/ref API
-и исходные motion API ещё не перенесены.
+Следующие этапы TreeSelect охватывают объявления `TreeNode`, свойства узлов,
+остальные trigger/input props, Form feedback и переходы панели.
 Deprecated React extras исключены.
 Класс popup задаётся через classNames.popup.root; popupClassName удалён.
 

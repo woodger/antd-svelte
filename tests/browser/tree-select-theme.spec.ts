@@ -268,7 +268,7 @@ test('popup dimensions preserve inline position and input focus', async ({ page 
   }
 
   await expect(popup).toHaveCSS('width', '300px');
-  await expect(popup.locator('.popup-body')).toHaveCSS('max-height', '100px');
+  await expect(popup.locator('.ant-tree-list-holder')).toHaveCSS('max-height', '100px');
   expect(await popup.evaluate(element => Boolean(element.style.left && element.style.top)))
     .toBe(true);
   expect(await popup.evaluate((element, previous) => element === previous, original)).toBe(true);

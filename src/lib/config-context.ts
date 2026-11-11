@@ -132,6 +132,7 @@ export interface ConfigContext {
   readonly switch?: SwitchConfig;
   readonly wave?: WaveConfig;
   readonly virtual?: boolean;
+  readonly popupMatchSelectWidth?: boolean | number;
   readonly renderEmpty?: RenderEmptyHandler;
   readonly getPopupContainer?: GetPopupContainer;
   readonly getTargetContainer?: GetTargetContainer;

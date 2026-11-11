@@ -32,7 +32,7 @@ export function connectPopup(popup: HTMLElement, anchor: Element, options: {
   onDismiss: (reason: 'escape' | 'outside') => void;
   outsideEvents?: 'pointer' | 'mouse';
   onKeydown?: (event: KeyboardEvent) => void;
-  preserveFocus?: boolean;
+  preserveFocus?: boolean | ((event: PointerEvent) => boolean);
   maxWidth?: string | false;
   align?: 'left' | 'right' | 'top' | 'bottom';
   matchAnchorWidth?: boolean;
@@ -240,7 +240,8 @@ export function connectPopup(popup: HTMLElement, anchor: Element, options: {
   }
 
   function preserveFocus(event: PointerEvent) {
-    event.preventDefault();
+    if (typeof options.preserveFocus !== 'function' || options.preserveFocus(event))
+      event.preventDefault();
   }
 
   // Пока поверхность открыта, отслеживаем и перемещение anchor без resize (включая бегунок).

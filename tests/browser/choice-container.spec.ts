@@ -210,7 +210,7 @@ for (const component of components) {
       expect(await input.evaluate(node => [
         (node as HTMLInputElement).selectionStart, (node as HTMLInputElement).selectionEnd
       ])).toEqual([1, 2]);
-      const scroller = component.startsWith('tree-select') ? popup.locator('.popup-body')
+      const scroller = component.startsWith('tree-select') ? popup.locator('.ant-tree-list-holder')
         : popup.getByRole('menu').first();
       await scroller.evaluate(node => node.dispatchEvent(new Event('scroll')));
       await expect(page.getByLabel('Choice container scrolls', { exact: true })).toHaveText('1');

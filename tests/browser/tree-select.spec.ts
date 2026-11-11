@@ -341,7 +341,7 @@ test(
   async ({ page }) => {
     await control(page).click();
 
-    const body = page.locator('[popover]:popover-open .popup-body');
+    const body = page.locator('[popover]:popover-open .ant-tree-list-holder');
 
     await expect(body).toHaveCSS('max-height', '96px');
 

@@ -150,8 +150,10 @@
     checkbox?: CheckboxConfig;
     switch?: SwitchConfig;
     wave?: WaveConfig;
-    /** Наследуемый virtual для Tree и Listy; собственные defaults компонентов различаются. */
+    /** Наследуемый virtual для Tree, Listy и TreeSelect. */
     virtual?: boolean;
+    /** Наследуемая ширина панели TreeSelect. */
+    popupMatchSelectWidth?: boolean | number;
     /** Producer callback пустых состояний контролов и Table. Наследуется от родителя. */
     renderEmpty?: RenderEmptyHandler;
     /**
@@ -248,6 +250,7 @@
     switch: switchConfig,
     wave,
     virtual,
+    popupMatchSelectWidth,
     renderEmpty,
     getPopupContainer,
     getTargetContainer,
@@ -470,6 +473,9 @@
     },
     get virtual() {
       return virtual ?? parent.virtual;
+    },
+    get popupMatchSelectWidth() {
+      return popupMatchSelectWidth ?? parent.popupMatchSelectWidth;
     },
     get renderEmpty() {
       return renderEmpty ?? parent.renderEmpty;

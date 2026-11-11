@@ -75,6 +75,7 @@ export {
 } from './tree-select.engine';
 export type {
   TreeSelectProps,
+  TreeSelectRef,
   TreeSelectNode,
   TreeSelectRawValue,
   TreeSelectLabel,

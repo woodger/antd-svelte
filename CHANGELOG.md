@@ -9,6 +9,10 @@
 
 ### Added
 
+- TreeSelect виртуализирует строки выпадающей панели и предоставляет `scrollTo`
+  через `bind:this`. Поддержаны `virtual`, `listItemHeight`, `listItemScrollOffset`
+  и настройки `ConfigProvider.virtual` и `ConfigProvider.popupMatchSelectWidth`.
+
 - TreeSelect поддерживает объект и функции для `classNames` и `styles`,
   настройки `ConfigProvider.treeSelect`, содержимое `placeholder` и значки
   `switcherIcon` и `treeLine.showLeafIcon`. Стили открытой панели обновляются
@@ -1582,6 +1586,9 @@
   тип результата `createMessage` подготовлен к генерации деклараций.
 
 ### Fixed
+
+- Изменение высоты viewport Tree сохраняет текущую прокрутку, если активный
+  ключ остался прежним.
 
 - Tree сохраняет исходное центрирование switcher: сброс native button styles
   больше не перекрывает vendor text-align. Содержимое строки сохраняет наследуемое выравнивание.

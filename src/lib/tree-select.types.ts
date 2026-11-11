@@ -2,8 +2,10 @@ import type { Snippet } from 'svelte';
 import type { HTMLInputAttributes, HTMLAttributes } from 'svelte/elements';
 import type { ComponentSize, Variant } from './types';
 import type { FormValidateStatus } from './form-error-list.types';
-import type { TreeEventNode, TreeExpandAction, TreeKey, TreeTitleContent } from './tree.types';
+import type { TreeEventNode, TreeExpandAction, TreeKey, TreeRef, TreeTitleContent } from './tree.types';
 import type { SelectTagInfo } from './select.types';
+/** Методы bind:this. DOM-элементы предоставляются через bindable props. */
+export type TreeSelectRef = TreeRef;
 export type TreeSelectRawValue = string | number;
 export type TreeSelectLabel = string | number | boolean | null | undefined | Snippet
   | readonly TreeSelectLabel[];
@@ -199,7 +201,13 @@ export interface TreeSelectProps<
   treeTitleRender?: Snippet<[Data]>;
   /** @defaultValue 256 */
   listHeight?: number;
-  /** @defaultValue true */
+  /** Оценка высоты строки. По умолчанию controlHeightSM + paddingXXS. */
+  listItemHeight?: number;
+  /** Дополнительный отступ при прокрутке до активного узла. @defaultValue 0 */
+  listItemScrollOffset?: number;
+  /** Undefined наследует ConfigProvider.virtual. @defaultValue true */
+  virtual?: boolean;
+  /** False оставляет ширину по содержимому и отключает виртуализацию. @defaultValue true */
   popupMatchSelectWidth?: boolean | number;
   placement?: 'bottomLeft' | 'bottomRight' | 'topLeft' | 'topRight';
   onPopupScroll?: HTMLAttributes<HTMLDivElement>['onscroll'];

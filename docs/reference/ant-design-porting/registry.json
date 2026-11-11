@@ -11033,7 +11033,7 @@
       "name": "TreeSelect",
       "category": "data-entry",
       "scope": "target",
-      "scopeReason": "TreeSelect по Ant Design 6.6.8 и rc-tree-select 1.16.1. Перенесены значения, check/стратегии, поиск, loadData, fieldNames/simple mode, generic data, title expansion, maxCount, tag display, renderer labels, popupRender, control slots, semantic config и переключатели узлов. Оставшийся API, virtual и motion переносятся отдельно.",
+      "scopeReason": "TreeSelect по Ant Design 6.6.8 и rc-tree-select 1.16.1. Перенесены значения, check/стратегии, поиск, loadData, fieldNames/simple mode, generic data, title expansion, maxCount, tag display, renderer labels, popupRender, control slots, semantic config, переключатели узлов, виртуализация и scrollTo. Оставшийся API и motion переносятся отдельно.",
       "upstreamPath": "components/tree-select",
       "reviewedRevision": "984592267de88fbf9cdaecc96a56629e721c709d",
       "exports": [
@@ -11066,6 +11066,11 @@
           "name": "@rc-component/select",
           "range": "~1.10.1",
           "referenceVersion": "1.10.1"
+        },
+        {
+          "name": "@rc-component/virtual-list",
+          "range": "^1.5.1",
+          "referenceVersion": "1.5.1"
         }
       ],
       "priority": "p1",
@@ -11265,7 +11270,7 @@
         },
         {
           "id": "extended-api",
-          "title": "Оставшиеся TreeNode, trigger, ref и Form API",
+          "title": "Оставшиеся TreeNode, trigger и Form API",
           "state": "partial",
           "requiredForV1": false,
           "evidence": [
@@ -11285,15 +11290,29 @@
             "tests/package/tree-select-data.ssr.test.ts",
             "readme.md"
           ],
-          "note": "FieldNames, treeDataSimpleMode, generic raw data, treeExpandAction, maxCount, tag text/count/placeholder/render API, renderer labels, popup/control slots, semantic config и общие switcherIcon/treeLine.showLeafIcon перенесены. Остаются TreeNode children и API узлов, унаследованные trigger/input props, ref и Form feedback. Deprecated extra.triggerNode/allCheckedNodes и node.props React wrappers исключены. Собственное поле props данных сохраняется."
+          "note": "FieldNames, treeDataSimpleMode, generic raw data, treeExpandAction, maxCount, tag text/count/placeholder/render API, renderer labels, popup/control slots, semantic config и общие switcherIcon/treeLine.showLeafIcon перенесены. Остаются TreeNode children и API узлов, унаследованные trigger/input props и Form feedback. Deprecated extra.triggerNode/allCheckedNodes и node.props React wrappers исключены. Собственное поле props данных сохраняется."
         },
         {
           "id": "virtual-motion",
           "title": "Виртуализация, scrollTo и исходные popup/list motion",
-          "state": "missing",
+          "state": "partial",
           "requiredForV1": false,
-          "evidence": [],
-          "note": "Все отфильтрованные видимые узлы рендерятся существующим Tree; listHeight ограничивает native scroll viewport. Rc-trigger alignment/virtual-list/motion API остаются отдельными этапами."
+          "evidence": [
+            "src/lib/TreeSelect.svelte",
+            "src/lib/tree-select.types.ts",
+            "src/lib/Tree.svelte",
+            "src/lib/popup.dom.ts",
+            "src/lib/virtual-list.model.svelte.ts",
+            "tests/browser/fixtures/tree-select-virtual-cases.ts",
+            "tests/browser/fixtures/TreeSelectVirtualFixtures.svelte",
+            "tests/browser/fixtures/ant-design-tree-select-virtual-reference.json",
+            "tests/browser/tree-select-virtual-metrics.ts",
+            "tests/browser/tree-select-virtual.spec.ts",
+            "tests/browser/tree-select-surface-hydration.spec.ts",
+            "tests/package/tree-select-virtual.ssr.test.ts",
+            "readme.md"
+          ],
+          "note": "TreeSelect использует измеряемый Tree viewport с listHeight, listItemHeight, listItemScrollOffset и onPopupScroll на holder. Local virtual и popupMatchSelectWidth имеют приоритет над provider, false ширины отключает virtual. Ref поддерживает позиции, key/index, offsets и autoExpand целевого key в неконтролируемом дереве. Сверены выбор и активный key при первом и повторном открытии, поиск, ширина, смена virtual/height, zero keys, фокус и custom popup. 20 сценариев и 57 действий официального UMD6.6.8, 6 DOM-free SSR случаев и 3 отдельных наблюдения. Native сохраняет SSR shell и валидный active descendant. В UMD6.6.8 при scrollTo в открытой пустой выдаче BaseSelect вызывает отсутствующий метод listRef.current.scrollTo и выбрасывает TypeError. Запрос скрытого дочернего key с autoExpand достигает лимита rc-virtual-list. Числовой scrollTo(560) при закрытом multiple popup оставляет фактический scrollTop=280, но сдвигает начало окна с Node 9 до Node 19. Явный virtual=undefined перекрывает provider false. Native безопасно завершает вызовы для отсутствующей строки и пустой выдачи, сохраняет согласованную позицию закрытой панели и наследует provider при явном undefined. Rc-trigger alignment и popup motion остаются отдельным этапом."
         },
         {
           "id": "source-tree-select-theme",
@@ -23401,21 +23420,38 @@
         },
         {
           "id": "virtual-list-default",
-          "title": "ConfigProvider.virtual для Tree/DirectoryTree и Listy",
+          "title": "ConfigProvider.virtual для Tree/DirectoryTree, TreeSelect и Listy",
           "state": "partial",
           "requiredForV1": false,
           "evidence": [
             "src/lib/ConfigProvider.svelte",
             "src/lib/config-context.ts",
             "src/lib/Tree.svelte",
+            "src/lib/TreeSelect.svelte",
             "src/lib/Listy.svelte",
             "tests/browser/tree-virtual.spec.ts",
             "tests/browser/tree-virtual-native.spec.ts",
             "tests/package/tree-virtual.ssr.test.ts",
+            "tests/browser/tree-select-virtual.spec.ts",
             "tests/browser/listy.spec.ts",
             "readme.md"
           ],
-          "note": "Общий virtual наследуется во вложенном provider; local prop компонента имеет приоритет. Tree по умолчанию включает virtual при height/itemHeight, Listy сохраняет default=false. Explicit undefined наследует общий default вместо Source spread omission. Другие source consumers (Select/AutoComplete/TreeSelect/Table и их virtual API) пока требуют отдельного переноса."
+          "note": "Общий virtual наследуется во вложенном provider, local prop компонента имеет приоритет. Tree и TreeSelect по умолчанию включают virtual при ненулевых высоте и оценке строки. Listy сохраняет default=false. Явное undefined наследует общий default. Остальные consumers, в том числе Select, AutoComplete и Table, требуют отдельного переноса."
+        },
+        {
+          "id": "popup-match-select-width-default",
+          "title": "ConfigProvider.popupMatchSelectWidth для TreeSelect",
+          "state": "partial",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/ConfigProvider.svelte",
+            "src/lib/config-context.ts",
+            "src/lib/TreeSelect.svelte",
+            "tests/browser/tree-select-virtual.spec.ts",
+            "tests/browser/fixtures/ant-design-tree-select-virtual-reference.json",
+            "readme.md"
+          ],
+          "note": "ConfigProvider передаёт TreeSelect boolean и number, как задокументировано и подтверждено runtime Ant Design 6.6.8. Локальный prop имеет приоритет, undefined наследует ближайшее заданное значение. При false TreeSelect отключает virtual и подстраивает ширину под содержимое. Остальные consumers требуют отдельного переноса."
         }
       ]
     },

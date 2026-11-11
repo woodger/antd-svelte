@@ -8,9 +8,10 @@
     TreeSelectLabeledValue,
     TreeSelectLabel,
     TreeSelectSemanticInfo,
-    TreeSelectNode
+    TreeSelectNode,
+    TreeSelectRef
   } from './tree-select.types';
-  import type { TreeDataNode, TreeEventNode, TreeKey } from './tree.types';
+  import type { TreeDataNode, TreeEventNode, TreeKey, TreeScrollConfig } from './tree.types';
   import {
     treeSelectIndex,
     treeSelectLabeled,
@@ -44,6 +45,7 @@
   import { createOverlayStyle } from './overlay-style.model.svelte';
   import { serializeInlineStyleLayers } from './inline-style.engine';
   import { useComponentTheme } from './theme-component.svelte';
+  import { useToken } from './theme-context.svelte';
   import Tree from './Tree.svelte';
   import TreeTitle from './TreeTitle.svelte';
   import Icon from './Icon.svelte';
@@ -100,7 +102,10 @@
     switcherIcon,
     treeTitleRender,
     listHeight = 256,
-    popupMatchSelectWidth = true,
+    listItemHeight,
+    listItemScrollOffset,
+    virtual,
+    popupMatchSelectWidth,
     placement,
     onPopupScroll,
     getPopupContainer,
@@ -124,6 +129,7 @@
     ValueType, Data
   > = $derived(componentProps);
   const config = useConfig();
+  const tokens = useToken();
   let prefix = $derived(config.getPrefixCls('select', prefixCls));
   let treePrefix = $derived(config.getPrefixCls('tree-select', prefixCls));
   let rootPrefix = $derived(config.getPrefixCls());
@@ -255,14 +261,14 @@
   let menuElement = $state<HTMLDivElement>();
   let popupMouseDownTimer: ReturnType<typeof setTimeout> | undefined;
   const anchorWidthVariable = '--ant-tree-select-anchor-width';
-  let matchPopupWidth = $derived(popupMatchSelectWidth !== false
-    && (typeof popupMatchSelectWidth === 'number' || !semantics.popupSizing.width));
-  let stretchPopup = $derived(matchPopupWidth && typeof popupMatchSelectWidth !== 'number'
-    && (semantics.popupSizing.minWidth || semantics.popupSizing.maxWidth));
+  let matchedWidth = $derived(popupMatchSelectWidth ?? config.popupMatchSelectWidth ?? true);
+  let itemHeight = $derived(listItemHeight ?? tokens.token.controlHeightSM + tokens.token.paddingXXS);
+  let panelVirtual = $derived(matchedWidth !== false && (virtual ?? config.virtual ?? true));
   let popupLayers = $derived([
-    componentStyle, matchPopupWidth && !stretchPopup ? undefined : 'min-width:0',
-    stretchPopup ? `width:var(${anchorWidthVariable})` : undefined, semantics.popupRootStyle,
-    typeof popupMatchSelectWidth === 'number' ? `width:${popupMatchSelectWidth}px` : undefined
+    componentStyle,
+    `${matchedWidth === true ? 'width' : 'min-width'}:var(${anchorWidthVariable})`,
+    semantics.popupRootStyle,
+    typeof matchedWidth === 'number' ? `width:${matchedWidth}px` : undefined
   ]);
   const popupStyle = createOverlayStyle(() => popupLayers);
   const portal = createPopupContainer(() => ({
@@ -272,6 +278,7 @@
     themeStyle: serializeInlineStyleLayers(popupLayers),
     preserveVariables: [anchorWidthVariable]
   }));
+  let tree = $state<TreeSelectRef>();
   let treeElement = $state<HTMLDivElement>();
   let active = $state<TreeKey | null>(null);
   let activeDescendant = $state<string>();
@@ -283,6 +290,7 @@
     )
   );
   let searchExpanded = $state.raw<TreeKey[]>([]);
+  let expandedByUser = false;
   let loaded = $state.raw<TreeKey[]>([]);
   let panelExpanded = $derived(treeExpandedKeys ?? (search ? searchExpanded : expanded));
   let initialized = untrack(() => defaultOpen || open === true);
@@ -294,8 +302,9 @@
       initialized = true;
     }
   }
-  let previousOpen = false;
   let previousSearch = '';
+  let panelOpened = false;
+  let panelSearch = '';
   let previousProps = untrack(() => ({ value, open, search: searchConfig.searchValue }));
   $effect(() => () => {
     cancelClose();
@@ -370,34 +379,50 @@
       internalOpen = false;
   });
   $effect(() => {
-    const nextOpen = visible;
     const nextSearch = search;
     if (nextSearch !== previousSearch && nextSearch)
       searchExpanded = filteredIndex.ordered.filter(entry => entry.node.children !== undefined).map(
         entry => entry.key
       );
-    if (nextOpen && (!previousOpen || nextSearch !== previousSearch)) {
+    if (visible) {
       mounted = true;
       untrack(initializePanel);
-      active = untrack(
-        () => !isMultiple && checks.checked.length && !nextSearch
-          ? checks.checked[0]
-          : firstNode(filtered)
-      );
     }
-    previousOpen = nextOpen;
     previousSearch = nextSearch;
   });
   $effect(() => {
-    void active;
-    void visible;
-    void filteredIndex;
-    const root = treeElement;
-    void tick().then(() => {
-      activeDescendant = visible
-        ? root?.querySelector('[role="tree"]')?.getAttribute('aria-activedescendant') ?? undefined
-        : undefined;
+    if (!visible) {
+      panelOpened = false;
+      return;
+    }
+    const panel = tree;
+    const query = search;
+    if (!shown || panelOpened && panelSearch === query) return;
+    const opening = !panelOpened;
+    panelOpened = true;
+    panelSearch = query;
+    untrack(() => {
+      const selected = isMultiple ? undefined : checks.checked[0];
+      const next = selected !== undefined && !query ? selected : firstNode(filtered);
+      // Tree учитывает offset при смене activeKey. При повторном открытии тот же key
+      // прокручивается с обычным выравниванием выбранного узла.
+      if (opening && next === active && selected !== undefined) panel?.scrollTo({ key: selected });
+      active = next;
     });
+  });
+  $effect(() => {
+    const panel = treeElement?.querySelector('[role="tree"]');
+    if (!visible || !panel) {
+      activeDescendant = undefined;
+      return;
+    }
+    const update = () => {
+      activeDescendant = panel.getAttribute('aria-activedescendant') ?? undefined;
+    };
+    update();
+    const observer = new MutationObserver(update);
+    observer.observe(panel, { attributes: true, attributeFilter: ['aria-activedescendant'] });
+    return () => observer.disconnect();
   });
   $effect(() => {
     if (!visible || !popup || !root) return;
@@ -407,12 +432,9 @@
       gap: 4,
       align: position.endsWith('Right') ? 'right' : 'left',
       autoAdjustOverflow: true,
-      get maxWidth() { return untrack(() => semantics.popupSizing.maxWidth ? false : '100vw'); },
-      get matchAnchorWidth() {
-        return untrack(() => matchPopupWidth && !stretchPopup && !semantics.popupSizing.minWidth);
-      },
-      get anchorWidthVariable() { return untrack(() => stretchPopup ? anchorWidthVariable : undefined); },
-      preserveFocus: !customPopup,
+      get maxWidth() { return untrack(() => semantics.popupHasMaxWidth ? false : '100vw'); },
+      anchorWidthVariable,
+      preserveFocus: customPopup ? false : preserveEditorFocus,
       applyPosition: value => untrack(() => popupStyle.position(value)),
       onPlacement: () => { },
       onVisibilityChange: next => {
@@ -595,6 +617,7 @@
     choose(node.key as TreeSelectRawValue);
   }
   function expandPanel(keys: TreeKey[]) {
+    expandedByUser = true;
     expanded = keys;
     searchExpanded = keys;
     onTreeExpand?.(keys);
@@ -610,6 +633,10 @@
       } as TreeEventNode<Data>
     )
       ?? Promise.resolve();
+  }
+  function preserveEditorFocus(event: PointerEvent) {
+    // Полоса прокрутки сама удерживает фокус при обработке mousedown.
+    return !(event.target instanceof Element && event.target.closest('.ant-tree-list-scrollbar'));
   }
   function popupMouseDown() {
     clearTimeout(popupMouseDownTimer);
@@ -695,6 +722,15 @@
   export function blur() {
     editor?.blur();
   }
+  export function scrollTo(settings?: TreeScrollConfig | null) {
+    if (!tree) return;
+    if (settings && typeof settings === 'object' && 'key' in settings && settings.autoExpand
+      && treeExpandedKeys === undefined && componentProps.treeDefaultExpandedKeys === undefined
+      && !expandedByUser && !search && !expanded.includes(settings.key)) {
+      expanded = [...expanded, settings.key];
+    }
+    if (visible && shown && listHeight) tree.scrollTo(settings);
+  }
 </script>
 <style>
   [data-ant-tree-choice-control] { display:flex;align-items:center;width:100%;position:relative; }
@@ -725,7 +761,6 @@
   .custom-tag { display:inline-flex;flex:none;min-width:0;max-width:100%; }
   [data-ant-tree-choice-responsive] [data-ant-tree-choice-input] { flex:0 0 auto;min-width:4px; }
   .popup { position:fixed;margin:0;border:0;overflow:visible; }
-  .popup-body { overflow:auto; }
   [data-ant-tree-choice-selection-item-disabled] { color:var(--ant-select-multiple-item-color-disabled); }
   [data-ant-tree-choice-source-theme] [data-ant-tree-choice-selection-item-disabled] { color:inherit; }
   [data-ant-tree-choice-selection-item-remove]:focus-visible,.clear:focus-visible { outline:2px solid var(--ant-color-primary); }
@@ -845,7 +880,7 @@
       </span>
     {/if}
     {:else if (!visible || !canSearch) && (treeTitleRender || typeof display[0]?.label==='function' || Array.isArray(display[0]?.label)) && display[0]}<span class="single-snippet">{@render labelNode(display[0])}</span>{/if}
-    <input {...attributes} bind:this={editor} id={controlId} data-ant-tree-choice-input class={[`${prefix}-input`, classes.input]} style={css.input} type="text" role="combobox" aria-haspopup="tree" aria-controls={!popupRender || menuElement ? `${controlId}-list` : undefined} aria-expanded={visible} aria-autocomplete={canSearch ? 'list' : 'none'} aria-activedescendant={visible && treeElement ? activeDescendant : undefined} aria-invalid={field?.invalid || resolvedStatus === 'error'
+    <input {...attributes} bind:this={editor} id={controlId} data-ant-tree-choice-input class={[`${prefix}-input`, classes.input]} style={css.input} type="text" role="combobox" aria-haspopup="tree" aria-controls={!popupRender || menuElement ? `${controlId}-list` : undefined} aria-expanded={visible} aria-autocomplete={canSearch ? 'list' : 'none'} aria-activedescendant={visible && shown && treeElement ? activeDescendant : undefined} aria-invalid={field?.invalid || resolvedStatus === 'error'
         || attributes['aria-invalid']
         || undefined} aria-describedby={[attributes['aria-describedby'], field?.describedBy].filter(
             Boolean
@@ -898,9 +933,12 @@
   {@attach portal}
   onfocusout={blurWithin} onmousedown={customPopup ? popupMouseDown : undefined}>
   {#snippet menu()}
-  <div class="popup-body" role="presentation" bind:this={menuElement} style:max-height={`${listHeight}px`} onscroll={onPopupScroll}
-    onpointerdown={customPopup ? event => event.preventDefault() : undefined}>
-    {#if filtered.length}<Tree prefixCls="ant-tree" motion={false} _themeStyle={componentStyle} _componentConfig={false} _nodeDisabled={node => limit.disabled.has(node.key as TreeSelectRawValue)} bind:nativeElement={treeElement} treeData={filteredIndex.data} id={`${controlId}-list`} class={treeSelectTheme.className && 'ant-tree-select-source-tree'}
+  <div class="popup-body" role="presentation" bind:this={menuElement}
+    onpointerdown={customPopup ? event => {
+      if (preserveEditorFocus(event)) event.preventDefault();
+    } : undefined}>
+    {#if filtered.length}<Tree prefixCls="ant-tree" motion={false} _themeStyle={componentStyle} _componentConfig={false} _nodeDisabled={node => limit.disabled.has(node.key as TreeSelectRawValue)} bind:this={tree} bind:nativeElement={treeElement} treeData={filteredIndex.data} id={`${controlId}-list`} class={treeSelectTheme.className && 'ant-tree-select-source-tree'}
+      height={listHeight} {itemHeight} itemScrollOffset={listItemScrollOffset} virtual={panelVirtual} onScroll={onPopupScroll}
       classNames={{ item: classes.popup.item, itemTitle: classes.popup.itemTitle, itemSwitcher: classes.popup.itemSwitcher }}
       styles={{ item: css.popup.item, itemTitle: css.popup.itemTitle, itemSwitcher: css.popup.itemSwitcher }}
       aria-label={attributes['aria-label'] ?? placeholderText ?? config.locale.searchText} focusable={false} multiple={isMultiple} checkable={checkable} checkStrictly checkedKeys={{ checked: checks.checked, halfChecked: checks.halfChecked }} selectedKeys={checkable ? [] : checks.checked} expandedKeys={panelExpanded} expandAction={treeExpandAction} activeKey={active} onActiveChange={key => {

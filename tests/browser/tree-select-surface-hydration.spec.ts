@@ -4,6 +4,7 @@ import { join } from 'node:path';
 import { createServer as createHttpServer } from 'node:http';
 import { createServer, type ViteDevServer } from 'vite';
 import { test, expect } from './test';
+import { readTreeSelectVirtual } from './tree-select-virtual-metrics';
 
 let server: ViteDevServer;
 let cache: string;
@@ -62,5 +63,27 @@ test('TreeSelect hydrates the initial custom popup in place before moving it to 
   await expect(editor).toHaveValue('Beta');
   await expect(editor).toBeFocused();
   await page.evaluate(() => window.treeSelectPopupHydration!.dispose());
+  await expect(page.locator('[popover]:popover-open')).toHaveCount(0);
+});
+
+test('TreeSelect hydrates a hidden virtual window before scrolling to the selected row', async ({ page }) => {
+  const module = await server.ssrLoadModule(fileURLToPath(new URL(
+    './fixtures/tree-select-virtual-hydration.server.ts', import.meta.url
+  )));
+  const { head, body } = module.renderVirtualTreeSelect();
+  await page.goto('/tree-select-surface-hydration.html');
+  await page.evaluate(({ head, body }) => {
+    document.head.insertAdjacentHTML('beforeend', head);
+    document.getElementById('root')!.innerHTML = body;
+  }, { head, body });
+  await expect(page.locator('[popover][hidden] [role="treeitem"]')).toHaveCount(5);
+  await page.addScriptTag({ type: 'module', url: '/tree-select-virtual-hydration.client.ts' });
+  await page.waitForFunction(() => window.virtualTreeSelectHydration);
+  await expect.poll(() => page.evaluate(readTreeSelectVirtual, 'native')).toMatchObject({
+    open: true, viewport: { count: 5, height: 84, top: 1627, active: 'Node 60' }
+  });
+  expect(await page.evaluate(() => window.virtualTreeSelectHydration!.popup
+    === document.querySelector('[popover]:popover-open'))).toBe(true);
+  await page.evaluate(() => window.virtualTreeSelectHydration!.dispose());
   await expect(page.locator('[popover]:popover-open')).toHaveCount(0);
 });
